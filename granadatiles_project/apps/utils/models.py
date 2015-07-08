@@ -26,7 +26,7 @@ class BaseModel(models.Model):
 
 
 class BaseDescriptionImageModel(BaseModel):
-    image = BaseModel.ImageField(upload_to=model_directory_path)
+    image = models.ImageField(upload_to=model_directory_path)
     description = models.TextField()
 
     description_es = models.TextField(blank=True,
@@ -46,7 +46,7 @@ class BaseDescriptionImageModel(BaseModel):
 
 
 class BaseImageModel(BaseModel):
-    image = BaseModel.ImageField(upload_to=model_directory_path)
+    image = models.ImageField(upload_to=model_directory_path)
 
     class Meta:
         abstract = True
