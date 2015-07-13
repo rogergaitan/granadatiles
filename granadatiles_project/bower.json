@@ -1,10 +1,10 @@
 {
-  "name": "your_project_name",
+  "name": "GranadaTiles",
   "version": "0.0.0",
   "authors": [
-    "yourUser <your@Email.com>"
+    "LRPalacios <lrpalaciosdev@gmail.com>"
   ],
-  "description": "your project description",
+  "description": "Granada tiles web site",
   "license": "MIT",
   "ignore": [
     "**/.*",

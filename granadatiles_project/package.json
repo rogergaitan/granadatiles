@@ -1,7 +1,7 @@
 {
-  "name": "your_project_name",
+  "name": "GranadaTiles",
   "version": "1.0.0",
-  "description": "your project description",
+  "description": "GranadaTiles web site",
   "scripts": {
     "init": "npm install",
     "install": "bower install"
