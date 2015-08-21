@@ -16,6 +16,17 @@
   ],
   "dependencies": {
     "bootstrap": "~3.3.5",
-    "yamm3": "~1.1.0"
+    "yamm3": "~1.1.0",
+    "font-awesome": "~4.4.0",
+    "animate.css": "~3.4.0"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
   }
 }

@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- build:css ../static/build/css/lib.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}lib/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}lib/yamm3/yamm/yamm.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}lib/animate.css/animate.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -14,20 +18,156 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}.temp/site.css">
     <!-- endinject -->
     <!-- endbuild -->
+    {% block css %}
+    {% endblock css %}
 </head>
-<body>
-    <header>
-    
-    </header>
-    
-    {% block content %}
-    {% endblock content %}
-    
-    <footer>
-    
-    </footer>
+<body class="container-fluid">
+    <div class="row">
+        <header class="shadow-menu">
+            <div class="container">
+                <nav class="navbar yamm navbar-custom roboto-light-lg margin-bottom-none" role="navigation">
+                    <div class="navbar-header col-md-2 col-sm-2">
+                        <button type="button" data-toggle="collapse" data-target="#navbar-collapse-grid" class="navbar-toggle toggle-custom">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="hidden-xs" href="/"><img class="" src="../static/img/Granada-Tile-logo.svg" alt=""></a>
+                    </div>
+                    <div class="col-md-10 col-sm-10">
+                        <div id="navbar-collapse-grid" class="navbar-collapse collapse float-right">
+                            <div id="general-info" class="roboto-light-sm padding-top15 text-right">
+                                <div class="col-md-12 col-xs-4 padding-none">
+                                    <div id="container-search" class="col-md-4 col-xs-12 pull-right">
+                                        <input id="search" type="text" class="form-control search-input-custom" placeholder="Search">
+                                        <span class="fa fa-angle-right form-control-feedback position-arrow-search" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-xs-8 padding-none">
+                                    <ul class="list-inline">
+                                        <li><a href="#" id="phone"><i class="glyphicon glyphicon-phone-alt"></i><span class="animated fadeIn hidden-xs">213-788-4238</span></a></li>
+                                        <li><a href="#" id="comments"><i class="fa fa-comments"></i><span class="animated fadeIn hidden-xs">LIVE CHAT</span></a></li>
+                                        <li><a href="#" id="our-mail"><i class="fa fa-envelope"></i><span class="animated fadeIn hidden-xs">sales@ganadatile.com</span></a></li>
+                                        <li><a href="#" id="portafolio"><i class="fa fa-briefcase"></i><span class="animated fadeIn hidden-xs">MY PORTFOLIO</span></a></li>
+                                        <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i><span class="animated fadeIn hidden-xs">CART</span></a></li>
+                                        <li><a href="#" id="lenguaje"><i class="fa fa-globe"></i><span class="animated fadeIn hidden-xs">English <i class="caret"></i></span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <ul class="nav navbar-nav">
+                                <li class="dropdown ">
+                                    <a href="#" class="dropdown-toggle separation-bar" data-toggle="dropdown">COLLECTIONS</a>
+                                    <ul class="dropdown-menu line-buttom-submenu shadow-menu">
+                                            <li class="grid-demo">
+                                                <div class="row">
+                                                        <div class="col-sm-8">
+                                                            <h4 class="text-center roboto-light-sm spacing-2">BROWSE OR CEMENT TILE COLLECTIONS</h4>
+                                                            <div class="col-sm-12">
+                                                                <div class="col-sm-4 text-center">
+                                                                    <img src="../static/img/icon-Echo-Collection-Granada-Tile-Cement.jpg" class="img-responsive margin-auto" alt="">
+                                                                    <a href="" class="color-darkblue">
+                                                                        <span class="font-xl">ECHO</span><br>
+                                                                        <span class="font-xs">TILE COLLECTION</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-sm-4 text-center">
+                                                                    <img src="../static/img/Icon-Mauresque-Collection-Granada-Tile-Cement.png" class="img-responsive margin-auto" alt="">
+                                                                    <a href="" class="color-darkblue">
+                                                                        <span class="font-xl">MINIS</span><br>
+                                                                        <span class="font-xs">TILE COLLECTION</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-sm-4 text-center">
+                                                                    <img src="../static/img/Icon-Minis-Collection-Granada-Tile-Cement.png" class="img-responsive margin-auto" alt="">
+                                                                    <a href="" class="color-darkblue">
+                                                                        <span class="font-xl">MAURESQUE</span><br>
+                                                                        <span class="font-xs">TILE COLLECTION</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <h4 class="roboto-light-sm spacing-2">PRODUCT INFORMATION</h4>
+                                                            <ul class="padding-none">
+                                                                <li class="roboto-light-sm custom-list-submenu"><a href="">In Stock Samples</a></li>
+                                                                <li class="roboto-light-sm custom-list-submenu"><a href="">In Stock Tiles</a></li>
+                                                                <li class="roboto-light-sm custom-list-submenu"><a href="">Compare our Products</a></li>
+                                                                <li class="roboto-light-sm custom-list-submenu"><a href="">Cement Vs. Ceramic</a></li>
+                                                                <li class="roboto-light-sm custom-list-submenu"><a href="">Color Palletes</a></li>
+                                                                <li class="roboto-light-sm custom-list-submenu"><a href="">Catalogs / Inspiration Boooks</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                            </li>
+                                        </ul>
+                                </li>
+                                <li class="">
+                                    <a class="roboto-light-md separation-bar" href="/">GALLERY</a>
+                                </li>
+                                <li class="">
+                                    <a class="roboto-light-md separation-bar" href="/">IN STOCK</a>
+                                </li>
+                                <li class="">
+                                    <a class="roboto-light-md separation-bar" href="/">RESIDENTIAL</a>
+                                </li>
+                                <li class="">
+                                    <a class="roboto-light-md separation-bar" href="/">COMERTIAL</a>
+                                </li>
+                                <li class="">
+                                    <a class="roboto-light-md separation-bar" href="/">NEWS/PRESS</a>
+                                </li>
+                                <li class="">
+                                    <a class="roboto-light-md padding-right-none" href="/">ABOUT US</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+    </div>
+    <div class="row">
+        {% block content %}
+        {% endblock content %}
+    </div>
+    <div class="row"><!--
+        <footer class="text-center custom-footer">
+            <div class="container verdana-normal-xxxs colorgray">
+                <p class="content-footer-align"><i class="fa fa-copyright"></i> Granada Tile 2015</p>
+                <ul class="list-inline content-footer-align">
+                        <li class="socialwide-position social-facebook">
+                            <a href=""><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li class="socialwide-position social-twitter">
+                            <a href=""><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li class="socialwide-position social-linkedin">
+                            <a href=""><i class="fa fa-linkedin"></i></a>
+                        </li>
+                        <li class="socialwide-position social-rss">
+                            <a href=""><i class="fa fa-rss"></i></a>
+                        </li>
+                        <li class="socialwide-position social-yelp">
+                            <a href=""><i class="fa fa-yelp"></i></a>
+                        </li>
+                        <li class="socialwide-position social-pinterest">
+                            <a href=""><i class="fa fa-pinterest-p"></i></a>
+                        </li>
+                        <li class="socialwide-position social-instagram">
+                            <a href=""><i class="fa fa-camera-retro"></i></a>
+                        </li>
+                        <li class="socialwide-position social-houzz">
+                            <a href=""><i class="fa fa-houzz"></i></a>
+                        </li>
+                    </ul>
+            </div>
+        </footer>-->
+    </div>
+
     <!-- build:js ../static/build/js/lib.js -->
     <!-- bower:js -->
+    <script src="{{ STATIC_URL }}lib/jquery/dist/jquery.js"></script>
+    <script src="{{ STATIC_URL }}lib/bootstrap/dist/js/bootstrap.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -36,5 +176,38 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/app.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
+    <script type="text/javascript">
+        $('#phone').hover(function () {
+          $('#phone > span').removeClass( "hidden-xs" );
+        },function () {
+          $('#phone > span').addClass( "hidden-xs" );
+        });
+        $('#comments').hover(function () {
+          $('#comments > span').removeClass( "hidden-xs" );
+        },function () {
+          $('#comments > span').addClass( "hidden-xs" );
+        });
+        $('#our-mail').hover(function () {
+          $('#our-mail > span').removeClass( "hidden-xs" );
+        },function () {
+          $('#our-mail > span').addClass( "hidden-xs" );
+        });
+        $('#portafolio').hover(function () {
+          $('#portafolio > span').removeClass( "hidden-xs" );
+        },function () {
+          $('#portafolio > span').addClass( "hidden-xs" );
+        });
+        $('#cart').hover(function () {
+          $('#cart > span').removeClass( "hidden-xs" );
+        },function () {
+          $('#cart > span').addClass( "hidden-xs" );
+        });
+        $('#lenguaje').hover(function () {
+          $('#lenguaje > span').removeClass( "hidden-xs" );
+        },function () {
+          $('#lenguaje > span').addClass( "hidden-xs" );
+        });
+    </script>
+    {% block js%} {% endblock js%}
 </body>
 </html>
