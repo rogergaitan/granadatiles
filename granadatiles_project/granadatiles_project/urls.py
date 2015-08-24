@@ -1,4 +1,4 @@
-"""granadatiles_project URL Configuration
+﻿"""granadatiles_project URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.8/topics/http/urls/
@@ -18,11 +18,15 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from apps.default import views
+from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
-    url(r'^$', views.index, name='home'),
     url(r'^admin/', include(admin.site.urls)),
-]
+    ]
+
+urlpatterns += i18n_patterns(
+    url(r'^$', views.index, name='home'),
+    )
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
