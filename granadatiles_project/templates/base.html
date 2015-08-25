@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n utilTt %}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -23,7 +23,6 @@
     {% endblock css %}
 </head>
 <body class="container-fluid">
-    {% load i18n %}
     <div class="row">
         <header class="shadow-menu">
             <div class="container">
@@ -54,15 +53,17 @@
                                         <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i><span class="animated fadeIn hidden-xs">{% trans 'CART' %}</span></a></li>
                                         <!--<li><a href="#" id="lenguaje"><i class="fa fa-globe"></i><span class="animated fadeIn hidden-xs">{% trans 'English' %}<i class="caret"></i></span></a></li>-->
                                         <li id="language">
+                                            {% get_current_language as LANGUAGE_CODE %}
+                                            {% get_available_languages as LANGUAGES %}
+                                            {% get_language_info_list for LANGUAGES as languages %}
                                             <button type="button" class="btn btn-default dropdown-toggle roboto-light-md custom-drop-button roboto-light-sm " data-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa fa-globe"></i><span class="animated fadeIn hidden-xs">{% trans 'Ingles  ' %}<i class="caret"></i></span>
+                                                <i class="fa fa-globe"></i><span class="animated fadeIn hidden-xs">{{ LANGUAGE_CODE | language_name }}<i class="caret"></i></span>
                                             </button>
-                                            {% get_available_languages as languages %}
-                                            {% if languages|length > 1 %}
+                                            {% if LANGUAGES|length > 1 %}
                                                 <ul class="dropdown-menu" role="menu">
-                                                    {% for lang_code, lang_name in languages %}
+                                                    {% for language in languages %}
                                                         <li>
-                                                            <a class="roboto-light-sm">{{ lang_name }}</a>
+                                                            <a class="roboto-light-sm" href="/{{ language.code }}">{{ language.name_local|title  }} ({{ language.code }})</a>
                                                         </li>
                                                     {% endfor %}
                                                 </ul>
