@@ -27,7 +27,7 @@
         <header class="shadow-menu">
             <div class="container">
                 <nav class="navbar yamm navbar-custom roboto-light-lg margin-bottom-none" role="navigation">
-                    <div class="navbar-header col-md-2 col-sm-2">
+                    <div class="navbar-header col-md-2 col-sm-3">
                         <button type="button" data-toggle="collapse" data-target="#navbar-collapse-grid" class="navbar-toggle toggle-custom">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -35,7 +35,7 @@
                         </button>
                         <a class="hidden-xs" href="/"><img class="" src="../static/img/Granada-Tile-logo.svg" alt=""></a>
                     </div>
-                    <div class="col-md-10 col-sm-10">
+                    <div class="col-md-10 col-sm-9">
                         <div id="navbar-collapse-grid" class="navbar-collapse collapse float-right">
                             <div id="general-info" class="roboto-light-sm padding-top15 text-right">
                                 <div class="col-md-12 col-xs-4 padding-none">
@@ -46,18 +46,17 @@
                                 </div>
                                 <div class="col-md-12 col-xs-8 padding-none">
                                     <ul class="list-inline">
-                                        <li><a href="#" id="phone"><i class="glyphicon glyphicon-phone-alt"></i><span class="animated fadeIn hidden-xs">213-788-4238</span></a></li>
-                                        <li><a href="#" id="comments"><i class="fa fa-comments"></i><span class="animated fadeIn hidden-xs">{% trans 'LIVE CHAT' %}</span></a></li>
-                                        <li><a href="#" id="our-mail"><i class="fa fa-envelope"></i><span class="animated fadeIn hidden-xs">sales@ganadatile.com</span></a></li>
-                                        <li><a href="#" id="portafolio"><i class="fa fa-briefcase"></i><span class="animated fadeIn hidden-xs">{% trans 'MY PORTFOLIO' %}</span></a></li>
-                                        <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i><span class="animated fadeIn hidden-xs">{% trans 'CART' %}</span></a></li>
-                                        <!--<li><a href="#" id="lenguaje"><i class="fa fa-globe"></i><span class="animated fadeIn hidden-xs">{% trans 'English' %}<i class="caret"></i></span></a></li>-->
+                                        <li class="hidden-xs hidden-sm"><a href="#" id="phone"><i class="glyphicon glyphicon-phone-alt"></i><span>213-788-4238</span></a></li>
+                                        <li class="hidden-xs hidden-sm"><a href="#" id="comments"><i class="fa fa-comments"></i><span>{% trans 'LIVE CHAT' %}</span></a></li>
+                                        <li class="hidden-xs hidden-sm"><a href="#" id="our-mail"><i class="fa fa-envelope"></i><span>sales@ganadatile.com</span></a></li>
+                                        <li><a href="#" id="portafolio"><i class="fa fa-briefcase"></i><span>{% trans 'MY PORTFOLIO' %}</span></a></li>
+                                        <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i><span>{% trans 'CART' %}</span></a></li>
                                         <li id="language">
                                             {% get_current_language as LANGUAGE_CODE %}
                                             {% get_available_languages as LANGUAGES %}
                                             {% get_language_info_list for LANGUAGES as languages %}
                                             <button type="button" class="btn btn-default dropdown-toggle roboto-light-md custom-drop-button roboto-light-sm " data-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa fa-globe"></i><span class="animated fadeIn hidden-xs">{{ LANGUAGE_CODE | language_name }}<i class="caret"></i></span>
+                                                <i class="fa fa-globe"></i><span>{{ LANGUAGE_CODE | language_name }}<i class="caret"></i></span>
                                             </button>
                                             {% if LANGUAGES|length > 1 %}
                                                 <ul class="dropdown-menu" role="menu">
@@ -194,38 +193,6 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/app.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
-    <script type="text/javascript">
-        $('#phone').hover(function () {
-          $('#phone > span').removeClass( "hidden-xs" );
-        },function () {
-          $('#phone > span').addClass( "hidden-xs" );
-        });
-        $('#comments').hover(function () {
-          $('#comments > span').removeClass( "hidden-xs" );
-        },function () {
-          $('#comments > span').addClass( "hidden-xs" );
-        });
-        $('#our-mail').hover(function () {
-          $('#our-mail > span').removeClass( "hidden-xs" );
-        },function () {
-          $('#our-mail > span').addClass( "hidden-xs" );
-        });
-        $('#portafolio').hover(function () {
-          $('#portafolio > span').removeClass( "hidden-xs" );
-        },function () {
-          $('#portafolio > span').addClass( "hidden-xs" );
-        });
-        $('#cart').hover(function () {
-          $('#cart > span').removeClass( "hidden-xs" );
-        },function () {
-          $('#cart > span').addClass( "hidden-xs" );
-        });
-        $('#lenguaje').hover(function () {
-          $('#lenguaje > span').removeClass( "hidden-xs" );
-        },function () {
-          $('#lenguaje > span').addClass( "hidden-xs" );
-        });
-    </script>
     {% block js%} {% endblock js%}
 </body>
 </html>

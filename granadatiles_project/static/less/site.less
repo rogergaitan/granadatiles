@@ -18,7 +18,7 @@ body {
   }
 }
 .navbar-header a > img{
-  padding: 27%;
+  padding: 22%;
 }
 
 .colorgray{
@@ -187,6 +187,7 @@ h1,h4{
       color:@gray;
       background-color: transparent;
       border-color: transparent;
+      padding: 0;
       &:hover, &:focus{
         color:@orange !important;
         font-weight: @font-normal !important;
@@ -199,7 +200,12 @@ h1,h4{
         border-color: transparent;
       }
       i{
-        margin:0 10px;
+        &:first-child{
+          margin-right: 10px;
+        }
+        &:last-child{
+          margin-left: 5px;
+        }
       }
     }
   }
@@ -271,12 +277,13 @@ footer > div{
     background-color: @houzz;
 }
 /* Small devices */
-@media (max-width: 768px) {
+@media (max-width: 990px) {
   .nav li > a{
     padding: 10px 10px;
    }
   .separation-bar:after {
-      content: "";
+    content: "";
+    margin: 0;
   }
   #navbar-collapse-grid{
     float: none;
@@ -309,8 +316,11 @@ footer > div{
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-    .nav li:first-child > a{
+    .nav{
+      float: right;
+      li:first-child > a{
         padding-left: 0;
+      }
     }
 }
 
