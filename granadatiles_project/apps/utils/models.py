@@ -69,3 +69,54 @@ class BaseDescriptionModel(BaseModel):
 
     class Meta:
         abstract = True
+
+
+class BaseSectionModel(BaseDescriptionModel):
+    name = models.CharField(max_length=160)
+    name_es = models.CharField(max_length=160, blank=True, null=True)
+    name_pr = models.CharField(max_length=160, blank=True, null=True)
+
+    def get_name(self, language):
+        if language == 'es' and self.name_es is not None and self.name_es:
+            return self.name_es
+        elif language == 'pr' and self.name_pr is not None and self.name_pr:
+            return self.name_pr
+        return self.title
+
+    class Meta:
+        abstract = True
+
+
+class BaseNameModel(models.Model):
+    name = models.CharField(max_length=160)
+    name_es = models.CharField(max_length=160, blank=True, null=True)
+    name_pr = models.CharField(max_length=160, blank=True, null=True)
+
+    def get_name(self, language):
+        if language == 'es' and self.name_es is not None and self.name_es:
+            return self.name_es
+        elif language == 'pr' and self.name_pr is not None and self.name_pr:
+            return self.name_pr
+        return self.title
+
+    class Meta:
+        abstract = True
+
+
+class BaseCarouselImage(models.Model):
+    description = models.TextField()
+    description_es = models.TextField(blank=True, null=True)
+    description_pr = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='carousels', verbose_name='File')
+    target = models.BooleanField(default=False)
+    link = models.URLField(blank=True, null=True)
+
+    def get_description(self, language):
+        if language == 'es' and self.description_es is not None and self.description_es:
+            return self.description_es
+        elif language == 'pr' and self.description_pr is not None and self.description_pr:
+            return self.description_pr
+        return self.title
+
+    class Meta:
+        abstract = True

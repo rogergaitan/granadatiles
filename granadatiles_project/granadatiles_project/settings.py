@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'apps.utils',
     'apps.news',
     'apps.galleries',
+    'apps.content',
+
+    'django_summernote',
 ]
 
 MIDDLEWARE_CLASSES = [
