@@ -17,6 +17,14 @@ class Section(BaseSectionModel):
 		ordering = ('name',)
 
 
+class Images(BaseCarouselImage):
+	section = models.ForeignKey(Section, related_name='carousel')
+
+	class Meta:
+		verbose_name = 'Image'
+		verbose_name_plural = 'Carousel'
+
+
 class Social(BaseNameModel):
 	link = models.URLField(blank=True, null=True, verbose_name='URL')
 	order = models.PositiveIntegerField(unique=True, verbose_name='Orden')
@@ -31,9 +39,3 @@ class Social(BaseNameModel):
 		ordering = ('order',)
 
 
-class Images(BaseCarouselImage):
-	section = models.ForeignKey(Section, related_name='carousel')
-
-	class Meta:
-		verbose_name = 'Image'
-		verbose_name_plural = 'Carousel'

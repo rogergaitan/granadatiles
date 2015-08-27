@@ -104,9 +104,9 @@ class BaseNameModel(models.Model):
 
 
 class BaseCarouselImage(models.Model):
-    description = models.TextField()
-    description_es = models.TextField(blank=True, null=True)
-    description_pr = models.TextField(blank=True, null=True)
+    description_image = models.TextField()
+    description_image_es = models.TextField(blank=True, null=True)
+    description_image_pr = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='carousels', verbose_name='File')
     target = models.BooleanField(default=False)
     link = models.URLField(blank=True, null=True)
