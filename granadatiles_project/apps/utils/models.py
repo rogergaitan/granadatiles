@@ -4,15 +4,8 @@ from apps.utils.methods import model_directory_path
 
 class BaseModel(models.Model):
     title = models.CharField(max_length=160)
-
-    title_es = models.CharField(max_length=160,
-                                blank=True,
-                                null=True
-                                )
-    title_pr = models.CharField(max_length=160,
-                                blank=True,
-                                null=True
-                                )
+    title_es = models.CharField(max_length=160, blank=True, null=True)
+    title_pr = models.CharField(max_length=160, blank=True, null=True)
 
     def get_title(self, language):
         if language == 'es' and self.title_es is not None and self.title_es:
@@ -28,11 +21,8 @@ class BaseModel(models.Model):
 class BaseDescriptionImageModel(BaseModel):
     image = models.ImageField(upload_to=model_directory_path)
     description = models.TextField()
-
-    description_es = models.TextField(blank=True,
-                                      null=True)
-    description_pr = models.TextField(blank=True,
-                                      null=True)
+    description_es = models.TextField(blank=True, null=True)
+    description_pr = models.TextField(blank=True, null=True)
 
     def get_description(self, language):
         if language == 'es' and self.description_es is not None and self.description_es:
@@ -54,11 +44,8 @@ class BaseImageModel(BaseModel):
 
 class BaseDescriptionModel(BaseModel):
     description = models.TextField()
-
-    description_es = models.TextField(blank=True,
-                                      null=True)
-    description_pr = models.TextField(blank=True,
-                                      null=True)
+    description_es = models.TextField(blank=True, null=True)
+    description_pr = models.TextField(blank=True, null=True)
 
     def get_description(self, language):
         if language == 'es' and self.description_es is not None and self.description_es:

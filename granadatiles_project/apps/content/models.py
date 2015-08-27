@@ -1,7 +1,7 @@
 # _*_ encoding: utf-8 _*_
 
 from django.db import models
-from apps.utils.models import BaseModel, BaseSectionModel,BaseNameModel,BaseCarouselImage
+from apps.utils.models import BaseModel, BaseSectionModel,BaseNameModel,BaseCarouselImage, BaseDescriptionModel
 
 
 # Create your models here.
@@ -37,5 +37,39 @@ class Social(BaseNameModel):
 		verbose_name = 'Social'
 		verbose_name_plural = 'Social Media'
 		ordering = ('order',)
+
+
+class FeaturedVideo(BaseModel):
+	video = models.URLField(blank=True, null=True)
+
+	def __str__(self):
+		return self.title
+
+	class Meta:
+		verbose_name = 'Video'
+		verbose_name_plural = 'Videos'
+
+
+class CustomMessage(BaseSectionModel):
+
+	def __str__(self):
+		return self.name
+
+	class Meta:
+		verbose_name = 'Mensaje'
+		verbose_name_plural = 'Mensajes'
+		ordering = ('name',)
+
+
+class Area(BaseDescriptionModel):
+
+	def __str__(self):
+		return self.title
+
+	class Meta:
+		verbose_name = 'Area Administrable'
+		verbose_name_plural = 'Areas Administrables'
+
+
 
 

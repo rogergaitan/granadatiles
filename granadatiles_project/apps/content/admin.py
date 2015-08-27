@@ -1,14 +1,13 @@
 from django.contrib import admin
 from apps.content.models import *
 from django_summernote.admin import SummernoteModelAdmin, SummernoteInlineModelAdmin
-from django_summernote.widgets import SummernoteWidget
 
 # Register your models here.
 
 
 class ImagesInline(admin.StackedInline, SummernoteInlineModelAdmin):
 	model = Images
-	'''extra = 3'''
+	extra = 3
 	verbose_name = "Images"
 
 
@@ -16,10 +15,9 @@ class ImagesInline(admin.StackedInline, SummernoteInlineModelAdmin):
 class SectionAdmin(SummernoteModelAdmin):
 	list_display = ('name', 'title', )
 	inlines = [ImagesInline]
-	readonly_fields = ('name',)
 	fieldsets = (
 		('General Info', {
-			'fields': ('name', 'name_es', 'name_pr', 'title', 'title_es', 'title_pr', 'description', 'description_es', 'description_pr'),
+			'fields': ('name', 'name_es', 'name_pr', 'title', 'title_es', 'title_pr', 'description', 'description_es', 'description_pr', ),
 			}),
 		)
 
@@ -27,4 +25,37 @@ class SectionAdmin(SummernoteModelAdmin):
 @admin.register(Social)
 class SocialAdmin(admin.ModelAdmin):
 	model = Social
-	list_display = ('name', 'order', 'active')
+	list_display = ('name', 'link', 'order', 'active')
+
+
+@admin.register(FeaturedVideo)
+class VideoAdmin(SummernoteModelAdmin):
+	list_display = ('title', )
+	fieldsets = (
+		('General Info', {
+			'fields': ('title', 'video', ),
+		}),
+	)
+
+
+@admin.register(CustomMessage)
+class MessageCustomAdmin(SummernoteModelAdmin):
+	list_display = ('name',  'title', )
+	fieldsets = (
+		('General Info', {
+			'fields': ('name', 'name_es', 'name_pr', 'title', 'title_es', 'title_pr', 'description', 'description_es', 'description_pr', ),
+		}),
+	)
+
+
+@admin.register(Area)
+class AreaAdmin(SummernoteModelAdmin):
+	list_display = ('title', )
+	fieldsets = (
+		('General Info', {
+			'fields': ('title', 'title_es', 'title_pr', 'description', 'description_es', 'description_pr', ),
+			})
+		),
+
+
+
