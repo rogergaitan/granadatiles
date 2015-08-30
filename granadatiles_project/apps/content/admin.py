@@ -30,10 +30,10 @@ class SocialAdmin(admin.ModelAdmin):
 
 @admin.register(FeaturedVideo)
 class VideoAdmin(SummernoteModelAdmin):
-	list_display = ('title', )
+	list_display = ('title', 'title_es', )
 	fieldsets = (
 		('General Info', {
-			'fields': ('title', 'video', ),
+			'fields': ('title', 'title_es', 'title_pr', 'video', ),
 		}),
 	)
 
@@ -50,10 +50,10 @@ class MessageCustomAdmin(SummernoteModelAdmin):
 
 @admin.register(Area)
 class AreaAdmin(SummernoteModelAdmin):
-	list_display = ('title', )
+	list_display = ('name', )
 	fieldsets = (
 		('General Info', {
-			'fields': ('title', 'title_es', 'title_pr', 'description', 'description_es', 'description_pr', ),
+			'fields': ('name', 'name_es', 'name_pr', 'description', 'description_es', 'description_pr', ),
 			})
 		),
 
