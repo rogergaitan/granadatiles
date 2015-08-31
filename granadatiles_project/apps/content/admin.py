@@ -50,10 +50,10 @@ class MessageCustomAdmin(SummernoteModelAdmin):
 
 @admin.register(Area)
 class AreaAdmin(SummernoteModelAdmin):
-	list_display = ('name', )
+	list_display = ('title', )
 	fieldsets = (
 		('General Info', {
-			'fields': ('name', 'name_es', 'name_pr', 'description', 'description_es', 'description_pr', ),
+			'fields': ('title', 'title_es', 'title_pr', 'message', 'message_es',),
 			})
 		),
 

@@ -1,7 +1,7 @@
 # _*_ encoding: utf-8 _*_
 
 from django.db import models
-from apps.utils.models import BaseModel, BaseSectionModel,BaseNameModel,BaseCarouselImage, BaseDescriptionNameModel
+from apps.utils.models import BaseModel, BaseSectionModel,BaseNameModel,BaseCarouselImage, BaseMessageNameModel
 
 
 # Create your models here.
@@ -61,7 +61,7 @@ class CustomMessage(BaseSectionModel):
 		ordering = ('name',)
 
 
-class Area(BaseDescriptionNameModel):
+class Area(BaseMessageNameModel):
 
 	def __str__(self):
 		return self.title
