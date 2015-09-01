@@ -1,10 +1,11 @@
-#-*- encoding: utf-8 -*-
-__author__ = 'ervingbonilla'
+# -*- encoding: utf-8 -*-
+
 from django import template
 
 register = template.Library()
 
-LANGUAGES = {'es': 'Español', 'pt': 'Português', 'en': 'English'}
+LANGUAGES = {'es': 'Español', 'en': 'English'}
+
 
 def language_name(value):
 	return LANGUAGES[value]
