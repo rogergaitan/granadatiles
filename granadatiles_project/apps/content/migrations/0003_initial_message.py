@@ -10,13 +10,10 @@ def addInitialData(apps, schema_editor):
 			message(
 					name='LogIn',
 					name_es='',
-					name_pr='',
 					title='You are already registered with us',
 					title_es='Usted ya está registrado con nosotros',
-					title_pr='',
 					description='We sent password recovery instructions to your email, please check your inbox and',
 					description_es='',
-					description_pr=''
 				),
 		])
 

@@ -17,7 +17,7 @@ class SectionAdmin(SummernoteModelAdmin):
 	inlines = [ImagesInline]
 	fieldsets = (
 		('General Info', {
-			'fields': ('name', 'name_es', 'name_pr', 'title', 'title_es', 'title_pr', 'description', 'description_es', 'description_pr', ),
+			'fields': ('name', 'name_es', 'title', 'title_es', 'description', 'description_es', ),
 			}),
 		)
 
@@ -33,7 +33,7 @@ class VideoAdmin(SummernoteModelAdmin):
 	list_display = ('title', 'title_es', )
 	fieldsets = (
 		('General Info', {
-			'fields': ('title', 'title_es', 'title_pr', 'video', ),
+			'fields': ('title', 'title_es', 'video', ),
 		}),
 	)
 
@@ -43,7 +43,7 @@ class MessageCustomAdmin(SummernoteModelAdmin):
 	list_display = ('name',  'title', )
 	fieldsets = (
 		('General Info', {
-			'fields': ('name', 'name_es', 'name_pr', 'title', 'title_es', 'title_pr', 'description', 'description_es', 'description_pr', ),
+			'fields': ('name', 'name_es', 'title', 'title_es', 'description', 'description_es', ),
 		}),
 	)
 
@@ -53,7 +53,7 @@ class AreaAdmin(SummernoteModelAdmin):
 	list_display = ('title', )
 	fieldsets = (
 		('General Info', {
-			'fields': ('title', 'title_es', 'title_pr', 'message', 'message_es',),
+			'fields': ('title', 'title_es', 'message', 'message_es',),
 			})
 		),
 

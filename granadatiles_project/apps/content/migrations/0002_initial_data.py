@@ -9,10 +9,8 @@ def addInitialData(apps, schema_editor):
 			section(
 					name='Magazines',
 					name_es='Revistas',
-					name_pr='',
 					title='Tile Editorials in Magazines ',
 					title_es='Editoriales de ceramica en revistas',
-					title_pr='',
 					description='Magazines love Granada Tile. Click the covers to ﬁnd out what magazine editors are '
 								'saying about our latest tile news. See our tiles in magazines’ new product roundups and in articles featuring our tiles in residential and commercial projects',
 					description_es=''
@@ -25,7 +23,6 @@ def addInitialData(apps, schema_editor):
 			Area(
 					title='Footer',
 					title_es='Pie de pagina',
-					title_pr='',
 					message='GrandaTile',
 					message_es=''
 				),

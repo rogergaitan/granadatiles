@@ -11,16 +11,14 @@ def addInitialData(apps, schema_editor):
 			social(
 					name='facebook',
 					name_es='',
-					name_pr='',
 					link='https://www.facebook.com',
-					order= 1,
+					order=1,
 					active=True
 				),
 			#2
 			social(
 					name='twitter',
 					name_es='',
-					name_pr='',
 					link='https://twitter.com',
 					order=2,
 					active=True
@@ -29,7 +27,6 @@ def addInitialData(apps, schema_editor):
 			social(
 					name='youtube',
 					name_es='',
-					name_pr='',
 					link='https://www.youtube.com',
 					order=3,
 					active=True
