@@ -15,6 +15,14 @@ def addInitialData(apps, schema_editor):
 					description='We sent password recovery instructions to your email, please check your inbox and',
 					description_es='',
 				),
+			message(
+					name='LogIn',
+					name_es='',
+					title='Thank You for Registering with us. Tile added to your Portolio ',
+					title_es='Thank You for Registering with us. Tile added to your Portolio ',
+					description='none',
+					description_es='',
+				),
 		])
 
 class Migration(migrations.Migration):
