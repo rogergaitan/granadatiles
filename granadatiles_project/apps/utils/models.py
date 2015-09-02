@@ -39,13 +39,10 @@ class BaseImageModel(BaseModel):
 class BaseDescriptionModel(BaseModel):
 	description = models.TextField()
 	description_es = models.TextField(blank=True, null=True)
-	description_pr = models.TextField(blank=True, null=True)
 
 	def get_description(self, language):
 		if language == 'es' and self.description_es is not None and self.description_es:
 			return self.description_es
-		elif language == 'pr' and self.description_pr is not None and self.description_pr:
-			return self.description_pr
 		return self.title
 
 	class Meta:

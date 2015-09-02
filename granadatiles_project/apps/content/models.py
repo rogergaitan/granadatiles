@@ -2,6 +2,7 @@
 
 from django.db import models
 from apps.utils.models import BaseModel, BaseSectionModel,BaseNameModel,BaseCarouselImage, BaseMessageNameModel
+from django.utils.translation import ugettext as _
 
 
 # Create your models here.
@@ -12,23 +13,23 @@ class Section(BaseSectionModel):
 		return self.name
 
 	class Meta:
-		verbose_name = 'Seccion'
-		verbose_name_plural = 'Secciones'
+		verbose_name = _('Section')
+		verbose_name_plural = _('Sections')
 		ordering = ('name',)
 
 
 class Images(BaseCarouselImage):
-	section = models.ForeignKey(Section, related_name='carousel')
+	section = models.ForeignKey(Section, related_name='Carousel')
 
 	class Meta:
-		verbose_name = 'Image'
-		verbose_name_plural = 'Carousel'
+		verbose_name = _('Image')
+		verbose_name_plural = _('Carousel')
 
 
 class Social(BaseNameModel):
 	link = models.URLField(blank=True, null=True, verbose_name='URL')
-	order = models.PositiveIntegerField(unique=True, verbose_name='Orden')
-	active = models.BooleanField(default=True, verbose_name='Activo')
+	order = models.PositiveIntegerField(unique=True, verbose_name=_('Order'))
+	active = models.BooleanField(default=True, verbose_name=_('Active'))
 
 	def __str__(self):
 		return self.name
@@ -40,14 +41,14 @@ class Social(BaseNameModel):
 
 
 class FeaturedVideo(BaseModel):
-	video = models.URLField(blank=True, null=True)
+	video = models.URLField(blank=True, null=True, max_length=11, verbose_name=_('Youtube Video ID'))
 
 	def __str__(self):
 		return self.title
 
 	class Meta:
-		verbose_name = 'Video'
-		verbose_name_plural = 'Videos'
+		verbose_name = _('Video')
+		verbose_name_plural = _('Videos')
 
 
 class CustomMessage(BaseSectionModel):
@@ -56,8 +57,8 @@ class CustomMessage(BaseSectionModel):
 		return self.name
 
 	class Meta:
-		verbose_name = 'Message'
-		verbose_name_plural = 'Messages'
+		verbose_name = _('Message')
+		verbose_name_plural = _('Messages')
 		ordering = ('name',)
 
 
@@ -67,8 +68,8 @@ class Area(BaseMessageNameModel):
 		return self.title
 
 	class Meta:
-		verbose_name = 'Administrable Area'
-		verbose_name_plural = 'Administrable Areas'
+		verbose_name = _('Manageable Area')
+		verbose_name_plural = _('Manageable Areas')
 
 
 

@@ -18,7 +18,7 @@ class Gallery(BaseImageModel):
 
 
 class GalleryOptions(BaseModel):
-	gallery = models.ForeignKey(Gallery, verbose_name='Gallery')
+	gallery = models.ForeignKey(Gallery, verbose_name=_('Gallery'))
 
 	class Meta:
 		verbose_name = _('Gallery Options')
@@ -29,8 +29,8 @@ class GalleryOptions(BaseModel):
 
 
 class GalleyImages(BaseDescriptionImageModel):
-	author = models.CharField(max_length=160, blank='true', verbose_name='Author')
-	gallery_options = models.ForeignKey(GalleryOptions, verbose_name='Gallery Options')
+	author = models.CharField(max_length=160, blank='true', verbose_name=_('Author'))
+	gallery_options = models.ForeignKey(GalleryOptions, verbose_name=_('Gallery Options'))
 
 	class Meta:
 		verbose_name = _('Carousel')
