@@ -34,8 +34,8 @@ msgid "COLLECTIONS"
 msgstr "COLLECCIONES"
 
 #: .\base.html:81
-msgid "BROWSE OR CEMENT TILE COLLECTIONS"
-msgstr ""
+msgid "BROWSE FOR CEMENT TILE COLLECTIONS"
+msgstr "BUSCAR COLECCIONES DE AZULEJOS"
 
 #: .\base.html:87 .\base.html.py:94 .\base.html.py:101
 msgid "TILE COLLECTION"
