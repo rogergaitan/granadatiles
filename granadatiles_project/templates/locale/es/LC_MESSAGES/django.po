@@ -1,0 +1,94 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-02 14:48-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\base.html:50
+msgid "LIVE CHAT"
+msgstr "CHAT EN VIVO"
+
+#: .\base.html:52
+msgid "MY PORTFOLIO"
+msgstr "MI PORTAFOLIO"
+
+#: .\base.html:53
+msgid "CART"
+msgstr "CARRITO"
+
+#: .\base.html:76
+msgid "COLLECTIONS"
+msgstr "COLLECCIONES"
+
+#: .\base.html:81
+msgid "BROWSE OR CEMENT TILE COLLECTIONS"
+msgstr ""
+
+#: .\base.html:87 .\base.html.py:94 .\base.html.py:101
+msgid "TILE COLLECTION"
+msgstr "COLLECCION DE AZULEJO"
+
+#: .\base.html:107
+msgid "PRODUCT INFORMATION"
+msgstr "INFORMACION DE PRODUCTO"
+
+#: .\base.html:109
+msgid "In Stock Samples"
+msgstr "Muestras disponibles"
+
+#: .\base.html:110
+msgid "In Stock Tiles"
+msgstr "Azulejos disponibles"
+
+#: .\base.html:111
+msgid "Compare our Products"
+msgstr "Compare nuestros productos"
+
+#: .\base.html:112
+msgid "Cement Vs. Ceramic"
+msgstr "Cemento Vs. Ceramica"
+
+#: .\base.html:113
+msgid "Color Palletes"
+msgstr "Paletas de Color"
+
+#: .\base.html:114
+msgid "Catalogs / Inspiration Boooks"
+msgstr "Catalogos / Libros de Inspiracion"
+
+#: .\base.html:122
+msgid "GALLERY"
+msgstr "GALLERIA"
+
+#: .\base.html:125
+msgid "IN STOCK"
+msgstr "DISPONIBLE"
+
+#: .\base.html:128
+msgid "RESIDENTIAL"
+msgstr "RESIDENCIAL"
+
+#: .\base.html:131
+msgid "COMERTIAL"
+msgstr "COMERCIAL"
+
+#: .\base.html:134
+msgid "NEWS/PRESS"
+msgstr "NOTICIAS/PRENSA"
+
+#: .\base.html:137
+msgid "ABOUT US"
+msgstr "ACERCA DE"

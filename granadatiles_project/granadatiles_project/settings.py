@@ -112,9 +112,12 @@ LANGUAGES = (
 )
 
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'templates', 'locale'),
+    )
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
