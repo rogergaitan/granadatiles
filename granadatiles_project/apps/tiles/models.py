@@ -1,13 +1,11 @@
 from django.db import models
+from apps.utils.models import BaseDescriptionImageModel
 
-class BaseModel(models.Model):
-    title = models.CharField(max_length=30)
-  
-    class Meta:
-        abstract = True
-        
-class Collection(BaseModel):
+class Collection(BaseDescriptionImageModel):
   pass
 
-class Tile(BaseModel):
+class Group(BaseDescriptionImageModel):
   collection = models.ForeignKey(Collection)
+  
+class Tile(BaseDescriptionImageModel):
+  group = models.ForeignKey(Group)
