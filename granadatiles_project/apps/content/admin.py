@@ -6,7 +6,7 @@ from django_summernote.admin import SummernoteModelAdmin, SummernoteInlineModelA
 
 
 class ImagesInline(admin.StackedInline, SummernoteInlineModelAdmin):
-	model = Images
+	model = ImagesGroup
 	extra = 3
 	verbose_name = "Images"
 
@@ -15,11 +15,6 @@ class ImagesInline(admin.StackedInline, SummernoteInlineModelAdmin):
 class SectionAdmin(SummernoteModelAdmin):
 	list_display = ('name', 'title', )
 	inlines = [ImagesInline]
-	fieldsets = (
-		('General Info', {
-			'fields': ('name', 'name_es', 'title', 'title_es', 'description', 'description_es', ),
-			}),
-		)
 
 
 @admin.register(Social)
@@ -31,31 +26,16 @@ class SocialAdmin(admin.ModelAdmin):
 @admin.register(FeaturedVideo)
 class VideoAdmin(SummernoteModelAdmin):
 	list_display = ('title', 'title_es', )
-	fieldsets = (
-		('General Info', {
-			'fields': ('title', 'title_es', 'video', ),
-		}),
-	)
 
 
 @admin.register(CustomMessage)
 class MessageCustomAdmin(SummernoteModelAdmin):
 	list_display = ('name',  'title', )
-	fieldsets = (
-		('General Info', {
-			'fields': ('name', 'name_es', 'title', 'title_es', 'description', 'description_es', ),
-		}),
-	)
 
 
 @admin.register(Area)
 class AreaAdmin(SummernoteModelAdmin):
 	list_display = ('title', )
-	fieldsets = (
-		('General Info', {
-			'fields': ('title', 'title_es', 'message', 'message_es',),
-			})
-		),
 
 
 

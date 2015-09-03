@@ -1,7 +1,7 @@
 # _*_ encoding: utf-8 _*_
 
 from django.db import models
-from apps.utils.models import BaseModel, BaseSectionModel,BaseNameModel,BaseCarouselImage, BaseMessageNameModel
+from apps.utils.models import BaseModel, BaseSectionModel, BaseNameModel, BaseImageModel, BaseMessageNameModel
 from django.utils.translation import ugettext as _
 
 
@@ -18,12 +18,24 @@ class Section(BaseSectionModel):
 		ordering = ('name',)
 
 
-class Images(BaseCarouselImage):
-	section = models.ForeignKey(Section, related_name='Carousel')
+class ImagesGroup(BaseImageModel):
+	target = models.BooleanField(default=False)
+	link = models.URLField(blank=True, null=True)
+	designer = models.CharField(max_length=200, blank=True, null=True, verbose_name=_('Designer'))
+	photographer = models.CharField(max_length=200, blank=True, null=True, verbose_name=_('Photographer'))
+	section = models.ForeignKey(Section, related_name=_('Images'))
 
 	class Meta:
 		verbose_name = _('Image')
-		verbose_name_plural = _('Carousel')
+		verbose_name_plural = _('Images')
+
+
+class Articles(BaseImageModel):
+	imageGroup = models.ForeignKey(ImagesGroup, related_name=_('Articles'))
+
+	class Meta:
+		verbose_name = _('Article')
+		verbose_name_plural = _('Articles')
 
 
 class Social(BaseNameModel):

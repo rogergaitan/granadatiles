@@ -75,22 +75,6 @@ class BaseNameModel(models.Model):
 		abstract = True
 
 
-class BaseCarouselImage(models.Model):
-	description_image = models.TextField()
-	description_image_es = models.TextField(blank=True, null=True)
-	image = models.ImageField(upload_to='carousels', verbose_name='File')
-	target = models.BooleanField(default=False)
-	link = models.URLField(blank=True, null=True)
-
-	def get_description(self, language):
-		if language == 'es' and self.description_es is not None and self.description_es:
-			return self.description_es
-		return self.title
-
-	class Meta:
-		abstract = True
-
-
 class BaseMessageNameModel(BaseModel):
 	message = models.TextField()
 	message_es = models.TextField(blank=True,null=True)
