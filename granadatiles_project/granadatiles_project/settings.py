@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'apps.news',
     'apps.galleries',
     'apps.content',
-
+    'apps.tiles',
     'django_summernote',
 ]
 
