@@ -15,36 +15,21 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Article',
+            name='SectionImage',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('title', models.CharField(max_length=160)),
-                ('title_es', models.CharField(null=True, blank=True, max_length=160)),
-                ('url', models.URLField(null=True, verbose_name='Link', blank=True)),
-                ('logo', models.ImageField(upload_to=apps.utils.methods.model_directory_path)),
-            ],
-            options={
-                'verbose_name_plural': 'Articles',
-                'verbose_name': 'Article',
-            },
-        ),
-        migrations.CreateModel(
-            name='ImageGroup',
-            fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
-                ('title', models.CharField(max_length=160)),
-                ('title_es', models.CharField(null=True, blank=True, max_length=160)),
+                ('title_es', models.CharField(blank=True, null=True, max_length=160)),
                 ('image', models.ImageField(upload_to=apps.utils.methods.model_directory_path)),
                 ('target', models.BooleanField(default=False)),
-                ('url', models.URLField(null=True, verbose_name='Link', blank=True)),
-                ('designer', models.CharField(null=True, max_length=200, verbose_name='Designer', blank=True)),
-                ('photographer', models.CharField(null=True, max_length=200, verbose_name='Photographer', blank=True)),
-                ('article', models.ManyToManyField(related_name='Articles', to='content.Article')),
-                ('magazine', models.ManyToManyField(related_name='Magazine', to='news.Magazine')),
+                ('url', models.URLField(verbose_name='Link', blank=True, null=True)),
+                ('designer', models.CharField(verbose_name='Designer', blank=True, null=True, max_length=200)),
+                ('photographer', models.CharField(verbose_name='Photographer', blank=True, null=True, max_length=200)),
+                ('article', models.ManyToManyField(related_name='Article', to='news.Article')),
             ],
             options={
-                'verbose_name_plural': 'Images',
                 'verbose_name': 'Image',
+                'verbose_name_plural': 'Images',
             },
         ),
         migrations.RemoveField(
@@ -53,11 +38,11 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterModelOptions(
             name='area',
-            options={'verbose_name_plural': 'Manageable Areas', 'verbose_name': 'Manageable Area'},
+            options={'verbose_name': 'Manageable Area', 'verbose_name_plural': 'Manageable Areas'},
         ),
         migrations.AlterModelOptions(
             name='section',
-            options={'ordering': ('name',), 'verbose_name_plural': 'Sections', 'verbose_name': 'Section'},
+            options={'ordering': ('name',), 'verbose_name': 'Section', 'verbose_name_plural': 'Sections'},
         ),
         migrations.RemoveField(
             model_name='area',
@@ -102,12 +87,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='social',
             name='url',
-            field=models.URLField(null=True, verbose_name='Link', blank=True),
+            field=models.URLField(verbose_name='Link', blank=True, null=True),
         ),
         migrations.AlterField(
             model_name='featuredvideo',
             name='video',
-            field=models.URLField(null=True, max_length=11, verbose_name='Youtube Video ID', blank=True),
+            field=models.URLField(verbose_name='Youtube Video ID', blank=True, null=True, max_length=11),
         ),
         migrations.AlterField(
             model_name='social',
@@ -117,19 +102,19 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='social',
             name='order',
-            field=models.PositiveIntegerField(unique=True, verbose_name='Order'),
+            field=models.PositiveIntegerField(verbose_name='Order', unique=True),
         ),
         migrations.DeleteModel(
             name='Images',
         ),
         migrations.AddField(
-            model_name='imagegroup',
+            model_name='sectionimage',
             name='section',
-            field=models.ForeignKey(to='content.Section', related_name='Images'),
+            field=models.ForeignKey(related_name='Images', to='content.Section'),
         ),
         migrations.AddField(
-            model_name='imagegroup',
+            model_name='sectionimage',
             name='tile',
-            field=models.ForeignKey(to='tiles.Tile', related_name='Tile'),
+            field=models.ForeignKey(related_name='Tile', to='tiles.Tile'),
         ),
     ]

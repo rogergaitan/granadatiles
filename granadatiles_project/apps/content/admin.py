@@ -6,15 +6,9 @@ from django_summernote.admin import SummernoteModelAdmin, SummernoteInlineModelA
 
 
 class ImagesInline(admin.StackedInline, SummernoteInlineModelAdmin):
-	model = ImageGroup
+	model = SectionImage
 	extra = 3
 	verbose_name = "Images"
-
-
-@admin.register(Article)
-class ArticleAdmin(admin.ModelAdmin):
-	model = Article
-	list_display = ('title', 'url', )
 
 
 @admin.register(Section)
