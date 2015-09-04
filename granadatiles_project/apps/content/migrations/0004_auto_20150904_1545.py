@@ -8,38 +8,24 @@ import apps.utils.methods
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('tiles', '0002_auto_20150904_1440'),
         ('news', '0001_initial'),
         ('content', '0003_initial_message'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Article',
+            name='SectionImage',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
                 ('title', models.CharField(max_length=160)),
-                ('title_es', models.CharField(max_length=160, null=True, blank=True)),
-                ('url', models.URLField(verbose_name='Link', null=True, blank=True)),
-                ('logo', models.ImageField(upload_to=apps.utils.methods.model_directory_path)),
-            ],
-            options={
-                'verbose_name': 'Article',
-                'verbose_name_plural': 'Articles',
-            },
-        ),
-        migrations.CreateModel(
-            name='ImageGroup',
-            fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
-                ('title', models.CharField(max_length=160)),
-                ('title_es', models.CharField(max_length=160, null=True, blank=True)),
+                ('title_es', models.CharField(blank=True, null=True, max_length=160)),
                 ('image', models.ImageField(upload_to=apps.utils.methods.model_directory_path)),
                 ('target', models.BooleanField(default=False)),
-                ('url', models.URLField(verbose_name='Link', null=True, blank=True)),
-                ('designer', models.CharField(verbose_name='Designer', max_length=200, null=True, blank=True)),
-                ('photographer', models.CharField(verbose_name='Photographer', max_length=200, null=True, blank=True)),
-                ('article', models.ManyToManyField(related_name='Articles', to='content.Article')),
-                ('magazine', models.ManyToManyField(related_name='Magazine', to='news.Magazine')),
+                ('url', models.URLField(verbose_name='Link', blank=True, null=True)),
+                ('designer', models.CharField(verbose_name='Designer', blank=True, null=True, max_length=200)),
+                ('photographer', models.CharField(verbose_name='Photographer', blank=True, null=True, max_length=200)),
+                ('article', models.ManyToManyField(related_name='Article', to='news.Article')),
             ],
             options={
                 'verbose_name': 'Image',
@@ -56,7 +42,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterModelOptions(
             name='section',
-            options={'verbose_name': 'Section', 'verbose_name_plural': 'Sections', 'ordering': ('name',)},
+            options={'ordering': ('name',), 'verbose_name': 'Section', 'verbose_name_plural': 'Sections'},
         ),
         migrations.RemoveField(
             model_name='area',
@@ -101,12 +87,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='social',
             name='url',
-            field=models.URLField(verbose_name='Link', null=True, blank=True),
+            field=models.URLField(verbose_name='Link', blank=True, null=True),
         ),
         migrations.AlterField(
             model_name='featuredvideo',
             name='video',
-            field=models.URLField(verbose_name='Youtube Video ID', max_length=11, null=True, blank=True),
+            field=models.URLField(verbose_name='Youtube Video ID', blank=True, null=True, max_length=11),
         ),
         migrations.AlterField(
             model_name='social',
@@ -122,8 +108,13 @@ class Migration(migrations.Migration):
             name='Images',
         ),
         migrations.AddField(
-            model_name='imagegroup',
+            model_name='sectionimage',
             name='section',
-            field=models.ForeignKey(to='content.Section', related_name='Images'),
+            field=models.ForeignKey(related_name='Images', to='content.Section'),
+        ),
+        migrations.AddField(
+            model_name='sectionimage',
+            name='tile',
+            field=models.ForeignKey(related_name='Tile', to='tiles.Tile'),
         ),
     ]

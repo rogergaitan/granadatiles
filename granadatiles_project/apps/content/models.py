@@ -2,12 +2,12 @@
 
 from django.db import models
 from apps.utils.models import BaseModel, BaseSectionModel, BaseNameModel, BaseImageModel, BaseMessageNameModel
-from apps.news.models import Magazine
+from apps.news.models import Article
+from apps.tiles.models import Tile
 from django.utils.translation import ugettext as _
-from apps.utils.methods import model_directory_path
-
 
 # Create your models here.
+
 
 class Section(BaseSectionModel):
 
@@ -20,26 +20,13 @@ class Section(BaseSectionModel):
 		ordering = ('name',)
 
 
-class Article(BaseModel):
-	url = models.URLField(blank=True, null=True, verbose_name=_('Link'))
-	logo = models.ImageField(upload_to=model_directory_path)
-
-	def __str__(self):
-		return self.title
-
-	class Meta:
-		verbose_name = _('Article')
-		verbose_name_plural = _('Articles')
-
-
 class SectionImage(BaseImageModel):
 	target = models.BooleanField(default=False)
-	url = models.URLField(blank=True, null=True, verbose_name=_('Link'))
 	designer = models.CharField(max_length=200, blank=True, null=True, verbose_name=_('Designer'))
 	photographer = models.CharField(max_length=200, blank=True, null=True, verbose_name=_('Photographer'))
-	section = models.ForeignKey(Section, related_name=_('Images'))
-	magazine = models.ManyToManyField(Magazine, related_name=_('Magazine'))
-	article = models.ManyToManyField(Article, related_name=_('Articles'))
+	section = models.ForeignKey(Section, related_name='Images')
+	article = models.ManyToManyField(Article, related_name='Article')
+	tile = models.ForeignKey(Tile, related_name='Tile')
 
 	def __str__(self):
 		return self.title
