@@ -5,7 +5,7 @@ from .models import Catalog, Magazine, Video
 
 
 class MagazineAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description')
+    list_display = ('title', 'name', 'url')
     list_filter = ['date']
     search_fields = ['title']
 

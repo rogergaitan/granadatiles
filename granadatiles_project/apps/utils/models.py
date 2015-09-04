@@ -86,3 +86,16 @@ class BaseMessageNameModel(BaseModel):
 
 	class Meta:
 		abstract = True
+
+
+class BaseMagazineModel(BaseDescriptionImageModel):
+	name = models.CharField(max_length=160)
+	name_es = models.CharField(max_length=160, blank=True, null=True)
+
+	def get_name(self, language):
+		if language == 'es' and self.name_es is not None and self.name_es:
+			return self.name_es
+		return self.title
+
+	class Meta:
+		abstract = True

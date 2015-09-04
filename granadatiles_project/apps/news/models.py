@@ -1,5 +1,5 @@
 from django.db import models
-from apps.utils.models import BaseModel, BaseDescriptionImageModel
+from apps.utils.models import BaseModel, BaseMagazineModel
 from apps.utils.methods import model_directory_path
 from django.utils.translation import ugettext as _
 
@@ -15,7 +15,9 @@ class Catalog(BaseModel):
         return self.title
 
 
-class Magazine(BaseDescriptionImageModel):
+class Magazine(BaseMagazineModel):
+    url = models.CharField(max_length=200, verbose_name=_('Link'), null=True, blank=True)
+    logo = models.ImageField(upload_to=model_directory_path)
     date = models.DateField(verbose_name=_('Date'))
 
     class Meta:

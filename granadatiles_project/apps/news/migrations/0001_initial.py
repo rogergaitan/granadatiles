@@ -14,11 +14,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Catalog',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('title', models.CharField(max_length=160)),
-                ('title_es', models.CharField(max_length=160, null=True, blank=True)),
-                ('title_pr', models.CharField(max_length=160, null=True, blank=True)),
-                ('file', models.FileField(verbose_name='File', upload_to=apps.utils.methods.model_directory_path)),
+                ('title_es', models.CharField(null=True, max_length=160, blank=True)),
+                ('file', models.FileField(upload_to=apps.utils.methods.model_directory_path, verbose_name='File')),
             ],
             options={
                 'verbose_name': 'Catalog',
@@ -28,14 +27,16 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Magazine',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('title', models.CharField(max_length=160)),
-                ('title_es', models.CharField(max_length=160, null=True, blank=True)),
-                ('title_pr', models.CharField(max_length=160, null=True, blank=True)),
+                ('title_es', models.CharField(null=True, max_length=160, blank=True)),
                 ('image', models.ImageField(upload_to=apps.utils.methods.model_directory_path)),
                 ('description', models.TextField()),
                 ('description_es', models.TextField(null=True, blank=True)),
-                ('description_pr', models.TextField(null=True, blank=True)),
+                ('name', models.CharField(max_length=160)),
+                ('name_es', models.CharField(null=True, max_length=160, blank=True)),
+                ('url', models.CharField(max_length=200, null=True, blank=True, verbose_name='Link')),
+                ('logo', models.ImageField(upload_to=apps.utils.methods.model_directory_path)),
                 ('date', models.DateField(verbose_name='Date')),
             ],
             options={
@@ -46,11 +47,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Video',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('title', models.CharField(max_length=160)),
-                ('title_es', models.CharField(max_length=160, null=True, blank=True)),
-                ('title_pr', models.CharField(max_length=160, null=True, blank=True)),
-                ('url', models.CharField(max_length=11, verbose_name='URL')),
+                ('title_es', models.CharField(null=True, max_length=160, blank=True)),
+                ('url', models.CharField(max_length=11, verbose_name='Youtube Video ID')),
             ],
             options={
                 'verbose_name': 'Video',

@@ -11,6 +11,12 @@ class ImagesInline(admin.StackedInline, SummernoteInlineModelAdmin):
 	verbose_name = "Images"
 
 
+@admin.register(Article)
+class ArticleAdmin(admin.ModelAdmin):
+	model = Article
+	list_display = ('title', 'url', )
+
+
 @admin.register(Section)
 class SectionAdmin(SummernoteModelAdmin):
 	list_display = ('name', 'title', )
@@ -20,7 +26,7 @@ class SectionAdmin(SummernoteModelAdmin):
 @admin.register(Social)
 class SocialAdmin(admin.ModelAdmin):
 	model = Social
-	list_display = ('name', 'link', 'order', 'active')
+	list_display = ('name', 'url', 'order', 'active')
 
 
 @admin.register(FeaturedVideo)
