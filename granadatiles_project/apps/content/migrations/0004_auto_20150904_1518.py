@@ -8,6 +8,7 @@ import apps.utils.methods
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('tiles', '0002_auto_20150904_1440'),
         ('news', '0001_initial'),
         ('content', '0003_initial_message'),
     ]
@@ -16,34 +17,34 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Article',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
                 ('title', models.CharField(max_length=160)),
-                ('title_es', models.CharField(max_length=160, null=True, blank=True)),
-                ('url', models.URLField(verbose_name='Link', null=True, blank=True)),
+                ('title_es', models.CharField(null=True, blank=True, max_length=160)),
+                ('url', models.URLField(null=True, verbose_name='Link', blank=True)),
                 ('logo', models.ImageField(upload_to=apps.utils.methods.model_directory_path)),
             ],
             options={
-                'verbose_name': 'Article',
                 'verbose_name_plural': 'Articles',
+                'verbose_name': 'Article',
             },
         ),
         migrations.CreateModel(
             name='ImageGroup',
             fields=[
-                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
                 ('title', models.CharField(max_length=160)),
-                ('title_es', models.CharField(max_length=160, null=True, blank=True)),
+                ('title_es', models.CharField(null=True, blank=True, max_length=160)),
                 ('image', models.ImageField(upload_to=apps.utils.methods.model_directory_path)),
                 ('target', models.BooleanField(default=False)),
-                ('url', models.URLField(verbose_name='Link', null=True, blank=True)),
-                ('designer', models.CharField(verbose_name='Designer', max_length=200, null=True, blank=True)),
-                ('photographer', models.CharField(verbose_name='Photographer', max_length=200, null=True, blank=True)),
+                ('url', models.URLField(null=True, verbose_name='Link', blank=True)),
+                ('designer', models.CharField(null=True, max_length=200, verbose_name='Designer', blank=True)),
+                ('photographer', models.CharField(null=True, max_length=200, verbose_name='Photographer', blank=True)),
                 ('article', models.ManyToManyField(related_name='Articles', to='content.Article')),
                 ('magazine', models.ManyToManyField(related_name='Magazine', to='news.Magazine')),
             ],
             options={
-                'verbose_name': 'Image',
                 'verbose_name_plural': 'Images',
+                'verbose_name': 'Image',
             },
         ),
         migrations.RemoveField(
@@ -52,11 +53,11 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterModelOptions(
             name='area',
-            options={'verbose_name': 'Manageable Area', 'verbose_name_plural': 'Manageable Areas'},
+            options={'verbose_name_plural': 'Manageable Areas', 'verbose_name': 'Manageable Area'},
         ),
         migrations.AlterModelOptions(
             name='section',
-            options={'verbose_name': 'Section', 'verbose_name_plural': 'Sections', 'ordering': ('name',)},
+            options={'ordering': ('name',), 'verbose_name_plural': 'Sections', 'verbose_name': 'Section'},
         ),
         migrations.RemoveField(
             model_name='area',
@@ -101,12 +102,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='social',
             name='url',
-            field=models.URLField(verbose_name='Link', null=True, blank=True),
+            field=models.URLField(null=True, verbose_name='Link', blank=True),
         ),
         migrations.AlterField(
             model_name='featuredvideo',
             name='video',
-            field=models.URLField(verbose_name='Youtube Video ID', max_length=11, null=True, blank=True),
+            field=models.URLField(null=True, max_length=11, verbose_name='Youtube Video ID', blank=True),
         ),
         migrations.AlterField(
             model_name='social',
@@ -116,7 +117,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='social',
             name='order',
-            field=models.PositiveIntegerField(verbose_name='Order', unique=True),
+            field=models.PositiveIntegerField(unique=True, verbose_name='Order'),
         ),
         migrations.DeleteModel(
             name='Images',
@@ -125,5 +126,10 @@ class Migration(migrations.Migration):
             model_name='imagegroup',
             name='section',
             field=models.ForeignKey(to='content.Section', related_name='Images'),
+        ),
+        migrations.AddField(
+            model_name='imagegroup',
+            name='tile',
+            field=models.ForeignKey(to='tiles.Tile', related_name='Tile'),
         ),
     ]
