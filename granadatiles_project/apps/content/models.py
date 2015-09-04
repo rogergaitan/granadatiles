@@ -32,7 +32,7 @@ class Article(BaseModel):
 		verbose_name_plural = _('Articles')
 
 
-class ImageGroup(BaseImageModel):
+class SectionImage(BaseImageModel):
 	target = models.BooleanField(default=False)
 	url = models.URLField(blank=True, null=True, verbose_name=_('Link'))
 	designer = models.CharField(max_length=200, blank=True, null=True, verbose_name=_('Designer'))

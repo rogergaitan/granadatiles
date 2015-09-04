@@ -6,7 +6,7 @@ from django_summernote.admin import SummernoteModelAdmin, SummernoteInlineModelA
 
 
 class ImagesInline(admin.StackedInline, SummernoteInlineModelAdmin):
-	model = ImageGroup
+	model = SectionImage
 	extra = 3
 	verbose_name = "Images"
 
