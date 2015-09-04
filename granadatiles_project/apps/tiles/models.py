@@ -1,6 +1,6 @@
 from django.db import models
 from apps.utils.models import BaseDescriptionImageModel
-from apps.content.model import SectionImage
+from apps.content.models import SectionImage
 
 class Collection(BaseDescriptionImageModel):
   pass
