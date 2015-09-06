@@ -17,7 +17,7 @@ from django.conf.urls import include, url, patterns
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from apps.default import views
+from apps.content import views
 from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
