@@ -49,8 +49,6 @@ INSTALLED_APPS = [
     'apps.content',
     'apps.tiles',
 
-
-    
 ]
 
 MIDDLEWARE_CLASSES = [
