@@ -1,42 +1,52 @@
 # -*- encoding: utf-8 -*-
-
 from django.db import models
-from apps.utils.models import BaseModel, BaseImageModel, BaseDescriptionImageModel
 from django.utils.translation import ugettext as _
+from core.models import BaseCatalogModel, BaseGallerieImageModel
+from sorl.thumbnail.fields import ImageField
 
-# Create your models here.
+class Designer(models.Model):
+    name = models.CharField(max_length=250, verbose_name=_('Name'))
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Designer')
+        verbose_name_plural = _('Designers')
+
+class Photographer(models.Model):
+    name = models.CharField(max_length=250, verbose_name=_('Name'))
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Photographer')
+        verbose_name_plural = _('Photographers')
+
+class Gallery(BaseCatalogModel):
+    image = ImageField(upload_to='Gallery')
+    
+    class Meta:
+        verbose_name = _('Gallery')
+        verbose_name_plural = _('Galleries')
 
 
-class Gallery(BaseImageModel):
+class GalleryCategory(BaseCatalogModel):
+    gallery = models.ForeignKey(Gallery, verbose_name=_('Gallery'), related_name='categories')
 
-	class Meta:
-		verbose_name = _('Gallery')
-		verbose_name_plural = _('Galleries')
-
-	def __str__(self):
-		return self.title
+    class Meta:
+        verbose_name = _('Gallery Category')
+        verbose_name_plural = _('Galleries Categories')
 
 
-class GalleryOptions(BaseModel):
-	gallery = models.ForeignKey(Gallery, verbose_name=_('Gallery'))
+class GalleryImage(BaseGallerieImageModel):
+    galleryCategory = models.ForeignKey(GalleryCategory, related_name='images', verbose_name=_('Gallery Category'))
+    designer = models.ForeignKey(Designer, blank=True, null = True, related_name='gallery_images', verbose_name=_('Author'))
+    photographer = models.ForeignKey(Photographer, blank=True, null = True, related_name= 'gallery_images', verbose_name=_('Photographer'))
 
-	class Meta:
-		verbose_name = _('Gallery Options')
-		verbose_name_plural = _('Galleries Options')
-
-	def __str__(self):
-		return self.title
-
-
-class GalleyImages(BaseDescriptionImageModel):
-	author = models.CharField(max_length=160, blank='true', verbose_name=_('Author'))
-	gallery_options = models.ForeignKey(GalleryOptions, verbose_name=_('Gallery Options'))
-
-	class Meta:
-		verbose_name = _('Carousel')
-		verbose_name_plural = _('Carousels')
-
-	def __str__(self):
-		return self.title
+    class Meta:
+        verbose_name = _('Image')
+        verbose_name_plural = _('Images')
 
 

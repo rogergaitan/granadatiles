@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 import sorl.thumbnail.fields
-import apps.utils.methods
+import core.models
 
 
 class Migration(migrations.Migration):
@@ -15,12 +15,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Collection',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
-                ('title', models.CharField(max_length=160)),
-                ('title_es', models.CharField(null=True, max_length=160, blank=True)),
-                ('image', sorl.thumbnail.fields.ImageField(upload_to=apps.utils.methods.model_directory_path)),
-                ('description', models.TextField()),
-                ('description_es', models.TextField(null=True, blank=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('title', models.CharField(max_length=150, verbose_name='Title')),
+                ('title_es', models.CharField(max_length=160, blank=True, null=True)),
+                ('description', models.TextField(verbose_name='Description')),
+                ('description_es', models.TextField(blank=True, null=True)),
+                ('image', sorl.thumbnail.fields.ImageField(upload_to=core.models.model_directory_path, verbose_name='Image')),
             ],
             options={
                 'abstract': False,
@@ -29,12 +29,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Group',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
-                ('title', models.CharField(max_length=160)),
-                ('title_es', models.CharField(null=True, max_length=160, blank=True)),
-                ('image', sorl.thumbnail.fields.ImageField(upload_to=apps.utils.methods.model_directory_path)),
-                ('description', models.TextField()),
-                ('description_es', models.TextField(null=True, blank=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('title', models.CharField(max_length=150, verbose_name='Title')),
+                ('title_es', models.CharField(max_length=160, blank=True, null=True)),
+                ('description', models.TextField(verbose_name='Description')),
+                ('description_es', models.TextField(blank=True, null=True)),
+                ('image', sorl.thumbnail.fields.ImageField(upload_to=core.models.model_directory_path, verbose_name='Image')),
                 ('collection', models.ForeignKey(to='tiles.Collection')),
             ],
             options={
@@ -44,10 +44,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='PalleteColor',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
-                ('name', models.CharField(max_length=160)),
-                ('name_es', models.CharField(null=True, max_length=160, blank=True)),
-                ('number', models.CharField(max_length=20)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=150, verbose_name='Name')),
+                ('name_es', models.CharField(max_length=150, blank=True, null=True, verbose_name='Name')),
+                ('hexadecimalCode', models.CharField(max_length=20)),
             ],
             options={
                 'abstract': False,
@@ -56,12 +56,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Tile',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
-                ('title', models.CharField(max_length=160)),
-                ('title_es', models.CharField(null=True, max_length=160, blank=True)),
-                ('image', sorl.thumbnail.fields.ImageField(upload_to=apps.utils.methods.model_directory_path)),
-                ('description', models.TextField()),
-                ('description_es', models.TextField(null=True, blank=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('title', models.CharField(max_length=150, verbose_name='Title')),
+                ('title_es', models.CharField(max_length=160, blank=True, null=True)),
+                ('description', models.TextField(verbose_name='Description')),
+                ('description_es', models.TextField(blank=True, null=True)),
                 ('colors', models.ManyToManyField(to='tiles.PalleteColor')),
                 ('group', models.ForeignKey(to='tiles.Group')),
             ],
@@ -72,7 +71,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TileSize',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
                 ('weight', models.IntegerField()),
                 ('thickness', models.IntegerField()),
             ],

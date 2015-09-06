@@ -1,20 +1,21 @@
-from django.db import models
-from apps.utils.models import BaseDescriptionImageModel, BaseNameModel
+﻿from django.db import models
+from core.models import BaseGallerieImageModel, BaseCatalogModel, BaseContentModel
 
-class Collection(BaseDescriptionImageModel):
-    pass
-
-class Group(BaseDescriptionImageModel):
-    collection = models.ForeignKey(Collection)
-  
 class TileSize(models.Model):
     weight = models.IntegerField()
     thickness = models.IntegerField()
     
-class PalleteColor(BaseNameModel):
-    number = models.CharField(max_length=20)
+class PalleteColor(BaseCatalogModel):
+    hexadecimalCode = models.CharField(max_length=20)
+
+
+class Collection(BaseGallerieImageModel):
+    pass
+
+class Group(BaseGallerieImageModel):
+    collection = models.ForeignKey(Collection)
   
-class Tile(BaseDescriptionImageModel):
+class Tile(BaseContentModel):
     group = models.ForeignKey(Group)
     sizes = models.ManyToManyField(TileSize)
     colors = models.ManyToManyField(PalleteColor)

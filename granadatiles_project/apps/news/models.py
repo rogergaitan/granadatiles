@@ -1,55 +1,40 @@
-from django.db import models
-from apps.utils.models import BaseModel, BaseMagazineModel, BaseNameModel
-from apps.utils.methods import model_directory_path
+﻿from django.db import models
 from django.utils.translation import ugettext as _
+from core.models import BaseCatalogModel, BaseContentModel
+from sorl.thumbnail.fields import ImageField
+from core.managers import BaseDateManager
+
+class Catalog(BaseCatalogModel):
+    file = models.FileField(upload_to='Catalogs', verbose_name=_('File'))
+
+    class Meta:
+        verbose_name = _('Catalog')
+        verbose_name_plural = _('Catalogs')
+
+    def __str__(self):
+        return self.title
 
 
-class Catalog(BaseModel):
-	file = models.FileField(upload_to=model_directory_path, verbose_name=_('File'))
+class Magazine(models.Model):
+    name = models.CharField(max_length=130, verbose_name=_('Name'))
+    logo = models.ImageField(upload_to='Magazines')
 
-	class Meta:
-		verbose_name = _('Catalog')
-		verbose_name_plural = _('Catalogs')
+    class Meta:
+        verbose_name = _('Magazine')
+        verbose_name_plural = _('Magazines')
 
-	def __str__(self):
-		return self.title
-
-
-class Magazine(BaseMagazineModel):
-	url = models.CharField(max_length=200, verbose_name=_('Link'), null=True, blank=True)
-	date = models.DateField(verbose_name=_('Date'))
-
-	class Meta:
-		verbose_name = _('Magazine')
-		verbose_name_plural = _('Magazines')
-
-	def __str__(self):
-		return self.title
+    def __str__(self):
+        return self.name
 
 
-class Article(BaseNameModel):
-	logo = models.ImageField(upload_to=model_directory_path)
-	magazine = models.ForeignKey(Magazine, related_name='Magazine')
+class Article(BaseContentModel):
+    url = models.CharField(max_length=200, verbose_name=_('Link'), null=True, blank=True)
+    date = models.DateField(verbose_name=_('Date'))
+    cover = ImageField(upload_to='Magazines')
+    magazine = models.ForeignKey(Magazine, related_name='articles')
 
-	def __str__(self):
-		return self.name
-
-	class Meta:
-		verbose_name = _('Article')
-		verbose_name_plural = _('Articles')
-
-
-class Video(BaseModel):
-	url = models.CharField(max_length=11, verbose_name=_('Youtube Video ID'))
-
-	class Meta:
-		verbose_name = _('Video')
-		verbose_name_plural = _('Videos')
-
-	def __str__(self):
-		return self.title
-
-	def youtube_url_format(self):
-		return 'https://www.youtube.com/watch?v={0}'.format(self.url)
-
-	youtube_url_format.short_description = 'Youtube Video URL'
+    objects = BaseDateManager()
+    
+    class Meta:
+        verbose_name = _('Article')
+        verbose_name_plural = _('Articles')

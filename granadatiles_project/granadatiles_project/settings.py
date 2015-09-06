@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
 
     #project apps
-    'apps.utils',
     'apps.news',
     'apps.galleries',
     'apps.content',

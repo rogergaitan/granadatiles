@@ -1,31 +1,17 @@
-from django.contrib import admin
-from .models import Catalog, Magazine, Video, Article
+﻿from django.contrib import admin
+from .models import Catalog, Magazine, Article
 
-# Register your models here.
-
-
+@admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-	model = Article
-	list_display = ('name',)
+    model = Article
+    list_display = ('title',)
 
-
+@admin.register(Magazine)
 class MagazineAdmin(admin.ModelAdmin):
-	list_display = ('title', 'name', 'url')
-	list_filter = ['date']
-	search_fields = ['title']
+    list_display = ('name',)
+    search_fields = ['name']
 
-
-class VideoAdmin(admin.ModelAdmin):
-	list_display = ('title', 'youtube_url_format')
-	search_fields = ['title']
-
-
+@admin.register(Catalog)
 class CatalogAdmin(admin.ModelAdmin):
-	list_display = ('title', 'title_es')
-	search_fields = ['title', 'title_es']
-
-
-admin.site.register(Catalog, CatalogAdmin)
-admin.site.register(Magazine, MagazineAdmin)
-admin.site.register(Article, ArticleAdmin)
-admin.site.register(Video, VideoAdmin)
+    list_display = ('name', 'name')
+    search_fields = ['name', 'name_es']

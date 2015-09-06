@@ -1,27 +1,23 @@
-from django.contrib import admin
-from apps.galleries.models import Gallery, GalleryOptions, GalleyImages
+﻿from django.contrib import admin
+from apps.galleries.models import Gallery, GalleryImage, GalleryCategory
 
-# Register your models here.
-
-
+@admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
-	list_display = ('title',)
-	list_filter = ['title']
-	search_fields = ['title']
+    list_display = ('name',)
+    list_filter = ['name']
+    search_fields = ['name']
 
 
-class GalleryOptionsAdmin(admin.ModelAdmin):
-	list_display = ('title', 'gallery')
-	list_filter = ['title']
-	search_fields = ['title']
+@admin.register(GalleryCategory)
+class GalleryCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'name')
+    list_filter = ['name']
+    search_fields = ['name']
 
+@admin.register(GalleryImage)
+class GalleryImage(admin.ModelAdmin):
+    list_display = ('title', )
+    list_filter = ['title']
+    search_fields = ['title']
 
-class Carousel(admin.ModelAdmin):
-	list_display = ('title', 'gallery_options')
-	list_filter = ['title']
-	search_fields = ['title']
-
-admin.site.register(Gallery, GalleryAdmin)
-admin.site.register(GalleryOptions, GalleryOptionsAdmin)
-admin.site.register(GalleyImages, Carousel)
 
