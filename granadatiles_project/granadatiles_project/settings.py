@@ -37,12 +37,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    #third party apps
+    'django_summernote',
+    'sorl.thumbnail',
+
+    #project apps
     'apps.utils',
     'apps.news',
     'apps.galleries',
     'apps.content',
     'apps.tiles',
-    'django_summernote',
+
+
+    
 ]
 
 MIDDLEWARE_CLASSES = [
