@@ -8,16 +8,16 @@ class TileSize(models.Model):
     thickness = models.IntegerField(verbose_name=_('Thickness'))
     
     class Meta:
-        verbose_name = _('TileSize')
-        verbose_name_plural = _('TileSizes')
+        verbose_name = _('Tile Size')
+        verbose_name_plural = _('Tile Sizes')
 	
 	
 class PalleteColor(BaseCatalogModel):
     hexadecimalCode = models.CharField(max_length=20, verbose_name=_('Color'))
     
     class Meta:
-        verbose_name = _('PalleteColor')
-        verbose_name_plural = _('PalleteColors')
+        verbose_name = _('Pallete Color')
+        verbose_name_plural = _('Pallete Colors')
 
 
 class Collection(BaseGallerieImageModel):
