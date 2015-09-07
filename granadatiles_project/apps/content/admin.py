@@ -13,6 +13,7 @@ class ImagesInline(admin.StackedInline, SummernoteInlineModelAdmin):
 class SectionAdmin(SummernoteModelAdmin):
     list_display = ('name', 'title', )
     inlines = [ImagesInline]
+    search_fields = ['name', 'name_es']
 
 
 @admin.register(Social)
@@ -23,9 +24,10 @@ class SocialAdmin(admin.ModelAdmin):
 
 @admin.register(FeaturedVideo)
 class VideoAdmin(SummernoteModelAdmin):
-    list_display = ('name', 'name', )
+    list_display = ('name', 'name_es', )
 
 
 @admin.register(Area)
 class AreaAdmin(SummernoteModelAdmin):
     list_display = ('title', )
+    search_fields = ['title', 'title_es',]

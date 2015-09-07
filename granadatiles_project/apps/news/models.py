@@ -1,4 +1,4 @@
-﻿from django.db import models
+from django.db import models
 from django.utils.translation import ugettext as _
 from core.models import BaseCatalogModel, BaseContentModel
 from sorl.thumbnail.fields import ImageField
