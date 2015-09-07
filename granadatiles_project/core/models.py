@@ -10,7 +10,7 @@ def model_directory_path(instance, filename):
 class BaseCatalogModel(models.Model):
     name = models.CharField(max_length=150, verbose_name=_('Name'))
 
-    name_es = models.CharField(max_length=150, verbose_name=_('Name'),
+    name_es = models.CharField(max_length=150, verbose_name=_('Name_es'),
                                blank=True,
                                null=True)
 
@@ -27,7 +27,7 @@ class BaseCatalogModel(models.Model):
 
 
 class BaseCatalogOrderModel(BaseCatalogModel):
-    order = models.PositiveIntegerField(unique=True, verbose_name='Order')
+    order = models.PositiveIntegerField(unique=True, verbose_name=_('Order'))
 
     class Meta:
         abstract = True
@@ -38,12 +38,14 @@ class BaseContentModel(models.Model):
 
     title_es = models.CharField(max_length=160,
                                 blank=True,
-                                null=True)
+                                null=True,
+                                verbose_name=_('Title_es')
 
     description = models.TextField(verbose_name=_('Description'))
 
     description_es = models.TextField(blank=True,
-                                      null=True)
+                                      null=True,
+                                      verbose_name='Description_es')
 
     def get_title(self, language):
         if language == 'es' and self.title_es is not None and self.title_es:
@@ -63,7 +65,7 @@ class BaseContentModel(models.Model):
 
 
 class BaseContentOrderModel(BaseContentModel):
-    order = models.PositiveIntegerField(unique=True, verbose_name='Order')
+    order = models.PositiveIntegerField(unique=True, verbose_name=_('Order'))
 
     class Meta:
         abstract = True
