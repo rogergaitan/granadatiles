@@ -7,6 +7,9 @@ class TileSize(models.Model):
     weight = models.IntegerField(verbose_name=_('Weight'))
     thickness = models.IntegerField(verbose_name=_('Thickness'))
     
+    def __str__(self):
+        return "{0}".format(self.weight)
+    
     class Meta:
         verbose_name = _('Tile Size')
         verbose_name_plural = _('Tile Sizes')
