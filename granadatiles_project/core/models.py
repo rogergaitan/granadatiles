@@ -39,13 +39,13 @@ class BaseContentModel(models.Model):
     title_es = models.CharField(max_length=160,
                                 blank=True,
                                 null=True,
-                                verbose_name=_('Title_es')
+                                verbose_name=_('Title_es'))
 
     description = models.TextField(verbose_name=_('Description'))
 
     description_es = models.TextField(blank=True,
                                       null=True,
-                                      verbose_name='Description_es')
+                                      verbose_name=_('Description_es'))
 
     def get_title(self, language):
         if language == 'es' and self.title_es is not None and self.title_es:
