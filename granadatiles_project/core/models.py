@@ -4,7 +4,8 @@ from sorl.thumbnail import ImageField
 
 
 def model_directory_path(instance, filename):
-    return instance.__class__.__name__+'/'+filename
+    return instance.__class__.__name__ + '/' + filename
+
 
 class BaseCatalogModel(models.Model):
     name = models.CharField(max_length=150, verbose_name=_('Name'))
@@ -23,6 +24,7 @@ class BaseCatalogModel(models.Model):
 
     class Meta:
         abstract = True
+
 
 class BaseCatalogOrderModel(BaseCatalogModel):
     order = models.PositiveIntegerField(unique=True, verbose_name='Order')

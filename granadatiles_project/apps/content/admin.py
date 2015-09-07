@@ -1,11 +1,13 @@
 ﻿from django.contrib import admin
-from apps.content.models import *
+from apps.content.models import Section, SectionImage, Social, FeaturedVideo, Area
 from django_summernote.admin import SummernoteModelAdmin, SummernoteInlineModelAdmin
+
 
 class ImagesInline(admin.StackedInline, SummernoteInlineModelAdmin):
     model = SectionImage
     extra = 3
     verbose_name = "Images"
+
 
 @admin.register(Section)
 class SectionAdmin(SummernoteModelAdmin):
@@ -27,6 +29,3 @@ class VideoAdmin(SummernoteModelAdmin):
 @admin.register(Area)
 class AreaAdmin(SummernoteModelAdmin):
     list_display = ('title', )
-
-
-

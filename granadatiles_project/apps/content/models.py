@@ -1,14 +1,13 @@
-# _*_ encoding: utf-8 _*_
 from django.db import models
 from apps.news.models import Article
 from apps.tiles.models import Tile
 from django.utils.translation import ugettext as _
 from apps.galleries.models import Designer, Photographer
-from core.models import BaseContentModel, BaseCatalogModel, BaseGallerieNavImageModel, BaseContentOrderModel, BaseCatalogOrderModel
+from core.models import BaseContentModel, BaseCatalogModel, BaseGallerieNavImageModel, BaseCatalogOrderModel
 
 
 class Section(BaseCatalogModel, BaseContentModel):
-    
+
     class Meta:
         verbose_name = _('Section')
         verbose_name_plural = _('Sections')
@@ -16,11 +15,16 @@ class Section(BaseCatalogModel, BaseContentModel):
 
 
 class SectionImage(BaseGallerieNavImageModel):
-    designer = models.ForeignKey(Designer, blank=True, null = True, related_name='covers', verbose_name=_('Author'))
-    photographer = models.ForeignKey(Photographer, blank=True, null = True, related_name= 'covers', verbose_name=_('Photographer'))
+    designer = models.ForeignKey(
+        Designer, blank=True, null=True, related_name='covers',
+        verbose_name=_('Author'))
+    photographer = models.ForeignKey(
+        Photographer, blank=True, null=True, related_name='covers',
+        verbose_name=_('Photographer'))
     section = models.ForeignKey(Section, related_name='images')
     articles = models.ManyToManyField(Article)
-    tile = models.ForeignKey(Tile, related_name='pictures', verbose_name=_('Tile'))
+    tile = models.ForeignKey(
+        Tile, related_name='pictures', verbose_name=_('Tile'))
 
     class Meta:
         verbose_name = _('Image')
@@ -55,4 +59,3 @@ class Area(BaseContentModel):
     class Meta:
         verbose_name = _('Manageable Area')
         verbose_name_plural = _('Manageable Areas')
-
