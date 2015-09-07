@@ -8,29 +8,29 @@ class TileSize(models.Model):
     thickness = models.IntegerField(verbose_name=_('Thickness'))
     
     class Meta:
-		verbose_name = _('TileSize')
-		verbose_name_plural = _('TileSizes')
+        verbose_name = _('TileSize')
+        verbose_name_plural = _('TileSizes')
 	
 	
 class PalleteColor(BaseCatalogModel):
     hexadecimalCode = models.CharField(max_length=20, verbose_name=_('Color'))
     
     class Meta:
-		verbose_name = _('PalleteColor')
-		verbose_name_plural = _('PalleteColors')
+        verbose_name = _('PalleteColor')
+        verbose_name_plural = _('PalleteColors')
 
 
 class Collection(BaseGallerieImageModel):
     
     class Meta:
-		verbose_name = _('Collection')
-		verbose_name_plural = _('Collections')
+        verbose_name = _('Collection')
+        verbose_name_plural = _('Collections')
 
 
 class Group(BaseGallerieImageModel):
     collection = models.ForeignKey(Collection, related_name='groups', verbose_name=_('Collection'))
 
-     class Meta:
+    class Meta:
         verbose_name = _('Group')
         verbose_name_plural = _('Groups')
 
@@ -39,6 +39,6 @@ class Tile(BaseContentModel):
     sizes = models.ManyToManyField(TileSize, related_name='tiles', verbose_name=_('Tiles Sizes'))
     colors = models.ManyToManyField(PalleteColor, related_name='tiles', verbose_name=_('Tiles Colors'))
     
-     class Meta:
+    class Meta:
         verbose_name = _('Tile')
         verbose_name_plural = _('Tiles')
