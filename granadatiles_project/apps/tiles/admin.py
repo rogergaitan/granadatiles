@@ -1,17 +1,18 @@
 ﻿from django.contrib import admin
+from django_summernote.admin import SummernoteModelAdmin
 from .models import Tile, Collection, Group
 
 
 @admin.register(Tile)
-class TileAdmin(admin.ModelAdmin):
+class TileAdmin(SummernoteModelAdmin):
     pass
 
 
 @admin.register(Collection)
-class CollectionAdmin(admin.ModelAdmin):
+class CollectionAdmin(SummernoteModelAdmin):
     pass
 
 
 @admin.register(Group)
-class GroupAdmin(admin.ModelAdmin):
+class GroupAdmin(SummernoteModelAdmin):
     pass
