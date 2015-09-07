@@ -1,4 +1,4 @@
-﻿from django.contrib import admin
+from django.contrib import admin
 from apps.content.models import Section, SectionImage, Social, FeaturedVideo, Area
 from django_summernote.admin import SummernoteModelAdmin, SummernoteInlineModelAdmin
 
