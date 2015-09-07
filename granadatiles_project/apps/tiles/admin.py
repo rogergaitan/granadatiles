@@ -29,4 +29,4 @@ class PalleteColorAdmin(admin.ModelAdmin):
 
 @admin.register(TileSize)
 class TileSize(admin.ModelAdmin):
-	pass
+	list_display = ('weight', 'thickness')

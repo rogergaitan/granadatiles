@@ -4,11 +4,11 @@ from core.models import BaseGallerieImageModel, BaseCatalogModel, BaseContentMod
 
 
 class TileSize(models.Model):
-    weight = models.IntegerField(verbose_name=_('Weight'))
-    thickness = models.IntegerField(verbose_name=_('Thickness'))
+    weight = models.CharField(max_length=10, verbose_name=_('Weight'))
+    thickness = models.CharField(max_length=10, verbose_name=_('Thickness'))
     
     def __str__(self):
-        return "{0}".format(self.weight)
+        return "{0} {1}".format(self.weight, self.thickness)
     
     class Meta:
         verbose_name = _('Tile Size')
