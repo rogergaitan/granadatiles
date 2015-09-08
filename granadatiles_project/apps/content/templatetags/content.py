@@ -5,7 +5,7 @@ from django.conf import settings
 register = template.Library()
 
 
-@register.inclusion_tag('area.html')
+@register.inclusion_tag('content/area.html')
 def area(area_id, language):
 	area = Area.objects.get(pk=area_id)
 	return {
@@ -13,7 +13,7 @@ def area(area_id, language):
 		}
 
 
-@register.inclusion_tag('carousel.html')
+@register.inclusion_tag('content/carousel.html')
 def carousel(section_id, language):
 	images_query_set = Section.objects.get(id=section_id).carousel.all()
 	images = []
@@ -31,7 +31,7 @@ def carousel(section_id, language):
 	}
 
 
-@register.inclusion_tag('social_media.html')
+@register.inclusion_tag('content/social_media.html')
 def social():
 	social = Social.objects.filter(active=True).order_by('order')
 	return {
@@ -39,7 +39,7 @@ def social():
 	}
 
 
-@register.inclusion_tag('video.html')
+@register.inclusion_tag('content/video.html')
 def video(video_id, language):
 	video = FeaturedVideo.objects.get(pk=video_id)
 	return {
