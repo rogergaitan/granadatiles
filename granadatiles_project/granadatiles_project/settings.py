@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     #third party apps
     'django_summernote',
     'sorl.thumbnail',
+    'rest_framework',
 
     #project apps
     'apps.news',

@@ -23,6 +23,7 @@ from django.conf.urls.i18n import i18n_patterns
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^summernote/', include('django_summernote.urls')),
+    url(r'^tiles/', include('apps.tiles.urls', namespace='tiles')),
 ]
 
 urlpatterns += i18n_patterns(
