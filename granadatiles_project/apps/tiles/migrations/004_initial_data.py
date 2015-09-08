@@ -38,7 +38,7 @@ def addInitialData(apps, schema_editor):
 	])
 		
 	group = apps.get_model('tiles', 'Group')
-	echo_collection = collection.object.filter(title__contains='echo')
+	echo_collection = collection.objects.filter(title__contains='echo')
 	group.objects.bulk_create([
 	    group(
 		    title='Essential Shapes',
