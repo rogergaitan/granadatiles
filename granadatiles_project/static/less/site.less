@@ -1,9 +1,23 @@
 @import "colors";
 @import "fonts";
 
+/***General styles for site***/
+
 body {
     font-family: @font-primary;
 }
+
+footer{
+  background-color: @darkBlue;
+  h4{
+      font-family: @font-tertiary;
+      font-weight: @font-normal;
+      font-size: @font-xxxs;
+      color:@gray;
+  }
+}
+
+/***General styles for site***/
 .shadow-menu{
   box-shadow: 0 -5px 40px black;
 }
@@ -21,9 +35,6 @@ body {
   padding: 22%;
 }
 
-.colorgray{
-  color: @gray;
-}
 .padding-none{
   padding: 0;
 }
@@ -146,11 +157,6 @@ h1,h4{
   font-weight: @font-normal;
   .font-xs;
 }
-.verdana-normal-xxxs{
-  font-family: @font-tertiary;
-  font-weight: @font-normal;
-  font-size: @font-xxxs;
-}
 
 .font-xl{
   font-size: @font-xl;
@@ -226,12 +232,7 @@ h1,h4{
   top: 16px;
   height: 15px;
 }
-.custom-footer{
-  background-color: @darkBlue;
-  min-height: 50px;
-  position: relative;
-  z-index: -2;
-}
+
 .socialwide-position{
     width: 25px;
     height: 25px;
@@ -243,15 +244,7 @@ h1,h4{
       margin: auto;
     }
 }
-footer > div{
-  padding-top: 1%;
-  padding-bottom: 1%;
-  .content-footer-align{
-    display: inline-block;
-    padding: 1%;
-    margin: 0;
-  }
-}
+
 .social-facebook{
     background-color: @facebook;
 }
