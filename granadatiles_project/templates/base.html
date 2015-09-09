@@ -23,131 +23,131 @@
     {% endblock css %}
 </head>
 <body class="container-fluid">
-    <section class="row">
-        <header class="shadow-menu">
-            <div class="container">
-                <nav class="navbar yamm navbar-custom roboto-light-lg margin-bottom-none" role="navigation">
-                    <div class="navbar-header col-md-2 col-sm-3">
-                        <button type="button" data-toggle="collapse" data-target="#navbar-collapse-grid" class="navbar-toggle toggle-custom">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="hidden-xs" href="/"><img class="" src="../static/img/Granada-Tile-logo.svg" alt=""></a>
-                    </div>
-                    <div class="col-md-10 col-sm-9">
-                        <div id="navbar-collapse-grid" class="navbar-collapse collapse float-right">
-                            <div id="general-info" class="roboto-light-sm padding-top15 text-right">
-                                <div class="col-md-12 col-xs-4 padding-none">
-                                    <div id="container-search" class="col-md-4 col-xs-12 pull-right">
-                                        <input id="search" type="text" class="form-control search-input-custom" placeholder="Search">
-                                        <span class="fa fa-angle-right form-control-feedback position-arrow-search" aria-hidden="true"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-xs-8 padding-none">
-                                    <ul class="list-inline">
-                                        <li class="hidden-xs hidden-sm"><a href="#" id="phone"><i class="glyphicon glyphicon-phone-alt"></i><span>213-788-4238</span></a></li>
-                                        <li class="hidden-xs hidden-sm"><a href="#" id="comments"><i class="fa fa-comments"></i><span>{% trans 'LIVE CHAT' %}</span></a></li>
-                                        <li class="hidden-xs hidden-sm"><a href="#" id="our-mail"><i class="fa fa-envelope"></i><span>sales@ganadatile.com</span></a></li>
-                                        <li><a href="#" id="portafolio"><i class="fa fa-briefcase"></i><span>{% trans 'MY PORTFOLIO' %}</span></a></li>
-                                        <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i><span>{% trans 'CART' %}</span></a></li>
-                                        <li id="language">
-                                            {% get_current_language as LANGUAGE_CODE %}
-                                            {% get_available_languages as LANGUAGES %}
-                                            {% get_language_info_list for LANGUAGES as languages %}
-                                            <button type="button" class="btn btn-default dropdown-toggle roboto-light-md custom-drop-button roboto-light-sm " data-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa fa-globe"></i><span>{{ LANGUAGE_CODE | language_name }}<i class="caret"></i></span>
-                                            </button>
-                                            {% if LANGUAGES|length > 1 %}
-                                                <ul class="dropdown-menu" role="menu">
-                                                    {% for language in languages %}
-                                                        <li>
-                                                            <a class="roboto-light-sm" href="/{{ language.code }}">{{ language.name_local|title  }} ({{ language.code }})</a>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            {% endif %}
-                                        </li>
-                                    </ul>
+    <header class="row">
+        <div class="container">
+            <nav class="navbar yamm navbar-custom roboto-light-lg margin-bottom-none" role="navigation">
+                <div class="navbar-header col-md-2 col-sm-3">
+                    <button type="button" data-toggle="collapse" data-target="#navbar-collapse-grid" class="navbar-toggle toggle-custom">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="hidden-xs" href="/"><img class="" src="{{STATIC_URL}}/img/Granada-Tile-logo.svg" alt="Granada Tile logo"></a>
+                </div>
+                <div class="col-md-10 col-sm-9">
+                    <div id="navbar-collapse-grid" class="navbar-collapse collapse float-right">
+                        <div id="general-info" class="roboto-light-sm padding-top15 text-right">
+                            <div class="col-md-12 col-xs-4 padding-none">
+                                <div id="container-search" class="col-md-4 col-xs-12 pull-right">
+                                    <input id="search" type="text" class="form-control search-input-custom" placeholder="Search">
+                                    <span class="fa fa-angle-right form-control-feedback position-arrow-search" aria-hidden="true"></span>
                                 </div>
                             </div>
-                            <ul class="nav navbar-nav">
-                                <li class="dropdown ">
-                                    <a href="#" class="dropdown-toggle separation-bar" data-toggle="dropdown">{% trans 'COLLECTIONS' %}</a>
-                                    <ul class="dropdown-menu line-buttom-submenu shadow-menu">
-                                            <li class="grid-demo">
-                                                <div class="row">
-                                                        <div class="col-sm-8">
-                                                            <h4 class="text-center roboto-light-sm spacing-2">{% trans 'BROWSE OR CEMENT TILE COLLECTIONS' %}</h4>
-                                                            <div class="col-sm-12">
-                                                                <div class="col-sm-4 text-center">
-                                                                    <img src="../static/img/icon-Echo-Collection-Granada-Tile-Cement.jpg" class="img-responsive margin-auto" alt="">
-                                                                    <a href="" class="color-darkblue">
-                                                                        <span class="font-xl">ECHO</span><br>
-                                                                        <span class="font-xs">{% trans 'TILE COLLECTION' %}</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="col-sm-4 text-center">
-                                                                    <img src="../static/img/Icon-Mauresque-Collection-Granada-Tile-Cement.png" class="img-responsive margin-auto" alt="">
-                                                                    <a href="" class="color-darkblue">
-                                                                        <span class="font-xl">MINIS</span><br>
-                                                                        <span class="font-xs">{% trans 'TILE COLLECTION' %}</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="col-sm-4 text-center">
-                                                                    <img src="../static/img/Icon-Minis-Collection-Granada-Tile-Cement.png" class="img-responsive margin-auto" alt="">
-                                                                    <a href="" class="color-darkblue">
-                                                                        <span class="font-xl">MAURESQUE</span><br>
-                                                                        <span class="font-xs">{% trans 'TILE COLLECTION' %}</span>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <h4 class="roboto-light-sm spacing-2">{% trans 'PRODUCT INFORMATION'%}</h4>
-                                                            <ul class="padding-none">
-                                                                <li class="roboto-light-sm custom-list-submenu"><a href="">{% trans 'In Stock Samples' %}</a></li>
-                                                                <li class="roboto-light-sm custom-list-submenu"><a href="">{% trans 'In Stock Tiles' %}</a></li>
-                                                                <li class="roboto-light-sm custom-list-submenu"><a href="">{% trans 'Compare our Products' %}</a></li>
-                                                                <li class="roboto-light-sm custom-list-submenu"><a href="">{% trans 'Cement Vs. Ceramic' %}</a></li>
-                                                                <li class="roboto-light-sm custom-list-submenu"><a href="">{% trans 'Color Palletes' %}</a></li>
-                                                                <li class="roboto-light-sm custom-list-submenu"><a href="">{% trans 'Catalogs / Inspiration Boooks' %}</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
+                            <div class="col-md-12 col-xs-8 padding-none">
+                                <ul class="list-inline">
+                                    <li class="hidden-xs hidden-sm"><a href="#" id="phone"><i class="glyphicon glyphicon-phone-alt"></i><span>213-788-4238</span></a></li>
+                                    <li class="hidden-xs hidden-sm"><a href="#" id="comments"><i class="fa fa-comments"></i><span>{% trans 'LIVE CHAT' %}</span></a></li>
+                                    <li class="hidden-xs hidden-sm"><a href="#" id="our-mail"><i class="fa fa-envelope"></i><span>sales@ganadatile.com</span></a></li>
+                                    <li><a href="#" id="portafolio"><i class="fa fa-briefcase"></i><span>{% trans 'MY PORTFOLIO' %}</span></a></li>
+                                    <li><a href="#" id="cart"><i class="fa fa-shopping-cart"></i><span>{% trans 'CART' %}</span></a></li>
+                                    <li id="language">
+                                        {% get_current_language as LANGUAGE_CODE %}
+                                        {% get_available_languages as LANGUAGES %}
+                                        {% get_language_info_list for LANGUAGES as languages %}
+                                        <button type="button" class="btn btn-default dropdown-toggle roboto-light-md custom-drop-button roboto-light-sm " data-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa fa-globe"></i><span>{{ LANGUAGE_CODE | language_name }}<i class="caret"></i></span>
+                                        </button>
+                                        {% if LANGUAGES|length > 1 %}
+                                        <ul class="dropdown-menu" role="menu">
+                                            {% for language in languages %}
+                                            <li>
+                                                <a class="roboto-light-sm" href="/{{ language.code }}">{{ language.name_local|title  }} ({{ language.code }})</a>
                                             </li>
+                                            {% endfor %}
                                         </ul>
-                                </li>
-                                <li class="">
-                                    <a class="roboto-light-md separation-bar" href="/">{% trans 'GALLERY' %}</a>
-                                </li>
-                                <li class="">
-                                    <a class="roboto-light-md separation-bar" href="/">{% trans 'IN STOCK' %}</a>
-                                </li>
-                                <li class="">
-                                    <a class="roboto-light-md separation-bar" href="/">{% trans 'RESIDENTIAL' %}</a>
-                                </li>
-                                <li class="">
-                                    <a class="roboto-light-md separation-bar" href="/">{% trans 'COMERTIAL' %}</a>
-                                </li>
-                                <li class="">
-                                    <a class="roboto-light-md separation-bar" href="/">{% trans 'NEWS/PRESS' %}</a>
-                                </li>
-                                <li class="">
-                                    <a class="roboto-light-md padding-right-none" href="/">{% trans 'ABOUT US' %}</a>
-                                </li>
-                            </ul>
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown ">
+                                <a href="#" class="dropdown-toggle separation-bar" data-toggle="dropdown">{% trans 'COLLECTIONS' %}</a>
+                                <ul class="dropdown-menu line-buttom-submenu shadow-menu">
+                                    <li class="grid-demo">
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                <h4 class="text-center roboto-light-sm spacing-2">{% trans 'BROWSE OR CEMENT TILE COLLECTIONS' %}</h4>
+                                                <div class="col-sm-12">
+                                                    <div class="col-sm-4 text-center">
+                                                        <img src="../static/img/icon-Echo-Collection-Granada-Tile-Cement.jpg" class="img-responsive margin-auto" alt="">
+                                                        <a href="" class="color-darkblue">
+                                                            <span class="font-xl">ECHO</span><br>
+                                                            <span class="font-xs">{% trans 'TILE COLLECTION' %}</span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-sm-4 text-center">
+                                                        <img src="../static/img/Icon-Mauresque-Collection-Granada-Tile-Cement.png" class="img-responsive margin-auto" alt="">
+                                                        <a href="" class="color-darkblue">
+                                                            <span class="font-xl">MINIS</span><br>
+                                                            <span class="font-xs">{% trans 'TILE COLLECTION' %}</span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-sm-4 text-center">
+                                                        <img src="../static/img/Icon-Minis-Collection-Granada-Tile-Cement.png" class="img-responsive margin-auto" alt="">
+                                                        <a href="" class="color-darkblue">
+                                                            <span class="font-xl">MAURESQUE</span><br>
+                                                            <span class="font-xs">{% trans 'TILE COLLECTION' %}</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <h4 class="roboto-light-sm spacing-2">{% trans 'PRODUCT INFORMATION'%}</h4>
+                                                <ul class="padding-none">
+                                                    <li class="roboto-light-sm custom-list-submenu"><a href="">{% trans 'In Stock Samples' %}</a></li>
+                                                    <li class="roboto-light-sm custom-list-submenu"><a href="">{% trans 'In Stock Tiles' %}</a></li>
+                                                    <li class="roboto-light-sm custom-list-submenu"><a href="">{% trans 'Compare our Products' %}</a></li>
+                                                    <li class="roboto-light-sm custom-list-submenu"><a href="">{% trans 'Cement Vs. Ceramic' %}</a></li>
+                                                    <li class="roboto-light-sm custom-list-submenu"><a href="">{% trans 'Color Palletes' %}</a></li>
+                                                    <li class="roboto-light-sm custom-list-submenu"><a href="">{% trans 'Catalogs / Inspiration Boooks' %}</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="">
+                                <a class="roboto-light-md separation-bar" href="/">{% trans 'GALLERY' %}</a>
+                            </li>
+                            <li class="">
+                                <a class="roboto-light-md separation-bar" href="/">{% trans 'IN STOCK' %}</a>
+                            </li>
+                            <li class="">
+                                <a class="roboto-light-md separation-bar" href="/">{% trans 'RESIDENTIAL' %}</a>
+                            </li>
+                            <li class="">
+                                <a class="roboto-light-md separation-bar" href="/">{% trans 'COMERTIAL' %}</a>
+                            </li>
+                            <li class="">
+                                <a class="roboto-light-md separation-bar" href="/">{% trans 'NEWS/PRESS' %}</a>
+                            </li>
+                            <li class="">
+                                <a class="roboto-light-md padding-right-none" href="/">{% trans 'ABOUT US' %}</a>
+                            </li>
+                        </ul>
                     </div>
-                </nav>
-            </div>
-        </header>
-    </section>
+                </div>
+            </nav>
+        </div>
+    </header>
     <main class="row">
-        <div class="container">
+        {% block main %}
+        {% endblock main %}
+        <section class="container">
             {% block content %}
             {% endblock content %}
-        </div>
+        </section>
     </main>
     <footer class="row">
         <section class="container text-center">
@@ -194,7 +194,6 @@
     <script src="{{ STATIC_URL }}lib/bootstrap/dist/js/bootstrap.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-
     <!-- build:js ../static/build/js/app.js -->
     <!-- inject:js -->
     <script type="text/javascript" src="{{ STATIC_URL }}js/app.js"></script>
