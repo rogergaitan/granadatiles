@@ -183,6 +183,11 @@
     <main class="row">
         {% block main %}
         {% endblock main %}
+        {% block cover%}
+        <ng-include src="'{{STATIC_URL}}app/content/templates/cover.html'">
+
+        </ng-include>
+        {% endblock cover%}
         <section class="container">
             {% block content %}
             {% endblock content %}
@@ -241,6 +246,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/module.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/coverCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/indexCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/sectionCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/areaSvc.js"></script>
