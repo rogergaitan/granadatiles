@@ -1,0 +1,161 @@
+﻿body {
+    font-family: @font-primary;
+}
+
+/***************Styles for header***************/
+header {
+    box-shadow: 0 -5px 40px black;
+    padding-top: 15px;
+
+    #gt-header-brand {
+        
+        img {
+            width: 131px;
+        }
+    }
+
+    #gt-header-contact-info ul:first-child {
+        margin: 10px auto 0 auto;
+        font-family: @font-secundary;
+        .font-configuration(@font-sm,@font-light);
+
+        @media screen and (max-width:1024px) {
+            font-size: @font-xs;
+        }
+
+        li {
+            margin: 0 2px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            a {
+                color: @gray;
+
+                &:hover, &:focus {
+                    .navigation-hover();
+                }
+            }
+
+            button {
+                color: @gray;
+                border-color: transparent;
+                padding: 0;
+                border: none;
+
+                &:hover, &:focus {
+                    .navigation-hover();
+                }
+            }
+        }
+    }
+
+    #gt-header-nav {
+        margin-top: 10px;
+        padding-top: 8px;
+        border-top: 1px solid @darkBlue;
+
+        .nav a {
+            color: @darkBlue;
+            font-family: @font-secundary;
+            .font-configuration(@font-lg,@font-light);
+
+            &:hover, &:focus {
+                .navigation-hover();
+            }
+
+            @media screen and (max-width:1024px) {
+                font-size: @font-md;
+            }
+        }
+
+        .nav > li {
+            margin: 5px 5px auto 5px;
+        }
+
+        span.gt-header-nav-separator {
+            margin-left: 30px;
+
+            @media screen and (max-width:1024px) {
+                margin-left: 12px;
+            }
+        }
+    }
+
+    #gt-toggle-custom {
+        border-color: @gray;
+
+        &:hover, &:focus {
+            background-color: @lightGray;
+        }
+
+        .icon-bar {
+            background-color: @darkGray;
+        }
+    }
+}
+
+/***********************************************/
+
+
+/***************Styles for footer***************/
+footer {
+    background-color: @darkBlue;
+
+    h4 {
+        margin: 15px 0;
+        font-family: @font-tertiary;
+        .font-configuration(@font-xxxs,@font-normal);
+        color: @gray;
+    }
+}
+
+.social-media {
+    margin: 10px 0;
+
+    li {
+        width: 21px;
+        height: 21px;
+        font-size: 14px;
+        padding-top: 2px;
+        border-radius: 50px;
+
+        a {
+            color: white;
+            margin: auto;
+        }
+    }
+
+    .social-facebook {
+        background-color: @facebook;
+    }
+
+    .social-twitter {
+        background-color: @twitter;
+    }
+
+    .social-linkedin {
+        background-color: @linkedin;
+    }
+
+    .social-rss {
+        background-color: @rss;
+    }
+
+    .social-yelp {
+        background-color: @yelp;
+    }
+
+    .social-pinterest {
+        background-color: @pinterest;
+    }
+
+    .social-instagram {
+        background-color: @instagram;
+    }
+
+    .social-houzz {
+        background-color: @houzz;
+    }
+}
