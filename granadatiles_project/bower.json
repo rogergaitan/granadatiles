@@ -15,10 +15,11 @@
     "tests"
   ],
   "dependencies": {
+    "angular": "~1.4.5",
+    "animate.css": "~3.4.0",
     "bootstrap": "~3.3.5",
-    "yamm3": "~1.1.0",
     "font-awesome": "~4.4.0",
-    "animate.css": "~3.4.0"
+    "yamm3": "~1.1.0"
   },
   "overrides": {
     "bootstrap": {
@@ -29,13 +30,13 @@
       ]
     },
     "font-awesome": {
-          "main": [
-              "css/font-awesome.css",
-              "fonts/fontawesome-webfont.eot",
-              "fonts/fontawesome-webfont.woff",
-              "fonts/fontawesome-webfont.ttf",
-              "fonts/fontawesome-webfont.svg"
-          ]
-      }
+      "main": [
+        "css/font-awesome.css",
+        "fonts/fontawesome-webfont.eot",
+        "fonts/fontawesome-webfont.woff",
+        "fonts/fontawesome-webfont.ttf",
+        "fonts/fontawesome-webfont.svg"
+      ]
+    }
   }
 }

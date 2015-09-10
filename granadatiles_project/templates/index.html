@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %} Granada Tiles {% endblock %}
 
@@ -20,3 +21,22 @@
     </div>
 </div>
 {% endblock content %}
+
+{% block js%}
+{% get_current_language as LANGUAGE_CODE %}
+<script>
+    (function () {
+        "use strict";
+        angular
+        .module("app.core")
+        .factory("pageSettings", [pageSettings]);
+
+        function pageSettings() {
+            return{
+                areaId: 1,
+                language: '{{LANGUAGE_CODE}}'
+            }
+        };
+    })();
+</script>
+{% endblock js %}

@@ -28,7 +28,7 @@ module.exports = function () {
          * compressed and injected into you base.html
          */
         js: [
-            staticFiles + 'js/**/*.js'
+            staticFiles + 'app/**/*.js'
         ],
 
         /* Include or exlude here all the less files that you want to be 
