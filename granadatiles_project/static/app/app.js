@@ -3,6 +3,9 @@
 
     angular
         .module('app',
-            ['app.core',
-             'app.content']);
+            ['ngSanitize',
+
+             'app.core',
+             'app.content',
+             'app.tiles']);
 })();

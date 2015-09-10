@@ -23,7 +23,7 @@
     {% block css %}
     {% endblock css %}
 </head>
-<body class="container-fluid">
+<body class="container-fluid" ng-app="app">
     <header class="row">
         <div class="container">
             <section class="row navbar yamm" role="navigation">
@@ -231,6 +231,7 @@
     <!-- bower:js -->
     <script src="{{ STATIC_URL }}lib/jquery/dist/jquery.js"></script>
     <script src="{{ STATIC_URL }}lib/angular/angular.js"></script>
+    <script src="{{ STATIC_URL }}lib/angular-sanitize/angular-sanitize.js"></script>
     <script src="{{ STATIC_URL }}lib/bootstrap/dist/js/bootstrap.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
@@ -239,7 +240,12 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/app.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/module.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/module.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/indexCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/sectionCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/areaSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/sectionSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/collectionsSvc.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
     {% block js%} {% endblock js%}

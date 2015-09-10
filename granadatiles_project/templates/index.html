@@ -13,12 +13,8 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-xs-12 text-center">
-        <h2>
-            Get inspired by Residential and Commercial installation photos
-        </h2>
-        <h3>then choose from in stock and custom tiles.</h3>
-    </div>
+    <ng-include src="'{{STATIC_URL}}app/content/templates/index.html'">
+    </ng-include>
 </div>
 {% endblock content %}
 
@@ -34,7 +30,10 @@
         function pageSettings() {
             return{
                 areaId: 1,
-                language: '{{LANGUAGE_CODE}}'
+                language: '{{LANGUAGE_CODE}}',
+                labels: {
+                    explore: '{% trans 'Explore our collections'%}'
+                }
             }
         };
     })();

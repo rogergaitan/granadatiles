@@ -1,5 +1,8 @@
 ﻿(function () {
     "use strict";
+
     angular
-        .module("app.content", []);
+        .module("app.content",
+                ['app.core',
+                'app.tiles']);
 })();
