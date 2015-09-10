@@ -25,9 +25,9 @@
         "use strict";
         angular
         .module("app.core")
-        .factory("pageSettings", [pageSettings]);
+        .factory("pageSettings", ['appSettings',pageSettings]);
 
-        function pageSettings() {
+        function pageSettings(appSettings) {
             return{
                 areaId: 1,
                 language: '{{LANGUAGE_CODE}}',

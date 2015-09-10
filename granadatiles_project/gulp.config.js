@@ -38,6 +38,10 @@ module.exports = function () {
             staticFiles + 'less/site.less'
         ],
 
+        lessFiles: [
+            staticFiles + 'less/*.less'
+        ],
+
         /* Include or exlude here all the css that you want to be 
         * compressed and injected into you base.html
         */

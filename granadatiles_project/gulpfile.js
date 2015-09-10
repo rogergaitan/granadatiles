@@ -181,7 +181,7 @@ function startBrowserSync() {
         port: 3000
     });
 
-    gulp.watch([config.less], ['styles']);
+    gulp.watch([config.lessFiles], ['styles']);
     gulp.watch([config.staticFiles + 'js/*.js'], ['inject-watch']);
-    gulp.watch([config.templates + '**/*.html']).on("change", browserSync.reload);
+    gulp.watch([config.templates + '**/*.html', config.staticFiles + '**/*.html' ]).on("change", browserSync.reload);
 };
