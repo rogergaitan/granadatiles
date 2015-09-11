@@ -11,11 +11,18 @@
     function collectionsSvc(appSettings, $http) {
         
         return {
-            getCollections: getCollections
+            getCollections: getCollections,
+            getMenuCollections: getMenuCollections
         }
 
         function getCollections() {
             return $http.get(appSettings.serverPath + 'collections/');
         }
+
+        function getMenuCollections(){
+            return $http.get(appSettings.serverPath + 'collections/menu');
+        }
+
+        
     }
 })();

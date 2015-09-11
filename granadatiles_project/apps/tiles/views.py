@@ -4,7 +4,7 @@ from .serializers import CollectionSerializer
 from rest_framework.response import Response
 from apps.tiles.services import CollectionService
 from rest_framework.decorators import list_route, detail_route
-from apps.tiles.serializers import GroupSerializer
+from apps.tiles.serializers import GroupSerializer, MenuCollectionSerializer
 
 
 def collection_detail(request, slug):
@@ -43,3 +43,12 @@ class CollectionViewSet(viewsets.ViewSet):
                                               language=request.LANGUAGE_CODE)
         serializer = GroupSerializer(groups, many=True)
         return Response(serializer.data)
+
+    # /collections/menu
+    @list_route(methods=['get'])
+    def menu(self, request):
+        collections = CollectionService.get_menu_collections(
+            language=request.LANGUAGE_CODE)
+        serializer = MenuCollectionSerializer(collections, many=True)
+        return Response(serializer.data)
+        

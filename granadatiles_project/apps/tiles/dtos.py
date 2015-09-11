@@ -12,3 +12,14 @@ class CollectionDto(BaseGalleryImageDto):
 
 class GroupDto(BaseGalleryImageDto):
     pass
+
+
+class MenuCollectionDto(object):
+    def __init__(self, collection, language = None):
+        if language:
+            self.title = collection.get_title(language)
+            self.url = collection.get_absolute_url(language)
+        else:
+            self.title = collection.title
+            self.url = collection.get_absolute_url()
+        self.image = collection.menu_thumbnail

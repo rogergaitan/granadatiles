@@ -2,6 +2,7 @@
 from django.utils.translation import ugettext as _
 from core.models import BaseGallerieImageModel, BaseCatalogModel, BaseContentModel, BaseSlugModel
 from django.core.urlresolvers import reverse
+from sorl.thumbnail.shortcuts import get_thumbnail
 
 
 class TileSize(models.Model):
@@ -25,6 +26,12 @@ class PalleteColor(BaseCatalogModel):
 
 
 class Collection(BaseGallerieImageModel, BaseSlugModel):
+
+    @property
+    def menu_thumbnail(self):
+        if self.image:
+            return get_thumbnail(self.image, '99x99').url 
+        return ''
 
     def get_absolute_url(self, language):
         slug = self.get_slug(language)

@@ -138,3 +138,6 @@ STATIC_ROOT = os.path.join(ROOT_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(ROOT_DIR, 'media')
+
+THUMBNAIL_BACKEND = 'core.extensions.SEOThumbnailBackend'
+THUMBNAIL_PREFIX = 'images/'

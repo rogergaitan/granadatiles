@@ -7,3 +7,8 @@ class CollectionSerializer(BaseGallerieImageSerializer):
 
 class GroupSerializer(BaseGallerieImageSerializer):
     pass
+
+class MenuCollectionSerializer(serializers.Serializer):
+    title = serializers.CharField()
+    image = serializers.CharField()
+    url = serializers.URLField()

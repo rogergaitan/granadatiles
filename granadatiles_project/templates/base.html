@@ -98,49 +98,9 @@
                                         <span class="dropdown-toggle" data-toggle="dropdown">
                                             <a href="#" >{% trans 'COLLECTIONS' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
                                         </span>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-sm-8">
-                                                        <h4 class="text-center">{% trans 'BROWSE OR CEMENT TILE COLLECTIONS' %}</h4>
-                                                        <div class="col-sm-12">
-                                                            <div class="col-sm-4 text-center">
-                                                                <img src="../static/img/icon-Echo-Collection-Granada-Tile-Cement.jpg" class="img-responsive" alt="">
-                                                                <a href="">
-                                                                    <span>ECHO</span><br>
-                                                                    <span>{% trans 'TILE COLLECTION' %}</span>
-                                                                </a>
-                                                            </div>
-                                                            <div class="col-sm-4 text-center">
-                                                                <img src="../static/img/Icon-Mauresque-Collection-Granada-Tile-Cement.png" class="img-responsive" alt="">
-                                                                <a href="">
-                                                                    <span>MINIS</span><br>
-                                                                    <span>{% trans 'TILE COLLECTION' %}</span>
-                                                                </a>
-                                                            </div>
-                                                            <div class="col-sm-4 text-center">
-                                                                <img src="../static/img/Icon-Minis-Collection-Granada-Tile-Cement.png" class="img-responsive" alt="">
-                                                                <a href="">
-                                                                    <span>MAURESQUE</span><br>
-                                                                    <span>{% trans 'TILE COLLECTION' %}</span>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <h4>{% trans 'PRODUCT INFORMATION'%}</h4>
-                                                        <ul>
-                                                            <li><a href="">{% trans 'In Stock Samples' %}</a></li>
-                                                            <li><a href="">{% trans 'In Stock Tiles' %}</a></li>
-                                                            <li><a href="">{% trans 'Compare our Products' %}</a></li>
-                                                            <li><a href="">{% trans 'Cement Vs. Ceramic' %}</a></li>
-                                                            <li><a href="">{% trans 'Color Palletes' %}</a></li>
-                                                            <li><a href="">{% trans 'Catalogs / Inspiration Boooks' %}</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                        <ul class="dropdown-menu" 
+                                            ng-include="'{{STATIC_URL}}app/tiles/templates/menuCollection.html'"
+                                            ng-controller="menuCollectionCtrl as vm"></ul>
                                     </li>
                                     <li>
                                         <span>
@@ -251,9 +211,27 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/sectionCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/areaSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/sectionSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controller/menuCollectionCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/collectionsSvc.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
+     <script>
+        (function () {
+            "use strict";
+            angular
+            .module("app.core")
+            .factory("baseSettings", ['appSettings',baseSettings]);
+
+            function baseSettings(appSettings) {
+                return{
+                    labels: {
+                        browse: '{% trans 'BROWSE OR CEMENT TILE COLLECTIONS' %}'
+                }
+            }
+        };
+        })();
+    </script>
+
     {% block js%} {% endblock js%}
 </body>
 </html>
