@@ -64,8 +64,9 @@ class BaseContentModel(models.Model):
     class Meta:
         abstract = True
 
+
 class BaseSlugModel(models.Model):
-    slug = models.SlugField(max_length=20, unique = True)
+    slug = models.SlugField(max_length=20, unique=True)
 
     slug_es = models.SlugField(max_length=20, unique=True)
 
@@ -75,7 +76,6 @@ class BaseSlugModel(models.Model):
         if language == 'es' and self.slug_es is not None and self.slug_es:
             return self.slug_es
         return self.slug
-
 
     class Meta:
         abstract = True

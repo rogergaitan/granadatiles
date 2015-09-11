@@ -4,5 +4,4 @@ from apps.tiles.views import collection_detail
 
 urlpatterns = [
     url(r'^(?P<slug>[\w-]+)/$', collection_detail, name='sr-detail')
-    ]
-
+]

@@ -1,14 +1,16 @@
 ﻿from django.db import models
 from _datetime import datetime, timedelta
 
+
 class BaseSlugManager(models.Manager):
 
     def get_id(self, slug, language):
         if language == 'es':
-            id = self.get(slug_es = slug).id
+            id = self.get(slug_es=slug).id
         else:
-            id = self.get(slug = slug).id
-        return id 
+            id = self.get(slug=slug).id
+        return id
+
 
 class BaseDateManager(models.Manager):
 

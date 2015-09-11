@@ -14,7 +14,8 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     url(r'^$', views.index, name='home'),
-    url(_(r'^collections/'), include('apps.tiles.serve_urls' , namespace='sr-collections'))
+    url(_(r'^collections/'),
+        include('apps.tiles.serve_urls', namespace='sr-collections'))
 )
 
 if settings.DEBUG:

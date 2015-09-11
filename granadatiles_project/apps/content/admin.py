@@ -30,4 +30,4 @@ class VideoAdmin(SummernoteModelAdmin):
 @admin.register(Area)
 class AreaAdmin(SummernoteModelAdmin):
     list_display = ('title', )
-    search_fields = ['title', 'title_es',]
+    search_fields = ['title', 'title_es', ]
