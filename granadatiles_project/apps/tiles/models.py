@@ -1,6 +1,6 @@
 ﻿from django.db import models
 from django.utils.translation import ugettext as _
-from core.models import BaseGallerieImageModel, BaseCatalogModel, BaseContentModel
+from core.models import BaseGallerieImageModel, BaseCatalogModel, BaseContentModel, BaseSlugModel
 
 
 class TileSize(models.Model):
@@ -13,8 +13,8 @@ class TileSize(models.Model):
     class Meta:
         verbose_name = _('Tile Size')
         verbose_name_plural = _('Tile Sizes')
-	
-	
+
+
 class PalleteColor(BaseCatalogModel):
     hexadecimalCode = models.CharField(max_length=20, verbose_name=_('Color'))
     
@@ -23,7 +23,7 @@ class PalleteColor(BaseCatalogModel):
         verbose_name_plural = _('Pallete Colors')
 
 
-class Collection(BaseGallerieImageModel):
+class Collection(BaseGallerieImageModel, BaseSlugModel):
     
     class Meta:
         verbose_name = _('Collection')

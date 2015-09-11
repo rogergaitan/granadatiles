@@ -1,0 +1,30 @@
+﻿{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %} Granada Tiles - {% trans 'Collections'%} {% endblock %}
+
+{% block content%}
+
+{% endblock content%}
+
+{% block js%}
+<script>
+    (function () {
+        "use strict";
+        angular
+        .module("app.core")
+        .factory("pageSettings", ['appSettings',pageSettings]);
+
+        function pageSettings(appSettings) {
+            return{
+                sectionId: 2,
+                language: '{{LANGUAGE_CODE}}',
+                collectionId: {{collection_id}}
+                labels: {
+                    gallery: '{% trans 'Gallery'%}'
+                }
+            }
+        };
+    })();
+</script>
+{% endblock js%}

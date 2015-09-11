@@ -9,6 +9,8 @@ def addInitialData(apps, schema_editor):
 	    collection(
 		    title='Echo Tile Collection',
 		    title_es='',
+            slug= 'echo',
+            slug_es = 'echo',
 			description='''<ul><li>Original French art form</li>
 			<li>Cement tiles are cured, not fired</li>
 			<li>Organic colors</li><li>Industrial strength</li>
@@ -19,6 +21,8 @@ def addInitialData(apps, schema_editor):
 		collection(
 			title='Minis Tile Collection',
 			title_es='',
+            slug= 'minis',
+            slug_es = 'minis',
 			description='''<ul><li>Mozaic size cement tiles</li>
 			<li>Geometric shapes</li>
 			<li>Use on bathroom floors and walls</li>
@@ -29,6 +33,8 @@ def addInitialData(apps, schema_editor):
 		collection(
 		    title='Mauresque Tile Collection',
 		    title_es='',
+            slug= 'mauresque',
+            slug_es = 'mauresque',
 		    description='''<ul><li>Inspired by France and Morocco</li>
 		    <li>Variety of shapes and sizes</li>
 		    <li>Use on bathroom floors and walls, kitchen backsplashes and more</li></ul>''',
@@ -84,7 +90,7 @@ def addInitialData(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('tiles', '0003_auto_20150907_1619'),
+        ('tiles', '0001_initial'),
     ]
 
     operations = [

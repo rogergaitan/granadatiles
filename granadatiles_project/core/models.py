@@ -1,6 +1,7 @@
 ﻿from django.db import models
 from django.utils.translation import ugettext as _
 from sorl.thumbnail import ImageField
+from core.managers import BaseSlugManager
 
 
 def model_directory_path(instance, filename):
@@ -55,10 +56,26 @@ class BaseContentModel(models.Model):
     def get_description(self, language):
         if language == 'es' and self.description_es is not None and self.description_es:
             return self.description_es
-        return self.title
+        return self.description
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        abstract = True
+
+class BaseSlugModel(models.Model):
+    slug = models.SlugField(max_length=20, unique = True)
+
+    slug_es = models.SlugField(max_length=20, unique=True)
+
+    objects = BaseSlugManager()
+
+    def get_slug(self, language):
+        if language == 'es' and self.slug_es is not None and self.slug_es:
+            return self.slug_es
+        return self.slug
+
 
     class Meta:
         abstract = True

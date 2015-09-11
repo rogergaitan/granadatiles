@@ -1,6 +1,7 @@
-from django.conf.urls import patterns, url
+﻿from django.conf.urls import patterns, url
 from . import views
 
+#API URLs
 urlpatterns = [
 	url(r'^tiles/$', views.TileList.as_view(), name='tiles'),
     url(r'^collections/$', views.CollectionList.as_view(), name='collections'),
@@ -8,5 +9,6 @@ urlpatterns = [
     url(r'^groups/$', views.GroupList.as_view(), name='groups'),
     url(r'^groups/(?P<pk>\d+)/$', views.GroupDetail.as_view(), name='group-detail'),
 ] 
+
 
 

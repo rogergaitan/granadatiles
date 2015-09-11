@@ -14,12 +14,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Article',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('title', models.CharField(max_length=150, verbose_name='Title')),
-                ('title_es', models.CharField(max_length=160, blank=True, null=True)),
+                ('title_es', models.CharField(null=True, max_length=160, verbose_name='Title_es', blank=True)),
                 ('description', models.TextField(verbose_name='Description')),
-                ('description_es', models.TextField(blank=True, null=True)),
-                ('url', models.CharField(max_length=200, blank=True, null=True, verbose_name='Link')),
+                ('description_es', models.TextField(null=True, verbose_name='Description_es', blank=True)),
+                ('url', models.CharField(null=True, max_length=200, verbose_name='Link', blank=True)),
                 ('date', models.DateField(verbose_name='Date')),
                 ('cover', sorl.thumbnail.fields.ImageField(upload_to='Magazines')),
             ],
@@ -31,9 +31,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Catalog',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('name', models.CharField(max_length=150, verbose_name='Name')),
-                ('name_es', models.CharField(max_length=150, blank=True, null=True, verbose_name='Name')),
+                ('name_es', models.CharField(null=True, max_length=150, verbose_name='Name_es', blank=True)),
                 ('file', models.FileField(upload_to='Catalogs', verbose_name='File')),
             ],
             options={
@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Magazine',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('name', models.CharField(max_length=130, verbose_name='Name')),
                 ('logo', models.ImageField(upload_to='Magazines')),
             ],
@@ -56,6 +56,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='article',
             name='magazine',
-            field=models.ForeignKey(to='news.Magazine', related_name='articles'),
+            field=models.ForeignKey(related_name='articles', to='news.Magazine'),
         ),
     ]
