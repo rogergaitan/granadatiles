@@ -1,7 +1,11 @@
 ﻿from rest_framework import serializers
 
 
-class BaseCatalogSerializer(serializers.Serializer):
+class BaseSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+
+
+class BaseCatalogSerializer(BaseSerializer):
     name = serializers.CharField(max_length=150)
 
 
@@ -9,7 +13,7 @@ class BaseCatalogOrderSerializer(BaseCatalogSerializer):
     order = serializers.IntegerField()
 
 
-class BaseContentSerializer(serializers.Serializer):
+class BaseContentSerializer(BaseSerializer):
     title = serializers.CharField(max_length=150)
     description = serializers.CharField(allow_blank=True)
 

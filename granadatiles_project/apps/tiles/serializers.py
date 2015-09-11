@@ -4,3 +4,6 @@ from core.serializers import BaseGallerieImageSerializer
 
 class CollectionSerializer(BaseGallerieImageSerializer):
     url = serializers.URLField()
+
+class GroupSerializer(BaseGallerieImageSerializer):
+    pass
