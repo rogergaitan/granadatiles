@@ -1,27 +1,12 @@
 ﻿    <li>
         <div class="row">
             <div class="col-sm-8">
-                <h4 class="text-center">{{vm.browse}}</h4>
+                <h4 class="text-center">{{::vm.browse}}</h4>
                 <div class="col-sm-12">
-                    <div class="col-sm-4 text-center">
-                        <img src="../static/img/icon-Echo-Collection-Granada-Tile-Cement.jpg" class="img-responsive" alt="">
-                        <a href="">
-                            <span>ECHO</span><br>
-                            <span>{% trans 'TILE COLLECTION' %}</span>
-                        </a>
-                    </div>
-                    <div class="col-sm-4 text-center">
-                        <img src="../static/img/Icon-Mauresque-Collection-Granada-Tile-Cement.png" class="img-responsive" alt="">
-                        <a href="">
-                            <span>MINIS</span><br>
-                            <span>{% trans 'TILE COLLECTION' %}</span>
-                        </a>
-                    </div>
-                    <div class="col-sm-4 text-center">
-                        <img src="../static/img/Icon-Minis-Collection-Granada-Tile-Cement.png" class="img-responsive" alt="">
-                        <a href="">
-                            <span>MAURESQUE</span><br>
-                            <span>{% trans 'TILE COLLECTION' %}</span>
+                    <div class="col-sm-4 text-center" ng-repeat="collection in vm.menuCollections">
+                        <img ng-src="{{::collection.image}}" class="img-responsive" alt="{{::collection.title}}">
+                        <a ng-href="{{::collection.url}}">
+                            <span>{{::collection.title}}</span>
                         </a>
                     </div>
                 </div>

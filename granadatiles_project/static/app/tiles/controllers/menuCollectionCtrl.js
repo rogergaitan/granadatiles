@@ -14,7 +14,7 @@
         vm.browse = baseSettings.labels.browse;
 
         collectionsSvc.getMenuCollections().then(function (response) {
-            vm.menuCollection = response.data;
+            vm.menuCollections = response.data;
         });
     }
 })();

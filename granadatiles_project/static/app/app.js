@@ -4,6 +4,8 @@
     angular
         .module('app',
             ['ngSanitize',
+              'ngAnimate',
+              'angular-loading-bar',
 
              'app.core',
              'app.content',

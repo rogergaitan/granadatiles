@@ -1,3 +1,4 @@
-from django.shortcuts import render
+﻿from django.shortcuts import render
 
-# Create your views here.
+def news(request):
+    return render(request, 'news/article_list.html')

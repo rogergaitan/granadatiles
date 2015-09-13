@@ -1,7 +1,7 @@
 ﻿{% extends "base.html" %}
 {% load i18n %}
 
-{% block title %} Granada Tiles - {% trans 'Collections'%} {% endblock %}
+{% block title %} Granada Tiles - {% trans 'About us'%} {% endblock %}
 
 {% block content%}
 
@@ -17,11 +17,10 @@
 
         function pageSettings(appSettings) {
             return{
-                sectionId: 2,
+                sectionId: 3,
                 language: '{{LANGUAGE_CODE}}',
-                collectionId: {{collection_id}},
                 labels: {
-                    gallery: '{% trans 'Gallery'%}'
+                    aboutUs: '{% trans 'About us'%}'
                 }
             }
         };

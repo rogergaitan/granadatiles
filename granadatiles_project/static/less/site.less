@@ -19,10 +19,42 @@
 
 
 /********************Cover Section**********************/
+
 #gt-cover-image{
     width:100%;
     max-height:600px;
 }
 
+#gt-cover-spinner{
+    text-align:center;
+    margin-top: 65px;
+    font-size: 20px;
+    i{
+        color:@blue;
+    }
+    
+}
+
 
 /*******************************************************/
+
+/******Animations***************************/
+#gt-main-content{
+    transition:opacity linear 0.5s;
+}
+
+#gt-main-content.ng-leave{
+    opacity:0;
+}
+
+#gt-main-content.ng-enter{
+    opacity:0;
+}
+
+#gt-main-content.ng-enter-active{
+    opacity:1;
+}
+
+
+
+/*************/

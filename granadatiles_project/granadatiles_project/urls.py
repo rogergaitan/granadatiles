@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from apps.content import views
+from apps.content.views import index, about_us
 from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import ugettext_lazy as _
 
@@ -13,9 +13,14 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    url(r'^$', views.index, name='home'),
+    url(r'^$', index, name='home'),
+    url(_(r'^about-us/$'), about_us, name='about_us'),
     url(_(r'^collections/'),
-        include('apps.tiles.serve_urls', namespace='sr-collections'))
+        include('apps.tiles.serve_urls', namespace='sr-collections')),
+    url(_(r'^news/'),
+        include('apps.news.serve_urls', namespace='sr-news')),
+    url(_(r'^gallery/'),
+        include('apps.galleries.serve_urls', namespace='sr-galleries'))
 )
 
 if settings.DEBUG:

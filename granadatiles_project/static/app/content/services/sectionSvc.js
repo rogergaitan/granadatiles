@@ -16,13 +16,15 @@
         };
 
         function getCover(sectionId) {
-            return getMockCover(sectionId);
+            if (sectionId == 1)
+                return getMockCover(sectionId);
+            else return {};
+
         }
 
         function getSection(sectionId) {
-            return getMockSection(sectionId);
+                return getMockSection(sectionId);
         }
-
 
         //TODO API api/section/:id
         function getMockSection() {
@@ -40,7 +42,7 @@
             return {
                 image: '/static/img/Cluny-on-bath-Granada-tile-cement.jpg',
                 designer: 'Ryan Phillips',
-                photographer: 'Deindre Doherty'
+                photographer: 'Deindre Doherty',
             }
         };
     }

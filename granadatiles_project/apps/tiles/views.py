@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from apps.tiles.services import CollectionService
 from rest_framework.decorators import list_route, detail_route
 from apps.tiles.serializers import GroupSerializer, MenuCollectionSerializer
+from apps.tiles.models import Collection
 
 
 def collection_detail(request, slug):
@@ -32,7 +33,7 @@ class CollectionViewSet(viewsets.ViewSet):
     def retrieve(self, request, pk=None):
         collection = CollectionService.get_collection(id=pk, 
                                                       language=request.LANGUAGE_CODE)
-        serializer = GroupSerializer(collection)
+        serializer = CollectionSerializer(collection)
         return Response(serializer.data)
 
 

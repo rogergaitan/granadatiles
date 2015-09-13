@@ -1,15 +1,17 @@
 ﻿<div class="row" ng-controller="coverCtrl as vm">
-    <div class="row">
-        <div class="col-xs-12">
-            <img ng-src="{{::vm.cover.image}}" alt="Granada Tiles Cover" class="img-responsive" id="gt-cover-image" />
+    <div ng-if="vm.cover.image">
+        <div class="row">
+            <div class="col-xs-12">
+                <img ng-src="{{::vm.cover.image}}" alt="Granada Tiles Cover" class="img-responsive fade" img-preload id="gt-cover-image" />
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <label><strong>Designer:</strong></label> <span>{{::vm.cover.designer}}</span> <br />
-                    <label><strong>Photographer:</strong></label> <span>{{::vm.cover.photographer}}</span>
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label><strong>Designer:</strong></label> <span>{{::vm.cover.designer}}</span> <br />
+                        <label><strong>Photographer:</strong></label> <span>{{::vm.cover.photographer}}</span>
+                    </div>
                 </div>
             </div>
         </div>
