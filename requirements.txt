@@ -1,5 +1,7 @@
 Django==1.8.4
-Pillow==2.9.0
+django-admin-bootstrapped==2.5.5
+django-bootstrap3==6.2.2
 django-summernote==0.6.10
 djangorestframework==3.2.3
+Pillow==2.9.0
 sorl-thumbnail==12.3
