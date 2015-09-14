@@ -1,7 +1,7 @@
 {% load i18n %}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+    <head>
     <title>{% block title %} {% endblock title %}</title>
     <link rel="icon" type="image/x-icon" href="{{STATIC_URL}}img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}lib/yamm3/yamm/yamm.css" />
     <!-- endbower -->
     <!-- endbuild -->
-
     <!-- build:css ../static/build/css/app.css -->
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ STATIC_URL }}.temp/site.css">
@@ -29,9 +28,9 @@
             <section class="row navbar yamm" role="navigation">
                 <div class="navbar-header col-md-2 col-sm-3" id="gt-header-brand">
                     <button type="button" data-toggle="collapse" data-target="#gt-navbar-collapse-grid" class="navbar-toggle" id="gt-toggle-custom">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                     </button>
                     <a class="hidden-xs brand" href="/">
                         <img class="" src="{{STATIC_URL}}img/Granada-Tile-logo.svg" alt="Granada Tile logo">
@@ -45,7 +44,7 @@
                                     <input type="text" class="form-control input-sm" placeholder="Search">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default btn-sm">
-                                            <span class="fa fa-angle-right"></span>
+                                        <span class="fa fa-angle-right"></span>
                                         </button>
                                     </span>
                                 </div>
@@ -76,16 +75,16 @@
                                         {% get_available_languages as LANGUAGES %}
                                         {% get_language_info_list for LANGUAGES as languages %}
                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa fa-globe"></i>&nbsp;<span>{{ LANGUAGE_CODE | language_name }}<i class="caret"></i></span>
+                                        <i class="fa fa-globe"></i>&nbsp;<span>{{ LANGUAGE_CODE | language_name }}<i class="caret"></i></span>
                                         </button>
                                         {% if LANGUAGES|length > 1 %}
-                                        <ul class="dropdown-menu" role="menu">
-                                            {% for language in languages %}
-                                            <li>
-                                                <a href="/{{ language.code }}">{{ language.name_local|title  }} ({{ language.code }})</a>
-                                            </li>
-                                            {% endfor %}
-                                        </ul>
+                                            <ul class="dropdown-menu" role="menu">
+                                                {% for language in languages %}
+                                                    <li>
+                                                        <a href="/{{ language.code }}">{{ language.name_local|title  }} ({{ language.code }})</a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
                                         {% endif %}
                                     </li>
                                 </ul>
@@ -98,13 +97,13 @@
                                         <span class="dropdown-toggle" data-toggle="dropdown">
                                             <a href="#" >{% trans 'COLLECTIONS' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
                                         </span>
-                                        <ul class="dropdown-menu" 
+                                        <ul class="dropdown-menu"
                                             ng-include="'{{STATIC_URL}}app/tiles/templates/menuCollection.html'"
-                                            ng-controller="menuCollectionCtrl as vm"></ul>
+                                        ng-controller="menuCollectionCtrl as vm"></ul>
                                     </li>
                                     <li>
                                         <span>
-                                             <a href="{% url 'sr-galleries:sr-gallery'%}">{% trans 'GALLERY' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
+                                            <a href="{% url 'sr-galleries:sr-gallery'%}">{% trans 'GALLERY' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
                                         </span>
                                     </li>
                                     <li>
@@ -141,24 +140,23 @@
         </div>
     </header>
     <main class="row">
-        {% block main %}
-        {% endblock main %}
-        {% block cover%}
+    {% block main %}
+    {% endblock main %}
+    {% block cover%}
         <ng-include src="'{{STATIC_URL}}app/content/templates/cover.html'">
-
         </ng-include>
-        {% endblock cover%}
-        <section class="container">
-            {% block content %}
-            {% endblock content %}
-        </section>
+    {% endblock cover%}
+    <section class="container">
+        {% block content %}
+        {% endblock content %}
+    </section>
     </main>
     <footer class="row">
         <section class="container text-center">
             <div class="row">
                 <div class="col-sm-offset-4 col-sm-3 col-md-2">
                     <h4>
-                        <i class="fa fa-copyright"></i>Granada Tile 2015
+                    <i class="fa fa-copyright"></i>Granada Tile 2015
                     </h4>
                 </div>
                 <div class="col-sm-5 col-md-4 col-lg-3">
@@ -218,23 +216,21 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/collectionsSvc.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
-     <script>
-        (function () {
-            "use strict";
-            angular
+    <script>
+    (function () {
+        "use strict";
+        angular
             .module("app.core")
             .factory("baseSettings", ['appSettings',baseSettings]);
-
-            function baseSettings(appSettings) {
+                function baseSettings(appSettings) {
                 return{
-                    labels: {
-                        browse: '{% trans 'BROWSE OR CEMENT TILE COLLECTIONS' %}'
+                labels: {
+                    browse: '{% trans 'BROWSE OR CEMENT TILE COLLECTIONS' %}'
                 }
             }
         };
-        })();
+    })();
     </script>
-
-    {% block js%} {% endblock js%}
+{% block js%} {% endblock js%}
 </body>
 </html>
