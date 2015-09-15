@@ -40,7 +40,7 @@
         //TODO API api/section/:sectionId/covers
         function getMockCover() {
             return {
-                image: '/static/img/Cluny-on-bath-Granada-tile-cement.jpg',
+                image: '/static/img/initial/content/Cluny-on-bath-Granada-tile-cement.jpg',
                 designer: 'Ryan Phillips',
                 photographer: 'Deindre Doherty',
             }

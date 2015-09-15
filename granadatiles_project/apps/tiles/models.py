@@ -3,6 +3,7 @@ from django.utils.translation import ugettext as _
 from core.models import BaseGallerieImageModel, BaseCatalogModel, BaseContentModel, BaseSlugModel
 from django.core.urlresolvers import reverse
 from sorl.thumbnail.shortcuts import get_thumbnail
+from sorl.thumbnail.fields import ImageField
 
 
 class TileSize(models.Model):
@@ -26,11 +27,14 @@ class PalleteColor(BaseCatalogModel):
 
 
 class Collection(BaseGallerieImageModel, BaseSlugModel):
+    menu_image = ImageField(upload_to='Galleries/menu', null = True, blank=True)
+    featured = models.BooleanField(default=True, verbose_name=_('Featured'))
+    show_in_menu = models.BooleanField(default=True, verbose_name= _('Show in menu'))
 
     @property
     def menu_thumbnail(self):
-        if self.image:
-            return get_thumbnail(self.image, '99x99').url 
+        if self.menu_image:
+            return get_thumbnail(self.menu_image, '99x99').url 
         return ''
 
     def get_absolute_url(self, language):
@@ -43,8 +47,7 @@ class Collection(BaseGallerieImageModel, BaseSlugModel):
 
 
 class Group(BaseGallerieImageModel):
-    collection = models.ForeignKey(
-        Collection, related_name='groups', verbose_name=_('Collection'))
+    collection = models.ForeignKey(Collection, related_name='groups', verbose_name=_('Collection'))
 
     class Meta:
         verbose_name = _('Group')
@@ -52,12 +55,9 @@ class Group(BaseGallerieImageModel):
 
 
 class Tile(BaseContentModel):
-    group = models.ForeignKey(
-        Group, related_name='tiles', verbose_name=_('Tiles Group'))
-    sizes = models.ManyToManyField(
-        TileSize, related_name='tiles', verbose_name=_('Tiles Sizes'))
-    colors = models.ManyToManyField(
-        PalleteColor, related_name='tiles', verbose_name=_('Tiles Colors'))
+    group = models.ForeignKey(Group, related_name='tiles', verbose_name=_('Tiles Group'))
+    sizes = models.ManyToManyField(TileSize, related_name='tiles', verbose_name=_('Tiles Sizes'))
+    colors = models.ManyToManyField(PalleteColor, related_name='tiles', verbose_name=_('Tiles Colors'))
 
     class Meta:
         verbose_name = _('Tile')

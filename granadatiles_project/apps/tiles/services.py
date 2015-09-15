@@ -15,6 +15,12 @@ class CollectionService(object):
                           for collection in collections]
         return collectionsDto
 
+    def get_featured_collections(language=None):
+        collections = Collection.objects.filter(featured=True)
+        collectionsDto = [CollectionDto(collection, language=language)
+                          for collection in collections]
+        return collectionsDto
+
     def get_groups(collection_id, language=None):
         groups = Collection.objects.get(pk=collection_id).groups.all()
         groupsDto = [GroupDto(group, language) 
@@ -22,7 +28,7 @@ class CollectionService(object):
         return groupsDto
 
     def get_menu_collections(language = None):
-        collections = Collection.objects.all()
+        collections = Collection.objects.filter(show_in_menu=True)
         menuCollectionsDto = [MenuCollectionDto(collection, language = language)
                               for collection in collections]
         return menuCollectionsDto

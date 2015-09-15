@@ -23,7 +23,7 @@ Theses are the views for the api
 
 class CollectionViewSet(BaseViewSet):
 
-    # /collections
+    # /collections/
     def list(self, request):
         collections = CollectionService.get_collections(
             language= self.get_language(request))
@@ -54,5 +54,13 @@ class CollectionViewSet(BaseViewSet):
         collections = CollectionService.get_menu_collections(
             language=self.get_language(request))
         serializer = MenuCollectionSerializer(collections, many=True)
+        return Response(serializer.data)
+
+     # /collections/featured
+    @list_route(methods=['get'])
+    def featured(self, request):
+        collections = CollectionService.get_featured_collections(
+            language= self.get_language(request))
+        serializer = CollectionSerializer(collections, many=True)
         return Response(serializer.data)
         

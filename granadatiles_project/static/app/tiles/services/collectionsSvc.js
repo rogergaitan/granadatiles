@@ -12,7 +12,8 @@
         
         return {
             getCollections: getCollections,
-            getMenuCollections: getMenuCollections
+            getMenuCollections: getMenuCollections,
+            getFeaturedCollections: getFeaturedCollections
         }
 
         function getCollections() {
@@ -21,6 +22,10 @@
 
         function getMenuCollections(){
             return $http.get(appSettings.serverPath + 'collections/menu');
+        }
+
+        function getFeaturedCollections() {
+            return $http.get(appSettings.serverPath + 'collections/featured');
         }
 
         

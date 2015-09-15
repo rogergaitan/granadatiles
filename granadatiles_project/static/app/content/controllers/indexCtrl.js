@@ -12,7 +12,7 @@
 
     function indexCtrl(appSettings, pageSettings, areaSvc, collectionsSvc) {
         var vm = this;
-        collectionsSvc.getCollections().then(function(response) {
+        collectionsSvc.getFeaturedCollections().then(function (response) {
             vm.collections = response.data;
         });
         vm.slogan = areaSvc.getArea(appSettings.areas.SLOGAN).description;
