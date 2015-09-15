@@ -1,7 +1,6 @@
-﻿(function () {
-    "use strict";
+﻿(function() {
+    'use strict';
 
     angular
-        .module('app.tiles',
-                ['app.core']);
-})();
+        .module('app.tiles', ['app.core']);
+}());

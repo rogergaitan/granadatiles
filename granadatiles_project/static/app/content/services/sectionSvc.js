@@ -1,11 +1,11 @@
-﻿(function () {
-    "use strict";
+﻿(function() {
+    'use strict';
 
     angular
-        .module("app.content")
-        .factory("sectionSvc",
-                ['pageSettings',
-                  sectionSvc]);
+        .module('app.content')
+        .factory('sectionSvc', ['pageSettings',
+            sectionSvc
+        ]);
 
 
     function sectionSvc(pageSettingsSvc) {
@@ -23,7 +23,7 @@
         }
 
         function getSection(sectionId) {
-                return getMockSection(sectionId);
+            return getMockSection(sectionId);
         }
 
         //TODO API api/section/:id
@@ -35,7 +35,7 @@
                             colorway tile in the Echo Collection Catalogue? Don't lose your work; save it to your Portfolio. Want to do a room layout? \
                             Use the tiles in your Portfolio to experiment with different combinations."
             }
-        }; 
+        };
 
         //TODO API api/section/:sectionId/covers
         function getMockCover() {

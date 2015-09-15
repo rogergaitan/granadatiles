@@ -1,4 +1,4 @@
-from django.db import models
+﻿from django.db import models
 from django.utils.translation import ugettext as _
 from core.models import BaseCatalogModel, BaseGallerieImageModel
 from sorl.thumbnail.fields import ImageField
@@ -39,8 +39,8 @@ class GalleryCategory(BaseCatalogModel):
         Gallery, verbose_name=_('Gallery'), related_name='categories')
 
     class Meta:
-        verbose_name = _('Gallery Category')
-        verbose_name_plural = _('Galleries Categories')
+        verbose_name = _('Category')
+        verbose_name_plural = _('Categories')
 
 
 class GalleryImage(BaseGallerieImageModel):

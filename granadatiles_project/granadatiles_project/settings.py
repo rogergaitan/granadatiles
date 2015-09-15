@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_admin_bootstrapped',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     #project apps
+    'apps.customadmin',
     'apps.news',
     'apps.galleries',
     'apps.content',
@@ -141,3 +143,13 @@ MEDIA_ROOT = os.path.join(ROOT_DIR, 'media')
 
 THUMBNAIL_BACKEND = 'core.extensions.SEOThumbnailBackend'
 THUMBNAIL_PREFIX = 'images/'
+
+DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
+
+from django.contrib import messages
+
+MESSAGE_TAGS = {
+            messages.SUCCESS: 'alert-success success',
+            messages.WARNING: 'alert-warning warning',
+            messages.ERROR: 'alert-danger error'
+}

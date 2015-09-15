@@ -84,7 +84,9 @@ module.exports = function () {
                         css: '<link rel="stylesheet" href="{{ STATIC_URL }}{{filePath}}" />'
                     }
                 }
-            }
+            },
+            exclude: [/eonasdan-bootstrap-datetimepicker/,
+                      /Chart.js/],
         },
         /* 
         * These are the settings for you inject css
@@ -114,7 +116,8 @@ module.exports = function () {
             bowerJson: config.bower.json,
             directory: config.bower.directory,
             ignorePath: config.bower.ignorePath,
-            fileTypes: config.bower.fileTypes
+            fileTypes: config.bower.fileTypes,
+            exclude: config.bower.exclude,
         };
         return options;
     };

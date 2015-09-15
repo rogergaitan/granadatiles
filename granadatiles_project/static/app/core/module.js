@@ -1,10 +1,10 @@
-﻿(function () {
-    "use strict";
+﻿(function() {
+    'use strict';
+
     angular
-        .module("app.core", [])
-        .constant("appSettings",
-        {
-            serverPath: "/api/",
+        .module('app.core', [])
+        .constant('appSettings', {
+            serverPath: '/api/',
             staticUrl: '/STATIC/',
             areas: {
                 SLOGAN: 1, // Page 1  Cement tile is not just a tile...

@@ -1,0 +1,78 @@
+﻿{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}admin/css/search.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}lib/animate.css/animate.min.css" />
+{% endblock %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block maintitle %}{% trans 'Search Result'%}{% endblock %}
+
+{% block box %}
+	<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">{{search_results|length}} {% trans 'resultados encontrados para' %} "{{search_term}}"</h3>
+            </div>
+            <div class="box-body table-responsive">
+                {% for item in search_results %}
+                    <div class="col-lg-4">
+                        <div class="contact-box">
+                            <div class="col-sm-4">
+                                <div class="text-center">
+                                    <img alt="Foto" class="img-circle m-t-xs img-responsive" src="{{item.image}}" />
+                                    <div class="m-t-xs font-bold">{{item.type}}</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <h3>
+                                    <strong>
+                                        <a href="{{item.url}}" class="link">{{item.name}}</a>
+                                    </strong>
+                                </h3>
+                                <p>
+                                    <i class="fa fa-info"></i>
+                                    {{item.additional}}
+                                </p>
+                                <address>
+                                    <span>{{item.additional2}}</span>
+                                </address>
+                            </div>
+                            <div class="clearfix"></div>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock box %}
+
+{% block extra_js %}
+<script>
+    function animationHover(element, animation) {
+        element = $(element);
+        element.hover(
+            function () {
+                element.addClass('animated ' + animation);
+            },
+            function () {
+                //wait for animation to finish before removing classes
+                window.setTimeout(function () {
+                    element.removeClass('animated ' + animation);
+                }, 1300);
+            });
+    }
+    $(document).ready(function () {
+        $('.contact-box').each(function () {
+            animationHover(this, 'bounce');
+        });
+    });
+</script>
+{% endblock extra_js%}

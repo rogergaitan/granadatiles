@@ -1,7 +1,8 @@
-import os, re
+﻿import os, re
 from sorl.thumbnail.base import ThumbnailBackend
 from django.template.defaultfilters import slugify
 from django.conf import settings
+from django.apps.config import AppConfig
 
 class SEOThumbnailBackend(ThumbnailBackend):
     """

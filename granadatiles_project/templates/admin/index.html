@@ -1,0 +1,203 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static bootstrapped_goodies_tags custom_admin thumbnail  %}
+
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}dashboard{% endblock %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block content-navbar-collapse %}
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block maintitle %}Dashboard{% endblock %}
+
+{% block box %}
+{% dashboard as dashboard %}
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-tags"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">{%trans 'Collections'%}</span>
+                <span class="info-box-number">{{dashboard.dashboard_data.total_collections}}</span>
+            </div><!-- /.info-box-content -->
+        </div><!-- /.info-box -->
+    </div><!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-object-group"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">{%trans 'Groups'%}</span>
+                <span class="info-box-number">{{dashboard.dashboard_data.total_groups}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-th-large"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">{% trans 'Tiles'%}</span>
+                <span class="info-box-number">{{dashboard.dashboard_data.total_tiles}}</span>
+            </div><!-- /.info-box-content -->
+        </div><!-- /.info-box -->
+    </div><!-- /.col -->
+    <!-- fix for small devices only -->
+    <div class="clearfix visible-sm-block"></div>
+
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box" title="Modulos disponibles">
+            <span class="info-box-icon bg-green"><i class="fa fa-users"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">{% trans 'Users'%}</span>
+                <span class="info-box-number">{{dashboard.dashboard_data.total_users}}</span>
+            </div><!-- /.info-box-content -->
+        </div><!-- /.info-box -->
+    </div><!-- /.col -->
+</div>
+<div class="row">
+    <div class='col-md-4'>
+        <div class="box box-warning">
+            <div class="box-header with-border">
+                <h3 class="box-title">{% trans 'Groups by collections'%}</h3>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="chart-responsive">
+                            <canvas id="pieChart" height="150"></canvas>
+                        </div><!-- ./chart-responsive -->
+                    </div><!-- /.col -->
+                    <div class="col-md-4">
+                        <ul class="chart-legend clearfix">
+                            {% for category in dashboard.dashboard_data.categories_graph_data %}
+                            <li><i class="fa fa-circle-o {{category.cssclass}}"></i> {{category.label}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.box-body -->
+            <div class="box-footer">
+            </div><!-- /.footer -->
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+    <div class="col-md-4">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">{% trans 'Recently Added Tiles'%}</h3>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div class="box-body no-padding">
+                <ul class="users-list clearfix">
+                    {% for event in dashboard.dashboard_data.recent_events %}
+                    <li title="{{event.title}}">
+                        {% if event.picture %}
+                            {% thumbnail event.picture "160x160" crop="center" as im %}
+                            <img src="{{ im.url }}" alt="student image" width="{{im.width}}" height="{{im.height}}" />
+                            {% endthumbnail %}
+                        {% else %}
+                            <img src="{{ STATIC_URL }}img/nopic_m.jpg " alt="event image" width="160" height="160"/>
+                        {% endif %}
+                        <a class="users-list-name" href="{{event.get_admin_url}}">{{event.title}}</a>
+                        <span class="users-list-date">{{event.date}}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">{% trans 'Latest User'%}</h3>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div class="box-body no-padding">
+                <ul class="users-list clearfix">
+                    {% for event in dashboard.dashboard_data.next_events %}
+                    <li title="{{event.title}}">
+                        {% if event.picture %}
+                            {% thumbnail event.picture "160x160" crop="center" as im %}
+                            <img src="{{ im.url }}" alt="student image" width="{{im.width}}" height="{{im.height}}" />
+                            {% endthumbnail %}
+                        {% else %}
+                            <img src="{{ STATIC_URL }}img/nopic_m.jpg " alt="student image" width="160" height="160"/>
+                        {% endif %}
+                        <a class="users-list-name" href="{{event.get_admin_url}}">{{event.title}}</a>
+                        <span class="users-list-date">{{event.date}}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block sidebar %}
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{{ STATIC_URL }}lib/Chart.js/Chart.min.js"></script>
+<script>
+    {% dashboard as dashboard %}
+    $(function () {
+        //-------------
+        //- PIE CHART -
+        //-------------
+        // Get context with jQuery - using jQuery's .get() method.
+        var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
+        var pieChart = new Chart(pieChartCanvas);
+        var PieData = {};//{{dashboard.dashboard_data.categories_graph_data|safe}};
+
+        var pieOptions = {
+            //Boolean - Whether we should show a stroke on each segment
+            segmentShowStroke: true,
+            //String - The colour of each segment stroke
+            segmentStrokeColor: "#fff",
+            //Number - The width of each segment stroke
+            segmentStrokeWidth: 1,
+            //Number - The percentage of the chart that we cut out of the middle
+            percentageInnerCutout: 50, // This is 0 for Pie charts
+            //Number - Amount of animation steps
+            animationSteps: 100,
+            //String - Animation easing effect
+            animationEasing: "easeOutBounce",
+            //Boolean - Whether we animate the rotation of the Doughnut
+            animateRotate: true,
+            //Boolean - Whether we animate scaling the Doughnut from the centre
+            animateScale: false,
+            //Boolean - whether to make the chart responsive to window resizing
+            responsive: true,
+            // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+            maintainAspectRatio: false,
+            
+        };
+        //Create pie or douhnut chart
+        // You can switch between pie and douhnut using the method below.  
+        pieChart.Doughnut(PieData, pieOptions);
+        //-----------------
+        //- END PIE CHART -
+        //-----------------
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,91 @@
+﻿.brand-logo {
+  width: 36px;
+  height: 30px;
+  margin-top: 6px;
+}
+
+a:hover {
+  color: #ff974b;
+}
+
+a {
+  color: #0085B9;
+}
+
+.navbar-default {
+    background-color: white;
+}
+
+.navbar-default .navbar-brand {
+  color: #ff974b;
+}
+
+.navbar-default .navbar-brand:hover {
+  color: #0085B9;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color:#FF7D1D;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color:#0085B9;
+}
+
+.model-app{
+    color: #4a4a4a;
+}
+
+.model-app:hover{
+    color:#0085B9;
+}
+
+.breadcrumb>li {
+  color:#0085B9;
+}
+
+.breadcrumb {
+ margin-bottom: 0;
+ }
+
+.btn:hover {
+    color: #ff974b;
+}
+
+.margin-bottom15{
+    margin-bottom:15px;
+}
+
+.menu-tree{
+  padding-right: 0;
+  padding-left: 0;
+  margin-top: -10px;
+}
+.menu-tree li{
+    width: 100%;
+}
+
+.menu-tree a:hover{
+    color: #1a88e4;
+    text-decoration:none;
+}
+
+.menu-tree a:focus{
+    color: #1a88e4;
+    text-decoration:none;
+}
+
+.menu-inner{
+    margin-bottom:0;
+}
+
+.menu-inner li{
+    padding: 0;
+    padding-top: 3px;
+    border: none;
+}
+
+.menu-inner a:hover{
+    color: #ff974b;
+    text-decoration:none;
+}

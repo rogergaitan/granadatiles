@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'customadmin/', include('apps.customadmin.urls' , namespace="customadmin")),
     url(r'^summernote/', include('django_summernote.urls')),
     url(r'^api/', include('apps.tiles.urls', namespace='tiles')),
 ]

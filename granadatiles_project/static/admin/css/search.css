@@ -1,0 +1,41 @@
+﻿.contact-box {
+  background-color: #ffffff;
+  border: 1px solid #e7eaec;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.contact-box.contact-active {
+    border-top: 2px solid #00a65a
+}
+
+.contact-box.contact-unactive {
+    border-top: 2px solid #ff0000
+}
+.contact-box a {
+  color: inherit;
+}
+.m-t-xs {
+  margin-top: 5px;
+}
+
+.font-bold {
+font-weight: 600;
+}
+
+h3, h4, h5 {
+margin-top: 5px !important;
+font-weight: 600 !important;
+}
+h3 {
+    font-size: 16px !important;
+}
+
+@media (min-width: 1200px) {
+    .contact-box {
+        height: 220px;
+    }
+    .img-circle {
+        max-height: 90px;
+    }
+}
+

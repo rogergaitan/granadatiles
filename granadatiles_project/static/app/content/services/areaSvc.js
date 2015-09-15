@@ -1,9 +1,9 @@
-﻿(function () {
-    "use strict";
+﻿(function() {
+    'use strict';
 
     angular
-        .module("app.content")
-        .factory("areaSvc", ['pageSettings', areaSvc]);
+        .module('app.content')
+        .factory('areaSvc', ['pageSettings', areaSvc]);
 
 
     function areaSvc(pageSettingsSvc) {
@@ -19,7 +19,7 @@
 
         //TODO API /api/area/:id
         function getMockArea() {
-            return  {
+            return {
                 description: '<h1>Get inspired by Residential and Commercial installation photos</h1><h3>then choose from in stock and custom tiles.</h3>',
                 id: 1
             };

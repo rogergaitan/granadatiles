@@ -13,8 +13,8 @@ class TileSize(models.Model):
         return "{0} {1}".format(self.weight, self.thickness)
 
     class Meta:
-        verbose_name = _('Tile Size')
-        verbose_name_plural = _('Tile Sizes')
+        verbose_name = _('Size')
+        verbose_name_plural = _('Sizes')
 
 
 class PalleteColor(BaseCatalogModel):
