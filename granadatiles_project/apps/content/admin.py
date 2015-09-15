@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.content.models import Section, SectionImage, Social, FeaturedVideo, Area
+from apps.content.models import Section, SectionImage, Social, FeaturedVideo, Area, Testimony
 from django_summernote.admin import SummernoteModelAdmin, SummernoteInlineModelAdmin
 
 
@@ -30,4 +30,10 @@ class VideoAdmin(SummernoteModelAdmin):
 @admin.register(Area)
 class AreaAdmin(SummernoteModelAdmin):
     list_display = ('title', )
+    search_fields = ['title', 'title_es', ]
+
+
+@admin.register(Testimony)
+class AreaAdmin(SummernoteModelAdmin):
+    list_display = ('title', 'subtitle', )
     search_fields = ['title', 'title_es', ]

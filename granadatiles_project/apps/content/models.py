@@ -59,3 +59,18 @@ class Area(BaseContentModel):
     class Meta:
         verbose_name = _('Manageable Area')
         verbose_name_plural = _('Manageable Areas')
+
+
+class Testimony(BaseContentModel):
+    subtitle = models.CharField(max_length=150, verbose_name=_('Subtitle'))
+
+    subtitle_es = models.CharField(max_length=150, verbose_name=_('Subtitle_es'))
+
+    def get_subtitle(self, lenguaje):
+        if lenguaje == 'es' and self.subtitle_es is not None and self.subtitle_es:
+            return self.subtitle_es
+        return self.subtitle
+
+    class Meta:
+        verbose_name = _('Testimony')
+        verbose_name_plural = _('Testimonials')
