@@ -1,4 +1,4 @@
-﻿(function() {
+﻿(function () {
     'use strict';
 
     angular
@@ -11,4 +11,4 @@
                 WELCOME: 2, // Page 1 Get inspired by Residential and Commercial...
             }
         });
-})();
+}());
