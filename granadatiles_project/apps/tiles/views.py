@@ -6,6 +6,7 @@ from apps.tiles.services import CollectionService
 from rest_framework.decorators import list_route, detail_route
 from apps.tiles.serializers import GroupSerializer, MenuCollectionSerializer
 from apps.tiles.models import Collection
+from core.views import BaseViewSet
 
 
 def collection_detail(request, slug):
@@ -20,19 +21,20 @@ Theses are the views for the api
 """
 
 
-class CollectionViewSet(viewsets.ViewSet):
+class CollectionViewSet(BaseViewSet):
 
     # /collections
     def list(self, request):
         collections = CollectionService.get_collections(
-            language=request.LANGUAGE_CODE)
+            language= self.get_language(request))
         serializer = CollectionSerializer(collections, many=True)
         return Response(serializer.data)
 
     # /collections/:id
     def retrieve(self, request, pk=None):
-        collection = CollectionService.get_collection(id=pk, 
-                                                      language=request.LANGUAGE_CODE)
+        collection = CollectionService.get_collection(
+                                        id=pk, 
+                                        language=self.get_language(request))
         serializer = CollectionSerializer(collection)
         return Response(serializer.data)
 
@@ -40,8 +42,9 @@ class CollectionViewSet(viewsets.ViewSet):
     # /collections/:id/groups
     @detail_route(methods=['get'])
     def groups(self, request, pk = None):
-        groups = CollectionService.get_groups(collection_id=pk,
-                                              language=request.LANGUAGE_CODE)
+        groups = CollectionService.get_groups(
+                                        collection_id=pk,
+                                        language=self.get_language(request))
         serializer = GroupSerializer(groups, many=True)
         return Response(serializer.data)
 
@@ -49,7 +52,7 @@ class CollectionViewSet(viewsets.ViewSet):
     @list_route(methods=['get'])
     def menu(self, request):
         collections = CollectionService.get_menu_collections(
-            language=request.LANGUAGE_CODE)
+            language=self.get_language(request))
         serializer = MenuCollectionSerializer(collections, many=True)
         return Response(serializer.data)
         
