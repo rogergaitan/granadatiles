@@ -17,7 +17,7 @@
         }
 
         function getCollections() {
-            return $http.get(appSettings.serverPath + 'collections/');
+            return $http.get(appSettings.serverPath + 'collections');
         }
 
         function getMenuCollections(){

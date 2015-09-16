@@ -37,7 +37,7 @@ class Collection(BaseGallerieImageModel, BaseSlugModel):
             return get_thumbnail(self.menu_image, '99x99').url 
         return ''
 
-    def get_absolute_url(self, language):
+    def get_absolute_url(self, language=None):
         slug = self.get_slug(language)
         return reverse('sr-collections:sr-detail', kwargs={'slug': slug})
 

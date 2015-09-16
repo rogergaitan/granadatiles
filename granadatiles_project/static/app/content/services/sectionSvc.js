@@ -37,7 +37,7 @@
             }
         };
 
-        //TODO API api/section/:sectionId/covers
+        //TODO API api/section/:sectionId/cover
         function getMockCover() {
             return {
                 image: '/static/img/initial/content/Cluny-on-bath-Granada-tile-cement.jpg',

@@ -17,8 +17,8 @@ def addInitialData(apps, schema_editor):
             <li>Organic colors</li><li>Industrial strength</li>
             <li>Pressed to 2,000 lbs. per square inch<br></li></ul>''',
             description_es='',
-            image= settings.STATIC_URL + 'initial/tiles/',
-            menu_image = settings.STATIC_URL + 'initial/tiles/icon-Echo-Collection-Granada-Tile-Cement.jpg'
+            image= '',
+            menu_image = ''
         ),
         collection(
             title='Minis Tile Collection',
@@ -30,8 +30,8 @@ def addInitialData(apps, schema_editor):
             <li>Use on bathroom floors and walls</li>
             <li>Use on kitchen floors and backsplashes</li></ul>''',
             description_es='',
-            image= settings.STATIC_URL + 'initial/tiles/',
-            menu_image = settings.STATIC_URL + 'initial/tiles/Icon-Minis-Collection-Granada-Tile-Cement.png'
+            image= '',
+            menu_image = ''
         ),
         collection(
             title='Mauresque Tile Collection',
@@ -42,8 +42,8 @@ def addInitialData(apps, schema_editor):
             <li>Variety of shapes and sizes</li>
             <li>Use on bathroom floors and walls, kitchen backsplashes and more</li></ul>''',
             description_es='',
-            image= settings.STATIC_URL + 'initial/tiles/',
-            menu_image = settings.STATIC_URL + 'initial/tiles/Icon-Mauresque-Collection-Granada-Tile-Cement.png'
+            image= '',
+            menu_image = ''
         ),
     ])
         

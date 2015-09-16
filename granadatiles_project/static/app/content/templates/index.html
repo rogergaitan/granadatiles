@@ -14,4 +14,18 @@
             <img ng-src="{{::collection.image}}" alt="Collection Image" />
         </div>
     </div>
+    <div ng-controller="testimonyCtrl as vm">
+        <div class="row">
+            <h2 class="text-center">
+                {{::vm.intro}}
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4" ng-repeat="testimony in vm.testimonials">
+                <div ng-bind-html="testimony.description"></div>
+                <div>{{::testimony.title}}</div>
+                <div>{{::testimony.subtitle}}</div>
+            </div>
+        </div>
+    </div>
 </div>
