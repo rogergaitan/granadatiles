@@ -11,9 +11,13 @@ class TestimonyService(object):
         return testimonialsDto
 
 class SectionService(object):
-	def get_sections(language=None):
-		sections = Section.objects.all()
-		basecontentDto = [BaseContentDto(section, language=language)
+    def get_sections(language=None):
+        sections = Section.objects.all()
+        sectionsDto = [BaseContentDto(section, language=language)
 			        for section in sections]
-		return basecontentDto
+        return sectionsDto
 	
+    def get_section(id, language=None):
+        section = Section.objects.get(pk=id)
+        sectionDto = BaseContentDto(section, language)  
+        return sectionDto

@@ -27,3 +27,10 @@ class SectionViewSet(BaseViewSet):
 			language=self.get_language(request))
         serializer = SectionSerializer(sections, many=True)
         return Response(serializer.data)
+	
+    def retrieve(self, request, pk=None):
+        section = SectionService.get_section(
+            id=pk, 
+            language=self.get_language(request))
+        serializer = SectionSerializer(section)
+        return Response(serializer.data)
