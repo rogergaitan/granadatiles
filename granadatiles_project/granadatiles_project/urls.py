@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'customadmin/', include('apps.customadmin.urls' , namespace="customadmin")),
     url(r'^summernote/', include('django_summernote.urls')),
     url(r'^api/', include('apps.tiles.urls', namespace='tiles')),
+    url(r'^api/', include('apps.content.urls', namespace='content')),
 ]
 
 urlpatterns += i18n_patterns(

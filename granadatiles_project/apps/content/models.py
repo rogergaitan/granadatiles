@@ -66,8 +66,8 @@ class Testimony(BaseContentModel):
 
     subtitle_es = models.CharField(max_length=150, verbose_name=_('Subtitle_es'))
 
-    def get_subtitle(self, lenguaje):
-        if lenguaje == 'es' and self.subtitle_es is not None and self.subtitle_es:
+    def get_subtitle(self, language=None):
+        if language == 'es' and self.subtitle_es is not None and self.subtitle_es:
             return self.subtitle_es
         return self.subtitle
 
