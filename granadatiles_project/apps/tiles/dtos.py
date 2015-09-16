@@ -10,6 +10,7 @@ class CollectionDto(BaseGalleryImageDto):
         else:
             self.url = collection.get_absolute_url()
 
+
 class GroupDto(BaseGalleryImageDto):
     pass
 
