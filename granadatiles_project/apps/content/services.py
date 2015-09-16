@@ -1,5 +1,6 @@
-from apps.content.models import Testimony
+from apps.content.models import Testimony, Section
 from apps.content.dtos import TestimonyDto
+from core.dtos import BaseContentDto
 
 
 class TestimonyService(object):
@@ -8,3 +9,11 @@ class TestimonyService(object):
         testimonialsDto = [TestimonyDto(testimony, language=language)
                            for testimony in testimonials]
         return testimonialsDto
+
+class SectionService(object):
+	def get_sections(language=None):
+		sections = Section.objects.all()
+		basecontentDto = [BaseContentDto(section, language=language)
+			        for section in sections]
+		return basecontentDto
+	

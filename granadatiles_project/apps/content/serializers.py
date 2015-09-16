@@ -4,3 +4,6 @@ from core.serializers import BaseContentSerializer
 
 class TestimonySerializer(BaseContentSerializer):
     subtitle = serializers.CharField()
+
+class SectionSerializer(BaseContentSerializer):
+	pass
