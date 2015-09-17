@@ -1,7 +1,9 @@
 ﻿from django.shortcuts import render
 from rest_framework.response import Response
-from apps.content.serializers import TestimonySerializer, SectionSerializer
+from rest_framework import viewsets, mixins
+from apps.content.serializers import TestimonySerializer, SectionSerializer, SocialSerializer
 from apps.content.services import TestimonyService, SectionService
+from .models import Social
 from core.views import BaseViewSet
 
 
@@ -21,6 +23,7 @@ class TestimonyViewSet(BaseViewSet):
         serializer = TestimonySerializer(testimonials, many=True)
         return Response(serializer.data)
 	
+
 class SectionViewSet(BaseViewSet):
     def list(self, request):
         sections = SectionService.get_sections(
@@ -34,3 +37,8 @@ class SectionViewSet(BaseViewSet):
             language=self.get_language(request))
         serializer = SectionSerializer(section)
         return Response(serializer.data)
+	
+
+class SocialViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = Social.objects.exclude(url='')
+    serializer_class = SocialSerializer

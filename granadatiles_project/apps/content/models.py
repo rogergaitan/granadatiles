@@ -36,6 +36,7 @@ class Social(models.Model):
     url = models.URLField(blank=True, null=True, verbose_name=_('Link'))
     order = models.PositiveIntegerField(unique=True, verbose_name=_('Order'))
     active = models.BooleanField(default=True, verbose_name=_('Active'))
+    css_class = models.CharField(max_length=30, editable=False)
 
     def __str__(self):
         return self.name
