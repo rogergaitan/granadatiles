@@ -1,10 +1,12 @@
 ﻿body {
     font-family: @font-primary;
+    background-color: @backgroundHomepage;
 }
 
 /***************Styles for header***************/
 header {
     box-shadow: 0 -5px 40px black;
+    background-color: @white;
     padding-top: 15px;
 
     #gt-header-brand {
@@ -72,6 +74,10 @@ header {
 
         .nav > li {
             margin: 5px 5px auto 5px;
+        }
+
+        .nav-justified > .dropdown .dropdown-menu{
+            border-bottom: 6px solid @orange;
         }
 
         span.gt-header-nav-separator {

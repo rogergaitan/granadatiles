@@ -2,29 +2,33 @@
     <div class="row">
         <div ng-bind-html="::vm.slogan" class="col-xs-12"></div>
     </div>
+    <hr>
     <div class="row">
-        <h2>{{::vm.explore}}</h2>
+        <h2 class="heading-sec">{{::vm.explore}}</h2>
     </div>
-    <div class="row" ng-repeat="collection in ::vm.collections">
-        <div class="col-md-6">
+    <div class="row explore-collections" ng-repeat="collection in ::vm.collections">
+        <div class="col-md-6 explore-collection-content">
             <h3>{{::collection.title}}</h3>
-            <div ng-bind-html="::collection.description"></div>
+            <div class="description" ng-bind-html="::collection.description"></div>
+            <button class="btn btn-green text-uppercase">View collection</button>
         </div>
-        <div class="col-md-6">
-            <img ng-src="{{::collection.image}}" alt="Collection Image" />
+        <div class="col-md-6 explore-collection-thumbnail">
+            <img ng-src="{{::collection.image}}" alt="Collection Image" class="img-responsive"/>
         </div>
     </div>
+    <hr>
     <div ng-controller="testimonyCtrl as vm">
         <div class="row">
-            <h2 class="text-center">
-                {{::vm.intro}}
-            </h2>
+            <h2 class="heading-sec">{{::vm.intro}}</h2>
         </div>
         <div class="row">
             <div class="col-md-4" ng-repeat="testimony in vm.testimonials">
-                <p ng-bind-html="testimony.description"></p>
-                <lable><strong>{{ ::testimony.title }}</strong></lable><br>
-                <lable>{{ ::testimony.subtitle }}</lable>
+                <div class="testimony-content">
+                    <i class="fa-quotes-left">&#8220;</i>
+                    <div class="quote" ng-bind-html="testimony.description"></div>
+                    <div class="author">{{::testimony.title}}</div>
+                    <div class="country">{{::testimony.subtitle}}</div>
+                </div>
             </div>
         </div>
     </div>
