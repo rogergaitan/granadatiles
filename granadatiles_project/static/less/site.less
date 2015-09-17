@@ -58,3 +58,119 @@
 
 
 /*************/
+
+/***********Styles Site***************/
+.heading-sec{
+    font-family: @font-primary;
+    .font-configuration(@font-xxlll,@font-light);
+    color:@darkBlue;
+}
+
+.explore-collections{
+    margin-bottom: 20px;
+
+    .explore-collection-content{
+        background-color: @lightBlue;
+        height: 270px;
+        text-align: left;
+        padding: 20px;
+
+        h3{
+            font-family: @font-primary;
+            .font-configuration(@font-xxll,@font-light);
+            color: @darkBlue;
+            padding-left: 20px;
+        }
+
+        .description{
+            font-family: @font-primary;
+            .font-configuration(@font-lg,@font-light);
+            color: @darkBlue;
+        }
+
+        button{
+            margin: 10px 0 0 20px;
+        }
+    }
+
+    .explore-collection-thumbnail{
+        padding-left: 0;
+
+        img{
+            height: 270px;
+            width: 100%;
+        }
+    }
+}
+
+.menu-browse-collections{
+
+    h4{
+        font-family: @font-secundary;
+        .font-configuration(@font-sm,@font-light);
+        color:@darkBlue;
+        letter-spacing: 4px;
+    }
+
+    .tile-collection{
+        text-align: center;
+
+        img{
+            margin: 0 auto;
+            padding-bottom: 5px;
+        }
+    }
+}
+
+.testimony-content{
+    background-color:@white;
+    margin: 5px -10px 25px -10px;
+    padding: 30px 55px 15px 55px;
+    text-align: left;
+
+    .fa-quotes-left{
+        font-family: @font-primary;
+        .font-configuration(@font-quotes,@font-light);
+        color:@lightBlue;
+        margin-left: -55px;
+        position: absolute;
+        top: 0;
+    }
+
+    .quote{
+        font-family:@font-primary;
+        font-style:@italic;
+        .font-configuration(@font-sm,@font-light);
+        color:@darkGray;
+    }
+
+    .author{
+        font-family: @font-primary;
+        .font-configuration(@font-xl,@font-medium);
+        color:@darkGray;
+        padding-top: 25px;
+    }
+
+    .country{
+        font-family: @font-primary;
+        .font-configuration(@font-sm,@font-light);
+    }
+}
+
+.btn-green{
+    color:@darkBlue;
+    background-color:@green;
+    border-color:@olive;
+    font-family:@font-secundary;
+    .font-configuration(@font-md,@font-light);
+
+    &:hover{
+        background-color:@olive;
+        border-color:@green
+    }
+}
+
+hr{
+    border-top: 1px solid @lightSylver;
+}
+/************************************/
