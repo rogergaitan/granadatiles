@@ -90,6 +90,7 @@ class Migration(migrations.Migration):
                 ('url', models.URLField(blank=True, null=True, verbose_name='Link')),
                 ('order', models.PositiveIntegerField(unique=True, verbose_name='Order')),
                 ('active', models.BooleanField(default=True, verbose_name='Active')),
+                ('css_class', models.CharField(max_length=30, editable=False)),
             ],
             options={
                 'ordering': ('order',),
