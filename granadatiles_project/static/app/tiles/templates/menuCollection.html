@@ -1,10 +1,10 @@
 ﻿<li>
-    <div class="row">
+    <div class="row menu-browse-collections">
         <div class="col-sm-8">
             <h4 class="text-center">{{::vm.browse}}</h4>
             <div class="col-sm-12">
-                <div class="col-sm-4 text-center" ng-repeat="collection in vm.menuCollections">
-                    <img ng-src="{{::collection.image}}" class="img-responsive" alt="{{::collection.title}}">
+                <div class="col-sm-4 tile-collection" ng-repeat="collection in vm.menuCollections">
+                    <img ng-src="{{::collection.image}}" class="img-responsive" alt="{{::collection.title}}" width="100" height="100">
                     <a ng-href="{{::collection.url}}">
                         <span>{{::collection.title}}</span>
                     </a>
