@@ -1,5 +1,5 @@
 from apps.content.models import Testimony, Section
-from apps.content.dtos import TestimonyDto
+from apps.content.dtos import TestimonyDto, SectionCoverDto
 from core.dtos import BaseContentDto
 
 
@@ -21,3 +21,8 @@ class SectionService(object):
         section = Section.objects.get(pk=id)
         sectionDto = BaseContentDto(section, language)  
         return sectionDto
+	
+    def get_cover(id):
+        section = Section.objects.get(pk=id)
+        sectioncoverDto = SectionCoverDto(section)
+        return sectioncoverDto

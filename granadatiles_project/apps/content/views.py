@@ -1,7 +1,8 @@
 ﻿from django.shortcuts import render
-from rest_framework.response import Response
 from rest_framework import viewsets, mixins
-from apps.content.serializers import TestimonySerializer, SectionSerializer, SocialSerializer
+from rest_framework.response import Response
+from rest_framework.decorators import detail_route
+from apps.content.serializers import TestimonySerializer, SectionSerializer, SocialSerializer, SectionCoverSerializer
 from apps.content.services import TestimonyService, SectionService
 from .models import Social
 from core.views import BaseViewSet
@@ -31,11 +32,19 @@ class SectionViewSet(BaseViewSet):
         serializer = SectionSerializer(sections, many=True)
         return Response(serializer.data)
 	
+    
     def retrieve(self, request, pk=None):
         section = SectionService.get_section(
             id=pk, 
             language=self.get_language(request))
         serializer = SectionSerializer(section)
+        return Response(serializer.data)
+	
+	
+    @detail_route(methods=['get'])
+    def cover(self, request, pk=None):
+        cover = SectionService.get_cover(id=pk)
+        serializer = SectionCoverSerializer(cover)
         return Response(serializer.data)
 	
 
