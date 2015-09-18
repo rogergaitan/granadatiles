@@ -60,12 +60,6 @@
 /*************/
 
 /***********Styles Site***************/
-.heading-sec{
-    font-family: @font-primary;
-    .font-configuration(@font-xxlll,@font-light);
-    color:@darkBlue;
-}
-
 .explore-collections{
     margin-bottom: 20px;
 
@@ -88,13 +82,14 @@
             color: @darkBlue;
         }
 
-        button{
+        a.btn{
             margin: 10px 0 0 20px;
         }
     }
 
     .explore-collection-thumbnail{
         padding-left: 0;
+        padding-right: 0;
 
         img{
             height: 270px;
@@ -169,6 +164,16 @@
 
 
 /*********** Style Reusable *************/
+.heading-sec{
+    font-family: @font-primary;
+    .font-configuration(@font-xxlll,@font-light);
+    color:@darkBlue;
+}
+.slogan{
+    font-family: @font-primary;
+    .font-configuration(@font-xlll,@font-light);
+    color: @darkBlue;
+}
 .btn-green{
     color:@darkBlue;
     background-color:@green;
