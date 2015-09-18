@@ -19,7 +19,7 @@ class SectionService(object):
 	
     def get_section(id, language=None):
         section = Section.objects.get(pk=id)
-        sectionDto = BaseContentDto(section, language)  
+        sectionDto = BaseContentDto(section, language=language)
         return sectionDto
 	
     def get_cover(id):
