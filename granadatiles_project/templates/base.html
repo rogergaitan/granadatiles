@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load content i18n %}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -162,30 +162,7 @@
                 </div>
                 <div class="col-sm-5 col-md-4 col-lg-3">
                     <ul class="list-inline social-media">
-                        <li class="social-facebook">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li class="social-twitter">
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li class="social-linkedin">
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                        </li>
-                        <li class="social-rss">
-                            <a href=""><i class="fa fa-rss"></i></a>
-                        </li>
-                        <li class="social-yelp">
-                            <a href=""><i class="fa fa-yelp"></i></a>
-                        </li>
-                        <li class="social-pinterest">
-                            <a href=""><i class="fa fa-pinterest-p"></i></a>
-                        </li>
-                        <li class="social-instagram">
-                            <a href=""><i class="fa fa-camera-retro"></i></a>
-                        </li>
-                        <li class="social-houzz">
-                            <a href=""><i class="fa fa-houzz"></i></a>
-                        </li>
+                        {% social %}
                     </ul>
                 </div>
             </div>
