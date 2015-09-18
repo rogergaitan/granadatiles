@@ -7,13 +7,25 @@
         <h2 class="heading-sec">{{::vm.explore}}</h2>
     </div>
     <div class="row explore-collections" ng-repeat="collection in ::vm.collections">
-        <div class="col-md-6 explore-collection-content">
-            <h3>{{::collection.title}}</h3>
-            <div class="description" ng-bind-html="::collection.description"></div>
-            <button class="btn btn-green text-uppercase">View collection</button>
+        <div ng-if="($index % 2 == 0)">
+            <div class="col-md-6 explore-collection-content">
+                <h3>{{::collection.title}}</h3>
+                <div class="description" ng-bind-html="::collection.description"></div>
+                <button class="btn btn-green text-uppercase">View collection</button>
+            </div>
+            <div class="col-md-6 explore-collection-thumbnail">
+                <img ng-src="{{::collection.image}}" alt="Collection Image" class="img-responsive" />
+            </div>
         </div>
-        <div class="col-md-6 explore-collection-thumbnail">
-            <img ng-src="{{::collection.image}}" alt="Collection Image" class="img-responsive"/>
+        <div ng-if="($index % 2 != 0)">
+            <div class="col-md-6 explore-collection-thumbnail">
+                <img ng-src="{{::collection.image}}" alt="Collection Image" class="img-responsive" />
+            </div>
+             <div class="col-md-6 explore-collection-content">
+                <h3>{{::collection.title}}</h3>
+                <div class="description" ng-bind-html="::collection.description"></div>
+                <button class="btn btn-green text-uppercase">View collection</button>
+            </div>
         </div>
     </div>
     <hr>

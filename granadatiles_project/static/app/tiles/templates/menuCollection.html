@@ -1,7 +1,7 @@
 ﻿<li>
     <div class="row menu-browse-collections">
         <div class="col-sm-8">
-            <h4 class="text-center">{{::vm.browse}}</h4>
+            <h4 class="text-center">{{::vm.labels.browse}}</h4>
             <div class="col-sm-12">
                 <div class="col-sm-4 tile-collection" ng-repeat="collection in vm.menuCollections">
                     <img ng-src="{{::collection.image}}" class="img-responsive" alt="{{::collection.title}}" width="100" height="100">
@@ -12,14 +12,14 @@
             </div>
         </div>
         <div class="col-sm-4">
-            <h4>{% trans 'PRODUCT INFORMATION'%}</h4>
+            <h4>{{vm.labels.productInformation}}</h4>
             <ul>
-                <li><a href="">{% trans 'In Stock Samples' %}</a></li>
-                <li><a href="">{% trans 'In Stock Tiles' %}</a></li>
-                <li><a href="">{% trans 'Compare our Products' %}</a></li>
-                <li><a href="">{% trans 'Cement Vs. Ceramic' %}</a></li>
-                <li><a href="">{% trans 'Color Palletes' %}</a></li>
-                <li><a href="">{% trans 'Catalogs / Inspiration Boooks' %}</a></li>
+                <li><a href="">{{vm.labels.inStockSamples}}</a></li>
+                <li><a href="">{{vm.labels.inStockTiles}}</a></li>
+                <li><a href="">{{vm.labels.compareProducts}}</a></li>
+                <li><a href="">{{vm.labels.cementVsCeramic}}</a></li>
+                <li><a href="">{{vm.labels.colorPalletes}}</a></li>
+                <li><a href="">{{vm.labels.catalogs}}</a></li>
             </ul>
         </div>
     </div>

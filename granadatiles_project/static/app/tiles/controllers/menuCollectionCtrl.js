@@ -10,8 +10,8 @@
 
     function menuCollectionCtrl(baseSettings, collectionsSvc) {
         var vm = this;
-        /*Translations*/
-        vm.browse = baseSettings.labels.browse;
+
+        vm.labels = baseSettings.labels;
 
         collectionsSvc.getMenuCollections().then(function(response) {
             vm.menuCollections = response.data;
