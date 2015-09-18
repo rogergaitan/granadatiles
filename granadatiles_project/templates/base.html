@@ -10,6 +10,7 @@
     <!-- build:css ../static/build/css/lib.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="{{ STATIC_URL }}lib/angular-loading-bar/build/loading-bar.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}lib/animate.css/animate.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}lib/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}lib/yamm3/yamm/yamm.css" />
@@ -24,14 +25,19 @@
     {% endblock css %}
 </head>
 <body class="container-fluid" data-ng-app="app">
+    <div class="preloader">
+        <div class="status">
+            <div id="gt-cover-spinner"><i class="fa fa-spinner fa-5x fa-spin"></i></div>
+        </div>
+    </div>
     <header class="row">
         <div class="container">
             <div class="row navbar yamm">
                 <div class="navbar-header col-md-2 col-sm-3" id="gt-header-brand">
                     <button type="button" data-toggle="collapse" data-target="#gt-navbar-collapse-grid" class="navbar-toggle" id="gt-toggle-custom">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
                     </button>
                     <a class="hidden-xs brand" href="/">
                         <img class="" src="{{ STATIC_URL }}img/Granada-Tile-logo.png" alt="Granada Tile logo">
@@ -45,7 +51,7 @@
                                     <input type="text" class="form-control input-sm" placeholder="Search">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default btn-sm">
-                                        <span class="fa fa-angle-right"></span>
+                                            <span class="fa fa-angle-right"></span>
                                         </button>
                                     </span>
                                 </div>
@@ -76,16 +82,16 @@
                                         {% get_available_languages as LANGUAGES %}
                                         {% get_language_info_list for LANGUAGES as languages %}
                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa fa-globe"></i>&nbsp;<span>{{ LANGUAGE_CODE | language_name }}<i class="caret"></i></span>
+                                            <i class="fa fa-globe"></i>&nbsp;<span>{{ LANGUAGE_CODE | language_name }}<i class="caret"></i></span>
                                         </button>
                                         {% if LANGUAGES|length > 1 %}
-                                            <ul class="dropdown-menu" role="menu">
-                                                {% for language in languages %}
-                                                    <li>
-                                                        <a href="/{{ language.code }}">{{ language.name_local|title  }} ({{ language.code }})</a>
-                                                    </li>
-                                                {% endfor %}
-                                            </ul>
+                                        <ul class="dropdown-menu" role="menu">
+                                            {% for language in languages %}
+                                            <li>
+                                                <a href="/{{ language.code }}">{{ language.name_local|title  }} ({{ language.code }})</a>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
                                         {% endif %}
                                     </li>
                                 </ul>
@@ -96,11 +102,11 @@
                                 <ul class="nav nav-justified">
                                     <li class="dropdown">
                                         <span class="dropdown-toggle" data-toggle="dropdown">
-                                            <a href="#" >{% trans 'COLLECTIONS' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
+                                            <a href="#">{% trans 'COLLECTIONS' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
                                         </span>
                                         <ul class="dropdown-menu"
                                             data-ng-include="'{{STATIC_URL}}app/tiles/templates/menuCollection.html'"
-                                        ng-controller="menuCollectionCtrl as vm"></ul>
+                                            ng-controller="menuCollectionCtrl as vm"></ul>
                                     </li>
                                     <li>
                                         <span>
@@ -141,23 +147,23 @@
         </div>
     </header>
     <main class="row">
-    {% block main %}
-    {% endblock main %}
-    {% block cover%}
+        {% block main %}
+        {% endblock main %}
+        {% block cover%}
         <ng-include src="'{{STATIC_URL}}app/content/templates/cover.html'">
         </ng-include>
-    {% endblock cover%}
-    <section class="container">
-        {% block content %}
-        {% endblock content %}
-    </section>
+        {% endblock cover%}
+        <section class="container">
+            {% block content %}
+            {% endblock content %}
+        </section>
     </main>
     <footer class="row">
         <section class="container text-center">
             <div class="row">
                 <div class="col-sm-offset-4 col-sm-3 col-md-2">
                     <h4>
-                    <i class="fa fa-copyright"></i>Granada Tile 2015
+                        <i class="fa fa-copyright"></i>Granada Tile 2015
                     </h4>
                 </div>
                 <div class="col-sm-5 col-md-4 col-lg-3">
@@ -199,11 +205,13 @@
     <script src="{{ STATIC_URL }}lib/angular-loading-bar/build/loading-bar.js"></script>
     <script src="{{ STATIC_URL }}lib/angular-sanitize/angular-sanitize.js"></script>
     <script src="{{ STATIC_URL }}lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="{{ STATIC_URL }}lib/wow/dist/wow.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js ../static/build/js/app.js -->
     <!-- inject:js -->
     <script type="text/javascript" src="{{ STATIC_URL }}app/app.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/stylish.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/module.js"></script>
@@ -248,6 +256,6 @@
         };
     })();
     </script>
-{% block js%} {% endblock js%}
+    {% block js%} {% endblock js%}
 </body>
 </html>
