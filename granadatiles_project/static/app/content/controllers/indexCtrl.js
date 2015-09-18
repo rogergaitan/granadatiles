@@ -16,6 +16,7 @@
             vm.collections = response.data;
         });
         vm.slogan = areaSvc.getArea(appSettings.areas.SLOGAN).description;
-        vm.explore = pageSettings.labels.explore;
+
+        vm.labels = pageSettings.labels;
     }
 }());
