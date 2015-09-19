@@ -7,3 +7,4 @@ class GallerySerializer(BaseCatalogSerializer):
     
 
 class GalleryCategorySerializer(BaseCatalogSerializer):
+    pass
