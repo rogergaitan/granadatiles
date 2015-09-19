@@ -9,6 +9,16 @@ jQuery(window).load(function () {
     jQuery(".preloader").delay(500).fadeOut("slow");
 })
 
+/* =================================
+===  SHRINK NAVBAR              ====
+=================================== */
+$(window).scroll(function () {
+    if ($(document).scrollTop() > 50) {
+        $('#gt-header').addClass('shrink');
+    } else {
+        $('#gt-header').removeClass('shrink');
+    }
+});
 
 /* =================================
 ===  WOW ANIMATION             ====
