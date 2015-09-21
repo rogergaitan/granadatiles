@@ -162,6 +162,25 @@
         margin-right: 15px;
     }
 }
+
+.mainNavigation{
+
+    margin-top:20px;
+
+    .options{
+        text-align:left;
+
+        img{
+            box-shadow: 0 8px 10px -7px @gray;
+        }
+
+        p{
+            font-family: @font-primary;
+            .font-configuration(@font-sm,@font-light);
+            color:@darkGray;
+        }
+    }
+}
 /************************************/
 
 
@@ -185,7 +204,19 @@
 
     &:hover{
         background-color:@olive;
-        border-color:@green
+        border-color:@green;
+    }
+}
+.btn-sky{
+    color:@darkBlue;
+    background-color:@lightBlue;
+    border-color:@lightBlue;
+    font-family:@font-secundary;
+    .font-configuration(@font-md,@font-light);
+
+    &:hover{
+        background-color:@geenBlue;
+        border-color:@lightBlue;
     }
 }
 
