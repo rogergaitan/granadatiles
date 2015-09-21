@@ -53,7 +53,7 @@ module.exports = function () {
         *  copied to your build directory eg: font awesome
         */
         fonts: [
-             staticFiles + 'lib/fontawesome/fonts/**/*.*',
+             staticFiles + 'lib/font-awesome/fonts/**/*.*',
              staticFiles + 'lib/bootstrap/fonts/**/*.*'
         ],
 

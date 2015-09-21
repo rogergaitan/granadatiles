@@ -2,6 +2,7 @@
 @import "fonts";
 @import "mixins";
 @import "base";
+@import "stylish";
 
 /********************Index page************************/
 
@@ -39,7 +40,8 @@
 /*******************************************************/
 
 /******Animations***************************/
-#gt-main-content{
+//TODO need to define this later
+/*#gt-main-content{
     transition:opacity linear 0.5s;
 }
 
@@ -53,19 +55,13 @@
 
 #gt-main-content.ng-enter-active{
     opacity:1;
-}
+}*/
 
 
 
 /*************/
 
 /***********Styles Site***************/
-.heading-sec{
-    font-family: @font-primary;
-    .font-configuration(@font-xxlll,@font-light);
-    color:@darkBlue;
-}
-
 .explore-collections{
     margin-bottom: 20px;
 
@@ -88,13 +84,14 @@
             color: @darkBlue;
         }
 
-        button{
+        a.btn{
             margin: 10px 0 0 20px;
         }
     }
 
     .explore-collection-thumbnail{
         padding-left: 0;
+        padding-right: 0;
 
         img{
             height: 270px;
@@ -126,6 +123,7 @@
     background-color:@white;
     margin: 5px -10px 25px -10px;
     padding: 30px 55px 15px 55px;
+    height: 200px;
     text-align: left;
 
     .fa-quotes-left{
@@ -157,6 +155,46 @@
     }
 }
 
+.press{
+
+    label{
+        float:left;
+        margin-right: 15px;
+    }
+}
+
+.mainNavigation{
+
+    margin-top:20px;
+
+    .options{
+        text-align:left;
+
+        img{
+            box-shadow: 0 8px 10px -7px @gray;
+        }
+
+        p{
+            font-family: @font-primary;
+            .font-configuration(@font-sm,@font-light);
+            color:@darkGray;
+        }
+    }
+}
+/************************************/
+
+
+/*********** Style Reusable *************/
+.heading-sec{
+    font-family: @font-primary;
+    .font-configuration(@font-xxlll,@font-light);
+    color:@darkBlue;
+}
+.slogan{
+    font-family: @font-primary;
+    .font-configuration(@font-xlll,@font-light);
+    color: @darkBlue;
+}
 .btn-green{
     color:@darkBlue;
     background-color:@green;
@@ -166,7 +204,19 @@
 
     &:hover{
         background-color:@olive;
-        border-color:@green
+        border-color:@green;
+    }
+}
+.btn-sky{
+    color:@darkBlue;
+    background-color:@lightBlue;
+    border-color:@lightBlue;
+    font-family:@font-secundary;
+    .font-configuration(@font-md,@font-light);
+
+    &:hover{
+        background-color:@geenBlue;
+        border-color:@lightBlue;
     }
 }
 

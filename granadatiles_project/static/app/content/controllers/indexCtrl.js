@@ -7,15 +7,19 @@
             'pageSettings',
             'areaSvc',
             'collectionsSvc',
+            'mainNavigationSvc',
             indexCtrl
         ]);
 
-    function indexCtrl(appSettings, pageSettings, areaSvc, collectionsSvc) {
+    function indexCtrl(appSettings, pageSettings, areaSvc, collectionsSvc, mainNavigationSvc) {
         var vm = this;
         collectionsSvc.getFeaturedCollections().then(function (response) {
             vm.collections = response.data;
         });
         vm.slogan = areaSvc.getArea(appSettings.areas.SLOGAN).description;
-        vm.explore = pageSettings.labels.explore;
+
+        vm.labels = pageSettings.labels;
+
+        vm.navigation = mainNavigationSvc.getmainNavigation();
     }
 }());

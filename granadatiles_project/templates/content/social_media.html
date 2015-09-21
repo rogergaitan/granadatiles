@@ -1,0 +1,11 @@
+{% for brand in social %}
+	<li class="social-{{brand.name|lower}}">
+		<a href="{{brand.url}}">
+			{% if brand.name == 'Pinterest' %}
+				<i class="fa fa-{{brand.name|lower}}-p"></i>
+			{% else %}
+				<i class="fa fa-{{brand.name|lower}}"></i>
+			{% endif %}
+		</a>
+    </li>
+{% endfor %}

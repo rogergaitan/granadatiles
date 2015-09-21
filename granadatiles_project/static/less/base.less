@@ -1,18 +1,26 @@
 ﻿body {
     font-family: @font-primary;
     background-color: @backgroundHomepage;
+    padding-top: 116px;
+
+    @media screen and (max-width:768px) {
+        padding-top: 67px;
+    }
 }
 
 /***************Styles for header***************/
-header {
+header.navbar-fixed-top {
     box-shadow: 0 -5px 40px black;
+    padding-top: 10px;
+    padding-bottom: 10px;
     background-color: @white;
-    padding-top: 15px;
+    transition: padding 0.6s ease;
 
     #gt-header-brand {
-        
+
         img {
             width: 131px;
+            transition: width 0.6s ease;
         }
     }
 
@@ -57,6 +65,7 @@ header {
         margin-top: 10px;
         padding-top: 8px;
         border-top: 1px solid @darkBlue;
+        transition: all 0.6s ease;
 
         .nav a {
             color: @darkBlue;
@@ -76,7 +85,7 @@ header {
             margin: 5px 5px auto 5px;
         }
 
-        .nav-justified > .dropdown .dropdown-menu{
+        .nav-justified > .dropdown .dropdown-menu {
             border-bottom: 6px solid @orange;
         }
 
@@ -99,6 +108,56 @@ header {
         .icon-bar {
             background-color: @darkGray;
         }
+    }
+}
+
+.bg-slider-footer {
+    background-color: @white;
+    opacity: 0.9;
+    position: relative;
+    bottom: 58px;
+
+    .row {
+        padding-top: 10px;
+    }
+
+    label {
+        font-family: @font-primary;
+        .font-configuration(@font-xs,@font-bold);
+        color: @darkGray;
+    }
+
+    span {
+        font-family: @font-primary;
+        .font-configuration(@font-xs,@font-light);
+        color: @darkGray;
+    }
+}
+
+header.shrink {
+    padding-top: 8px !important;
+    padding-bottom: 5px !important;
+
+    #gt-header-brand {
+
+        img {
+            width: 110px !important;
+        }
+    }
+
+    #gt-header-search {
+        input {
+            height: 25px !important;
+        }
+
+        .btn-sm {
+            font-size: 9px;
+        }
+    }
+
+    #gt-header-nav {
+        margin-top: 3px;
+        padding-top: 5px;
     }
 }
 

@@ -16,12 +16,23 @@ class SectionCoverDto(object):
     def __init__(self, section):
         
         if section.images.count() > 1:
-            self.image = section.images.get(pk=random.randrange(1, section.images.count() + 1)) #Obtain random image if many
+            self.image = self.get_random_cover(section)
         elif section.images.count() == 1:
             self.image = section.images.first()
         else:
             self.image = ''
-    
-        self.designer = self.image.designer if self.image else ''
-    
-        self.photographer = self.image.photographer if self.image else ''
+        
+        if self.image:
+            self.cover = self.image.image
+            self.designer = self.image.designer
+            self.photographer = self.image.photographer
+        else:
+            self.cover = ''
+            self.designer = ''
+            self.photographer = ''
+        
+    def get_random_cover(self, section):
+        ids = section.images.values_list('id')
+        choice = random.sample(list(ids), 1)
+        image = section.images.get(pk=choice[0][0])
+        return image

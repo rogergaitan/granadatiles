@@ -12,7 +12,7 @@ class SectionSerializer(BaseContentSerializer):
 
 
 class SectionCoverSerializer(serializers.Serializer):
-    image = serializers.CharField()
+    cover = serializers.CharField()
     designer = serializers.CharField()
     photographer = serializers.CharField()
 

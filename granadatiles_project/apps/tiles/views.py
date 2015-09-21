@@ -20,7 +20,6 @@ def collection_detail(request, slug):
 Theses are the views for the api
 """
 
-
 class CollectionViewSet(BaseViewSet):
 
     # /collections/

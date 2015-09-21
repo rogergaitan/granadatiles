@@ -1,19 +1,39 @@
 ﻿<div class="col-xs-12 text-center" ng-controller="indexCtrl as vm">
-    <div class="row">
+    <div class="row wow fadeInLeft animated" data-wow-offset="30" data-wow-duration="1.5s" data-wow-delay="0.15s">
         <div ng-bind-html="::vm.slogan" class="col-xs-12"></div>
     </div>
+    <div class="row mainNavigation">
+        <div class="col-md-3 options" ng-repeat="option in ::vm.navigation">
+            <img src="{{::option.image}}" alt="">
+            <h3 class="slogan">{{::option.title}}</h3>
+            <p>{{::option.description}}</p>
+            <a href="" class="btn btn-sky">{{::option.action}}</a>
+        </div>
+    </div>
     <hr>
-    <div class="row">
-        <h2 class="heading-sec">{{::vm.explore}}</h2>
+    <div class="row wow fadeInDown animated" data-wow-offset="30" data-wow-duration="1.5s" data-wow-delay="0.05s">
+        <h2 class="heading-sec">{{::vm.labels.explore}}</h2>
     </div>
     <div class="row explore-collections" ng-repeat="collection in ::vm.collections">
-        <div class="col-md-6 explore-collection-content">
-            <h3>{{::collection.title}}</h3>
-            <div class="description" ng-bind-html="::collection.description"></div>
-            <button class="btn btn-green text-uppercase">View collection</button>
+        <div ng-if="($index % 2 == 0)">
+            <div class="col-md-6 explore-collection-content wow fadeInLeft animated" data-wow-offset="30" data-wow-duration="1.5s" data-wow-delay="0.15s">
+                <h3>{{::collection.title}}</h3>
+                <div class="description" ng-bind-html="::collection.description"></div>
+                <a class="btn btn-green text-uppercase" ng-href="{{::collection.url}}">View collection</a>
+            </div>
+            <div class="col-md-6 explore-collection-thumbnail wow fadeInRight animated" data-wow-offset="30" data-wow-duration="1.5s" data-wow-delay="0.15s">
+                <img ng-src="{{::collection.image}}" alt="Collection Image" class="img-responsive" />
+            </div>
         </div>
-        <div class="col-md-6 explore-collection-thumbnail">
-            <img ng-src="{{::collection.image}}" alt="Collection Image" class="img-responsive"/>
+        <div ng-if="($index % 2 != 0)">
+            <div class="col-md-6 explore-collection-thumbnail wow fadeInLeft animated" data-wow-offset="30" data-wow-duration="1.5s" data-wow-delay="0.15s">
+                <img ng-src="{{::collection.image}}" alt="Collection Image" class="img-responsive" />
+            </div>
+             <div class="col-md-6 explore-collection-content wow fadeInRight animated" data-wow-offset="30" data-wow-duration="1.5s" data-wow-delay="0.15s">
+                <h3>{{::collection.title}}</h3>
+                <div class="description" ng-bind-html="::collection.description"></div>
+                <a class="btn btn-green text-uppercase" ng-href="{{::collection.url}}">View collection</a>
+            </div>
         </div>
     </div>
     <hr>
@@ -22,7 +42,7 @@
             <h2 class="heading-sec">{{::vm.intro}}</h2>
         </div>
         <div class="row">
-            <div class="col-md-4" ng-repeat="testimony in vm.testimonials">
+            <div class="col-md-4 wow fadeInRight animated" ng-repeat="testimony in vm.testimonials" data-wow-offset="30" data-wow-duration="1.1s" data-wow-delay="0.10s">
                 <div class="testimony-content">
                     <i class="fa-quotes-left">&#8220;</i>
                     <div class="quote" ng-bind-html="testimony.description"></div>

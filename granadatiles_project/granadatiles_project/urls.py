@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^summernote/', include('django_summernote.urls')),
     url(r'^api/', include('apps.tiles.urls', namespace='tiles')),
     url(r'^api/', include('apps.content.urls', namespace='content')),
+    url(r'^api/', include('apps.galleries.urls', namespace='galleries')),
 ]
 
 urlpatterns += i18n_patterns(

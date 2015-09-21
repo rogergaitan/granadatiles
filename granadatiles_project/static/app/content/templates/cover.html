@@ -2,24 +2,24 @@
     <div ng-if="vm.cover.image">
         <div class="row">
             <div class="col-xs-12">
-                <img ng-src="{{::vm.cover.image}}" alt="Granada Tiles Cover" class="img-responsive fade" img-preload id="gt-cover-image" />
+                <img ng-src="{{::vm.cover.image}}" alt="Granada Tiles Cover" class="img-responsive" id="gt-cover-image" />
             </div>
         </div>
-        <div class="row">
+        <div class="row bg-slider-footer">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
-                        <label><strong>Designer:</strong></label> <span>{{ ::vm.cover.designer }}</span> <br />
-                        <label><strong>Photographer:</strong></label> <span>{{ ::vm.cover.photographer }}</span>
+                        <label>Designer:</label> <span>{{ ::vm.cover.designer }}</span> <br />
+                        <label>Photographer:</label> <span>{{ ::vm.cover.photographer }}</span>
                     </div>
                     <div class="col-md-4">
-                        <lable>{{ ::vm.cover.featuredArticle.title }}</lable>
+                        <span>{{ ::vm.cover.featuredArticle.title }}</span>
                         <a href="">
                             <img ng-src="{{ ::vm.cover.featuredArticle.logo }}" alt="{{ ::vm.cover.featuredArticle.title }}">
                         </a>
                     </div>
-                    <div class="col-md-5">
-                        <label><strong>Also Featured in:</strong></label>
+                    <div class="col-md-5 press">
+                        <label>Also Featured in:</label>
                         <ul class="list-inline">
                             <li ng-repeat="article in vm.cover.articles">
                                 <a href="{{ ::article.url }}">
