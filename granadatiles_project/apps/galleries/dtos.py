@@ -1,4 +1,4 @@
-from core.dtos import BaseCatalogDto
+from core.dtos import BaseCatalogDto, BaseGalleryImageDto
 
 
 class GalleryDto(BaseCatalogDto):
@@ -9,7 +9,9 @@ class GalleryDto(BaseCatalogDto):
         self.categories = gallery.categories.values('name', 'id')
         
         
-class GalleryCategoryDto(BaseCatalogDto):
+class GalleryImageDto(BaseGalleryImageDto):
     
-    def __init__(self, gallery_category, language=None):
-        super().__init__(gallery_category, language)  
+    def __init__(self, image, language=None):
+       super().__init__(image, language)
+       self.designer = image.designer
+       self.photographer = image.photographer
