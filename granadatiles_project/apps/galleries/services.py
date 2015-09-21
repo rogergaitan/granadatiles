@@ -1,4 +1,4 @@
-from .dtos import GalleryDto, GalleryCategoryDto
+from .dtos import GalleryDto, GalleryImageDto
 from .models import Gallery, GalleryCategory
 
 class GalleryService(object):
@@ -8,7 +8,7 @@ class GalleryService(object):
         return galleriesDto
 
 class GalleryCategoryService(object):
-    def get_gallery_category(id, language=None):
-        gallery_category = GalleryCategory.objects.get(pk=id)
-        gallery_categoryDto = GalleryCategoryDto(gallery_category, language=language)
-        return gallery_categoryDto
+    def get_images(gallery_category_id, language=None):
+        images = GalleryCategory.objects.get(pk=gallery_category_id).images.all()
+        imagesDto = [GalleryImageDto(image, language) for image in images]
+        return imagesDto

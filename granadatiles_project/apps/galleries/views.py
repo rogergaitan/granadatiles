@@ -2,7 +2,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
 from core.views import BaseViewSet
-from .serializers import GallerySerializer, GalleryCategorySerializer
+from .serializers import GallerySerializer, GalleryCategorySerializer, GalleryImageSerializer
 from .services import GalleryService, GalleryCategoryService
 
 
@@ -22,8 +22,8 @@ class GalleryCategoryViewSet(BaseViewSet):
     
     @detail_route(methods=['get'])
     def images(self, request, pk=None):
-        gallery_category = GalleryCategoryService.get_gallery_category(
-                               id=pk,
+        images = GalleryCategoryService.get_images(
+                               gallery_category_id=pk,
                                language=self.get_language(request))
-        serializer = GalleryCategorySerializer(gallery_category)
+        serializer = GalleryImageSerializer(images, many=True)
         return Response(serializer.data)
