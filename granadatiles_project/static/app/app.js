@@ -8,6 +8,7 @@
 
             'app.core',
             'app.content',
-            'app.tiles'
+            'app.tiles',
+            'app.galleries'
         ]);
 }());
