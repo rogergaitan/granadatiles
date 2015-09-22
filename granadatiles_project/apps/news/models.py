@@ -7,6 +7,7 @@ from core.managers import BaseDateManager
 
 class Catalog(BaseCatalogModel):
     file = models.FileField(upload_to='Catalogs', verbose_name=_('File'))
+    image = models.ImageField(upload_to='Catalog', verbose_name=_('Image'))
 
     class Meta:
         verbose_name = _('Catalog')

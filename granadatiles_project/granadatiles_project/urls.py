@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^api/', include('apps.tiles.urls', namespace='tiles')),
     url(r'^api/', include('apps.content.urls', namespace='content')),
     url(r'^api/', include('apps.galleries.urls', namespace='galleries')),
+    url(r'^api/', include('apps.news.urls', namespace='news')),
 ]
 
 urlpatterns += i18n_patterns(
