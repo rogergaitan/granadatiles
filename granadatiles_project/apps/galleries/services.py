@@ -1,6 +1,7 @@
 from .dtos import GalleryDto, GalleryImageDto
 from .models import Gallery, GalleryCategory
 
+
 class GalleryService(object):
     def get_galleries(language=None):
         galleries = Gallery.objects.all()
