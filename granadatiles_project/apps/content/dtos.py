@@ -1,5 +1,5 @@
-import random
 from core.dtos import BaseContentDto
+from apps.news.dtos import ArticleDto
 
 
 class TestimonyDto(BaseContentDto):
@@ -11,28 +11,12 @@ class TestimonyDto(BaseContentDto):
         else:
             self.subtitle = testimony.get_subtitle()
             
+            
 class SectionCoverDto(object):
     
-    def __init__(self, section):
+    def __init__(self, section_image):
         
-        if section.images.count() > 1:
-            self.image = self.get_random_cover(section)
-        elif section.images.count() == 1:
-            self.image = section.images.first()
-        else:
-            self.image = ''
-        
-        if self.image:
-            self.cover = self.image.image
-            self.designer = self.image.designer
-            self.photographer = self.image.photographer
-        else:
-            self.cover = ''
-            self.designer = ''
-            self.photographer = ''
-        
-    def get_random_cover(self, section):
-        ids = section.images.values_list('id')
-        choice = random.sample(list(ids), 1)
-        image = section.images.get(pk=choice[0][0])
-        return image
+        self.image = section_image.image
+        self.designer = section_image.designer
+        self.photographer = section_image.photographer
+        self.featuredArticle = ArticleDto

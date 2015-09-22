@@ -43,7 +43,7 @@ class SectionViewSet(BaseViewSet):
 	
     @detail_route(methods=['get'])
     def cover(self, request, pk=None):
-        cover = SectionService.get_cover(id=pk)
+        cover = SectionService.get_cover(section_id=pk)
         serializer = SectionCoverSerializer(cover)
         return Response(serializer.data)
 	

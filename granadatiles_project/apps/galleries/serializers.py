@@ -9,6 +9,7 @@ class GallerySerializer(BaseCatalogSerializer):
 class GalleryCategorySerializer(BaseCatalogSerializer):
     pass
 
+
 class GalleryImageSerializer(BaseGallerieImageSerializer):
     designer = serializers.StringRelatedField()
     photographer = serializers.StringRelatedField()

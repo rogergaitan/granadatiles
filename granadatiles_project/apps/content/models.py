@@ -23,6 +23,8 @@ class SectionImage(BaseGallerieNavImageModel):
         verbose_name=_('Photographer'))
     section = models.ForeignKey(Section, related_name='images')
     articles = models.ManyToManyField(Article)
+    featured_article = models.ForeignKey(Article, related_name='featured_article',
+										    null=True, blank=True)
     tile = models.ForeignKey(
         Tile, related_name='pictures', verbose_name=_('Tile'))
 
