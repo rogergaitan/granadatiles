@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from core.serializers import BaseContentSerializer
+from apps.news.serializers import FeaturedArticleSerializer
 from .models import Social
 
 
@@ -12,10 +13,11 @@ class SectionSerializer(BaseContentSerializer):
 
 
 class SectionCoverSerializer(serializers.Serializer):
-    cover = serializers.CharField()
+    image = serializers.CharField()
     designer = serializers.CharField()
     photographer = serializers.CharField()
-
+    featuredArticle = FeaturedArticleSerializer()
+    
 
 class SocialSerializer(serializers.ModelSerializer):
     class Meta:
