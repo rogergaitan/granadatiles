@@ -6,11 +6,16 @@
         .controller('galleryListCtrl',['gallerySvc','sectionSvc',
                     galleryCtrl]);
 
-    function galleryCtrl(gallerySvc, sectionSvc) {
+    function galleryCtrl(gallerySvc) {
         var vm = this;
 
-        vm.galleries = gallerySvc.getGalleries();
-        vm.section = gallerySvc.getSection();
+        vm.otro = "hola";
+
+        gallerySvc.getGalleries().then(function (response){
+            vm.galleries = response.data;
+        })
+
+
 
     }
 
