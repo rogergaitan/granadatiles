@@ -1,6 +1,6 @@
 import random
-from .models import Testimony, Section
-from .dtos import TestimonyDto, SectionCoverDto
+from .models import Testimony, Section, FeaturedVideo
+from .dtos import TestimonyDto, SectionCoverDto, FeaturedVideoDto
 from apps.news.models import Article
 from apps.news.dtos import ArticleDto
 from core.dtos import BaseContentDto
@@ -39,4 +39,9 @@ class SectionService(object):
         sectioncoverDto.featuredArticle = featured_article
         return sectioncoverDto
 	
-    
+
+class FeaturedVideoService(object):
+    def get_videos(language=None):
+        videos = FeaturedVideo.objects.all()
+        videosDto = [FeaturedVideoDto(video, language=language) for video in videos]
+        return videosDto

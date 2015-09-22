@@ -2,8 +2,8 @@
 from rest_framework import viewsets, mixins
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
-from apps.content.serializers import TestimonySerializer, SectionSerializer, SocialSerializer, SectionCoverSerializer
-from apps.content.services import TestimonyService, SectionService
+from apps.content.serializers import TestimonySerializer, SectionSerializer, SocialSerializer, SectionCoverSerializer, FeaturedVideoSerializer
+from apps.content.services import TestimonyService, SectionService, FeaturedVideoService
 from .models import Social
 from core.views import BaseViewSet
 
@@ -51,3 +51,10 @@ class SectionViewSet(BaseViewSet):
 class SocialViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = Social.objects.exclude(url='')
     serializer_class = SocialSerializer
+    
+
+class FeaturedVideoViewSet(BaseViewSet):
+    def list(self, request):
+        videos = FeaturedVideoService.get_videos(language=self.get_language(request))
+        serializer = FeaturedVideoSerializer(videos, many=True)
+        return Response(serializer.data)
