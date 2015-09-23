@@ -45,7 +45,7 @@
                 photographer: 'Deindre Doherty',
                 featuredArticle: {
                     title:'Bath of the Month Oct 2013',
-                    logo:'/static/img/initial/news/House-Beautiful-Granada-Tile-cement.png',
+                    image:'/static/img/initial/news/House-Beautiful-Granada-Tile-cement.png',
                     url:''
                 },
                 articles:[
