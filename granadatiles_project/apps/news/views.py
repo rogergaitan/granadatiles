@@ -2,7 +2,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
 from core.views import BaseViewSet
-from .serializers import CatalogSerializer, ArticleYearSerializer
+from .serializers import CatalogSerializer, ArticleYearSerializer, ArticleSerializer
 from .services import CatalogService, ArticleService
 
 def news(request):
@@ -18,6 +18,12 @@ class CatalogViewSet(BaseViewSet):
    
    
 class ArticleViewSet(BaseViewSet):
+	
+    def list(self, request):
+        year = request.query_params.get('year', None)
+        articles = ArticleService.get_articles(year=year, language=self.get_language(request))
+        serializer = ArticleSerializer(articles, many=True)
+        return Response(serializer.data)
 	
     @list_route(methods=['get'])
     def years(self, request):

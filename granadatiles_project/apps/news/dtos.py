@@ -1,4 +1,4 @@
-﻿from core.dtos import BaseContentDto, BaseCatalogDto 
+﻿from core.dtos import BaseContentDto, BaseCatalogDto, BaseGalleryImageDto 
 
 
 class SectionFeaturedArticleDto(object):
@@ -20,6 +20,13 @@ class ArticleMagazineDto(object):
 class ArticleYearDto(object):
     def __init__(self, years_choice):
         self.year = years_choice
+        
+
+class ArticleDto(BaseGalleryImageDto):
+    def __init__(self, article, language=None):
+       super().__init__(article, language)
+       self.date = article.date
+       self.magazine = article.magazine.name
         
 
 class CatalogDto(BaseCatalogDto):

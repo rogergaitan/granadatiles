@@ -16,6 +16,11 @@ class ArticleMagazineSerializer(serializers.Serializer):
 
 class ArticleYearSerializer(serializers.Serializer):
     year = serializers.CharField()
+    
+    
+class ArticleSerializer(BaseGallerieImageSerializer):
+    date = serializers.CharField()
+    magazine = serializers.CharField()
 
 
 class CatalogSerializer(BaseCatalogSerializer):

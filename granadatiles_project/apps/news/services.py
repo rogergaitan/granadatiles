@@ -1,4 +1,4 @@
-from .dtos import CatalogDto, ArticleYearDto
+from .dtos import CatalogDto, ArticleYearDto, ArticleDto
 from .models import Catalog, Article
 
 
@@ -11,6 +11,16 @@ class CatalogService(object):
 	
 	
 class ArticleService(object):
+	
+    def get_articles(year, language=None):
+        if year is None:
+            articles = Article.objects.all()
+        else:
+            articles = Article.objects.filter(date__year=year)
+        articlesDto = [ArticleDto(article, language=language) for article in articles]
+        return articlesDto
+	
+	
     def get_years():
         years = Article.objects.dates('date', 'year').reverse()
         years_choice = [ArticleYearDto(year_choice.year) for year_choice in years]
