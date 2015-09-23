@@ -16,6 +16,11 @@ class ArticleMagazineDto(object):
         self.magazineName = article.magazine.name
         self.magazineLogo = article.magazine.logo
         
+        
+class ArticleYearDto(object):
+    def __init__(self, years_choice):
+        self.year = years_choice
+        
 
 class CatalogDto(BaseCatalogDto):
    def __init__(self, catalog, language=None):
