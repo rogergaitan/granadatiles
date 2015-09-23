@@ -9,6 +9,7 @@
             'app.core',
             'app.content',
             'app.tiles',
-            'app.galleries'
+            'app.galleries',
+            'app.news'
         ]);
 }());
