@@ -14,6 +14,7 @@ class TestimonyDto(BaseContentDto):
             
 class SectionCoverDto(object):
     featuredArticle = None
+    articles = None
 
     def __init__(self, section_image):
         self.image = section_image.image

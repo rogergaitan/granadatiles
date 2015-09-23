@@ -2,7 +2,7 @@
 from .models import Testimony, Section, FeaturedVideo
 from .dtos import TestimonyDto, SectionCoverDto, FeaturedVideoDto
 from apps.news.models import Article
-from apps.news.dtos import  SectionFeaturedArticleDto
+from apps.news.dtos import  SectionFeaturedArticleDto, ArticleMagazineDto
 from core.dtos import BaseContentDto
 
 
@@ -41,6 +41,8 @@ class SectionService(object):
             sectioncoverDto = SectionCoverDto(cover)
             if cover.featured_article:
                 sectioncoverDto.featuredArticle = SectionFeaturedArticleDto(cover.featured_article, language)
+            if cover.articles.count() > 0:
+                sectioncoverDto.articles = [ArticleMagazineDto(article) for article in cover.articles.all()]
             return sectioncoverDto
         else:
             return None

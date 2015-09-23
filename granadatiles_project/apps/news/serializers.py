@@ -5,6 +5,12 @@ class SectionFeaturedArticleSerializer(serializers.Serializer):
     title = serializers.CharField()
     image = serializers.ImageField()
     url = serializers.URLField()
+    
+
+class ArticleMagazineSerializer(serializers.Serializer):
+    url = serializers.URLField()
+    magazineName = serializers.CharField()
+    magazineLogo = serializers.CharField()
 
 
 class CatalogSerializer(BaseCatalogSerializer):
