@@ -1,8 +1,8 @@
-import random
+﻿import random
 from .models import Testimony, Section, FeaturedVideo
 from .dtos import TestimonyDto, SectionCoverDto, FeaturedVideoDto
 from apps.news.models import Article
-from apps.news.dtos import ArticleDto
+from apps.news.dtos import  SectionFeaturedArticleDto
 from core.dtos import BaseContentDto
 
 
@@ -26,18 +26,24 @@ class SectionService(object):
         return sectionDto
 	
     def get_random_cover(section):
-        ids = section.images.values_list('id')
-        choice = random.sample(list(ids), 1)
-        image = section.images.get(pk=choice[0][0])
-        return image
+        if section.images.all().count() > 0:
+            ids = section.images.values_list('id')
+            choice = random.sample(list(ids), 1)
+            image = section.images.get(pk=choice[0][0])
+            return image
+        else:
+            return None
 	
-    def get_cover(section_id):
+    def get_cover(section_id, language):
         section = Section.objects.get(pk=section_id)
         cover = SectionService.get_random_cover(section)
-        sectioncoverDto = SectionCoverDto(cover)
-        featured_article = ArticleDto(Article.objects.get(pk=cover.featured_article.id))
-        sectioncoverDto.featuredArticle = featured_article
-        return sectioncoverDto
+        if cover:
+            sectioncoverDto = SectionCoverDto(cover)
+            if cover.featured_article:
+                sectioncoverDto.featuredArticle = SectionFeaturedArticleDto(cover.featured_article, language)
+            return sectioncoverDto
+        else:
+            return None
 	
 
 class FeaturedVideoService(object):

@@ -1,8 +1,10 @@
-from rest_framework import serializers
+﻿from rest_framework import serializers
 from core.serializers import BaseGallerieImageSerializer, BaseCatalogSerializer
 
-class FeaturedArticleSerializer(BaseGallerieImageSerializer):
-	pass
+class SectionFeaturedArticleSerializer(serializers.Serializer):
+    title = serializers.CharField()
+    image = serializers.ImageField()
+    url = serializers.URLField()
 
 
 class CatalogSerializer(BaseCatalogSerializer):

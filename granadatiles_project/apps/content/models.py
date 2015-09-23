@@ -1,4 +1,4 @@
-from django.db import models
+﻿from django.db import models
 from apps.news.models import Article
 from apps.tiles.models import Tile
 from django.utils.translation import ugettext as _
@@ -14,15 +14,17 @@ class Section(BaseCatalogModel, BaseContentModel):
         ordering = ('name',)
 
 
-class SectionImage(BaseGallerieNavImageModel):
+class SectionImage(models.Model):
+    image = models.ImageField(upload_to="Covers")
     designer = models.ForeignKey(
         Designer, blank=True, null=True, related_name='covers',
-        verbose_name=_('Author'))
+        verbose_name=_('Designer'))
     photographer = models.ForeignKey(
         Photographer, blank=True, null=True, related_name='covers',
         verbose_name=_('Photographer'))
     section = models.ForeignKey(Section, related_name='images')
-    articles = models.ManyToManyField(Article)
+    articles = models.ManyToManyField(Article, 
+                                        blank=True, null=True)
     featured_article = models.ForeignKey(Article, related_name='featured_article',
 										    null=True, blank=True)
     tile = models.ForeignKey(

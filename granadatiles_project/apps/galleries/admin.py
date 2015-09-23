@@ -1,5 +1,5 @@
 ﻿from django.contrib import admin
-from apps.galleries.models import Gallery, GalleryImage, GalleryCategory
+from apps.galleries.models import Gallery, GalleryImage, GalleryCategory, Designer, Photographer
 from django_summernote.admin import SummernoteInlineModelAdmin
 
 
@@ -22,3 +22,11 @@ class GalleryCategoryAdmin(admin.ModelAdmin):
     inlines = [ImagesInline]
     list_filter = ['name']
     search_fields = ['name']
+
+@admin.register(Designer)
+class DesignerAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Photographer)
+class PhotographerAdmin(admin.ModelAdmin):
+    pass

@@ -6,6 +6,7 @@ from apps.content.serializers import TestimonySerializer, SectionSerializer, Soc
 from apps.content.services import TestimonyService, SectionService, FeaturedVideoService
 from .models import Social
 from core.views import BaseViewSet
+from rest_framework.status import HTTP_404_NOT_FOUND
 
 
 def index(request):
@@ -23,7 +24,7 @@ class TestimonyViewSet(BaseViewSet):
             language=self.get_language(request))
         serializer = TestimonySerializer(testimonials, many=True)
         return Response(serializer.data)
-	
+
 
 class SectionViewSet(BaseViewSet):
     def list(self, request):
@@ -31,7 +32,7 @@ class SectionViewSet(BaseViewSet):
 			language=self.get_language(request))
         serializer = SectionSerializer(sections, many=True)
         return Response(serializer.data)
-	
+
     
     def retrieve(self, request, pk=None):
         section = SectionService.get_section(
@@ -39,14 +40,15 @@ class SectionViewSet(BaseViewSet):
             language=self.get_language(request))
         serializer = SectionSerializer(section)
         return Response(serializer.data)
-	
-	
+
+
     @detail_route(methods=['get'])
     def cover(self, request, pk=None):
-        cover = SectionService.get_cover(section_id=pk)
+        cover = SectionService.get_cover(section_id=pk,
+                                         language=self.get_language(request))
         serializer = SectionCoverSerializer(cover)
-        return Response(serializer.data)
-	
+        return self.response(cover, serializer)
+
 
 class SocialViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = Social.objects.exclude(url='')

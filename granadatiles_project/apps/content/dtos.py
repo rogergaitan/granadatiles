@@ -1,5 +1,5 @@
-from core.dtos import BaseContentDto, BaseCatalogOrderDto
-from apps.news.dtos import ArticleDto
+﻿from core.dtos import BaseContentDto, BaseCatalogOrderDto
+from apps.news.dtos import SectionFeaturedArticleDto
 
 
 class TestimonyDto(BaseContentDto):
@@ -13,13 +13,13 @@ class TestimonyDto(BaseContentDto):
             
             
 class SectionCoverDto(object):
-    
+    featuredArticle = None
+
     def __init__(self, section_image):
-        
         self.image = section_image.image
         self.designer = section_image.designer
         self.photographer = section_image.photographer
-        self.featuredArticle = ArticleDto
+        
         
 class FeaturedVideoDto(BaseCatalogOrderDto):
 

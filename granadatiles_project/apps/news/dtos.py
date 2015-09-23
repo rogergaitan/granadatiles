@@ -1,8 +1,12 @@
-from core.dtos import BaseContentDto, BaseCatalogDto 
+﻿from core.dtos import BaseContentDto, BaseCatalogDto 
 
 
-class ArticleDto(BaseContentDto):
-    pass
+class SectionFeaturedArticleDto(object):
+    
+    def __init__(self, article, language = None):
+        self.title = article.get_title(language)
+        self.image = article.image
+        self.url = article.url
 
 
 class CatalogDto(BaseCatalogDto):
