@@ -4,9 +4,7 @@
 {% block title %} Granada Tiles - {% trans 'Gallery'%} {% endblock %}
 
 {% block content%}
-    <div class="row">
-        <ng-include src="'{{STATIC_URL}}app/galleries/templates/galleries_list.html'"></ng-include>
-    </div>
+    <ng-include src="'{{STATIC_URL}}app/galleries/templates/galleries_list.html'"></ng-include>
 {% endblock content%}
 
 {% block js%}

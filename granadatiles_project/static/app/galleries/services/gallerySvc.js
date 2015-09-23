@@ -47,19 +47,19 @@
                     image:'/static/img/initial/galleries/Installation-Commercial-Cement-Tile-Granada-Tile-Cement.jpg',
                     categories:[
                         {
-                            id:5,
+                            id:1,
                             name:'Restaurant'
                         },
                         {
-                            id:6,
+                            id:2,
                             name:'Café'
                         },
                         {
-                            id:7,
+                            id:3,
                             name:'Resort & Hotel'
                         },
                         {
-                            id:8,
+                            id:4,
                             name:'Retail Office'
                         }
                     ]
@@ -70,15 +70,15 @@
                     image:'/static/img/initial/galleries/Installation-Collection-Cement-Tile-Granada-Tile-Cement.jpg',
                     categories:[
                         {
-                            id:9,
+                            id:1,
                             name:'Echo Tile Collection'
                         },
                         {
-                            id:10,
+                            id:2,
                             name:'Minis Tile Collection'
                         },
                         {
-                            id:11,
+                            id:3,
                             name:'Mauresque Tile Collection'
                         }
                     ]
@@ -89,30 +89,30 @@
                     image:'/static/img/initial/galleries/Installation-United-States-Cement-Tile-Granada-Tile-Cement.jpg',
                     categories:[
                         {
-                            id:12,
+                            id:1,
                             name:'Chicago'
                         },
                         {
-                            id:13,
+                            id:2,
                             name:'Los Angeles'
                         }
                     ]
                 },
                 {
-                    id:4,
+                    id:5,
                     name:'Historic Tile Installations',
                     image:'/static/img/initial/galleries/Installation-Historic-Tiles-Cement-Tile-Granada-Tile-Cement.jpg',
                     categories:[
                         {
-                            id:14,
+                            id:1,
                             name:'America'
                         },
                         {
-                            id:15,
+                            id:2,
                             name:'Europa'
                         },
                         {
-                            id:16,
+                            id:3,
                             name:'Asia'
                         }
                     ]

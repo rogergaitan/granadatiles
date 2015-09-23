@@ -1,17 +1,31 @@
 ﻿<div class="col-md-12" ng-controller="galleryListCtrl as vm">
     <div class="row">
-        <h2>{{ ::vm.title }}</h2>
-        <p ng-bind-html="::vm.description"></p>
+        <div class="col-md-12">
+            <h2>{{ ::vm.title }}</h2>
+            <p ng-bind-html="::vm.description"></p>
+        </div>
     </div>
-
-    <div class="col-md-6" ng-repeat="gallery in ::vm.galleries">
-        <div class="gallery-content">
-            <img ng-src="{{ gallery.image }}" alt="" class="img-responsive">
-            <div>
-                <h2>{{ gallery.name }}</h2>
-                <ul class="list-inline">
-                    <li ng-repeat="category in gallery.categories"><a href="" data-toggle="modal" data-target="#myModal">{{ category.name }}</a></li>
-                </ul>
+    <div ng-repeat="gallery in ::vm.galleries" ng-if="$index % 2 == 0" class="row" >
+        <div class="col-md-6" ng-if="$index <= ::vm.galleries.length - 1">
+            <div class="gallery-content">
+                <img ng-src="{{ ::vm.galleries[$index].image }}" alt="" class="img-responsive">
+                <div>
+                    <h2>{{ ::vm.galleries[$index].name }}</h2>
+                    <ul class="list-inline">
+                        <li ng-repeat="category in ::vm.galleries[$index].categories"><a href="">{{ ::category.name }}</a></li>
+                    </ul>
+                 </div>
+            </div>
+        </div>
+        <div class="col-md-6" ng-if="$index + 1 <= ::vm.galleries.length - 1">
+            <div class="gallery-content">
+                <img ng-src="{{ ::vm.galleries[$index + 1].image }}" alt="" class="img-responsive">
+                <div>
+                    <h2>{{ ::vm.galleries[$index + 1].name }}</h2>
+                    <ul class="list-inline">
+                        <li ng-repeat="category in ::vm.galleries[$index + 1].categories"><a href="">{{ ::category.name }}</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
