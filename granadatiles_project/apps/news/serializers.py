@@ -1,5 +1,5 @@
 ﻿from rest_framework import serializers
-from core.serializers import BaseGallerieImageSerializer, BaseCatalogSerializer
+from core.serializers import BaseGalleryImageSerializer, BaseCatalogSerializer
 
 
 class SectionFeaturedArticleSerializer(serializers.Serializer):
@@ -18,7 +18,7 @@ class ArticleYearSerializer(serializers.Serializer):
     year = serializers.CharField()
     
     
-class ArticleSerializer(BaseGallerieImageSerializer):
+class ArticleSerializer(BaseGalleryImageSerializer):
     date = serializers.CharField()
     magazine = serializers.CharField()
 

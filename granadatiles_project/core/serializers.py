@@ -22,10 +22,10 @@ class BaseContentOrderModel(BaseContentSerializer):
     order = serializers.IntegerField()
 
 
-class BaseGallerieImageSerializer(BaseContentSerializer):
+class BaseGalleryImageSerializer(BaseContentSerializer):
     image = serializers.CharField(allow_blank=True)
 
 
-class BaseGallerieNavImageSerializer(BaseGallerieImageSerializer):
+class BaseGallerieNavImageSerializer(BaseGalleryImageSerializer):
     target = serializers.BooleanField()
     link = serializers.URLField(allow_blank=True)
