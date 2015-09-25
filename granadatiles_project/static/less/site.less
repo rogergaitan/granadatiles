@@ -197,7 +197,6 @@
             font-family: @font-secundary;
             .font-configuration(@font-xlll,@font-light);
         }
-
         ul a{
             border:@darkGray 1px solid;
             border-radius: 3px;
@@ -207,24 +206,110 @@
             padding: 5px;
 
             &:hover,&:focus,&:active{
-                color: @darkBlue;
                 background-color: @lightBlue;
                 border-color: @lightBlue;
+                color: @darkBlue;
                 text-decoration: none;
-
-
             }
         }
+    }
+}
+.filter{
+    margin-bottom: 20px;
+    button{
+        background-color: @lightBlue;
+        color: @darkBlue;
+        font-family: @font-secundary;
+        .font-configuration(@font-md,@font-light);
+    }
+    ul{
+        background-color: @lightBlue;
+        li a{
+            color: @darkBlue;
+            font-family: @font-secundary;
+            .font-configuration(@font-md,@font-light);
+            &:hover, &:focus {
+                background-color: transparent;
+                color: @white;
+                text-decoration: none;
+            }
+        }
+    }
+}
+.article-section {
+    padding-top: 20px;
+    h1{
+        margin: 0;
+    }
+    p{
+        margin-top: 20px;
+    }
+    ul{
+        padding: 0 20px 0 0;
+        border-bottom: @orange 4px SOLID;
+        li{
+            border-bottom: @lightGray 1px SOLID;
+            list-style: none;
+            margin-bottom: 10px;
+            a{
+                color: @darkGray;
+                font-family: @font-secundary;
+                .font-configuration(@font-sm,@font-light);
+                &:hover, &:focus{
+                    color: @orange;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
+}
+.article-content{
+    background-color: @lightSteelBlue;
+    padding: 15px;
+    margin-bottom: 20px;
+    img{
+        margin: auto;
+        width: 100%;
+        -webkit-box-shadow: 6px 6px 5px -2px rgba(89,89,89,0.5);
+        -moz-box-shadow: 6px 6px 5px -2px rgba(89,89,89,0.5);
+        box-shadow: 6px 6px 5px -2px rgba(89,89,89,0.5);
+    }
+    h2{
+        color: @darkBlue;
+        font-family: @font-secundary;
+        .font-configuration(@font-xlll,@font-light);
+        margin: 0;
+    }
+    h3{
+        color: @darkGray;
+        font-family: @font-primary;
+        .font-configuration(@font-sm,@font-bold);
+        margin: 0;
+    }
+    p, label{
+        color: @darkGray;
+        font-family: @font-primary;
+        .font-configuration(@font-sm,@font-light)
     }
 }
 /************************************/
 
 
 /*********** Style Reusable *************/
-.heading-sec{
+.heading-sec-home {
     font-family: @font-primary;
     .font-configuration(@font-xxlll,@font-light);
     color:@darkBlue;
+}
+.heading-sec {
+    font-family: @font-primary;
+    .font-configuration(@font-xxll,@font-light);
+    color:@darkBlue;
+}
+.text-section{
+    font-family: @font-primary;
+    .font-configuration(@font-sm,@font-light);
 }
 .slogan{
     font-family: @font-primary;
@@ -258,5 +343,11 @@
 
 hr{
     border-top: 1px solid @lightSylver;
+}
+.breadcums{
+    color: @darkGray;
+    font-family: @font-primary;
+    .font-configuration(@font-xxxs,@font-light);
+    font-style: @italic;
 }
 /************************************/
