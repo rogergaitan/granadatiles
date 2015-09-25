@@ -238,15 +238,10 @@
 }
 .article-section {
     padding-top: 20px;
-    h1{
-        margin: 0;
-    }
-    p{
-        margin-top: 20px;
-    }
     ul{
-        padding: 0 20px 0 0;
         border-bottom: @orange 4px SOLID;
+        padding: 0 20px 0 0;
+        margin-top: 20px;
         li{
             border-bottom: @lightGray 1px SOLID;
             list-style: none;
@@ -313,6 +308,7 @@
     font-family: @font-primary;
     .font-configuration(@font-sm,@font-light);
     margin: 20px 0;
+    text-align: justify;
 }
 .slogan{
     font-family: @font-primary;
@@ -352,5 +348,8 @@ hr{
     font-family: @font-primary;
     .font-configuration(@font-xxxs,@font-light);
     font-style: @italic;
+    &:hover,&:focus{
+        color:@orange;
+    }
 }
 /************************************/

@@ -10,15 +10,15 @@
         var vm = this;
 
 
-        vm.saludo = 'hello';
+        vm.breadcums = 'My Portafolio »';
 
         vm.articles = articleSvc.getArticles();
 
         vm.title = 'Tile Editorials in Magazines';
 
-        vm.description = 'Magazines love Granada Tile. Click the covers to ﬁnd out what magazine editors are saying about\ ' +
+        vm.description = '<p>Magazines love Granada Tile. Click the covers to ﬁnd out what magazine editors are saying about\ ' +
                          'our latest tile news. See our tiles in magazines’ new product roundups and in articles featuring\ ' +
-                         'our tiles in residential and commercial projects.';
+                         'our tiles in residential and commercial projects.</p>';
 
     }
 
