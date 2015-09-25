@@ -24,7 +24,8 @@
     "Chart.js": "~1.0.2",
     "font-awesome": "~4.4.0",
     "wow": "wowjs#~1.1.2",
-    "yamm3": "~1.1.0"
+    "yamm3": "~1.1.0",
+    "angular-bootstrap": "~0.13.4"
   },
   "overrides": {
     "bootstrap": {
