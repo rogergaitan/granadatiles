@@ -1,29 +1,30 @@
 ﻿<div class="col-md-12" ng-controller="galleryListCtrl as vm">
     <div class="row">
         <div class="col-md-12">
-            <h2>{{ ::vm.title }}</h2>
-            <p ng-bind-html="::vm.description"></p>
+            <h2 class="heading-sec">{{ ::vm.title }}</h2>
+            <a class="breadcums" href="#"><u>{{ ::vm.breadcums }}</u></a>
+            <div class="text-section" ng-bind-html="::vm.description"></div>
         </div>
     </div>
     <div ng-repeat="gallery in ::vm.galleries" ng-if="$index % 2 == 0" class="row" >
-        <div class="col-md-6" ng-if="$index <= ::vm.galleries.length - 1">
+        <div class="col-md-6" ng-if="$index <= vm.galleries.length - 1">
             <div class="gallery-content">
-                <img ng-src="{{ ::vm.galleries[$index].image }}" alt="" class="img-responsive">
+                <img ng-src="{{ vm.galleries[$index].image }}" alt="" class="img-responsive">
                 <div>
-                    <h2>{{ ::vm.galleries[$index].name }}</h2>
+                    <h2>{{ vm.galleries[$index].name }}</h2>
                     <ul class="list-inline">
-                        <li ng-repeat="category in ::vm.galleries[$index].categories"><a href="">{{ ::category.name }}</a></li>
+                        <li ng-repeat="category in vm.galleries[$index].categories"><a href="">{{ category.name }}</a></li>
                     </ul>
                  </div>
             </div>
         </div>
-        <div class="col-md-6" ng-if="$index + 1 <= ::vm.galleries.length - 1">
+        <div class="col-md-6" ng-if="$index + 1 <= vm.galleries.length - 1">
             <div class="gallery-content">
-                <img ng-src="{{ ::vm.galleries[$index + 1].image }}" alt="" class="img-responsive">
+                <img ng-src="{{ vm.galleries[$index + 1].image }}" alt="" class="img-responsive">
                 <div>
-                    <h2>{{ ::vm.galleries[$index + 1].name }}</h2>
+                    <h2>{{ vm.galleries[$index + 1].name }}</h2>
                     <ul class="list-inline">
-                        <li ng-repeat="category in ::vm.galleries[$index + 1].categories"><a href="">{{ ::category.name }}</a></li>
+                        <li ng-repeat="category in vm.galleries[$index + 1].categories"><a href="">{{ category.name }}</a></li>
                     </ul>
                 </div>
             </div>
