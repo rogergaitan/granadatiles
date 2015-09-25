@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.serializers import BaseCatalogSerializer, BaseGallerieImageSerializer
+from core.serializers import BaseCatalogSerializer, BaseGalleryImageSerializer
 
 class GallerySerializer(BaseCatalogSerializer):
     image = serializers.CharField()
@@ -10,6 +10,6 @@ class GalleryCategorySerializer(BaseCatalogSerializer):
     pass
 
 
-class GalleryImageSerializer(BaseGallerieImageSerializer):
+class GalleryImageSerializer(BaseGalleryImageSerializer):
     designer = serializers.StringRelatedField()
     photographer = serializers.StringRelatedField()
