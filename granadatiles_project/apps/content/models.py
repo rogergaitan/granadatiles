@@ -1,4 +1,4 @@
-﻿from django.db import models
+from django.db import models
 from apps.news.models import Article
 from apps.tiles.models import Tile
 from django.utils.translation import ugettext as _
