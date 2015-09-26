@@ -1,4 +1,4 @@
-﻿import random
+import random
 from .models import Testimony, Section, FeaturedVideo
 from .dtos import TestimonyDto, SectionCoverDto, FeaturedVideoDto
 from apps.news.models import Article
@@ -13,18 +13,18 @@ class TestimonyService(object):
                            for testimony in testimonials]
         return testimonialsDto
 
+
 class SectionService(object):
     def get_sections(language=None):
         sections = Section.objects.all()
-        sectionsDto = [BaseContentDto(section, language=language)
-			        for section in sections]
+        sectionsDto = [BaseContentDto(section, language=language) for section in sections]
         return sectionsDto
-	
+
     def get_section(id, language=None):
         section = Section.objects.get(pk=id)
         sectionDto = BaseContentDto(section, language=language)
         return sectionDto
-	
+
     def get_random_cover(section):
         if section.images.all().count() > 0:
             ids = section.images.values_list('id')
@@ -33,7 +33,7 @@ class SectionService(object):
             return image
         else:
             return None
-	
+
     def get_cover(section_id, language):
         section = Section.objects.get(pk=section_id)
         cover = SectionService.get_random_cover(section)
@@ -46,7 +46,7 @@ class SectionService(object):
             return sectioncoverDto
         else:
             return None
-	
+
 
 class FeaturedVideoService(object):
     def get_videos(language=None):

@@ -1,4 +1,4 @@
-﻿from rest_framework import serializers
+from rest_framework import serializers
 from core.serializers import BaseContentSerializer, BaseCatalogOrderSerializer
 from apps.news.serializers import SectionFeaturedArticleSerializer, ArticleMagazineSerializer
 from .models import Social
@@ -9,7 +9,7 @@ class TestimonySerializer(BaseContentSerializer):
 
 
 class SectionSerializer(BaseContentSerializer):
-	pass
+    pass
 
 
 class SectionCoverSerializer(serializers.Serializer):
