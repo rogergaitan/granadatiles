@@ -15,13 +15,13 @@
             <div ng-repeat="video in vm.videos" ng-if="$index % 2 == 0" class="row" >
                 <div class="col-md-6" ng-if="$index <= vm.videos.length - 1">
                     <div class="video-container">
-                        <iframe ng-src="{{ vm.videos[$index].video }}" frameborder="0" allowfullscreen></iframe>
+                        <iframe src="{{ vm.videos[$index].video | trustAsResourceUrl }}" frameborder="0" allowfullscreen></iframe>
                         <h2>{{ vm.videos[$index].name }}</h2>
                     </div>
                 </div>
                 <div class="col-md-6" ng-if="$index <= vm.videos.length - 1">
                     <div class="video-container">
-                        <iframe ng-src="{{ vm.videos[$index + 1].video }}" frameborder="0" allowfullscreen></iframe>
+                        <iframe ng-src="{{ vm.videos[$index + 1].video | trustAsResourceUrl }}" frameborder="0" allowfullscreen></iframe>
                         <h2>{{ vm.videos[$index + 1].name }}</h2>
                     </div>
                 </div>
@@ -29,3 +29,4 @@
         </div>
     </div>
 </div>
+src
