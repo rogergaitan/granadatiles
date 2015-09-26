@@ -10,7 +10,7 @@
 
         vm.title = 'Tile Videos - How to Tile Videos from Granada Tile ';
 
-        vm.breadcums = 'News / Press »';
+        vm.breadcums = 'News / Press';
 
 
         vm.description = '<p>Ever wondered how cement tiles are made? Take a peak behind the scenes at this remarkable\ ' +
