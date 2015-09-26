@@ -16,9 +16,9 @@ class BaseCatalogModel(models.Model):
                                null=True)
 
     def get_name(self, language):
-        if language == 'es' and self.title_es is not None and self.title_es:
-            return self.title_es
-        return self.title
+        if language == 'es' and self.name_es is not None and self.name_es:
+            return self.name_es
+        return self.name
 
     def __str__(self):
         return self.name
