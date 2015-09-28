@@ -19,7 +19,6 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     url(r'^$', index, name='home'),
     url(_(r'^about-us/$'), about_us, name='about_us'),
-    url(_(r'^videos/$'), videos, name='videos'),
     url(_(r'^collections/'),
         include('apps.tiles.serve_urls', namespace='sr-collections')),
     url(_(r'^news/'),
