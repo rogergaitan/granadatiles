@@ -33,4 +33,4 @@ class CatalogDto(BaseCatalogDto):
    def __init__(self, catalog, language=None):
        super().__init__(catalog, language)
        self.file = catalog.file
-       self.image = catalog.image
+       self.image = catalog.image.url
