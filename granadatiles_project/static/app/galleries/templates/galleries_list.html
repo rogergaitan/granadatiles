@@ -7,7 +7,7 @@
         </div>
     </div>
     <div ng-repeat="gallery in ::vm.galleries" ng-if="$index % 2 == 0" class="row" >
-        <div class="col-md-6" ng-if="$index <= vm.galleries.length - 1">
+        <div class="col-md-6 gallery" ng-if="$index <= vm.galleries.length - 1">
             <div class="gallery-container">
                 <img ng-src="{{ vm.galleries[$index].image }}" alt="" class="img-responsive">
                 <div>
@@ -18,7 +18,7 @@
                  </div>
             </div>
         </div>
-        <div class="col-md-6" ng-if="$index + 1 <= vm.galleries.length - 1">
+        <div class="col-md-6 gallery" ng-if="$index + 1 <= vm.galleries.length - 1">
             <div class="gallery-container">
                 <img ng-src="{{ vm.galleries[$index + 1].image }}" alt="" class="img-responsive">
                 <div>
