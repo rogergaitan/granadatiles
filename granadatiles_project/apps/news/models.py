@@ -14,7 +14,7 @@ class Catalog(BaseCatalogModel):
         verbose_name_plural = _('Catalogs')
 
     def __str__(self):
-        return self.title
+        return self.name
 
 
 class Magazine(models.Model):
