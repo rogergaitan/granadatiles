@@ -9,10 +9,13 @@
     function catalogListCtrl(catalogSvc) {
         var vm = this;
 
+        catalogSvc.getCatalogs().then(function (response){
+            vm.catalogs = response.data;
+        })
 
         vm.breadcrumds = 'News / Press';
 
-        vm.catalogs = catalogSvc.getCatalogs();
+        //vm.catalogs = catalogSvc.getCatalogs();
 
         vm.title = 'Tile Design Inspiration to Help You Design Your Project';
 

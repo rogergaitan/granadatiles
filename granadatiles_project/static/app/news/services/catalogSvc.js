@@ -12,7 +12,8 @@
         };
 
         function getCatalogs() {
-            return catalogsMock();
+            //return catalogsMock();
+            return $http.get(appSettings.serverPath + 'catalogs');
         }
 
         function catalogsMock(){
