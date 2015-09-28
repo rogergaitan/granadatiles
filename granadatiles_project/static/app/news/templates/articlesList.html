@@ -1,6 +1,6 @@
 ﻿<div class="col-md-12" ng-controller="articlesListCtrl as vm">
-    <div class="row article-section">
-        <aside class="col-md-3">
+    <div class="row section-container">
+        <aside class="col-md-3 menu-section">
             <ul>
                 <li><a href="">Magazines</a></li>
                 <li><a href="">Catalogs / Inspiration Books</a></li>
@@ -31,7 +31,7 @@
         </div>
     </div>
     <div ng-repeat="article in ::vm.articles" ng-if="$index % 2 == 0" class="row" >
-        <div class="col-md-6">
+        <div class="col-md-6" ng-if="$index <= vm.articles.length - 1">
             <a href="#">
                 <div class="article-container">
                     <div class="row">
@@ -48,7 +48,7 @@
                 </div>
             </a>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" ng-if="$index <= vm.articles.length - 1">
             <a href="#">
                 <div class="article-container">
                     <div class="row">

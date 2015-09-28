@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %} Granada Tiles - {% trans 'Inspirations Books'%} {% endblock %}
+{% block title %} Granada Tiles - {% trans 'Catalogs / Inspirations Books'%} {% endblock %}
 
 {% block content%}
-    <ng-include src="'{{STATIC_URL}}app/news/templates/booksList.html'"></ng-include>
+    <ng-include src="'{{STATIC_URL}}app/news/templates/catalogsList.html'"></ng-include>
 {% endblock content%}
 
 {% block js%}
@@ -20,7 +20,7 @@
                 sectionId: 7,
                 language: '{{LANGUAGE_CODE}}',
                 labels: {
-                    news: '{% trans 'Inspirations Books'%}'
+                    news: '{% trans 'Catalogs / Inspirations Books'%}'
                 }
             }
         }

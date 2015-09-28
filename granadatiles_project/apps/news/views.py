@@ -9,8 +9,8 @@ def news(request):
     return render(request, 'news/article_list.html')
 
 
-def books(request):
-    return render(request, 'news/books_list.html')
+def catalogs(request):
+    return render(request, 'news/catalogs_list.html')
 
 
 class CatalogViewSet(BaseViewSet):

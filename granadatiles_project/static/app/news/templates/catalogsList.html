@@ -1,0 +1,82 @@
+<div class="col-md-12" ng-controller="catalogListCtrl as vm">
+    <div class="row section-container">
+        <aside class="col-md-3 menu-section">
+            <ul>
+                <li><a href="">Magazines</a></li>
+                <li><a href="">Catalogs / Inspiration Books</a></li>
+                <li><a href="">Cement Tile Blog</a></li>
+                <li><a href="">Videos</a></li>
+            </ul>
+        </aside>
+        <div class="col-md-9">
+            <h1 class="heading-sec">{{ ::vm.title }}</h1>
+            <a href="#" class="breadcrumds"><u>{{ ::vm.breadcrumds }}</u> <i class="fa fa-angle-double-right"></i></a>
+            <div ng-bind-html="vm.description" class="text-section"></div>
+        </div>
+    </div>
+    <div ng-repeat="catalog in vm.catalogs" ng-if="$index % 3 == 0" class="row" >
+        <div class="col-md-4 catalog" ng-if="$index <= vm.catalogs.length - 1">
+            <a href="#">
+                <img ng-src="{{ ::vm.catalogs[$index].image }}" alt="" class="thumbnail img-responsive catalog-img">
+            </a>
+            <div class="catalog-container">
+                <div>
+                    <h2>{{ ::vm.catalogs[$index].name }}</h2>
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#"><i class="fa fa-eye"></i><br />VIEW</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-download"></i><br />DOWNLOAD</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-share-alt"></i><br />SHARED</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 catalog" ng-if="$index <= vm.catalogs.length - 1">
+            <a href="#">
+                <img ng-src="{{ ::vm.catalogs[$index + 1].image }}" alt="" class="thumbnail img-responsive catalog-img">
+            </a>
+            <div class="catalog-container">
+                <div>
+                    <h2>{{ ::vm.catalogs[$index + 1].name }}</h2>
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#"><i class="fa fa-eye"></i><br />VIEW</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-download"></i><br />DOWNLOAD</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-share-alt"></i><br />SHARED</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 catalog" ng-if="$index <= vm.catalogs.length - 1">
+            <a href="#">
+                <img ng-src="{{ ::vm.catalogs[$index + 2].image }}" alt="" class="thumbnail img-responsive catalog-img">
+            </a>
+            <div class="catalog-container">
+                <div>
+                    <h2>{{ ::vm.catalogs[$index + 2].name }}</h2>
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#"><i class="fa fa-eye"></i><br />VIEW</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-download"></i><br />DOWNLOAD</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-share-alt"></i><br />SHARED</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
