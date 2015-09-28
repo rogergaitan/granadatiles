@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %} Granada Tiles - {% trans 'Videos'%} {% endblock %}
+
+{% block content%}
+    <ng-include src="'{{STATIC_URL}}app/content/templates/videos.html'"></ng-include>
+{% endblock content%}
+
+{% block js%}
+<script>
+    (function () {
+        "use strict";
+        angular
+        .module("app.core")
+        .factory("pageSettings", ['appSettings',pageSettings]);
+
+        function pageSettings(appSettings) {
+            return{
+                sectionId: 3,
+                language: '{{LANGUAGE_CODE}}',
+                labels: {
+                    aboutUs: '{% trans 'Videos'%}'
+                }
+            }
+        };
+    })();
+</script>
+{% endblock js%}

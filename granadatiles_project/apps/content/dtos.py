@@ -1,4 +1,4 @@
-﻿from core.dtos import BaseContentDto, BaseCatalogOrderDto
+from core.dtos import BaseContentDto, BaseCatalogOrderDto
 from apps.news.dtos import SectionFeaturedArticleDto
 
 

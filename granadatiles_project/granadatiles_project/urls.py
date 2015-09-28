@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from apps.content.views import index, about_us
+from apps.content.views import index, about_us, videos
 from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import ugettext_lazy as _
 

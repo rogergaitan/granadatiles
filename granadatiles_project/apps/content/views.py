@@ -17,6 +17,10 @@ def about_us(request):
     return render(request, 'content/about_us.html')
 
 
+def videos(request):
+    return render(request, 'content/featured_videos.html')
+
+
 class TestimonyViewSet(BaseViewSet):
     # /testimonials
     def list(self, request):
@@ -29,7 +33,7 @@ class TestimonyViewSet(BaseViewSet):
 class SectionViewSet(BaseViewSet):
     def list(self, request):
         sections = SectionService.get_sections(
-			language=self.get_language(request))
+            language=self.get_language(request))
         serializer = SectionSerializer(sections, many=True)
         return Response(serializer.data)
 

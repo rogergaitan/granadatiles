@@ -1,7 +1,7 @@
 ﻿<div class="col-md-12" ng-controller="articlesListCtrl as vm">
-    <div class="row article-section">
-        <aside class="col-md-3">
-            <ul>
+    <div class="row section-container">
+        <aside class="col-md-3 ">
+            <ul class="menu-section">
                 <li><a href="">Magazines</a></li>
                 <li><a href="">Catalogs / Inspiration Books</a></li>
                 <li><a href="">Cement Tile Blog</a></li>
@@ -10,7 +10,7 @@
         </aside>
         <div class="col-md-9">
             <h1 class="heading-sec">{{ ::vm.title }}</h1>
-            <a href="#" class="breadcums"><u>{{ vm.breadcums }}</u></a>
+            <a href="#" class="breadcrumds"><u>{{ vm.breadcums }}</u></a>
             <div class="text-section" ng-bind-html="::vm.description"></div>
         </div>
     </div>
@@ -31,9 +31,9 @@
         </div>
     </div>
     <div ng-repeat="article in ::vm.articles" ng-if="$index % 2 == 0" class="row" >
-        <div class="col-md-6">
+        <div class="col-md-6 article" ng-if="$index <= vm.articles.length - 1">
             <a href="#">
-                <div class="article-content">
+                <div class="article-container">
                     <div class="row">
                         <div class="col-md-4">
                             <img ng-src="{{ ::vm.articles[$index].image }}" alt="" class="thumbnail img-responsive">
@@ -48,9 +48,9 @@
                 </div>
             </a>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 article" ng-if="$index <= vm.articles.length - 1">
             <a href="#">
-                <div class="article-content">
+                <div class="article-container">
                     <div class="row">
                         <div class="col-md-4">
                             <img ng-src="{{ ::vm.articles[$index + 1].image }}" alt="" class="thumbnail img-responsive">
