@@ -13,7 +13,7 @@
 
         function getCatalogs() {
             //return catalogsMock();
-            return $http.get(appSettings.serverPath + 'catalogs');
+            return $http.get(appSettings.serverPath + 'news/catalogs');
         }
 
         function catalogsMock(){
