@@ -9,11 +9,11 @@
     function galleryCtrl(gallerySvc) {
         var vm = this;
 
-        vm.galleries = gallerySvc.getGalleries();
+        //vm.galleries = gallerySvc.getGalleries();
 
         vm.title = 'Photos of Cement & Concrete Tile Installations';
 
-        vm.breadcums = 'Gallery »';
+        vm.breadcums = 'Gallery';
 
         vm.description = '<p>Granada Tile is pleased to share photos of some of the cement tile installations using our ﬂagship\ ' +
             'Echo Collection tiles. Our hand made cement and concrete tiles have been used in private residences and commercial\ ' +
@@ -26,14 +26,9 @@
             'concrete tiles? (And when you do, please send pictures so we can add them here!)</p>';
 
 
-        /*gallerySvc.getGalleries().then(function (response){
+        gallerySvc.getGalleries().then(function (response){
             vm.galleries = response.data;
-        })*/
-
-
-
-
-
+        });
     }
 
 }());

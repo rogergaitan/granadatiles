@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 catalog" ng-if="$index <= vm.catalogs.length - 1">
+        <div class="col-md-4 catalog" ng-if="$index + 1 <= vm.catalogs.length - 1">
             <a href="#">
                 <img ng-src="{{ ::vm.catalogs[$index + 1].image }}" alt="" class="thumbnail img-responsive catalog-img">
             </a>
@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 catalog" ng-if="$index <= vm.catalogs.length - 1">
+        <div class="col-md-4 catalog" ng-if="$index + 2 <= vm.catalogs.length - 1">
             <a href="#">
                 <img ng-src="{{ ::vm.catalogs[$index + 2].image }}" alt="" class="thumbnail img-responsive catalog-img">
             </a>

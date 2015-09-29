@@ -12,8 +12,8 @@
         };
 
         function getGalleries() {
-            return galleriesMock();
-            //return $http.get(appSettings.serverPath + 'galleries');
+            //return galleriesMock();
+            return $http.get(appSettings.serverPath + 'galleries');
         }
 
         function galleriesMock(){
