@@ -68,30 +68,30 @@ def addInitialData(apps, schema_editor):
 			    magazine_id = 1,
 			    date = timezone.now()
 		)
-	
-    section_image.articles.create(
-		    title = '',
-		    description = '',
-		    url = 'http://www.coastalliving.com/',
-		    magazine_id = 2,
-		    date = timezone.now()
-	)
-    
-    section_image.articles.create(
-		    title = '',
-		    description = '',
-		    url = 'http://www.revistaad.es/',
-		    magazine_id = 3,
-		    date = timezone.now()
-	)
 		
-    section_image.articles.create(
-		    title = '',
-		    description = '',
-		    url = 'http://www.elledecor.com/',
-		    magazine_id = 4,
-		    date = timezone.now()
-	)
+	    section_image.articles.create(
+			    title = '',
+			    description = '',
+			    url = 'http://www.coastalliving.com/',
+			    magazine_id = 2,
+			    date = timezone.now()
+		)
+	    
+	    section_image.articles.create(
+			    title = '',
+			    description = '',
+			    url = 'http://www.revistaad.es/',
+			    magazine_id = 3,
+			    date = timezone.now()
+		)
+			
+	    section_image.articles.create(
+			    title = '',
+			    description = '',
+			    url = 'http://www.elledecor.com/',
+			    magazine_id = 4,
+			    date = timezone.now()
+		)
 	
 
 class Migration(migrations.Migration):
