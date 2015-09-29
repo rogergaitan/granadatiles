@@ -9,7 +9,7 @@
     function galleryCtrl(gallerySvc) {
         var vm = this;
 
-        vm.galleries = gallerySvc.getGalleries();
+        //vm.galleries = gallerySvc.getGalleries();
 
         vm.title = 'Photos of Cement & Concrete Tile Installations';
 
@@ -26,9 +26,11 @@
             'concrete tiles? (And when you do, please send pictures so we can add them here!)</p>';
 
 
-        /*gallerySvc.getGalleries().then(function (response){
+        gallerySvc.getGalleries().then(function (response){
             vm.galleries = response.data;
-        })*/
+        })
+
+        console.log(vm.galleries);
 
 
 
