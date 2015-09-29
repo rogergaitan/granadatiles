@@ -10,7 +10,7 @@
         </aside>
         <div class="col-md-9">
             <h1 class="heading-sec">{{ ::vm.title }}</h1>
-            <a href="#" class="breadcrumds"><u>{{ vm.breadcums }}</u></a>
+            <a href="#" class="breadcrumds"><u>{{ vm.breadcums }}</u> <i class="fa fa-angle-double-right"></i></a>
             <div class="text-section" ng-bind-html="::vm.description"></div>
         </div>
     </div>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-md-8">
                             <h2>{{ ::vm.articles[$index].title }}</h2>
-                            <h3>{{ ::vm.articles[$index].name }}</h3>
+                            <h3>{{ ::vm.articles[$index].magazine }}</h3>
                             <p ng-bind-html="::vm.articles[$index].description"></p>
                             <label>Date:</label><label>{{ ::vm.articles[$index].date }}</label>
                         </div>
@@ -48,7 +48,7 @@
                 </div>
             </a>
         </div>
-        <div class="col-md-6 article" ng-if="$index <= vm.articles.length - 1">
+        <div class="col-md-6 article" ng-if="$index + 1 <= vm.articles.length - 1">
             <a href="#">
                 <div class="article-container">
                     <div class="row">
@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-md-8">
                             <h2>{{ ::vm.articles[$index + 1].title }}</h2>
-                            <h3>{{ ::vm.articles[$index + 1].name }}</h3>
+                            <h3>{{ ::vm.articles[$index + 1].magazine }}</h3>
                             <p ng-bind-html="::vm.articles[$index + 1].description"></p>
                             <label>Date:</label><label>{{ ::vm.articles[$index + 1].date }}</label>
                         </div>

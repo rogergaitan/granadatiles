@@ -12,7 +12,8 @@
         };
 
         function getArticles() {
-            return articlesMock();
+            //return articlesMock();
+            return $http.get(appSettings.serverPath + 'news/articles');
         }
 
         function articlesMock(){
