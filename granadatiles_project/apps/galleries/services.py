@@ -1,4 +1,4 @@
-from .dtos import GalleryDto, GalleryImageDto
+from .dtos import GalleryDto, GalleryImageDto, GalleryCategoryDto
 from .models import Gallery, GalleryCategory
 
 

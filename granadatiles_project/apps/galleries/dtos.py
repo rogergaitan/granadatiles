@@ -1,14 +1,18 @@
 from core.dtos import BaseCatalogDto, BaseGalleryImageDto
 
 
+class GalleryCategoryDto(BaseCatalogDto):
+    pass
+
+
 class GalleryDto(BaseCatalogDto):
-    
+	
     def __init__(self, gallery, language=None):
         super().__init__(gallery, language)
-        self.image = gallery.image
-        self.categories = gallery.categories.values('name', 'id')
+        self.image = gallery.image.url
+        self.categories = [GalleryCategoryDto(category, language) for category in gallery.categories.all()]
         
-        
+    
 class GalleryImageDto(BaseGalleryImageDto):
     
     def __init__(self, image, language=None):
