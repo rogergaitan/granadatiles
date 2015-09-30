@@ -12,12 +12,12 @@
 
         return {
             getTestimonials: getTestimonials
-        }
+        };
 
         function getTestimonials() {
             return $http.get(appSettings.serverPath + 'testimonials');
         }
 
-    };
+    }
 
 }());

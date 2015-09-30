@@ -12,6 +12,10 @@
     function coverCtrl(appSettings, pageSettings, sectionSvc) {
         var vm = this;
 
-        vm.cover = sectionSvc.getCover(pageSettings.sectionId);
+        //vm.cover = sectionSvc.getCover(pageSettings.sectionId);
+
+        sectionSvc.getCover(pageSettings.sectionId).then(function (response) {
+            vm.cover = response.data;
+        });
     }
 }());

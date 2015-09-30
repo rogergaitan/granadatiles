@@ -3,12 +3,10 @@
 
     angular
         .module('app.content')
-        .factory('sectionSvc', ['pageSettings',
-            sectionSvc
-        ]);
+        .factory('sectionSvc', ['$http','appSettings', sectionSvc]);
 
 
-    function sectionSvc(pageSettingsSvc) {
+    function sectionSvc($http, appSettings) {
 
         return {
             getSection: getSection,
@@ -16,14 +14,12 @@
         };
 
         function getCover(sectionId) {
-            if (sectionId == 1)
-                return getMockCover(sectionId);
-            else return {};
-
+            return $http.get(appSettings.serverPath + 'sections/' + sectionId + '/cover');;
         }
 
         function getSection(sectionId) {
-            return getMockSection(sectionId);
+            //return getMockSection(sectionId);
+            return $http.get(appSettings.serverPath + 'sections/' + sectionId );
         }
 
         //TODO API api/section/:id
