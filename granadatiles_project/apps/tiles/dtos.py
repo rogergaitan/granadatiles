@@ -1,4 +1,4 @@
-﻿from core.dtos import BaseGalleryImageDto
+﻿from core.dtos import BaseGalleryImageDto, BaseContentDto
 
 
 class CollectionDto(BaseGalleryImageDto):
@@ -11,8 +11,19 @@ class CollectionDto(BaseGalleryImageDto):
             self.url = collection.get_absolute_url()
 
 
+class TileDto(BaseContentDto):
+    pass	
+
+
 class GroupDto(BaseGalleryImageDto):
     pass
+
+
+class GroupTileDto(GroupDto):
+	
+   def __init__(self, group, language=None):
+       	super().__init__(group, language)
+        self.tiles = [TileDto(tile, language) for tile in group.tiles.all()]
 
 
 class MenuCollectionDto(object):

@@ -2,9 +2,9 @@
 from rest_framework import viewsets
 from .serializers import CollectionSerializer
 from rest_framework.response import Response
-from apps.tiles.services import CollectionService
+from apps.tiles.services import CollectionService, GroupService
 from rest_framework.decorators import list_route, detail_route
-from apps.tiles.serializers import GroupSerializer, MenuCollectionSerializer
+from apps.tiles.serializers import GroupSerializer, GroupTileSerializer, MenuCollectionSerializer
 from apps.tiles.models import Collection
 from core.views import BaseViewSet
 
@@ -63,3 +63,13 @@ class CollectionViewSet(BaseViewSet):
         serializer = CollectionSerializer(collections, many=True)
         return Response(serializer.data)
         
+
+class GroupViewSet(BaseViewSet):
+
+   @detail_route(methods=['get'])
+   def tiles(self, request, pk = None):
+       group = GroupService.get_group(id=pk, language=self.get_language(request))
+       serializer = GroupTileSerializer(group)
+       return Response(serializer.data)
+   
+          

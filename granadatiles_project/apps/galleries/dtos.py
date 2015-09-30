@@ -10,7 +10,7 @@ class GalleryDto(BaseCatalogDto):
     def __init__(self, gallery, language=None):
         super().__init__(gallery, language)
         self.image = gallery.image.url
-        self.categories = [GalleryCategoryDto(category, language) for category in gallery.categories.all()]
+        self.categories = gallery.categories.all()
         
     
 class GalleryImageDto(BaseGalleryImageDto):
