@@ -1,5 +1,5 @@
-﻿from apps.tiles.models import Collection
-from apps.tiles.dtos import CollectionDto, GroupDto, MenuCollectionDto
+﻿from apps.tiles.models import Collection, Group
+from apps.tiles.dtos import CollectionDto, GroupDto, GroupTileDto, MenuCollectionDto
 
 
 class CollectionService(object):
@@ -32,3 +32,11 @@ class CollectionService(object):
         menuCollectionsDto = [MenuCollectionDto(collection, language = language)
                               for collection in collections]
         return menuCollectionsDto
+	
+
+class GroupService(object):
+	
+    def get_group(id, language=None):
+       group = Group.objects.get(pk=id)
+       grouptileDto = GroupTileDto(group, language)
+       return grouptileDto
