@@ -14,7 +14,7 @@ class ArticleMagazineDto(object):
     def __init__(self, article):
         self.url = article.url
         self.magazineName = article.magazine.name
-        self.magazineLogo = article.magazine.logo
+        self.magazineLogo = article.magazine.logo.url
         
         
 class ArticleYearDto(object):

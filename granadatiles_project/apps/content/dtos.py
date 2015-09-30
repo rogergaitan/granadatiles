@@ -17,7 +17,7 @@ class SectionCoverDto(object):
     articles = None
 
     def __init__(self, section_image):
-        self.image = section_image.image
+        self.image = section_image.image.url
         self.designer = section_image.designer
         self.photographer = section_image.photographer
         
