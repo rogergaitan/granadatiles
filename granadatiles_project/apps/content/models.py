@@ -1,4 +1,4 @@
-from django.db import models
+﻿from django.db import models
 from apps.news.models import Article
 from apps.tiles.models import Tile
 from django.utils.translation import ugettext as _
@@ -24,7 +24,7 @@ class SectionImage(models.Model):
         verbose_name=_('Photographer'))
     section = models.ForeignKey(Section, related_name='images')
     articles = models.ManyToManyField(Article, 
-                                        blank=True, null=True)
+                                        blank=True)
     featured_article = models.ForeignKey(Article, related_name='featured_article',
 										    null=True, blank=True)
     tile = models.ForeignKey(
