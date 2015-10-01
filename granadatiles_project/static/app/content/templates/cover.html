@@ -7,7 +7,7 @@
         </div>
         <div class="row bg-slider-footer">
             <div class="container">
-                <div class="row">
+                <div class="row" ng-if="vm.cover.designer || vm.cover.photographer || vm.cover.featuredArticle || vm.cover.articles">
                     <div class="col-md-3">
                         <label>Designer:</label> <span>{{ ::vm.cover.designer }}</span> <br />
                         <label>Photographer:</label> <span>{{ ::vm.cover.photographer }}</span>
