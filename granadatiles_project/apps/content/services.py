@@ -1,4 +1,5 @@
 import random
+from django.shortcuts import get_object_or_404
 from .models import Testimony, Section, FeaturedVideo
 from .dtos import TestimonyDto, SectionCoverDto, FeaturedVideoDto
 from apps.news.models import Article
@@ -35,7 +36,7 @@ class SectionService(object):
             return None
 
     def get_cover(section_id, language):
-        section = Section.objects.get(pk=section_id)
+        section = get_object_or_404(Section, pk=section_id)
         cover = SectionService.get_random_cover(section)
         if cover:
             sectioncoverDto = SectionCoverDto(cover)
