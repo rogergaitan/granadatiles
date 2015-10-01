@@ -1,7 +1,6 @@
 from django.shortcuts import render
 
 from rest_framework import viewsets
-from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
 from rest_framework.decorators import list_route, detail_route
 
@@ -73,7 +72,7 @@ class GroupViewSet(BaseViewSet):
 
    @detail_route(methods=['get'])
    def tiles(self, request, pk = None):
-       limit = int(request.query_params.get('limit', 3))
+       limit = int(request.query_params.get('limit', 6))
        offset = int(request.query_params.get('offset', 0))
        group = GroupService.get_group_tiles(id=pk, offset=offset,
            limit=limit, language=self.get_language(request))
