@@ -1,4 +1,4 @@
-﻿from core.dtos import BaseGalleryImageDto, BaseContentDto
+from core.dtos import BaseGalleryImageDto, BaseContentDto
 
 
 class CollectionDto(BaseGalleryImageDto):
@@ -12,7 +12,7 @@ class CollectionDto(BaseGalleryImageDto):
 
 
 class TileDto(BaseContentDto):
-    pass	
+    pass
 
 
 class GroupDto(BaseGalleryImageDto):
@@ -20,10 +20,10 @@ class GroupDto(BaseGalleryImageDto):
 
 
 class GroupTileDto(GroupDto):
-	
-   def __init__(self, group, language=None):
+
+   def __init__(self, group, offset, limit, language=None):
        	super().__init__(group, language)
-        self.tiles = [TileDto(tile, language) for tile in group.tiles.all()]
+        self.tiles = [TileDto(tile, language) for tile in group.tiles.all()[offset:limit + 1]]
 
 
 class MenuCollectionDto(object):

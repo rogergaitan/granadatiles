@@ -1,12 +1,16 @@
-﻿from django.shortcuts import render
+from django.shortcuts import render
+
 from rest_framework import viewsets
-from .serializers import CollectionSerializer
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.response import Response
-from apps.tiles.services import CollectionService, GroupService
 from rest_framework.decorators import list_route, detail_route
-from apps.tiles.serializers import GroupSerializer, GroupTileSerializer, MenuCollectionSerializer
-from apps.tiles.models import Collection
+
 from core.views import BaseViewSet
+
+from apps.tiles.serializers import GroupSerializer, GroupTileSerializer, MenuCollectionSerializer, CollectionSerializer
+from apps.tiles.services import CollectionService, GroupService
+from apps.tiles.models import Collection
+
 
 
 def collection_detail(request, slug):
@@ -17,7 +21,7 @@ def collection_detail(request, slug):
 
 
 """
-Theses are the views for the api
+These are the views for the api
 """
 
 class CollectionViewSet(BaseViewSet):
@@ -32,7 +36,7 @@ class CollectionViewSet(BaseViewSet):
     # /collections/:id
     def retrieve(self, request, pk=None):
         collection = CollectionService.get_collection(
-                                        id=pk, 
+                                        id=pk,
                                         language=self.get_language(request))
         serializer = CollectionSerializer(collection)
         return Response(serializer.data)
@@ -62,14 +66,17 @@ class CollectionViewSet(BaseViewSet):
             language= self.get_language(request))
         serializer = CollectionSerializer(collections, many=True)
         return Response(serializer.data)
-        
+
 
 class GroupViewSet(BaseViewSet):
 
+
    @detail_route(methods=['get'])
    def tiles(self, request, pk = None):
-       group = GroupService.get_group(id=pk, language=self.get_language(request))
+       limit = int(request.query_params.get('limit', 3))
+       offset = int(request.query_params.get('offset', 0))
+       group = GroupService.get_group_tiles(id=pk, offset=offset,
+           limit=limit, language=self.get_language(request))
        serializer = GroupTileSerializer(group)
        return Response(serializer.data)
-   
-          
+
