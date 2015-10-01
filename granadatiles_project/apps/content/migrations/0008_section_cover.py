@@ -16,51 +16,51 @@ def addInitialData(apps, schema_editor):
 	                       colorway tile in the Echo Collection Catalogue? Don't lose your work; save it to your Portfolio. Want to do a room layout? \
 	                       Use the tiles in your Portfolio to experiment with different combinations."
 		)
-		
-		
+
+
 	    Photographer = apps.get_model('galleries', 'photographer')
 	    photographer = Photographer.objects.create(name='Ryan Phillips')
-		
+
 	    Designer = apps.get_model('galleries', 'designer')
 	    designer = Designer.objects.create(name='Deindre Doherty')
-	    
+
 	    Article = apps.get_model('news', 'article')
 	    featured_article = Article.objects.create(
 			title = 'Bath of the Month Oct 2013',
-			cover = os.path.join(settings.STATIC_ROOT, 'img/initial/news/House-Beautiful-Granada-Tile-cement.png'),
+			cover = os.path.join(settings.STATIC_URL, 'img/initial/news/House-Beautiful-Granada-Tile-cement.png'),
 			url = '',
 			date = timezone.now(),
 			magazine_id = 1
 		)
-		
+
 	    section_image = section.images.create(
 		    tile_id = 1,
 		    designer_id = designer.id,
 		    photographer_id = photographer.id,
 		    featured_article_id = featured_article.id,
-		    image = os.path.join(settings.STATIC_ROOT, 'img/initial/content/Cluny-on-bath-Granada-tile-cement.jpg')
+		    image = os.path.join(settings.STATIC_URL, 'img/initial/content/Cluny-on-bath-Granada-tile-cement.jpg')
 		)
-		
+
 	    Magazine = apps.get_model('news', 'magazine')
 	    magazines = Magazine.objects.bulk_create([
 		    Magazine(
 			    name = 'Dwell',
-			    logo = os.path.join(settings.STATIC_ROOT, 'img/initial/news/Dwell-Granada-Tile-cement.png')
+			    logo = os.path.join(settings.STATIC_URL, 'img/initial/news/Dwell-Granada-Tile-cement.png')
 			),
 			Magazine(
 			    name = 'Marta Living',
-			    logo = os.path.join(settings.STATIC_ROOT, 'img/initial/news/Martha-Living-Granada-Tile-cement.png')
+			    logo = os.path.join(settings.STATIC_URL, 'img/initial/news/Martha-Living-Granada-Tile-cement.png')
 			),
 			Magazine(
 				name = 'AD',
-				logo = os.path.join(settings.STATIC_ROOT, 'img/initial/news/AD-Granada-Tile-cement.png')
+				logo = settings.STATIC_URL + 'img/initial/news/AD-Granada-Tile-cement.png'
 			),
 			Magazine(
 			    name = 'Elle Decor',
-			    logo = os.path.join(settings.STATIC_ROOT, 'img/initial/news/Elle-Decor-Granada-Tile-cement.png')
+			    logo = os.path.join(settings.STATIC_URL, 'img/initial/news/Elle-Decor-Granada-Tile-cement.png')
 			),
 		])
-		
+
 	    section_image.articles.create(
 			    title = '',
 			    description = '',
@@ -68,7 +68,7 @@ def addInitialData(apps, schema_editor):
 			    magazine_id = 1,
 			    date = timezone.now()
 		)
-		
+
 	    section_image.articles.create(
 			    title = '',
 			    description = '',
@@ -76,7 +76,7 @@ def addInitialData(apps, schema_editor):
 			    magazine_id = 2,
 			    date = timezone.now()
 		)
-	    
+
 	    section_image.articles.create(
 			    title = '',
 			    description = '',
@@ -84,7 +84,7 @@ def addInitialData(apps, schema_editor):
 			    magazine_id = 3,
 			    date = timezone.now()
 		)
-			
+
 	    section_image.articles.create(
 			    title = '',
 			    description = '',
@@ -92,7 +92,7 @@ def addInitialData(apps, schema_editor):
 			    magazine_id = 4,
 			    date = timezone.now()
 		)
-	
+
 
 class Migration(migrations.Migration):
 
