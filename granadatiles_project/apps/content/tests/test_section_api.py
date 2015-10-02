@@ -1,8 +1,8 @@
 from rest_framework import status
-from rest_framework.test import  APITestCase
+from rest_framework.test import APITestCase
 
 
-class SectionTest(APITestCase):
+class SectionAPITest(APITestCase):
 
 
     def test_section_list_200(self):
