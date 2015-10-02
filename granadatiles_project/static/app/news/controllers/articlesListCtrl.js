@@ -12,8 +12,6 @@
 
         vm.breadcums = 'My Portafolio';
 
-        vm.articles = articleSvc.getArticles();
-
         vm.title = 'Tile Editorials in Magazines';
 
         vm.description = '<p>Magazines love Granada Tile. Click the covers to ﬁnd out what magazine editors are saying about\ ' +
@@ -22,9 +20,7 @@
 
         articleSvc.getArticles().then(function (response){
             vm.articles = response.data;
-        })
-
-        //console.log(vm.articles().length);
+        });
 
     }
 
