@@ -1,4 +1,4 @@
-from django.shorcuts import get_object_or_404
+from django.shortcuts import get_object_or_404
 from .dtos import GalleryDto, GalleryImageDto, GalleryCategoryDto
 from .models import Gallery, GalleryCategory
 
