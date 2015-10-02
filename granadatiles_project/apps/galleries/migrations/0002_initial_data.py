@@ -12,31 +12,31 @@ def addInitialData(apps, schema_editor):
         Gallery.objects.bulk_create([
 	       Gallery(
 		       name = 'Residential Cement Tile',
-		       image = os.path.join(settings.STATIC_ROOT, 
+		       image = os.path.join(settings.STATIC_URL, 
 			       'img/initial/galleries/Installation-Residential-Cement-Tile-Granada-Tile-Cement.jpg'),
 		   ),
 				   
            Gallery(
 		       name = 'Commercial Cement Tile',
-		       image = os.path.join(settings.STATIC_ROOT, 
+		       image = os.path.join(settings.STATIC_URL, 
 			       'img/initial/galleries/Installation-Commercial-Cement-Tile-Granada-Tile-Cement.jpg'),
 		   ),  
 		          
 		   Gallery(
 		       name = 'Collection',
-		       image = os.path.join(settings.STATIC_ROOT, 
+		       image = os.path.join(settings.STATIC_URL, 
 			       'img/initial/galleries/Installation-Collection-Cement-Tile-Granada-Tile-Cement.jpg'),
 		   ),  
 		   
 		   Gallery(
 		       name = 'United States Cities',
-		       image = os.path.join(settings.STATIC_ROOT, 
+		       image = os.path.join(settings.STATIC_URL, 
 			       'img/initial/galleries/Installation-United-States-Cement-Tile-Granada-Tile-Cement.jpg'),
 		   ),
 				   
 		   Gallery(
 		       name = 'Historic Tile Installations',
-		       image = os.path.join(settings.STATIC_ROOT, 
+		       image = os.path.join(settings.STATIC_URL, 
 			       'img/initial/galleries/Installation-Historic-Tiles-Cement-Tile-Granada-Tile-Cement.jpg'),
 		   
 	      )

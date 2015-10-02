@@ -14,7 +14,7 @@ def addInitialData(apps, schema_editor):
         chatelaine = Magazine.objects.create(name='CHATELAINE')
         News.objects.bulk_create([
             News(
-			   image = os.path.join(settings.STATIC_ROOT, 
+			   image = os.path.join(settings.STATIC_URL, 
 				   'img/initial/news/article/Magazine-Affar-Granada-Tile-Cement.jpg'),
 			   title = 'DESIGNING L.A.',
 			   magazine_id = afar.id,
@@ -24,7 +24,7 @@ def addInitialData(apps, schema_editor):
 		    ),
 		   
             News(
-		       image = os.path.join(settings.STATIC_ROOT,
+		       image = os.path.join(settings.STATIC_URL,
 			       'img/initial/news/article/Magazine-Chatelaine-Granada-Tile.jpg'),
 			   title = 'BOLD & FEARLESS',
 			   magazine_id = chatelaine.id,
@@ -34,7 +34,7 @@ def addInitialData(apps, schema_editor):
 		    ),
 			 
             News(
-		       image = os.path.join(settings.STATIC_ROOT,
+		       image = os.path.join(settings.STATIC_URL,
 			       'img/initial/news/article/Magazine-Coastal-Living-Granada-Tile.jpg'),
 			   title = 'DESIGNING L.A.',
 			   magazine_id = afar.id,
@@ -44,7 +44,7 @@ def addInitialData(apps, schema_editor):
 		    ),
 			   
             News(
-		       image = os.path.join(settings.STATIC_ROOT,
+		       image = os.path.join(settings.STATIC_URL,
 			       'img/initial/news/article/Magazine-Chatelaine-Granada-Tile.jpg'),
 			   title = 'BOLD & FEARLESS',
 			   magazine_id = chatelaine.id,
@@ -54,7 +54,7 @@ def addInitialData(apps, schema_editor):
 		    ),
 			   
             News(
-		       image = os.path.join(settings.STATIC_ROOT,
+		       image = os.path.join(settings.STATIC_URL,
 			       'img/initial/news/article/Magazine-Dwell-Granada-Tile.jpg'),
 			   title = 'DESIGNING L.A.',
 			   magazine_id = afar.id,
@@ -64,7 +64,7 @@ def addInitialData(apps, schema_editor):
 		    ),
 			 
             News(
-		       image = os.path.join(settings.STATIC_ROOT,
+		       image = os.path.join(settings.STATIC_URL,
 			       'img/initial/news/article/Magazine-HGTV-Granada-Tile.jpg'),
 			   title = 'BOLD & FEARLESS',
 			   magazine_id = chatelaine.id,
@@ -78,37 +78,37 @@ def addInitialData(apps, schema_editor):
         Catalog.objects.bulk_create([
 	        Catalog(
 			    name = 'Instack Catalog 2015',
-			    image = os.path.join(settings.STATIC_ROOT,
+			    image = os.path.join(settings.STATIC_URL,
 							'img/initial/news/catalog/News-In-Stock-Catalog-2015-Granada-Tile.jpg'),
 			),
 			 
 			Catalog(
 			    name = 'Echo Collection Mini Catalog',
-			    image = os.path.join(settings.STATIC_ROOT,
+			    image = os.path.join(settings.STATIC_URL,
 							'img/initial/news/catalog/News-Echo-Collection-Mini-Catalog-Granada-Tile.jpg'),
 			),
 				
 			Catalog(
 			    name = 'Instock Catalog 2015',
-			    image = os.path.join(settings.STATIC_ROOT,
+			    image = os.path.join(settings.STATIC_URL,
 							'img/initial/news/catalog/News-Look-Book-2015-Granada-Tile.jpg'),
 			),
 				
 			Catalog(
 			    name = 'Lookbook 2013',
-			    image = os.path.join(settings.STATIC_ROOT,
+			    image = os.path.join(settings.STATIC_URL,
 							'img/initial/news/catalog/News-Look-Book-2013-Granada-Tile.jpg'),
 			),
 				
 			Catalog(
 			    name = 'Lookbook 2013 - Volume 2',
-			    image = os.path.join(settings.STATIC_ROOT,
+			    image = os.path.join(settings.STATIC_URL,
 							'img/initial/news/catalog/News-Look-Book-2013-vol2-Granada-Tile.jpg'),
 			),
 				
 			Catalog(
 			    name = 'Lookbook 2013 - Volume 1',
-			    image = os.path.join(settings.STATIC_ROOT,
+			    image = os.path.join(settings.STATIC_URL,
 							'img/initial/news/catalog/News-Look-Book-2012-Granada-Tile.jpg'),
 			),
 		   
