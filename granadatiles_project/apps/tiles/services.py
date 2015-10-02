@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from apps.tiles.models import Collection, Group
 from apps.tiles.dtos import CollectionDto, GroupDto, GroupTileDto, MenuCollectionDto
 
@@ -5,7 +6,7 @@ from apps.tiles.dtos import CollectionDto, GroupDto, GroupTileDto, MenuCollectio
 class CollectionService(object):
 
     def get_collection(id ,language=None):
-        collection = Collection.objects.get(pk=id)
+        collection = get_object_or_404(Collection, pk=id)
         collectionDto = CollectionDto(collection, language)
         return collectionDto
 
@@ -22,7 +23,8 @@ class CollectionService(object):
         return collectionsDto
 
     def get_groups(collection_id, language=None):
-        groups = Collection.objects.get(pk=collection_id).groups.all()
+        collection = get_object_or_404(Collection, pk=collection_id)
+        groups = collection.groups.all()
         groupsDto = [GroupDto(group, language)
                      for group in groups]
         return groupsDto
@@ -37,6 +39,6 @@ class CollectionService(object):
 class GroupService(object):
 
     def get_group_tiles(id, offset, limit, language=None):
-       group = Group.objects.get(pk=id)
+       group = get_object_or_404(Group, pk=id)
        grouptileDto = GroupTileDto(group, offset, limit, language)
        return grouptileDto

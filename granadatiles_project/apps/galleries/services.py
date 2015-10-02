@@ -1,3 +1,4 @@
+from django.shorcuts import get_object_or_404
 from .dtos import GalleryDto, GalleryImageDto, GalleryCategoryDto
 from .models import Gallery, GalleryCategory
 
@@ -10,6 +11,7 @@ class GalleryService(object):
 
 class GalleryCategoryService(object):
     def get_images(gallery_category_id, language=None):
-        images = GalleryCategory.objects.get(pk=gallery_category_id).images.all()
+        gallery = get_object_or_404(GalleryCategory, pk=gallery_category_id)
+        images = gallery.images.all()
         imagesDto = [GalleryImageDto(image, language) for image in images]
         return imagesDto

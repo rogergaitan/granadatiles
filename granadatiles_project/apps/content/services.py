@@ -22,7 +22,7 @@ class SectionService(object):
         return sectionsDto
 
     def get_section(id, language=None):
-        section = Section.objects.get(pk=id)
+        section = get_object_or_404(Section, pk=id)
         sectionDto = BaseContentDto(section, language=language)
         return sectionDto
 
