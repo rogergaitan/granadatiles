@@ -1,6 +1,10 @@
 ﻿<div class="col-md-12" ng-controller="collectionsGroupCtrl as vm">
     <div class="row">
         <aside class="col-md-3 ">
+            <div>
+                <img src="/static/img/initial/tiles/icon-Echo-Collection-Granada-Tile-Cement.jpg" alt="" >
+                <h3>ECHO TILE COLLECTION<i class="fa fa-caret-down"></i></h3>
+            </div>
             <ul class="menu-section">
                 <li><a href="#">Interactive Catalog </a></li>
                 <li><a href="#">Custom Cement Tiles </a></li>
@@ -11,25 +15,38 @@
                 <li><a href="#">Ordering Cement Tile </a></li>
                 <li><a href="#">Installing Cement Tile</a></li>
             </ul>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="/static/img/initial/tiles/Icon-Minis-Collection-Granada-Tile-Cement.png" alt="" class="img-responsive">
+                    <h3>MINIS TILE COLLECTION</h3>
+                </div>
+                <div class="col-md-6">
+                    <img src="/static/img/initial/tiles/Icon-Mauresque-Collection-Granada-Tile-Cement.png" alt="" class="img-responsive">
+                    <h3>MAURESQUE TILE COLLECTION</h3>
+                </div>
+            </div>
         </aside>
         <div class="col-md-9">
             <h1 class="heading-sec">{{ ::vm.title }}</h1>
-            <!--<a href="#" class="breadcrumds"><u>{{ vm.breadcrumds }}</u> <i class="fa fa-angle-double-right"></i></a>-->
+            <a href="#" class="breadcrumds"><u>Collections</u> <i class="fa fa-angle-double-right"></i> <u>Echo Tile Collection
+</u></a>
             <div class="text-section" ng-bind-html="::vm.description"></div>
             <div ng-repeat="group in vm.collectionGroups" ng-if="$index % 2 == 0" class="row">
-                <div class="col-md-6" ng-if="$index <= vm.collectionGroups.length - 1">
+                <div class="col-md-6 collection-group" ng-if="$index <= vm.collectionGroups.length - 1">
                     <a href="#">
-                        <div class="">
+                        <div class="collection-group-container">
                             <img ng-src="{{ vm.collectionGroups[$index].image }}" >
                             <h2>{{ vm.collectionGroups[$index].title }}</h2>
+                            <span><i class="fa fa-plus-circle"></i>MORE<br />INFO</span>
                         </div>
                     </a>
                 </div>
-                <div class="col-md-6" ng-if="$index + 1 <= vm.collectionGroups.length - 1">
+                <div class="col-md-6 collection-group" ng-if="$index + 1 <= vm.collectionGroups.length - 1">
                     <a href="#">
-                        <div class="">
+                        <div class="collection-group-container">
                             <img ng-src="{{ vm.collectionGroups[$index + 1].image }}" >
                             <h2>{{ vm.collectionGroups[$index + 1].title }}</h2>
+                            <span><i class="fa fa-plus-circle"></i>MORE<br />INFO</span>
                         </div>
                     </a>
                 </div>
