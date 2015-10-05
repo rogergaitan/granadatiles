@@ -80,3 +80,7 @@ class Tile(BaseCatalogModel):
 
 class Style(BaseCatalogModel):
     group = models.ForeignKey(Group, related_name='styles', verbose_name=_('Group'))
+
+    class Meta:
+       verbose_name = _('Style')
+       verbose_name_plural = _('Styles')
