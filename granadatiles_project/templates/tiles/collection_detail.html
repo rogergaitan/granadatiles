@@ -4,7 +4,10 @@
 {% block title %} Granada Tiles - {% trans 'Collections'%} {% endblock %}
 
 {% block content%}
-
+<div class="row">
+    <ng-include id="gt-main-groups" src="'{{STATIC_URL}}app/tiles/templates/groupList.html'">
+    </ng-include>
+</div>
 {% endblock content%}
 
 {% block js%}
@@ -17,7 +20,7 @@
 
         function pageSettings(appSettings) {
             return{
-                sectionId: 2,
+                sectionId: 0,
                 language: '{{LANGUAGE_CODE}}',
                 collectionId: {{collection_id}},
                 labels: {
