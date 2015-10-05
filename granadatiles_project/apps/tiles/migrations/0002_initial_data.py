@@ -1,52 +1,55 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import os
+
 from django.conf import settings
 from django.db import models, migrations
 
 def addInitialData(apps, schema_editor):
-    
+
     collection = apps.get_model('tiles', 'Collection')
     collection.objects.bulk_create([
         collection(
             title='Echo Tile Collection',
             title_es='',
-            slug= 'echo',
-            slug_es = 'echo',
+            slug='echo',
+            slug_es='echo',
             description='''<ul><li>Original French art form</li>
             <li>Cement tiles are cured, not fired</li>
             <li>Organic colors</li><li>Industrial strength</li>
             <li>Pressed to 2,000 lbs. per square inch<br></li></ul>''',
             description_es='',
-            image= '',
-            menu_image = ''
+            image=os.path.join(settings.STATIC_URL, 'img/initial/tiles/FairweatherBar-compressor-compressor.jpg'),
+            menu_image=''
         ),
         collection(
             title='Minis Tile Collection',
             title_es='',
-            slug= 'minis',
-            slug_es = 'minis',
+            slug='minis',
+            slug_es='minis',
             description='''<ul><li>Mozaic size cement tiles</li>
             <li>Geometric shapes</li>
             <li>Use on bathroom floors and walls</li>
             <li>Use on kitchen floors and backsplashes</li></ul>''',
             description_es='',
-            image= '',
-            menu_image = ''
+            image=os.path.join(settings.STATIC_URL,
+                'img/initial/tiles/heath-ceramics-mural-tile-and-clay-studio-photo-by-mariko-reed-compressor-com_RdqFIFZ.jpg'),
+            menu_image=''
         ),
         collection(
-            title='Mauresque Tile Collection',
+            title='Andalucía Tile Collection',
             title_es='',
-            slug= 'mauresque',
-            slug_es = 'mauresque',
+            slug='mauresque',
+            slug_es='mauresque',
             description='''<ul><li>Inspired by France and Morocco</li>
             <li>Variety of shapes and sizes</li>
             <li>Use on bathroom floors and walls, kitchen backsplashes and more</li></ul>''',
             description_es='',
-            image= '',
-            menu_image = ''
+            image=os.path.join(settings.STATIC_URL, 'img/initial/tiles/kitchen-minis-compressor_ca6NA4u.jpg'),
+            menu_image=''
         ),
     ])
-        
+
     group = apps.get_model('tiles', 'Group')
     echo_collection = collection.objects.filter(title='Echo Tile Collection').first()
     group.objects.bulk_create([
@@ -88,7 +91,7 @@ def addInitialData(apps, schema_editor):
             image='',
             collection=echo_collection
         ),
-        
+
     ])
 
 class Migration(migrations.Migration):
