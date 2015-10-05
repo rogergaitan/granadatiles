@@ -54,8 +54,21 @@ class Group(BaseGallerieImageModel):
         verbose_name_plural = _('Groups')
 
 
-class Tile(BaseContentModel):
-    group = models.ForeignKey(Group, related_name='tiles', verbose_name=_('Tiles Group'))
+
+
+class TileDesign(BaseCatalogModel):
+    group = models.ForeignKey(Group, related_name='designs', verbose_name=_('Tiles Group'))
+
+    class Meta:
+        verbose_name = _('Tile Design')
+        verbose_name_plural = _('Tile Designs')
+
+class Tile(BaseCatalogModel):
+    image = ImageField(upload_to='tiles', verbose_name=_('Image'), null = True, blank=True)
+    main = models.BooleanField(default=False, verbose_name=_('Main'),
+                               help_text='Is the main tile of the design')
+    similar_tiles = models.ManyToManyField('Tile', verbose_name=_('Similar Tiles'))
+    design = models.ForeignKey(TileDesign, related_name='tiles', verbose_name=_('Design'))
     sizes = models.ManyToManyField(TileSize, related_name='tiles', verbose_name=_('Tiles Sizes'))
     colors = models.ManyToManyField(PalleteColor, related_name='tiles', verbose_name=_('Tiles Colors'))
 

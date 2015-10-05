@@ -26,9 +26,10 @@ class SectionImage(models.Model):
     articles = models.ManyToManyField(Article, 
                                         blank=True)
     featured_article = models.ForeignKey(Article, related_name='featured_article',
-										    null=True, blank=True)
+                                            null=True, blank=True)
     tile = models.ForeignKey(
-        Tile, related_name='pictures', verbose_name=_('Tile'))
+        Tile, related_name='pictures', verbose_name=_('Tile'), null = True,
+         blank = True)
 
     class Meta:
         verbose_name = _('Image')

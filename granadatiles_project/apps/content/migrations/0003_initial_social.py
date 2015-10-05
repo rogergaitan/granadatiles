@@ -25,59 +25,59 @@ def addInitialData(apps, schema_editor):
                 ),
             #3
             social(
-					name='Linked In',
-					url='https://www.linkedin.com/company/granada-tile',
-					order=3,
-					active=True,
-					css_class='linked-in'
-				),
+                    name='Linked In',
+                    url='https://www.linkedin.com/company/granada-tile',
+                    order=3,
+                    active=True,
+                    css_class='linked-in'
+                ),
             
             social(
-					name='RSS',
-					url='',
-					order=4,
-					active=True,
-					css_class='rss'
-				),
-			
-			social(
-					name='Yelp',
-					url='',
-					order=5,
-					active=True,
-					css_class='yelp'
-				),
-			
-			social(
-					name='Pinterest',
-					url='https://www.pinterest.com/granadatile/',
-					order=6,
-					active=True,
-					css_class='pinterest'
-				),
-			
-			social(
-					name='Instagram',
-					url='',
-					order=7,
-					active=True,
-					css_class='instagram'
-				),
-			
-			social(
-					name='Houzz',
-					url='https://www.houzz.com/Granada-Tile',
-					order=8,
-					active=True,
-					css_class='houzz'
-				),
+                    name='RSS',
+                    url='',
+                    order=4,
+                    active=True,
+                    css_class='rss'
+                ),
+            
+            social(
+                    name='Yelp',
+                    url='',
+                    order=5,
+                    active=True,
+                    css_class='yelp'
+                ),
+            
+            social(
+                    name='Pinterest',
+                    url='https://www.pinterest.com/granadatile/',
+                    order=6,
+                    active=True,
+                    css_class='pinterest'
+                ),
+            
+            social(
+                    name='Instagram',
+                    url='',
+                    order=7,
+                    active=True,
+                    css_class='instagram'
+                ),
+            
+            social(
+                    name='Houzz',
+                    url='https://www.houzz.com/Granada-Tile',
+                    order=8,
+                    active=True,
+                    css_class='houzz'
+                ),
         ])
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('content', '0002_initial_data'),
+        ('content', '0002_initial_sections'),
     ]
 
     operations = [
