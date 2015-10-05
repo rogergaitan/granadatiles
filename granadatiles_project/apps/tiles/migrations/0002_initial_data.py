@@ -75,9 +75,9 @@ def addInitialData(apps, schema_editor):
             title='Moroccan',
             title_es='',
             description='Lorem ipsum dolor sit amet consectetur adipsicing',
-            description_es=os.path.join(settings.STATIC_URL,
-                                        'img/initial/tiles/groups/Mediterranean-Granada-Tile\-Cement.jpg'),
-            image='',
+            description_es='',
+            image=os.path.join(settings.STATIC_URL,
+                               'img/initial/tiles/groups/Mediterranean-Granada-Tile-Cement.jpg'),
             collection=echo_collection
         ),
         group(
