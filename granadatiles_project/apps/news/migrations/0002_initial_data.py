@@ -118,7 +118,7 @@ def addInitialData(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('news', '0003_catalog_image'),
+        ('news', '0001_initial'),
     ]
 
     operations = [

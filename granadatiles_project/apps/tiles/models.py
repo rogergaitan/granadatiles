@@ -1,4 +1,4 @@
-﻿from django.db import models
+from django.db import models
 from django.utils.translation import ugettext as _
 from core.models import BaseGallerieImageModel, BaseCatalogModel, BaseContentModel, BaseSlugModel
 from django.core.urlresolvers import reverse
@@ -34,7 +34,7 @@ class Collection(BaseGallerieImageModel, BaseSlugModel):
     @property
     def menu_thumbnail(self):
         if self.menu_image:
-            return get_thumbnail(self.menu_image, '99x99').url 
+            return get_thumbnail(self.menu_image, '99x99').url
         return ''
 
     def get_absolute_url(self, language=None):
@@ -54,11 +54,33 @@ class Group(BaseGallerieImageModel):
         verbose_name_plural = _('Groups')
 
 
-class Tile(BaseContentModel):
-    group = models.ForeignKey(Group, related_name='tiles', verbose_name=_('Tiles Group'))
+
+
+class TileDesign(BaseCatalogModel):
+    group = models.ForeignKey(Group, related_name='designs', verbose_name=_('Tiles Group'))
+
+    class Meta:
+        verbose_name = _('Tile Design')
+        verbose_name_plural = _('Tile Designs')
+
+
+class Tile(BaseCatalogModel):
+    image = ImageField(upload_to='tiles', verbose_name=_('Image'), null = True, blank=True)
+    main = models.BooleanField(default=False, verbose_name=_('Main'),
+                               help_text='Is the main tile of the design')
+    similar_tiles = models.ManyToManyField('Tile', verbose_name=_('Similar Tiles'))
+    design = models.ForeignKey(TileDesign, related_name='tiles', verbose_name=_('Design'))
     sizes = models.ManyToManyField(TileSize, related_name='tiles', verbose_name=_('Tiles Sizes'))
     colors = models.ManyToManyField(PalleteColor, related_name='tiles', verbose_name=_('Tiles Colors'))
 
     class Meta:
         verbose_name = _('Tile')
         verbose_name_plural = _('Tiles')
+
+
+class Style(BaseCatalogModel):
+    group = models.ForeignKey(Group, related_name='styles', verbose_name=_('Group'))
+
+    class Meta:
+       verbose_name = _('Style')
+       verbose_name_plural = _('Styles')
