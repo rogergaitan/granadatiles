@@ -1,4 +1,4 @@
-﻿from django.db import models
+from django.db import models
 from django.utils.translation import ugettext as _
 from core.models import BaseGallerieImageModel, BaseCatalogModel, BaseContentModel, BaseSlugModel
 from django.core.urlresolvers import reverse
@@ -34,7 +34,7 @@ class Collection(BaseGallerieImageModel, BaseSlugModel):
     @property
     def menu_thumbnail(self):
         if self.menu_image:
-            return get_thumbnail(self.menu_image, '99x99').url 
+            return get_thumbnail(self.menu_image, '99x99').url
         return ''
 
     def get_absolute_url(self, language=None):
@@ -63,6 +63,7 @@ class TileDesign(BaseCatalogModel):
         verbose_name = _('Tile Design')
         verbose_name_plural = _('Tile Designs')
 
+
 class Tile(BaseCatalogModel):
     image = ImageField(upload_to='tiles', verbose_name=_('Image'), null = True, blank=True)
     main = models.BooleanField(default=False, verbose_name=_('Main'),
@@ -75,3 +76,7 @@ class Tile(BaseCatalogModel):
     class Meta:
         verbose_name = _('Tile')
         verbose_name_plural = _('Tiles')
+
+
+class Style(BaseCatalogModel):
+    group = models.ForeignKey(Group, related_name='styles', verbose_name=_('Group'))
