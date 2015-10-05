@@ -13,7 +13,7 @@
 
         vm.title = 'Photos of Cement & Concrete Tile Installations';
 
-        vm.breadcums = 'Gallery';
+        vm.breadcrumds = 'Gallery';
 
         vm.description = '<p>Granada Tile is pleased to share photos of some of the cement tile installations using our ﬂagship\ ' +
             'Echo Collection tiles. Our hand made cement and concrete tiles have been used in private residences and commercial\ ' +

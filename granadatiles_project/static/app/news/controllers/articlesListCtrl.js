@@ -10,7 +10,7 @@
         var vm = this;
 
 
-        vm.breadcums = 'My Portafolio';
+        vm.breadcrumds = 'My Portafolio';
 
         vm.title = 'Tile Editorials in Magazines';
 
