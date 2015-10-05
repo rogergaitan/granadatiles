@@ -58,7 +58,8 @@ def addInitialData(apps, schema_editor):
             title_es='',
             description='Lorem ipsum dolor sit amet consectetur adipsicing',
             description_es='',
-            image='',
+            image=os.path.join(settings.STATIC_URL,
+                               'img/initial/tiles/groups/Designer-Erin-Adams-Granada-Tile-Cement.jpg'),
             collection=echo_collection
         ),
         group(
@@ -66,14 +67,16 @@ def addInitialData(apps, schema_editor):
             title_es='',
             description='Lorem ipsum dolor sit amet consectetur adipsicing',
             description_es='',
-            image='',
+            image=os.path.join(settings.STATIC_URL,
+                               'img/initial/tiles/groups/Essential-Shapes-Granada-Tile-Cement.jpg'),
             collection=echo_collection
         ),
         group(
             title='Moroccan',
             title_es='',
             description='Lorem ipsum dolor sit amet consectetur adipsicing',
-            description_es='',
+            description_es=os.path.join(settings.STATIC_URL,
+                                        'img/initial/tiles/groups/Mediterranean-Granada-Tile\-Cement.jpg'),
             image='',
             collection=echo_collection
         ),
@@ -88,7 +91,8 @@ def addInitialData(apps, schema_editor):
             <li>For floors and walls</li>
             </ul>''',
             description_es='',
-            image='',
+            image=os.path.join(settings.STATIC_URL,
+                               'img/initial/tiles/groups/Moroccan-Granada-Tile-Cement.jpg'),
             collection=echo_collection
         ),
 
