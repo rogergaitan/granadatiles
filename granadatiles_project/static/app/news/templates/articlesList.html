@@ -30,19 +30,19 @@
             </div>
         </div>
     </div>
-    <div ng-repeat="article in ::vm.articles" ng-if="$index % 2 == 0" class="row" >
-        <div class="col-md-6 article" ng-if="$index <= vm.articles.length - 1">
+    <div ng-repeat="article in ::vm.articles" ng-if="$index % 2 == 0" class="row component-space-row" >
+        <div class="col-md-6" ng-if="$index <= vm.articles.length - 1">
             <a href="#">
-                <div class="article-container">
-                    <div class="row">
+                <div class="component-container">
+                    <div class="row component-container_padding15">
                         <div class="col-md-4">
-                            <img ng-src="{{ ::vm.articles[$index].image }}" alt="" class="thumbnail img-responsive">
+                            <img ng-src="{{ ::vm.articles[$index].image }}" alt="" class="thumbnail img-responsive component-container_multimedia component-container_multimedia--shadow">
                         </div>
                         <div class="col-md-8">
-                            <h2>{{ ::vm.articles[$index].title }}</h2>
-                            <h3>{{ ::vm.articles[$index].magazine }}</h3>
-                            <p ng-bind-html="::vm.articles[$index].description"></p>
-                            <label>Date:</label><label>{{ ::vm.articles[$index].date }}</label>
+                            <h2 class="component-container_title">{{ ::vm.articles[$index].title }}</h2>
+                            <h3 class="component-container_subtitle">{{ ::vm.articles[$index].magazine }}</h3>
+                            <p class="component-container_text" ng-bind-html="::vm.articles[$index].description"></p>
+                            <label class="component-container_text">Date:</label><label class="component-container_text">{{ ::vm.articles[$index].date }}</label>
                         </div>
                     </div>
                 </div>
@@ -50,16 +50,16 @@
         </div>
         <div class="col-md-6 article" ng-if="$index + 1 <= vm.articles.length - 1">
             <a href="#">
-                <div class="article-container">
-                    <div class="row">
+                <div class="component-container">
+                    <div class="row component-container_padding15">
                         <div class="col-md-4">
-                            <img ng-src="{{ ::vm.articles[$index + 1].image }}" alt="" class="thumbnail img-responsive">
+                            <img ng-src="{{ ::vm.articles[$index + 1].image }}" alt="" class="thumbnail img-responsive component-container_multimedia component-container_multimedia--shadow">
                         </div>
                         <div class="col-md-8">
-                            <h2>{{ ::vm.articles[$index + 1].title }}</h2>
-                            <h3>{{ ::vm.articles[$index + 1].magazine }}</h3>
-                            <p ng-bind-html="::vm.articles[$index + 1].description"></p>
-                            <label>Date:</label><label>{{ ::vm.articles[$index + 1].date }}</label>
+                            <h2 class="component-container_title">{{ ::vm.articles[$index + 1].title }}</h2>
+                            <h3 class="component-container_subtitle">{{ ::vm.articles[$index + 1].magazine }}</h3>
+                            <p class="component-container_text" ng-bind-html="::vm.articles[$index + 1].description"></p>
+                            <label class="component-container_text">Date:</label><label class="component-container_text">{{ ::vm.articles[$index + 1].date }}</label>
                         </div>
                     </div>
                 </div>

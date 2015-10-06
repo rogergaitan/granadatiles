@@ -14,15 +14,16 @@
             <div ng-bind-html="vm.description" class="text-section"></div>
         </div>
     </div>
-    <div ng-repeat="catalog in vm.catalogs" ng-if="$index % 3 == 0" class="row" >
-        <div class="col-md-4 catalog" ng-if="$index <= vm.catalogs.length - 1">
-            <a href="#">
-                <img ng-src="{{ ::vm.catalogs[$index].image }}" alt="" class="thumbnail img-responsive catalog-img">
-            </a>
-            <div class="catalog-container">
-                <div>
-                    <h2>{{ ::vm.catalogs[$index].name }}</h2>
-                    <ul class="list-inline">
+    <div ng-repeat="catalog in vm.catalogs" ng-if="$index % 3 == 0" class="row component-space-row" >
+        <div class="col-md-4" ng-if="$index <= vm.catalogs.length - 1">
+            <div class="component-container">
+                <a href="#">
+                    <img ng-src="{{ ::vm.catalogs[$index].image }}" alt="" class="thumbnail img-responsive
+                     component-container_multimedia component-container_multimedia--shadow">
+                </a>
+                <div class="component-container_footer">
+                    <h2 class="component-container_title">{{ ::vm.catalogs[$index].name }}</h2>
+                    <ul class="list-inline component-container_ItemList">
                         <li>
                             <a href="#"><i class="fa fa-eye"></i><br />VIEW</a>
                         </li>
@@ -36,14 +37,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 catalog" ng-if="$index + 1 <= vm.catalogs.length - 1">
-            <a href="#">
-                <img ng-src="{{ ::vm.catalogs[$index + 1].image }}" alt="" class="thumbnail img-responsive catalog-img">
-            </a>
-            <div class="catalog-container">
-                <div>
-                    <h2>{{ ::vm.catalogs[$index + 1].name }}</h2>
-                    <ul class="list-inline">
+        <div class="col-md-4" ng-if="$index + 1 <= vm.catalogs.length - 1">
+            <div class="component-container">
+                <a href="#">
+                    <img ng-src="{{ ::vm.catalogs[$index + 1].image }}" alt="" class="thumbnail img-responsive
+                     component-container_multimedia component-container_multimedia--shadow">
+                </a>
+                <div class="component-container_footer">
+                    <h2 class="component-container_title">{{ ::vm.catalogs[$index + 1].name }}</h2>
+                    <ul class="list-inline component-container_ItemList">
                         <li>
                             <a href="#"><i class="fa fa-eye"></i><br />VIEW</a>
                         </li>
@@ -57,14 +59,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 catalog" ng-if="$index + 2 <= vm.catalogs.length - 1">
-            <a href="#">
-                <img ng-src="{{ ::vm.catalogs[$index + 2].image }}" alt="" class="thumbnail img-responsive catalog-img">
-            </a>
-            <div class="catalog-container">
-                <div>
-                    <h2>{{ ::vm.catalogs[$index + 2].name }}</h2>
-                    <ul class="list-inline">
+        <div class="col-md-4" ng-if="$index + 2 <= vm.catalogs.length - 1">
+            <div class="component-container">
+                <a href="#">
+                    <img ng-src="{{ ::vm.catalogs[$index + 2].image }}" alt="" class="thumbnail img-responsive
+                     component-container_multimedia component-container_multimedia--shadow">
+                </a>
+                <div class="component-container_footer">
+                    <h2 class="component-container_title">{{ ::vm.catalogs[$index + 2].name }}</h2>
+                    <ul class="list-inline component-container_ItemList">
                         <li>
                             <a href="#"><i class="fa fa-eye"></i><br />VIEW</a>
                         </li>
