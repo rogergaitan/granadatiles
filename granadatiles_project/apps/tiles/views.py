@@ -69,7 +69,6 @@ class CollectionViewSet(BaseViewSet):
 
 class GroupViewSet(BaseViewSet):
 
-
    @detail_route(methods=['get'])
    def tiles(self, request, pk = None):
        limit = int(request.query_params.get('limit', 6))

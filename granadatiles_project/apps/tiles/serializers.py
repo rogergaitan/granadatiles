@@ -5,12 +5,18 @@ from core.serializers import BaseGalleryImageSerializer, BaseContentSerializer, 
 class CollectionSerializer(BaseGalleryImageSerializer):
     url = serializers.URLField()
 
+class TileSizeSerializer(serializers.Serializer):
+    weight = serializers.CharField()
+
+
 class TileSerializer(BaseCatalogSerializer):
-    pass
+    image = serializers.CharField()
+    sizes = TileSizeSerializer(many=True)
 
 
 class TileDesignSerializer(BaseCatalogSerializer):
-    pass
+    main = TileSerializer()
+    tiles = TileSerializer(many=True)
 
 
 class GroupSerializer(BaseGalleryImageSerializer):

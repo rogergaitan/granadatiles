@@ -11,15 +11,26 @@ class CollectionDto(BaseGalleryImageDto):
             self.url = collection.get_absolute_url()
 
 
+class TileSizeDto():
+
+    def __init__(self, tile_size, language=None):
+        self.weight = tile_size.weight
+
+
 class TileDto(BaseCatalogDto):
-    pass
+
+    def __init__(self, tile, language=None):
+        super().__init__(tile, language)
+        self.image = tile.image.url if tile.image else ''
+        self.sizes = [TileSizeDto(tile_size, language) for tile_size in tile.sizes.all()]
 
 
 class TileDesignDto(BaseCatalogDto):
 
     def __init__(self, tile_design, language=None):
         super().__init__(tile_design, language)
-        self.tiles = tile_design.tiles.all()
+        self.main = TileDto(tile_design.tiles.filter(main=True)[0], language)
+        self.tiles = [TileDto(tile, language) for tile in tile_design.tiles.filter(main=False)]
 
 
 class GroupDto(BaseGalleryImageDto):
