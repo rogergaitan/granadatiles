@@ -6,7 +6,7 @@ from rest_framework.decorators import list_route, detail_route
 
 from core.views import BaseViewSet
 
-from apps.tiles.serializers import GroupSerializer, GroupTileSerializer, MenuCollectionSerializer, CollectionSerializer
+from apps.tiles.serializers import GroupSerializer, GroupDesignSerializer, MenuCollectionSerializer, CollectionSerializer
 from apps.tiles.services import CollectionService, GroupService
 from apps.tiles.models import Collection
 
@@ -76,6 +76,5 @@ class GroupViewSet(BaseViewSet):
        offset = int(request.query_params.get('offset', 0))
        group = GroupService.get_group_tiles(id=pk, offset=offset,
            limit=limit, language=self.get_language(request))
-       serializer = GroupTileSerializer(group)
+       serializer = GroupDesignSerializer(group)
        return Response(serializer.data)
-
