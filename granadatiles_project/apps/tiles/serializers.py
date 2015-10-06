@@ -1,21 +1,30 @@
-﻿from rest_framework import serializers
-from core.serializers import BaseGalleryImageSerializer, BaseContentSerializer
+from rest_framework import serializers
+from core.serializers import BaseGalleryImageSerializer, BaseContentSerializer, BaseCatalogSerializer
 
 
 class CollectionSerializer(BaseGalleryImageSerializer):
     url = serializers.URLField()
-    
 
-class TileSerializer(BaseContentSerializer):
+class TileSizeSerializer(serializers.Serializer):
+    name = serializers.CharField()
+
+
+class TileSerializer(BaseCatalogSerializer):
+    image = serializers.CharField()
+    sizes = TileSizeSerializer(many=True)
+
+
+class TileDesignSerializer(BaseCatalogSerializer):
+    main = TileSerializer()
+    tiles = TileSerializer(many=True)
+
+
+class GroupSerializer(BaseContentSerializer):
     pass
 
 
-class GroupSerializer(BaseGalleryImageSerializer):
-    pass
-
-
-class GroupTileSerializer(BaseContentSerializer):
-   tiles = TileSerializer(many=True)
+class GroupDesignSerializer(serializers.Serializer):
+    designs = TileDesignSerializer(many=True)
 
 
 class MenuCollectionSerializer(serializers.Serializer):

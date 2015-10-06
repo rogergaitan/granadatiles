@@ -55,7 +55,6 @@ class Group(BaseGallerieImageModel):
 
 
 
-
 class TileDesign(BaseCatalogModel):
     group = models.ForeignKey(Group, related_name='designs', verbose_name=_('Tiles Group'))
 

@@ -6,7 +6,10 @@ from rest_framework.decorators import list_route, detail_route
 
 from core.views import BaseViewSet
 
-from apps.tiles.serializers import GroupSerializer, GroupTileSerializer, MenuCollectionSerializer, CollectionSerializer
+from apps.tiles.serializers import (
+    GroupSerializer, GroupDesignSerializer, MenuCollectionSerializer,
+    CollectionSerializer, TileDesignSerializer
+)
 from apps.tiles.services import CollectionService, GroupService
 from apps.tiles.models import Collection
 
@@ -69,13 +72,13 @@ class CollectionViewSet(BaseViewSet):
 
 class GroupViewSet(BaseViewSet):
 
+   def retrieve(self, request, pk=None):
+       group = GroupService.get_group(id=pk, language=self.get_language(request))
+       serializer = GroupSerializer(group)
+       return Response(serializer.data)
 
    @detail_route(methods=['get'])
    def tiles(self, request, pk = None):
-       limit = int(request.query_params.get('limit', 6))
-       offset = int(request.query_params.get('offset', 0))
-       group = GroupService.get_group_tiles(id=pk, offset=offset,
-           limit=limit, language=self.get_language(request))
-       serializer = GroupTileSerializer(group)
+       tile_designs = GroupService.get_group_designs(id=pk, language=self.get_language(request))
+       serializer = TileDesignSerializer(tile_designs, many=True)
        return Response(serializer.data)
-

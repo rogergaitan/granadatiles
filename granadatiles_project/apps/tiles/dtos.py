@@ -1,4 +1,4 @@
-from core.dtos import BaseGalleryImageDto, BaseContentDto
+from core.dtos import BaseGalleryImageDto, BaseContentDto, BaseCatalogDto
 
 
 class CollectionDto(BaseGalleryImageDto):
@@ -11,19 +11,34 @@ class CollectionDto(BaseGalleryImageDto):
             self.url = collection.get_absolute_url()
 
 
-class TileDto(BaseContentDto):
+class TileSizeDto():
+
+    def __init__(self, tile_size, language=None):
+        self.name = tile_size.weight
+
+
+class TileDto(BaseCatalogDto):
+
+    def __init__(self, tile, language=None):
+        super().__init__(tile, language)
+        self.image = tile.image.url if tile.image else ''
+        self.sizes = [TileSizeDto(tile_size, language) for tile_size in tile.sizes.all()]
+
+
+class TileDesignDto(BaseCatalogDto):
+
+    def __init__(self, tile_design, language=None):
+        super().__init__(tile_design, language)
+        self.main = TileDto(tile_design.tiles.filter(main=True)[0], language)
+        self.tiles = [TileDto(tile, language) for tile in tile_design.tiles.filter(main=False)]
+
+
+class GroupRetrieveDto(BaseContentDto):
     pass
 
 
 class GroupDto(BaseGalleryImageDto):
     pass
-
-
-class GroupTileDto(GroupDto):
-
-   def __init__(self, group, offset, limit, language=None):
-       	super().__init__(group, language)
-        self.tiles = [TileDto(tile, language) for tile in group.tiles.all()[offset:limit + 1]]
 
 
 class MenuCollectionDto(object):
