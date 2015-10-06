@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from apps.tiles.models import Collection, Group
-from apps.tiles.dtos import CollectionDto, GroupDto, GroupDesignDto, MenuCollectionDto
+from apps.tiles.dtos import CollectionDto, GroupDto, GroupRetrieveDto, TileDesignDto, MenuCollectionDto
 
 
 class CollectionService(object):
@@ -38,7 +38,13 @@ class CollectionService(object):
 
 class GroupService(object):
 
-    def get_group_tiles(id, offset, limit, language=None):
-       group = get_object_or_404(Group, pk=id)
-       grouptileDto = GroupDesignDto(group, offset, limit, language)
-       return grouptileDto
+    def get_group(id, language=None):
+        group = get_object_or_404(Group, pk=id)
+        groupDto = GroupRetrieveDto(group, language)
+        return groupDto
+
+    def get_group_designs(id, language=None):
+        group = get_object_or_404(Group, pk=id)
+        tiledesignDto = [TileDesignDto(tile_design, language)
+                         for tile_design in group.designs.all()]
+        return tiledesignDto

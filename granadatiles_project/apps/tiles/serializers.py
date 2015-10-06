@@ -6,7 +6,7 @@ class CollectionSerializer(BaseGalleryImageSerializer):
     url = serializers.URLField()
 
 class TileSizeSerializer(serializers.Serializer):
-    weight = serializers.CharField()
+    name = serializers.CharField()
 
 
 class TileSerializer(BaseCatalogSerializer):
@@ -19,11 +19,11 @@ class TileDesignSerializer(BaseCatalogSerializer):
     tiles = TileSerializer(many=True)
 
 
-class GroupSerializer(BaseGalleryImageSerializer):
+class GroupSerializer(BaseContentSerializer):
     pass
 
 
-class GroupDesignSerializer(BaseContentSerializer):
+class GroupDesignSerializer(serializers.Serializer):
     designs = TileDesignSerializer(many=True)
 
 

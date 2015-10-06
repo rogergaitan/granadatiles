@@ -14,7 +14,7 @@ class CollectionDto(BaseGalleryImageDto):
 class TileSizeDto():
 
     def __init__(self, tile_size, language=None):
-        self.weight = tile_size.weight
+        self.name = tile_size.weight
 
 
 class TileDto(BaseCatalogDto):
@@ -33,15 +33,12 @@ class TileDesignDto(BaseCatalogDto):
         self.tiles = [TileDto(tile, language) for tile in tile_design.tiles.filter(main=False)]
 
 
-class GroupDto(BaseGalleryImageDto):
+class GroupRetrieveDto(BaseContentDto):
     pass
 
 
-class GroupDesignDto(GroupDto):
-
-   def __init__(self, group, offset, limit, language=None):
-       	super().__init__(group, language)
-        self.designs = [TileDesignDto(tile, language) for tile in group.designs.all()[offset:limit + 1]]
+class GroupDto(BaseGalleryImageDto):
+    pass
 
 
 class MenuCollectionDto(object):
