@@ -77,7 +77,7 @@ class Tile(BaseCatalogModel):
         verbose_name_plural = _('Tiles')
 
     def save(self, *args, **kwargs):
-        if self.main == True:
+        if self.main:
             Tile.objects.filter(main=True).update(main=False)
         super(Tile, self).save(*args, **kwargs)
 
