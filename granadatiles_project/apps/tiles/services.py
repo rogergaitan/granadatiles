@@ -43,8 +43,9 @@ class GroupService(object):
         groupDto = GroupRetrieveDto(group, language)
         return groupDto
 
-    def get_group_designs(id, language=None):
+    def get_group_designs(id, limit, offset, language=None):
+
         group = get_object_or_404(Group, pk=id)
         tiledesignDto = [TileDesignDto(tile_design, language)
-                         for tile_design in group.designs.all()]
+                         for tile_design in group.designs.all()[offset:limit + 1]]
         return tiledesignDto

@@ -79,6 +79,9 @@ class GroupViewSet(BaseViewSet):
 
    @detail_route(methods=['get'])
    def tiles(self, request, pk = None):
-       tile_designs = GroupService.get_group_designs(id=pk, language=self.get_language(request))
+       limit = int(request.query_params.get('limit', 6))
+       offset = int(request.query_params.get('offset', 0))
+       tile_designs = GroupService.get_group_designs(id=pk,
+           language=self.get_language(request), limit=limit, offset=offset)
        serializer = TileDesignSerializer(tile_designs, many=True)
        return Response(serializer.data)
