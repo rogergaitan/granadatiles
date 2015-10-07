@@ -76,6 +76,11 @@ class Tile(BaseCatalogModel):
         verbose_name = _('Tile')
         verbose_name_plural = _('Tiles')
 
+    def save(self, *args, **kwargs):
+        if self.main == True:
+            Tile.objects.filter(main=True).update(main=False)
+        super(Tile, self).save(*args, **kwargs)
+
 
 class Style(BaseCatalogModel):
     group = models.ForeignKey(Group, related_name='styles', verbose_name=_('Group'))
