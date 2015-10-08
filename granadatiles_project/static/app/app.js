@@ -3,6 +3,8 @@
 
     angular
         .module('app', ['ngSanitize',
+            'ui.bootstrap',
+            'mega-menu',
             'ngAnimate',
             'angular-loading-bar',
 
