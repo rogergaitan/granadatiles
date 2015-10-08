@@ -4,7 +4,7 @@
     </div>
     <div class="row mainNavigation">
         <div class="col-md-3 options" ng-repeat="option in ::vm.navigation">
-            <img src="{{::option.image}}" alt="">
+            <img ng-src="{{::option.image}}" alt="">
             <h3 class="slogan">{{::option.title}}</h3>
             <p>{{::option.description}}</p>
             <a href="" class="btn btn-sky">{{::option.action}}</a>
