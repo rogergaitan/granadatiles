@@ -20,7 +20,7 @@ def addInitialData(apps, schema_editor):
             <li>Pressed to 2,000 lbs. per square inch<br></li></ul>''',
             description_es='',
             image=os.path.join(settings.STATIC_URL, 'img/initial/tiles/FairweatherBar-compressor-compressor.jpg'),
-            menu_image=''
+            menu_image=os.path.join(settings.STATIC_URL, 'img/initial/tiles/icon-Echo-Collection-Granada-Tile-Cement.jpg')
         ),
         collection(
             title='Minis Tile Collection',
@@ -34,7 +34,7 @@ def addInitialData(apps, schema_editor):
             description_es='',
             image=os.path.join(settings.STATIC_URL,
                 'img/initial/tiles/heath-ceramics-mural-tile-and-clay-studio-photo-by-mariko-reed-compressor-com_RdqFIFZ.jpg'),
-            menu_image=''
+            menu_image=os.path.join(settings.STATIC_URL, 'img/initial/tiles/Icon-Minis-Collection-Granada-Tile-Cement.png')
         ),
         collection(
             title='Andalucía Tile Collection',
@@ -46,7 +46,7 @@ def addInitialData(apps, schema_editor):
             <li>Use on bathroom floors and walls, kitchen backsplashes and more</li></ul>''',
             description_es='',
             image=os.path.join(settings.STATIC_URL, 'img/initial/tiles/kitchen-minis-compressor_ca6NA4u.jpg'),
-            menu_image=''
+            menu_image=os.path.join(settings.STATIC_URL, 'img/initial/tiles/Icon-Mauresque-Collection-Granada-Tile-Cement.png')
         ),
     ])
 
