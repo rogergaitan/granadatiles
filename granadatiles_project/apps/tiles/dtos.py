@@ -5,7 +5,6 @@ class CollectionDto(BaseGalleryImageDto):
 
     def __init__(self, collection, language=None):
         super().__init__(collection, language)
-        self.menu_image = collection.menu_image.url if collection.menu_image else ''
         if language:
             self.url = collection.get_absolute_url(language)
         else:
@@ -50,4 +49,4 @@ class MenuCollectionDto(object):
         else:
             self.title = collection.title
             self.url = collection.get_absolute_url()
-        self.image = collection.menu_thumbnail
+        self.image = collection.menu_image
