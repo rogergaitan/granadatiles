@@ -4,6 +4,7 @@ from core.serializers import BaseGalleryImageSerializer, BaseContentSerializer, 
 
 class CollectionSerializer(BaseGalleryImageSerializer):
     url = serializers.URLField()
+    menu_image = serializers.CharField()
 
 
 class TileSizeSerializer(serializers.Serializer):
