@@ -80,7 +80,10 @@
                                     {% get_current_language as LANGUAGE_CODE %}
                                     {% get_available_languages as LANGUAGES %}
                                     {% get_language_info_list for LANGUAGES as languages %}
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <div ng-init="isOpen=false" dropdown is-open="isOpen">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                            dropdown-toggle ng-disabled="disabled"
+                                            aria-expanded="false">
                                         <i class="fa fa-globe"></i>&nbsp;<span>{{ LANGUAGE_CODE | language_name }}<i class="caret"></i></span>
                                     </button>
                                     {% if LANGUAGES|length > 1 %}
@@ -92,6 +95,7 @@
                                         {% endfor %}
                                     </ul>
                                     {% endif %}
+                                    </div>
                                 </li>
                             </ul>
                         </div>
