@@ -4,14 +4,14 @@
     angular
         .module('app.tiles')
         .controller('collectionsGroupCtrl', ['pageSettings',
-            'collectionGroupsSvc',
+            'collectionsSvc',
             collectionsGroupCtrl
         ]);
 
-    function collectionsGroupCtrl(pageSettings, collectionGroupsSvc) {
+    function collectionsGroupCtrl(pageSettings, collectionsSvc) {
         var vm = this;
 
-        collectionGroupsSvc.getCollectionGroups(pageSettings.collectionId).then(function (response) {
+        collectionsSvc.getCollectionGroups(pageSettings.collectionId).then(function (response) {
             vm.collectionGroups = response.data;
         });
 
