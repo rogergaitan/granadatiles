@@ -64,7 +64,7 @@ def addInitialData(apps, schema_editor):
         section_image.articles.create(
                 title='Lorep ipsum',
                 description='Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                image=os.path.join(settings.STATIC_URL, 'img/initial/news/article/Magazine-Dwell-Granada-Tile'),
+                image=os.path.join(settings.STATIC_URL, 'img/initial/news/article/Magazine-Dwell-Granada-Tile.jpg'),
                 url='http://www.dwell.com/',
                 magazine_id=2,
                 date=timezone.now()
@@ -73,7 +73,7 @@ def addInitialData(apps, schema_editor):
         section_image.articles.create(
                 title='Lore ipsum',
                 description='Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                image=os.path.join(settings.STATIC_URL, 'img/initial/news/article/Magazine-Coastal-Living-Granada-Tile'),
+                image=os.path.join(settings.STATIC_URL, 'img/initial/news/article/Magazine-Coastal-Living-Granada-Tile.jpg'),
                 url='http://www.coastalliving.com/',
                 magazine_id=3,
                 date=timezone.now()
@@ -91,7 +91,7 @@ def addInitialData(apps, schema_editor):
         section_image.articles.create(
                 title='Lorep ipsum',
                 description='Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                image=os.path.join(settings.STATIC_URL, 'img/initial/news/article/elle_decor_cover.jpg'),
+                image=os.path.join(settings.STATIC_URL, 'img/initial/news/article/elle_decor_cover.jpeg'),
                 url='http://www.elledecor.com/',
                 magazine_id=5,
                 date=timezone.now()
