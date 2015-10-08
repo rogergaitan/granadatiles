@@ -80,7 +80,10 @@
                                     {% get_current_language as LANGUAGE_CODE %}
                                     {% get_available_languages as LANGUAGES %}
                                     {% get_language_info_list for LANGUAGES as languages %}
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <div ng-init="isOpen=false" dropdown is-open="isOpen">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                            dropdown-toggle ng-disabled="disabled"
+                                            aria-expanded="false">
                                         <i class="fa fa-globe"></i>&nbsp;<span>{{ LANGUAGE_CODE | language_name }}<i class="caret"></i></span>
                                     </button>
                                     {% if LANGUAGES|length > 1 %}
@@ -92,6 +95,7 @@
                                         {% endfor %}
                                     </ul>
                                     {% endif %}
+                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -206,6 +210,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/directives/angular-yamm3.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/interceptors/languageCode.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/controllers/galleriesListCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/controllers/galleryModalCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/services/gallerySvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/controllers/articlesListCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/controllers/catalogListCtrl.js"></script>
@@ -225,16 +230,17 @@
             .factory("baseSettings", ['appSettings',baseSettings]);
                 function baseSettings(appSettings) {
                 return{
-                labels: {
-                    browse: '{% trans 'BROWSE OR CEMENT TILE COLLECTIONS' %}',
-                    inStockSamples: '{% trans 'In Stock Samples' %}',
-                    productInformation: '{% trans 'PRODUCT INFORMATION'%}',
-                    inStockTiles: '{% trans 'In Stock Tiles' %}',
-                    compareProducts: '{% trans 'Compare our Products' %}',
-                    cementVsCeramic: '{% trans 'Cement Vs. Ceramic' %}',
-                    colorPalletes: '{% trans 'Color Palletes' %}',
-                    catalogs:'{% trans 'Catalogs / Inspiration Boooks' %}'
-                }
+                    staticUrl: '{{STATIC_URL}}',
+                    labels: {
+                        browse: '{% trans 'BROWSE OR CEMENT TILE COLLECTIONS' %}',
+                        inStockSamples: '{% trans 'In Stock Samples' %}',
+                        productInformation: '{% trans 'PRODUCT INFORMATION'%}',
+                        inStockTiles: '{% trans 'In Stock Tiles' %}',
+                        compareProducts: '{% trans 'Compare our Products' %}',
+                        cementVsCeramic: '{% trans 'Cement Vs. Ceramic' %}',
+                        colorPalletes: '{% trans 'Color Palletes' %}',
+                        catalogs:'{% trans 'Catalogs / Inspiration Boooks' %}'
+                    }
             }
         };
     })();

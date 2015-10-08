@@ -13,7 +13,7 @@
                 <div class="component-container_footer">
                     <h2 class="component-container_title">{{ ::vm.galleries[$index].name }}</h2>
                     <ul class="list-inline component-container_OptionList">
-                        <li ng-repeat="category in vm.galleries[$index].categories"><a href="">{{ ::category.name }}</a></li>
+                        <li ng-repeat="category in vm.galleries[$index].categories"><a href="#" ng-click="vm.showGallery(category.id)">{{ ::category.name }}</a></li>
                     </ul>
                  </div>
             </div>
@@ -24,7 +24,7 @@
                 <div class="component-container_footer">
                     <h2 class="component-container_title">{{ ::vm.galleries[$index + 1].name }}</h2>
                     <ul class="list-inline component-container_OptionList">
-                        <li ng-repeat="category in vm.galleries[$index + 1].categories"><a href="">{{ ::category.name }}</a></li>
+                        <li ng-repeat="category in vm.galleries[$index + 1].categories"><a href="#" ng-click="vm.showGallery(category.id)">{{ ::category.name }}</a></li>
                     </ul>
                 </div>
             </div>

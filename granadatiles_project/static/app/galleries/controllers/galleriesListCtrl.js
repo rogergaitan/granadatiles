@@ -3,13 +3,35 @@
 
     angular
         .module('app.galleries')
-        .controller('galleryListCtrl',['gallerySvc','sectionSvc',
+        .controller('galleryListCtrl',
+                    ['baseSettings',
+                    'gallerySvc',
+                    'sectionSvc',
+                    '$modal',
                     galleryCtrl]);
 
-    function galleryCtrl(gallerySvc) {
+    function galleryCtrl(baseSettings, gallerySvc, sectionSvc, $modal) {
         var vm = this;
 
-        //vm.galleries = gallerySvc.getGalleries();
+        gallerySvc.getGalleries().then(function (response) {
+            vm.galleries = response.data;
+        });
+
+        vm.showGallery = function (categoryId) {
+            $modal.open({
+                templateUrl: baseSettings.staticUrl + 'app/galleries/templates/galleryModal.html',
+                controller: 'galleryModalCtrl',
+                controllerAs: 'vm',
+                size:'lg',
+                resolve:{
+                    gallery: function () {
+                        return gallerySvc.getGallery(categoryId).then(function (response) {
+                            return response.data;
+                        });
+                    }
+                }
+            })
+        }
 
         vm.title = 'Photos of Cement & Concrete Tile Installations';
 
@@ -26,9 +48,7 @@
             'concrete tiles? (And when you do, please send pictures so we can add them here!)</p>';
 
 
-        gallerySvc.getGalleries().then(function (response){
-            vm.galleries = response.data;
-        });
+        
     }
 
 }());
