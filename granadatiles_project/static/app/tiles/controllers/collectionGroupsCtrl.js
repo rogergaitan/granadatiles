@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -15,7 +15,7 @@
             vm.collectionGroups = response.data;
         });
 
-         vm.title = 'Echo Tile Collection Interactive Catalog ';
+        vm.title = 'Echo Tile Collection Interactive Catalog ';
 
         vm.description = '<p>The Echo Tile Collection revitalizes an art form that developed in France in the mid-1800s\ ' +
                         'and quickly spread around the world. Unlike ceramic tiles, which are usually glazed and ?red,\ ' +
