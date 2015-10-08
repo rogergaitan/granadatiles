@@ -20,7 +20,7 @@ class TileDesignSerializer(BaseCatalogSerializer):
     tiles = TileSerializer(many=True)
 
 
-class GroupSerializer(BaseContentSerializer):
+class GroupSerializer(BaseGalleryImageSerializer):
     pass
 
 
