@@ -7,6 +7,7 @@
             'mega-menu',
             'ngAnimate',
             'angular-loading-bar',
+            '720kb.socialshare',
 
             'app.core',
             'app.content',
