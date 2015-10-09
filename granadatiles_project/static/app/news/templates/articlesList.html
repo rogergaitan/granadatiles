@@ -10,7 +10,7 @@
         </aside>
         <div class="col-md-9">
             <h1 class="heading-sec">{{ ::vm.title }}</h1>
-            <a href="#" class="breadcrumds"><u>{{ vm.breadcrumds }}</u> <i class="fa fa-angle-double-right"></i></a>
+            <a href="#" class="breadcrumds"><u>{{ ::vm.breadcrumds }}</u> <i class="fa fa-angle-double-right"></i></a>
             <div class="text-section" ng-bind-html="::vm.description"></div>
         </div>
     </div>
@@ -42,7 +42,7 @@
                             <h2 class="component-container_title">{{ ::vm.articles[$index].title }}</h2>
                             <h3 class="component-container_subtitle">{{ ::vm.articles[$index].magazine }}</h3>
                             <p class="component-container_text" ng-bind-html="::vm.articles[$index].description"></p>
-                            <label class="component-container_text">Date:</label><label class="component-container_text">{{ ::vm.articles[$index].date }}</label>
+                            <label class="component-container_text">{{vm.labels.date}}:</label><label class="component-container_text">{{ ::vm.articles[$index].date }}</label>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                             <h2 class="component-container_title">{{ ::vm.articles[$index + 1].title }}</h2>
                             <h3 class="component-container_subtitle">{{ ::vm.articles[$index + 1].magazine }}</h3>
                             <p class="component-container_text" ng-bind-html="::vm.articles[$index + 1].description"></p>
-                            <label class="component-container_text">Date:</label><label class="component-container_text">{{ ::vm.articles[$index + 1].date }}</label>
+                            <label class="component-container_text">{{vm.labels.date}}:</label><label class="component-container_text">{{ ::vm.articles[$index + 1].date }}</label>
                         </div>
                     </div>
                 </div>

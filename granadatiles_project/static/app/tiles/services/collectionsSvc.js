@@ -13,7 +13,8 @@
         return {
             getCollections: getCollections,
             getMenuCollections: getMenuCollections,
-            getFeaturedCollections: getFeaturedCollections
+            getFeaturedCollections: getFeaturedCollections,
+            getCollectionGroups: getCollectionGroups
         }
 
         function getCollections() {
@@ -26,6 +27,10 @@
 
         function getFeaturedCollections() {
             return $http.get(appSettings.serverPath + 'collections/featured');
+        }
+
+        function getCollectionGroups(collectionId) {
+            return $http.get(appSettings.serverPath + 'collections/'+ collectionId + '/groups');
         }
 
         
