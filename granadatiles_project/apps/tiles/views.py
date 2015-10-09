@@ -56,8 +56,9 @@ class CollectionViewSet(BaseViewSet):
     # /collections/menu
     @list_route(methods=['get'])
     def menu(self, request):
+        filter = request.query_params.get('exclude')
         collections = CollectionService.get_menu_collections(
-            language=self.get_language(request))
+            language=self.get_language(request), filter=filter)
         serializer = MenuCollectionSerializer(collections, many=True)
         return Response(serializer.data)
 

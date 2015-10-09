@@ -43,10 +43,6 @@ class TileDesignDto(BaseCatalogDto):
         self.tiles = [TileDto(tile, language) for tile in tile_design.tiles.filter(main=False)]
 
 
-class GroupRetrieveDto(BaseContentDto):
-    pass
-
-
 class GroupDto(BaseGalleryImageDto):
     pass
 
