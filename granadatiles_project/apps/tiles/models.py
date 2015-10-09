@@ -30,6 +30,8 @@ class Collection(BaseGallerieImageModel, BaseSlugModel):
     menu_image = ImageField(upload_to='Galleries/menu', null = True, blank=True)
     featured = models.BooleanField(default=True, verbose_name=_('Featured'))
     show_in_menu = models.BooleanField(default=True, verbose_name= _('Show in menu'))
+    introduction = models.TextField(verbose_name=_('Introduction'))
+    introduction_es = models.TextField(blank=True, null=True, verbose_name=_('Introduction_es'))
 
     @property
     def menu_thumbnail(self):
@@ -40,6 +42,11 @@ class Collection(BaseGallerieImageModel, BaseSlugModel):
     def get_absolute_url(self, language=None):
         slug = self.get_slug(language)
         return reverse('sr-collections:sr-detail', kwargs={'slug': slug})
+
+    def get_introduction(self, language):
+        if language == 'es' and self.introduction_es is not None and self.introduction_es:
+            return self.introduction_es
+        return self.introduction
 
     class Meta:
         verbose_name = _('Collection')

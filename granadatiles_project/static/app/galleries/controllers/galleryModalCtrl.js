@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app')
+        .module('app.galleries')
         .controller('galleryModalCtrl',
                     ['gallery',
                      '$modalInstance',

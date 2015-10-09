@@ -3,17 +3,20 @@
 
     angular
         .module('app.news')
+
         .controller('catalogListCtrl',
             ['baseSettings',
                 'pageSettings',
                 'catalogSvc',
                 'sectionSvc',
+                'sharePageSvc',
                 catalogListCtrl]);
 
-    function catalogListCtrl(baseSettings,pageSettings, catalogSvc) {
+    function catalogListCtrl(baseSettings,pageSettings, catalogSvc, sectionSvc, sharePageSvc) {
+
         var vm = this;
 
-        catalogSvc.getCatalogs().then(function (response){
+        catalogSvc.getCatalogs().then(function (response) {
             vm.catalogs = response.data;
         });
 
@@ -24,8 +27,6 @@
         vm.labels = pageSettings.labels;
 
         vm.breadcrumds = 'News / Press';
-
-
 
         vm.title = 'Tile Design Inspiration to Help You Design Your Project';
 
@@ -39,6 +40,10 @@
                         'site to bring you the most current designs and patterns. (This is also an environmentally friendly\ ' +
                         'solution.)</p><p>Nevertheless, the most recent cement tile catalogs are still useful tools and can\ ' +
                         'present information and photos in ways that inspire and inform.</p>';
+
+        vm.share = function () {
+            sharePageSvc.shareModal();
+        }
 
     }
 
