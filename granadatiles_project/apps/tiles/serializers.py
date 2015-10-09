@@ -7,6 +7,10 @@ class CollectionSerializer(BaseGalleryImageSerializer):
     menu_image = serializers.CharField()
 
 
+class CollectionRetrieveSerializer(CollectionSerializer):
+    introduction = serializers.CharField()
+
+
 class TileSizeSerializer(serializers.Serializer):
     name = serializers.CharField()
 

@@ -1,13 +1,15 @@
 from django.shortcuts import get_object_or_404
 from apps.tiles.models import Collection, Group
-from apps.tiles.dtos import CollectionDto, GroupDto, GroupRetrieveDto, TileDesignDto, MenuCollectionDto
+from apps.tiles.dtos import (
+    CollectionDto, CollectionRetrieveDto, GroupDto,
+    GroupRetrieveDto, TileDesignDto, MenuCollectionDto)
 
 
 class CollectionService(object):
 
     def get_collection(id ,language=None):
         collection = get_object_or_404(Collection, pk=id)
-        collectionDto = CollectionDto(collection, language)
+        collectionDto = CollectionRetrieveDto(collection, language)
         return collectionDto
 
     def get_collections(language=None):

@@ -11,6 +11,15 @@ class CollectionDto(BaseGalleryImageDto):
         else:
             self.url = collection.get_absolute_url()
 
+class CollectionRetrieveDto(CollectionDto):
+
+    def __init__(self, collection, language):
+        super().__init__(collection, language)
+        if language:
+           self.introduction = collection.get_introduction(language)
+        else:
+           self.introduction = collection.introduction
+
 
 class TileSizeDto():
 
