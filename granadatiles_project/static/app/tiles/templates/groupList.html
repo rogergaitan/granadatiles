@@ -1,15 +1,15 @@
 ﻿<div class="col-md-12" ng-controller="collectionsGroupCtrl as vm">
     <div class="row">
         <aside class="col-md-3 ">
-            <div class="row margin-top-20">
-                <div class="col-md-6">
-                    <img ng-src="{{ vm.collection.menu_image }}" alt="{{ vm.collection.title }}" class="img-responsive menu-section_image">
+            <div class="row submenu-selected">
+                <div class="col-md-6 submenu-selected-image">
+                    <img ng-src="{{ vm.collection.menu_image }}" alt="{{ vm.collection.title }}" class="img-responsive">
                 </div>
-                <div class="col-md-6">
-                    <h3 class="menu-section_title">{{ vm.collection.title }}<i class="fa fa-caret-down menu-section_arrowDown"></i></h3>
+                <div class="col-md-3 submenu-selected-title">
+                    <h3 class="text-uppercase">{{ vm.collection.title }}<i class="fa fa-caret-down"></i></h3>
                 </div>
             </div>
-            <ul class="menu-section">
+            <ul class="active-submenu">
                 <li><a href="#">Interactive Catalog </a></li>
                 <li><a href="#">Custom Cement Tiles </a></li>
                 <li><a href="#">About the Echo Collection </a></li>
@@ -20,13 +20,13 @@
                 <li><a href="#">Installing Cement Tile</a></li>
             </ul>
             <div class="row">
-                <div class="col-md-6">
-                    <img src="/static/img/initial/tiles/Icon-Minis-Collection-Granada-Tile-Cement.png" alt="" class="img-responsive menu-section_image">
-                    <h3 class="menu-section_title text-center">MINIS TILE COLLECTION</h3>
+                <div class="col-md-6 navigation-submenu-option">
+                    <img src="/static/img/initial/tiles/Icon-Minis-Collection-Granada-Tile-Cement.png" alt="" class="img-responsive">
+                    <h3>MINIS TILE COLLECTION</h3>
                 </div>
-                <div class="col-md-6">
-                    <img src="/static/img/initial/tiles/Icon-Mauresque-Collection-Granada-Tile-Cement.png" alt="" class="img-responsive menu-section_image">
-                    <h3 class="menu-section_title text-center">MAURESQUE TILE COLLECTION</h3>
+                <div class="col-md-6 navigation-submenu-option">
+                    <img src="/static/img/initial/tiles/Icon-Mauresque-Collection-Granada-Tile-Cement.png" alt="" class="img-responsive">
+                    <h3>MAURESQUE TILE COLLECTION</h3>
                 </div>
             </div>
         </aside>
@@ -34,25 +34,25 @@
             <h1 class="heading-sec">{{ ::vm.collection.title }} {{ ::vm.labels.title }}</h1>
             <a href="#" class="breadcrumds"><u>Collections</u> <i class="fa fa-angle-double-right"></i> <u>Echo Tile Collection</u></a>
             <div class="text-section" ng-bind-html="::vm.description"></div>
-            <div ng-repeat="group in vm.collectionGroups" ng-if="$index % 2 == 0" class="row component-space-row">
-                <div class="col-md-6" ng-if="$index <= vm.collectionGroups.length - 1">
+            <div ng-repeat="group in vm.collectionGroups" ng-if="$index % 2 == 0" class="row">
+                <div class="col-md-6 blue-box" ng-if="$index <= vm.collectionGroups.length - 1">
                     <a href="#">
-                        <div class="component-container component-container_padding5">
-                            <img ng-src="{{ vm.collectionGroups[$index].image }}" class="component-container_multimedia">
-                            <h2 class="component-container_title padding-left-10">{{ vm.collectionGroups[$index].title }}</h2>
-                            <div class="component-container_moreInfo">
+                        <div class="blue-box-content">
+                            <img ng-src="{{ vm.collectionGroups[$index].image }}">
+                            <h2>{{ vm.collectionGroups[$index].title }}</h2>
+                            <div class="view-more">
                                 <i class="fa fa-plus-circle"></i>
                                 <label>MORE<br />INFO</label>
                             </div>
                         </div>
                     </a>
                 </div>
-                <div class="col-md-6" ng-if="$index + 1 <= vm.collectionGroups.length - 1">
+                <div class="col-md-6 blue-box" ng-if="$index + 1 <= vm.collectionGroups.length - 1">
                     <a href="#">
-                        <div class="component-container component-container_padding5">
-                            <img ng-src="{{ vm.collectionGroups[$index + 1].image }}" class="component-container_multimedia">
-                            <h2 class="component-container_title padding-left-10">{{ vm.collectionGroups[$index + 1].title }}</h2>
-                            <div class="component-container_moreInfo">
+                        <div class="blue-box-content">
+                            <img ng-src="{{ vm.collectionGroups[$index + 1].image }}">
+                            <h2>{{ vm.collectionGroups[$index + 1].title }}</h2>
+                            <div class="view-more">
                                 <i class="fa fa-plus-circle"></i>
                                 <label>MORE<br />INFO</label>
                             </div>
