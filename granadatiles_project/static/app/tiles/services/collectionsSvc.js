@@ -15,7 +15,8 @@
             getMenuCollections: getMenuCollections,
             getFeaturedCollections: getFeaturedCollections,
             getCollection: getCollection,
-            getCollectionGroups: getCollectionGroups
+            getCollectionGroups: getCollectionGroups,
+            getFilteredMenuCollection: getFilteredMenuCollection
         }
 
         function getCollections() {
@@ -24,6 +25,10 @@
 
         function getMenuCollections(){
             return $http.get(appSettings.serverPath + 'collections/menu');
+        }
+
+        function getFilteredMenuCollection(collectionId){
+             return $http.get(appSettings.serverPath + 'collections/menu/?exclude='+ collectionId);
         }
 
         function getFeaturedCollections() {

@@ -17,6 +17,10 @@
             vm.collectionGroups = response.data;
         });
 
+        collectionsSvc.getFilteredMenuCollection(pageSettings.collectionId).then(function (response) {
+            vm.filteredMenuCollection = response.data;
+        });
+
         vm.labels = pageSettings.labels;
 
     }

@@ -19,26 +19,30 @@
                 <li><a href="#">Ordering Cement Tile </a></li>
                 <li><a href="#">Installing Cement Tile</a></li>
             </ul>
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="/static/img/initial/tiles/Icon-Minis-Collection-Granada-Tile-Cement.png" alt="" class="img-responsive menu-section_image">
-                    <h3 class="menu-section_title text-center">MINIS TILE COLLECTION</h3>
+            <div ng-repeat="item in vm.filteredMenuCollection" ng-if="$index % 2 == 0" class="row">
+                <div class="col-md-6"  ng-if="$index <= vm.filteredMenuCollection.length - 1">
+                    <a ng-href="{{ vm.filteredMenuCollection[$index].url }}">
+                        <img ng-src="{{ ::vm.filteredMenuCollection[$index].image }}" alt="{{ ::vm.filteredMenuCollection[$index].title }}" class="img-responsive menu-section_image">
+                        <h3 class="menu-section_title text-center">{{ ::vm.filteredMenuCollection[$index].title | uppercase }}</h3>
+                    </a>
                 </div>
-                <div class="col-md-6">
-                    <img src="/static/img/initial/tiles/Icon-Mauresque-Collection-Granada-Tile-Cement.png" alt="" class="img-responsive menu-section_image">
-                    <h3 class="menu-section_title text-center">MAURESQUE TILE COLLECTION</h3>
+                <div class="col-md-6"  ng-if="$index + 1 <= vm.filteredMenuCollection.length - 1">
+                    <a ng-href="{{ vm.filteredMenuCollection[$index + 1].url }}">
+                        <img ng-src="{{ ::vm.filteredMenuCollection[$index + 1].image }}" alt="{{ ::vm.filteredMenuCollection[$index + 1].title }}" class="img-responsive menu-section_image">
+                        <h3 class="menu-section_title text-center">{{ ::vm.filteredMenuCollection[$index + 1].title | uppercase }}</h3>
+                    </a>
                 </div>
             </div>
         </aside>
         <div class="col-md-9">
             <h1 class="heading-sec">{{ ::vm.collection.title }} {{ ::vm.labels.title }}</h1>
-            <a href="#" class="breadcrumds"><u>Collections</u> <i class="fa fa-angle-double-right"></i> <u>Echo Tile Collection</u></a>
+            <a href="#" class="breadcrumds"><u>Collections</u> <i class="fa fa-angle-double-right"></i> <u>{{ ::vm.collection.title }}</u></a>
             <div class="text-section" ng-bind-html="::vm.collection.introduction"></div>
             <div ng-repeat="group in vm.collectionGroups" ng-if="$index % 2 == 0" class="row component-space-row">
                 <div class="col-md-6" ng-if="$index <= vm.collectionGroups.length - 1">
-                    <a href="#">
+                    <a ng-href="{{ vm.collectionGroups[$index].url }}">
                         <div class="component-container component-container_padding5">
-                            <img ng-src="{{ vm.collectionGroups[$index].image }}" class="component-container_multimedia">
+                            <img ng-src="{{ vm.collectionGroups[$index].image }}" alt="{{ vm.collectionGroups[$index].title }}" class="component-container_multimedia">
                             <h2 class="component-container_title padding-left-10">{{ vm.collectionGroups[$index].title }}</h2>
                             <div class="component-container_moreInfo">
                                 <i class="fa fa-plus-circle"></i>
@@ -48,9 +52,9 @@
                     </a>
                 </div>
                 <div class="col-md-6" ng-if="$index + 1 <= vm.collectionGroups.length - 1">
-                    <a href="#">
+                    <a href="#" ">
                         <div class="component-container component-container_padding5">
-                            <img ng-src="{{ vm.collectionGroups[$index + 1].image }}" class="component-container_multimedia">
+                            <img ng-src="{{ vm.collectionGroups[$index + 1].image }}" alt="{{ vm.collectionGroups[$index + 1].title }}" class="component-container_multimedia">
                             <h2 class="component-container_title padding-left-10">{{ vm.collectionGroups[$index + 1].title }}</h2>
                             <div class="component-container_moreInfo">
                                 <i class="fa fa-plus-circle"></i>
