@@ -9,7 +9,7 @@
                 <slide ng-repeat="slide in vm.gallery" active="slide.active">
                     <img ng-src="{{::slide.image}}" alt="{{::slide.title}}" />
                     <div>
-                        <h4>{{::slide.title}}</h4>
+                        <h1>{{::slide.title}}</h1>
                         <p ng-bind-html="slide.description"></p>
                         <p>{{::slide.designer}}</p>
                         <p>{{::slide.photographer}}</p>

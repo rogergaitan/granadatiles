@@ -403,3 +403,46 @@ hr{
     margin-top: 20px;
 }
 /************************************/
+
+/*********** Style Gallery **********/
+#gt-gallery-carousel{
+    div{
+        h1{
+            color: @darkBlue;
+            text-align: left;
+            font-family: @font-secundary;
+            .font-configuration(@font-xlll,@font-light);
+        }
+        p{
+            color: @darkGray;
+            text-align: justify;
+            font-family: @font-primary;
+            .font-configuration(@font-sm,@font-light);
+        }
+    }
+}
+.carousel-control.left,
+.carousel-control.right{
+    background-image: none;
+}
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right{
+    width: 40px;
+    height: 40px;
+    padding: 4px;
+    border-radius: 25px;
+    background-color: black;
+}
+.modal-header {
+    border-bottom: 1px solid transparent;
+
+    .close{
+        color: @blue;
+        font-size: 45px;
+        margin-top: -14px;
+        background-color: @white;
+    }
+}
+
+
+/***********************************/
