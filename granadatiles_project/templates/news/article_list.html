@@ -21,7 +21,16 @@
                 language: '{{LANGUAGE_CODE}}',
                 labels: {
                     news: '{% trans 'News'%}',
-                    date: '{% trans 'Date'  %}'
+                    date: '{% trans 'Date'  %}',
+                    magazine: '{% trans 'Magazines'%}',
+                    catalog: '{% trans 'Catalogs / Inspiration Books'%}',
+                    blog: '{% trans 'Cement Tile Blog'%}',
+                    video: '{% trans 'Videos'%}'
+                },
+                navigation:{
+                    magazine: '{% url 'sr-news:sr-news' %}',
+                    catalog: '{% url 'sr-news:sr-catalogs' %}',
+                    video: '{% url 'sr-news:sr-videos' %}'
                 }
             }
         }

@@ -3,9 +3,14 @@
 
     angular
         .module('app.news')
-        .controller('articlesListCtrl',['pageSettings','articleSvc','sectionSvc', articlesListCtrl]);
+        .controller('articlesListCtrl',
+            ['pageSettings',
+                'baseSettings',
+                'articleSvc',
+                'sectionSvc',
+                articlesListCtrl]);
 
-    function articlesListCtrl(pageSettings, articleSvc) {
+    function articlesListCtrl(pageSettings, baseSettings, articleSvc, sectionSvc) {
         var vm = this;
 
         vm.breadcrumds = 'My Portafolio';
@@ -22,6 +27,10 @@
         articleSvc.getArticles().then(function (response){
             vm.articles = response.data;
         });
+
+        vm.menuNewsTemplateUrl = baseSettings.staticUrl + 'app/news/templates/menuNews.html';
+
+        vm.navigation = pageSettings.navigation;
 
     }
 

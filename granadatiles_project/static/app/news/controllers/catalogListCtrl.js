@@ -3,19 +3,29 @@
 
     angular
         .module('app.news')
-        .controller('catalogListCtrl',['catalogSvc','sectionSvc',
-                    catalogListCtrl]);
+        .controller('catalogListCtrl',
+            ['baseSettings',
+                'pageSettings',
+                'catalogSvc',
+                'sectionSvc',
+                catalogListCtrl]);
 
-    function catalogListCtrl(catalogSvc) {
+    function catalogListCtrl(baseSettings,pageSettings, catalogSvc) {
         var vm = this;
 
         catalogSvc.getCatalogs().then(function (response){
             vm.catalogs = response.data;
-        })
+        });
+
+        vm.menuNewsTemplateUrl = baseSettings.staticUrl + 'app/news/templates/menuNews.html';
+
+        vm.navigation = pageSettings.navigation;
+
+        vm.labels = pageSettings.labels;
 
         vm.breadcrumds = 'News / Press';
 
-        //vm.catalogs = catalogSvc.getCatalogs();
+
 
         vm.title = 'Tile Design Inspiration to Help You Design Your Project';
 
