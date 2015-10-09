@@ -31,8 +31,9 @@ class CollectionService(object):
                      for group in groups]
         return groupsDto
 
-    def get_menu_collections(language = None):
+    def get_menu_collections(language=None, filter=None):
         collections = Collection.objects.filter(show_in_menu=True)
+        if filter: collections = collections.exclude(pk=filter)
         menuCollectionsDto = [MenuCollectionDto(collection, language = language)
                               for collection in collections]
         return menuCollectionsDto
