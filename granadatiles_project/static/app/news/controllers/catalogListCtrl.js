@@ -3,18 +3,28 @@
 
     angular
         .module('app.news')
-        .controller('catalogListCtrl', [
-                    'catalogSvc',
-                    'sectionSvc',
-                    'sharePageSvc',
-                    catalogListCtrl]);
 
-    function catalogListCtrl(catalogSvc, sectionSvc, sharePageSvc) {
+        .controller('catalogListCtrl',
+            ['baseSettings',
+                'pageSettings',
+                'catalogSvc',
+                'sectionSvc',
+                'sharePageSvc',
+                catalogListCtrl]);
+
+    function catalogListCtrl(baseSettings,pageSettings, catalogSvc, sectionSvc, sharePageSvc) {
+
         var vm = this;
 
         catalogSvc.getCatalogs().then(function (response) {
             vm.catalogs = response.data;
         });
+
+        vm.menuNewsTemplateUrl = baseSettings.staticUrl + 'app/news/templates/menuNews.html';
+
+        vm.navigation = pageSettings.navigation;
+
+        vm.labels = pageSettings.labels;
 
         vm.breadcrumds = 'News / Press';
 

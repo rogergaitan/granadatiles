@@ -3,15 +3,29 @@
 
     angular
         .module('app.content')
-        .controller('videoCtrl',['videoSvc','sectionSvc',videoCtrl]);
+        .controller('videoCtrl',
+            ['baseSettings',
+                'pageSettings',
+                'videoSvc',
+                'sectionSvc',
+                videoCtrl]);
 
-    function videoCtrl(videoSvc, sectionSvc) {
+    function videoCtrl(baseSettings, pageSettings, videoSvc, sectionSvc) {
         var vm = this;
+
+        videoSvc.getVideos().then(function (response) {
+            vm.videos = response.data;
+        });
+
+        vm.menuNewsTemplateUrl = baseSettings.staticUrl + 'app/news/templates/menuNews.html';
+
+        vm.navigation = pageSettings.navigation;
+
+        vm.labels = pageSettings.labels;
 
         vm.title = 'Tile Videos - How to Tile Videos from Granada Tile ';
 
         vm.breadcrumds = 'News / Press';
-
 
         vm.description = '<p>Ever wondered how cement tiles are made? Take a peak behind the scenes at this remarkable\ ' +
                         'technique developed a century and a half ago. This tile video shows you the steps in the process\ ' +
@@ -36,9 +50,7 @@
                         'So go ahead. Fall in love...</p>';
 
 
-        videoSvc.getVideos().then(function (response) {
-            vm.videos = response.data;
-        });
+
 
 
 

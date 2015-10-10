@@ -11,6 +11,15 @@ class CollectionDto(BaseGalleryImageDto):
         else:
             self.url = collection.get_absolute_url()
 
+class CollectionRetrieveDto(CollectionDto):
+
+    def __init__(self, collection, language):
+        super().__init__(collection, language)
+        if language:
+           self.introduction = collection.get_introduction(language)
+        else:
+           self.introduction = collection.introduction
+
 
 class TileSizeDto():
 
@@ -32,10 +41,6 @@ class TileDesignDto(BaseCatalogDto):
         super().__init__(tile_design, language)
         self.main = TileDto(tile_design.tiles.filter(main=True)[0], language)
         self.tiles = [TileDto(tile, language) for tile in tile_design.tiles.filter(main=False)]
-
-
-class GroupRetrieveDto(BaseContentDto):
-    pass
 
 
 class GroupDto(BaseGalleryImageDto):

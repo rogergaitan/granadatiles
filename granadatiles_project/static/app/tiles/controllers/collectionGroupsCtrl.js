@@ -3,24 +3,25 @@
 
     angular
         .module('app.tiles')
-        .controller('collectionsGroupCtrl', ['pageSettings',
-            'collectionsSvc',
-            collectionsGroupCtrl
+        .controller('collectionsGroupCtrl', ['pageSettings', 'collectionsSvc', collectionsGroupCtrl
         ]);
 
     function collectionsGroupCtrl(pageSettings, collectionsSvc) {
         var vm = this;
 
+        collectionsSvc.getCollection(pageSettings.collectionId).then(function (response) {
+            vm.collection = response.data;
+        });
+
         collectionsSvc.getCollectionGroups(pageSettings.collectionId).then(function (response) {
             vm.collectionGroups = response.data;
         });
 
-        vm.title = 'Echo Tile Collection Interactive Catalog ';
+        collectionsSvc.getFilteredMenuCollection(pageSettings.collectionId).then(function (response) {
+            vm.filteredMenuCollection = response.data;
+        });
 
-        vm.description = '<p>The Echo Tile Collection revitalizes an art form that developed in France in the mid-1800s\ ' +
-                        'and quickly spread around the world. Unlike ceramic tiles, which are usually glazed and ?red,\ ' +
-                        'decorative cement tiles are made by ?rst pouring a mixture of cement and color pigment into\ ' +
-                        'separate compartments in a metal mold.</p>';
+        vm.labels = pageSettings.labels;
 
     }
 }());

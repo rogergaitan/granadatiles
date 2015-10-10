@@ -8,7 +8,7 @@ from core.views import BaseViewSet
 
 from apps.tiles.serializers import (
     GroupSerializer, GroupDesignSerializer, MenuCollectionSerializer,
-    CollectionSerializer, TileDesignSerializer
+    CollectionSerializer, CollectionRetrieveSerializer, TileDesignSerializer
 )
 from apps.tiles.services import CollectionService, GroupService
 from apps.tiles.models import Collection
@@ -40,7 +40,7 @@ class CollectionViewSet(BaseViewSet):
         collection = CollectionService.get_collection(
                                         id=pk,
                                         language=self.get_language(request))
-        serializer = CollectionSerializer(collection)
+        serializer = CollectionRetrieveSerializer(collection)
         return Response(serializer.data)
 
 
@@ -56,8 +56,9 @@ class CollectionViewSet(BaseViewSet):
     # /collections/menu
     @list_route(methods=['get'])
     def menu(self, request):
+        filter = request.query_params.get('exclude')
         collections = CollectionService.get_menu_collections(
-            language=self.get_language(request))
+            language=self.get_language(request), filter=filter)
         serializer = MenuCollectionSerializer(collections, many=True)
         return Response(serializer.data)
 
