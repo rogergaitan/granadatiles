@@ -4,7 +4,9 @@
 {% block title %} Granada Tiles - {% trans 'Catalogs / Inspirations Books'%} {% endblock %}
 
 {% block content%}
+<div class="row">
     <ng-include src="'{{STATIC_URL}}app/news/templates/catalogsList.html'"></ng-include>
+</div>
 {% endblock content%}
 
 {% block js%}

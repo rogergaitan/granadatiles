@@ -4,7 +4,9 @@
 {% block title %} Granada Tiles - {% trans 'News'%} {% endblock %}
 
 {% block content%}
-    <ng-include src="'{{STATIC_URL}}app/news/templates/articlesList.html'"></ng-include>
+    <div class="row">
+        <ng-include src="'{{STATIC_URL}}app/news/templates/articlesList.html'"></ng-include>
+    </div>
 {% endblock content%}
 
 {% block js%}

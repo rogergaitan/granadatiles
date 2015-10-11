@@ -4,8 +4,9 @@
 {% block title %} Granada Tiles - {% trans 'Collections'%} {% endblock %}
 
 {% block content%}
-    <ng-include id="gt-main-groups" src="'{{STATIC_URL}}app/tiles/templates/groupList.html'">
-    </ng-include>
+<div class="row">
+    <ng-include id="gt-main-groups" src="'{{STATIC_URL}}app/tiles/templates/groupList.html'"></ng-include>
+</div>
 {% endblock content%}
 
 {% block js%}
