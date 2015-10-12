@@ -3,7 +3,7 @@ from apps.news.models import Article
 from apps.tiles.models import Tile
 from django.utils.translation import ugettext as _
 from apps.galleries.models import Designer, Photographer
-from core.models import BaseContentModel, BaseCatalogModel, BaseGallerieNavImageModel, BaseCatalogOrderModel
+from core.models import BaseContentModel, BaseCatalogModel, BaseGalleryNavImageModel, BaseCatalogOrderModel
 
 
 class Section(BaseCatalogModel, BaseContentModel):

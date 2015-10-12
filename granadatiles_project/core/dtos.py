@@ -47,7 +47,7 @@ class BaseGalleryImageDto(BaseContentDto):
         super().__init__(baseGalleryImageModel, language)
 
 
-class BaseGallerieNavImageModel(BaseGalleryImageDto):
+class BaseGalleryNavImageModel(BaseGalleryImageDto):
 
     def __init__(self, baseGalleryNavImageModel, language=None):
         super().__init__(baseGalleryNavImageModel, language)

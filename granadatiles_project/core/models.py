@@ -88,7 +88,7 @@ class BaseContentOrderModel(BaseContentModel):
         abstract = True
 
 
-class BaseGallerieImageModel(BaseContentModel):
+class BaseGalleryImageModel(BaseContentModel):
     image = ImageField(
         upload_to=model_directory_path, verbose_name=_('Image'))
 
@@ -96,7 +96,7 @@ class BaseGallerieImageModel(BaseContentModel):
         abstract = True
 
 
-class BaseGallerieNavImageModel(BaseGallerieImageModel):
+class BaseGalleryNavImageModel(BaseGalleryImageModel):
     target = models.BooleanField(default=False, help_text=_('Open in new tab'))
     link = models.URLField(blank=True, null=True, verbose_name=_('Link'))
 
