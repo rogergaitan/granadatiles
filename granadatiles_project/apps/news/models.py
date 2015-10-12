@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext as _
-from core.models import BaseCatalogModel, BaseGallerieImageModel
+from core.models import BaseCatalogModel, BaseGalleryImageModel
 from sorl.thumbnail.fields import ImageField
 from core.managers import BaseDateManager
 
@@ -29,7 +29,7 @@ class Magazine(models.Model):
         return self.name
 
 
-class Article(BaseGallerieImageModel):
+class Article(BaseGalleryImageModel):
     url = models.URLField(
         max_length=200, verbose_name=_('Link'), null=True, blank=True)
     date = models.DateField(verbose_name=_('Date'))

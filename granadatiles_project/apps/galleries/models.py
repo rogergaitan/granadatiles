@@ -1,6 +1,6 @@
 ﻿from django.db import models
 from django.utils.translation import ugettext as _
-from core.models import BaseCatalogModel, BaseGallerieImageModel
+from core.models import BaseCatalogModel, BaseGalleryImageModel
 from sorl.thumbnail.fields import ImageField
 
 
@@ -43,7 +43,7 @@ class GalleryCategory(BaseCatalogModel):
         verbose_name_plural = _('Categories')
 
 
-class GalleryImage(BaseGallerieImageModel):
+class GalleryImage(BaseGalleryImageModel):
     galleryCategory = models.ForeignKey(
         GalleryCategory, related_name='images',
         verbose_name=_('Gallery Category'))

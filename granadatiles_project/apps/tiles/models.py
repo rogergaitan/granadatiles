@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext as _
-from core.models import BaseGallerieImageModel, BaseCatalogModel, BaseContentModel, BaseSlugModel
+from core.models import BaseGalleryImageModel, BaseCatalogModel, BaseContentModel, BaseSlugModel
 from django.core.urlresolvers import reverse
 from sorl.thumbnail.shortcuts import get_thumbnail
 from sorl.thumbnail.fields import ImageField
@@ -26,7 +26,7 @@ class PalleteColor(BaseCatalogModel):
         verbose_name_plural = _('Pallete Colors')
 
 
-class Collection(BaseGallerieImageModel, BaseSlugModel):
+class Collection(BaseGalleryImageModel, BaseSlugModel):
     menu_image = ImageField(upload_to='Galleries/menu', null = True, blank=True)
     featured = models.BooleanField(default=True, verbose_name=_('Featured'))
     show_in_menu = models.BooleanField(default=True, verbose_name= _('Show in menu'))
@@ -53,7 +53,7 @@ class Collection(BaseGallerieImageModel, BaseSlugModel):
         verbose_name_plural = _('Collections')
 
 
-class Group(BaseGallerieImageModel):
+class Group(BaseGalleryImageModel):
     collection = models.ForeignKey(Collection, related_name='groups', verbose_name=_('Collection'))
 
     class Meta:
