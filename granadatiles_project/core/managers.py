@@ -1,12 +1,16 @@
 ﻿from django.db import models
 from _datetime import datetime, timedelta
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class BaseSlugManager(models.Manager):
 
     def get_id(self, slug, language):
         if language == 'es':
-            id = self.get(slug_es=slug).id
+            try:
+                id = self.get(slug_es=slug).id
+            except ObjectDoesNotExist:
+                id = self.get(slug=slug).id
         else:
             id = self.get(slug=slug).id
         return id

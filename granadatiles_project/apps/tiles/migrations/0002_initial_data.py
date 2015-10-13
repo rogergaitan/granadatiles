@@ -57,7 +57,7 @@ def addInitialData(apps, schema_editor):
             title='Essential Shapes',
             title_es='',
             slug='essential-shapes',
-            slug_es='',
+            slug_es='essential-shapes',
             description='Lorem ipsum dolor sit amet consectetur adipsicing',
             description_es='',
             image=os.path.join(settings.STATIC_URL,
