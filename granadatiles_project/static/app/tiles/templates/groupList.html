@@ -1,31 +1,7 @@
 ﻿<div class="col-md-12" ng-controller="collectionsGroupCtrl as vm">
     <div class="row">
         <aside class="col-md-3">
-            <div class="row submenu-selected">
-                <a ng-href="{{ vm.collection.url }}">
-                    <div class="col-md-6 submenu-selected-image">
-                        <img ng-src="{{ vm.collection.menu_image }}" alt="{{ vm.collection.title }}" class="img-responsive">
-                    </div>
-                    <div class="col-md-3 submenu-selected-title">
-                        <h3 class="text-uppercase">{{ vm.collection.title | uppercase }}<i class="fa fa-caret-down"></i></h3>
-                    </div>
-                </a>
-            </div>
-            <ng-include src="::vm.collectionSubMenuTemplateUrl"></ng-include>
-            <div ng-repeat="item in vm.filteredMenuCollection" ng-if="$index % 2 == 0" class="row">
-                <div class="col-md-6"  ng-if="$index <= vm.filteredMenuCollection.length - 1">
-                    <a ng-href="{{ vm.filteredMenuCollection[$index].url }}" class="navigation-submenu-option">
-                        <img ng-src="{{ ::vm.filteredMenuCollection[$index].image }}" alt="{{ ::vm.filteredMenuCollection[$index].title }}" class="img-responsive">
-                        <h3>{{ ::vm.filteredMenuCollection[$index].title | uppercase }}</h3>
-                    </a>
-                </div>
-                <div class="col-md-6"  ng-if="$index + 1 <= vm.filteredMenuCollection.length - 1">
-                    <a ng-href="{{ vm.filteredMenuCollection[$index + 1].url }}" class="navigation-submenu-option">
-                        <img ng-src="{{ ::vm.filteredMenuCollection[$index + 1].image }}" alt="{{ ::vm.filteredMenuCollection[$index + 1].title }}" class="img-responsive">
-                        <h3>{{ ::vm.filteredMenuCollection[$index + 1].title | uppercase }}</h3>
-                    </a>
-                </div>
-            </div>
+            <ng-include src="vm.collectionAsideNavigationTemplateUrl"></ng-include>
         </aside>
         <div class="col-md-9">
             <h1 class="heading-sec">{{ ::vm.collection.title }} {{ ::vm.labels.title }}</h1>
@@ -59,6 +35,4 @@
             </div>
         </div>
     </div>
-
-
 </div>

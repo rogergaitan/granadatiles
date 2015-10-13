@@ -13,7 +13,7 @@
     function collectionsGroupCtrl(baseSettings ,pageSettings, collectionsSvc) {
         var vm = this;
 
-        vm.collectionSubMenuTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/collectionSubMenu.html';
+        vm.collectionAsideNavigationTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/collectionAsideNavigation.html';
 
         collectionsSvc.getCollection(pageSettings.collectionId).then(function (response) {
             vm.collection = response.data;
