@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %} Granada Tiles - {% trans 'Group'%} {% endblock %}
+
+{% block content%}
+<div class="row">
+    <ng-include id="gt-main-groups" src="'{{STATIC_URL}}app/tiles/templates/tileList.html'"></ng-include>
+</div>
+{% endblock content%}
+
+{% block js%}
+<script>
+    (function () {
+        "use strict";
+        angular
+        .module("app.core")
+        .factory("pageSettings", ['appSettings',pageSettings]);
+
+        function pageSettings(appSettings) {
+            return{
+                sectionId: 0,
+                language: '{{LANGUAGE_CODE}}',
+                groupId: {{group_id}},
+                labels: {
+                    title: '{% trans 'Interactive Catalog' %}',
+                    show: '{% trans 'Show only' %}',
+                    new: '{% trans 'New' %}',
+                    stock: '{% trans 'In Stock' %}',
+                    special: '{% trans 'Specials' %}',
+                    size: '{% trans 'Sizes' %}',
+                    style: '{% trans 'Styles' %}'
+                }
+            }
+        }
+    })();
+</script>
+{% endblock js%}
