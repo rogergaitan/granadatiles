@@ -11,8 +11,7 @@ from apps.tiles.serializers import (
     CollectionSerializer, CollectionRetrieveSerializer, TileDesignSerializer
 )
 from apps.tiles.services import CollectionService, GroupService
-from apps.tiles.models import Collection
-
+from apps.tiles.models import Collection, Group
 
 
 def collection_detail(request, slug):
@@ -22,9 +21,17 @@ def collection_detail(request, slug):
     })
 
 
+def group_detail(request, slug):
+    collection_id = Collection.objects.get_id(slug, request.LANGUAGE_CODE)
+    return render(request, "tiles/group_detail.html", {
+        'collection_id': collection_id
+    })
+
+
 """
 These are the views for the api
 """
+
 
 class CollectionViewSet(BaseViewSet):
 
