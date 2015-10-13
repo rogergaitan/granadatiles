@@ -66,9 +66,9 @@ class BaseContentModel(models.Model):
 
 
 class BaseSlugModel(models.Model):
-    slug = models.SlugField(max_length=20, unique=True)
+    slug = models.SlugField(max_length=35, unique=True)
 
-    slug_es = models.SlugField(max_length=20, unique=True)
+    slug_es = models.SlugField(max_length=35, unique=True)
 
     objects = BaseSlugManager()
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+﻿from django.shortcuts import render
 
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -11,7 +11,7 @@ from apps.tiles.serializers import (
     CollectionSerializer, CollectionRetrieveSerializer, TileDesignSerializer
 )
 from apps.tiles.services import CollectionService, GroupService
-from apps.tiles.models import Collection
+from apps.tiles.models import Collection, Group
 
 
 
@@ -19,6 +19,14 @@ def collection_detail(request, slug):
     collection_id = Collection.objects.get_id(slug, request.LANGUAGE_CODE)
     return render(request, "tiles/collection_detail.html", {
         'collection_id': collection_id
+    })
+
+def group_detail(request, collection_slug, group_slug):
+    collection_id = Collection.objects.get_id(collection_slug, request.LANGUAGE_CODE)
+    group_id = Group.objects.get_id(group_slug, request.LANGUAGE_CODE)
+    return render(request, "tiles/group_detail.html", {
+        'collection_id': collection_id,
+        'group_id': group_id
     })
 
 

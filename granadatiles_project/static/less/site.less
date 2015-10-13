@@ -237,7 +237,7 @@
     padding: 0 0 10px 0;
     border-bottom: @orange 5px solid;
 
-    li{
+    > li{
         list-style: none;
         padding: 5px 0 5px 0;
         border-bottom: @lightGray 1px solid;
@@ -252,6 +252,12 @@
                 text-decoration: none;
                 .font-configuration(@font-sm,@font-normal);
             }
+        }
+    }
+
+    .collapsed-submenu{
+        > li{
+            list-style:none;
         }
     }
 }

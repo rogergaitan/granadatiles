@@ -22,7 +22,7 @@
                          'our tiles in residential and commercial projects.</p>';
 
         vm.labels = pageSettings.labels;
-         vm.section = pageSettings.sectionId;
+        vm.section = pageSettings.sectionId;
 
         articleSvc.getArticles().then(function (response){
             vm.articles = response.data;

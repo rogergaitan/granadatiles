@@ -1,4 +1,4 @@
-from rest_framework import serializers
+﻿from rest_framework import serializers
 from core.serializers import BaseGalleryImageSerializer, BaseContentSerializer, BaseCatalogSerializer
 
 
@@ -26,7 +26,7 @@ class TileDesignSerializer(BaseCatalogSerializer):
 
 
 class GroupSerializer(BaseGalleryImageSerializer):
-    pass
+    url = serializers.URLField()
 
 
 class GroupDesignSerializer(serializers.Serializer):

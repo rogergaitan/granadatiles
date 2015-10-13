@@ -11,16 +11,7 @@
                     </div>
                 </a>
             </div>
-            <ul class="active-submenu">
-                <li><a href="#">Interactive Catalog </a></li>
-                <li><a href="#">Custom Cement Tiles </a></li>
-                <li><a href="#">About the Echo Collection </a></li>
-                <li><a href="#">Applications of Cement Tile</a></li>
-                <li><a href="#">Echo Collection Gallery </a></li>
-                <li><a href="#">Technical Specifications </a></li>
-                <li><a href="#">Ordering Cement Tile </a></li>
-                <li><a href="#">Installing Cement Tile</a></li>
-            </ul>
+            <ng-include src="::vm.collectionSubMenuTemplateUrl"></ng-include>
             <div ng-repeat="item in vm.filteredMenuCollection" ng-if="$index % 2 == 0" class="row">
                 <div class="col-md-6"  ng-if="$index <= vm.filteredMenuCollection.length - 1">
                     <a ng-href="{{ vm.filteredMenuCollection[$index].url }}" class="navigation-submenu-option">
