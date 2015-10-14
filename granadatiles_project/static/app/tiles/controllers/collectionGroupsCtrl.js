@@ -3,11 +3,17 @@
 
     angular
         .module('app.tiles')
-        .controller('collectionsGroupCtrl', ['pageSettings', 'collectionsSvc', collectionsGroupCtrl
+        .controller('collectionsGroupCtrl',
+                    ['baseSettings',
+                     'pageSettings',
+                     'collectionsSvc',
+                     collectionsGroupCtrl
         ]);
 
-    function collectionsGroupCtrl(pageSettings, collectionsSvc) {
+    function collectionsGroupCtrl(baseSettings ,pageSettings, collectionsSvc) {
         var vm = this;
+
+        vm.collectionAsideNavigationTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/collectionAsideNavigation.html';
 
         collectionsSvc.getCollection(pageSettings.collectionId).then(function (response) {
             vm.collection = response.data;
@@ -22,6 +28,8 @@
         });
 
         vm.labels = pageSettings.labels;
+
+        vm.subMenuCollapsed = true;
 
     }
 }());

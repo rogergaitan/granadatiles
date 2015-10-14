@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import sorl.thumbnail.fields
 import core.models
+import sorl.thumbnail.fields
 
 
 class Migration(migrations.Migration):
@@ -15,8 +15,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Designer',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
-                ('name', models.CharField(max_length=250, verbose_name='Name')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(verbose_name='Name', max_length=250)),
             ],
             options={
                 'verbose_name_plural': 'Designers',
@@ -26,9 +26,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Gallery',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
-                ('name', models.CharField(max_length=150, verbose_name='Name')),
-                ('name_es', models.CharField(max_length=150, null=True, blank=True, verbose_name='Name_es')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(verbose_name='Name', max_length=150)),
+                ('name_es', models.CharField(blank=True, verbose_name='Name_es', null=True, max_length=150)),
                 ('image', sorl.thumbnail.fields.ImageField(upload_to='Gallery')),
             ],
             options={
@@ -39,9 +39,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='GalleryCategory',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
-                ('name', models.CharField(max_length=150, verbose_name='Name')),
-                ('name_es', models.CharField(max_length=150, null=True, blank=True, verbose_name='Name_es')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(verbose_name='Name', max_length=150)),
+                ('name_es', models.CharField(blank=True, verbose_name='Name_es', null=True, max_length=150)),
                 ('gallery', models.ForeignKey(verbose_name='Gallery', to='galleries.Gallery', related_name='categories')),
             ],
             options={
@@ -52,13 +52,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='GalleryImage',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
-                ('title', models.CharField(max_length=150, verbose_name='Title')),
-                ('title_es', models.CharField(max_length=160, null=True, blank=True, verbose_name='Title_es')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(verbose_name='Title', max_length=150)),
+                ('title_es', models.CharField(blank=True, verbose_name='Title_es', null=True, max_length=160)),
                 ('description', models.TextField(verbose_name='Description')),
-                ('description_es', models.TextField(null=True, blank=True, verbose_name='Description_es')),
-                ('image', sorl.thumbnail.fields.ImageField(upload_to=core.models.model_directory_path, verbose_name='Image')),
-                ('designer', models.ForeignKey(null=True, related_name='gallery_images', blank=True, to='galleries.Designer', verbose_name='Author')),
+                ('description_es', models.TextField(blank=True, verbose_name='Description_es', null=True)),
+                ('image', sorl.thumbnail.fields.ImageField(verbose_name='Image', upload_to=core.models.model_directory_path)),
+                ('designer', models.ForeignKey(verbose_name='Author', null=True, to='galleries.Designer', related_name='gallery_images', blank=True)),
                 ('galleryCategory', models.ForeignKey(verbose_name='Gallery Category', to='galleries.GalleryCategory', related_name='images')),
             ],
             options={
@@ -69,8 +69,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Photographer',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
-                ('name', models.CharField(max_length=250, verbose_name='Name')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(verbose_name='Name', max_length=250)),
             ],
             options={
                 'verbose_name_plural': 'Photographers',
@@ -80,6 +80,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='galleryimage',
             name='photographer',
-            field=models.ForeignKey(null=True, related_name='gallery_images', blank=True, to='galleries.Photographer', verbose_name='Photographer'),
+            field=models.ForeignKey(verbose_name='Photographer', null=True, to='galleries.Photographer', related_name='gallery_images', blank=True),
         ),
     ]

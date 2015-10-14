@@ -1,4 +1,4 @@
-from django.contrib import admin
+﻿from django.contrib import admin
 from apps.content.models import Section, SectionImage, Social, FeaturedVideo, Area, Testimony
 from django_summernote.admin import SummernoteModelAdmin, SummernoteInlineModelAdmin
 
@@ -14,6 +14,10 @@ class SectionAdmin(SummernoteModelAdmin):
     list_display = ('name', 'title', )
     inlines = [ImagesInline]
     search_fields = ['name', 'name_es']
+    exclude  = ('name', 'name_es',)
+
+    def has_add_permission(self, request):
+        return False;
 
 
 @admin.register(Social)
@@ -31,9 +35,15 @@ class VideoAdmin(SummernoteModelAdmin):
 class AreaAdmin(SummernoteModelAdmin):
     list_display = ('title', )
     search_fields = ['title', 'title_es', ]
+    readonly_fields = ('title', 'title_es')
+
+    def has_add_permission(self, request):
+        return False;
 
 
 @admin.register(Testimony)
-class AreaAdmin(SummernoteModelAdmin):
+class TestimonyAdmin(SummernoteModelAdmin):
     list_display = ('title', 'subtitle', )
     search_fields = ['title', 'title_es', ]
+
+    

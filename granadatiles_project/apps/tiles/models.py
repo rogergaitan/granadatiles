@@ -1,4 +1,4 @@
-from django.db import models
+﻿from django.db import models
 from django.utils.translation import ugettext as _
 from core.models import BaseGalleryImageModel, BaseCatalogModel, BaseContentModel, BaseSlugModel
 from django.core.urlresolvers import reverse
@@ -53,8 +53,16 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
         verbose_name_plural = _('Collections')
 
 
-class Group(BaseGalleryImageModel):
+class Group(BaseGalleryImageModel, BaseSlugModel):
     collection = models.ForeignKey(Collection, related_name='groups', verbose_name=_('Collection'))
+
+    def get_absolute_url(self, language=None):
+        slug = self.get_slug(language)
+        return reverse('sr-collections:sr-group-detail', 
+                       kwargs={
+                           'group_slug': slug,
+                           'collection_slug': self.collection.get_slug(language)
+                           })
 
     class Meta:
         verbose_name = _('Group')

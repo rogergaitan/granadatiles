@@ -189,7 +189,6 @@
     <script src="{{ STATIC_URL }}lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="{{ STATIC_URL }}lib/angular-socialshare/dist/angular-socialshare.min.js"></script>
     <!-- endbower -->
-
     <!-- inject:js -->
     <script type="text/javascript" src="{{ STATIC_URL }}app/app.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/stylish.js"></script>
@@ -198,6 +197,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/module.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/contentDefaultCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/coverCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/indexCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/sectionCtrl.js"></script>
@@ -244,7 +244,13 @@
                         cementVsCeramic: '{% trans 'Cement Vs. Ceramic' %}',
                         colorPalletes: '{% trans 'Color Palletes' %}',
                         catalogs:'{% trans 'Catalogs / Inspiration Boooks' %}'
-                    }
+                    },
+                   navigation:{
+                        catalogs: '{% url 'sr-news:sr-catalogs' %}',
+                        compareProducts: '{% url 'compare_products'%}',
+                        cementVsCeramic: '{% url 'cement_vs_ceramic'%}',
+                        colorPalletes:'{% url 'color_palletes'%}'
+                   }
             }
         };
     })();

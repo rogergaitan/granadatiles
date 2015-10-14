@@ -4,9 +4,9 @@
             <ng-include src="::vm.menuNewsTemplateUrl"></ng-include>
         </aside>
         <div class="col-md-9">
-            <h1 class="heading-sec">{{ ::vm.title }}</h1>
+            <h1 class="heading-sec">{{ ::vm.section.title }}</h1>
             <a href="#" class="breadcrumds"><u>{{ ::vm.breadcrumds }}</u> <i class="fa fa-angle-double-right"></i></a>
-            <div ng-bind-html="vm.description" class="text-section"></div>
+            <div ng-bind-html="vm.section.description" class="text-section"></div>
         </div>
     </div>
     <div ng-repeat="catalog in vm.catalogs" ng-if="$index % 3 == 0" class="row component-space-row" >

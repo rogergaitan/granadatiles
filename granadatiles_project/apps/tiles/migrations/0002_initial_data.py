@@ -56,6 +56,8 @@ def addInitialData(apps, schema_editor):
         group(
             title='Essential Shapes',
             title_es='',
+            slug='essential-shapes',
+            slug_es='essential-shapes',
             description='Lorem ipsum dolor sit amet consectetur adipsicing',
             description_es='',
             image=os.path.join(settings.STATIC_URL,
@@ -65,6 +67,8 @@ def addInitialData(apps, schema_editor):
         group(
             title='Mediterranean',
             title_es='',
+            slug='mediterranean',
+            slug_es='mediterranean',
             description='Lorem ipsum dolor sit amet consectetur adipsicing',
             description_es='',
             image=os.path.join(settings.STATIC_URL,
@@ -74,6 +78,8 @@ def addInitialData(apps, schema_editor):
         group(
             title='Moroccan',
             title_es='',
+            slug='moroccan',
+            slug_es='moroccan',
             description='Lorem ipsum dolor sit amet consectetur adipsicing',
             description_es='',
             image=os.path.join(settings.STATIC_URL,
@@ -83,6 +89,8 @@ def addInitialData(apps, schema_editor):
         group(
             title='Designer Erin Adams',
             title_es='',
+            slug='designer-erin-adams',
+            slug_es='designer-erin-adams',
             description='''The customizable Echo Tile Collection offers: <br />
             <ul><li>Over 140 hand made cement tile designs</li>
             <li>Array of styles and sizes</li>

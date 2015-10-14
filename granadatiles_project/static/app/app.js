@@ -3,9 +3,9 @@
     
     angular
         .module('app', ['ngSanitize',
+            'ngAnimate',
             'ui.bootstrap',
             'mega-menu',
-            'ngAnimate',
             'angular-loading-bar',
             '720kb.socialshare',
 
