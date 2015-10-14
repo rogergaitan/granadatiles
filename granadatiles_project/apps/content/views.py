@@ -24,6 +24,12 @@ def videos(request):
 def compare_products(request):
     return render(request, 'content/compare_products.html')
 
+def cement_vs_ceramic(request):
+    return render(request, 'content/cement_vs_ceramic.html')
+
+def color_palletes(request):
+    return render(request, 'content/color_palletes.html')
+
 
 class TestimonyViewSet(BaseViewSet):
     # /testimonials
