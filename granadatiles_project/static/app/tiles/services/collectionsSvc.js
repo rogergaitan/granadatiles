@@ -44,9 +44,9 @@
             return $http.get(appSettings.serverPath + 'collections/'+ collectionId + '/groups');
         }
 
-        function getGroup(groupId) {
-            //return $http.get(appSettings.serverPath + 'groups/'+ groupId);
+        function getGroup() {
             return groupMock();
+            //return $http.get(appSettings.serverPath + 'groups/'+ groupId);
         }
 
         function groupMock(){
@@ -107,7 +107,7 @@
                     subtitle:'IN STOCK: 8”x 8”',
                     image:'/static/img/initial/tiles/tile/Avesta.jpg',
                     discontinue:false,
-                    new:false,
+                    new_item:false,
                     others_style:[
                         {
                             id:1,
@@ -132,7 +132,7 @@
                     subtitle:'IN STOCK: 8”x 8”',
                     image:'/static/img/initial/tiles/tile/Boden.jpg',
                     discontinue:false,
-                    new:false,
+                    new_item:false,
                     others_style:[
                         {
                             id:1,
@@ -157,7 +157,7 @@
                     subtitle:'IN STOCK: 8”x 8”',
                     image:'/static/img/initial/tiles/tile/Helsinki.jpg',
                     discontinue:false,
-                    new:false,
+                    new_item:false,
                     others_style:[
                         {
                             id:1,
@@ -182,7 +182,7 @@
                     subtitle:'IN STOCK: 8”x 8”',
                     image:'/static/img/initial/tiles/tile/Laholm.jpg',
                     discontinue:false,
-                    new:false,
+                    new_item:false,
                     others_style:[
                         {
                             id:1,
@@ -201,10 +201,7 @@
                         }
                     ]
                 }
-
             ]
-
-
         }
 
         

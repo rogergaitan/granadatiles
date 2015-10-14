@@ -1,6 +1,6 @@
-<div class="col-md-12" ng-controller="collectionsGroupCtrl as vm">
+<div class="col-md-12">
     <div class="row">
-        <aside class="col-md-3">
+        <aside class="col-md-3" ng-controller="collectionsGroupCtrl as vm">
             <div class="row submenu-selected">
                 <a ng-href="{{ vm.collection.url }}">
                     <div class="col-md-6 submenu-selected-image">
@@ -36,10 +36,10 @@
                 </div>
             </div>
         </aside>
-        <div class="col-md-9">
-            <h1 class="heading-sec">{{ ::vm.collection.title }} {{ ::vm.labels.title }}</h1>
-            <a href="#" class="breadcrumds"><u>Collections</u> <i class="fa fa-angle-double-right"></i> <u>{{ ::vm.collection.title }}</u></a>
-            <div class="text-section" ng-bind-html="::vm.collection.introduction"></div>
+        <div class="col-md-9" ng-controller="groupTilesCtrl as vm">
+            <h1 class="heading-sec">{{ ::vm.title }}</h1>
+            <a href="#" class="breadcrumds"><u>Collections</u> <i class="fa fa-angle-double-right"></i> <u></u></a>
+            <div class="text-section" ng-bind-html="::vm.description"></div>
         </div>
     </div>
 
