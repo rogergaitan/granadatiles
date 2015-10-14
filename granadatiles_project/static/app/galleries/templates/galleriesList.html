@@ -9,7 +9,7 @@
     <div ng-repeat="gallery in vm.galleries" ng-if="$index % 2 == 0" class="row component-space-row" >
         <div class="col-md-6" ng-if="$index <= vm.galleries.length - 1">
             <div class="component-container component-container_padding5">
-                <img ng-src="{{ ::vm.galleries[$index].image }}" alt="" class="img-responsive component-container_multimedia">
+                <img ng-src="{{ ::vm.galleries[$index].image }}" alt="{{ ::vm.galleries[$index].name }}" class="img-responsive component-container_multimedia">
                 <div class="component-container_footer">
                     <h2 class="component-container_title">{{ ::vm.galleries[$index].name }}</h2>
                     <ul class="list-inline component-container_OptionList">
@@ -20,7 +20,7 @@
         </div>
         <div class="col-md-6" ng-if="$index + 1 <= vm.galleries.length - 1">
             <div class="component-container component-container_padding5">
-                <img ng-src="{{ ::vm.galleries[$index + 1].image }}" alt="" class="img-responsive component-container_multimedia">
+                <img ng-src="{{ ::vm.galleries[$index + 1].image }}" alt="{{ ::vm.galleries[$index + 1].name }}" class="img-responsive component-container_multimedia">
                 <div class="component-container_footer">
                     <h2 class="component-container_title">{{ ::vm.galleries[$index + 1].name }}</h2>
                     <ul class="list-inline component-container_OptionList">

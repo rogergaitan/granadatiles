@@ -15,7 +15,7 @@
                 <button type="button" class="btn btn-info">2015</button>
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
+                    <span class="sr-only"></span>
                 </button>
                 <ul class="dropdown-menu">
                     <li><a href="#">2015</a></li>
@@ -31,7 +31,7 @@
                 <div class="component-container">
                     <div class="row component-container_padding15">
                         <div class="col-md-4">
-                            <img ng-src="{{ ::vm.articles[$index].image }}" alt="" class="thumbnail img-responsive component-container_multimedia component-container_multimedia--shadow">
+                            <img ng-src="{{ ::vm.articles[$index].image }}" alt="{{ ::vm.articles[$index].title }}" class="thumbnail img-responsive component-container_multimedia component-container_multimedia--shadow">
                         </div>
                         <div class="col-md-8">
                             <h2 class="component-container_title">{{ ::vm.articles[$index].title }}</h2>
@@ -48,7 +48,7 @@
                 <div class="component-container">
                     <div class="row component-container_padding15">
                         <div class="col-md-4">
-                            <img ng-src="{{ ::vm.articles[$index + 1].image }}" alt="" class="thumbnail img-responsive component-container_multimedia component-container_multimedia--shadow">
+                            <img ng-src="{{ ::vm.articles[$index + 1].image }}" alt="{{ ::vm.articles[$index + 1].title }}" class="thumbnail img-responsive component-container_multimedia component-container_multimedia--shadow">
                         </div>
                         <div class="col-md-8">
                             <h2 class="component-container_title">{{ ::vm.articles[$index + 1].title }}</h2>

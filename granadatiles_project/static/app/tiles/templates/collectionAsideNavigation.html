@@ -10,20 +10,20 @@
 </div>
 <ul class="active-submenu">
     <li>
-        <a href="#" ng-click="vm.subMenuCollapsed = !vm.subMenuCollapsed">Interactive Catalog</a>
+        <a href="#" ng-click="vm.subMenuCollapsed = !vm.subMenuCollapsed">{{ ::vm.labels.catalog_interactive }}</a>
         <ul class="collapsed-submenu" collapse="vm.subMenuCollapsed">
             <li ng-repeat="group in vm.collectionGroups">
                 <a ng-href="{{::group.url}}">{{::group.title}}</a>
             </li>
         </ul>
     </li>
-    <li><a href="#">Custom Cement Tiles </a></li>
-    <li><a href="#">About the Echo Collection </a></li>
-    <li><a href="#">Applications of Cement Tile</a></li>
-    <li><a href="#">Echo Collection Gallery </a></li>
-    <li><a href="#">Technical Specifications </a></li>
-    <li><a href="#">Ordering Cement Tile </a></li>
-    <li><a href="#">Installing Cement Tile</a></li>
+    <li><a href="#">{{ ::vm.labels.custom_cement }}</a></li>
+    <li><a href="#">{{ ::vm.labels.about }}{{ ::vm.collection.title }}</a></li>
+    <li><a href="#">{{ ::vm.labels.applications }}</a></li>
+    <li><a href="#">{{ ::vm.collection.title }}{{ ::vm.labels.gallery_menu }}</a></li>
+    <li><a href="#">{{ ::vm.labels.technical }}</a></li>
+    <li><a href="#">{{ ::vm.labels.ordering }}</a></li>
+    <li><a href="#">{{ ::vm.labels.installing }}</a></li>
 </ul>
 <div ng-repeat="item in vm.filteredMenuCollection" ng-if="$index % 2 == 0" class="row">
     <div class="col-md-6" ng-if="$index <= vm.filteredMenuCollection.length - 1">

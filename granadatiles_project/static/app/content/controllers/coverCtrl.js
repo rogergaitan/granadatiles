@@ -17,5 +17,7 @@
                 vm.cover = response.data;
             });
         }
+
+        vm.labels = pageSettings.labels;
     }
 }());

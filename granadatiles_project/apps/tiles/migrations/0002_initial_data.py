@@ -50,8 +50,8 @@ def addInitialData(apps, schema_editor):
             collection(
                 title='Andalucía Tile Collection',
                 title_es='',
-                slug='mauresque',
-                slug_es='mauresque',
+                slug='andalucia',
+                slug_es='andalucia',
                 description='''<ul><li>Inspired by France and Morocco</li>
                 <li>Variety of shapes and sizes</li>
                 <li>Use on bathroom floors and walls, kitchen backsplashes and more</li></ul>''',
