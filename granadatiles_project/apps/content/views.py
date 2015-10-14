@@ -1,11 +1,12 @@
-﻿from django.shortcuts import render
+from django.shortcuts import render
 from rest_framework import viewsets, mixins
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
 from apps.content.serializers import TestimonySerializer, SectionSerializer, SocialSerializer, SectionCoverSerializer, FeaturedVideoSerializer
-from apps.content.services import TestimonyService, SectionService, FeaturedVideoService
+from apps.content.services import TestimonyService, SectionService, FeaturedVideoService, AreaService
 from .models import Social
 from core.views import BaseViewSet
+from core.serializers import BaseContentSerializer
 from rest_framework.status import HTTP_404_NOT_FOUND
 
 
@@ -47,10 +48,10 @@ class SectionViewSet(BaseViewSet):
         serializer = SectionSerializer(sections, many=True)
         return Response(serializer.data)
 
-    
+
     def retrieve(self, request, pk=None):
         section = SectionService.get_section(
-            id=pk, 
+            id=pk,
             language=self.get_language(request))
         serializer = SectionSerializer(section)
         return Response(serializer.data)
@@ -67,10 +68,18 @@ class SectionViewSet(BaseViewSet):
 class SocialViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = Social.objects.exclude(url='')
     serializer_class = SocialSerializer
-    
+
 
 class FeaturedVideoViewSet(BaseViewSet):
+
     def list(self, request):
         videos = FeaturedVideoService.get_videos(language=self.get_language(request))
         serializer = FeaturedVideoSerializer(videos, many=True)
+        return Response(serializer.data)
+
+class AreaViewSet(BaseViewSet):
+
+    def retrieve(self, request, pk=None):
+        area = AreaService.get_area(id=pk, language=self.get_language(request))
+        serializer = BaseContentSerializer(area)
         return Response(serializer.data)
