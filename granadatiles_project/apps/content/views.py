@@ -21,6 +21,10 @@ def videos(request):
     return render(request, 'content/featured_videos.html')
 
 
+def compare_products(request):
+    return render(request, 'content/compare_products.html')
+
+
 class TestimonyViewSet(BaseViewSet):
     # /testimonials
     def list(self, request):
