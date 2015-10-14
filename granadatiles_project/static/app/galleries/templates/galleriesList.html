@@ -1,9 +1,9 @@
 ﻿<div class="col-md-12" ng-controller="galleryListCtrl as vm">
     <div class="row">
         <div class="col-md-12">
-            <h2 class="heading-sec">{{ ::vm.title }}</h2>
+            <h2 class="heading-sec">{{ ::vm.section.title }}</h2>
             <a class="breadcrumds" href="#"><u>{{ ::vm.breadcrumds }}</u> <i class="fa fa-angle-double-right"></i></a>
-            <div class="text-section" ng-bind-html="::vm.description"></div>
+            <div class="text-section" ng-bind-html="::vm.section.description"></div>
         </div>
     </div>
     <div ng-repeat="gallery in vm.galleries" ng-if="$index % 2 == 0" class="row component-space-row" >
