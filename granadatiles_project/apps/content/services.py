@@ -1,6 +1,6 @@
 import random
 from django.shortcuts import get_object_or_404
-from .models import Testimony, Section, FeaturedVideo
+from .models import Testimony, Section, FeaturedVideo, Area
 from .dtos import TestimonyDto, SectionCoverDto, FeaturedVideoDto
 from apps.news.models import Article
 from apps.news.dtos import  SectionFeaturedArticleDto, ArticleMagazineDto
@@ -50,7 +50,16 @@ class SectionService(object):
 
 
 class FeaturedVideoService(object):
+
     def get_videos(language=None):
         videos = FeaturedVideo.objects.all()
         videosDto = [FeaturedVideoDto(video, language=language) for video in videos]
         return videosDto
+
+
+class AreaService(object):
+
+    def get_area(id, language=None):
+        area = get_object_or_404(Area,pk=id)
+        areaDto = BaseContentDto(area, language)
+        return areaDto

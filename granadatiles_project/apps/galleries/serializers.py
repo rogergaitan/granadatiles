@@ -8,8 +8,8 @@ class GalleryCategorySerializer(BaseCatalogSerializer):
 
 class GallerySerializer(BaseCatalogSerializer):
     image = serializers.CharField()
-    categories = GalleryCategorySerializer(many=True)
-    
+    categories = GalleryCategorySerializer(many=True, required=False)
+
 
 class GalleryImageSerializer(BaseGalleryImageSerializer):
     designer = serializers.StringRelatedField()
