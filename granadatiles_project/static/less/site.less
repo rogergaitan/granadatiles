@@ -298,7 +298,7 @@
 }
 
 .blue-box{
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .blue-box-content{
@@ -331,6 +331,48 @@
         }   
     }
 }
+.content-catalog{
+    background-color: @lightSteelBlue;
+
+    .image-catalog{
+        width: 100%;
+        margin: auto;
+        box-shadow: 2px 6px 5px -2px rgba(89, 89, 89, 0.5);
+        -moz-box-shadow: 2px 6px 5px -2px rgba(89, 89, 89, 0.5);
+        -webkit-box-shadow: 2px 6px 5px -2px rgba(89, 89, 89, 0.5);
+    }
+
+    .catalog-body{
+        padding: 0 10px 10px;
+
+        h2{
+            color: @darkBlue;
+            font-family: @font-secundary;
+            .font-configuration(@font-xlll,@font-light);
+        }
+        .catalog-options{
+            margin: 0;
+            padding-top: 10px;
+            border-top: 1px solid @darkGray;
+
+            li{
+                text-align: center;
+                a{
+                    color: @darkGray;
+                    font-family: @font-secundary;
+                    .font-configuration(@font-sm,@font-light);
+                    &:hover, &:focus{
+                        color: @darkBlue;
+                        text-decoration: none;
+                    }
+                    i{
+                        font-size: @font-xxl;
+                    }
+                }
+            }
+        }
+    }
+}
 
 .component-space-row{
     margin-bottom: 20px;
@@ -341,11 +383,6 @@
     .component-container_multimedia{
         width: 100%;
         margin: auto;
-    }
-    .component-container_multimedia--shadow{
-        -webkit-box-shadow: 6px 6px 5px -2px rgba(89, 89, 89, 0.5);
-        -moz-box-shadow: 6px 6px 5px -2px rgba(89, 89, 89, 0.5);
-        box-shadow: 6px 6px 5px -2px rgba(89, 89, 89, 0.5);
     }
     .component-container_title{
         color: @darkBlue;
@@ -393,26 +430,6 @@
                 border-color: @lightBlue;
                 color: @darkBlue;
                 text-decoration: none;
-            }
-        }
-    }
-    .component-container_ItemList{
-        border-top: 1px SOLID @darkGray;
-        margin: 0;
-        padding-top: 10px;
-        li {
-            text-align: center;
-            a {
-                color: @darkGray;
-                font-family: @font-secundary;
-                .font-configuration(@font-sm, @font-light);
-                i {
-                    font-size: 22px;
-                }
-                &:hover, &:focus {
-                    color: @darkBlue;
-                    text-decoration: none;
-                }
             }
         }
     }
