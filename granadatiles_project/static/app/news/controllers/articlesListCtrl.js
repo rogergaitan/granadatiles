@@ -17,6 +17,14 @@
             vm.articles = response.data;
         });
 
+        articleSvc.getYears().then(function (response){
+            vm.years = response.data;
+        });
+
+        articleSvc.getArticlesFiltered().then(function (response){
+            vm.articlesFiltered = response.data;
+        });
+
         if(pageSettings.sectionId != 0){
             sectionSvc.getSection(pageSettings.sectionId).then(function (response) {
                 vm.section = response.data;
