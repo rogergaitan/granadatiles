@@ -1,6 +1,6 @@
 <div class="col-md-12" ng-controller="catalogListCtrl as vm">
     <div class="row">
-        <aside class="col-md-3 sub-menu-container">
+        <aside class="col-md-3">
             <ng-include src="::vm.menuNewsTemplateUrl"></ng-include>
         </aside>
         <div class="col-md-9">
@@ -9,69 +9,48 @@
             <div ng-bind-html="vm.section.description" class="text-section"></div>
         </div>
     </div>
-    <div ng-repeat="catalog in vm.catalogs" ng-if="$index % 3 == 0" class="row component-space-row" >
-        <div class="col-md-4" ng-if="$index <= vm.catalogs.length - 1">
-            <div class="component-container">
+    <div ng-repeat="catalog in vm.catalogs" ng-if="$index % 3 == 0" class="row">
+        <div class="col-md-4 blue-box" ng-if="$index <= vm.catalogs.length - 1">
+            <div class="content-catalog">
                 <a href="#">
-                    <img ng-src="{{ ::vm.catalogs[$index].image }}" alt="{{ ::vm.catalogs[$index].name }}" class="thumbnail img-responsive
-                     component-container_multimedia component-container_multimedia--shadow">
+                    <img ng-src="{{ ::vm.catalogs[$index].image }}" alt="{{ ::vm.catalogs[$index].name }}" class="image-catalog thumbnail img-responsive">
                 </a>
-                <div class="component-container_footer">
-                    <h2 class="component-container_title">{{ ::vm.catalogs[$index].name }}</h2>
-                    <ul class="list-inline component-container_ItemList">
-                        <li>
-                            <a href="#"><i class="fa fa-eye"></i><br />{{ ::vm.labels.view | uppercase }}</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-download"></i><br />{{ ::vm.labels.download | uppercase }}</a>
-                        </li>
-                        <li>
-                            <a href="#" ng-click="vm.share()"><i class="fa fa-share-alt"></i><br />{{ ::vm.labels.shared | uppercase }}</a>
-                        </li>
+                <div class="catalog-body">
+                    <h2>{{ ::vm.catalogs[$index].name }}</h2>
+                    <ul class="list-inline catalog-options">
+                        <li><a href="#"><i class="fa fa-eye"></i><br />{{ ::vm.labels.view | uppercase }}</a></li>
+                        <li><a href="#"><i class="fa fa-download"></i><br />{{ ::vm.labels.download | uppercase }}</a></li>
+                        <li><a href="#" ng-click="vm.share()"><i class="fa fa-share-alt"></i><br />{{ ::vm.labels.shared | uppercase }}</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-md-4" ng-if="$index + 1 <= vm.catalogs.length - 1">
-            <div class="component-container">
+        <div class="col-md-4 blue-box" ng-if="$index + 1 <= vm.catalogs.length - 1">
+            <div class="content-catalog">
                 <a href="#">
-                    <img ng-src="{{ ::vm.catalogs[$index + 1].image }}" alt="{{ ::vm.catalogs[$index + 1].name }}" class="thumbnail img-responsive
-                     component-container_multimedia component-container_multimedia--shadow">
+                    <img ng-src="{{ ::vm.catalogs[$index + 1].image }}" alt="{{ ::vm.catalogs[$index + 1].name }}" class="image-catalog thumbnail img-responsive">
                 </a>
-                <div class="component-container_footer">
-                    <h2 class="component-container_title">{{ ::vm.catalogs[$index + 1].name }}</h2>
-                    <ul class="list-inline component-container_ItemList">
-                        <li>
-                            <a href="#"><i class="fa fa-eye"></i><br />{{ ::vm.labels.view | uppercase }}</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-download"></i><br />{{ ::vm.labels.download | uppercase }}</a>
-                        </li>
-                        <li>
-                            <a href="#" ng-click="vm.share()"><i class="fa fa-share-alt"></i><br />{{ ::vm.labels.shared | uppercase }}</a>
-                        </li>
+                <div class="catalog-body">
+                    <h2>{{ ::vm.catalogs[$index + 1].name }}</h2>
+                    <ul class="list-inline catalog-options">
+                        <li><a href="#"><i class="fa fa-eye"></i><br />{{ ::vm.labels.view | uppercase }}</a></li>
+                        <li><a href="#"><i class="fa fa-download"></i><br />{{ ::vm.labels.download | uppercase }}</a></li>
+                        <li><a href="#" ng-click="vm.share()"><i class="fa fa-share-alt"></i><br />{{ ::vm.labels.shared | uppercase }}</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-md-4" ng-if="$index + 2 <= vm.catalogs.length - 1">
-            <div class="component-container">
+        <div class="col-md-4 blue-box" ng-if="$index + 2 <= vm.catalogs.length - 1">
+            <div class="content-catalog">
                 <a href="#">
-                    <img ng-src="{{ ::vm.catalogs[$index + 2].image }}" alt="{{ ::vm.catalogs[$index + 2].name }}" class="thumbnail img-responsive
-                     component-container_multimedia component-container_multimedia--shadow">
+                    <img ng-src="{{ ::vm.catalogs[$index + 2].image }}" alt="{{ ::vm.catalogs[$index + 2].name }}" class="image-catalog thumbnail img-responsive">
                 </a>
-                <div class="component-container_footer">
-                    <h2 class="component-container_title">{{ ::vm.catalogs[$index + 2].name }}</h2>
-                    <ul class="list-inline component-container_ItemList">
-                        <li>
-                            <a href="#"><i class="fa fa-eye"></i><br />{{ ::vm.labels.view | uppercase }}</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-download"></i><br />{{ ::vm.labels.download | uppercase }}</a>
-                        </li>
-                        <li>
-                            <a href="#" ng-click="vm.share()"><i class="fa fa-share-alt"></i><br />{{ ::vm.labels.shared | uppercase }}</a>
-                        </li>
+                <div class="catalog-body">
+                    <h2>{{ ::vm.catalogs[$index + 2].name }}</h2>
+                    <ul class="list-inline catalog-options">
+                        <li><a href="#"><i class="fa fa-eye"></i><br />{{ ::vm.labels.view | uppercase }}</a></li>
+                        <li><a href="#"><i class="fa fa-download"></i><br />{{ ::vm.labels.download | uppercase }}</a></li>
+                        <li><a href="#" ng-click="vm.share()"><i class="fa fa-share-alt"></i><br />{{ ::vm.labels.shared | uppercase }}</a></li>
                     </ul>
                 </div>
             </div>

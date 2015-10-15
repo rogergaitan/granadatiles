@@ -7,17 +7,17 @@
             <h1 class="heading-sec">{{ ::vm.section.title }}</h1>
             <a href="#" class="breadcrumds"><u>{{ vm.breadcrumds }} <i class="fa fa-angle-double-right"></i></u></a>
             <div class="text-section" ng-bind-html="vm.section.description"></div>
-            <div ng-repeat="video in vm.videos" ng-if="$index % 2 == 0" class="row component-space-row" >
-                <div class="col-md-6" ng-if="$index <= vm.videos.length - 1">
-                    <div class="component-container component-container_padding5">
-                        <iframe class="component-container_multimedia" src="{{ vm.videos[$index].video | trustAsResourceUrl }}" frameborder="0" allowfullscreen height="300px"></iframe>
-                        <h2 class="component-container_title padding-left-10">{{ vm.videos[$index].name }}</h2>
+            <div ng-repeat="video in vm.videos" ng-if="$index % 2 == 0" class="row" >
+                <div class="col-md-6 blue-box" ng-if="$index <= vm.videos.length - 1">
+                    <div class="blue-box-content">
+                        <iframe src="{{ vm.videos[$index].video | trustAsResourceUrl }}" frameborder="0" allowfullscreen height="300px"></iframe>
+                        <h2>{{ vm.videos[$index].name }}</h2>
                     </div>
                 </div>
-                <div class="col-md-6" ng-if="$index + 1 <= vm.videos.length - 1">
-                    <div class="component-container component-container_padding5">
-                        <iframe class="component-container_multimedia" ng-src="{{ vm.videos[$index + 1].video | trustAsResourceUrl }}" frameborder="0" allowfullscreen height="300px"></iframe>
-                        <h2 class="component-container_title padding-left-10">{{ vm.videos[$index + 1].name }}</h2>
+                <div class="col-md-6 blue-box" ng-if="$index + 1 <= vm.videos.length - 1">
+                    <div class="blue-box-content">
+                        <iframe ng-src="{{ vm.videos[$index + 1].video | trustAsResourceUrl }}" frameborder="0" allowfullscreen height="300px"></iframe>
+                        <h2>{{ vm.videos[$index + 1].name }}</h2>
                     </div>
                 </div>
             </div>
