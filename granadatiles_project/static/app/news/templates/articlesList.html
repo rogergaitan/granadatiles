@@ -13,14 +13,12 @@
         <div class="col-md-2 pull-right  text-right">
             <div class="btn-group">
                 <button type="button" class="btn btn-info">2015</button>
-                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn btn-info dropdown-toggle drop-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="caret"></span>
                     <span class="sr-only"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="#">2015</a></li>
-                    <li><a href="#">2014</a></li>
-                    <li><a href="#">2013</a></li>
+                    <li ng-repeat="year in vm.years"><a href="#">{{ year.year }}</a></li>
                 </ul>
             </div>
         </div>
