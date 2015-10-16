@@ -13,7 +13,7 @@
         <div class="col-md-4 blue-box" ng-if="$index <= vm.catalogs.length - 1">
             <div class="content-catalog">
                 <a href="#">
-                    <img ng-src="{{ ::vm.catalogs[$index].image }}" alt="{{ ::vm.catalogs[$index].name }}" class="image-catalog thumbnail img-responsive">
+                    <img ng-src="{{ ::vm.catalogs[$index].image }}" alt="{{ ::vm.catalogs[$index].name }}" class="shadow-image thumbnail img-responsive">
                 </a>
                 <div class="catalog-body">
                     <h2>{{ ::vm.catalogs[$index].name }}</h2>
@@ -28,7 +28,7 @@
         <div class="col-md-4 blue-box" ng-if="$index + 1 <= vm.catalogs.length - 1">
             <div class="content-catalog">
                 <a href="#">
-                    <img ng-src="{{ ::vm.catalogs[$index + 1].image }}" alt="{{ ::vm.catalogs[$index + 1].name }}" class="image-catalog thumbnail img-responsive">
+                    <img ng-src="{{ ::vm.catalogs[$index + 1].image }}" alt="{{ ::vm.catalogs[$index + 1].name }}" class="shadow-image thumbnail img-responsive">
                 </a>
                 <div class="catalog-body">
                     <h2>{{ ::vm.catalogs[$index + 1].name }}</h2>
@@ -43,7 +43,7 @@
         <div class="col-md-4 blue-box" ng-if="$index + 2 <= vm.catalogs.length - 1">
             <div class="content-catalog">
                 <a href="#">
-                    <img ng-src="{{ ::vm.catalogs[$index + 2].image }}" alt="{{ ::vm.catalogs[$index + 2].name }}" class="image-catalog thumbnail img-responsive">
+                    <img ng-src="{{ ::vm.catalogs[$index + 2].image }}" alt="{{ ::vm.catalogs[$index + 2].name }}" class="shadow-image thumbnail img-responsive">
                 </a>
                 <div class="catalog-body">
                     <h2>{{ ::vm.catalogs[$index + 2].name }}</h2>

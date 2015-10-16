@@ -352,14 +352,6 @@
 .content-catalog{
     background-color: @lightSteelBlue;
 
-    .image-catalog{
-        width: 100%;
-        margin: auto;
-        box-shadow: 2px 6px 5px -2px rgba(89, 89, 89, 0.5);
-        -moz-box-shadow: 2px 6px 5px -2px rgba(89, 89, 89, 0.5);
-        -webkit-box-shadow: 2px 6px 5px -2px rgba(89, 89, 89, 0.5);
-    }
-
     .catalog-body{
         padding: 0 10px 10px;
 
@@ -392,39 +384,33 @@
     }
 }
 
-.component-space-row{
-    margin-bottom: 20px;
-}
-
-.component-container{
+.article-content{
     background-color: @lightSteelBlue;
-    .component-container_multimedia{
-        width: 100%;
-        margin: auto;
-    }
-    .component-container_title{
-        color: @darkBlue;
-        font-family: @font-secundary;
-        .font-configuration(@font-xlll, @font-light);
-    }
-    .component-container_subtitle{
-        color: @darkGray;
-        font-family: @font-primary;
-        .font-configuration(@font-sm, @font-bold);
-    }
-    .component-container_text{
-        color: @darkGray;
-        font-family: @font-primary;
-        .font-configuration(@font-sm, @font-light)
-    }
-}
-.component-container_padding15 {
-    padding: 15px;
-    h2,h3{
-        margin: 0;
-    }
-}
 
+    .row{
+        padding: 15px;
+    }
+
+    .article-body{
+        h2{
+            margin:0;
+            color: @darkBlue;
+            font-family: @font-secundary;
+            .font-configuration(@font-xlll,@font-light);
+        }
+        h3{
+            margin:0;
+            color: @darkGray;
+            font-family: @font-primary;
+            .font-configuration(@font-sm,@font-bold);
+        }
+        p, label{
+            color: @darkGray;
+            font-family: @font-primary;
+            .font-configuration(@font-sm,@font-light);
+        }
+    }
+}
 
 /************************************/
 
@@ -486,6 +472,13 @@
     &:hover, &:focus{
         color: @orange;
     }
+}
+.shadow-image{
+    width: 100%;
+    margin: auto;
+    box-shadow: 2px 6px 5px -2px rgba(89, 89, 89, 0.5);
+    -moz-box-shadow: 2px 6px 5px -2px rgba(89, 89, 89, 0.5);
+    -webkit-box-shadow: 2px 6px 5px -2px rgba(89, 89, 89, 0.5);
 }
 hr{
     border-top: 1px solid @lightSylver;
