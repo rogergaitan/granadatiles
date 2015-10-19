@@ -1,3 +1,12 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from rest_framework.response import Response
 
-# Create your views here.
+from .services import ItemService
+from .serializers import ItemSerializer
+
+class ItemViewSet(viewsets.ViewSet):
+
+    def list(self, request):
+        items = ItemService.get_items()
+        serializer = ItemSerializer(items, many=True)
+        return Response(serializer.data)
