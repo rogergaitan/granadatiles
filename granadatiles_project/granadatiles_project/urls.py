@@ -1,4 +1,4 @@
-﻿from django.conf.urls import include, url
+from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^api/', include('apps.content.urls', namespace='content')),
     url(r'^api/', include('apps.galleries.urls', namespace='galleries')),
     url(r'^api/', include('apps.news.urls', namespace='news')),
+    url(r'^api/', include('apps.quickbooks.urls', namespace='quickbooks')),
 ]
 
 urlpatterns += i18n_patterns(
