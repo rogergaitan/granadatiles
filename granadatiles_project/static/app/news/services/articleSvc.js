@@ -22,7 +22,7 @@
         }
 
         function getArticlesFiltered(selectedYear) {
-            return $http.get(appSettings.serverPath + 'news/articles/?years=' + selectedYear);
+            return $http.get(appSettings.serverPath + 'news/articles/?year=' + selectedYear);
         }
     }
 }());

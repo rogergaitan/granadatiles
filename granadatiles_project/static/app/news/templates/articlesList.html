@@ -11,14 +11,15 @@
     </div>
     <div class="row filter">
         <div class="col-md-2 pull-right text-right">
-            <div class="btn-group">
-                <button type="button" class="btn btn-info">2015</button>
-                <button type="button" class="btn btn-info dropdown-toggle drop-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-info">{{ vm.selectedYear.year }}</button>
+                <button type="button" class="btn btn-info dropdown-toggle" dropdown-toggle>
                     <span class="caret"></span>
-                    <span class="sr-only"></span>
                 </button>
-                <ul class="dropdown-menu">
-                    <li ng-repeat="year in vm.years"><a href="#">{{ year.year }}</a></li>
+                <ul class="dropdown-menu" role="menu">
+                    <li ng-repeat="year in vm.years">
+                        <a href="#" ng-click="vm.setYear(year)">{{ year.year }}</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -26,6 +27,7 @@
     <div ng-repeat="article in ::vm.articles" ng-if="$index % 2 == 0" class="row">
         <div class="col-md-6 blue-box" ng-if="$index <= vm.articles.length - 1">
             <a href="#">
+                <span>{{ ::vm.articles[$index].id }}</span>
                 <div class="article-content">
                     <div class="row">
                         <div class="col-md-4">
@@ -44,6 +46,7 @@
         </div>
         <div class="col-md-6 blue-box" ng-if="$index + 1 <= vm.articles.length - 1">
             <a href="#">
+                <span>{{ ::vm.articles[$index + 1].id }}</span>
                 <div class="article-content">
                     <div class="row">
                         <div class="col-md-4">

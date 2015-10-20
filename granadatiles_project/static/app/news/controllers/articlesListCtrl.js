@@ -13,16 +13,14 @@
     function articlesListCtrl(pageSettings, baseSettings, articleSvc, sectionSvc) {
         var vm = this;
 
-        articleSvc.getArticles().then(function (response){
+        /*articleSvc.getArticles().then(function (response){
             vm.articles = response.data;
-        });
+        });*/
 
         articleSvc.getYears().then(function (response){
             vm.years = response.data;
-        });
-
-        articleSvc.getArticlesFiltered().then(function (response){
-            vm.articlesFiltered = response.data;
+            vm.selectedYear = vm.years[0];
+            updateArticles(vm.years[0].year);
         });
 
         if(pageSettings.sectionId != 0){
@@ -38,6 +36,24 @@
         vm.labels = pageSettings.labels;
 
         vm.breadcrumds = 'My Portafolio';
+
+        vm.status = {
+            isopen: false
+        };
+
+        vm.setYear = function(year) {
+            vm.selectedYear = year;
+            updateArticles(year.year);
+        };
+
+        function updateArticles(selectedYear){
+            console.log(selectedYear);
+            articleSvc.getArticlesFiltered(selectedYear).then(function (response){
+                vm.articles = response.data;
+                console.log(vm.articles[0].id);
+            });
+        }
+
 
     }
 
