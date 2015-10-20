@@ -154,3 +154,10 @@ MESSAGE_TAGS = {
             messages.WARNING: 'alert-warning warning',
             messages.ERROR: 'alert-danger error'
 }
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
