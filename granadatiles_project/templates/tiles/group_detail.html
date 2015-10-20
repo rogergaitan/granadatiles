@@ -1,7 +1,7 @@
-{% extends "base.html" %}
+﻿﻿{% extends "base.html" %}
 {% load i18n %}
 
-{% block title %} Granada Tiles - {% trans 'Group'%} {% endblock %}
+{% block title %} Granada Tiles - {% trans 'Tiles'%} {% endblock %}
 
 {% block content%}
 <div class="row">
@@ -22,11 +22,18 @@
                 sectionId: 0,
                 language: '{{LANGUAGE_CODE}}',
                 collectionId: {{collection_id}},
-                //groupId: {{group_id}},
+                groupId:{{group_id}},
                 labels: {
-                    title: '{% trans 'Interactive Catalog' %}',
-                    show: '{% trans 'Show only' %}',
-                    nuevo: '{% trans 'New' %}',
+                    interactiveCatalog: '{% trans 'Interactive Catalog' %}',
+                    customCement: '{% trans 'Custom Cement Tiles' %}',
+                    about: '{% trans 'About the ' %}',
+                    applications: '{% trans 'Applications of Cement Tile' %}',
+                    galleryMenu: '{% trans ' Gallery' %}',
+                    technical: '{% trans 'Technical Specifications' %}',
+                    ordering: '{% trans 'Ordering Cement Tile' %}',
+                    installing: '{% trans 'Installing Cement Tile' %}',
+                    show_only: '{% trans 'Show only' %}',
+                    new_tile: '{% trans 'New' %}',
                     stock: '{% trans 'In Stock' %}',
                     special: '{% trans 'Specials' %}',
                     size: '{% trans 'Sizes' %}',

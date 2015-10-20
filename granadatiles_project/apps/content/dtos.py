@@ -10,8 +10,8 @@ class TestimonyDto(BaseContentDto):
             self.subtitle = testimony.get_subtitle(language)
         else:
             self.subtitle = testimony.get_subtitle()
-            
-            
+
+
 class SectionCoverDto(object):
     featuredArticle = None
     articles = None
@@ -20,10 +20,10 @@ class SectionCoverDto(object):
         self.image = section_image.image.url
         self.designer = section_image.designer
         self.photographer = section_image.photographer
-        
-        
+
+
 class FeaturedVideoDto(BaseCatalogOrderDto):
 
-   def __init__(self, featured_video, language=None):
-       super().__init__(featured_video, language)
-       self.video = featured_video.video
+    def __init__(self, featured_video, language=None):
+        super().__init__(featured_video, language)
+        self.video = featured_video.video
