@@ -7,7 +7,10 @@ from apps.quickbooks.models import Item
 class Command(BaseCommand):
 
     def handle(self, **options):
-        items = requests.get('https://granadatilesqbintegration.azurewebsites.net/api/items')
+        data = {'username': 'qbgtAdmin', 'grant_type': 'password', 'password': 'bkTdHyN6beF8C5cf'}
+        response = requests.post('https://granadatilesqbintegration.azurewebsites.net/token', data=data)
+        auth = {'Authorization': response.json()['token_type'] + " " + response.json()['access_token']}
+        items = requests.get('https://granadatilesqbintegration.azurewebsites.net/api/items', headers=auth)
 
         for item in items.json():
 
