@@ -254,6 +254,7 @@
                 $('input[type="submit"]').addClass('btn');
                 $('[title]').tooltip();
                 $( "ul span:contains('Django Summernote')" ).parent().parent().remove();
+                $($( "ul span:contains('Aut')" )[1]).parent().parent().remove()
                 $( "ul span:contains('Aut')" ).siblings()[0].setAttribute('class', 'fa fa-user');
                 $( "ul span:contains('Aut')" ).text('{% trans 'Authentication'%}')
             });

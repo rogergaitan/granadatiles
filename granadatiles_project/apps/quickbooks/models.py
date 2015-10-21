@@ -19,7 +19,7 @@ class Item(models.Model):
   is_active = models.BooleanField(verbose_name=_('Is Active'))
   sublevel = models.IntegerField(verbose_name=_('Sublevel'))
   sales_price = models.FloatField(verbose_name=_('Sales Price'))
-  quantity_on_hand = models.IntegerField()
+  quantity_on_hand = models.IntegerField(verbose_name=_('Quantity'))
   average_cost = models.FloatField(verbose_name=_('Average Cost'))
   quantity_on_order = models.IntegerField()
   quantity_on_sales_order = models.FloatField()

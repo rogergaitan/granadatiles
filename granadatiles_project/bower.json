@@ -26,7 +26,8 @@
     "wow": "wowjs#~1.1.2",
     "yamm3": "~1.1.0",
     "angular-bootstrap": "~0.13.4",
-    "angular-socialshare": "angularjs-socialshare#~0.1.14"
+    "angular-socialshare": "angularjs-socialshare#~0.1.14",
+    "eonasdan-bootstrap-datetimepicker": "~4.17.37"
   },
   "overrides": {
     "bootstrap": {

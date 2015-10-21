@@ -29,6 +29,11 @@ class Photographer(models.Model):
 class Gallery(BaseCatalogModel):
     image = ImageField(upload_to='Gallery')
 
+    def categories_count(self):
+        return str(self.categories.count())
+
+    categories_count.short_description = _('Categorias')
+
     class Meta:
         verbose_name = _('Gallery')
         verbose_name_plural = _('Galleries')
@@ -37,6 +42,11 @@ class Gallery(BaseCatalogModel):
 class GalleryCategory(BaseCatalogModel):
     gallery = models.ForeignKey(
         Gallery, verbose_name=_('Gallery'), related_name='categories')
+
+    def images_count(self):
+        return str(self.images.count())
+
+    images_count.short_description = _('Images')
 
     class Meta:
         verbose_name = _('Category')
