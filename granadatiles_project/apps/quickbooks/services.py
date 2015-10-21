@@ -5,9 +5,6 @@ from .dtos import ItemDto
 class ItemService():
 
     def get_items():
-        items = requests.get('https://granadatilesqbintegration.azurewebsites.net/api/items')
-        itemsDto = [ItemDto(item) for item in items.json()]
+        items = Item.objects.all()
+        itemsDto = [ItemDto(item) for item in items]
         return itemsDto
-
-    def update_items():
-        items = requests.get('https://granadatilesqbintegration.azurewebsites.net/api/items')
