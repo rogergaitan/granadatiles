@@ -1,10 +1,11 @@
-from django.conf.urls import include, url
+﻿from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from apps.content.views import index, about_us, videos, compare_products, cement_vs_ceramic, color_palletes
 from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import ugettext_lazy as _
+from rest_framework.authtoken import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -15,6 +16,7 @@ urlpatterns = [
     url(r'^api/', include('apps.galleries.urls', namespace='galleries')),
     url(r'^api/', include('apps.news.urls', namespace='news')),
     url(r'^api/', include('apps.quickbooks.urls', namespace='quickbooks')),
+    url(r'^api/token/', views.obtain_auth_token)
 ]
 
 urlpatterns += i18n_patterns(
