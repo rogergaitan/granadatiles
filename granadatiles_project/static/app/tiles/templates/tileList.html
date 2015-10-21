@@ -1,12 +1,37 @@
-<div class="col-md-12">
+<div class="col-md-12" ng-controller="collectionsGroupCtrl as vm">
     <div class="row">
-        <aside class="col-md-3" ng-controller="collectionsGroupCtrl as vm">
+        <aside class="col-md-3">
             <ng-include src="vm.collectionAsideNavigationTemplateUrl"></ng-include>
         </aside>
-        <div class="col-md-9" ng-controller="groupTilesCtrl as vm">
-            <h1 class="heading-sec">{{ ::vm.title }}</h1>
+        <div class="col-md-9">
+            <h1 class="heading-sec">{{ ::vm.group.title }}</h1>
             <a href="#" class="breadcrumds"><u>Collections</u> <i class="fa fa-angle-double-right"></i> <u></u></a>
-            <div class="text-section" ng-bind-html="::vm.description"></div>
+            <div class="text-section" ng-bind-html="::vm.group.description"></div>
+            <div class="row filter">
+                <div class="col-md-9">
+                    <label>{{ vm.labels.show_only }}:</label>
+                </div>
+                <div class="col-md-3 pull-right text-right">
+                    <div class="btn-group" dropdown>
+                        <button type="button" class="btn btn-info">Sizes</button>
+                        <button type="button" class="btn btn-info dropdown-toggle" dropdown-toggle>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">8 x 8</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group" dropdown>
+                        <button type="button" class="btn btn-info">styles</button>
+                        <button type="button" class="btn btn-info dropdown-toggle" dropdown-toggle>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Avesta</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

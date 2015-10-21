@@ -17,7 +17,8 @@
             getCollection: getCollection,
             getCollectionGroups: getCollectionGroups,
             getFilteredMenuCollection: getFilteredMenuCollection,
-            getGroup: getGroup
+            getGroup: getGroup,
+            getTile: getTile
         };
 
         function getCollections() {
@@ -44,12 +45,15 @@
             return $http.get(appSettings.serverPath + 'collections/'+ collectionId + '/groups');
         }
 
-        function getGroup() {
-            return groupMock();
-            //return $http.get(appSettings.serverPath + 'groups/'+ groupId);
+        function getGroup(groupId) {
+            return $http.get(appSettings.serverPath + 'groups/'+ groupId);
         }
 
-        function groupMock(){
+        function getTile(groupId){
+            return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles')
+        }
+
+        /*function groupMock(){
             return[
                 {
                     id:1,
@@ -202,7 +206,7 @@
                     ]
                 }
             ]
-        }
+        }*/
 
         
     }
