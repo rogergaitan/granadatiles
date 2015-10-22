@@ -48,6 +48,11 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
             return self.introduction_es
         return self.introduction
 
+    def groups_count(self):
+        return str(self.groups.count())
+
+    groups_count.short_description = _('Grupos')
+
     class Meta:
         verbose_name = _('Collection')
         verbose_name_plural = _('Collections')
