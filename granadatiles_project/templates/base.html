@@ -47,7 +47,7 @@
                     <div id="gt-navbar-collapse-grid" class="navbar-collapse collapse row" collapse="navCollapsed">
                         <div class="row">
                             <div class="col-xs-12">
-                                <br class="visible-xs"/>
+                                <br class="visible-xs" />
                                 <div class="col-sm-6">
                                     <a class="visible-sm" href="/">
                                         <img class="gt-header-logo-sm " src="{{ STATIC_URL }}img/Granada-Tile-logo.png" alt="Granada Tile logo">
@@ -157,16 +157,18 @@
         </div>
     </header>
     <main class="row">
-        {% block main %}
-        {% endblock main %}
-        {% block cover%}
-        <ng-include src="'{{STATIC_URL}}app/content/templates/cover.html'">
-        </ng-include>
-        {% endblock cover%}
-        <section class="container">
-            {% block content %}
-            {% endblock content %}
-        </section>
+        <div class="col-xs-12">
+            {% block main %}
+            {% endblock main %}
+            {% block cover%}
+            <ng-include src="'{{STATIC_URL}}app/content/templates/cover.html'">
+            </ng-include>
+            {% endblock cover%}
+            <section class="container">
+                {% block content %}
+                {% endblock content %}
+            </section>
+        </div>
     </main>
     <footer class="row">
         <section class="container text-center">
