@@ -1,9 +1,9 @@
 <div class="col-md-12" ng-controller="catalogListCtrl as vm">
     <div class="row">
-        <aside class="col-md-3">
+        <aside class="col-sm-3">
             <ng-include src="::vm.menuNewsTemplateUrl"></ng-include>
         </aside>
-        <div class="col-md-9">
+        <div class="col-sm-9">
             <h1 class="heading-sec">{{ ::vm.section.title }}</h1>
             <a href="#" class="breadcrumds"><u>{{ ::vm.breadcrumds }}</u> <i class="fa fa-angle-double-right"></i></a>
             <div ng-bind-html="vm.section.description" class="text-section"></div>
