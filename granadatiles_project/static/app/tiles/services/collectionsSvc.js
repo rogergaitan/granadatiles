@@ -18,7 +18,7 @@
             getCollectionGroups: getCollectionGroups,
             getFilteredMenuCollection: getFilteredMenuCollection,
             getGroup: getGroup,
-            getTile: getTile
+            getTiles: getTiles
         };
 
         function getCollections() {
@@ -49,165 +49,329 @@
             return $http.get(appSettings.serverPath + 'groups/'+ groupId);
         }
 
-        function getTile(groupId){
-            return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles')
+        function getTiles(groupId){
+            return groupMock();
+            //return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles')
         }
 
-        /*function groupMock(){
+        function groupMock(){
             return[
                 {
                     id:1,
-                    title:'Kotka 918 A',
-                    subtitle:'CUSTOM: 6” x 6” • 10” x 10”',
-                    image:'/static/img/initial/tiles/tile/Kotka.jpg',
-                    discontinue:false,
-                    new:false,
-                    others_style:[
-                        {
-                            id:1,
-                            title:'918 B',
-                            image:'/static/img/initial/tiles/tile/Kotka918-B-Granada-Tile-Cement.jpg'
-                        },
+                    name:'Kotka',
+                    main:{
+                        id:1,
+                        name:'918 A',
+                        image:'/static/img/initial/tiles/tiles/kotka.jpg',
+                        discontinue:false,
+                        new_item:false,
+                        sizes:[
+                            {
+                                    id: 1,
+                                    name: '6x6'
+                                },
+                                {
+                                    id: 2,
+                                    name: '8x8'
+                                }
+                        ]
+                    },
+                    tiles:[
                         {
                             id:2,
-                            title:'918 C',
-                            image:'/static/img/initial/tiles/tile/Kotka918-C-Granada-Tile-Cement.jpg'
+                            name:'918 B',
+                            image:'/static/img/initial/tiles/tiles/Kotka918-B-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
                         },
                         {
                             id:3,
-                            title:'918 D',
-                            image:'/static/img/initial/tiles/tile/Kotka918-D-Granada-Tile-Cement.jpg'
+                            name:'918 C',
+                            image:'/static/img/initial/tiles/tiles/Kotka918-C-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
+                        },
+                        {
+                            id:4,
+                            name:'918 D',
+                            image:'/static/img/initial/tiles/tiles/Kotka918-D-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
                         }
                     ]
                 },
                 {
                     id:2,
-                    title:'Aarhus 813 A',
-                    subtitle:'IN STOCK: 8”x 8”',
-                    image:'/static/img/initial/tiles/tile/Aarhus.jpg',
-                    discontinue:false,
-                    new:false,
-                    others_style:[
+                    name:'Aarhus',
+                    main:{
+                        id:5,
+                        name:'813 A',
+                        image:'/static/img/initial/tiles/tiles/aarhus.jpg',
+                        discontinue:false,
+                        new_item:false,
+                        sizes:[
+                            {
+                                id: 1,
+                                name: '8x8'
+                            }
+                        ]
+                    },
+                    tiles:[
                         {
-                            id:1,
-                            title:'813 B',
-                            image:'/static/img/initial/tiles/tile/Aarhus-813-B-Granada-Tile-Cement.jpg'
+                            id:6,
+                            name:'813 B',
+                            image:'/static/img/initial/tiles/tiles/Aarhus-813-B-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
                         },
                         {
-                            id:2,
-                            title:'813 C',
-                            image:'/static/img/initial/tiles/tile/Aarhus-813-C-Granada-Tile-Cement.jpg'
+                            id:7,
+                            name:'813 C',
+                            image:'/static/img/initial/tiles/tiles/Aarhus-813-C-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
                         },
                         {
-                            id:3,
-                            title:'813 D',
-                            image:'/static/img/initial/tiles/tile/Aarhus-813-D-Granada-Tile-Cement.jpg'
+                            id:8,
+                            name:'813 D',
+                            image:'/static/img/initial/tiles/tiles/Aarhus-813-D-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
                         }
                     ]
                 },
                 {
                     id:3,
-                    title:'Avesta 800 A',
-                    subtitle:'IN STOCK: 8”x 8”',
-                    image:'/static/img/initial/tiles/tile/Avesta.jpg',
-                    discontinue:false,
-                    new_item:false,
-                    others_style:[
+                    name:'Avesta',
+                    main:{
+                        id:9,
+                        image:'/static/img/initial/tiles/tiles/avesta.jpg',
+                        discontinue:false,
+                        new_item:false,
+                        sizes:[
+                            {
+                                id: 1,
+                                name: '8x8'
+                            }
+                        ]
+                    },
+                    tiles:[
                         {
-                            id:1,
-                            title:'800 B',
-                            image:'/static/img/initial/tiles/tile/Avesta-800-B-Granada-Tile-Cement.jpg'
+                            id:10,
+                            name:'800 B',
+                            image:'/static/img/initial/tiles/tiles/Avesta-800-B-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
                         },
                         {
-                            id:2,
-                            title:'800 C',
-                            image:'/static/img/initial/tiles/tile/Avesta-800-C-Granada-Tile-Cement.jpg'
+                            id:11,
+                            name:'800 C',
+                            image:'/static/img/initial/tiles/tiles/Avesta-800-C-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
                         },
                         {
-                            id:3,
-                            title:'800 D',
-                            image:'/static/img/initial/tiles/tile/Avesta-800-D-Granada-Tile-Cement.jpg'
+                            id:12,
+                            name:'800 D',
+                            image:'/static/img/initial/tiles/tiles/Avesta-800-D-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
                         }
                     ]
                 },
                 {
                     id:4,
-                    title:'Boden 801 A',
-                    subtitle:'IN STOCK: 8”x 8”',
-                    image:'/static/img/initial/tiles/tile/Boden.jpg',
-                    discontinue:false,
-                    new_item:false,
-                    others_style:[
+                    name:'Boden',
+                    main:{
+                        id:13,
+                        name:'801 A',
+                        image:'/static/img/initial/tiles/tiles/boden.jpg',
+                        discontinue:false,
+                        new_item:false,
+                        sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                        ]
+                    },
+                    tiles:[
                         {
-                            id:1,
-                            title:'801 B',
-                            image:'/static/img/initial/tiles/tile/Boden-801-B-Granada-Tile-Cement.jpg'
+                            id:14,
+                            name:'801 B',
+                            image:'/static/img/initial/tiles/tiles/Boden-801-B-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
                         },
                         {
-                            id:2,
-                            title:'801 C',
-                            image:'/static/img/initial/tiles/tile/Boden-801-C-Granada-Tile-Cement.jpg'
+                            id:15,
+                            name:'801 C',
+                            image:'/static/img/initial/tiles/tiles/Boden-801-C-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
                         },
                         {
-                            id:3,
-                            title:'801 D',
-                            image:'/static/img/initial/tiles/tile/Boden-801-D-Granada-Tile-Cement.jpg'
+                            id:16,
+                            name:'801 D',
+                            image:'/static/img/initial/tiles/tiles/Boden-801-D-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
                         }
                     ]
                 },
                 {
                     id:5,
-                    title:'Helsinki 810 A',
-                    subtitle:'IN STOCK: 8”x 8”',
-                    image:'/static/img/initial/tiles/tile/Helsinki.jpg',
-                    discontinue:false,
-                    new_item:false,
-                    others_style:[
+                    name:'Helsinki',
+                    main:{
+                        id:17,
+                        name:'810 A',
+                        image:'/static/img/initial/tiles/tiles/helsinki.jpg',
+                        discontinue:false,
+                        new_item:false,
+                        sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                        ]
+                    },
+                    tiles:[
                         {
-                            id:1,
-                            title:'810 B',
-                            image:'/static/img/initial/tiles/tile/Helsinki-810-B-Granada-Tile-Cement.jpg'
+                            id:18,
+                            name:'810 B',
+                            image:'/static/img/initial/tiles/tiles/Helsinki-810-B-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
                         },
                         {
-                            id:2,
-                            title:'810 C',
-                            image:'/static/img/initial/tiles/tile/Helsinki-810-C-Granada-Tile-Cement.jpg'
+                            id:19,
+                            name:'810 C',
+                            image:'/static/img/initial/tiles/tiles/Helsinki-810-C-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
                         },
                         {
-                            id:3,
-                            title:'810 D',
-                            image:'/static/img/initial/tiles/tile/Helsinki-810-D-Granada-Tile-Cement.jpg'
+                            id:20,
+                            name:'810 D',
+                            image:'/static/img/initial/tiles/tiles/Helsinki-810-D-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
                         }
                     ]
                 },
                 {
                     id:6,
-                    title:'Laholm 802 A',
-                    subtitle:'IN STOCK: 8”x 8”',
-                    image:'/static/img/initial/tiles/tile/Laholm.jpg',
-                    discontinue:false,
-                    new_item:false,
-                    others_style:[
+                    name:'Laholm',
+                    main:{
+                        id:21,
+                        name:'802 A',
+                        image:'/static/img/initial/tiles/tiles/laholm.jpg',
+                        discontinue:false,
+                        new_item:false,
+                        sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                        ]
+                    },
+                    tiles:[
                         {
-                            id:1,
-                            title:'802 B',
-                            image:'/static/img/initial/tiles/Laholm-802-B-Granada-Tile-Cement.jpg'
+                            id:22,
+                            name:'802 B',
+                            image:'/static/img/initial/tiles/tiles/Laholm-802-B-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
                         },
                         {
-                            id:2,
-                            title:'802 C',
-                            image:'/static/img/initial/tiles/Laholm-802-C-Granada-Tile-Cement.jpg'
+                            id:23,
+                            name:'802 C',
+                            image:'/static/img/initial/tiles/tiles/Laholm-802-C-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
                         },
                         {
-                            id:3,
-                            title:'802 D',
-                            image:'/static/img/initial/tiles/Laholm-802-D-Granada-Tile-Cement.jpg'
+                            id:24,
+                            name:'802 D',
+                            image:'/static/img/initial/tiles/tiles/Laholm-802-D-Granada-Tile-Cement.jpg',
+                            sizes:[
+                                {
+                                    id: 1,
+                                    name: '8x8'
+                                }
+                            ]
                         }
                     ]
                 }
             ]
-        }*/
-
-        
+        }
     }
 }());

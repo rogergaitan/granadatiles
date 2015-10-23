@@ -29,14 +29,15 @@
 
         collectionsSvc.getGroup(pageSettings.groupId).then(function (response) {
             vm.group = response.data;
-            console.log(vm.group);
         });
 
-        collectionsSvc.getTile(pageSettings.groupId).then(function (response) {
+        /*collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
             vm.tiles = response.data;
             console.log(vm.tiles);
-        });
+        });*/
 
+        vm.tiles = collectionsSvc.getTiles();
+        console.log(vm.tiles);
 
         vm.labels = pageSettings.labels;
 
