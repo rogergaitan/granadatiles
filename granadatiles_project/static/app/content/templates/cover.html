@@ -8,17 +8,17 @@
         <div class="row bg-slider-footer">
             <div class="container">
                 <div class="row" ng-if="vm.cover.designer || vm.cover.photographer || vm.cover.featuredArticle || vm.cover.articles">
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-sm-3 col-xs-6">
                         <label>{{ ::vm.labels.designer }}:</label> <span>{{ ::vm.cover.designer }}</span> <br />
                         <label>{{ ::vm.labels.photographer }}:</label> <span>{{ ::vm.cover.photographer }}</span>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-3 col-xs-6">
                         <span>{{ ::vm.cover.featuredArticle.title }}</span>
                         <a href="">
                             <img ng-src="{{ ::vm.cover.featuredArticle.image }}" alt="{{ ::vm.cover.featuredArticle.title }}">
                         </a>
                     </div>
-                    <div class="col-md-5 press">
+                    <div class="col-md-5 press col-sm-6 hidden-xs">
                         <label>{{ ::vm.labels.featured }}:</label>
                         <ul class="list-inline">
                             <li ng-repeat="article in vm.cover.articles">

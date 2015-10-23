@@ -1,4 +1,4 @@
-from django.db import models
+﻿from django.db import models
 from django.utils.translation import ugettext as _
 from core.models import BaseCatalogModel, BaseGalleryImageModel
 from sorl.thumbnail.fields import ImageField
@@ -20,6 +20,11 @@ class Catalog(BaseCatalogModel):
 class Magazine(models.Model):
     name = models.CharField(max_length=130, verbose_name=_('Name'))
     logo = models.ImageField(upload_to='Magazines')
+
+    def articles_count(self):
+        return str(self.articles.count())
+
+    articles_count.short_description = _('Articulos')
 
     class Meta:
         verbose_name = _('Magazine')

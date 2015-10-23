@@ -17,7 +17,7 @@ class TileAdmin(admin.ModelAdmin):
 
 @admin.register(Collection)
 class CollectionAdmin(SummernoteModelAdmin):
-    list_display = ('title', 'title_es')
+    list_display = ('title', 'title_es', 'groups_count', 'featured', 'show_in_menu')
     search_fields = ['title', 'title_es']
 
 

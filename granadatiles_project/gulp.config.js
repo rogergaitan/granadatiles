@@ -85,7 +85,7 @@ module.exports = function () {
                     }
                 }
             },
-            exclude: [/eonasdan-bootstrap-datetimepicker/,
+            exclude: [/eonasdan-bootstrap-datetimepicker/, /moment/, /moment-timezone/,
                       /Chart.js/],
         },
         /* 

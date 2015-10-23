@@ -14,19 +14,23 @@ class Command(BaseCommand):
 
         for item in items.json():
 
-            Item.objects.get_or_create(
-                id=item['$id'],
+            data = {
+                'list_id':item['ListID'],
+                'name':item['Name'],
+                'full_name':item['FullName'],
+                'is_active':item['IsActive'],
+                'sublevel':item['SubLevel'],
+                'sales_price':item['SalesPrice'],
+                'quantity_on_hand':item['QuantityOnHand'],
+                'average_cost':item['AverageCost'],
+                'quantity_on_order':item['QuantityOnOrder'],
+                'quantity_on_sales_order':item['QuantityOnSalesOrder'],
+                'sales_desc':item['SalesDesc'],
+                'purchase_desc':item['PurchaseDesc'],
+                'purchase_cost':item['PurchaseCost'],
+            }
+
+            Item.objects.update_or_create(
                 list_id=item['ListID'],
-                name=item['Name'],
-                full_name=item['FullName'],
-                is_active=item['IsActive'],
-                sublevel=item['SubLevel'],
-                sales_price=item['SalesPrice'],
-                quantity_on_hand=item['QuantityOnHand'],
-                average_cost=item['AverageCost'],
-                quantity_on_order=item['QuantityOnOrder'],
-                quantity_on_sales_order=item['QuantityOnSalesOrder'],
-                sales_desc=item['SalesDesc'],
-                purchase_desc=item['PurchaseDesc'],
-                purchase_cost=item['PurchaseCost'],
+                defaults=data
             )

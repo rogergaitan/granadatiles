@@ -11,14 +11,13 @@ class ImagesInline(admin.StackedInline, SummernoteInlineModelAdmin):
 
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-    list_filter = ['name']
-    search_fields = ['name']
+    list_display = ('name', 'name_es', 'categories_count')
+    search_fields = ['name', 'name_es']
 
 
 @admin.register(GalleryCategory)
 class GalleryCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'name')
+    list_display = ('name', 'name_es', 'images_count',  'gallery')
     inlines = [ImagesInline]
     list_filter = ['name']
     search_fields = ['name']

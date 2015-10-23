@@ -16,7 +16,6 @@
         collectionsSvc.getFeaturedCollections().then(function (response) {
             vm.collections = response.data;
         });
-        vm.slogan = areaSvc.getArea(appSettings.areas.SLOGAN).description;
 
         vm.labels = pageSettings.labels;
 

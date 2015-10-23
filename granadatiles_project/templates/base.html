@@ -31,7 +31,7 @@
     <header class="row navbar navbar-fixed-top yamm" id="gt-header">
         <div class="container">
             <div class="row">
-                <div class="navbar-header col-md-2 col-sm-3" id="gt-header-brand">
+                <div class="navbar-header col-md-2" id="gt-header-brand">
                     <button type="button" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed"
                             data-toggle="collapse" data-target="#gt-navbar-collapse-grid"
                             class="navbar-toggle" id="gt-toggle-custom">
@@ -39,14 +39,20 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="hidden-xs brand" href="/">
+                    <a class="hidden-sm brand" href="/">
                         <img class="" src="{{ STATIC_URL }}img/Granada-Tile-logo.png" alt="Granada Tile logo">
                     </a>
                 </div>
-                <div class="col-md-10 col-sm-9">
+                <div class="col-md-10">
                     <div id="gt-navbar-collapse-grid" class="navbar-collapse collapse row" collapse="navCollapsed">
                         <div class="row">
                             <div class="col-xs-12">
+                                <br class="visible-xs"/>
+                                <div class="col-sm-6">
+                                    <a class="visible-sm" href="/">
+                                        <img class="gt-header-logo-sm " src="{{ STATIC_URL }}img/Granada-Tile-logo.png" alt="Granada Tile logo">
+                                    </a>
+                                </div>
                                 <div class="col-xs-12 col-sm-6 col-md-4 pull-right input-group" id="gt-header-search">
                                     <input type="text" class="form-control input-sm" placeholder="Search">
                                     <span class="input-group-btn">
@@ -58,21 +64,21 @@
                             </div>
                         </div>
                         <div class="row text-right" id="gt-header-contact-info">
-                            <div class="col-md-12 col-xs-8 pull-right">
+                            <div class="col-md-12 pull-right">
                                 <ul class="list-inline">
-                                    <li class="hidden-xs hidden-sm">
+                                    <li>
                                         <a href="#">
                                             <i class="glyphicon glyphicon-phone-alt"></i>&nbsp;<span>213-788-4238</span>
                                         </a>
                                     </li>
-                                    <li class="hidden-xs hidden-sm">
+                                    <li>
                                         <a href="#"><i class="fa fa-comments"></i>&nbsp;<span>{% trans 'LIVE CHAT' %}</span></a>
                                     </li>
-                                    <li class="hidden-xs hidden-sm">
+                                    <li>
                                         <a href="#"><i class="fa fa-envelope"></i>&nbsp;<span>sales@ganadatile.com</span></a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="fa fa-briefcase"></i>&nbsp;<span>{% trans 'MY PORTFOLIO' %}</span></a>
+                                        <a href="{% url 'social:begin' 'facebook' %}"><i class="fa fa-briefcase"></i>&nbsp;<span>{% trans 'MY PORTFOLIO' %}</span></a>
                                     </li>
                                     <li>
                                         <a href="#"><i class="fa fa-shopping-cart"></i>&nbsp;<span>{% trans 'CART' %}</span></a>

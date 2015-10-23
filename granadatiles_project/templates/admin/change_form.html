@@ -11,6 +11,16 @@
 </style>
 {% url 'admin:jsi18n' as jsi18nurl %}
 <script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
+<style>
+    .related-widget-wrapper{
+    float:none !important;
+}
+
+    .form-control-inline{
+        display: inline-block;
+        width:80%;
+    }
+</style>
 {{ media }}
 {% endblock %}
 
@@ -110,17 +120,9 @@
 <script>
     $(function () {
         
-        var set = $('.controls select.form-control.form-control-inline');
-        var addButtons = $('.add-another');
-        addButtons.children('img').remove()
-        set.each(function () {
-            $(this).next('a').andSelf().wrapAll('<div class="input-group"> </div>');
-        });
-        $('td .input-group').addClass('col-sm-4');
-        addButtonsToBeWrapped = $('.controls .add-another');
-        addButtonsToBeWrapped.wrap('<span class="input-group-addon"></span>');
-        addButtons.append('Add');
-        addButtons.append('<i class="fa fa-plus"></i>');
+        setTimeout(function () {
+            $('.datetimeshortcuts').remove();
+        }, 500);
         $('p.datetime').replaceWith(function () {
             return $("<div />").append($(this).contents());
         });
