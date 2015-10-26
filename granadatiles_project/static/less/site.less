@@ -207,6 +207,10 @@
 }
 .filter{
     margin-bottom: 20px;
+    label{
+        font-family: @font-secundary;
+        .font-configuration(@font-md,@font-light);
+    }
     button{
         background-color: @lightBlue;
         color: @darkBlue;
@@ -421,6 +425,57 @@
         }
     }
 }
+.content-tile {
+    background-color: @lightSteelBlue;
+    padding: 10px;
+
+    img{
+        margin: auto;
+    }
+    .label-tile{
+        font-family: @font-secundary;
+        .font-configuration(@font-xs,@font-light);
+    }
+
+    .tile-body {
+        margin: 10px 0 20px 0;
+
+        h2 {
+            color: @darkBlue;
+            font-family: @font-secundary;
+            .font-configuration(@font-xlll, @font-light);
+            margin: 0;
+        }
+        ul,label {
+            display: inline;
+            font-family: @font-secundary;
+            .font-configuration(@font-sm, @font-light);
+
+        }
+    }
+    .tile-options{
+        margin: 0;
+        padding-top: 10px;
+        border-top: 1px solid @darkGray;
+
+        li{
+            text-align: center;
+            a{
+                color: @darkGray;
+                font-family: @font-secundary;
+                .font-configuration(@font-sm,@font-light);
+                &:hover, &:focus{
+                    color: @darkBlue;
+                    text-decoration: none;
+                }
+                i{
+                    font-size: @font-xxl;
+                }
+            }
+        }
+    }
+
+}
 
 .article-content{
     background-color: @lightSteelBlue;
@@ -525,6 +580,7 @@
 hr{
     border-top: 1px solid @lightSylver;
 }
+
 /************************************/
 
 /*********** Style Gallery **********/
