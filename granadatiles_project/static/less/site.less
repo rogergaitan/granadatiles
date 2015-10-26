@@ -448,7 +448,6 @@ div.gt-index-welcome{
         font-family: @font-secundary;
         .font-configuration(@font-xs,@font-light);
     }
-
     .tile-body {
         margin: 10px 0 20px 0;
 
@@ -458,34 +457,49 @@ div.gt-index-welcome{
             .font-configuration(@font-xlll, @font-light);
             margin: 0;
         }
-        ul,label {
-            display: inline;
-            font-family: @font-secundary;
-            .font-configuration(@font-sm, @font-light);
-
-        }
-    }
-    .tile-options{
-        margin: 0;
-        padding-top: 10px;
-        border-top: 1px solid @darkGray;
-
-        li{
-            text-align: center;
-            a{
-                color: @darkGray;
+        div{
+            margin-bottom: 10px;
+            .title-tile {
+                display: inline;
                 font-family: @font-secundary;
-                .font-configuration(@font-sm,@font-light);
-                &:hover, &:focus{
-                    color: @darkBlue;
-                    text-decoration: none;
+                .font-configuration(@font-sm, @font-light);
+            }
+        }
+        .tile-options{
+            margin: 0;
+            padding-top: 10px;
+            border-top: 1px solid @darkGray;
+
+            li{
+                margin-bottom: 10px;
+                a{
+                    color: @darkGray;
+                    font-family: @font-secundary;
+                    .font-configuration(@font-sm,@font-light);
+                    display: inline-flex;
+                    &:hover, &:focus{
+                        color: @darkBlue;
+                        text-decoration: none;
+                    }
+                    i,img{
+                        font-size: @font-xxll;
+                        margin: auto;
+                        padding-right: 5px;
+                    }
+                    p{
+                        width: 100px;
+                        margin: auto;
+                    }
                 }
-                i{
-                    font-size: @font-xxl;
+            }
+            li:first-child{
+                p{
+                    width: 50px;
                 }
             }
         }
     }
+
 
 }
 

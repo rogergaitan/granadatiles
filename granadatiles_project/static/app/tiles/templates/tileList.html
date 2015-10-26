@@ -59,15 +59,13 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 tile-body">
-                                <h2>{{ vm.tiles[$index].name }} {{ vm.tiles[$index].main.name }}</h2>
-                                <label>CUSTOM:</label>
-                                <ul class="list-inline">
-                                    <li ng-repeat="tileSize in vm.tiles[$index].main.sizes">{{ tileSize.name }}</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
+                                <div>
+                                    <h2>{{ vm.tiles[$index].name }} {{ vm.tiles[$index].main.name }}</h2>
+                                    <label class="title-tile">CUSTOM:</label>
+                                    <ul class="list-inline title-tile">
+                                        <li ng-repeat="tileSize in vm.tiles[$index].main.sizes">{{ tileSize.name }}</li>
+                                    </ul>
+                                </div>
                                 <ul class="list-inline tile-options">
                                     <li>
                                         <a href="#"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
@@ -103,15 +101,13 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 tile-body">
-                                <h2>{{ vm.tiles[$index + 1].name }} {{ vm.tiles[$index + 1].main.name }}</h2>
-                                <label>CUSTOM:</label>
-                                <ul class="list-inline">
-                                    <li ng-repeat="tileSize in vm.tiles[$index + 1].main.sizes">{{ tileSize.name }}</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
+                                <div>
+                                    <h2>{{ vm.tiles[$index].name }} {{ vm.tiles[$index].main.name }}</h2>
+                                    <label class="title-tile">CUSTOM:</label>
+                                    <ul class="list-inline title-tile">
+                                        <li ng-repeat="tileSize in vm.tiles[$index].main.sizes">{{ tileSize.name }}</li>
+                                    </ul>
+                                </div>
                                 <ul class="list-inline tile-options">
                                     <li>
                                         <a href="#"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
@@ -147,15 +143,13 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 tile-body">
-                                <h2>{{ vm.tiles[$index + 2].name }} {{ vm.tiles[$index + 2].main.name }}</h2>
-                                <label>CUSTOM:</label>
-                                <ul class="list-inline">
-                                    <li ng-repeat="tileSize in vm.tiles[$index + 2].main.sizes">{{ tileSize.name }}</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
+                                <div>
+                                    <h2>{{ vm.tiles[$index].name }} {{ vm.tiles[$index].main.name }}</h2>
+                                    <label class="title-tile">CUSTOM:</label>
+                                    <ul class="list-inline title-tile">
+                                        <li ng-repeat="tileSize in vm.tiles[$index].main.sizes">{{ tileSize.name }}</li>
+                                    </ul>
+                                </div>
                                 <ul class="list-inline tile-options">
                                     <li>
                                         <a href="#"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
