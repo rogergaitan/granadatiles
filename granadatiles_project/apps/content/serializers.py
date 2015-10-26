@@ -1,5 +1,5 @@
-from rest_framework import serializers
-from core.serializers import BaseContentSerializer, BaseCatalogOrderSerializer
+﻿from rest_framework import serializers
+from core.serializers import BaseContentSerializer, BaseCatalogOrderSerializer, BaseGalleryNavImageSerializer
 from apps.news.serializers import SectionFeaturedArticleSerializer, ArticleMagazineSerializer
 from .models import Social
 
@@ -27,3 +27,8 @@ class SocialSerializer(serializers.ModelSerializer):
         
 class FeaturedVideoSerializer(BaseCatalogOrderSerializer):
     video = serializers.URLField()
+
+class IndexNavigationSerializer(BaseGalleryNavImageSerializer):
+    actionName = serializers.CharField()
+
+    

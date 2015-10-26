@@ -1,9 +1,9 @@
-from django.shortcuts import render
+﻿from django.shortcuts import render
 from rest_framework import viewsets, mixins
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
-from apps.content.serializers import TestimonySerializer, SectionSerializer, SocialSerializer, SectionCoverSerializer, FeaturedVideoSerializer
-from apps.content.services import TestimonyService, SectionService, FeaturedVideoService, AreaService
+from apps.content.serializers import TestimonySerializer, SectionSerializer, SocialSerializer, SectionCoverSerializer, FeaturedVideoSerializer, IndexNavigationSerializer
+from apps.content.services import TestimonyService, SectionService, FeaturedVideoService, AreaService, IndexNavigationService
 from .models import Social
 from core.views import BaseViewSet
 from core.serializers import BaseContentSerializer
@@ -83,3 +83,11 @@ class AreaViewSet(BaseViewSet):
         area = AreaService.get_area(id=pk, language=self.get_language(request))
         serializer = BaseContentSerializer(area)
         return Response(serializer.data)
+
+
+class IndexNavigationViewSet(BaseViewSet):
+
+    def list(self, request):
+        index_navigation = IndexNavigationService.get_index_navigation(language=self.get_language(request))
+        serialize = IndexNavigationSerializer(index_navigation, many=True)
+        return Response(serialize.data)

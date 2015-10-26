@@ -1,5 +1,5 @@
 ﻿from django.contrib import admin
-from apps.content.models import Section, SectionImage, Social, FeaturedVideo, Area, Testimony
+from apps.content.models import Section, SectionImage, Social, FeaturedVideo, Area, Testimony, IndexNavigation
 from django_summernote.admin import SummernoteModelAdmin, SummernoteInlineModelAdmin
 
 
@@ -45,5 +45,13 @@ class AreaAdmin(SummernoteModelAdmin):
 class TestimonyAdmin(SummernoteModelAdmin):
     list_display = ('title', 'subtitle', )
     search_fields = ['title', 'title_es', ]
+
+@admin.register(IndexNavigation)
+class IndexNavigationAdmin(SummernoteModelAdmin):
+    list_display = ('title', 'title_es', 'action_name', 'action_name_es')
+    search_fields = ['title', 'title_es', 'action_name', 'action_name_es']
+
+    def has_add_permission(self, request):
+        return False;
 
     
