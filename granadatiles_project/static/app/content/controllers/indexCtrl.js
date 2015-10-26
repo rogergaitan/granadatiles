@@ -19,6 +19,8 @@
 
         vm.labels = pageSettings.labels;
 
-        vm.navigation = mainNavigationSvc.getmainNavigation();
+        mainNavigationSvc.getmainNavigation().then(function (response) {
+            vm.navigation = response.data;
+        });
     }
 }());
