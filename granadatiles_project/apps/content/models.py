@@ -80,3 +80,16 @@ class Testimony(BaseContentModel):
     class Meta:
         verbose_name = _('Testimony')
         verbose_name_plural = _('Testimonials')
+
+
+class IndexNavigation(BaseGalleryNavImageModel):
+    link_es = models.URLField(blank=True, null=True, verbose_name=_('Link'))
+
+    def get_link(self, language = None):
+        if language == 'es' and self.link_es:
+            return self.link_es
+        return self.link
+
+    class Meta:
+        verbose_name = _('Index Link')
+        verbose_name_plural = _('Index Links')
