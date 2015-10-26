@@ -1,5 +1,3 @@
-﻿from django.core.management import call_command
-
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser
@@ -7,6 +5,7 @@ from rest_framework.decorators import detail_route, list_route
 
 from .services import ItemService
 from .serializers import ItemSerializer
+from .tasks import update_inventory_task
 
 class ItemViewSet(viewsets.ViewSet):
 
@@ -18,6 +17,6 @@ class ItemViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     @list_route(methods=['post'])
-    def update_inventory(self, request, pk = None):
-        call_command('update_inventory')
+    def update_inventory(self, request):
+        update_inventory_task.delay()
         return Response({'message': 'Finished task'})

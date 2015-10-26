@@ -1,16 +1,16 @@
 ﻿<div class="row" ng-controller="coverCtrl as vm">
-    <div ng-if="vm.cover.image">
+    <div ng-if="vm.cover.image" class="col-xs-12">
         <div class="row">
-            <div class="col-xs-12">
                 <img ng-src="{{::vm.cover.image}}" alt="Granada Tiles Cover" class="img-responsive" id="gt-cover-image" />
-            </div>
         </div>
         <div class="row bg-slider-footer">
             <div class="container">
                 <div class="row" ng-if="vm.cover.designer || vm.cover.photographer || vm.cover.featuredArticle || vm.cover.articles">
                     <div class="col-md-3 col-sm-3 col-xs-6">
-                        <label>{{ ::vm.labels.designer }}:</label> <span>{{ ::vm.cover.designer }}</span> <br />
-                        <label>{{ ::vm.labels.photographer }}:</label> <span>{{ ::vm.cover.photographer }}</span>
+                        <label ng-if="!vm.cover.designer">&nbsp;</label>
+                        <label ng-if="vm.cover.designer">{{ ::vm.labels.designer }}:</label> <span>{{ ::vm.cover.designer }}</span> <br />
+                        <label ng-if="vm.cover.photographer">{{ ::vm.labels.photographer }}:</label> <span>{{ ::vm.cover.photographer }}</span>
+                        <label ng-if="!vm.cover.photographer">&nbsp;</label>
                     </div>
                     <div class="col-md-4 col-sm-3 col-xs-6">
                         <span>{{ ::vm.cover.featuredArticle.title }}</span>
@@ -18,7 +18,7 @@
                             <img ng-src="{{ ::vm.cover.featuredArticle.image }}" alt="{{ ::vm.cover.featuredArticle.title }}">
                         </a>
                     </div>
-                    <div class="col-md-5 press col-sm-6 hidden-xs">
+                    <div class="col-md-5 press col-sm-6 hidden-xs" ng-if="vm.cover.articles">
                         <label>{{ ::vm.labels.featured }}:</label>
                         <ul class="list-inline">
                             <li ng-repeat="article in vm.cover.articles">
