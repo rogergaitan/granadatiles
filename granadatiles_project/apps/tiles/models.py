@@ -1,4 +1,4 @@
-﻿from django.db import models
+from django.db import models
 from django.utils.translation import ugettext as _
 from core.models import BaseGalleryImageModel, BaseCatalogModel, BaseContentModel, BaseSlugModel
 from django.core.urlresolvers import reverse
@@ -63,7 +63,7 @@ class Group(BaseGalleryImageModel, BaseSlugModel):
 
     def get_absolute_url(self, language=None):
         slug = self.get_slug(language)
-        return reverse('sr-collections:sr-group-detail', 
+        return reverse('sr-collections:sr-group-detail',
                        kwargs={
                            'group_slug': slug,
                            'collection_slug': self.collection.get_slug(language)
@@ -84,6 +84,13 @@ class TileDesign(BaseCatalogModel):
 
 
 class Tile(BaseCatalogModel):
+    list_id = models.CharField(max_length=250)
+    full_name = models.CharField(max_length=250, verbose_name=_('Full name'))
+    is_active = models.BooleanField(verbose_name=_('Is Active'))
+    sublevel = models.IntegerField(verbose_name=_('Sublevel'))
+    sales_price = models.FloatField(verbose_name=_('Sales Price'))
+    quantity_on_hand = models.IntegerField(verbose_name=_('Quantity'))
+    average_cost = models.FloatField(verbose_name=_('Average Cost'))
     image = ImageField(upload_to='tiles', verbose_name=_('Image'), null = True, blank=True)
     main = models.BooleanField(default=False, verbose_name=_('Main'),
                                help_text='Is the main tile of the design')
@@ -95,11 +102,6 @@ class Tile(BaseCatalogModel):
     class Meta:
         verbose_name = _('Tile')
         verbose_name_plural = _('Tiles')
-
-    def save(self, *args, **kwargs):
-        if self.main:
-            Tile.objects.filter(main=True).update(main=False)
-        super(Tile, self).save(*args, **kwargs)
 
 
 class Style(BaseCatalogModel):
