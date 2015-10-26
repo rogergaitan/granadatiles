@@ -1,0 +1,134 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-26 14:59-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\apps.py:7 .\models.py:97
+msgid "Tiles"
+msgstr "Azulejos"
+
+#: .\models.py:10
+msgid "Weight"
+msgstr "Peso"
+
+#: .\models.py:11
+msgid "Thickness"
+msgstr "Grosor"
+
+#: .\models.py:17
+msgid "Size"
+msgstr "Tamaño"
+
+#: .\models.py:18
+msgid "Sizes"
+msgstr "Tamaños"
+
+#: .\models.py:22
+msgid "Color"
+msgstr "Color"
+
+#: .\models.py:25
+msgid "Pallete Color"
+msgstr "Palleta de color"
+
+#: .\models.py:26
+msgid "Pallete Colors"
+msgstr "Paleta de colores"
+
+#: .\models.py:31
+msgid "Featured"
+msgstr "Destacado"
+
+#: .\models.py:32
+msgid "Show in menu"
+msgstr "Mostrar en menu"
+
+#: .\models.py:33
+msgid "Introduction"
+msgstr "Introduccion"
+
+#: .\models.py:34
+msgid "Introduction_es"
+msgstr "Introduccion_es"
+
+#: .\models.py:54 .\models.py:74
+msgid "Groups"
+msgstr "Grupos"
+
+#: .\models.py:57 .\models.py:62
+msgid "Collection"
+msgstr "Collecion"
+
+#: .\models.py:58
+msgid "Collections"
+msgstr "Colleciones"
+
+#: .\models.py:73 .\models.py:106
+msgid "Group"
+msgstr "Grupo"
+
+#: .\models.py:79
+msgid "Tiles Group"
+msgstr "Grupo azulejos"
+
+#: .\models.py:82
+msgid "Tile Design"
+msgstr "Diseño azulejo"
+
+#: .\models.py:83
+msgid "Tile Designs"
+msgstr "Diseños azulejo"
+
+#: .\models.py:87
+msgid "Image"
+msgstr "Imagen"
+
+#: .\models.py:88
+msgid "Main"
+msgstr "Principal"
+
+#: .\models.py:90
+msgid "Similar Tiles"
+msgstr "Modelos similares"
+
+#: .\models.py:91
+msgid "Design"
+msgstr "Diseño"
+
+#: .\models.py:92
+msgid "Tiles Sizes"
+msgstr "Tamaños azulejos"
+
+#: .\models.py:93
+msgid "Tiles Colors"
+msgstr "Colores azulejos"
+
+#: .\models.py:96
+msgid "Tile"
+msgstr "Azulejo"
+
+#: .\models.py:109
+msgid "Style"
+msgstr "Estilo"
+
+#: .\models.py:110
+msgid "Styles"
+msgstr "Estilos"
+
+#: .\serve_urls.py:7
+msgid "^(?P<collection_slug>[\\w-]+)/groups/(?P<group_slug>[\\w-]+)$"
+msgstr "^(?P<collection_slug>[\\w-]+)/grupos/(?P<group_slug>[\\w-]+)$"

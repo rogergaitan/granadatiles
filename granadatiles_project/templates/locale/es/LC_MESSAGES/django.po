@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-02 14:48-0600\n"
+"POT-Creation-Date: 2015-10-26 15:11-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,78 +17,215 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\base.html:50
+#: .\base.html:75
 msgid "LIVE CHAT"
 msgstr "CHAT EN VIVO"
 
-#: .\base.html:52
+#: .\base.html:81
 msgid "MY PORTFOLIO"
 msgstr "MI PORTAFOLIO"
 
-#: .\base.html:53
+#: .\base.html:84
 msgid "CART"
 msgstr "CARRITO"
 
-#: .\base.html:76
+#: .\base.html:115
 msgid "COLLECTIONS"
-msgstr "COLLECCIONES"
+msgstr "COLECCIONES"
 
-#: .\base.html:81
-msgid "BROWSE FOR CEMENT TILE COLLECTIONS"
-msgstr "BUSCAR COLECCIONES DE AZULEJOS"
-
-#: .\base.html:87 .\base.html.py:94 .\base.html.py:101
-msgid "TILE COLLECTION"
-msgstr "COLLECCION DE AZULEJO"
-
-#: .\base.html:107
-msgid "PRODUCT INFORMATION"
-msgstr "INFORMACION DE PRODUCTO"
-
-#: .\base.html:109
-msgid "In Stock Samples"
-msgstr "Muestras disponibles"
-
-#: .\base.html:110
-msgid "In Stock Tiles"
-msgstr "Azulejos disponibles"
-
-#: .\base.html:111
-msgid "Compare our Products"
-msgstr "Compare nuestros productos"
-
-#: .\base.html:112
-msgid "Cement Vs. Ceramic"
-msgstr "Cemento Vs. Ceramica"
-
-#: .\base.html:113
-msgid "Color Palletes"
-msgstr "Paletas de Color"
-
-#: .\base.html:114
-msgid "Catalogs / Inspiration Boooks"
-msgstr "Catalogos / Libros de Inspiracion"
-
-#: .\base.html:122
+#: .\base.html:123
 msgid "GALLERY"
-msgstr "GALLERIA"
-
-#: .\base.html:125
-msgid "IN STOCK"
-msgstr "DISPONIBLE"
+msgstr "GALERÍA"
 
 #: .\base.html:128
+msgid "IN STOCK"
+msgstr "EN EXISTENCIA"
+
+#: .\base.html:133
 msgid "RESIDENTIAL"
 msgstr "RESIDENCIAL"
 
-#: .\base.html:131
-msgid "COMERTIAL"
+#: .\base.html:138
+msgid "COMMERCIAL"
 msgstr "COMERCIAL"
 
-#: .\base.html:134
+#: .\base.html:143
 msgid "NEWS/PRESS"
 msgstr "NOTICIAS/PRENSA"
 
-#: .\base.html:137
+#: .\base.html:148
 msgid "ABOUT US"
 msgstr "ACERCA DE"
+
+#: .\base.html:246
+msgid "BROWSE OUR CEMENT TILE COLLECTIONS"
+msgstr "EXPLORA NUESTRAS COLECCIONES DE AZULEJOS"
+
+#: .\base.html:247
+msgid "In Stock Samples"
+msgstr "Muestras en existencia"
+
+#: .\base.html:248
+msgid "PRODUCT INFORMATION"
+msgstr "INFORMACION DE PRODUCTO"
+
+#: .\base.html:249
+msgid "In Stock Tiles"
+msgstr "Azulejos en existencia"
+
+#: .\base.html:250
+msgid "Compare our Products"
+msgstr "Compare nuestros productos"
+
+#: .\base.html:251
+msgid "Cement Vs. Ceramic"
+msgstr "Cemento Vs. Cerámica"
+
+#: .\base.html:252
+msgid "Color Palletes"
+msgstr "Paleta de colores"
+
+#: .\base.html:253
+msgid "Catalogs / Inspiration Boooks"
+msgstr "Catalogos / Libros Inspiracionales"
+
+#: .\base.html:254
+msgid "Designer"
+msgstr "Diseñador"
+
+#: .\base.html:255
+msgid "Photographer"
+msgstr "Fotógrafo"
+
+#: .\base.html:256
+msgid "Also Featured in"
+msgstr "Tambien aparece en"
+
+#: .\content\about_us.html:4 .\content\about_us.html.py:23
+msgid "About us"
+msgstr "Acerca de"
+
+#: .\content\cement_vs_ceramic.html:4 .\content\color_palletes.html:4
+#: .\content\compare_products.html:4
+msgid "Compare our products"
+msgstr "Compare nuestros productos"
+
+#: .\content\cement_vs_ceramic.html:25 .\content\compare_products.html:25
+#: .\tiles\collection_detail.html:4
+msgid "Collections"
+msgstr "Colecciones"
+
+#: .\content\featured_videos.html:4 .\content\featured_videos.html.py:25
+#: .\content\featured_videos.html:29 .\news\article_list.html:30
+#: .\news\catalogs_list.html:29
+msgid "Videos"
+msgstr "Videos"
+
+#: .\content\featured_videos.html:26 .\news\article_list.html:27
+#: .\news\catalogs_list.html:26
+msgid "Magazines"
+msgstr "Revistas"
+
+#: .\content\featured_videos.html:27 .\news\article_list.html:28
+#: .\news\catalogs_list.html:27
+msgid "Catalogs / Inspiration Books"
+msgstr "Catalogos / Libros inspiracionales"
+
+#: .\content\featured_videos.html:28 .\news\article_list.html:29
+#: .\news\catalogs_list.html:28
+msgid "Cement Tile Blog"
+msgstr "Blog de Azulejos de cemento"
+
+#: .\galleries\galleries_list.html:4 .\galleries\galleries_list.html.py:25
+#: .\tiles\collection_detail.html:26
+msgid "Gallery"
+msgstr "Galleria"
+
+#: .\index.html:10
+msgid ""
+"Cement tile is not just a tile made with cement. Cement tile has the "
+"strength of concrete & the feel of silk"
+msgstr "Un azulejo de cemento no es solamente un azulejo hecho con cemento. Un azulejo de "
+"cemento tiene la fuerza del concreto y la sensación de la seda"
+
+#: .\index.html:37
+msgid "Explore our collections"
+msgstr "Explora nuestras colecciones"
+
+#: .\index.html:38
+msgid "View collection"
+msgstr "Ver coleccion"
+
+#: .\index.html:39
+msgid "Get inspired by Residential and Commercial installation photos"
+msgstr "Inspírate en las fotos de instalaciones Residenciales y Comerciales"
+
+#: .\index.html:40
+msgid "then choose from in stock and custom tiles."
+msgstr "a continuación, elege entre azulejos en existencia y personalizados."
+
+#: .\index.html:41
+msgid "Read what our architect, designer, and homeowner clients say"
+msgstr ""
+"Lea lo que dicen nuestros clientes arquitectos, diseñadores y dueños de casa"
+
+#: .\news\article_list.html:4 .\news\article_list.html.py:25
+msgid "News"
+msgstr "Noticias"
+
+#: .\news\article_list.html:26
+msgid "Date"
+msgstr "Fecha"
+
+#: .\news\catalogs_list.html:4 .\news\catalogs_list.html.py:25
+msgid "Catalogs / Inspirations Books"
+msgstr "Catalogos / Libros inspiracionales"
+
+#: .\news\catalogs_list.html:30
+msgid "View"
+msgstr "Ver"
+
+#: .\news\catalogs_list.html:31
+msgid "Download"
+msgstr "Descargar"
+
+#: .\news\catalogs_list.html:32
+msgid "Share"
+msgstr "Compartir"
+
+#: .\tiles\collection_detail.html:27 .\tiles\collection_detail.html.py:28
+#: .\tiles\group_detail.html:27
+msgid "Interactive Catalog"
+msgstr "Catalogo Interactivo"
+
+#: .\tiles\collection_detail.html:29 .\tiles\group_detail.html:28
+msgid "Custom Cement Tiles"
+msgstr "Azulejos Personalizados"
+
+#: .\tiles\collection_detail.html:30 .\tiles\group_detail.html:29
+msgid "About the "
+msgstr "Acerca de "
+
+#: .\tiles\collection_detail.html:31 .\tiles\group_detail.html:30
+msgid "Applications of Cement Tile"
+msgstr "Aplicaciones de azulejos de cemento"
+
+#: .\tiles\collection_detail.html:32 .\tiles\group_detail.html:31
+msgid " Gallery"
+msgstr "Galeria"
+
+#: .\tiles\collection_detail.html:33 .\tiles\group_detail.html:32
+msgid "Technical Specifications"
+msgstr "Especificaciones técnicas"
+
+#: .\tiles\collection_detail.html:34 .\tiles\group_detail.html:33
+msgid "Ordering Cement Tile"
+msgstr "Pedido de azulejos"
+
+#: .\tiles\collection_detail.html:35 .\tiles\group_detail.html:34
+msgid "Installing Cement Tile"
+msgstr "Instalando los azulejos"
+
+#: .\tiles\group_detail.html:4
+msgid "Tiles"
+msgstr "Azulejos"

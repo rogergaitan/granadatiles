@@ -27,6 +27,18 @@
             vm.filteredMenuCollection = response.data;
         });
 
+        collectionsSvc.getGroup(pageSettings.groupId).then(function (response) {
+            vm.group = response.data;
+        });
+
+        /*collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
+            vm.tiles = response.data;
+            console.log(vm.tiles);
+        });*/
+
+        vm.tiles = collectionsSvc.getTiles();
+        console.log(vm.tiles);
+
         vm.labels = pageSettings.labels;
 
         vm.subMenuCollapsed = true;

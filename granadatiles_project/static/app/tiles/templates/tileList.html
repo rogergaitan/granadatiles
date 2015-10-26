@@ -1,9 +1,181 @@
-﻿<div class="col-md-12" ng-controller="collectionsGroupCtrl as vm">
+<div class="col-md-12" ng-controller="collectionsGroupCtrl as vm">
     <div class="row">
         <aside class="col-md-3">
             <ng-include src="vm.collectionAsideNavigationTemplateUrl"></ng-include>
         </aside>
         <div class="col-md-9">
+            <h1 class="heading-sec">{{ ::vm.group.title }}</h1>
+            <a href="#" class="breadcrumds"><u>Collections</u> <i class="fa fa-angle-double-right"></i> <u></u></a>
+            <div class="text-section" ng-bind-html="::vm.group.description"></div>
+            <div class="row filter">
+                <div class="col-md-9">
+                    <label><strong>{{ vm.labels.show_only }}</strong></label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1">{{ ::vm.labels.new_tile }}
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox2" value="option2">{{ ::vm.labels.stock }}
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox3" value="option3">{{ ::vm.labels.special }}
+                    </label>
+                </div>
+                <div class="col-md-3 pull-right text-right">
+                    <div class="btn-group" dropdown>
+                        <button type="button" class="btn btn-info">Sizes</button>
+                        <button type="button" class="btn btn-info dropdown-toggle" dropdown-toggle>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">8 x 8</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group" dropdown>
+                        <button type="button" class="btn btn-info">styles</button>
+                        <button type="button" class="btn btn-info dropdown-toggle" dropdown-toggle>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Avesta</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div ng-repeat="tile in ::vm.tiles" ng-if="$index % 3 == 0" class="row">
+                <div class="col-md-4 blue-box">
+                    <div class="content-tile">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <img ng-src="{{ vm.tiles[$index].main.image }}" alt="{{ vm.tiles[$index].main.name }}" class="img-responsive thumbnail" width="100%">
+                            </div>
+                            <div class="col-md-4">
+                                <div ng-repeat="item in ::vm.tiles[$index].tiles" class="row">
+                                    <div class="col-md-12">
+                                        <img ng-src="{{ item.image }}" alt="{{ item.name }}" class="img-responsive thumbnail">
+                                        <label class="label-tile">{{ item.name }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 tile-body">
+                                <h2>{{ vm.tiles[$index].name }} {{ vm.tiles[$index].main.name }}</h2>
+                                <label>CUSTOM:</label>
+                                <ul class="list-inline">
+                                    <li ng-repeat="tileSize in vm.tiles[$index].main.sizes">{{ tileSize.name }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="list-inline tile-options">
+                                    <li>
+                                        <a href="#"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="">
+                                            <p>{{ vm.labels.orderFree | uppercase }}</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 blue-box">
+                    <div class="content-tile">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <img ng-src="{{ vm.tiles[$index + 1].main.image }}" alt="{{ vm.tiles[$index + 1].main.name }}" class="img-responsive thumbnail" width="100%">
+                            </div>
+                            <div class="col-md-4">
+                                <div ng-repeat="item in ::vm.tiles[$index + 1].tiles" class="row">
+                                    <div class="col-md-12">
+                                        <img ng-src="{{ item.image }}" alt="{{ item.name }}" class="img-responsive thumbnail">
+                                        <label class="label-tile">{{ item.name }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 tile-body">
+                                <h2>{{ vm.tiles[$index + 1].name }} {{ vm.tiles[$index + 1].main.name }}</h2>
+                                <label>CUSTOM:</label>
+                                <ul class="list-inline">
+                                    <li ng-repeat="tileSize in vm.tiles[$index + 1].main.sizes">{{ tileSize.name }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="list-inline tile-options">
+                                    <li>
+                                        <a href="#"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="">
+                                            <p>{{ vm.labels.orderFree | uppercase }}</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 blue-box">
+                    <div class="content-tile">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <img ng-src="{{ vm.tiles[$index + 2].main.image }}" alt="{{ vm.tiles[$index + 2].main.name }}" class="img-responsive thumbnail" width="100%">
+                            </div>
+                            <div class="col-md-4">
+                                <div ng-repeat="item in ::vm.tiles[$index + 2].tiles" class="row">
+                                    <div class="col-md-12">
+                                        <img ng-src="{{ item.image }}" alt="{{ item.name }}" class="img-responsive thumbnail">
+                                        <label class="label-tile">{{ item.name }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 tile-body">
+                                <h2>{{ vm.tiles[$index + 2].name }} {{ vm.tiles[$index + 2].main.name }}</h2>
+                                <label>CUSTOM:</label>
+                                <ul class="list-inline">
+                                    <li ng-repeat="tileSize in vm.tiles[$index + 2].main.sizes">{{ tileSize.name }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="list-inline tile-options">
+                                    <li>
+                                        <a href="#"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="">
+                                            <p>{{ vm.labels.orderFree | uppercase }}</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
