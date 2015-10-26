@@ -12,7 +12,7 @@ class GalleryDto(BaseCatalogDto):
         self.image = gallery.image.url if gallery.image else ''
         if gallery.categories.filter(images__isnull=False):
             self.categories = [GalleryCategoryDto(category, language)
-                                  for category in gallery.categories.filter(images__isnull=False)]
+                                  for category in gallery.categories.filter(images__isnull=False).distinct()]
 
 
 class GalleryImageDto(BaseGalleryImageDto):
