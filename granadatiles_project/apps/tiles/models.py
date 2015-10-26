@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext as _
-from core.models import BaseGalleryImageModel, BaseCatalogModel, BaseContentModel, BaseSlugModel
+from core.models import BaseGalleryImageModel, BaseCatalogModel, BaseContentModel, BaseSlugModel, BaseItemModel
 from django.core.urlresolvers import reverse
 from sorl.thumbnail.shortcuts import get_thumbnail
 from sorl.thumbnail.fields import ImageField
@@ -26,7 +26,7 @@ class PalleteColor(BaseCatalogModel):
         verbose_name_plural = _('Pallete Colors')
 
 
-class Collection(BaseGalleryImageModel, BaseSlugModel):
+class Collection(BaseGalleryImageModel, BaseSlugModel, BaseItemModel):
     menu_image = ImageField(upload_to='Galleries/menu', null = True, blank=True)
     featured = models.BooleanField(default=True, verbose_name=_('Featured'))
     show_in_menu = models.BooleanField(default=True, verbose_name= _('Show in menu'))
@@ -58,7 +58,7 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
         verbose_name_plural = _('Collections')
 
 
-class Group(BaseGalleryImageModel, BaseSlugModel):
+class Group(BaseGalleryImageModel, BaseSlugModel, BaseItemModel):
     collection = models.ForeignKey(Collection, related_name='groups', verbose_name=_('Collection'))
 
     def get_absolute_url(self, language=None):
@@ -83,14 +83,7 @@ class TileDesign(BaseCatalogModel):
         verbose_name_plural = _('Tile Designs')
 
 
-class Tile(BaseCatalogModel):
-    list_id = models.CharField(max_length=250)
-    full_name = models.CharField(max_length=250, verbose_name=_('Full name'))
-    is_active = models.BooleanField(verbose_name=_('Is Active'))
-    sublevel = models.IntegerField(verbose_name=_('Sublevel'))
-    sales_price = models.FloatField(verbose_name=_('Sales Price'))
-    quantity_on_hand = models.IntegerField(verbose_name=_('Quantity'))
-    average_cost = models.FloatField(verbose_name=_('Average Cost'))
+class Tile(BaseItemModel):
     image = ImageField(upload_to='tiles', verbose_name=_('Image'), null = True, blank=True)
     main = models.BooleanField(default=False, verbose_name=_('Main'),
                                help_text='Is the main tile of the design')
