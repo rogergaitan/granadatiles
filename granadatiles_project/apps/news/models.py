@@ -24,7 +24,7 @@ class Magazine(models.Model):
     def articles_count(self):
         return str(self.articles.count())
 
-    articles_count.short_description = _('Articulos')
+    articles_count.short_description = _('Articles')
 
     class Meta:
         verbose_name = _('Magazine')

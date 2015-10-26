@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700,300italic|Ubuntu:700,300,300italic,500' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300,700|Ubuntu:300,300italic,500' rel='stylesheet' type='text/css'>
     <title>{% block title %} {% endblock title %}</title>
     <link rel="icon" type="image/x-icon" href="{{STATIC_URL}}img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,7 +47,7 @@
                     <div id="gt-navbar-collapse-grid" class="navbar-collapse collapse row" collapse="navCollapsed">
                         <div class="row">
                             <div class="col-xs-12">
-                                <br class="visible-xs"/>
+                                <br class="visible-xs" />
                                 <div class="col-sm-6">
                                     <a class="visible-sm" href="/">
                                         <img class="gt-header-logo-sm " src="{{ STATIC_URL }}img/Granada-Tile-logo.png" alt="Granada Tile logo">
@@ -130,12 +130,12 @@
                                     </li>
                                     <li>
                                         <span>
-                                            <a href="/">{% trans 'RESIDENTIAL' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
+                                            <a href="{% url 'sr-galleries:sr-gallery'%}">{% trans 'RESIDENTIAL' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
                                         </span>
                                     </li>
                                     <li>
                                         <span>
-                                            <a href="/">{% trans 'COMMERCIAL' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
+                                            <a href="{% url 'sr-galleries:sr-gallery'%}">{% trans 'COMMERCIAL' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
                                         </span>
                                     </li>
                                     <li>
@@ -157,16 +157,18 @@
         </div>
     </header>
     <main class="row">
-        {% block main %}
-        {% endblock main %}
-        {% block cover%}
-        <ng-include src="'{{STATIC_URL}}app/content/templates/cover.html'">
-        </ng-include>
-        {% endblock cover%}
-        <section class="container">
-            {% block content %}
-            {% endblock content %}
-        </section>
+        <div class="col-xs-12">
+            {% block main %}
+            {% endblock main %}
+            {% block cover%}
+            <ng-include src="'{{STATIC_URL}}app/content/templates/cover.html'">
+            </ng-include>
+            {% endblock cover%}
+            <section class="container">
+                {% block content %}
+                {% endblock content %}
+            </section>
+        </div>
     </main>
     <footer class="row">
         <section class="container text-center">
@@ -241,14 +243,17 @@
                 return{
                     staticUrl: '{{STATIC_URL}}',
                     labels: {
-                        browse: '{% trans 'BROWSE OR CEMENT TILE COLLECTIONS' %}',
+                        browse: '{% trans 'BROWSE OUR CEMENT TILE COLLECTIONS' %}',
                         inStockSamples: '{% trans 'In Stock Samples' %}',
                         productInformation: '{% trans 'PRODUCT INFORMATION'%}',
                         inStockTiles: '{% trans 'In Stock Tiles' %}',
                         compareProducts: '{% trans 'Compare our Products' %}',
                         cementVsCeramic: '{% trans 'Cement Vs. Ceramic' %}',
                         colorPalletes: '{% trans 'Color Palletes' %}',
-                        catalogs:'{% trans 'Catalogs / Inspiration Boooks' %}'
+                        catalogs:'{% trans 'Catalogs / Inspiration Boooks' %}',
+                        designer: '{% trans 'Designer' %}',
+                        photographer: '{% trans 'Photographer' %}',
+                        featured: '{% trans 'Also Featured in' %}'
                     },
                    navigation:{
                         catalogs: '{% url 'sr-news:sr-catalogs' %}',

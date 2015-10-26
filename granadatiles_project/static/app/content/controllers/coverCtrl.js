@@ -1,15 +1,17 @@
-﻿(function() {
+﻿(function () {
     'use strict';
 
     angular
         .module('app.content')
-        .controller('coverCtrl', ['appSettings',
+        .controller('coverCtrl',
+        [
+            'baseSettings',
             'pageSettings',
             'sectionSvc',
             coverCtrl
         ]);
 
-    function coverCtrl(appSettings, pageSettings, sectionSvc) {
+    function coverCtrl(baseSettings, pageSettings, sectionSvc) {
         var vm = this;
 
         if (pageSettings.sectionId != 0) {
@@ -18,6 +20,6 @@
             });
         }
 
-        vm.labels = pageSettings.labels;
+        vm.labels = baseSettings.labels;
     }
 }());

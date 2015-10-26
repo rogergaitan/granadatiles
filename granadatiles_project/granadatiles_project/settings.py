@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'social.apps.django_app.default',
+    'kombu.transport.django',
 
     #project apps
     'apps.customadmin',
@@ -130,6 +131,7 @@ LANGUAGES = (
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'templates', 'locale'),
+    os.path.join(BASE_DIR, 'granadatiles_project', 'locale'),
     )
 
 STATICFILES_DIRS = (
@@ -187,3 +189,5 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
 
 SOCIAL_AUTH_FACEBOOK_KEY = '1653932784823559'
 SOCIAL_AUTH_FACEBOOK_SECRET = '4d0e4c10fee651e388b74bcf68a6ced2'
+
+BROKER_URL = 'django://'

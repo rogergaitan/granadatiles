@@ -38,6 +38,17 @@
     margin-top:-40px;
 }
 
+div.gt-index-welcome{
+    > h2{
+        .font-configuration(32px;@font-light);
+        color:@darkBlue;
+    }
+    > h3{
+        .font-configuration(21px, @font-light);
+        color:@darkBlue;
+    }
+}
+
 /*******************************************************/
 
 /********************Cover Section**********************/
@@ -198,10 +209,11 @@
             box-shadow: 0 8px 10px -7px @gray;
         }
 
-        p{
+        div{
             font-family: @font-primary;
             .font-configuration(@font-sm,@font-light);
             color:@darkGray;
+            height:85px;
         }
     }
 }
@@ -505,6 +517,30 @@
     }
 }
 
+.social-share{
+    .font-configuration(@font-xlll,@font-light);
+
+    .fa-facebook-official{
+        font-size: @font-xxll;
+        color: @facebook;
+    }
+
+    .fa-twitter-square{
+        font-size: @font-xxll;
+        color: @twitter;
+    }
+
+    .fa-google-plus-square{
+        font-size: @font-xxll;
+        color: @pinterest;
+    }
+
+    .fa-linkedin-square{
+        font-size: @font-xxll;
+        color: @linkedin;
+    }
+}
+
 /************************************/
 
 
@@ -599,6 +635,10 @@ hr{
             .font-configuration(@font-sm,@font-light);
         }
     }
+}
+.gt-gallery-img{
+    width: 100%;
+    height: 650px;
 }
 .carousel-control.left,
 .carousel-control.right{

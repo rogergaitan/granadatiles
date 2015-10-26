@@ -1,10 +1,12 @@
-import random
+﻿import random
 from django.shortcuts import get_object_or_404
 from .models import Testimony, Section, FeaturedVideo, Area
 from .dtos import TestimonyDto, SectionCoverDto, FeaturedVideoDto
 from apps.news.models import Article
 from apps.news.dtos import  SectionFeaturedArticleDto, ArticleMagazineDto
 from core.dtos import BaseContentDto
+from apps.content.models import IndexNavigation
+from apps.content.dtos import IndexNavigationDto
 
 
 class TestimonyService(object):
@@ -63,3 +65,10 @@ class AreaService(object):
         area = get_object_or_404(Area,pk=id)
         areaDto = BaseContentDto(area, language)
         return areaDto
+
+class IndexNavigationService(object):
+
+    def get_index_navigation(language=None):
+        index_navigation_objects = IndexNavigation.objects.all()
+        index_navigation_dto = [IndexNavigationDto(index_object, language=language) for index_object in index_navigation_objects]
+        return index_navigation_dto
