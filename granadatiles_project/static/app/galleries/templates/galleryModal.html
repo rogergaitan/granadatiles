@@ -7,7 +7,7 @@
         <div>
             <carousel interval="5000" no-wrap="false" id="gt-gallery-carousel">
                 <slide ng-repeat="slide in vm.gallery" active="slide.active">
-                    <img ng-src="{{::slide.image}}" alt="{{::slide.title}}" />
+                    <img class="gt-gallery-img" ng-src="{{::slide.image}}" alt="{{::slide.title}}" />
                     <div>
                         <h1>{{::slide.title}}</h1>
                         <p ng-bind-html="slide.description"></p>
