@@ -1,8 +1,9 @@
-﻿from django.shortcuts import render
+from django.shortcuts import render
 
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import list_route, detail_route
+from rest_framework.permissions import IsAdminUser
 
 from core.views import BaseViewSet
 
@@ -95,3 +96,14 @@ class GroupViewSet(BaseViewSet):
            language=self.get_language(request), limit=limit, offset=offset)
        serializer = TileDesignSerializer(tile_designs, many=True)
        return Response(serializer.data)
+
+
+class ItemViewSet(viewsets.ViewSet):
+
+    permission_classes = (IsAdminUser,)
+
+
+    @list_route(methods=['post'])
+    def update_inventory(self, request):
+        update_inventory_task.delay()
+        return Response({'message': 'Finished task'})
