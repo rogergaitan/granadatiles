@@ -1,6 +1,6 @@
-from django.db import models
+﻿from django.db import models
 from django.utils.translation import ugettext as _
-from core.models import BaseGalleryImageModel, BaseCatalogModel, BaseContentModel, BaseSlugModel, BaseItemModel
+from core.models import BaseGalleryImageModel, BaseCatalogModel, BaseContentModel, BaseSlugModel
 from django.core.urlresolvers import reverse
 from sorl.thumbnail.shortcuts import get_thumbnail
 from sorl.thumbnail.fields import ImageField
@@ -26,12 +26,13 @@ class PalleteColor(BaseCatalogModel):
         verbose_name_plural = _('Pallete Colors')
 
 
-class Collection(BaseGalleryImageModel, BaseSlugModel, BaseItemModel):
+class Collection(BaseGalleryImageModel, BaseSlugModel):
     menu_image = ImageField(upload_to='Galleries/menu', null = True, blank=True)
     featured = models.BooleanField(default=True, verbose_name=_('Featured'))
     show_in_menu = models.BooleanField(default=True, verbose_name= _('Show in menu'))
-    introduction = models.TextField(verbose_name=_('Introduction'))
+    introduction = models.TextField(verbose_name=_('Introduction'), default='')
     introduction_es = models.TextField(blank=True, null=True, verbose_name=_('Introduction_es'))
+    list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
 
     @property
     def menu_thumbnail(self):
@@ -58,8 +59,9 @@ class Collection(BaseGalleryImageModel, BaseSlugModel, BaseItemModel):
         verbose_name_plural = _('Collections')
 
 
-class Group(BaseGalleryImageModel, BaseSlugModel, BaseItemModel):
+class Group(BaseGalleryImageModel, BaseSlugModel):
     collection = models.ForeignKey(Collection, related_name='groups', verbose_name=_('Collection'))
+    list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
 
     def get_absolute_url(self, language=None):
         slug = self.get_slug(language)
@@ -83,14 +85,21 @@ class TileDesign(BaseCatalogModel):
         verbose_name_plural = _('Tile Designs')
 
 
-class Tile(BaseItemModel):
+class Tile(BaseCatalogModel):
+    list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
+    is_active = models.BooleanField(verbose_name=_('Is Active'), default=True)
+    sales_price = models.FloatField(verbose_name=_('Sales Price'), blank=True, null=True)
+    average_cost = models.FloatField(verbose_name=_('Average Cost'), blank=True, null=True)
+    quantity_on_hand = models.IntegerField(verbose_name=_('Quantity'), default=0)
+    sales_description = models.CharField(max_length=450 ,verbose_name=_('Sales description'), default='')
+    sales_description_es = models.CharField(max_length=450 ,verbose_name=_('Sales description_es'), default='')
     image = ImageField(upload_to='tiles', verbose_name=_('Image'), null = True, blank=True)
     main = models.BooleanField(default=False, verbose_name=_('Main'),
                                help_text='Is the main tile of the design')
-    similar_tiles = models.ManyToManyField('Tile', verbose_name=_('Similar Tiles'))
-    design = models.ForeignKey(TileDesign, related_name='tiles', verbose_name=_('Design'))
-    sizes = models.ManyToManyField(TileSize, related_name='tiles', verbose_name=_('Tiles Sizes'))
-    colors = models.ManyToManyField(PalleteColor, related_name='tiles', verbose_name=_('Tiles Colors'))
+    similar_tiles = models.ManyToManyField('Tile', verbose_name=_('Similar Tiles'), blank=True)
+    design = models.ForeignKey(TileDesign, related_name='tiles', verbose_name=_('Design'), null=True, blank = True)
+    sizes = models.ManyToManyField(TileSize, related_name='tiles', verbose_name=_('Tiles Sizes'), blank=True)
+    colors = models.ManyToManyField(PalleteColor, related_name='tiles', verbose_name=_('Tiles Colors'), blank=True)
 
     class Meta:
         verbose_name = _('Tile')

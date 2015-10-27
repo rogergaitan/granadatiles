@@ -1,4 +1,4 @@
-from django.db import models
+﻿from django.db import models
 from django.utils.translation import ugettext as _
 from sorl.thumbnail import ImageField
 from core.managers import BaseSlugManager
@@ -99,18 +99,6 @@ class BaseGalleryImageModel(BaseContentModel):
 class BaseGalleryNavImageModel(BaseGalleryImageModel):
     target = models.BooleanField(default=False, help_text=_('Open in new tab'))
     link = models.URLField(blank=True, null=True, verbose_name=_('Link'))
-
-    class Meta:
-        abstract = True
-
-
-class BaseItemModel(BaseCatalogModel):
-    list_id = models.CharField(max_length=250)
-    full_name = models.CharField(max_length=250, verbose_name=_('Full name'))
-    is_active = models.BooleanField(verbose_name=_('Is Active'))
-    sublevel = models.IntegerField(verbose_name=_('Sublevel'))
-    sales_price = models.FloatField(verbose_name=_('Sales Price'), blank=True, null=True)
-    average_cost = models.FloatField(verbose_name=_('Average Cost'), blank=True, null=True)
 
     class Meta:
         abstract = True
