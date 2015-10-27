@@ -1,4 +1,4 @@
-﻿from django.db import models
+from django.db import models
 from django.utils.translation import ugettext as _
 from sorl.thumbnail import ImageField
 from core.managers import BaseSlugManager
@@ -68,7 +68,7 @@ class BaseContentModel(models.Model):
 class BaseSlugModel(models.Model):
     slug = models.SlugField(max_length=35, unique=True)
 
-    slug_es = models.SlugField(max_length=35, unique=True)
+    slug_es = models.SlugField(max_length=35, unique=True, null=True)
 
     objects = BaseSlugManager()
 
