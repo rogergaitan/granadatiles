@@ -1,9 +1,18 @@
-﻿from django.db import models
+from django.db import models
 from django.utils.translation import ugettext as _
-from core.models import BaseGalleryImageModel, BaseCatalogModel, BaseContentModel, BaseSlugModel
+from django.dispatch.dispatcher import receiver
+from django.conf import settings
 from django.core.urlresolvers import reverse
+from core.models import BaseGalleryImageModel, BaseCatalogModel, BaseContentModel, BaseSlugModel
 from sorl.thumbnail.shortcuts import get_thumbnail
 from sorl.thumbnail.fields import ImageField
+from rest_framework.authtoken.models import Token
+
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
 
 
 class TileSize(models.Model):
