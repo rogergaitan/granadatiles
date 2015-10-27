@@ -19,7 +19,10 @@ def addInitialData(apps, schema_editor):
                 <li>Cement tiles are cured, not fired</li>
                 <li>Organic colors</li><li>Industrial strength</li>
                 <li>Pressed to 2,000 lbs. per square inch<br></li></ul>''',
-                description_es='',
+                description_es='''<ul><li>Forma original de arte francés</li>
+                <li>Cement tiles are cured, not fired</li>
+                <li>Organic colors</li><li>Industrial strength</li>
+                <li>Pressed to 2,000 lbs. per square inch<br></li></ul>''',
                 image=os.path.join(settings.STATIC_URL, 'img/initial/tiles/FairweatherBar-compressor-compressor.jpg'),
                 menu_image=os.path.join(settings.STATIC_URL, 'img/initial/tiles/icon-Echo-Collection-Granada-Tile-Cement.jpg'),
                 introduction='The Echo Tile Collection revitalizes an art form that developed in France in the mid-1800s\

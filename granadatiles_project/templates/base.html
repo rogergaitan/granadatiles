@@ -130,12 +130,12 @@
                                     </li>
                                     <li>
                                         <span>
-                                            <a href="/">{% trans 'RESIDENTIAL' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
+                                            <a href="{% url 'sr-galleries:sr-gallery'%}">{% trans 'RESIDENTIAL' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
                                         </span>
                                     </li>
                                     <li>
                                         <span>
-                                            <a href="/">{% trans 'COMMERCIAL' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
+                                            <a href="{% url 'sr-galleries:sr-gallery'%}">{% trans 'COMMERCIAL' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
                                         </span>
                                     </li>
                                     <li>
@@ -202,8 +202,8 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/stylish.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/module.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/news/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/module.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/news/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/contentDefaultCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/coverCtrl.js"></script>
@@ -221,13 +221,13 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/directives/angular-yamm3.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/interceptors/languageCode.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/services/sharePageSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/controllers/galleriesListCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/controllers/galleryModalCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/services/gallerySvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/controllers/articlesListCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/controllers/catalogListCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/services/articleSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/services/catalogSvc.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/controllers/galleriesListCtrl.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/controllers/galleryModalCtrl.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/services/gallerySvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/collectionGroupsCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/menuCollectionCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/collectionsSvc.js"></script>
@@ -243,7 +243,7 @@
                 return{
                     staticUrl: '{{STATIC_URL}}',
                     labels: {
-                        browse: '{% trans 'BROWSE OR CEMENT TILE COLLECTIONS' %}',
+                        browse: '{% trans 'BROWSE OUR CEMENT TILE COLLECTIONS' %}',
                         inStockSamples: '{% trans 'In Stock Samples' %}',
                         productInformation: '{% trans 'PRODUCT INFORMATION'%}',
                         inStockTiles: '{% trans 'In Stock Tiles' %}',

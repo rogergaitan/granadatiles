@@ -14,12 +14,12 @@ from apps.tiles.services import CollectionService, GroupService
 from apps.tiles.models import Collection, Group
 
 
-
 def collection_detail(request, slug):
     collection_id = Collection.objects.get_id(slug, request.LANGUAGE_CODE)
     return render(request, "tiles/collection_detail.html", {
         'collection_id': collection_id
     })
+
 
 def group_detail(request, collection_slug, group_slug):
     collection_id = Collection.objects.get_id(collection_slug, request.LANGUAGE_CODE)
@@ -33,6 +33,7 @@ def group_detail(request, collection_slug, group_slug):
 """
 These are the views for the api
 """
+
 
 class CollectionViewSet(BaseViewSet):
 

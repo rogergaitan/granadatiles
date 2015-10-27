@@ -32,7 +32,7 @@ class Gallery(BaseCatalogModel):
     def categories_count(self):
         return str(self.categories.count())
 
-    categories_count.short_description = _('Categorias')
+    categories_count.short_description = _('Categories')
 
     class Meta:
         verbose_name = _('Gallery')

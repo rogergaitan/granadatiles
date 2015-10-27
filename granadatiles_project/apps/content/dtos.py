@@ -1,4 +1,4 @@
-from core.dtos import BaseContentDto, BaseCatalogOrderDto
+﻿from core.dtos import BaseContentDto, BaseCatalogOrderDto, BaseGalleryNavImageDto
 from apps.news.dtos import SectionFeaturedArticleDto
 
 
@@ -27,3 +27,11 @@ class FeaturedVideoDto(BaseCatalogOrderDto):
     def __init__(self, featured_video, language=None):
         super().__init__(featured_video, language)
         self.video = featured_video.video
+
+class IndexNavigationDto(BaseGalleryNavImageDto):
+
+    def __init__(self, baseGalleryNavImageModel, language = None):
+        super().__init__(baseGalleryNavImageModel, language)
+        self.actionName = baseGalleryNavImageModel.get_action_name(language=language)
+        if language == 'es' and baseGalleryNavImageModel.link_es:
+            self.link = baseGalleryNavImageModel.link_es
