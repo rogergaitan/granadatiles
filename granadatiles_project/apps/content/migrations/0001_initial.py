@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('tiles', '0001_initial'),
+
         ('news', '0001_initial'),
         ('galleries', '0001_initial'),
     ]
