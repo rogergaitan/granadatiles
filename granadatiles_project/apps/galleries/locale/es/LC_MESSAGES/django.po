@@ -47,7 +47,7 @@ msgstr "Categorias"
 
 #: .\models.py:38 .\models.py:44
 msgid "Gallery"
-msgstr "Galleria"
+msgstr "Galeria"
 
 #: .\models.py:49 .\models.py:69
 msgid "Images"
