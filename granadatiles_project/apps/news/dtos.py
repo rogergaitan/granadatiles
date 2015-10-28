@@ -32,5 +32,5 @@ class ArticleDto(BaseGalleryImageDto):
 class CatalogDto(BaseCatalogDto):
    def __init__(self, catalog, language=None):
        super().__init__(catalog, language)
-       self.file = catalog.file
+       self.file = catalog.file.url if catalog.file else ''
        self.image = catalog.image.url
