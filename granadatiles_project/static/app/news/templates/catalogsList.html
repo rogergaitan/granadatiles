@@ -19,7 +19,7 @@
                     <h2>{{ ::vm.catalogs[$index].name }}</h2>
                     <ul class="list-inline catalog-options">
                         <li><a href="#"><i class="fa fa-eye"></i><br />{{ ::vm.labels.view | uppercase }}</a></li>
-                        <li><a href="#"><i class="fa fa-download"></i><br />{{ ::vm.labels.download | uppercase }}</a></li>
+                        <li><a target="_self" href="{{ ::vm.catalogs[$index].file }}" target="_self"><i class="fa fa-download"></i><br />{{ ::vm.labels.download | uppercase }}</a></li>
                         <li><a href="#" ng-click="vm.share()"><i class="fa fa-share-alt"></i><br />{{ ::vm.labels.shared | uppercase }}</a></li>
                     </ul>
                 </div>
@@ -34,7 +34,7 @@
                     <h2>{{ ::vm.catalogs[$index + 1].name }}</h2>
                     <ul class="list-inline catalog-options">
                         <li><a href="#"><i class="fa fa-eye"></i><br />{{ ::vm.labels.view | uppercase }}</a></li>
-                        <li><a href="#"><i class="fa fa-download"></i><br />{{ ::vm.labels.download | uppercase }}</a></li>
+                        <li><a target="_self" href="{{ ::vm.catalogs[$index + 1].file }}"><i class="fa fa-download"></i><br />{{ ::vm.labels.download | uppercase }}</a></li>
                         <li><a href="#" ng-click="vm.share()"><i class="fa fa-share-alt"></i><br />{{ ::vm.labels.shared | uppercase }}</a></li>
                     </ul>
                 </div>
@@ -49,7 +49,7 @@
                     <h2>{{ ::vm.catalogs[$index + 2].name }}</h2>
                     <ul class="list-inline catalog-options">
                         <li><a href="#"><i class="fa fa-eye"></i><br />{{ ::vm.labels.view | uppercase }}</a></li>
-                        <li><a href="#"><i class="fa fa-download"></i><br />{{ ::vm.labels.download | uppercase }}</a></li>
+                        <li><a target="_self" href="{{ ::vm.catalogs[$index + 2].file }}"><i class="fa fa-download"></i><br />{{ ::vm.labels.download | uppercase }}</a></li>
                         <li><a href="#" ng-click="vm.share()"><i class="fa fa-share-alt"></i><br />{{ ::vm.labels.shared | uppercase }}</a></li>
                     </ul>
                 </div>
