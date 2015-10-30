@@ -1,4 +1,4 @@
-﻿from django.shortcuts import render
+from django.shortcuts import render
 
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -6,12 +6,13 @@ from rest_framework.decorators import list_route, detail_route
 
 from core.views import BaseViewSet
 
-from apps.tiles.serializers import (
+from .serializers import (
     GroupSerializer, GroupDesignSerializer, MenuCollectionSerializer,
-    CollectionSerializer, CollectionRetrieveSerializer, TileDesignSerializer
+    CollectionSerializer, CollectionRetrieveSerializer, TileDesignSerializer,
+    GroupTileStyleSerializer
 )
-from apps.tiles.services import CollectionService, GroupService
-from apps.tiles.models import Collection, Group
+from .services import CollectionService, GroupService
+from .models import Collection, Group
 
 
 def collection_detail(request, slug):
@@ -88,10 +89,16 @@ class GroupViewSet(BaseViewSet):
        return Response(serializer.data)
 
    @detail_route(methods=['get'])
-   def tiles(self, request, pk = None):
+   def tiles(self, request, pk=None):
        limit = int(request.query_params.get('limit', 6))
        offset = int(request.query_params.get('offset', 0))
        tile_designs = GroupService.get_group_designs(id=pk,
            language=self.get_language(request), limit=limit, offset=offset)
        serializer = TileDesignSerializer(tile_designs, many=True)
+       return Response(serializer.data)
+
+   @detail_route(methods=['get'])
+   def styles(self, request, pk=None):
+       styles = GroupService.get_styles(id=pk, language=self.get_language(request))
+       serializer = GroupTileStyleSerializer(styles, many=True)
        return Response(serializer.data)

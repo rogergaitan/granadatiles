@@ -44,6 +44,10 @@ class TileDesignDto(BaseCatalogDto):
         self.tiles = [TileDto(tile, language) for tile in tile_design.tiles.filter(main=False)]
 
 
+class TileStyleDto(BaseCatalogDto):
+    pass
+
+
 class GroupDto(BaseGalleryImageDto):
     def __init__(self, collection, language=None):
         super().__init__(collection, language)

@@ -1,4 +1,4 @@
-﻿from rest_framework import serializers
+from rest_framework import serializers
 from core.serializers import BaseGalleryImageSerializer, BaseContentSerializer, BaseCatalogSerializer
 
 
@@ -31,6 +31,10 @@ class GroupSerializer(BaseGalleryImageSerializer):
 
 class GroupDesignSerializer(serializers.Serializer):
     designs = TileDesignSerializer(many=True)
+
+
+class GroupTileStyleSerializer(serializers.Serializer):
+    name = serializers.CharField()
 
 
 class MenuCollectionSerializer(serializers.Serializer):
