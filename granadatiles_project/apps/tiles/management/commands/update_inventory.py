@@ -3,7 +3,7 @@ import requests
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.text import slugify
 
-from ...models import Collection, Group, Tile
+from ...models import Collection, Group, Tile, TileDesign
 
 class Command(BaseCommand):
 
@@ -45,6 +45,15 @@ class Command(BaseCommand):
             }
 
             Tile.objects.update_or_create(list_id=data['list_id'], defaults=data)
+
+            TileDesign.objects.update_or_create(
+                name=item['Name'].split(" ")[0],
+                defaults = {
+                    'name': item['Name'].split(" ")[0],
+                    'group': Group.objects.get(list_id=item['ParentRef']['ListID'])
+                }
+
+            )
 
 
     def handle(self, **options):
