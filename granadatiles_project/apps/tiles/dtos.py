@@ -1,4 +1,4 @@
-﻿from core.dtos import BaseGalleryImageDto, BaseContentDto, BaseCatalogDto
+from core.dtos import BaseGalleryImageDto, BaseContentDto, BaseCatalogDto
 
 
 class CollectionDto(BaseGalleryImageDto):
@@ -39,8 +39,13 @@ class TileDesignDto(BaseCatalogDto):
 
     def __init__(self, tile_design, language=None):
         super().__init__(tile_design, language)
-        self.main = TileDto(tile_design.tiles.filter(main=True)[0], language)
+        self.main = TileDto(tile_design.tiles.filter(main=True).first(), language) \
+                    if tile_design.tiles.count() > 0 else None
         self.tiles = [TileDto(tile, language) for tile in tile_design.tiles.filter(main=False)]
+
+
+class TileStyleDto(BaseCatalogDto):
+    pass
 
 
 class GroupDto(BaseGalleryImageDto):
