@@ -46,16 +46,19 @@ class GroupService(object):
         groupDto = GroupDto(group, language)
         return groupDto
 
-    def get_group_designs(id, limit, offset, language=None):
+    def get_group_designs(id, limit, offset, style, size, language=None):
         group = get_object_or_404(Group, pk=id)
-        tiledesignDto = [TileDesignDto(tile_design, language)
-                         for tile_design in group.designs.all()[offset:limit + 1]]
+        design = group.designs.filter(styles__name=style) if style else group.designs.all()
+
+        tiledesignDto = [TileDesignDto(tile_design, size, language) for tile_design in design[offset:limit + 1]]
+
         return tiledesignDto
 
     def get_styles(id, language=None):
         group = get_object_or_404(Group, pk=id)
         styleDto = [TileStyleDto(style, language) for style in group.styles.all()]
         return styleDto
+
 
 class TileSizeService(object):
 

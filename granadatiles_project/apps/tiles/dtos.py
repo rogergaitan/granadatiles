@@ -37,11 +37,14 @@ class TileDto(BaseCatalogDto):
 
 class TileDesignDto(BaseCatalogDto):
 
-    def __init__(self, tile_design, language=None):
+    def __init__(self, tile_design, size, language=None):
+
+        tiles_filter = tile_design.tiles.filter(sizes__weight=size) if size else tile_design.tiles.all()
+
         super().__init__(tile_design, language)
-        self.main = TileDto(tile_design.tiles.filter(main=True).first(), language) \
-                    if tile_design.tiles.count() > 0 else None
-        self.tiles = [TileDto(tile, language) for tile in tile_design.tiles.filter(main=False)]
+        self.main = TileDto(tiles_filter.filter(main=True).first(), language) \
+                    if tiles_filter.filter(main=True).count() > 0 else None
+        self.tiles = [TileDto(tile, language) for tile in tiles_filter.filter(main=False)]
 
 
 class TileStyleDto(BaseCatalogDto):

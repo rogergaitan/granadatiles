@@ -92,8 +92,11 @@ class GroupViewSet(BaseViewSet):
     def tiles(self, request, pk=None):
         limit = int(request.query_params.get('limit', 6))
         offset = int(request.query_params.get('offset', 0))
+        style = request.query_params.get('style', None)
+        size = request.query_params.get('size', None)
+
         tile_designs = GroupService.get_group_designs(id=pk,
-            language=self.get_language(request), limit=limit, offset=offset)
+            language=self.get_language(request), limit=limit, offset=offset, style=style, size=size)
         serializer = TileDesignSerializer(tile_designs, many=True)
         return Response(serializer.data)
 

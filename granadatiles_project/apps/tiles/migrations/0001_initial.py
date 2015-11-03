@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import core.models
 import sorl.thumbnail.fields
+import core.models
 
 
 class Migration(migrations.Migration):
@@ -15,113 +15,112 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Collection',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('title', models.CharField(verbose_name='Title', max_length=150)),
-                ('title_es', models.CharField(blank=True, verbose_name='Title_es', null=True, max_length=160)),
+                ('title_es', models.CharField(verbose_name='Title_es', null=True, blank=True, max_length=160)),
                 ('description', models.TextField(verbose_name='Description')),
-                ('description_es', models.TextField(blank=True, verbose_name='Description_es', null=True)),
-                ('slug', models.SlugField(unique=True, max_length=35)),
-                ('slug_es', models.SlugField(unique=True, max_length=35)),
-                ('image', sorl.thumbnail.fields.ImageField(verbose_name='Image', upload_to=core.models.model_directory_path)),
-                ('menu_image', sorl.thumbnail.fields.ImageField(blank=True, upload_to='Galleries/menu', null=True)),
+                ('description_es', models.TextField(verbose_name='Description_es', null=True, blank=True)),
+                ('slug', models.SlugField(max_length=35, unique=True)),
+                ('slug_es', models.SlugField(max_length=35, unique=True)),
+                ('image', sorl.thumbnail.fields.ImageField(upload_to=core.models.model_directory_path, verbose_name='Image')),
+                ('menu_image', sorl.thumbnail.fields.ImageField(upload_to='Galleries/menu', null=True, blank=True)),
                 ('featured', models.BooleanField(verbose_name='Featured', default=True)),
                 ('show_in_menu', models.BooleanField(verbose_name='Show in menu', default=True)),
                 ('introduction', models.TextField(verbose_name='Introduction')),
-                ('introduction_es', models.TextField(blank=True, verbose_name='Introduction_es', null=True)),
+                ('introduction_es', models.TextField(verbose_name='Introduction_es', null=True, blank=True)),
             ],
             options={
-                'verbose_name_plural': 'Collections',
                 'verbose_name': 'Collection',
+                'verbose_name_plural': 'Collections',
             },
         ),
         migrations.CreateModel(
             name='Group',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('title', models.CharField(verbose_name='Title', max_length=150)),
-                ('title_es', models.CharField(blank=True, verbose_name='Title_es', null=True, max_length=160)),
+                ('title_es', models.CharField(verbose_name='Title_es', null=True, blank=True, max_length=160)),
                 ('description', models.TextField(verbose_name='Description')),
-                ('description_es', models.TextField(blank=True, verbose_name='Description_es', null=True)),
-                ('slug', models.SlugField(unique=True, max_length=35)),
-                ('slug_es', models.SlugField(unique=True, max_length=35)),
-                ('image', sorl.thumbnail.fields.ImageField(verbose_name='Image', upload_to=core.models.model_directory_path)),
-                ('collection', models.ForeignKey(verbose_name='Collection', to='tiles.Collection', related_name='groups')),
+                ('description_es', models.TextField(verbose_name='Description_es', null=True, blank=True)),
+                ('slug', models.SlugField(max_length=35, unique=True)),
+                ('slug_es', models.SlugField(max_length=35, unique=True)),
+                ('image', sorl.thumbnail.fields.ImageField(upload_to=core.models.model_directory_path, verbose_name='Image')),
+                ('collection', models.ForeignKey(to='tiles.Collection', verbose_name='Collection', related_name='groups')),
             ],
             options={
-                'verbose_name_plural': 'Groups',
                 'verbose_name': 'Group',
+                'verbose_name_plural': 'Groups',
             },
         ),
         migrations.CreateModel(
             name='PalleteColor',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('name', models.CharField(verbose_name='Name', max_length=150)),
-                ('name_es', models.CharField(blank=True, verbose_name='Name_es', null=True, max_length=150)),
+                ('name_es', models.CharField(verbose_name='Name_es', null=True, blank=True, max_length=150)),
                 ('hexadecimalCode', models.CharField(verbose_name='Color', max_length=20)),
             ],
             options={
-                'verbose_name_plural': 'Pallete Colors',
                 'verbose_name': 'Pallete Color',
+                'verbose_name_plural': 'Pallete Colors',
             },
         ),
         migrations.CreateModel(
             name='Style',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('name', models.CharField(verbose_name='Name', max_length=150)),
-                ('name_es', models.CharField(blank=True, verbose_name='Name_es', null=True, max_length=150)),
-                ('group', models.ForeignKey(verbose_name='Group', to='tiles.Group', related_name='styles')),
+                ('name_es', models.CharField(verbose_name='Name_es', null=True, blank=True, max_length=150)),
             ],
             options={
-                'verbose_name_plural': 'Styles',
                 'verbose_name': 'Style',
+                'verbose_name_plural': 'Styles',
             },
         ),
         migrations.CreateModel(
             name='Tile',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('name', models.CharField(verbose_name='Name', max_length=150)),
-                ('name_es', models.CharField(blank=True, verbose_name='Name_es', null=True, max_length=150)),
-                ('image', sorl.thumbnail.fields.ImageField(blank=True, verbose_name='Image', null=True, upload_to='tiles')),
+                ('name_es', models.CharField(verbose_name='Name_es', null=True, blank=True, max_length=150)),
+                ('image', sorl.thumbnail.fields.ImageField(verbose_name='Image', upload_to='tiles', null=True, blank=True)),
                 ('main', models.BooleanField(verbose_name='Main', help_text='Is the main tile of the design', default=False)),
-                ('colors', models.ManyToManyField(verbose_name='Tiles Colors', to='tiles.PalleteColor', related_name='tiles')),
+                ('colors', models.ManyToManyField(verbose_name='Tiles Colors', related_name='tiles', to='tiles.PalleteColor')),
             ],
             options={
-                'verbose_name_plural': 'Tiles',
                 'verbose_name': 'Tile',
+                'verbose_name_plural': 'Tiles',
             },
         ),
         migrations.CreateModel(
             name='TileDesign',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('name', models.CharField(verbose_name='Name', max_length=150)),
-                ('name_es', models.CharField(blank=True, verbose_name='Name_es', null=True, max_length=150)),
-                ('group', models.ForeignKey(verbose_name='Tiles Group', to='tiles.Group', related_name='designs')),
+                ('name_es', models.CharField(verbose_name='Name_es', null=True, blank=True, max_length=150)),
+                ('group', models.ForeignKey(to='tiles.Group', verbose_name='Tiles Group', related_name='designs')),
             ],
             options={
-                'verbose_name_plural': 'Tile Designs',
                 'verbose_name': 'Tile Design',
+                'verbose_name_plural': 'Tile Designs',
             },
         ),
         migrations.CreateModel(
             name='TileSize',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('weight', models.CharField(verbose_name='Weight', max_length=10)),
                 ('thickness', models.CharField(verbose_name='Thickness', max_length=10)),
             ],
             options={
-                'verbose_name_plural': 'Sizes',
                 'verbose_name': 'Size',
+                'verbose_name_plural': 'Sizes',
             },
         ),
         migrations.AddField(
             model_name='tile',
             name='design',
-            field=models.ForeignKey(verbose_name='Design', to='tiles.TileDesign', related_name='tiles'),
+            field=models.ForeignKey(to='tiles.TileDesign', verbose_name='Design', related_name='tiles'),
         ),
         migrations.AddField(
             model_name='tile',
@@ -131,6 +130,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='tile',
             name='sizes',
-            field=models.ManyToManyField(verbose_name='Tiles Sizes', to='tiles.TileSize', related_name='tiles'),
+            field=models.ManyToManyField(verbose_name='Tiles Sizes', related_name='tiles', to='tiles.TileSize'),
+        ),
+        migrations.AddField(
+            model_name='style',
+            name='design',
+            field=models.ManyToManyField(verbose_name='Designs', related_name='styles', to='tiles.TileDesign'),
         ),
     ]
