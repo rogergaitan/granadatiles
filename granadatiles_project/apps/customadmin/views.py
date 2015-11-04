@@ -2,12 +2,11 @@ from django.http.response import JsonResponse
 from django.shortcuts import render
 
 from rest_framework.response import Response
-from rest_framework.decorators import list_route
 
 from core.views import BaseViewSet
 
-from .services import ItemCountService
-from .serializers import ItemCountSerializer
+from .services import ItemCountService, LatestTilesService, LatestUsersService
+from .serializers import ItemCountSerializer, LatestTilesSerializer, LatestUsersSerializer
 
 def search(request):
     #search_term = request.GET.get('search_term')
@@ -29,4 +28,19 @@ class ItemCountViewSet(BaseViewSet):
     def list(self, request):
         items = ItemCountService.get_item_count()
         serializer = ItemCountSerializer(items)
+        return Response(serializer.data)
+
+
+class LatestTilesViewset(BaseViewSet):
+
+    def list(self, request):
+        tiles = LatestTilesService.get_latest_tiles(language=self.get_language(request))
+        serializer = LatestTilesSerializer(tiles, many=True)
+        return Response(serializer.data)
+
+class LatestUsersViewSet(BaseViewSet):
+
+    def list(self, request):
+        users = LatestUsersService.get_latest_users()
+        serializer = LatestUsersSerializer(users, many=True)
         return Response(serializer.data)

@@ -9,7 +9,7 @@
     <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% block extrastyle %}{% endblock %}
-    
+
     <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet" />
     <link rel="stylesheet" href="{{STATIC_URL}}lib/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}admin/css/AdminLTE.min.css" />
@@ -144,7 +144,7 @@
         </header>
         <aside class="main-sidebar">
             <section class="sidebar">
-                <form action="{% url 'customadmin:search' %}" method="get" class="sidebar-form">
+                <form action="{#% url 'customadmin:search' %}" method="get" class="sidebar-form">
                     <div class="input-group">
                         <input type="text" name="search_term" id="search_term" class="form-control" placeholder="Search..."/>
                         <span class="input-group-btn">
@@ -241,7 +241,7 @@
         </strong>
     </footer>
     {% endblock %}
-    
+
     <script src="{% static "admin/js/jquery-migrate-1.2.1.min.js" %}"></script>
     <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
     <script src="{{STATIC_URL}}admin/js/jquery.slimscroll.min.js"></script>

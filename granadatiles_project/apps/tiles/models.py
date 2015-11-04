@@ -92,6 +92,10 @@ class Tile(BaseCatalogModel):
     sizes = models.ManyToManyField(TileSize, related_name='tiles', verbose_name=_('Tiles Sizes'))
     colors = models.ManyToManyField(PalleteColor, related_name='tiles', verbose_name=_('Tiles Colors'))
 
+    @property
+    def get_admin_url(self):
+        return reverse("admin:%s_%s_change" % (self._meta.app_label, self._meta.model_name), args=(self.id,))
+
     class Meta:
         verbose_name = _('Tile')
         verbose_name_plural = _('Tiles')
