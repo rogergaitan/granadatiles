@@ -9,16 +9,21 @@
             <div class="text-section" ng-bind-html="::vm.group.description"></div>
             <div class="row filter">
                 <div class="col-md-9">
-                    <label><strong>{{ vm.labels.show_only }}</strong></label>
-                    <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox1" value="option1">{{ ::vm.labels.new_tile }}
-                    </label>
-                    <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox2" value="option2">{{ ::vm.labels.stock }}
-                    </label>
-                    <label class="checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbox3" value="option3">{{ ::vm.labels.special }}
-                    </label>
+                    <label class="inline-block"><strong>{{ vm.labels.show_only }}</strong></label>
+                    <div class="checkbox-content">
+                        <p class="checkbox-inline">
+                            <input type="checkbox" id="checkbox1" value="option1">
+                            <label for="checkbox1">{{ ::vm.labels.new_tile }}</label>
+                        </p>
+                        <p class="checkbox-inline">
+                            <input type="checkbox" id="checkbox2" value="option2">
+                            <label for="checkbox2">{{ ::vm.labels.stock }}</label>
+                        </p>
+                        <p class="checkbox-inline">
+                            <input type="checkbox" id="checkbox3" value="option3">
+                            <label for="checkbox3">{{ ::vm.labels.special }}</label>
+                        </p>
+                    </div>
                 </div>
                 <div class="col-md-3 pull-right text-right">
                     <div class="btn-group" dropdown>
