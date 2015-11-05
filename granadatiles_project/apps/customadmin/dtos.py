@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
-from core.dtos import BaseCatalogDto
+from core.dtos import BaseCatalogDto, BaseContentDto
 from apps.tiles.models import Collection, Group, Tile
 
 
@@ -28,5 +28,16 @@ class LatestUsersDto():
 
     def __init__(self, user):
 
-      self.name = user.username
-      self.url = reverse("admin:%s_%s_change" % (user._meta.app_label, user._meta.model_name), args=(user.id,))
+        self.name = user.username
+        self.url = reverse("admin:%s_%s_change" % (user._meta.app_label, user._meta.model_name), args=(user.id,))
+
+
+class GroupsByCollectionDto():
+
+    def __init__(self, collection, color, language):
+
+        self.label = collection.get_title(language) if language else collection.title
+        self.value = collection.groups.count()
+        self.color = color['color']
+        self.cssclass = color['cssclass']
+        self.highlight = color['highlight']

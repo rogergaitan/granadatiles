@@ -17,3 +17,11 @@ class LatestTilesSerializer(BaseCatalogSerializer):
 class LatestUsersSerializer(serializers.Serializer):
     name = serializers.CharField()
     url = serializers.CharField()
+
+
+class GroupsByCollectionSerializer(serializers.Serializer):
+    label = serializers.CharField()
+    value = serializers.CharField()
+    color = serializers.CharField()
+    cssclass = serializers.CharField()
+    highlight = serializers.CharField()

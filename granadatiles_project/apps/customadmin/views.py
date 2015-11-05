@@ -5,8 +5,9 @@ from rest_framework.response import Response
 
 from core.views import BaseViewSet
 
-from .services import ItemCountService, LatestTilesService, LatestUsersService
-from .serializers import ItemCountSerializer, LatestTilesSerializer, LatestUsersSerializer
+from .services import ItemCountService, LatestTilesService, LatestUsersService, GroupsByCollectionService
+from .serializers import (ItemCountSerializer, LatestTilesSerializer, LatestUsersSerializer,
+    GroupsByCollectionSerializer)
 
 def search(request):
     #search_term = request.GET.get('search_term')
@@ -43,4 +44,11 @@ class LatestUsersViewSet(BaseViewSet):
     def list(self, request):
         users = LatestUsersService.get_latest_users()
         serializer = LatestUsersSerializer(users, many=True)
+        return Response(serializer.data)
+
+class GroupsByCollectionViewSet(BaseViewSet):
+
+    def list(self, request):
+        collections = GroupsByCollectionService.get_groups_collection(language=self.get_language(request))
+        serializer = GroupsByCollectionSerializer(collections, many=True)
         return Response(serializer.data)
