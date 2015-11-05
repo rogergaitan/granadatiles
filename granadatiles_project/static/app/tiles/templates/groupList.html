@@ -15,7 +15,7 @@
                             <h2>{{ vm.collectionGroups[$index].title }}</h2>
                             <div class="view-more">
                                 <i class="fa fa-plus-circle"></i>
-                                <label>MORE<br />INFO</label>
+                                <label>{{ vm.labels.moreInfo | uppercase }}</label>
                             </div>
                         </div>
                     </a>
@@ -27,7 +27,7 @@
                             <h2>{{ vm.collectionGroups[$index + 1].title }}</h2>
                             <div class="view-more">
                                 <i class="fa fa-plus-circle"></i>
-                                <label>MORE<br />INFO</label>
+                                <label>{{ vm.labels.moreInfo | uppercase }}</label>
                             </div>
                         </div>
                     </a>
