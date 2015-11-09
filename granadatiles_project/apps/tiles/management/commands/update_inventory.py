@@ -7,53 +7,49 @@ from ...models import Collection, Group, Tile, TileDesign
 
 class Command(BaseCommand):
 
-    def create_update_inventory(item):
-        if item['SubLevel'] == 0:
-            data = {
-                'title':item['Name'],
-                'description':'',
-                'slug':slugify(item['Name'].split(" ")[0]),
-                'list_id':item['ListID']
+    def create_update_collections(item):
+        data = {
+            'title':item['Name'],
+            'description':'',
+            'slug':slugify(item['Name'].split(" ")[0]),
+            'list_id':item['ListID']
+        }
 
+        Collection.objects.update_or_create(list_id=data['list_id'], defaults=data)
+
+    def create_update_groups(item):
+        data = {
+            'title':item['Name'],
+            'description':'',
+            'slug':slugify(item['Name']),
+            'collection': Collection.objects.get(list_id=item['ParentRef']['ListID']),
+            'list_id':item['ListID']
+        }
+
+        Group.objects.update_or_create(list_id=data['list_id'], defaults=data)
+
+    def create_update_tiles(item):
+        data = {
+            'list_id':item['ListID'],
+            'name':item['Name'],
+            'is_active':item['IsActive'],
+            'sales_price':item['SalesPrice'],
+            'quantity_on_hand':item['QuantityOnHand'],
+            'average_cost':item['AverageCost'],
+            'sales_description':item['SalesDesc'],
+            'sales_description_es':item['SalesDesc']
+        }
+
+        Tile.objects.update_or_create(list_id=data['list_id'], defaults=data)
+
+        TileDesign.objects.update_or_create(
+            name=item['Name'].split(" ")[0],
+            defaults = {
+                'name': item['Name'].split(" ")[0],
+                'group': Group.objects.get(list_id=item['ParentRef']['ListID'])
             }
 
-            Collection.objects.update_or_create(list_id=data['list_id'], defaults=data)
-
-        elif item['SubLevel'] == 1:
-            data = {
-                'title':item['Name'],
-                'description':'',
-                'slug':slugify(item['Name']),
-                'collection': Collection.objects.get(list_id=item['ParentRef']['ListID']),
-                'list_id':item['ListID']
-
-            }
-
-            Group.objects.update_or_create(list_id=data['list_id'], defaults=data)
-
-        elif item['SubLevel'] == 2 or item['SubLevel'] == 3:
-            data = {
-                'list_id':item['ListID'],
-                'name':item['Name'],
-                'is_active':item['IsActive'],
-                'sales_price':item['SalesPrice'],
-                'quantity_on_hand':item['QuantityOnHand'],
-                'average_cost':item['AverageCost'],
-                'sales_description':item['SalesDesc'],
-                'sales_description_es':item['SalesDesc']
-
-            }
-
-            Tile.objects.update_or_create(list_id=data['list_id'], defaults=data)
-
-            TileDesign.objects.update_or_create(
-                name=item['Name'].split(" ")[0],
-                defaults = {
-                    'name': item['Name'].split(" ")[0],
-                    'group': Group.objects.get(list_id=item['ParentRef']['ListID'])
-                }
-
-            )
+        )
 
 
     def handle(self, **options):
@@ -64,13 +60,13 @@ class Command(BaseCommand):
 
         collections = [collection for collection in items.json() if collection['SubLevel'] == 0]
         groups = [group for group in items.json() if group['SubLevel'] == 1]
-        items = [item for item in items.json() if item['SubLevel'] == 2]
+        tiles = [item for item in items.json() if item['SubLevel'] == 2 or item['SubLevel'] == 3]
 
         for collection in collections:
-            Command.create_update_inventory(collection)
+            Command.create_update_collections(collections)
 
         for group in groups:
-            Command.create_update_inventory(group)
+            Command.create_update_groups(groups)
 
         for item in items:
-            Command.create_update_inventory(item)
+            Command.create_update_tiles(tiles)
