@@ -17,6 +17,7 @@ class Command(BaseCommand):
 
         Collection.objects.update_or_create(list_id=data['list_id'], defaults=data)
 
+
     def create_update_groups(item):
         data = {
             'title':item['Name'],
@@ -27,6 +28,7 @@ class Command(BaseCommand):
         }
 
         Group.objects.update_or_create(list_id=data['list_id'], defaults=data)
+
 
     def create_update_tiles(item):
         data = {
@@ -63,10 +65,10 @@ class Command(BaseCommand):
         tiles = [item for item in items.json() if item['SubLevel'] == 2 or item['SubLevel'] == 3]
 
         for collection in collections:
-            Command.create_update_collections(collections)
+            Command.create_update_collections(collection)
 
         for group in groups:
-            Command.create_update_groups(groups)
+            Command.create_update_groups(group)
 
-        for item in items:
-            Command.create_update_tiles(tiles)
+        for tile in tiles:
+            Command.create_update_tiles(tile)
