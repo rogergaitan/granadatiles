@@ -31,7 +31,7 @@ class Command(BaseCommand):
 
             Group.objects.update_or_create(list_id=data['list_id'], defaults=data)
 
-        elif item['SubLevel'] == 2:
+        elif item['SubLevel'] == 2 or item['SubLevel'] == 3:
             data = {
                 'list_id':item['ListID'],
                 'name':item['Name'],
