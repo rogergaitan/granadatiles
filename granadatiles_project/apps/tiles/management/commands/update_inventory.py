@@ -1,3 +1,5 @@
+import re
+
 import requests
 
 from django.core.management.base import BaseCommand, CommandError
@@ -44,10 +46,22 @@ class Command(BaseCommand):
 
         Tile.objects.update_or_create(list_id=data['list_id'], defaults=data)
 
+        #add design name from tile
+        if re.search('^\d+\s*x\s*\d+', item['Name']):
+            design_name = re.search('[a-zA-z]+$', item['Name'])
+
+        elif re.search('\d+\s*x\s*\d+$', item['Name']):
+            design_name = re.search('^[a-zA-z]+ [a-zA-z]*', item['Name'])
+
+        else:
+            design_name = re.search('\D+\d*', item['Name'])
+
+        print(design_name.group())
+
         TileDesign.objects.update_or_create(
-            name=item['Name'].split(" ")[0],
+            name=design_name.group(),
             defaults = {
-                'name': item['Name'].split(" ")[0],
+                'name': design_name.group(),
                 'group': Group.objects.get(list_id=item['ParentRef']['ListID'])
             }
 
