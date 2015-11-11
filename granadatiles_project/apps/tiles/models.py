@@ -93,6 +93,7 @@ class TileDesign(BaseCatalogModel):
     class Meta:
         verbose_name = _('Tile Design')
         verbose_name_plural = _('Tile Designs')
+        unique_together = ('name', 'group')
 
 
 class Tile(BaseCatalogModel):

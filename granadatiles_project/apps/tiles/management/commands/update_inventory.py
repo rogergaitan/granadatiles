@@ -3,6 +3,7 @@ import re
 import requests
 
 from django.core.management.base import BaseCommand, CommandError
+from django.core.exceptions import ObjectDoesNotExist
 from django.utils.text import slugify
 
 from ...models import Collection, Group, Tile, TileDesign
@@ -56,14 +57,21 @@ class Command(BaseCommand):
         else:
             design_name = re.search('\D+\d*', item['Name'])
 
-        TileDesign.objects.update_or_create(
-            name=design_name.group(),
-            defaults = {
-                'name': design_name.group(),
-                'group': Group.objects.get(list_id=item['ParentRef']['ListID'])
-            }
+        try:
+            group = Group.objects.get(list_id=item['ParentRef']['ListID'])
+        except ObjectDoesNotExist:
+            group = None
 
-        )
+        if group:
+
+            TileDesign.objects.update_or_create(
+                name=design_name.group(),
+                group=group,
+                defaults = {
+                    'name': design_name.group(),
+                    'group': group
+                }
+            )
 
 
     def handle(self, **options):
