@@ -50,7 +50,7 @@ class Command(BaseCommand):
         if re.search('^\d+\s*x\s*\d+', item['Name']):
             design_name = re.search('[a-zA-z]+$', item['Name'])
 
-        elif re.search('\d+\s*x\s*\d+$', item['Name']):
+        elif re.search('\d+\s*x\s*\d+\D*$', item['Name']):
             design_name = re.search('^[a-zA-z]+ [a-zA-z]*', item['Name'])
 
         else:
@@ -58,14 +58,14 @@ class Command(BaseCommand):
 
         print(design_name.group())
 
-        TileDesign.objects.update_or_create(
-            name=design_name.group(),
-            defaults = {
-                'name': design_name.group(),
-                'group': Group.objects.get(list_id=item['ParentRef']['ListID'])
-            }
+#         TileDesign.objects.update_or_create(
+#             name=design_name.group(),
+#             defaults = {
+#                 'name': design_name.group(),
+#                 'group': Group.objects.get(list_id=item['ParentRef']['ListID'])
+#             }
 
-        )
+#         )
 
 
     def handle(self, **options):
@@ -78,11 +78,11 @@ class Command(BaseCommand):
         groups = [group for group in items.json() if group['SubLevel'] == 1]
         tiles = [item for item in items.json() if item['SubLevel'] == 2 or item['SubLevel'] == 3]
 
-        for collection in collections:
-            Command.create_update_collections(collection)
+#         for collection in collections:
+#             Command.create_update_collections(collection)
 
-        for group in groups:
-            Command.create_update_groups(group)
+#         for group in groups:
+#             Command.create_update_groups(group)
 
         for tile in tiles:
             Command.create_update_tiles(tile)
