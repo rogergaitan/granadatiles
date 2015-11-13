@@ -42,11 +42,14 @@ class Command(BaseCommand):
             'quantity_on_hand':item['QuantityOnHand'],
             'average_cost':item['AverageCost'],
             'sales_description':item['SalesDesc'],
-            'sales_description_es':item['SalesDesc']
+            'sales_description_es':item['SalesDesc'],
         }
 
         if re.search('samples', item['FullName'], re.IGNORECASE):
             data['is_sample'] = True
+
+        size = re.search('\d+"*\s*x\s*\d+"*', item['SalesDesc'])
+        if size: data['size'] = size.group()
 
         Tile.objects.update_or_create(list_id=data['list_id'], defaults=data)
 
@@ -80,7 +83,6 @@ class Command(BaseCommand):
                     'group': group
                 }
             )
-
 
 
     def handle(self, **options):

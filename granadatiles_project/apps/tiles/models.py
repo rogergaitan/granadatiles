@@ -109,10 +109,10 @@ class Tile(BaseCatalogModel):
                                help_text='Is the main tile of the design')
     similar_tiles = models.ManyToManyField('Tile', verbose_name=_('Similar Tiles'), blank=True)
     design = models.ForeignKey(TileDesign, related_name='tiles', verbose_name=_('Design'), null=True, blank = True)
-    sizes = models.ManyToManyField(TileSize, related_name='tiles', verbose_name=_('Tiles Sizes'), blank=True)
     colors = models.ManyToManyField(PalleteColor, related_name='tiles', verbose_name=_('Tiles Colors'), blank=True)
-    is_sample = models.BooleanField(default=False)
-    new = models.BooleanField(default=False)
+    is_sample = models.BooleanField(default=False, verbose_name=_('Is Sample'))
+    new = models.BooleanField(max_length=10, default=False, verbose_name=_('New'))
+    size = models.CharField(max_length=10, default='', null=True, verbose_name=_('Size'))
 
     class Meta:
         verbose_name = _('Tile')
