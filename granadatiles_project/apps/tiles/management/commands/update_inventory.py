@@ -6,7 +6,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.text import slugify
 
-from ...models import Collection, Group, Tile, TileDesign
+from ...models import Collection, Group, Tile, TileDesign, TileSize
 
 class Command(BaseCommand):
 
@@ -45,7 +45,15 @@ class Command(BaseCommand):
             'sales_description_es':item['SalesDesc']
         }
 
+        if re.search('samples', item['FullName'], re.IGNORECASE):
+            data['is_sample'] = True
+
         Tile.objects.update_or_create(list_id=data['list_id'], defaults=data)
+
+        Command.create_update_tiles_designs(item)
+
+
+    def create_update_tiles_designs(item):
 
         #add design name from tile
         if re.search('^\d+\s*x\s*\d+', item['Name']):
@@ -72,6 +80,7 @@ class Command(BaseCommand):
                     'group': group
                 }
             )
+
 
 
     def handle(self, **options):
