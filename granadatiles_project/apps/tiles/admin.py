@@ -1,4 +1,4 @@
-﻿from django.contrib import admin
+from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from .models import Tile, Collection, Group, PalleteColor, TileSize
 from apps.tiles.models import TileDesign
@@ -9,10 +9,19 @@ class TileDesignAdmin(admin.ModelAdmin):
     list_display = ('name', 'name_es')
     search_fields = ['name', 'name_es']
 
+
+def tile_new(modeladmin, request, queryset):
+    queryset.update(new=True)
+tile_new.short_description = "Mark tile as new"
+
+
 @admin.register(Tile)
 class TileAdmin(admin.ModelAdmin):
-    list_display = ('name', 'name_es')
-    search_fields = ['name', 'name_es']
+    list_display = ('name', 'name_es', 'sales_description', 'quantity_on_hand',
+                    'list_id', 'is_active', 'new'
+                   )
+    search_fields = ['name', 'name_es', 'list_id', 'new']
+    actions = [tile_new]
 
 
 @admin.register(Collection)
