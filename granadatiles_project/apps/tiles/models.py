@@ -111,6 +111,8 @@ class Tile(BaseCatalogModel):
     design = models.ForeignKey(TileDesign, related_name='tiles', verbose_name=_('Design'), null=True, blank = True)
     sizes = models.ManyToManyField(TileSize, related_name='tiles', verbose_name=_('Tiles Sizes'), blank=True)
     colors = models.ManyToManyField(PalleteColor, related_name='tiles', verbose_name=_('Tiles Colors'), blank=True)
+    is_sample = models.BooleanField(default=False)
+    new = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = _('Tile')
