@@ -15,12 +15,34 @@ def tile_new(modeladmin, request, queryset):
 tile_new.short_description = "Mark tile as new"
 
 
+class TileSizeFilter(admin.SimpleListFilter):
+
+    title = 'tile size available'
+
+    parameter_name = 'size'
+
+    def lookups(self, request, model_admin):
+        return(
+            ('y', 'Yes'),
+            ('n', 'No'),
+        )
+
+
+    def queryset(self, request, queryset):
+        if self.value() == 'y':
+            return queryset.filter(size__isnull=False)
+
+        if self.value() == 'n':
+            return queryset.filter(size__isnull=True)
+
+
 @admin.register(Tile)
 class TileAdmin(admin.ModelAdmin):
-    list_display = ('name', 'name_es', 'sales_description', 'quantity_on_hand',
+    list_display = ('name', 'name_es', 'sales_description', 'size', 'quantity_on_hand',
                     'list_id', 'is_active', 'new'
                    )
-    search_fields = ['name', 'name_es', 'list_id', 'new']
+    search_fields = ['name', 'name_es', 'list_id', 'size', 'new']
+    list_filter = ('new', TileSizeFilter)
     actions = [tile_new]
 
 
