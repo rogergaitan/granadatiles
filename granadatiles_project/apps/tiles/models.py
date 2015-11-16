@@ -16,18 +16,6 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
         Token.objects.create(user=instance)
 
 
-class TileSize(models.Model):
-    weight = models.CharField(max_length=10, verbose_name=_('Weight'))
-    thickness = models.CharField(max_length=10, verbose_name=_('Thickness'))
-
-    def __str__(self):
-        return "{0} {1}".format(self.weight, self.thickness)
-
-    class Meta:
-        verbose_name = _('Size')
-        verbose_name_plural = _('Sizes')
-
-
 class PalleteColor(BaseCatalogModel):
     hexadecimalCode = models.CharField(max_length=20, verbose_name=_('Color'))
 
@@ -125,3 +113,11 @@ class Style(BaseCatalogModel):
     class Meta:
        verbose_name = _('Style')
        verbose_name_plural = _('Styles')
+
+
+# class Use():
+#     tile = models.ForeignKey(Tile, related_name='uses', verbose_name=_('Use'))
+
+#     class Meta:
+#         verbose_name = _('Use')
+#         verbose_name_plural = _('Uses')

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
-from .models import Tile, Collection, Group, PalleteColor, TileSize
+from .models import Tile, Collection, Group, PalleteColor
 from apps.tiles.models import TileDesign
 
 
@@ -62,8 +62,3 @@ class GroupAdmin(SummernoteModelAdmin):
 class PalleteColorAdmin(admin.ModelAdmin):
     list_display = ('name', 'name_es')
     search_fields = ['name', 'name_es']
-
-
-@admin.register(TileSize)
-class TileSize(admin.ModelAdmin):
-    list_display = ('weight', 'thickness')
