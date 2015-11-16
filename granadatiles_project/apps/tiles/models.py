@@ -101,6 +101,8 @@ class Tile(BaseCatalogModel):
     is_sample = models.BooleanField(default=False, verbose_name=_('Is Sample'))
     new = models.BooleanField(max_length=10, default=False, verbose_name=_('New'))
     size = models.CharField(max_length=10, default='', null=True, verbose_name=_('Size'))
+    weight = models.CharField(max_length=10, default='', null=True, verbose_name=_('Weight'))
+    thickness = models.CharField(max_length=10, default='', null=True, verbose_name=('Thickness'))
 
     class Meta:
         verbose_name = _('Tile')
@@ -113,11 +115,3 @@ class Style(BaseCatalogModel):
     class Meta:
        verbose_name = _('Style')
        verbose_name_plural = _('Styles')
-
-
-# class Use():
-#     tile = models.ForeignKey(Tile, related_name='uses', verbose_name=_('Use'))
-
-#     class Meta:
-#         verbose_name = _('Use')
-#         verbose_name_plural = _('Uses')
