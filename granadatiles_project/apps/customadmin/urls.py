@@ -17,4 +17,4 @@ router.register('dashboard/latestusers', LatestUsersViewSet, base_name='latestus
 router.register('dashboard/groupsbycollection', GroupsByCollectionViewSet, base_name='groupsbycollection')
 
 
-urlpatterns = router.urls
+urlpatterns += router.urls
