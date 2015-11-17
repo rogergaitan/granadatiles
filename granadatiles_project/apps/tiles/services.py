@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from .models import Collection, Group, TileSize
+from .models import Collection, Group
 from .dtos import (
     CollectionDto, CollectionRetrieveDto, GroupDto,
     TileDesignDto, MenuCollectionDto, TileStyleDto, TileSizeDto)
