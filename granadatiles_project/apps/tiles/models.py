@@ -23,7 +23,7 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
     introduction = models.TextField(verbose_name=_('Introduction'), default='')
     introduction_es = models.TextField(blank=True, null=True, verbose_name=_('Introduction_es'))
     list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
-    uses = models.ManyToManyField('Use', null=True, blank=True, related_name='collection', verbose_name=_('Uses'))
+    uses = models.ManyToManyField('Use', blank=True, related_name='collection', verbose_name=_('Uses'))
 
     @property
     def menu_thumbnail(self):
@@ -86,6 +86,7 @@ class Tile(BaseCatalogModel):
     sales_description = models.CharField(max_length=450 ,verbose_name=_('Sales description'), default='')
     sales_description_es = models.CharField(max_length=450 ,verbose_name=_('Sales description_es'), default='')
     image = ImageField(upload_to='tiles', verbose_name=_('Image'), null = True, blank=True)
+#     mosaic = ImageField(upload_to='mosaic', verbose_name=_('Image'), null = True, blank=True)
     main = models.BooleanField(default=False, verbose_name=_('Main'),
                                help_text='Is the main tile of the design')
     similar_tiles = models.ManyToManyField('Tile', verbose_name=_('Similar Tiles'), blank=True)
@@ -112,7 +113,7 @@ class Style(BaseCatalogModel):
 
 
 class Use(BaseCatalogModel):
-
+    pass
 
     class Meta:
        verbose_name = _('Use')

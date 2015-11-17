@@ -14,18 +14,18 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Use',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
                 ('name', models.CharField(verbose_name='Name', max_length=150)),
-                ('name_es', models.CharField(blank=True, max_length=150, verbose_name='Name_es', null=True)),
+                ('name_es', models.CharField(verbose_name='Name_es', blank=True, null=True, max_length=150)),
             ],
             options={
-                'verbose_name_plural': 'Uses',
                 'verbose_name': 'Use',
+                'verbose_name_plural': 'Uses',
             },
         ),
         migrations.AddField(
             model_name='collection',
             name='uses',
-            field=models.ManyToManyField(blank=True, related_name='collection', to='tiles.Use', verbose_name='Uses', null=True),
+            field=models.ManyToManyField(verbose_name='Uses', blank=True, to='tiles.Use', related_name='collection'),
         ),
     ]
