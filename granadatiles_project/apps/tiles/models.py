@@ -23,6 +23,7 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
     introduction = models.TextField(verbose_name=_('Introduction'), default='')
     introduction_es = models.TextField(blank=True, null=True, verbose_name=_('Introduction_es'))
     list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
+    uses = models.ManyToManyField('Use', null=True, blank=True, related_name='collection', verbose_name=_('Uses'))
 
     @property
     def menu_thumbnail(self):
@@ -111,7 +112,7 @@ class Style(BaseCatalogModel):
 
 
 class Use(BaseCatalogModel):
-    collection = models.ForeignKey(Collection, related_name='uses', verbose_name=_('Collection'))
+
 
     class Meta:
        verbose_name = _('Use')

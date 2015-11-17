@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
-from .models import Tile, Collection, Group
-from apps.tiles.models import TileDesign
+from .models import Tile, Collection, Group, TileDesign, Use
 
 
 @admin.register(TileDesign)
@@ -54,3 +53,8 @@ class CollectionAdmin(SummernoteModelAdmin):
 class GroupAdmin(SummernoteModelAdmin):
     list_display = ('title', 'title_es')
     search_fields = ['title', 'title_es']
+
+
+@admin.register(Use)
+class UseAdmin(admin.ModelAdmin):
+    list_display = ('name', 'name_es')
