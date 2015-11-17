@@ -103,6 +103,7 @@ class Tile(BaseCatalogModel):
     size = models.CharField(max_length=10, default='', null=True, verbose_name=_('Size'))
     weight = models.CharField(max_length=10, default='', null=True, verbose_name=_('Weight'))
     thickness = models.CharField(max_length=10, default='', null=True, verbose_name=('Thickness'))
+    on_sale = models.BooleanField(default=False, verbose_name=_('On Sale'))
 
     class Meta:
         verbose_name = _('Tile')
