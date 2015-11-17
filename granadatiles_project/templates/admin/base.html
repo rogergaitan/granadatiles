@@ -144,7 +144,7 @@
         </header>
         <aside class="main-sidebar">
             <section class="sidebar">
-                <form action="{#% url 'customadmin:search' %}" method="get" class="sidebar-form">
+                <form action="{% url 'customadmin:search' %}" method="get" class="sidebar-form">
                     <div class="input-group">
                         <input type="text" name="search_term" id="search_term" class="form-control" placeholder="Search..."/>
                         <span class="input-group-btn">
@@ -155,7 +155,7 @@
                 <ul class="sidebar-menu">
                     <li class="header">{% trans 'MAIN NAVIGATION' %}</li>
                     {% for app in apps.app_list %}
-                    <li class="treeview">
+                    <li class="treeview" id="{{ app.name|lower }}" data-menu-option="{{app.name}}">
                         <a href="#">
                             <i class="{{app.icon}}"></i>
                             <span>{{app.name}}</span> <i class="fa fa-angle-left pull-right"></i>
@@ -258,6 +258,10 @@
                 $( "ul span:contains('Aut')" ).siblings()[0].setAttribute('class', 'fa fa-user');
                 $( "ul span:contains('Aut')" ).text('{% trans 'Authentication'%}')
             });
+            var selectedApp = $('.breadcrumb').find("li:eq(1)").find("a").text();
+            var $selectedMenuOption = $('[data-menu-option="'+selectedApp+'"]');
+            $selectedMenuOption.addClass('active');
+            $selectedMenuOption.find('ul').slideDown();
         }(jQuery));
         //]]>
     </script>
