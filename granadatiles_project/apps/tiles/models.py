@@ -1,37 +1,29 @@
 from django.db import models
+from django.db.models.signals import post_save
 from django.utils.translation import ugettext as _
-from core.models import BaseGalleryImageModel, BaseCatalogModel, BaseContentModel, BaseSlugModel
+from django.dispatch.dispatcher import receiver
+from django.conf import settings
 from django.core.urlresolvers import reverse
+from core.models import BaseGalleryImageModel, BaseCatalogModel, BaseContentModel, BaseSlugModel
 from sorl.thumbnail.shortcuts import get_thumbnail
 from sorl.thumbnail.fields import ImageField
+from rest_framework.authtoken.models import Token
 
 
-class TileSize(models.Model):
-    weight = models.CharField(max_length=10, verbose_name=_('Weight'))
-    thickness = models.CharField(max_length=10, verbose_name=_('Thickness'))
-
-    def __str__(self):
-        return "{0} {1}".format(self.weight, self.thickness)
-
-    class Meta:
-        verbose_name = _('Size')
-        verbose_name_plural = _('Sizes')
-
-
-class PalleteColor(BaseCatalogModel):
-    hexadecimalCode = models.CharField(max_length=20, verbose_name=_('Color'))
-
-    class Meta:
-        verbose_name = _('Pallete Color')
-        verbose_name_plural = _('Pallete Colors')
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
 
 
 class Collection(BaseGalleryImageModel, BaseSlugModel):
     menu_image = ImageField(upload_to='Galleries/menu', null = True, blank=True)
     featured = models.BooleanField(default=True, verbose_name=_('Featured'))
     show_in_menu = models.BooleanField(default=True, verbose_name= _('Show in menu'))
-    introduction = models.TextField(verbose_name=_('Introduction'))
+    introduction = models.TextField(verbose_name=_('Introduction'), default='')
     introduction_es = models.TextField(blank=True, null=True, verbose_name=_('Introduction_es'))
+    list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
+    uses = models.ManyToManyField('Use', blank=True, related_name='collection', verbose_name=_('Uses'))
 
     @property
     def menu_thumbnail(self):
@@ -60,6 +52,7 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
 
 class Group(BaseGalleryImageModel, BaseSlugModel):
     collection = models.ForeignKey(Collection, related_name='groups', verbose_name=_('Collection'))
+    list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
 
     def get_absolute_url(self, language=None):
         slug = self.get_slug(language)
@@ -81,16 +74,30 @@ class TileDesign(BaseCatalogModel):
     class Meta:
         verbose_name = _('Tile Design')
         verbose_name_plural = _('Tile Designs')
+        unique_together = ('name', 'group')
 
 
 class Tile(BaseCatalogModel):
+    list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
+    is_active = models.BooleanField(verbose_name=_('Is Active'), default=True)
+    sales_price = models.FloatField(verbose_name=_('Sales Price'), blank=True, null=True)
+    average_cost = models.FloatField(verbose_name=_('Average Cost'), blank=True, null=True)
+    quantity_on_hand = models.IntegerField(verbose_name=_('Quantity'), default=0)
+    sales_description = models.CharField(max_length=450 ,verbose_name=_('Sales description'), default='')
+    sales_description_es = models.CharField(max_length=450 ,verbose_name=_('Sales description_es'), default='')
     image = ImageField(upload_to='tiles', verbose_name=_('Image'), null = True, blank=True)
+    mosaic = ImageField(upload_to='mosaic', verbose_name=_('Mosaic'), null = True, blank=True)
     main = models.BooleanField(default=False, verbose_name=_('Main'),
                                help_text='Is the main tile of the design')
-    similar_tiles = models.ManyToManyField('Tile', verbose_name=_('Similar Tiles'))
-    design = models.ForeignKey(TileDesign, related_name='tiles', verbose_name=_('Design'))
-    sizes = models.ManyToManyField(TileSize, related_name='tiles', verbose_name=_('Tiles Sizes'))
-    colors = models.ManyToManyField(PalleteColor, related_name='tiles', verbose_name=_('Tiles Colors'))
+    similar_tiles = models.ManyToManyField('Tile', verbose_name=_('Similar Tiles'), blank=True)
+    design = models.ForeignKey(TileDesign, related_name='tiles', verbose_name=_('Design'), null=True, blank = True)
+    colors = models.CharField(max_length=200, null=True, verbose_name=_('Colors'))
+    is_sample = models.BooleanField(default=False, verbose_name=_('Is Sample'))
+    new = models.BooleanField(max_length=10, default=False, verbose_name=_('New'))
+    size = models.CharField(max_length=10, default='', null=True, verbose_name=_('Size'))
+    weight = models.CharField(max_length=10, default='', null=True, verbose_name=_('Weight'))
+    thickness = models.CharField(max_length=10, default='', null=True, verbose_name=('Thickness'))
+    on_sale = models.BooleanField(default=False, verbose_name=_('On Sale'))
 
     @property
     def get_admin_url(self):
@@ -100,11 +107,6 @@ class Tile(BaseCatalogModel):
         verbose_name = _('Tile')
         verbose_name_plural = _('Tiles')
 
-    def save(self, *args, **kwargs):
-        if self.main:
-            Tile.objects.filter(main=True).update(main=False)
-        super(Tile, self).save(*args, **kwargs)
-
 
 class Style(BaseCatalogModel):
     design = models.ManyToManyField(TileDesign, related_name='styles', verbose_name=_('Designs'))
@@ -112,3 +114,11 @@ class Style(BaseCatalogModel):
     class Meta:
        verbose_name = _('Style')
        verbose_name_plural = _('Styles')
+
+
+class Use(BaseCatalogModel):
+    pass
+
+    class Meta:
+       verbose_name = _('Use')
+       verbose_name_plural = _('Uses')

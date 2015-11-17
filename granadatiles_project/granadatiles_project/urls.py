@@ -15,7 +15,6 @@ urlpatterns = [
     url(r'^api/', include('apps.content.urls', namespace='content')),
     url(r'^api/', include('apps.galleries.urls', namespace='galleries')),
     url(r'^api/', include('apps.news.urls', namespace='news')),
-    url(r'^api/', include('apps.quickbooks.urls', namespace='quickbooks')),
     url(r'^api/', include('apps.customadmin.urls', namespace='dashboard')),
     url(r'^api/token/', views.obtain_auth_token),
     url('', include('social.apps.django_app.urls', namespace='social')),

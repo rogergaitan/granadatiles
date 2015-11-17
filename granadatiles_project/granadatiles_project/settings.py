@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'apps.galleries',
     'apps.content',
     'apps.tiles',
-    'apps.quickbooks',
 
 ]
 

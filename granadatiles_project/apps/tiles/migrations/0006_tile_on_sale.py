@@ -7,13 +7,13 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('quickbooks', '0001_initial'),
+        ('tiles', '0005_auto_20151116_2257'),
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='item',
-            name='quantity_on_hand',
-            field=models.IntegerField(verbose_name='Quantity'),
+        migrations.AddField(
+            model_name='tile',
+            name='on_sale',
+            field=models.BooleanField(default=False, verbose_name='On Sale'),
         ),
     ]

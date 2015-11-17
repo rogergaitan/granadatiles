@@ -3,6 +3,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import list_route, detail_route
+from rest_framework.permissions import IsAdminUser
 
 from core.views import BaseViewSet
 
@@ -112,3 +113,28 @@ class TileSizeViewSet(BaseViewSet):
         sizes = TileSizeService.get_sizes()
         serializer = TileSizeSerializer(sizes, many=True)
         return Response(serializer.data)
+
+   def retrieve(self, request, pk=None):
+       group = GroupService.get_group(id=pk, language=self.get_language(request))
+       serializer = GroupSerializer(group)
+       return Response(serializer.data)
+
+   @detail_route(methods=['get'])
+   def tiles(self, request, pk = None):
+       limit = int(request.query_params.get('limit', 6))
+       offset = int(request.query_params.get('offset', 0))
+       tile_designs = GroupService.get_group_designs(id=pk,
+           language=self.get_language(request), limit=limit, offset=offset)
+       serializer = TileDesignSerializer(tile_designs, many=True)
+       return Response(serializer.data)
+
+
+class ItemViewSet(viewsets.ViewSet):
+
+    permission_classes = (IsAdminUser,)
+
+
+    @list_route(methods=['post'])
+    def update_inventory(self, request):
+        update_inventory_task.delay()
+        return Response({'message': 'Finished task'})

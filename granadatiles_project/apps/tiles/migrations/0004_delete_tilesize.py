@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import migrations, models
+from django.db import models, migrations
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('quickbooks', '0002_auto_20151023_2011'),
-        ('quickbooks', '0002_auto_20151022_1333'),
+        ('tiles', '0003_auto_20151113_2113'),
     ]
 
     operations = [
+        migrations.DeleteModel(
+            name='TileSize',
+        ),
     ]
