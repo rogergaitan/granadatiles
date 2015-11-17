@@ -10,11 +10,6 @@ class TileDesignAdmin(admin.ModelAdmin):
     search_fields = ['name', 'name_es']
 
 
-def tile_new(modeladmin, request, queryset):
-    queryset.update(new=True)
-tile_new.short_description = "Mark tile as new"
-
-
 class TileSizeFilter(admin.SimpleListFilter):
 
     title = 'tile size available'
@@ -39,11 +34,15 @@ class TileSizeFilter(admin.SimpleListFilter):
 @admin.register(Tile)
 class TileAdmin(admin.ModelAdmin):
     list_display = ('name', 'name_es', 'sales_description', 'size', 'quantity_on_hand',
-                    'list_id', 'is_active', 'new'
-                   )
-    search_fields = ['name', 'name_es', 'list_id', 'size', 'new']
+                    'list_id', 'is_active', 'new', 'on_sale')
+    list_editable = ['size']
+    search_fields = ['name', 'name_es', 'list_id', 'size']
     list_filter = ('new', TileSizeFilter)
-    actions = [tile_new]
+    actions = ['tile_new']
+
+    def tile_new(self, request, queryset):
+        queryset.update(new=True)
+    tile_new.short_description = "Mark tile as new"
 
 
 @admin.register(Collection)
