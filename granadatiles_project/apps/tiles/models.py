@@ -16,14 +16,6 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
         Token.objects.create(user=instance)
 
 
-class PalleteColor(BaseCatalogModel):
-    hexadecimalCode = models.CharField(max_length=20, verbose_name=_('Color'))
-
-    class Meta:
-        verbose_name = _('Pallete Color')
-        verbose_name_plural = _('Pallete Colors')
-
-
 class Collection(BaseGalleryImageModel, BaseSlugModel):
     menu_image = ImageField(upload_to='Galleries/menu', null = True, blank=True)
     featured = models.BooleanField(default=True, verbose_name=_('Featured'))
@@ -97,7 +89,7 @@ class Tile(BaseCatalogModel):
                                help_text='Is the main tile of the design')
     similar_tiles = models.ManyToManyField('Tile', verbose_name=_('Similar Tiles'), blank=True)
     design = models.ForeignKey(TileDesign, related_name='tiles', verbose_name=_('Design'), null=True, blank = True)
-    colors = models.ManyToManyField(PalleteColor, related_name='tiles', verbose_name=_('Tiles Colors'), blank=True)
+    colors = models.CharField(max_length=200, null=True, verbose_name=_('Colors'))
     is_sample = models.BooleanField(default=False, verbose_name=_('Is Sample'))
     new = models.BooleanField(max_length=10, default=False, verbose_name=_('New'))
     size = models.CharField(max_length=10, default='', null=True, verbose_name=_('Size'))
@@ -116,3 +108,11 @@ class Style(BaseCatalogModel):
     class Meta:
        verbose_name = _('Style')
        verbose_name_plural = _('Styles')
+
+
+class Use(BaseCatalogModel):
+    collection = models.ForeignKey(Collection, related_name='uses', verbose_name=_('Collection'))
+
+    class Meta:
+       verbose_name = _('Use')
+       verbose_name_plural = _('Uses')
