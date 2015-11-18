@@ -1,12 +1,12 @@
 import re
-
+import pdb
 import requests
 
 from django.core.management.base import BaseCommand, CommandError
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.text import slugify
 
-from ...models import Collection, Group, Tile, TileDesign, TileSize
+from ...models import Collection, Group, Tile, TileDesign
 
 class Command(BaseCommand):
 
@@ -45,15 +45,17 @@ class Command(BaseCommand):
             'sales_description_es':item['SalesDesc'],
         }
 
+        design = Command.create_update_tiles_designs(item)
+
         if re.search('samples', item['FullName'], re.IGNORECASE):
             data['is_sample'] = True
 
         size = re.search('\d+"*\s*x\s*\d+"*', item['SalesDesc'])
         if size: data['size'] = size.group()
 
-        Tile.objects.update_or_create(list_id=data['list_id'], defaults=data)
+        if design: data['design'] = design[0]
 
-        Command.create_update_tiles_designs(item)
+        Tile.objects.update_or_create(list_id=data['list_id'], defaults=data)
 
 
     def create_update_tiles_designs(item):
@@ -75,14 +77,15 @@ class Command(BaseCommand):
 
         if group:
 
-            TileDesign.objects.update_or_create(
-                name=design_name.group(),
-                group=group,
-                defaults = {
-                    'name': design_name.group(),
-                    'group': group
-                }
-            )
+         design = TileDesign.objects.update_or_create(
+                      name=design_name.group(),
+                      group=group,
+                      defaults = {
+                          'name': design_name.group(),
+                          'group': group
+                      }
+                  )
+         return design
 
 
     def handle(self, **options):
@@ -95,11 +98,11 @@ class Command(BaseCommand):
         groups = [group for group in items.json() if group['SubLevel'] == 1]
         tiles = [item for item in items.json() if item['SubLevel'] == 2 or item['SubLevel'] == 3]
 
-        for collection in collections:
-            Command.create_update_collections(collection)
+#         for collection in collections:
+#             Command.create_update_collections(collection)
 
-        for group in groups:
-            Command.create_update_groups(group)
+#         for group in groups:
+#             Command.create_update_groups(group)
 
         for tile in tiles:
             Command.create_update_tiles(tile)
