@@ -10,9 +10,9 @@ from core.views import BaseViewSet
 from .serializers import (
     GroupSerializer, GroupDesignSerializer, MenuCollectionSerializer,
     CollectionSerializer, CollectionRetrieveSerializer, TileDesignSerializer,
-    GroupTileStyleSerializer, TileSizeSerializer
+    GroupTileStyleSerializer, TileSizeSerializer, TileDetailSerializer
 )
-from .services import CollectionService, GroupService, TileSizeService
+from .services import CollectionService, GroupService, TileService
 from .models import Collection, Group
 
 
@@ -107,25 +107,33 @@ class GroupViewSet(BaseViewSet):
         serializer = GroupTileStyleSerializer(styles, many=True)
         return Response(serializer.data)
 
-class TileSizeViewSet(BaseViewSet):
+# class TileSizeViewSet(BaseViewSet):
 
-    def list(self, request):
-        sizes = TileSizeService.get_sizes()
-        serializer = TileSizeSerializer(sizes, many=True)
-        return Response(serializer.data)
+#     def list(self, request):
+#         sizes = TileSizeService.get_sizes()
+#         serializer = TileSizeSerializer(sizes, many=True)
+#         return Response(serializer.data)
+
+#     def retrieve(self, request, pk=None):
+#        group = GroupService.get_group(id=pk, language=self.get_language(request))
+#        serializer = GroupSerializer(group)
+#        return Response(serializer.data)
+
+#     @detail_route(methods=['get'])
+#     def tiles(self, request, pk = None):
+#         limit = int(request.query_params.get('limit', 6))
+#         offset = int(request.query_params.get('offset', 0))
+#         tile_designs = GroupService.get_group_designs(id=pk,
+#             language=self.get_language(request), limit=limit, offset=offset)
+#         serializer = TileDesignSerializer(tile_designs, many=True)
+#         return Response(serializer.data)
+
+
+class TileViewSet(BaseViewSet):
 
     def retrieve(self, request, pk=None):
-       group = GroupService.get_group(id=pk, language=self.get_language(request))
-       serializer = GroupSerializer(group)
-       return Response(serializer.data)
-
-    @detail_route(methods=['get'])
-    def tiles(self, request, pk = None):
-        limit = int(request.query_params.get('limit', 6))
-        offset = int(request.query_params.get('offset', 0))
-        tile_designs = GroupService.get_group_designs(id=pk,
-            language=self.get_language(request), limit=limit, offset=offset)
-        serializer = TileDesignSerializer(tile_designs, many=True)
+        tile = TileService.get_tile(id=pk, language=self.get_language(request))
+        serializer = TileDetailSerializer(tile)
         return Response(serializer.data)
 
 

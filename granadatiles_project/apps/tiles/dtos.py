@@ -21,10 +21,12 @@ class CollectionRetrieveDto(CollectionDto):
            self.introduction = collection.introduction
 
 
-class TileSizeDto():
+class TileDetailDto(BaseCatalogDto):
 
-    def __init__(self, tile_size, language=None):
-        self.name = tile_size.weight
+    def __init__(self, tile, language):
+        super().__init__(tile, language)
+        self.sizes = tile.size
+        self.mosaic = tile.mosaic
 
 
 class TileDto(BaseCatalogDto):

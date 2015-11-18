@@ -1,11 +1,11 @@
 from django.shortcuts import get_object_or_404
-from .models import Collection, Group
+from .models import Collection, Group, Tile
 from .dtos import (
     CollectionDto, CollectionRetrieveDto, GroupDto,
-    TileDesignDto, MenuCollectionDto, TileStyleDto, TileSizeDto)
+    TileDesignDto, MenuCollectionDto, TileStyleDto, TileDetailDto)
 
 
-class CollectionService(object):
+class CollectionService:
 
     def get_collection(id ,language=None):
         collection = get_object_or_404(Collection, pk=id)
@@ -39,7 +39,7 @@ class CollectionService(object):
         return menuCollectionsDto
 
 
-class GroupService(object):
+class GroupService:
 
     def get_group(id, language=None):
         group = get_object_or_404(Group, pk=id)
@@ -59,9 +59,9 @@ class GroupService(object):
         styleDto = [TileStyleDto(style, language) for style in group.styles.all()]
         return styleDto
 
+class TileService:
 
-class TileSizeService(object):
-
-    def get_sizes():
-        tilesizeDto = [TileSizeDto(size) for size in TileSize.objects.all()]
-        return tilesizeDto
+      def get_tile(id, language):
+          tile = get_object_or_404(Tile, pk=id)
+          tiledetailDto = TileDetailDto(tile, language)
+          return tiledetailDto
