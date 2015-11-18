@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from .models import Collection, Group, Tile
 from .dtos import (
-    CollectionDto, CollectionRetrieveDto, GroupDto,
+    CollectionDto, CollectionDetailDto, GroupDto,
     TileDesignDto, MenuCollectionDto, TileStyleDto, TileDetailDto,
     TileInstallationPhotosDto
 )
@@ -11,7 +11,7 @@ class CollectionService:
 
     def get_collection(id ,language=None):
         collection = get_object_or_404(Collection, pk=id)
-        collectionDto = CollectionRetrieveDto(collection, language)
+        collectionDto = CollectionDetailDto(collection, language)
         return collectionDto
 
     def get_collections(language=None):

@@ -11,13 +11,9 @@ class CollectionRetrieveSerializer(CollectionSerializer):
     introduction = serializers.CharField()
 
 
-class TileSizeSerializer(serializers.Serializer):
-    name = serializers.CharField()
-
-
 class TileSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
-    sizes = TileSizeSerializer(many=True)
+    sizes = serializers.CharField()
 
 
 class TileDetailSerializer(BaseCatalogSerializer):

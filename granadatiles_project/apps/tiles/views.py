@@ -10,7 +10,7 @@ from core.views import BaseViewSet
 from .serializers import (
     GroupSerializer, GroupDesignSerializer, MenuCollectionSerializer,
     CollectionSerializer, CollectionRetrieveSerializer, TileDesignSerializer,
-    GroupTileStyleSerializer, TileSizeSerializer, TileDetailSerializer,
+    GroupTileStyleSerializer, TileDetailSerializer,
     TileInstallationPhotosSerializer
 )
 from .services import CollectionService, GroupService, TileService

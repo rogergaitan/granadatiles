@@ -11,7 +11,7 @@ class CollectionDto(BaseGalleryImageDto):
         else:
             self.url = collection.get_absolute_url()
 
-class CollectionRetrieveDto(CollectionDto):
+class CollectionDetailDto(CollectionDto):
 
     def __init__(self, collection, language):
         super().__init__(collection, language)
@@ -34,7 +34,7 @@ class TileDto(BaseCatalogDto):
     def __init__(self, tile, language=None):
         super().__init__(tile, language)
         self.image = tile.image.url if tile.image else ''
-        self.sizes = [TileSizeDto(tile_size, language) for tile_size in tile.sizes.all()]
+        self.sizes = tile.size
 
 
 class TileDesignDto(BaseCatalogDto):
