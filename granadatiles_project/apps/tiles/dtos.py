@@ -53,6 +53,13 @@ class TileStyleDto(BaseCatalogDto):
     pass
 
 
+class TileInstallationPhotosDto(BaseContentDto):
+
+    def __init__(self, photo, language):
+        super().__init__(photo, language)
+        self.image = photo.image
+
+
 class GroupDto(BaseGalleryImageDto):
     def __init__(self, collection, language=None):
         super().__init__(collection, language)

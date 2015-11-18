@@ -10,7 +10,8 @@ from core.views import BaseViewSet
 from .serializers import (
     GroupSerializer, GroupDesignSerializer, MenuCollectionSerializer,
     CollectionSerializer, CollectionRetrieveSerializer, TileDesignSerializer,
-    GroupTileStyleSerializer, TileSizeSerializer, TileDetailSerializer
+    GroupTileStyleSerializer, TileSizeSerializer, TileDetailSerializer,
+    TileInstallationPhotosSerializer
 )
 from .services import CollectionService, GroupService, TileService
 from .models import Collection, Group
@@ -134,6 +135,12 @@ class TileViewSet(BaseViewSet):
     def retrieve(self, request, pk=None):
         tile = TileService.get_tile(id=pk, language=self.get_language(request))
         serializer = TileDetailSerializer(tile)
+        return Response(serializer.data)
+
+    @detail_route(methods=['get'])
+    def installation_photos(self, request, pk=None):
+        tile = TileService.get_tile_installation_photos(id=pk, language=self.get_language(request))
+        serializer = TileInstallationPhotosSerializer(tile, many=True)
         return Response(serializer.data)
 
 

@@ -25,6 +25,10 @@ class TileDetailSerializer(BaseCatalogSerializer):
     sizes = serializers.CharField()
 
 
+class TileInstallationPhotosSerializer(BaseContentSerializer):
+    image = serializers.CharField()
+
+
 class TileDesignSerializer(BaseCatalogSerializer):
     main = TileSerializer()
     tiles = TileSerializer(many=True)

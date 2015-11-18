@@ -1,7 +1,8 @@
-﻿from django.db import models
+from django.db import models
 from django.utils.translation import ugettext as _
 from core.models import BaseCatalogModel, BaseGalleryImageModel
 from sorl.thumbnail.fields import ImageField
+from apps.tiles.models import Tile
 
 
 class Designer(models.Model):
@@ -63,6 +64,8 @@ class GalleryImage(BaseGalleryImageModel):
     photographer = models.ForeignKey(
         Photographer, blank=True, null=True, related_name='gallery_images',
         verbose_name=_('Photographer'))
+    tiles = models.ManyToManyField(Tile, blank=True, related_name='installation_photos', verbose_name=_('Tiles'))
+
 
     class Meta:
         verbose_name = _('Image')

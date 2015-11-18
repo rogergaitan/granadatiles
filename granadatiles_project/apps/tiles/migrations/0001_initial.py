@@ -138,14 +138,4 @@ class Migration(migrations.Migration):
             name='similar_tiles',
             field=models.ManyToManyField(blank=True, verbose_name='Similar Tiles', to='tiles.Tile'),
         ),
-        migrations.AddField(
-            model_name='tile',
-            name='sizes',
-            field=models.ManyToManyField(verbose_name='Tiles Sizes', related_name='tiles', to='tiles.TileSize'),
-        ),
-        migrations.AddField(
-            model_name='style',
-            name='design',
-            field=models.ManyToManyField(blank=True, verbose_name='Tiles Sizes', related_name='tiles', to='tiles.TileSize'),
-        ),
     ]

@@ -2,7 +2,9 @@ from django.shortcuts import get_object_or_404
 from .models import Collection, Group, Tile
 from .dtos import (
     CollectionDto, CollectionRetrieveDto, GroupDto,
-    TileDesignDto, MenuCollectionDto, TileStyleDto, TileDetailDto)
+    TileDesignDto, MenuCollectionDto, TileStyleDto, TileDetailDto,
+    TileInstallationPhotosDto
+)
 
 
 class CollectionService:
@@ -59,9 +61,18 @@ class GroupService:
         styleDto = [TileStyleDto(style, language) for style in group.styles.all()]
         return styleDto
 
+
 class TileService:
 
       def get_tile(id, language):
           tile = get_object_or_404(Tile, pk=id)
           tiledetailDto = TileDetailDto(tile, language)
           return tiledetailDto
+
+      def get_tile_installation_photos(id, language):
+          tile = get_object_or_404(Tile, pk=id)
+          if tile.installation_photos.exists():
+              tileinstallationphotosDto = [TileInstallationPhotosDto(photo, language)
+                                           for photo in tile.installation_photos.all()]
+          else: tileinstallationphotosDto = None
+          return tileinstallationphotosDto
