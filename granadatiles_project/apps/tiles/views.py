@@ -10,7 +10,7 @@ from core.views import BaseViewSet
 from .serializers import (
     GroupSerializer, GroupDesignSerializer, MenuCollectionSerializer,
     CollectionSerializer, CollectionRetrieveSerializer, TileDesignSerializer,
-    GroupTileStyleSerializer, TileDetailSerializer,
+    GroupTileStyleSerializer, GroupTileSizeSerializer, TileDetailSerializer,
     TileInstallationPhotosSerializer
 )
 from .services import CollectionService, GroupService, TileService
@@ -114,6 +114,12 @@ class GroupViewSet(BaseViewSet):
         styles = GroupService.get_styles(id=pk, language=self.get_language(request))
         serializer = GroupTileStyleSerializer(styles, many=True)
         return Response(serializer.data)
+
+    @detail_route(methods=['get'])
+    def sizes(self, request, pk=None):
+        sizes = GroupService.get_sizes(pk)
+        serializers = GroupTileSizeSerializer(sizes)
+        return Response(serializers.data)
 
 
 class TileViewSet(BaseViewSet):

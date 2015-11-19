@@ -42,6 +42,10 @@ class GroupTileStyleSerializer(serializers.Serializer):
     name = serializers.CharField()
 
 
+class GroupTileSizeSerializer(serializers.Serializer):
+    sizes = serializers.CharField()
+
+
 class MenuCollectionSerializer(serializers.Serializer):
     title = serializers.CharField()
     image = serializers.CharField()

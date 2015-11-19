@@ -3,9 +3,10 @@ from .models import Collection, Group, Tile
 from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto,
     TileDesignDto, MenuCollectionDto, TileStyleDto, TileDetailDto,
-    TileInstallationPhotosDto
+    TileInstallationPhotosDto, TileSizeDto
 )
 
+import pdb
 
 class CollectionService:
 
@@ -61,6 +62,19 @@ class GroupService:
         group = get_object_or_404(Group, pk=id)
         styleDto = [TileStyleDto(style, language) for style in group.styles.all()]
         return styleDto
+
+    def get_sizes(id):
+        group = get_object_or_404(Group, pk=id)
+        designs = group.designs.all()
+        sizes = [design.tiles.values_list('size', flat=True).distinct() for design in designs]
+
+        unique_sizes = []
+        for size in sizes:
+            if size[0] not in unique_sizes:
+                unique_sizes.append(size[0])
+
+        sizeDto = TileSizeDto(unique_sizes)
+        return sizeDto
 
 
 class TileService:
