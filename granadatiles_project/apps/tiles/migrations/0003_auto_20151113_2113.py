@@ -11,10 +11,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='tile',
-            name='sizes',
-        ),
         migrations.AddField(
             model_name='tile',
             name='is_sample',
