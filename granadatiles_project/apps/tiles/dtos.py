@@ -1,5 +1,5 @@
 from core.dtos import BaseGalleryImageDto, BaseContentDto, BaseCatalogDto
-
+import pdb
 
 class CollectionDto(BaseGalleryImageDto):
 
@@ -33,19 +33,24 @@ class TileDto(BaseCatalogDto):
 
     def __init__(self, tile, language=None):
         super().__init__(tile, language)
-        self.image = tile.image.url if tile.image else ''
+        self.image = tile.image
         self.sizes = tile.size
 
 
 class TileDesignDto(BaseCatalogDto):
 
-    def __init__(self, tile_design, size, language=None):
+    def __init__(self, tile_design, size, new, in_stock, special, language=None):
 
-        tiles_filter = tile_design.tiles.filter(sizes__weight=size) if size else tile_design.tiles.all()
+        tiles_filter = tile_design.tiles.exclude(image='')
+        if size: tiles_filter = tiles_filter.filter(size=size)
+        if new: tiles_filter = tiles_filter.filter(new=True)
+        if in_stock: tiles_filter = tiles_filter.filter(quantity_on_hand__gt=0)
+        if special: tiles_filter = tiles_filter.filter(on_sale=True)
 
         super().__init__(tile_design, language)
         self.main = TileDto(tiles_filter.filter(main=True).first(), language) \
-                    if tiles_filter.filter(main=True).count() > 0 else None
+                    if tiles_filter.filter(main=True).exists() else None
+        #pdb.set_trace()
         self.tiles = [TileDto(tile, language) for tile in tiles_filter.filter(main=False)]
 
 

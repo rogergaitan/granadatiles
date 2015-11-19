@@ -96,9 +96,16 @@ class GroupViewSet(BaseViewSet):
         offset = int(request.query_params.get('offset', 0))
         style = request.query_params.get('style', None)
         size = request.query_params.get('size', None)
+        new = request.query_params.get('new', None)
+        in_stock = request.query_params.get('in_stock', None)
+        special = request.query_params.get('special', None)
 
-        tile_designs = GroupService.get_group_designs(id=pk,
-            language=self.get_language(request), limit=limit, offset=offset, style=style, size=size)
+        tile_designs = GroupService.get_group_designs(
+            id=pk, language=self.get_language(request), limit=limit,
+            offset=offset, style=style, size=size, new=new,
+            in_stock=in_stock, special=special
+        )
+
         serializer = TileDesignSerializer(tile_designs, many=True)
         return Response(serializer.data)
 
