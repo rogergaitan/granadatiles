@@ -98,11 +98,11 @@ class Command(BaseCommand):
         groups = [group for group in items.json() if group['SubLevel'] == 1]
         tiles = [item for item in items.json() if item['SubLevel'] == 2 or item['SubLevel'] == 3]
 
-#         for collection in collections:
-#             Command.create_update_collections(collection)
+        for collection in collections:
+            Command.create_update_collections(collection)
 
-#         for group in groups:
-#             Command.create_update_groups(group)
+        for group in groups:
+            Command.create_update_groups(group)
 
         for tile in tiles:
             Command.create_update_tiles(tile)
