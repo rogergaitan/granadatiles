@@ -3,7 +3,7 @@ from .models import Collection, Group, Tile
 from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto,
     TileDesignDto, MenuCollectionDto, TileStyleDto, TileDetailDto,
-    TileInstallationPhotosDto, TileSizeDto
+    TileInstallationPhotosDto, TileSizeDto, TileOrderDto
 )
 
 import pdb
@@ -91,3 +91,8 @@ class TileService:
                                            for photo in tile.installation_photos.all()]
           else: tileinstallationphotosDto = None
           return tileinstallationphotosDto
+
+      def get_tile_order(id, language):
+          tile = get_object_or_404(Tile, pk=id)
+          tileorderDto = TileOrderDto(tile, language)
+          return tileorderDto

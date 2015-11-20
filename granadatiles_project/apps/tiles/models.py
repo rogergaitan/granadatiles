@@ -91,7 +91,7 @@ class Tile(BaseCatalogModel):
                                help_text='Is the main tile of the design')
     similar_tiles = models.ManyToManyField('Tile', verbose_name=_('Similar Tiles'), blank=True)
     design = models.ForeignKey(TileDesign, related_name='tiles', verbose_name=_('Design'), null=True, blank = True)
-    colors = models.CharField(max_length=200, null=True, verbose_name=_('Colors'))
+    colors = models.ManyToManyField('PalleteColor', related_name='tiles', verbose_name=_('Tiles Colors'))
     is_sample = models.BooleanField(default=False, verbose_name=_('Is Sample'))
     new = models.BooleanField(max_length=10, default=False, verbose_name=_('New'))
     size = models.CharField(max_length=10, default='', null=True, verbose_name=_('Size'))
@@ -106,6 +106,14 @@ class Tile(BaseCatalogModel):
     class Meta:
         verbose_name = _('Tile')
         verbose_name_plural = _('Tiles')
+
+
+class PalleteColor(BaseCatalogModel):
+    hexadecimalCode = models.CharField(max_length=20, verbose_name=_('Color'))
+
+    class Meta:
+        verbose_name = _('Pallete Color')
+        verbose_name_plural = _('Pallete Colors')
 
 
 class Style(BaseCatalogModel):

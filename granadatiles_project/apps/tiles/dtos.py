@@ -71,6 +71,20 @@ class TileInstallationPhotosDto(BaseContentDto):
         self.image = photo.image
 
 
+class TileOrderDto(BaseCatalogDto):
+
+    def __init__(self, tile, language):
+        super().__init__(tile, language)
+        self.image = tile.image
+        self.mosaic = tile.mosaic
+        self.sizes = tile.size
+        self.thickness = tile.thickness
+        self.weight = tile.weight
+        self.colors = [color for color in tile.colors.all()]
+        self.uses = [use for use in tile.design.group.collection.uses.all()]
+        self.styles = [style for style in tile.design.styles.all()]
+
+
 class GroupDto(BaseGalleryImageDto):
     def __init__(self, collection, language=None):
         super().__init__(collection, language)
