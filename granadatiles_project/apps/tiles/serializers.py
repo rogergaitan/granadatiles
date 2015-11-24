@@ -30,6 +30,16 @@ class TileDesignSerializer(BaseCatalogSerializer):
     tiles = TileSerializer(many=True)
 
 
+class TileOrderSerializer(BaseCatalogSerializer):
+    image = serializers.CharField()
+    mosaic = serializers.CharField()
+    sizes = serializers.CharField()
+    thickness = serializers.CharField()
+    weight = serializers.CharField()
+    colors = serializers.CharField()
+    uses = serializers.CharField()
+
+
 class GroupSerializer(BaseGalleryImageSerializer):
     url = serializers.URLField()
 
