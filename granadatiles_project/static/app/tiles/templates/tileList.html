@@ -8,7 +8,7 @@
             <a href="#" class="breadcrumds"><u>Collections</u> <i class="fa fa-angle-double-right"></i> <u></u></a>
             <div class="text-section" ng-bind-html="::vm.group.description"></div>
             <div class="row filter">
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <label class="inline-block"><strong>{{ vm.labels.show_only }}</strong></label>
                     <div class="checkbox-content">
                         <p class="checkbox-inline">
@@ -25,7 +25,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-md-3 pull-right text-right">
+                <div class="col-md-4 pull-right text-right">
                     <div class="btn-group" dropdown>
                         <button type="button" class="btn btn-info">Sizes</button>
                         <button type="button" class="btn btn-info dropdown-toggle" dropdown-toggle>
@@ -56,8 +56,10 @@
                             <div class="col-md-4">
                                 <div ng-repeat="item in ::vm.tiles[$index].tiles" class="row">
                                     <div class="col-md-12">
-                                        <img ng-src="{{ item.image }}" alt="{{ item.name }}" class="img-responsive thumbnail">
-                                        <label class="label-tile">{{ item.name }}</label>
+                                        <a href="#">
+                                            <img ng-src="{{ item.image }}" alt="{{ item.name }}" class="img-responsive thumbnail">
+                                            <label class="label-tile">{{ item.name }}</label>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -98,8 +100,10 @@
                             <div class="col-md-4">
                                 <div ng-repeat="item in ::vm.tiles[$index + 1].tiles" class="row">
                                     <div class="col-md-12">
-                                        <img ng-src="{{ item.image }}" alt="{{ item.name }}" class="img-responsive thumbnail">
-                                        <label class="label-tile">{{ item.name }}</label>
+                                        <a href="#">
+                                            <img ng-src="{{ item.image }}" alt="{{ item.name }}" class="img-responsive thumbnail">
+                                            <label class="label-tile">{{ item.name }}</label>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -140,8 +144,10 @@
                             <div class="col-md-4">
                                 <div ng-repeat="item in ::vm.tiles[$index + 2].tiles" class="row">
                                     <div class="col-md-12">
-                                        <img ng-src="{{ item.image }}" alt="{{ item.name }}" class="img-responsive thumbnail">
-                                        <label class="label-tile">{{ item.name }}</label>
+                                        <a href="#">
+                                            <img ng-src="{{ item.image }}" alt="{{ item.name }}" class="img-responsive thumbnail">
+                                            <label class="label-tile">{{ item.name }}</label>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
