@@ -26,15 +26,28 @@ class TileDetailDto(BaseCatalogDto):
     def __init__(self, tile, language):
         super().__init__(tile, language)
         self.sizes = tile.size
-        self.mosaic = tile.mosaic
+        self.mosaic = tile.mosaic.url if tile.mosaic else ''
 
 
 class TileDto(BaseCatalogDto):
 
     def __init__(self, tile, language=None):
         super().__init__(tile, language)
-        self.image = tile.image
         self.sizes = tile.size
+
+
+class MainTileDto(TileDto):
+
+    def __init__(self, tile, language):
+        super().__init__(tile, language)
+        self.image = tile.mosaic.url if tile.mosaic else ''
+
+
+class MinorTileDto(TileDto):
+
+    def __init__(self, tile, language):
+        super().__init__(tile, language)
+        self.image = tile.image.url if tile.image else ''
 
 
 class TileDesignDto(BaseCatalogDto):
@@ -48,10 +61,10 @@ class TileDesignDto(BaseCatalogDto):
         if special: tiles_filter = tiles_filter.filter(on_sale=True)
 
         super().__init__(tile_design, language)
-        self.main = TileDto(tiles_filter.filter(main=True).first(), language) \
+        self.main = MainTileDto(tiles_filter.filter(main=True).first(), language) \
                     if tiles_filter.filter(main=True).exists() else None
 
-        self.tiles = [TileDto(tile, language) for tile in tiles_filter.filter(main=False)]
+        self.tiles = [MinorTileDto(tile, language) for tile in tiles_filter.filter(main=False)]
 
 
 class TileStyleDto(BaseCatalogDto):

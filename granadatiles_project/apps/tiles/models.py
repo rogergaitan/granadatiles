@@ -18,8 +18,8 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 
 class Collection(BaseGalleryImageModel, BaseSlugModel):
     menu_image = ImageField(upload_to='Galleries/menu', null = True, blank=True)
-    featured = models.BooleanField(default=True, verbose_name=_('Featured'))
-    show_in_menu = models.BooleanField(default=True, verbose_name= _('Show in menu'))
+    featured = models.BooleanField(default=False, verbose_name=_('Featured'))
+    show_in_menu = models.BooleanField(default=False, verbose_name= _('Show in menu'))
     introduction = models.TextField(verbose_name=_('Introduction'), default='')
     introduction_es = models.TextField(blank=True, null=True, verbose_name=_('Introduction_es'))
     list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
