@@ -47,15 +47,19 @@ class TileAdmin(admin.ModelAdmin):
 
 @admin.register(Collection)
 class CollectionAdmin(SummernoteModelAdmin):
+    fields = ('title', 'title_es', 'list_id', 'description', 'description_es', 'introduction',
+              'introduction_es', 'slug', 'slug_es', 'image', 'menu_image', 'uses',
+              'featured', 'show_in_menu'
+             )
     list_display = ('title', 'title_es', 'list_id', 'groups_count', 'featured', 'show_in_menu')
     search_fields = ['title', 'title_es', 'list_id']
-    readonly_fields = ('list_id',)
+    readonly_fields = ('list_id', 'title')
 
 @admin.register(Group)
 class GroupAdmin(SummernoteModelAdmin):
     list_display = ('title', 'title_es', 'list_id')
     search_fields = ['title', 'title_es', 'list_id']
-    readonly_fields = ('list_id',)
+    readonly_fields = ('list_id', 'description')
 
 
 @admin.register(Use)
