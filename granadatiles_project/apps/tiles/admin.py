@@ -38,6 +38,7 @@ class TileAdmin(admin.ModelAdmin):
     search_fields = ['name', 'name_es', 'list_id', 'size']
     list_filter = ('new', TileSizeFilter)
     actions = ['tile_new']
+    readonly_fields = ('list_id',)
 
     def tile_new(self, request, queryset):
         queryset.update(new=True)
@@ -46,14 +47,15 @@ class TileAdmin(admin.ModelAdmin):
 
 @admin.register(Collection)
 class CollectionAdmin(SummernoteModelAdmin):
-    list_display = ('title', 'title_es', 'groups_count', 'featured', 'show_in_menu')
-    search_fields = ['title', 'title_es']
-
+    list_display = ('title', 'title_es', 'list_id', 'groups_count', 'featured', 'show_in_menu')
+    search_fields = ['title', 'title_es', 'list_id']
+    readonly_fields = ('list_id',)
 
 @admin.register(Group)
 class GroupAdmin(SummernoteModelAdmin):
-    list_display = ('title', 'title_es')
-    search_fields = ['title', 'title_es']
+    list_display = ('title', 'title_es', 'list_id')
+    search_fields = ['title', 'title_es', 'list_id']
+    readonly_fields = ('list_id',)
 
 
 @admin.register(Use)
