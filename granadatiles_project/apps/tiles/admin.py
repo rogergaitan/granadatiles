@@ -38,12 +38,12 @@ class TileAdmin(admin.ModelAdmin):
               'sales_description_es', 'size', 'thickness', 'weight',
               'sales_price','average_cost', 'quantity_on_hand',
               'image', 'mosaic', 'similar_tiles', 'colors',
-              'is_active', 'main', 'new', 'on_sale', 'is_sample',
-             )
+              'is_active', 'main', 'new', 'on_sale', 'is_sample',)
 
-    list_display = ('name', 'name_es', 'sales_description', 'size', 'quantity_on_hand',
-                    'list_id', 'is_active', 'new', 'on_sale')
-    list_editable = ['size']
+    list_display = ('name', 'sales_description', 'size', 'quantity_on_hand',
+                    'is_active', 'new', 'on_sale')
+
+    list_editable = ['is_active', 'new', 'on_sale', 'size']
     search_fields = ['name', 'name_es', 'list_id', 'size']
     list_filter = ('new', TileSizeFilter)
     actions = ['tile_new']
@@ -58,29 +58,31 @@ class TileAdmin(admin.ModelAdmin):
 class CollectionAdmin(SummernoteModelAdmin):
     fields = ('title', 'title_es', 'list_id', 'description', 'description_es', 'introduction',
               'introduction_es', 'slug', 'slug_es', 'image', 'menu_image', 'uses',
-              'featured', 'show_in_menu'
-             )
-    list_display = ('title', 'title_es', 'list_id', 'groups_count', 'featured', 'show_in_menu')
+              'featured', 'show_in_menu')
+
+    list_display = ('title', 'groups_count', 'featured', 'show_in_menu')
     search_fields = ['title', 'title_es', 'list_id']
     list_editable = ['featured', 'show_in_menu']
     readonly_fields = ('list_id', 'title')
 
+
 @admin.register(Group)
 class GroupAdmin(SummernoteModelAdmin):
     fields = ('title', 'title_es', 'list_id', 'collection', 'description', 'description_es',
-              'slug', 'slug_es', 'image'
-             )
-    list_display = ('title', 'title_es', 'list_id')
+              'slug', 'slug_es', 'image')
+
+    list_display = ('title',)
     search_fields = ['title', 'title_es', 'list_id']
     readonly_fields = ('list_id', 'title', 'collection')
 
 
 @admin.register(Use)
 class UseAdmin(admin.ModelAdmin):
-    list_display = ('name', 'name_es')
+    list_display = ('name',)
     search_fields = ['name', 'name_es']
+
 
 @admin.register(Style)
 class StyleAdmin(admin.ModelAdmin):
-    list_display = ('name', 'name_es')
+    list_display = ('name',)
     search_fields = ['name', 'name_es']
