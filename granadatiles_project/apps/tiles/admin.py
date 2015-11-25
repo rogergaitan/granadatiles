@@ -62,6 +62,7 @@ class CollectionAdmin(SummernoteModelAdmin):
              )
     list_display = ('title', 'title_es', 'list_id', 'groups_count', 'featured', 'show_in_menu')
     search_fields = ['title', 'title_es', 'list_id']
+    list_editable = ['featured', 'show_in_menu']
     readonly_fields = ('list_id', 'title')
 
 @admin.register(Group)
