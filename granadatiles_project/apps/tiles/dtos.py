@@ -26,14 +26,14 @@ class TileDetailDto(BaseCatalogDto):
     def __init__(self, tile, language):
         super().__init__(tile, language)
         self.sizes = tile.size
-        self.mosaic = tile.mosaic
+        self.mosaic = tile.mosaic.url if tile.mosaic else ''
 
 
 class TileDto(BaseCatalogDto):
 
     def __init__(self, tile, language=None):
         super().__init__(tile, language)
-        self.image = tile.image
+        self.image = tile.image.url if tile.image else ''
         self.sizes = tile.size
 
 
