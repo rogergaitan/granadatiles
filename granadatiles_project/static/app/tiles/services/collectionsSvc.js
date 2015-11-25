@@ -61,8 +61,8 @@
 
         function getTiles(groupId){
             console.log(groupId);
-            //return groupMock();
-            return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles')
+            return groupMock();
+            //return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles')
         }
 
         function groupMock(){

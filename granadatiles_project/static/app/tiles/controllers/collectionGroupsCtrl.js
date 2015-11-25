@@ -31,9 +31,9 @@
             vm.group = response.data;
         });
 
-        collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
+        /*collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
             vm.tiles = response.data;
-        });
+        });*/
 
         collectionsSvc.getSizes(pageSettings.groupId).then(function (response) {
             vm.sizes = response.data;
@@ -43,10 +43,9 @@
 
         collectionsSvc.getStyles(pageSettings.groupId).then(function (response) {
             vm.styles = response.data;
-            console.log(vm.styles);
         });
 
-        //vm.tiles = collectionsSvc.getTiles();
+        vm.tiles = collectionsSvc.getTiles(pageSettings.groupId);
 
         vm.labels = pageSettings.labels;
 
