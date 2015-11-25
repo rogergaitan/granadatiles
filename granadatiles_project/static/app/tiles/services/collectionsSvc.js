@@ -18,6 +18,8 @@
             getCollectionGroups: getCollectionGroups,
             getFilteredMenuCollection: getFilteredMenuCollection,
             getGroup: getGroup,
+            getSizes: getSizes,
+            getStyles: getStyles,
             getTiles: getTiles
         };
 
@@ -49,9 +51,18 @@
             return $http.get(appSettings.serverPath + 'groups/'+ groupId);
         }
 
+        function getStyles(groupId){
+            return $http.get(appSettings.serverPath + 'groups/' + groupId + '/styles');
+        }
+
+        function getSizes(groupId){
+            return $http.get(appSettings.serverPath + 'groups/' + groupId + '/sizes');
+        }
+
         function getTiles(groupId){
-            return groupMock();
-            //return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles')
+            console.log(groupId);
+            //return groupMock();
+            return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles')
         }
 
         function groupMock(){

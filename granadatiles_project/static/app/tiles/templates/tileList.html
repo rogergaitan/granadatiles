@@ -27,12 +27,14 @@
                 </div>
                 <div class="col-md-4 pull-right text-right">
                     <div class="btn-group" dropdown>
-                        <button type="button" class="btn btn-info">Sizes</button>
+                        <button type="button" class="btn btn-info">{{ vm.selectedSize }}</button>
                         <button type="button" class="btn btn-info dropdown-toggle" dropdown-toggle>
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">8 x 8</a></li>
+                            <li ng-repeat="size in vm.sizes">
+                                <a href="#" ng-click="vm.setSize(size)">{{ size }}</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="btn-group" dropdown>
