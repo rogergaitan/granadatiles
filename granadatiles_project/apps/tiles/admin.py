@@ -6,8 +6,10 @@ from .models import Tile, Collection, Group, TileDesign, Use, Style
 
 @admin.register(TileDesign)
 class TileDesignAdmin(admin.ModelAdmin):
+    fields = ('name', 'name_es', 'group')
     list_display = ('name', 'name_es')
     search_fields = ['name', 'name_es']
+    readonly_fields = ('name', 'group')
 
 
 class TileSizeFilter(admin.SimpleListFilter):
