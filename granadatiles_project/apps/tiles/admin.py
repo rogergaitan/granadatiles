@@ -40,14 +40,14 @@ class TileAdmin(admin.ModelAdmin):
               'image', 'mosaic', 'similar_tiles', 'colors',
               'is_active', 'main', 'new', 'on_sale', 'is_sample',)
 
-    list_display = ('name', 'sales_description', 'size', 'quantity_on_hand',
-                    'is_active', 'new', 'on_sale')
+    list_display = ('name', 'sales_description', 'size', 'weight', 'thickness',
+                    'quantity_on_hand', 'is_active', 'new', 'on_sale')
 
-    list_editable = ['is_active', 'new', 'on_sale', 'size']
+    list_editable = ['is_active', 'new', 'on_sale', 'size', 'weight', 'thickness']
     search_fields = ['name', 'name_es', 'list_id', 'size']
     list_filter = ('new', TileSizeFilter)
     actions = ['tile_new']
-    readonly_fields = ('list_id', 'design', 'name')
+    readonly_fields = ('list_id', 'design', 'name', 'quantity_on_hand')
 
     def tile_new(self, request, queryset):
         queryset.update(new=True)
