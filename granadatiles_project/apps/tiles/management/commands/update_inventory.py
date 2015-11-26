@@ -1,5 +1,4 @@
 import re
-import pdb
 import requests
 
 from django.core.management.base import BaseCommand, CommandError
@@ -11,14 +10,16 @@ from ...models import Collection, Group, Tile, TileDesign
 class Command(BaseCommand):
 
     def create_update_collections(item):
-        data = {
-            'title':item['Name'],
-            'description':'',
-            'slug':slugify(item['Name'].split(" ")[0]),
-            'list_id':item['ListID']
-        }
+        if re.search('collection', item['Name'], re.IGNORECASE):
 
-        Collection.objects.update_or_create(list_id=data['list_id'], defaults=data)
+            data = {
+                'title':item['Name'],
+                'description':'',
+                'slug':slugify(item['Name'].split(" ")[0]),
+                'list_id':item['ListID']
+            }
+
+            Collection.objects.update_or_create(list_id=data['list_id'], defaults=data)
 
 
     def create_update_groups(item):
