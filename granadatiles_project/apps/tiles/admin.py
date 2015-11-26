@@ -1,4 +1,4 @@
-from django.contrib import admin
+﻿from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django.utils.translation import ugettext as _
 from .models import Tile, Collection, Group, TileDesign, Use, Style
@@ -7,7 +7,7 @@ from .models import Tile, Collection, Group, TileDesign, Use, Style
 @admin.register(TileDesign)
 class TileDesignAdmin(admin.ModelAdmin):
     fields = ('name', 'name_es', 'group')
-    list_display = ('name', 'name_es')
+    list_display = ('name', 'group' , 'tiles_count')
     search_fields = ['name', 'name_es']
     readonly_fields = ('name', 'group')
 
@@ -71,7 +71,7 @@ class GroupAdmin(SummernoteModelAdmin):
     fields = ('title', 'title_es', 'list_id', 'collection', 'description', 'description_es',
               'slug', 'slug_es', 'image')
 
-    list_display = ('title',)
+    list_display = ('title','collection', 'designs_count', 'tiles_count')
     search_fields = ['title', 'title_es', 'list_id']
     readonly_fields = ('list_id', 'title', 'collection')
 
