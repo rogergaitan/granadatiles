@@ -6,6 +6,11 @@
   <link rel="stylesheet" type="text/css" href="{% static "admin/css/changelists.css" %}" />
   {% if cl.formset %}
     <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />
+<style>
+    .vTextField {
+        width: auto;
+    }
+</style>
   {% endif %}
   {% if cl.formset or action_form %}
     {% url 'admin:jsi18n' as jsi18nurl %}
@@ -46,7 +51,7 @@
         {% block object-tools-items %}
         {% if has_add_permission %}
         {% url cl.opts|admin_urlname:'add' as add_url %}
-        <a role="button" style="margin-right: 5px;" href="{% add_preserved_filters add_url is_popup %}" class="btn btn-sm btn-primary">
+        <a role="button" style="        margin-right: 5px;" href="{% add_preserved_filters add_url is_popup %}" class="btn btn-sm btn-primary">
             <span class="glyphicon glyphicon-plus"></span> {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
         </a>
         {% endif %}
@@ -55,7 +60,8 @@
         {% if cl.has_filters %}
            <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="#" style="padding: 5px; padding-right: 10px;" class="dropdown-toggle" data-toggle="dropdown">{% trans 'Filter' %} <span class="caret"></span></a>
+                    <a href="#" style="        padding: 5px;
+        padding-right: 10px;" class="dropdown-toggle" data-toggle="dropdown">{% trans 'Filter' %} <span class="caret"></span></a>
                     <ul class="dropdown-menu pull-right scrollable-dropdown-menu">
                         {% for spec in cl.filter_specs %}
                             {% admin_list_filter cl spec %}
@@ -84,7 +90,7 @@
 {% endwith %}
 
 {% if action_form and actions_on_top and cl.full_result_count %}
-<div class='pull-left form-inline' style="margin-bottom:10px;">{% admin_actions %}</div>
+<div class='pull-left form-inline' style="        margin-bottom: 10px;">{% admin_actions %}</div>
 {% endif %}
 
 <div id="content-main">

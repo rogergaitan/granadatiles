@@ -1,4 +1,4 @@
-from django.db import models
+﻿from django.db import models
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext as _
 from django.dispatch.dispatcher import receiver
@@ -54,6 +54,19 @@ class Group(BaseGalleryImageModel, BaseSlugModel):
     collection = models.ForeignKey(Collection, related_name='groups', verbose_name=_('Collection'))
     list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
 
+    def designs_count(self):
+        return self.designs.count()
+
+    def tiles_count(self):
+        total = 0
+        designs = self.designs.all()
+        for design in designs:
+            total += design.tiles.count()
+        return total
+
+    designs_count.short_description = _('Designs count')
+    tiles_count.short_description = _('Tiles count')
+
     def get_absolute_url(self, language=None):
         slug = self.get_slug(language)
         return reverse('sr-collections:sr-group-detail',
@@ -70,6 +83,11 @@ class Group(BaseGalleryImageModel, BaseSlugModel):
 
 class TileDesign(BaseCatalogModel):
     group = models.ForeignKey(Group, related_name='designs', verbose_name=_('Tiles Group'))
+
+    def tiles_count(self):
+        return self.tiles.count()
+
+    tiles_count.short_description = _('Tiles count')
 
     class Meta:
         verbose_name = _('Tile Design')
