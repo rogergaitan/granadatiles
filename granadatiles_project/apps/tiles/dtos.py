@@ -1,11 +1,11 @@
-﻿from core.dtos import BaseGalleryImageDto, BaseContentDto, BaseCatalogDto
+from core.dtos import BaseGalleryImageDto, BaseContentDto, BaseCatalogDto
 
 
 class CollectionDto(BaseGalleryImageDto):
 
     def __init__(self, collection, language=None):
         super().__init__(collection, language)
-        self.menu_image = collection.menu_image
+        self.menu_image = collection.menu_image.url if collection.menu_image else ''
         if language:
             self.url = collection.get_absolute_url(language)
         else:
