@@ -1,4 +1,5 @@
-﻿from django.db import models
+﻿import re
+from django.db import models
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext as _
 from django.dispatch.dispatcher import receiver
@@ -8,6 +9,7 @@ from core.models import BaseGalleryImageModel, BaseCatalogModel, BaseContentMode
 from sorl.thumbnail.shortcuts import get_thumbnail
 from sorl.thumbnail.fields import ImageField
 from rest_framework.authtoken.models import Token
+
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
@@ -122,10 +124,15 @@ class Tile(BaseCatalogModel):
         return reverse("admin:%s_%s_change" % (self._meta.app_label, self._meta.model_name), args=(self.id,))
 
     def get_available_sizes(self):
-        tiles_of_myself = Tile.objects.filter(name=self.name, is_sample=False)
+        tiles_of_myself = Tile.objects.filter(
+            name=self.name, is_sample=False)
         sizes = []
+        size =  re.search('\d+"*\s*x\s*\d+"*', self.sales_description)
+        sales_description_no_size = self.sales_description.replace(size.group(),'')
         for tile in tiles_of_myself:
-            sizes.append(tile.size)
+            size = re.search('\d+"*\s*x\s*\d+"*', tile.sales_description)
+            if tile.sales_description.replace(size.group(),'') == sales_description_no_size:
+                sizes.append(tile.size)
         return sizes
     
     class Meta:
