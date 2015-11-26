@@ -7,6 +7,7 @@ from .dtos import (
 )
 
 import pdb
+from apps.tiles.models import Style
 
 class CollectionService:
 
@@ -60,7 +61,8 @@ class GroupService:
 
     def get_styles(id, language=None):
         group = get_object_or_404(Group, pk=id)
-        styleDto = [TileStyleDto(style, language) for style in group.styles.all()]
+        styles = Style.objects.filter(designs__group__id=id).distinct()
+        styleDto = [TileStyleDto(style, language) for style in styles]
         return styleDto
 
     def get_sizes(id):

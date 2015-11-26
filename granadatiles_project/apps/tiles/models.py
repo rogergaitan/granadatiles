@@ -85,7 +85,7 @@ class Group(BaseGalleryImageModel, BaseSlugModel):
 
 class TileDesign(BaseCatalogModel):
     group = models.ForeignKey(Group, related_name='designs', verbose_name=_('Tiles Group'))
-
+    styles = models.ManyToManyField('Style', related_name='designs', verbose_name=_('Styles'))
     def tiles_count(self):
         return self.tiles.count()
 
@@ -149,7 +149,6 @@ class PalleteColor(BaseCatalogModel):
 
 
 class Style(BaseCatalogModel):
-    design = models.ManyToManyField(TileDesign, related_name='styles', verbose_name=_('Designs'))
 
     class Meta:
        verbose_name = _('Style')
