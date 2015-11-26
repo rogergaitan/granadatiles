@@ -1,4 +1,4 @@
-from rest_framework import serializers
+﻿from rest_framework import serializers
 from core.serializers import BaseGalleryImageSerializer, BaseContentSerializer, BaseCatalogSerializer
 
 
@@ -15,6 +15,11 @@ class TileSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
     sizes = serializers.CharField()
 
+class MainTileSerialzer(BaseCatalogSerializer):
+    image = serializers.CharField()
+    sizes = serializers.ListField(
+            child = serializers.CharField()
+        )
 
 class TileDetailSerializer(BaseCatalogSerializer):
     mosaic = serializers.CharField()
@@ -26,7 +31,7 @@ class TileInstallationPhotosSerializer(BaseContentSerializer):
 
 
 class TileDesignSerializer(BaseCatalogSerializer):
-    main = TileSerializer()
+    main = MainTileSerialzer()
     tiles = TileSerializer(many=True)
 
 

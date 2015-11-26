@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404
+﻿from django.shortcuts import get_object_or_404
 from .models import Collection, Group, Tile
 from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto,
@@ -51,10 +51,10 @@ class GroupService:
 
     def get_group_designs(id, limit, offset, style, size, new, in_stock, special, language=None):
         group = get_object_or_404(Group, pk=id)
-        design = group.designs.filter(styles__name=style) if style else group.designs.all()
+        designs = group.designs.filter(styles__name=style) if style else group.designs.all()
 
         tiledesignDto = [TileDesignDto(tile_design, size, new, in_stock, special, language)
-                         for tile_design in design[offset:limit]]
+                         for tile_design in designs[offset:limit]]
 
         return tiledesignDto
 

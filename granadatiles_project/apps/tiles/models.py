@@ -121,6 +121,13 @@ class Tile(BaseCatalogModel):
     def get_admin_url(self):
         return reverse("admin:%s_%s_change" % (self._meta.app_label, self._meta.model_name), args=(self.id,))
 
+    def get_available_sizes(self):
+        tiles_of_myself = Tile.objects.filter(name=self.name, is_sample=False)
+        sizes = []
+        for tile in tiles_of_myself:
+            sizes.append(tile.size)
+        return sizes
+    
     class Meta:
         verbose_name = _('Tile')
         verbose_name_plural = _('Tiles')
