@@ -5,7 +5,7 @@ class CollectionDto(BaseGalleryImageDto):
 
     def __init__(self, collection, language=None):
         super().__init__(collection, language)
-        self.menu_image = collection.menu_image
+        self.menu_image = collection.menu_image.url if collection.menu_image else ''
         if language:
             self.url = collection.get_absolute_url(language)
         else:
@@ -41,6 +41,7 @@ class MainTileDto(TileDto):
     def __init__(self, tile, language):
         super().__init__(tile, language)
         self.image = tile.mosaic.url if tile.mosaic else ''
+        self.sizes = tile.get_available_sizes()
 
 
 class MinorTileDto(TileDto):
@@ -54,7 +55,7 @@ class TileDesignDto(BaseCatalogDto):
 
     def __init__(self, tile_design, size, new, in_stock, special, language=None):
 
-        tiles_filter = tile_design.tiles.exclude(image='')
+        tiles_filter = tile_design.tiles.exclude(image='').exclude(mosaic='')
         if size: tiles_filter = tiles_filter.filter(size=size)
         if new: tiles_filter = tiles_filter.filter(new=True)
         if in_stock: tiles_filter = tiles_filter.filter(quantity_on_hand__gt=0)

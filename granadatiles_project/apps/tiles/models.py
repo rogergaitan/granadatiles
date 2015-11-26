@@ -1,3 +1,4 @@
+﻿import re
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext as _
@@ -8,6 +9,7 @@ from core.models import BaseGalleryImageModel, BaseCatalogModel, BaseContentMode
 from sorl.thumbnail.shortcuts import get_thumbnail
 from sorl.thumbnail.fields import ImageField
 from rest_framework.authtoken.models import Token
+
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
@@ -54,6 +56,19 @@ class Group(BaseGalleryImageModel, BaseSlugModel):
     collection = models.ForeignKey(Collection, related_name='groups', verbose_name=_('Collection'))
     list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
 
+    def designs_count(self):
+        return self.designs.count()
+
+    def tiles_count(self):
+        total = 0
+        designs = self.designs.all()
+        for design in designs:
+            total += design.tiles.count()
+        return total
+
+    designs_count.short_description = _('Designs count')
+    tiles_count.short_description = _('Tiles count')
+
     def get_absolute_url(self, language=None):
         slug = self.get_slug(language)
         return reverse('sr-collections:sr-group-detail',
@@ -70,6 +85,11 @@ class Group(BaseGalleryImageModel, BaseSlugModel):
 
 class TileDesign(BaseCatalogModel):
     group = models.ForeignKey(Group, related_name='designs', verbose_name=_('Tiles Group'))
+    styles = models.ManyToManyField('Style', related_name='designs', verbose_name=_('Styles'))
+    def tiles_count(self):
+        return self.tiles.count()
+
+    tiles_count.short_description = _('Tiles count')
 
     class Meta:
         verbose_name = _('Tile Design')
@@ -103,6 +123,18 @@ class Tile(BaseCatalogModel):
     def get_admin_url(self):
         return reverse("admin:%s_%s_change" % (self._meta.app_label, self._meta.model_name), args=(self.id,))
 
+    def get_available_sizes(self):
+        tiles_of_myself = Tile.objects.filter(
+            name=self.name, is_sample=False)
+        sizes = []
+        size =  re.search('\d+"*\s*x\s*\d+"*', self.sales_description)
+        sales_description_no_size = self.sales_description.replace(size.group(),'')
+        for tile in tiles_of_myself:
+            size = re.search('\d+"*\s*x\s*\d+"*', tile.sales_description)
+            if tile.sales_description.replace(size.group(),'') == sales_description_no_size:
+                sizes.append(tile.size)
+        return sizes
+    
     class Meta:
         verbose_name = _('Tile')
         verbose_name_plural = _('Tiles')
@@ -117,7 +149,6 @@ class PalleteColor(BaseCatalogModel):
 
 
 class Style(BaseCatalogModel):
-    design = models.ManyToManyField(TileDesign, related_name='styles', verbose_name=_('Designs'))
 
     class Meta:
        verbose_name = _('Style')
