@@ -7,10 +7,11 @@
                     ['baseSettings',
                      'pageSettings',
                      'collectionsSvc',
+                     '$modal',
                      collectionsGroupCtrl
         ]);
 
-    function collectionsGroupCtrl(baseSettings ,pageSettings, collectionsSvc) {
+    function collectionsGroupCtrl(baseSettings ,pageSettings, collectionsSvc, $modal) {
         var vm = this;
 
         vm.collectionAsideNavigationTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/collectionAsideNavigation.html';
@@ -31,9 +32,10 @@
             vm.group = response.data;
         });
 
-        /*collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
+        collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
             vm.tiles = response.data;
-        });*/
+            console.log(vm.tiles);
+        });
 
         collectionsSvc.getSizes(pageSettings.groupId).then(function (response) {
             vm.sizes = response.data;
@@ -41,11 +43,11 @@
             //updateTiles(vm.sizes[0]);
         });
 
-        collectionsSvc.getStyles(pageSettings.groupId).then(function (response) {
+        /*collectionsSvc.getStyles(pageSettings.groupId).then(function (response) {
             vm.styles = response.data;
-        });
+        });*/
 
-        vm.tiles = collectionsSvc.getTiles(pageSettings.groupId);
+        //vm.tiles = collectionsSvc.getTiles(pageSettings.groupId);
 
         vm.labels = pageSettings.labels;
 
@@ -61,6 +63,31 @@
                 vm.tiles = response.data;
             });
         }
+
+        vm.setTile = function(tileId){
+            console.log(tileId);
+            collectionsSvc.getMainTile(tileId).then(function (response){
+                vm.main = response.data;
+                console.log(vm.main);
+            });
+        };
+
+        vm.showInstallationPhoto = function(tileId) {
+            $modal.open({
+                templateUrl: baseSettings.staticUrl + 'app/tiles/templates/tileModal.html',
+                controller: 'tileModalCtrl',
+                controllerAs: 'vm',
+                size:'lg',
+                resolve:{
+                    installationPhotos: function () {
+                        return collectionsSvc.getInstallationPhoto(tileId).then(function (response) {
+                            //console.log(response.data);
+                            return response.data;
+                        });
+                    }
+                }
+            })
+        };
 
     }
 }());

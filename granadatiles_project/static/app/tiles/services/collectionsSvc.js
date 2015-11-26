@@ -20,7 +20,9 @@
             getGroup: getGroup,
             getSizes: getSizes,
             getStyles: getStyles,
-            getTiles: getTiles
+            getTiles: getTiles,
+            getMainTile:getMainTile,
+            getInstallationPhoto: getInstallationPhoto
         };
 
         function getCollections() {
@@ -60,9 +62,16 @@
         }
 
         function getTiles(groupId){
-            console.log(groupId);
-            return groupMock();
-            //return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles')
+            //return groupMock();
+            return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles')
+        }
+
+        function getMainTile(tileId){
+            return $http.get(appSettings.serverPath + 'tiles/' + tileId)
+        }
+
+        function getInstallationPhoto(tileId){
+            return $http.get(appSettings.serverPath + 'tiles/'+ tileId + '/installationphotos/')
         }
 
         function groupMock(){
