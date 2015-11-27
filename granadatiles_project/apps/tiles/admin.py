@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django.utils.translation import ugettext as _
-from .models import Tile, Collection, Group, TileDesign, Use, Style
+from .models import Tile, Collection, Group, TileDesign, Use, Style, PalleteColor
 
 
 class TileInline(admin.StackedInline):
@@ -17,7 +17,7 @@ class TileInline(admin.StackedInline):
 
 @admin.register(TileDesign)
 class TileDesignAdmin(admin.ModelAdmin):
-    fields = ('name', 'name_es', 'group')
+    fields = ('name', 'name_es', 'group', 'styles')
     list_display = ('name', 'group' , 'tiles_count')
     search_fields = ['name', 'name_es']
     readonly_fields = ('name', 'group')
@@ -100,6 +100,7 @@ class CollectionAdmin(SummernoteModelAdmin):
     list_editable = ['featured', 'show_in_menu']
     readonly_fields = ('list_id', 'title')
     inlines = [GroupInline]
+    prepopulated_fields = {"slug_es": ("title_es",)}
 
     def has_add_permission(self, request):
         return False
@@ -146,3 +147,8 @@ class UseAdmin(admin.ModelAdmin):
 class StyleAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ['name', 'name_es']
+
+
+@admin.register(PalleteColor)
+class PalleteColorAdmin(admin.ModelAdmin):
+    list_display = ('name', 'hexadecimalCode')
