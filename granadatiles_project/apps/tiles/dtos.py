@@ -143,4 +143,4 @@ class MenuCollectionDto(object):
         else:
             self.title = collection.title
             self.url = collection.get_absolute_url()
-        self.image = collection.menu_image
+        self.image = collection.menu_image.url if collection.image else ''
