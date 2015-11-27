@@ -5,11 +5,13 @@
         .module('app.tiles')
         .controller('tileModalCtrl',
                     ['installationPhotos',
-                     '$modalInstance',
-                     tileModalCtrl]);
+                    '$modalInstance',
+                    tileModalCtrl]);
 
     function tileModalCtrl(installationPhotos, $modalInstance) {
         var vm = this;
+
+        console.log("intro");
 
         vm.installationPhotos = installationPhotos;
 

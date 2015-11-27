@@ -37,17 +37,19 @@
             console.log(vm.tiles);
         });
 
+        //vm.tiles = collectionsSvc.getTiles(pageSettings.groupId);
+
         collectionsSvc.getSizes(pageSettings.groupId).then(function (response) {
             vm.sizes = response.data;
-            vm.selectedSize = vm.sizes[0];
-            //updateTiles(vm.sizes[0]);
+            //vm.selectedSize = vm.sizes[0];
         });
 
-        /*collectionsSvc.getStyles(pageSettings.groupId).then(function (response) {
+        collectionsSvc.getStyles(pageSettings.groupId).then(function (response) {
             vm.styles = response.data;
-        });*/
+            vm.selectedStyle = vm.styles[0];
+        });
 
-        //vm.tiles = collectionsSvc.getTiles(pageSettings.groupId);
+
 
         vm.labels = pageSettings.labels;
 
@@ -55,14 +57,11 @@
 
         vm.setSize = function(size) {
             vm.selectedSize = size;
-            //updateTiles(size);
         };
 
-        function updateTiles(selectedSize){
-            collectionsSvc.getArticlesFiltered(selectedSize).then(function (response){
-                vm.tiles = response.data;
-            });
-        }
+        vm.setStyle = function(style) {
+            vm.selectedStyle = style;
+        };
 
         vm.setTile = function(tileId){
             console.log(tileId);

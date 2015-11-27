@@ -8,12 +8,12 @@
             <carousel interval="5000" no-wrap="false" id="gt-gallery-carousel">
                 <slide ng-repeat="slide in vm.installationPhotos" active="slide.active">
                     <img class="gt-gallery-img" ng-src="{{::slide.image}}" alt="{{::slide.title}}" />
-                    <!--<div>
+                    <div>
                         <h1>{{::slide.title}}</h1>
                         <p ng-bind-html="slide.description"></p>
                         <p>{{::slide.designer}}</p>
                         <p>{{::slide.photographer}}</p>
-                    </div>-->
+                    </div>
                 </slide>
             </carousel>
         </div>

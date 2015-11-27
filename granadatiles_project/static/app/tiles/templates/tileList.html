@@ -38,12 +38,14 @@
                         </ul>
                     </div>
                     <div class="btn-group" dropdown>
-                        <button type="button" class="btn btn-info">styles</button>
+                        <button type="button" class="btn btn-info">{{ vm.selectedStyle }}</button>
                         <button type="button" class="btn btn-info dropdown-toggle" dropdown-toggle>
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Avesta</a></li>
+                            <li ng-repeat="style in vm.styles">
+                                <a href="#" ng-click="vm.setStyle(style)">{{ style }}</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -124,7 +126,7 @@
                                         <a href="#"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
+                                        <a href="#" ng-click="vm.showInstallationPhoto(vm.tiles[$index + 1].id)"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
                                     </li>
                                     <li>
                                         <a href="#">
@@ -168,7 +170,7 @@
                                         <a href="#"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
+                                        <a href="#" ng-click="vm.showInstallationPhoto(vm.tiles[$index + 2].id)"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
                                     </li>
                                     <li>
                                         <a href="#">
