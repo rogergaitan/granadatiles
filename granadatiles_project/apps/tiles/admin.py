@@ -1,14 +1,33 @@
-﻿from django.contrib import admin
+from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django.utils.translation import ugettext as _
 from .models import Tile, Collection, Group, TileDesign, Use, Style
 
 
+class TileInline(admin.StackedInline):
+    model = Tile
+    fields = ('name', 'name_es')
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
 @admin.register(TileDesign)
 class TileDesignAdmin(admin.ModelAdmin):
+    fields = ('name', 'name_es', 'group')
     list_display = ('name', 'group' , 'tiles_count')
     search_fields = ['name', 'name_es']
     readonly_fields = ('name', 'group')
+    inlines = [TileInline]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 class TileSizeFilter(admin.SimpleListFilter):
@@ -52,6 +71,23 @@ class TileAdmin(admin.ModelAdmin):
         queryset.update(new=True)
     tile_new.short_description = "Mark tile as new"
 
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+class GroupInline(admin.StackedInline):
+    model = Group
+    fields = ('title', 'title_es')
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 @admin.register(Collection)
 class CollectionAdmin(SummernoteModelAdmin):
@@ -63,6 +99,24 @@ class CollectionAdmin(SummernoteModelAdmin):
     search_fields = ['title', 'title_es', 'list_id']
     list_editable = ['featured', 'show_in_menu']
     readonly_fields = ('list_id', 'title')
+    inlines = [GroupInline]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+class TileDesignInline(admin.StackedInline):
+    model = TileDesign
+    fields = ('name', 'name_es')
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(Group)
@@ -73,6 +127,13 @@ class GroupAdmin(SummernoteModelAdmin):
     list_display = ('title','collection', 'designs_count', 'tiles_count')
     search_fields = ['title', 'title_es', 'list_id']
     readonly_fields = ('list_id', 'title', 'collection')
+    inlines = [TileDesignInline]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(Use)
