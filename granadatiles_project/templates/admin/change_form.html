@@ -3,10 +3,21 @@
 
 {% block extrahead %}{{ block.super }}
 <link rel="stylesheet" href="{{STATIC_URL}}lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet"href="{{STATIC_URL}}lib/select2/dist/css/select2.min.css" />
+<link rel="stylesheet" href="{{ STATIC_URL }}lib/select2-bootstrap-css/select2-bootstrap.min.css"/>
 <style>
     td a{
      font-size: 13px;
      margin-left: 50%;
+    }
+    .select2-container--default .select2-selection--single{
+        border-radius:0;
+    }
+    .select2-container .select2-selection--single{
+        height:34px;
+    }
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #444444;
     }
 </style>
 {% url 'admin:jsi18n' as jsi18nurl %}
@@ -117,6 +128,7 @@
 {% block extra_js %}
     <script src="{{ STATIC_URL }}lib/moment/moment.js"></script>
     <script src="{{ STATIC_URL }}lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="{{ STATIC_URL }}lib/select2/dist/js/select2.full.min.js"></script>
 <script>
     $(function () {
         
@@ -129,6 +141,7 @@
         $('#id_date_0').datetimepicker({ format: 'DD/MM/YYYY' });
         $('#id_date_1').datetimepicker({ format: 'HH:mm:SS' });
         $('.vDateField').datetimepicker({ format: 'DD/MM/YYYY' });
+        $('select').select2();
         
     });
 </script>
