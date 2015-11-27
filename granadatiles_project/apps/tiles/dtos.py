@@ -85,18 +85,45 @@ class TileInstallationPhotosDto(BaseContentDto):
         self.image = photo.image
 
 
+class SimilarTileDto(BaseCatalogDto):
+
+    def __init__(self, tile, language):
+        super().__init__(tile, language)
+
+
+class TileDesignerDto(BaseContentDto):
+
+    def __init__(self, designer, language):
+        super().__init__(designer, language)
+
+
+class TileColorDto(BaseCatalogDto):
+
+    def __init__(self, color, language):
+        super().__init__(color, language)
+        self.hexadecimalCode = color.hexadecimalCode
+
+
+class TileUseDto(BaseCatalogDto):
+
+    def __init__(self, use, language):
+        super().__init__(use, language)
+
+
 class TileOrderDto(BaseCatalogDto):
 
     def __init__(self, tile, language):
         super().__init__(tile, language)
         self.image = tile.image
         self.mosaic = tile.mosaic
-        self.sizes = tile.size
+        self.sizes = tile.get_available_sizes()
         self.thickness = tile.thickness
         self.weight = tile.weight
-        self.colors = [color for color in tile.colors.all()]
-        self.uses = [use for use in tile.design.group.collection.uses.all()]
-        self.styles = [style for style in tile.design.styles.all()]
+        self.colors = [TileColorDto(color, language) for color in tile.colors.all()]
+        self.uses = [TileUseDto(use, language) for use in tile.design.group.collection.uses.all()]
+        self.styles = [TileStyleDto(style, language) for style in tile.design.styles.all()]
+        self.similar_tiles = [SimilarTileDto(tile, language) for tile in tile.similar_tiles.all()]
+        self.designer = TileDesignerDto(tile.design.group, language)
 
 
 class GroupDto(BaseGalleryImageDto):

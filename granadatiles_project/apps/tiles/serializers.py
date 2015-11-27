@@ -1,5 +1,5 @@
-﻿from rest_framework import serializers
-from core.serializers import BaseGalleryImageSerializer, BaseContentSerializer, BaseCatalogSerializer
+from rest_framework import serializers
+from core.serializers import BaseSerializer, BaseGalleryImageSerializer, BaseContentSerializer, BaseCatalogSerializer
 
 
 class CollectionSerializer(BaseGalleryImageSerializer):
@@ -35,14 +35,36 @@ class TileDesignSerializer(BaseCatalogSerializer):
     tiles = TileSerializer(many=True)
 
 
+class TileDesignerSerializer(BaseSerializer):
+    title = serializers.CharField()
+
+
+class TileColorSerializer(BaseCatalogSerializer):
+    hexadecimalCode = serializers.CharField()
+
+
+class TileUseSerializer(BaseCatalogSerializer):
+    pass
+
+
+class StyleSerializer(BaseCatalogSerializer):
+    pass
+
+
+class SimilarTilesSerializer(BaseCatalogSerializer):
+    pass
+
+
 class TileOrderSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
     mosaic = serializers.CharField()
     sizes = serializers.CharField()
     thickness = serializers.CharField()
     weight = serializers.CharField()
-    colors = serializers.CharField()
-    uses = serializers.CharField()
+    colors = TileColorSerializer(many=True)
+    uses = TileUseSerializer(many=True)
+    similar_tiles = BaseCatalogSerializer(many=True)
+    designer = TileDesignerSerializer()
 
 
 class GroupSerializer(BaseGalleryImageSerializer):
@@ -51,10 +73,6 @@ class GroupSerializer(BaseGalleryImageSerializer):
 
 class GroupDesignSerializer(serializers.Serializer):
     designs = TileDesignSerializer(many=True)
-
-
-class GroupTileStyleSerializer(serializers.Serializer):
-    name = serializers.CharField()
 
 
 class GroupTileSizeSerializer(serializers.Serializer):
