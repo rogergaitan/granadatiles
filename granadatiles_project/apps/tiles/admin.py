@@ -17,7 +17,7 @@ class TileInline(admin.StackedInline):
 
 @admin.register(TileDesign)
 class TileDesignAdmin(admin.ModelAdmin):
-    fields = ('name', 'name_es', 'group')
+    fields = ('name', 'name_es', 'group', 'styles')
     list_display = ('name', 'group' , 'tiles_count')
     search_fields = ['name', 'name_es']
     readonly_fields = ('name', 'group')
