@@ -82,7 +82,7 @@ class TileInstallationPhotosDto(BaseContentDto):
 
     def __init__(self, photo, language):
         super().__init__(photo, language)
-        self.image = photo.image
+        self.image = photo.image.url if photo.image else ''
 
 
 class SimilarTileDto(BaseCatalogDto):
