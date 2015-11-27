@@ -477,9 +477,18 @@ div.gt-index-welcome{
     img{
         margin: auto;
     }
+    a {
+        color: @darkGray;
+        &:hover,&:focus{
+            label{
+                color:@darkBlue;
+            }
+        }
+    }
     .label-tile{
         font-family: @font-secundary;
         .font-configuration(@font-xs,@font-light);
+        cursor:pointer;
     }
     .tile-body {
         margin: 10px 0 20px 0;

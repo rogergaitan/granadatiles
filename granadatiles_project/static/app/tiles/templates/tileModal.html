@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.close()">&times;</button>
+    <!--<h4 class="modal-title">Modal Title</h4>-->
+</div>
+<div class="modal-body">
+    <div>
+        <div>
+            <carousel interval="5000" no-wrap="false" id="gt-gallery-carousel">
+                <slide ng-repeat="slide in vm.installationPhotos" active="slide.active">
+                    <img class="gt-gallery-img" ng-src="{{::slide.image}}" alt="{{::slide.title}}" />
+                    <div>
+                        <h1>{{::slide.title}}</h1>
+                        <p ng-bind-html="slide.description"></p>
+                        <p>{{::slide.designer}}</p>
+                        <p>{{::slide.photographer}}</p>
+                    </div>
+                </slide>
+            </carousel>
+        </div>
+    </div>
+</div>
