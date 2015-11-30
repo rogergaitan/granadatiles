@@ -1,4 +1,4 @@
-﻿import re
+import re
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext as _
@@ -118,6 +118,7 @@ class Tile(BaseCatalogModel):
     weight = models.CharField(max_length=10, default='', null=True, verbose_name=_('Weight'))
     thickness = models.CharField(max_length=10, default='', null=True, verbose_name=('Thickness'))
     on_sale = models.BooleanField(default=False, verbose_name=_('On Sale'))
+    tearsheet = models.FileField(upload_to='tearsheets', null=True, blank=True, verbose_name=_('Tearsheet'))
 
     @property
     def get_admin_url(self):
@@ -134,7 +135,7 @@ class Tile(BaseCatalogModel):
             if tile.sales_description.replace(size.group(),'') == sales_description_no_size:
                 sizes.append(tile.size)
         return sizes
-    
+
     class Meta:
         verbose_name = _('Tile')
         verbose_name_plural = _('Tiles')

@@ -68,6 +68,7 @@ class TileOrderSerializer(BaseCatalogSerializer):
     quantity = serializers.IntegerField()
     sample = serializers.BooleanField()
     price = serializers.FloatField()
+    tearsheet = serializers.CharField()
 
 
 class GroupSerializer(BaseGalleryImageSerializer):

@@ -128,6 +128,7 @@ class TileOrderDto(BaseCatalogDto):
         self.quantity = tile.quantity_on_hand
         self.sample = tile.is_sample
         self.price = tile.sales_price
+        self.tearsheet = tile.tearsheet.url if tile.tearsheet else ''
 
 
 class GroupDto(BaseGalleryImageDto):
