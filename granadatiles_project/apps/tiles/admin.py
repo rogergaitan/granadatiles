@@ -55,7 +55,7 @@ class TileAdmin(admin.ModelAdmin):
     fields = ('name', 'name_es', 'list_id', 'design', 'sales_description',
               'sales_description_es', 'size', 'thickness', 'weight',
               'sales_price','average_cost', 'quantity_on_hand',
-              'image', 'mosaic', 'similar_tiles', 'colors',
+              'image', 'mosaic', 'tearsheet', 'similar_tiles', 'colors',
               'is_active', 'main', 'new', 'on_sale', 'is_sample',)
 
     list_display = ('name', 'sales_description', 'size', 'weight', 'thickness',
