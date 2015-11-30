@@ -65,6 +65,9 @@ class TileOrderSerializer(BaseCatalogSerializer):
     uses = TileUseSerializer(many=True)
     similar_tiles = BaseCatalogSerializer(many=True)
     designer = TileDesignerSerializer()
+    quantity = serializers.IntegerField()
+    sample = serializers.BooleanField()
+    price = serializers.FloatField()
 
 
 class GroupSerializer(BaseGalleryImageSerializer):

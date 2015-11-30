@@ -124,6 +124,9 @@ class TileOrderDto(BaseCatalogDto):
         self.styles = [TileStyleDto(style, language) for style in tile.design.styles.all()]
         self.similar_tiles = [SimilarTileDto(tile, language) for tile in tile.similar_tiles.all()]
         self.designer = TileDesignerDto(tile.design.group, language)
+        self.quantity = tile.quantity_on_hand
+        self.sample = tile.is_sample
+        self.price = tile.sales_price
 
 
 class GroupDto(BaseGalleryImageDto):
