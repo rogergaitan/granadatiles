@@ -89,6 +89,7 @@ class SimilarTileDto(BaseCatalogDto):
 
     def __init__(self, tile, language):
         super().__init__(tile, language)
+        self.image = tile.mosaic.url if tile.mosaic else ''
 
 
 class TileDesignerDto(BaseContentDto):

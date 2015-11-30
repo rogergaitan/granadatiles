@@ -52,7 +52,7 @@ class StyleSerializer(BaseCatalogSerializer):
 
 
 class SimilarTilesSerializer(BaseCatalogSerializer):
-    pass
+    image = serializers.CharField()
 
 
 class TileOrderSerializer(BaseCatalogSerializer):
