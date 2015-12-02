@@ -11,22 +11,25 @@ class CollectionRetrieveSerializer(CollectionSerializer):
     introduction = serializers.CharField()
 
 
+class TileSizeSerializer(serializers.Serializer):
+    size = serializers.CharField()
+
+
 class TileSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
     sizes = serializers.CharField()
 
+
 class MainTileSerialzer(BaseCatalogSerializer):
     image = serializers.CharField()
     mosaic = serializers.CharField()
-    sizes = serializers.ListField(
-            child = serializers.CharField()
-        )
+    sizes = TileSizeSerializer(many=True)
     has_installation_photos = serializers.BooleanField()
 
+
 class TileDetailSerializer(BaseCatalogSerializer):
-    image = serializers.CharField()
     mosaic = serializers.CharField()
-    sizes = serializers.CharField()
+    sizes = TileSizeSerializer(many=True)
 
 
 class TileInstallationPhotosSerializer(BaseContentSerializer):
