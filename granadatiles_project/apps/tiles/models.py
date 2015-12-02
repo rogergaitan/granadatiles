@@ -1,4 +1,4 @@
-import re
+﻿import re
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext as _
@@ -135,6 +135,12 @@ class Tile(BaseCatalogModel):
             if tile.sales_description.replace(size.group(),'') == sales_description_no_size:
                 sizes.append(tile.size)
         return sizes
+
+    def has_installation_photos(self):
+        return (self.has_installation_photos.count() > 0)
+
+    def __str__(self):
+        return self.name + '-' + self.sales_description
 
     class Meta:
         verbose_name = _('Tile')
