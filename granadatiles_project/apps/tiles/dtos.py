@@ -21,12 +21,19 @@ class CollectionDetailDto(CollectionDto):
            self.introduction = collection.introduction
 
 
+class TileSizeDto:
+
+    def __init__(self, size):
+        self.size = size
+
+
 class TileDetailDto(BaseCatalogDto):
 
     def __init__(self, tile, language):
         super().__init__(tile, language)
-        self.sizes = tile.size
+        self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
         self.mosaic = tile.mosaic.url if tile.mosaic else ''
+        self.image = tile.image.url if tile.image else ''
 
 
 class TileDto(BaseCatalogDto):
@@ -40,9 +47,9 @@ class MainTileDto(TileDto):
 
     def __init__(self, tile, language):
         super().__init__(tile, language)
-        self.image = tile.image.url if tile.mosaic else ''
-        self.mosaic = tile.mosaic.url if tile.image else ''
-        self.sizes = tile.get_available_sizes()
+        self.image = tile.image.url if tile.image else ''
+        self.mosaic = tile.mosaic.url if tile.mosaic else ''
+        self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
         self.has_installation_photos = tile.has_installation_photos()
 
 
@@ -58,7 +65,7 @@ class TileDesignDto(BaseCatalogDto):
 
     def __init__(self, tile_design, size, new, in_stock, special, language=None):
 
-        tiles_filter = tile_design.tiles.exclude(image='').exclude(mosaic='')
+        tiles_filter = tile_design.tiles.exclude(image='')
         if size: tiles_filter = tiles_filter.filter(size=size)
         if new: tiles_filter = tiles_filter.filter(new=True)
         if in_stock: tiles_filter = tiles_filter.filter(quantity_on_hand__gt=0)
@@ -73,12 +80,6 @@ class TileDesignDto(BaseCatalogDto):
 
 class TileStyleDto(BaseCatalogDto):
     pass
-
-
-class TileSizeDto:
-
-    def __init__(self, sizes):
-        self.sizes = [size for size in sizes]
 
 
 class TileInstallationPhotosDto(BaseContentDto):
