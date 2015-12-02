@@ -7,6 +7,8 @@ from .models import Tile, Collection, Group, TileDesign, Use, Style, PalleteColo
 class TileInline(admin.StackedInline):
     model = Tile
     fields = ('name', 'name_es')
+    readonly_fields = ('name', 'name_es')
+    view_on_site = False
 
     def has_add_permission(self, request):
         return False
@@ -56,7 +58,7 @@ class TileAdmin(admin.ModelAdmin):
               'sales_description_es', 'size', 'thickness', 'weight',
               'sales_price','average_cost', 'quantity_on_hand',
               'image', 'mosaic', 'tearsheet', 'similar_tiles', 'colors',
-              'is_active', 'main', 'new', 'on_sale', 'is_sample',)
+              'is_active', 'main', 'new', 'on_sale', 'is_sample')
 
     list_display = ('name', 'sales_description', 'size', 'weight', 'thickness',
                     'quantity_on_hand', 'is_active', 'new', 'on_sale',)
@@ -65,7 +67,8 @@ class TileAdmin(admin.ModelAdmin):
     search_fields = ['name', 'name_es', 'list_id', 'size']
     list_filter = ('new', TileSizeFilter)
     actions = ['tile_new']
-    readonly_fields = ('list_id', 'design', 'name', 'quantity_on_hand')
+    readonly_fields = ('list_id', 'design', 'name', 'quantity_on_hand',
+                       'sales_price', 'average_cost')
 
     def tile_new(self, request, queryset):
         queryset.update(new=True)
@@ -81,6 +84,9 @@ class TileAdmin(admin.ModelAdmin):
 class GroupInline(admin.StackedInline):
     model = Group
     fields = ('title', 'title_es')
+    readonly_fields = ('title', 'title_es')
+    view_on_site = False
+
 
     def has_add_permission(self, request):
         return False
@@ -112,6 +118,8 @@ class CollectionAdmin(SummernoteModelAdmin):
 class TileDesignInline(admin.StackedInline):
     model = TileDesign
     fields = ('name', 'name_es')
+    readonly_fields = ('name', 'name_es')
+    view_on_site = False
 
     def has_add_permission(self, request):
         return False

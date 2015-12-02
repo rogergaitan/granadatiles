@@ -42,6 +42,7 @@ class MainTileDto(TileDto):
         super().__init__(tile, language)
         self.image = tile.mosaic.url if tile.mosaic else ''
         self.sizes = tile.get_available_sizes()
+        self.has_installation_photos = tile.has_installation_photos()
 
 
 class MinorTileDto(TileDto):
@@ -129,6 +130,13 @@ class TileOrderDto(BaseCatalogDto):
         self.sample = tile.is_sample
         self.price = tile.sales_price
         self.tearsheet = tile.tearsheet.url if tile.tearsheet else ''
+
+
+class CartDto(BaseCatalogDto):
+
+  def __init__(self, tile):
+      self.name = tile.name
+
 
 
 class GroupDto(BaseGalleryImageDto):
