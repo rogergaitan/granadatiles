@@ -131,4 +131,12 @@
 </form>
 {% endblock %}
 
+{% block extra_js %}
+<script>
+    $(function () {
+        $('[name="action"]').attr('required', false);
+    });
+</script>
+{% endblock %}
+
 

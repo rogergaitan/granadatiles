@@ -139,8 +139,10 @@ class Tile(BaseCatalogModel):
     def has_installation_photos(self):
         return (self.installation_photos.count() > 0)
 
+    has_installation_photos.boolean = True
+
     def __str__(self):
-        return self.name + '-' + self.sales_description
+        return self.name + ' - ' + self.sales_description
 
     class Meta:
         verbose_name = _('Tile')
