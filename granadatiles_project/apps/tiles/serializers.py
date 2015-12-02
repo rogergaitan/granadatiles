@@ -17,12 +17,14 @@ class TileSerializer(BaseCatalogSerializer):
 
 class MainTileSerialzer(BaseCatalogSerializer):
     image = serializers.CharField()
+    mosaic = serializers.CharField()
     sizes = serializers.ListField(
             child = serializers.CharField()
         )
     has_installation_photos = serializers.BooleanField()
 
 class TileDetailSerializer(BaseCatalogSerializer):
+    image = serializers.CharField()
     mosaic = serializers.CharField()
     sizes = serializers.CharField()
 
