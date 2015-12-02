@@ -34,7 +34,6 @@
 
         collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
             vm.tiles = response.data;
-            console.log(vm.tiles);
         });
 
         //vm.tiles = collectionsSvc.getTiles(pageSettings.groupId);
@@ -81,6 +80,7 @@
                 'image':vm.tiles[index].main.image,
                 'sizes':vm.tiles[index].main.sizes
             });
+
             vm.tiles[index].tiles = arrayTiles;
 
         };
