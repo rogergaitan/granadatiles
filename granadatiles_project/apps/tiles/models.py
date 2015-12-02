@@ -137,7 +137,7 @@ class Tile(BaseCatalogModel):
         return sizes
 
     def has_installation_photos(self):
-        return (self.has_installation_photos.count() > 0)
+        return (self.installation_photos.count() > 0)
 
     def __str__(self):
         return self.name + '-' + self.sales_description
