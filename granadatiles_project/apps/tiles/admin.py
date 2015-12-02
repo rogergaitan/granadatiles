@@ -1,4 +1,4 @@
-from django.contrib import admin
+﻿from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django.utils.translation import ugettext as _
 from .models import Tile, Collection, Group, TileDesign, Use, Style, PalleteColor
@@ -59,7 +59,7 @@ class TileAdmin(admin.ModelAdmin):
               'is_active', 'main', 'new', 'on_sale', 'is_sample',)
 
     list_display = ('name', 'sales_description', 'size', 'weight', 'thickness',
-                    'quantity_on_hand', 'is_active', 'new', 'on_sale')
+                    'quantity_on_hand', 'is_active', 'new', 'on_sale',)
 
     list_editable = ['is_active', 'new', 'on_sale', 'size', 'weight', 'thickness']
     search_fields = ['name', 'name_es', 'list_id', 'size']
