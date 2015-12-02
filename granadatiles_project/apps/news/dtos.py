@@ -1,13 +1,13 @@
-﻿from core.dtos import BaseContentDto, BaseCatalogDto, BaseGalleryImageDto 
-
+from core.dtos import BaseContentDto, BaseCatalogDto, BaseGalleryImageDto
+import pdb
 
 class SectionFeaturedArticleDto(object):
-    
-    def __init__(self, article, language = None):
+
+    def __init__(self, article, language=None):
         self.title = article.get_title(language)
-        self.image = article.magazine.logo
+        self.image = article.image.url if article.image else ''
         self.url = article.url
-        
+
 
 class ArticleMagazineDto(object):
 
@@ -15,19 +15,19 @@ class ArticleMagazineDto(object):
         self.url = article.url
         self.magazineName = article.magazine.name
         self.magazineLogo = article.magazine.logo.url
-        
-        
+
+
 class ArticleYearDto(object):
     def __init__(self, years_choice):
         self.year = years_choice
-        
+
 
 class ArticleDto(BaseGalleryImageDto):
     def __init__(self, article, language=None):
        super().__init__(article, language)
        self.date = article.date
        self.magazine = article.magazine.name
-        
+
 
 class CatalogDto(BaseCatalogDto):
    def __init__(self, catalog, language=None):
