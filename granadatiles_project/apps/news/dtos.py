@@ -1,5 +1,5 @@
 from core.dtos import BaseContentDto, BaseCatalogDto, BaseGalleryImageDto
-import pdb
+
 
 class SectionFeaturedArticleDto(object):
 
