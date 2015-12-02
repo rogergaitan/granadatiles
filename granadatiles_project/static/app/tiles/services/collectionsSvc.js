@@ -21,6 +21,7 @@
             getSizes: getSizes,
             getStyles: getStyles,
             getTiles: getTiles,
+            getTileFilteredByStyle: getTileFilteredByStyle,
             getMainTile:getMainTile,
             getInstallationPhoto: getInstallationPhoto
         };
@@ -66,8 +67,13 @@
             return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles')
         }
 
+        function getTileFilteredByStyle(groupId, styleId){
+            return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles/?style=' + styleId)
+        }
+
         function getMainTile(tileId){
             return $http.get(appSettings.serverPath + 'tiles/' + tileId)
+            //return tileMainMock();
         }
 
         function getInstallationPhoto(tileId){
@@ -392,6 +398,18 @@
                     ]
                 }
             ]
+        }
+
+        function tileMainMock(){
+           return{
+               id:939,
+               image:'/media/mosaic/kotka.jpg',
+               name:'455 E',
+               sizes:[
+                   "4\" x 4\"",
+                   "6\" x 6\""
+               ]
+           }
         }
     }
 }());

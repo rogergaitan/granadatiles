@@ -47,9 +47,8 @@
         collectionsSvc.getStyles(pageSettings.groupId).then(function (response) {
             vm.styles = response.data;
             vm.selectedStyle = vm.styles[0];
+            //updateTilesByStyle(vm.styles[0].name);
         });
-
-
 
         vm.labels = pageSettings.labels;
 
@@ -61,17 +60,50 @@
 
         vm.setStyle = function(style) {
             vm.selectedStyle = style;
+            updateTilesByStyle(style.name);
         };
 
-        vm.setTile = function(tileId){
-            console.log(tileId);
+        vm.setTile = function(index, tileId){
             collectionsSvc.getMainTile(tileId).then(function (response){
                 vm.main = response.data;
-                console.log(vm.main);
+                updateMain(index, vm.main);
             });
+
+            var arrayTiles = [];
+            for ( var i = 0; i < vm.tiles[index].tiles.length;i++ ){
+                if(vm.tiles[index].tiles[i].id != tileId){
+                    arrayTiles.push(vm.tiles[index].tiles[i])
+                }
+            }
+            arrayTiles.push({
+                'id':vm.tiles[index].main.id,
+                'name':vm.tiles[index].main.name,
+                'image':vm.tiles[index].main.image,
+                'sizes':vm.tiles[index].main.sizes
+            });
+            vm.tiles[index].tiles = arrayTiles;
+
         };
+        function updateMain(index, main){
+            var setMain = [];
+            setMain.push({
+                'id':main.id,
+                'name':main.name,
+                'image':main.mosaic,
+                'sizes':main.sizes
+            });
+            vm.tiles[index].main = setMain[0];
+        }
+
+        function updateTilesByStyle(selectedStyle){
+            collectionsSvc.getTileFilteredByStyle(pageSettings.groupId, selectedStyle).then(function (response){
+                vm.tiles = response.data;
+                console.log(vm.tiles);
+            });
+        }
 
         vm.showInstallationPhoto = function(tileId) {
+            console.log(tileId);
             $modal.open({
                 templateUrl: baseSettings.staticUrl + 'app/tiles/templates/tileModal.html',
                 controller: 'tileModalCtrl',
@@ -80,7 +112,6 @@
                 resolve:{
                     installationPhotos: function () {
                         return collectionsSvc.getInstallationPhoto(tileId).then(function (response) {
-                            //console.log(response.data);
                             return response.data;
                         });
                     }
