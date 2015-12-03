@@ -63,7 +63,6 @@
         }
 
         function getTiles(groupId){
-            //return groupMock();
             return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles')
         }
 
@@ -398,18 +397,6 @@
                     ]
                 }
             ]
-        }
-
-        function tileMainMock(){
-           return{
-               id:939,
-               image:'/media/mosaic/kotka.jpg',
-               name:'455 E',
-               sizes:[
-                   "4\" x 4\"",
-                   "6\" x 6\""
-               ]
-           }
         }
     }
 }());
