@@ -77,8 +77,8 @@
             arrayTiles.push({
                 'id':vm.tiles[index].main.id,
                 'name':vm.tiles[index].main.name,
-                'image':vm.tiles[index].main.image
-                //'sizes':vm.tiles[index].main.sizes
+                'image':vm.tiles[index].main.image,
+                'sizes':vm.tiles[index].main.sizes
             });
             vm.tiles[index].tiles = arrayTiles;
 
