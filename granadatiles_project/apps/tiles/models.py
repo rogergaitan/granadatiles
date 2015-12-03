@@ -119,6 +119,7 @@ class Tile(BaseCatalogModel):
     thickness = models.CharField(max_length=10, default='', null=True, verbose_name=('Thickness'))
     on_sale = models.BooleanField(default=False, verbose_name=_('On Sale'))
     tearsheet = models.FileField(upload_to='tearsheets', null=True, blank=True, verbose_name=_('Tearsheet'))
+    custom = models.BooleanField(default=False, blank=True, verbose_name=_('Custom'))
 
     @property
     def get_admin_url(self):
