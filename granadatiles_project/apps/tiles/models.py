@@ -1,4 +1,4 @@
-﻿import re
+import re
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext as _
@@ -55,6 +55,7 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
 class Group(BaseGalleryImageModel, BaseSlugModel):
     collection = models.ForeignKey(Collection, related_name='groups', verbose_name=_('Collection'))
     list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
+    show_in_web = models.BooleanField(default=True, verbose_name=_('Show in web'))
 
     def designs_count(self):
         return self.designs.count()
@@ -86,6 +87,8 @@ class Group(BaseGalleryImageModel, BaseSlugModel):
 class TileDesign(BaseCatalogModel):
     group = models.ForeignKey(Group, related_name='designs', verbose_name=_('Tiles Group'))
     styles = models.ManyToManyField('Style', related_name='designs', verbose_name=_('Styles'))
+    show_in_web = models.BooleanField(default=True, verbose_name=_('Show in web'))
+
     def tiles_count(self):
         return self.tiles.count()
 
@@ -119,6 +122,7 @@ class Tile(BaseCatalogModel):
     thickness = models.CharField(max_length=10, default='', null=True, verbose_name=('Thickness'))
     on_sale = models.BooleanField(default=False, verbose_name=_('On Sale'))
     tearsheet = models.FileField(upload_to='tearsheets', null=True, blank=True, verbose_name=_('Tearsheet'))
+    custom = models.BooleanField(default=False, blank=True, verbose_name=_('Custom'))
 
     @property
     def get_admin_url(self):
@@ -170,3 +174,20 @@ class Use(BaseCatalogModel):
     class Meta:
        verbose_name = _('Use')
        verbose_name_plural = _('Uses')
+
+class Warehouse(BaseCatalogModel):
+    zipcode = models.BooleanField(blank=True, verbose_name=_('Zipcode'))
+    custom = models.BooleanField(blank=True, verbose_name=_('Custom'))
+    in_stock = models.BooleanField(blank=True, verbose_name=_('In Stock'))
+
+    class Meta:
+       verbose_name = _('Warehouse')
+       verbose_name_plural = _('Warehouses')
+
+
+class LeadTime(BaseContentModel):
+    pass
+
+    class Meta:
+       verbose_name = _('Lead Time')
+       verbose_name = _('Lead Times')

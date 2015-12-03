@@ -1,7 +1,8 @@
-﻿from django.contrib import admin
+from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django.utils.translation import ugettext as _
-from .models import Tile, Collection, Group, TileDesign, Use, Style, PalleteColor
+from .models import (Tile, Collection, Group, TileDesign, Use, Style,
+                     PalleteColor, Warehouse, LeadTime)
 
 
 class TileInline(admin.StackedInline):
@@ -19,7 +20,7 @@ class TileInline(admin.StackedInline):
 
 @admin.register(TileDesign)
 class TileDesignAdmin(admin.ModelAdmin):
-    fields = ('name', 'name_es', 'group', 'styles')
+    fields = ('name', 'name_es', 'group', 'styles', 'show_in_web')
     list_display = ('name', 'group' , 'tiles_count')
     search_fields = ['name', 'name_es']
     readonly_fields = ('name', 'group')
@@ -131,7 +132,7 @@ class TileDesignInline(admin.StackedInline):
 @admin.register(Group)
 class GroupAdmin(SummernoteModelAdmin):
     fields = ('title', 'title_es', 'list_id', 'collection', 'description', 'description_es',
-              'slug', 'slug_es', 'image')
+              'slug', 'slug_es', 'image', 'show_in_web')
 
     list_display = ('title','collection', 'designs_count', 'tiles_count')
     search_fields = ['title', 'title_es', 'list_id']
@@ -160,3 +161,18 @@ class StyleAdmin(admin.ModelAdmin):
 @admin.register(PalleteColor)
 class PalleteColorAdmin(admin.ModelAdmin):
     list_display = ('name', 'hexadecimalCode')
+
+
+@admin.register(Warehouse)
+class WarehouseAdmin(admin.ModelAdmin):
+    list_display = ('name', 'zipcode', 'custom', 'in_stock')
+    search_fields = ['name', 'name_es']
+    list_filter = ('custom', 'in_stock')
+
+
+@admin.register(LeadTime)
+class LeadTimeAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description')
+
+    def has_add_permission(self, request):
+        return False

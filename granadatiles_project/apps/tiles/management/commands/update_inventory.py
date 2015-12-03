@@ -10,7 +10,7 @@ from ...models import Collection, Group, Tile, TileDesign
 class Command(BaseCommand):
 
     def create_update_collections(item):
-        if re.search('collection', item['Name'], re.IGNORECASE):
+        if re.search('collection', item['Name'], re.I):
 
             data = {
                 'title':item['Name'],
@@ -46,20 +46,38 @@ class Command(BaseCommand):
             'sales_description_es':item['SalesDesc'],
         }
 
-        design = Command.create_update_tiles_designs(item)
 
-        if re.search('samples', item['FullName'], re.IGNORECASE):
+        #get value of samples field
+        if re.search('samples', item['FullName'], re.I):
             data['is_sample'] = True
 
+        #get value of custom field
+        try:
+            group = Group.objects.get(list_id=item['ParentRef']['ListID'])
+        except ObjectDoesNotExist:
+            group = None
+
+        data['custom'] = False
+
+        if re.search('custom', item['Name'], re.I) or re.search('custom', item['SalesDesc'], re.I):
+            data['custom'] = True
+
+        if group and data['custom'] == False:
+            if re.search('custom', group.title, re.I):
+                data['custom'] = True
+
+        #get value of size field
         size = re.search('\d+"*\s*x\s*\d+"*', item['SalesDesc'])
         if size: data['size'] = size.group()
 
+        #get tile design
+        design = Command.create_update_tiles_designs(item, group)
         if design: data['design'] = design[0]
 
         Tile.objects.update_or_create(list_id=data['list_id'], defaults=data)
 
 
-    def create_update_tiles_designs(item):
+    def create_update_tiles_designs(item, group):
 
         #add design name from tile
         if re.search('^\d+\s*x\s*\d+', item['Name']):
@@ -70,11 +88,6 @@ class Command(BaseCommand):
 
         else:
             design_name = re.search('\D+\d*', item['Name'])
-
-        try:
-            group = Group.objects.get(list_id=item['ParentRef']['ListID'])
-        except ObjectDoesNotExist:
-            group = None
 
         if group:
 
