@@ -74,7 +74,7 @@
                                     <h2>{{ vm.tiles[$index].name }} {{ vm.tiles[$index].main.name }}</h2>
                                     <label class="title-tile">CUSTOM:</label>
                                     <ul class="list-inline title-tile">
-                                        <!--<li ng-repeat="size in vm.tiles[$index].main.sizes">{{ size }}</li>-->
+                                        <li ng-repeat="size in vm.tiles[$index].main.sizes">{{ size.size }}</li>
                                     </ul>
                                 </div>
 
@@ -119,7 +119,7 @@
                                     <h2>{{ vm.tiles[$index + 1].name }} {{ vm.tiles[$index + 1].main.name }}</h2>
                                     <label class="title-tile">CUSTOM:</label>
                                     <ul class="list-inline title-tile">
-                                       <!--<li ng-repeat="size in vm.tiles[$index + 1].main.sizes">{{ size }}</li>-->
+                                       <li ng-repeat="size in vm.tiles[$index + 1].main.sizes">{{ size.size }}</li>
                                     </ul>
                                 </div>
                                 <ul class="list-inline tile-options">
@@ -163,7 +163,7 @@
                                     <h2>{{ vm.tiles[$index + 2].name }} {{ vm.tiles[$index + 2].main.name }}</h2>
                                     <label class="title-tile">CUSTOM:</label>
                                     <ul class="list-inline title-tile">
-                                       <!-- <li ng-repeat="size in vm.tiles[$index + 2].main.sizes">{{ size }}</li>-->
+                                        <li ng-repeat="size in vm.tiles[$index + 2].main.sizes">{{ size.size }}</li>
                                     </ul>
                                 </div>
                                 <ul class="list-inline tile-options">
