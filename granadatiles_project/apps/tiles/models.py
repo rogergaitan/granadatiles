@@ -55,6 +55,7 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
 class Group(BaseGalleryImageModel, BaseSlugModel):
     collection = models.ForeignKey(Collection, related_name='groups', verbose_name=_('Collection'))
     list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
+    show_in_web = models.BooleanField(default=True, verbose_name=_('Show in web'))
 
     def designs_count(self):
         return self.designs.count()
@@ -86,6 +87,8 @@ class Group(BaseGalleryImageModel, BaseSlugModel):
 class TileDesign(BaseCatalogModel):
     group = models.ForeignKey(Group, related_name='designs', verbose_name=_('Tiles Group'))
     styles = models.ManyToManyField('Style', related_name='designs', verbose_name=_('Styles'))
+    show_in_web = models.BooleanField(default=True, verbose_name=_('Show in web'))
+
     def tiles_count(self):
         return self.tiles.count()
 
@@ -179,4 +182,4 @@ class Warehouse(BaseCatalogModel):
 
     class Meta:
        verbose_name = _('Warehouse')
-       verbose_name_plural = _('Warehouse')
+       verbose_name_plural = _('Warehouses')
