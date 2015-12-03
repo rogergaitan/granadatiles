@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django.utils.translation import ugettext as _
-from .models import Tile, Collection, Group, TileDesign, Use, Style, PalleteColor, Warehouse
+from .models import (Tile, Collection, Group, TileDesign, Use, Style,
+                     PalleteColor, Warehouse, LeadTime)
 
 
 class TileInline(admin.StackedInline):
@@ -167,3 +168,11 @@ class WarehouseAdmin(admin.ModelAdmin):
     list_display = ('name', 'zipcode', 'custom', 'in_stock')
     search_fields = ['name', 'name_es']
     list_filter = ('custom', 'in_stock')
+
+
+@admin.register(LeadTime)
+class LeadTimeAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description')
+
+    def has_add_permission(self, request):
+        return False

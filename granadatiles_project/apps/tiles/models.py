@@ -183,3 +183,11 @@ class Warehouse(BaseCatalogModel):
     class Meta:
        verbose_name = _('Warehouse')
        verbose_name_plural = _('Warehouses')
+
+
+class LeadTime(BaseContentModel):
+    pass
+
+    class Meta:
+       verbose_name = _('Lead Time')
+       verbose_name = _('Lead Times')
