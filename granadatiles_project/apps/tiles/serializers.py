@@ -62,6 +62,10 @@ class SimilarTilesSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
 
 
+class WarehouseSerializer(BaseCatalogSerializer):
+    zipcode = serializers.CharField()
+
+
 class TileOrderSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
     mosaic = serializers.CharField()
@@ -76,6 +80,7 @@ class TileOrderSerializer(BaseCatalogSerializer):
     sample = serializers.BooleanField()
     price = serializers.FloatField()
     tearsheet = serializers.CharField()
+    ship_from = WarehouseSerializer(many=True)
 
 
 class GroupSerializer(BaseGalleryImageSerializer):

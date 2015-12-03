@@ -1,4 +1,5 @@
 from core.dtos import BaseGalleryImageDto, BaseContentDto, BaseCatalogDto
+from .models import Warehouse
 
 
 class CollectionDto(BaseGalleryImageDto):
@@ -115,6 +116,13 @@ class TileUseDto(BaseCatalogDto):
         super().__init__(use, language)
 
 
+class WarehouseDto(BaseCatalogDto):
+
+    def __init__(self, warehouse, language):
+        super().__init__(warehouse, language)
+        self.zipcode = warehouse.zipcode
+
+
 class TileOrderDto(BaseCatalogDto):
 
     def __init__(self, tile, language):
@@ -133,6 +141,12 @@ class TileOrderDto(BaseCatalogDto):
         self.sample = tile.is_sample
         self.price = tile.sales_price
         self.tearsheet = tile.tearsheet.url if tile.tearsheet else ''
+        if tile.in_stock:
+            self.ship_from = [WarehouseDto(warehouse, language) for warehouse in
+                              Warehouse.objects.filter(in_stock=True)]
+        elif tile.custom:
+            self.ship_from = [WarehouseDto(warehouse, language) for warehouse in
+                              Warehouse.objects.filter(custom=True)]
 
 
 class CartDto(BaseCatalogDto):

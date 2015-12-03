@@ -59,7 +59,7 @@ class TileAdmin(admin.ModelAdmin):
               'sales_description_es', 'size', 'thickness', 'weight',
               'sales_price','average_cost', 'quantity_on_hand',
               'image', 'mosaic', 'tearsheet', 'similar_tiles', 'colors',
-              'is_active', 'main', 'new', 'on_sale', 'is_sample')
+              'is_active', 'main', 'new', 'on_sale', 'is_sample', 'in_stock')
 
     list_display = ('name', 'sales_description', 'size', 'weight', 'thickness',
                     'quantity_on_hand', 'is_active', 'new', 'on_sale',)
