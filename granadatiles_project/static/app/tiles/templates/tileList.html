@@ -51,16 +51,16 @@
                 </div>
             </div>
             <div ng-repeat="tile in ::vm.tiles" ng-if="$index % 3 == 0" class="row">
-                <div class="col-md-4 blue-box">
+                <div class="col-md-4 blue-box" ng-if="$index <= vm.tiles.length - 1">
                     <div class="content-tile">
                         <div class="row">
                             <div class="col-md-8">
-                                <img ng-src="{{ vm.tiles[$index].main.image }}" alt="{{ vm.tiles[$index].main.name }}" class="img-responsive thumbnail" width="100%">
+                                <img ng-src="{{ vm.tiles[$index].main.mosaic }}" alt="{{ vm.tiles[$index].main.name }}" class="img-responsive thumbnail" width="100%">
                             </div>
                             <div class="col-md-4">
-                                <div ng-repeat="item in ::vm.tiles[$index].tiles" class="row">
+                                <div ng-repeat="item in vm.tiles[$index].tiles" class="row">
                                     <div class="col-md-12">
-                                        <a href="#" ng-click="vm.setTile(item.id)">
+                                        <a href="#" ng-click="vm.setTile($parent.$index, item.id)">
                                             <img ng-src="{{ item.image }}" alt="{{ item.name }}" class="img-responsive thumbnail">
                                             <label class="label-tile">{{ item.name }}</label>
                                         </a>
@@ -74,15 +74,16 @@
                                     <h2>{{ vm.tiles[$index].name }} {{ vm.tiles[$index].main.name }}</h2>
                                     <label class="title-tile">CUSTOM:</label>
                                     <ul class="list-inline title-tile">
-                                        <li ng-repeat="size in vm.tiles[$index].main.sizes">{{ size }}</li>
+                                        <li ng-repeat="size in vm.tiles[$index].main.sizes">{{ size.size }}</li>
                                     </ul>
                                 </div>
+
                                 <ul class="list-inline tile-options">
                                     <li>
                                         <a href="#"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
                                     </li>
                                     <li>
-                                        <a href="#" ng-click="vm.showInstallationPhoto(vm.tiles[$index].id)"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
+                                        <a href="#" ng-click="vm.showInstallationPhoto(vm.tiles[$index].main.id)"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
                                     </li>
                                     <li>
                                         <a href="#">
@@ -95,16 +96,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 blue-box">
+                <div class="col-md-4 blue-box" ng-if="$index + 1 <= vm.tiles.length - 1">
                     <div class="content-tile">
                         <div class="row">
                             <div class="col-md-8">
-                                <img ng-src="{{ vm.tiles[$index + 1].main.image }}" alt="{{ vm.tiles[$index + 1].main.name }}" class="img-responsive thumbnail" width="100%">
+                                <img ng-src="{{ vm.tiles[$index + 1].main.mosaic }}" alt="{{ vm.tiles[$index + 1].main.name }}" class="img-responsive thumbnail" width="100%">
                             </div>
                             <div class="col-md-4">
-                                <div ng-repeat="item in ::vm.tiles[$index + 1].tiles" class="row">
+                                <div ng-repeat="item in vm.tiles[$index + 1].tiles" class="row">
                                     <div class="col-md-12">
-                                        <a href="#">
+                                        <a href="#"  ng-click="vm.setTile($parent.$index+1, item.id)">
                                             <img ng-src="{{ item.image }}" alt="{{ item.name }}" class="img-responsive thumbnail">
                                             <label class="label-tile">{{ item.name }}</label>
                                         </a>
@@ -118,7 +119,7 @@
                                     <h2>{{ vm.tiles[$index + 1].name }} {{ vm.tiles[$index + 1].main.name }}</h2>
                                     <label class="title-tile">CUSTOM:</label>
                                     <ul class="list-inline title-tile">
-                                        <li ng-repeat="size in vm.tiles[$index + 1].main.sizes">{{ size }}</li>
+                                       <li ng-repeat="size in vm.tiles[$index + 1].main.sizes">{{ size.size }}</li>
                                     </ul>
                                 </div>
                                 <ul class="list-inline tile-options">
@@ -126,7 +127,7 @@
                                         <a href="#"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
                                     </li>
                                     <li>
-                                        <a href="#" ng-click="vm.showInstallationPhoto(vm.tiles[$index + 1].id)"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
+                                        <a href="#" ng-click="vm.showInstallationPhoto(vm.tiles[$index + 1].main.id)"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
                                     </li>
                                     <li>
                                         <a href="#">
@@ -139,16 +140,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 blue-box">
+                <div class="col-md-4 blue-box" ng-if="$index + 2 <= vm.tiles.length - 1">
                     <div class="content-tile">
                         <div class="row">
                             <div class="col-md-8">
-                                <img ng-src="{{ vm.tiles[$index + 2].main.image }}" alt="{{ vm.tiles[$index + 2].main.name }}" class="img-responsive thumbnail" width="100%">
+                                <img ng-src="{{ vm.tiles[$index + 2].main.mosaic }}" alt="{{ vm.tiles[$index + 2].main.name }}" class="img-responsive thumbnail" width="100%">
                             </div>
                             <div class="col-md-4">
-                                <div ng-repeat="item in ::vm.tiles[$index + 2].tiles" class="row">
+                                <div ng-repeat="item in vm.tiles[$index + 2].tiles" class="row">
                                     <div class="col-md-12">
-                                        <a href="#">
+                                        <a href="#"  ng-click="vm.setTile($parent.$index, item.id)">
                                             <img ng-src="{{ item.image }}" alt="{{ item.name }}" class="img-responsive thumbnail">
                                             <label class="label-tile">{{ item.name }}</label>
                                         </a>
@@ -162,7 +163,7 @@
                                     <h2>{{ vm.tiles[$index + 2].name }} {{ vm.tiles[$index + 2].main.name }}</h2>
                                     <label class="title-tile">CUSTOM:</label>
                                     <ul class="list-inline title-tile">
-                                        <li ng-repeat="size in vm.tiles[$index + 2].main.sizes">{{ size }}</li>
+                                        <li ng-repeat="size in vm.tiles[$index + 2].main.sizes">{{ size.size }}</li>
                                     </ul>
                                 </div>
                                 <ul class="list-inline tile-options">
@@ -170,7 +171,7 @@
                                         <a href="#"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
                                     </li>
                                     <li>
-                                        <a href="#" ng-click="vm.showInstallationPhoto(vm.tiles[$index + 2].id)"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
+                                        <a href="#" ng-click="vm.showInstallationPhoto(vm.tiles[$index + 2].main.id)"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
                                     </li>
                                     <li>
                                         <a href="#">
