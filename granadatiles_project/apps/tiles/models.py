@@ -1,4 +1,4 @@
-﻿import re
+import re
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext as _
@@ -170,3 +170,8 @@ class Use(BaseCatalogModel):
     class Meta:
        verbose_name = _('Use')
        verbose_name_plural = _('Uses')
+
+class Warehouse(BaseCatalogModel):
+    zipcode = models.BooleanField(blank=True, verbose_name=_('Zipcode'))
+    custom = models.BooleanField(blank=True, verbose_name=_('Custom'))
+    in_stock = models.BooleanField(blank=True, verbose_name=_('In Stock'))

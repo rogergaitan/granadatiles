@@ -1,7 +1,7 @@
-﻿from django.contrib import admin
+from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django.utils.translation import ugettext as _
-from .models import Tile, Collection, Group, TileDesign, Use, Style, PalleteColor
+from .models import Tile, Collection, Group, TileDesign, Use, Style, PalleteColor, Warehouse
 
 
 class TileInline(admin.StackedInline):
@@ -160,3 +160,10 @@ class StyleAdmin(admin.ModelAdmin):
 @admin.register(PalleteColor)
 class PalleteColorAdmin(admin.ModelAdmin):
     list_display = ('name', 'hexadecimalCode')
+
+
+@admin.register(Warehouse)
+class WarehouseAdmin(admin.ModelAdmin):
+    list_display = ('name', 'zipcode', 'custom', 'in_stock')
+    search_fields = ['name', 'name_es']
+    list_filter = ('custom', 'in_stock')
