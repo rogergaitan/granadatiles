@@ -175,3 +175,7 @@ class Warehouse(BaseCatalogModel):
     zipcode = models.BooleanField(blank=True, verbose_name=_('Zipcode'))
     custom = models.BooleanField(blank=True, verbose_name=_('Custom'))
     in_stock = models.BooleanField(blank=True, verbose_name=_('In Stock'))
+
+    class Meta:
+       verbose_name = _('Warehouse')
+       verbose_name_plural = _('Warehouse')
