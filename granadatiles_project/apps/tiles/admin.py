@@ -19,7 +19,7 @@ class TileInline(admin.StackedInline):
 
 @admin.register(TileDesign)
 class TileDesignAdmin(admin.ModelAdmin):
-    fields = ('name', 'name_es', 'group', 'styles')
+    fields = ('name', 'name_es', 'group', 'styles', 'show_in_web')
     list_display = ('name', 'group' , 'tiles_count')
     search_fields = ['name', 'name_es']
     readonly_fields = ('name', 'group')
@@ -131,7 +131,7 @@ class TileDesignInline(admin.StackedInline):
 @admin.register(Group)
 class GroupAdmin(SummernoteModelAdmin):
     fields = ('title', 'title_es', 'list_id', 'collection', 'description', 'description_es',
-              'slug', 'slug_es', 'image')
+              'slug', 'slug_es', 'image', 'show_in_web')
 
     list_display = ('title','collection', 'designs_count', 'tiles_count')
     search_fields = ['title', 'title_es', 'list_id']
