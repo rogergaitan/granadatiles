@@ -38,10 +38,10 @@
 
         //vm.tiles = collectionsSvc.getTiles(pageSettings.groupId);
 
-        collectionsSvc.getSizes(pageSettings.groupId).then(function (response) {
+        /*collectionsSvc.getSizes(pageSettings.groupId).then(function (response) {
             vm.sizes = response.data;
             //vm.selectedSize = vm.sizes[0];
-        });
+        });*/
 
         collectionsSvc.getStyles(pageSettings.groupId).then(function (response) {
             vm.styles = response.data;
@@ -77,10 +77,9 @@
             arrayTiles.push({
                 'id':vm.tiles[index].main.id,
                 'name':vm.tiles[index].main.name,
-                'image':vm.tiles[index].main.image,
-                'sizes':vm.tiles[index].main.sizes
+                'image':vm.tiles[index].main.image
+                //'sizes':vm.tiles[index].main.sizes
             });
-
             vm.tiles[index].tiles = arrayTiles;
 
         };
@@ -89,7 +88,8 @@
             setMain.push({
                 'id':main.id,
                 'name':main.name,
-                'image':main.mosaic,
+                'mosaic':main.mosaic,
+                'image':main.image,
                 'sizes':main.sizes
             });
             vm.tiles[index].main = setMain[0];
@@ -98,7 +98,6 @@
         function updateTilesByStyle(selectedStyle){
             collectionsSvc.getTileFilteredByStyle(pageSettings.groupId, selectedStyle).then(function (response){
                 vm.tiles = response.data;
-                console.log(vm.tiles);
             });
         }
 
