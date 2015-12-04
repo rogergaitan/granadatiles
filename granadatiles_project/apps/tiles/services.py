@@ -1,4 +1,4 @@
-﻿from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404
 from .models import Collection, Group, Tile
 from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto,
@@ -6,7 +6,6 @@ from .dtos import (
     TileInstallationPhotosDto, TileSizeDto, TileOrderDto
 )
 
-import pdb
 from apps.tiles.models import Style
 
 class CollectionService:
@@ -30,7 +29,7 @@ class CollectionService:
 
     def get_groups(collection_id, language=None):
         collection = get_object_or_404(Collection, pk=collection_id)
-        groups = collection.groups.all()
+        groups = collection.groups.filter(show_in_web=True)
         groupsDto = [GroupDto(group, language)
                      for group in groups]
         return groupsDto
@@ -46,13 +45,14 @@ class CollectionService:
 class GroupService:
 
     def get_group(id, language=None):
-        group = get_object_or_404(Group, pk=id)
+        group = get_object_or_404(Group, pk=id, show_in_web=True)
         groupDto = GroupDto(group, language)
         return groupDto
 
     def get_group_designs(id, limit, offset, style, size, new, in_stock, special, language=None):
-        group = get_object_or_404(Group, pk=id)
-        designs = group.designs.filter(styles__name=style) if style else group.designs.all()
+        group = get_object_or_404(Group, pk=id, show_in_web=True)
+        designs = group.designs.filter(show_in_web=True)
+        if style: group.designs.filter(styles__name=style)
 
         tiledesignDto = [TileDesignDto(tile_design, size, new, in_stock, special, language)
                          for tile_design in designs[offset:limit]]
@@ -60,14 +60,14 @@ class GroupService:
         return tiledesignDto
 
     def get_styles(id, language=None):
-        group = get_object_or_404(Group, pk=id)
+        group = get_object_or_404(Group, pk=id, show_in_web=True)
         styles = Style.objects.filter(designs__group__id=id).distinct()
         styleDto = [TileStyleDto(style, language) for style in styles]
         return styleDto
 
     def get_sizes(id):
-        group = get_object_or_404(Group, pk=id)
-        designs = group.designs.all()
+        group = get_object_or_404(Group, pk=id, show_in_web=True)
+        designs = group.designs.filter(show_in_web=True)
         sizes = [design.tiles.values_list('size', flat=True).distinct() for design in designs]
 
         unique_sizes = []
