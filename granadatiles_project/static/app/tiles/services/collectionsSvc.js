@@ -71,7 +71,7 @@
         }
 
         function getMainTile(tileId){
-            return $http.get(appSettings.serverPath + 'tiles/' + tileId)
+            return $http.get(appSettings.serverPath + 'tiles/' + tileId);
             //return tileMainMock();
         }
 
