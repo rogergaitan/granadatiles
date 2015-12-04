@@ -1,6 +1,7 @@
 import re
 from django.db import models
 from django.db.models.signals import post_save
+from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.dispatch.dispatcher import receiver
 from django.conf import settings
@@ -9,7 +10,6 @@ from core.models import BaseGalleryImageModel, BaseCatalogModel, BaseContentMode
 from sorl.thumbnail.shortcuts import get_thumbnail
 from sorl.thumbnail.fields import ImageField
 from rest_framework.authtoken.models import Token
-
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
@@ -124,6 +124,8 @@ class Tile(BaseCatalogModel):
     tearsheet = models.FileField(upload_to='tearsheets', null=True, blank=True, verbose_name=_('Tearsheet'))
     custom = models.BooleanField(default=False, blank=True, verbose_name=_('Custom'))
     sample = models.ForeignKey('self', blank=True, null=True, related_name='samples', verbose_name=_('Sample'))
+    portfolio = models.ForeignKey('Portfolio', blank=True, null=True, related_name='tiles', verbose_name=_('Portfolio'))
+    customized = models.BooleanField(default=False, blank=True, verbose_name=_('Customized'))
 
     @property
     def get_admin_url(self):
@@ -191,8 +193,11 @@ class Warehouse(BaseCatalogModel):
 
 
 class LeadTime(BaseContentModel):
-    pass
 
     class Meta:
        verbose_name = _('Lead Time')
        verbose_name = _('Lead Times')
+
+
+class Portfolio(models.Model):
+    user = models.ForeignKey(User, related_name='portfolio', verbose_name=_('Portfolio'))
