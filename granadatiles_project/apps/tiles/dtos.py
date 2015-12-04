@@ -129,7 +129,7 @@ class TileOrderDto(BaseCatalogDto):
         super().__init__(tile, language)
         self.image = tile.image
         self.mosaic = tile.mosaic
-        self.sizes = tile.get_available_sizes()
+        self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
         self.thickness = tile.thickness
         self.weight = tile.weight
         self.colors = [TileColorDto(color, language) for color in tile.colors.all()]
@@ -139,6 +139,7 @@ class TileOrderDto(BaseCatalogDto):
         self.designer = TileDesignerDto(tile.design.group, language)
         self.quantity = tile.quantity_on_hand
         self.sample = tile.is_sample
+        self.has_sample = tile.has_sample()
         self.price = tile.sales_price
         self.tearsheet = tile.tearsheet.url if tile.tearsheet else ''
         if tile.in_stock:

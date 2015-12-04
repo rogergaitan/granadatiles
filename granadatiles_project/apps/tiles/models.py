@@ -123,6 +123,8 @@ class Tile(BaseCatalogModel):
     on_sale = models.BooleanField(default=False, verbose_name=_('On Sale'))
     tearsheet = models.FileField(upload_to='tearsheets', null=True, blank=True, verbose_name=_('Tearsheet'))
     custom = models.BooleanField(default=False, blank=True, verbose_name=_('Custom'))
+    in_stock = models.BooleanField(default=False, blank=True, verbose_name=_('In stock'))
+    sample = models.ForeignKey('self', blank=True, null=True, related_name='samples', verbose_name=_('Sample'))
 
     @property
     def get_admin_url(self):
@@ -144,6 +146,10 @@ class Tile(BaseCatalogModel):
         return (self.installation_photos.count() > 0)
 
     has_installation_photos.boolean = True
+
+
+    def has_sample(self):
+        return self.sample is not None
 
     def __str__(self):
         return self.name + ' - ' + self.sales_description
