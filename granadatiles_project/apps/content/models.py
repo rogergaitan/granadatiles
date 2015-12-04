@@ -1,4 +1,4 @@
-﻿from django.db import models
+from django.db import models
 from apps.news.models import Article
 from apps.tiles.models import Tile
 from django.utils.translation import ugettext as _
@@ -7,6 +7,30 @@ from core.models import BaseContentModel, BaseCatalogModel, BaseGalleryNavImageM
 
 
 class Section(BaseCatalogModel, BaseContentModel):
+    page_title = models.CharField(default='', blank=True, null=True, max_length=500, verbose_name=_('Pagetitle'))
+    page_title_es = models.CharField(default='', blank=True, null=True, max_length=500, verbose_name=_('Pagetitle_es'))
+    meta_description = models.CharField(default='', blank=True, null=True, max_length=500,
+                                        verbose_name=_('Metadescription'))
+    meta_description_es = models.CharField(default='', blank=True, null=True, max_length=500,
+                                           verbose_name=_('Metadescription_es'))
+    meta_keywords = models.CharField(default='', blank=True, null=True, max_length=500, verbose_name=_('Metakeywords'))
+    meta_keywords_es = models.CharField(default='', blank=True, null=True, max_length=500,
+                                        verbose_name=_('Metakeywords_es'))
+
+    def get_page_title(self, language):
+        if language == 'es' and self.page_title_es is not None and self.page_title_es:
+            return self.page_title_es
+        return self.page_title
+
+    def get_meta_description(self, language):
+        if language == 'es' and self.meta_description_es is not None and self.meta_description_es:
+            return self.meta_description_es
+        return self.meta_description
+
+    def get_meta_keywords(self, language):
+        if language == 'es' and self.meta_keywords_es is not None and self.meta_keywords_es:
+            return self.meta_keywords_es
+        return self.meta_keywords
 
     class Meta:
         verbose_name = _('Section')
@@ -23,7 +47,7 @@ class SectionImage(models.Model):
         Photographer, blank=True, null=True, related_name='covers',
         verbose_name=_('Photographer'))
     section = models.ForeignKey(Section, related_name='images')
-    articles = models.ManyToManyField(Article, 
+    articles = models.ManyToManyField(Article,
                                         blank=True)
     featured_article = models.ForeignKey(Article, related_name='featured_article',
                                             null=True, blank=True)
