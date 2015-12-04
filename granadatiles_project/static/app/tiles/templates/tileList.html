@@ -33,7 +33,7 @@
                         </button>
                         <ul class="dropdown-menu" role="menu">
                             <li ng-repeat="size in vm.sizes">
-                                <a href="#" ng-click="vm.setSize(size)">{{ size }}</a>
+                                <a href="#" ng-click="vm.setSize(size)">{{ size.name }}</a>
                             </li>
                         </ul>
                     </div>
@@ -43,7 +43,7 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li ng-repeat="style in vm.styles">
+                            <li ng-repeat="style in vm.updatedStyles">
                                 <a href="#" ng-click="vm.setStyle(style)">{{ style.name }}</a>
                             </li>
                         </ul>

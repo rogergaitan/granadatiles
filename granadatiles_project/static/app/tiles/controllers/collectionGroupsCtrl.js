@@ -14,6 +14,10 @@
     function collectionsGroupCtrl(baseSettings ,pageSettings, collectionsSvc, $modal) {
         var vm = this;
 
+        vm.labels = pageSettings.labels;
+
+        vm.subMenuCollapsed = true;
+
         vm.collectionAsideNavigationTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/collectionAsideNavigation.html';
 
         collectionsSvc.getCollection(pageSettings.collectionId).then(function (response) {
@@ -32,9 +36,9 @@
             vm.group = response.data;
         });
 
-        collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
+        /*collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
             vm.tiles = response.data;
-        });
+        });*/
 
         //vm.tiles = collectionsSvc.getTiles(pageSettings.groupId);
 
@@ -45,13 +49,26 @@
 
         collectionsSvc.getStyles(pageSettings.groupId).then(function (response) {
             vm.styles = response.data;
-            vm.selectedStyle = vm.styles[0];
-            //updateTilesByStyle(vm.styles[0].name);
+
+            vm.updatedStyles = [];
+
+            vm.updatedStyles.push({
+                'id':0,
+                'name':vm.labels.all
+            });
+
+            for(var i =0; i < vm.styles.length; i++){
+                vm.updatedStyles.push(vm.styles[i]);
+            }
+
+            vm.selectedStyle = vm.updatedStyles[0];
+
+            if(vm.selectedStyle.id == 0){
+                collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
+                    vm.tiles = response.data;
+                });
+            }
         });
-
-        vm.labels = pageSettings.labels;
-
-        vm.subMenuCollapsed = true;
 
         vm.setSize = function(size) {
             vm.selectedSize = size;
@@ -59,7 +76,7 @@
 
         vm.setStyle = function(style) {
             vm.selectedStyle = style;
-            updateTilesByStyle(style.name);
+            updateTilesByStyle(style);
         };
 
         vm.setTile = function(index, tileId){
@@ -96,9 +113,15 @@
         }
 
         function updateTilesByStyle(selectedStyle){
-            collectionsSvc.getTileFilteredByStyle(pageSettings.groupId, selectedStyle).then(function (response){
-                vm.tiles = response.data;
-            });
+            if(selectedStyle.id == 0){
+                collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
+                    vm.tiles = response.data;
+                });
+            }else{
+                collectionsSvc.getTileFilteredByStyle(pageSettings.groupId, selectedStyle.name).then(function (response){
+                    vm.tiles = response.data;
+                });
+            }
         }
 
         vm.showInstallationPhoto = function(tileId) {
