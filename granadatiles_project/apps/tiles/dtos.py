@@ -142,12 +142,12 @@ class TileOrderDto(BaseCatalogDto):
         self.has_sample = tile.has_sample()
         self.price = tile.sales_price
         self.tearsheet = tile.tearsheet.url if tile.tearsheet else ''
-        if tile.in_stock:
-            self.ship_from = [WarehouseDto(warehouse, language) for warehouse in
-                              Warehouse.objects.filter(in_stock=True)]
-        elif tile.custom:
+        if tile.custom:
             self.ship_from = [WarehouseDto(warehouse, language) for warehouse in
                               Warehouse.objects.filter(custom=True)]
+        else:
+            self.ship_from = [WarehouseDto(warehouse, language) for warehouse in
+                              Warehouse.objects.filter(custom=False)]
 
 
 class CartDto(BaseCatalogDto):

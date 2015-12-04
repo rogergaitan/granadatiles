@@ -123,7 +123,6 @@ class Tile(BaseCatalogModel):
     on_sale = models.BooleanField(default=False, verbose_name=_('On Sale'))
     tearsheet = models.FileField(upload_to='tearsheets', null=True, blank=True, verbose_name=_('Tearsheet'))
     custom = models.BooleanField(default=False, blank=True, verbose_name=_('Custom'))
-    in_stock = models.BooleanField(default=False, blank=True, verbose_name=_('In stock'))
     sample = models.ForeignKey('self', blank=True, null=True, related_name='samples', verbose_name=_('Sample'))
 
     @property
