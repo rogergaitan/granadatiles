@@ -62,13 +62,19 @@ class Command(BaseCommand):
         if re.search('custom', item['Name'], re.I) or re.search('custom', item['SalesDesc'], re.I):
             data['custom'] = True
 
-        if group and data['custom'] == False:
-            if re.search('custom', group.title, re.I):
-                data['custom'] = True
+        if group and data['custom'] == False and re.search('custom', group.title, re.I):
+            data['custom'] = True
 
         #get value of size field
+        data['size'] = ''
         size = re.search('\d+"*\s*x\s*\d+"*', item['SalesDesc'])
         if size: data['size'] = size.group()
+
+        #get height and width
+        if data['size']:
+            size_width = re.findall('\d+', data['size'])
+            data['height'] = size_width[0]
+            data['width'] = size_width[1]
 
         #get tile design
         design = Command.create_update_tiles_designs(item, group)
@@ -112,11 +118,11 @@ class Command(BaseCommand):
         groups = [group for group in items.json() if group['SubLevel'] == 1]
         tiles = [item for item in items.json() if item['SubLevel'] == 2 or item['SubLevel'] == 3]
 
-        for collection in collections:
-            Command.create_update_collections(collection)
+#         for collection in collections:
+#             Command.create_update_collections(collection)
 
-        for group in groups:
-            Command.create_update_groups(group)
+#         for group in groups:
+#             Command.create_update_groups(group)
 
         for tile in tiles:
             Command.create_update_tiles(tile)
