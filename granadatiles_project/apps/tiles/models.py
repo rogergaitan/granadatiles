@@ -129,6 +129,12 @@ class Tile(BaseCatalogModel):
     portfolio = models.ForeignKey('Portfolio', blank=True, null=True, related_name='tiles', verbose_name=_('Portfolio'))
     customized = models.BooleanField(default=False, blank=True, verbose_name=_('Customized'))
 
+    def get_sq_ft(self):
+        return self.width * self.height * 0.00694444
+
+    def get_price_by_sq_ft(self):
+        return (1/self.get_sq_ft()) * self.sales_price
+
     @property
     def get_admin_url(self):
         return reverse("admin:%s_%s_change" % (self._meta.app_label, self._meta.model_name), args=(self.id,))
