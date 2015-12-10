@@ -15,10 +15,10 @@ class CartViewSet(BaseViewSet):
         serializer = CartSerializer(cart)
         return Response(serializer.data)
 
-
-#     def add_to_cart(self, request):
-#         tile = Tile.objects.get(list_id=request.query_params['list_id'])
-#         square_ft = request.query_params['square_ft']
+    @list_route(methods=['get'])
+    def add_to_cart(self, request):
+        tile = Tile.objects.get(list_id=request.query_params['list_id'])
+        square_ft = request.query_params['square_ft']
 
 
 #     def update_square_ft(self, request):

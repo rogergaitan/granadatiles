@@ -2,9 +2,13 @@ from rest_framework import serializers
 from core.serializers import BaseSerializer, BaseCatalogSerializer
 
 
+class TileColorSerializer(BaseCatalogSerializer):
+    pass
+
+
 class TileCartSerializer(BaseCatalogSerializer):
-    colors = serializers.CharField()
     image = serializers.CharField()
+    colors = TileColorSerializer(many=True)
 
 
 class CartSerializer(BaseSerializer):
