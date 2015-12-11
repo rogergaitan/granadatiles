@@ -7,7 +7,7 @@ class TileColorDto(BaseCatalogDto):
         super().__init__(color, language)
 
 
-class TileCartDto(BaseCatalogDto):
+class TileDto(BaseCatalogDto):
 
     def __init__(self, tile, language):
         super().__init__(tile, language)
@@ -15,11 +15,11 @@ class TileCartDto(BaseCatalogDto):
         self.colors = [TileColorDto(color, language) for color in tile.colors.all()]
 
 
-class CartDto(BaseDto):
+class TileOrdersDto(BaseDto):
 
-    def __init__(self, cart, language):
-        super().__init__(cart)
-        self.square_ft = cart.square_ft
-        self.quantity = cart.quantity
-        self.boxes = cart.boxes
-        self.tiles = [TileCartDto(tile, language) for tile in cart.tiles.all() ]
+    def __init__(self, tileorder, language):
+        super().__init__(tileorder)
+        self.sq_ft = tileorder.sq_ft
+        self.quantity = tileorder.quantity
+        self.boxes = tileorder.boxes
+        self.tile = TileDto(tileorder.tiles, language)

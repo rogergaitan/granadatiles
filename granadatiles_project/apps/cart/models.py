@@ -5,11 +5,29 @@ from apps.tiles.models import Tile
 
 
 class Cart(models.Model):
-    square_ft = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Square feet'))
-    quantity = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Quantity'))
-    boxes = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Tile Boxes'))
-    tiles = models.ManyToManyField(Tile, related_name='cart', verbose_name=_('Cart'))
 
     class Meta:
         verbose_name = _('Cart')
         verbose_name_plural = _('Carts')
+
+
+class TileOrder(models.Model):
+    cart = models.ForeignKey(Cart, related_name='tile_orders', verbose_name=_('Tile Orders'))
+    tiles = models.ForeignKey(Tile, null=True, blank=True, verbose_name=_('Tiles'))
+    sq_ft = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Square feet'))
+    quantity = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Quantity'))
+    boxes = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Tile Boxes'))
+
+    class Meta:
+         verbose_name = _('Tile Order')
+         verbose_name_plural = _('Tile Orders')
+
+
+class SampleOrder(models.Model):
+    cart = models.ForeignKey(Cart, related_name='sample_orders', verbose_name=_('Sample Orders'))
+    tiles = models.ForeignKey(Tile, null=True, blank=True, verbose_name=_('Tiles'))
+    quantity = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Quantity'))
+
+    class Meta:
+         verbose_name = _('Sample Order')
+         verbose_name_plural = _('Sample Orders')

@@ -6,13 +6,13 @@ class TileColorSerializer(BaseCatalogSerializer):
     pass
 
 
-class TileCartSerializer(BaseCatalogSerializer):
+class TileSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
     colors = TileColorSerializer(many=True)
 
 
-class CartSerializer(BaseSerializer):
-    square_ft = serializers.IntegerField()
+class TileOrdersSerializer(BaseSerializer):
+    sq_ft = serializers.IntegerField()
     quantity = serializers.IntegerField()
     boxes = serializers.IntegerField()
-    tiles = TileCartSerializer(many=True)
+    tile = TileSerializer()
