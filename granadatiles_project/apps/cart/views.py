@@ -11,14 +11,15 @@ class CartViewSet(BaseViewSet):
 
     @list_route(methods=['get'])
     def show_cart(self, request):
-        cart = CartService.get_cart(request, language=self.get_language(request))
+        session_cart = CartService.get_session_cart(request)
+        cart = CartService.show_cart(session_cart, language=self.get_language(request))
         serializer = CartSerializer(cart)
         return Response(serializer.data)
 
-    @list_route(methods=['get'])
-    def add_to_cart(self, request):
-        tile = Tile.objects.get(list_id=request.query_params['list_id'])
-        square_ft = request.query_params['square_ft']
+#     @list_route(methods=['get'])
+#     def add_to_cart(self, request):
+#         tile = Tile.objects.get(list_id=request.query_params['list_id'])
+#         square_ft = request.query_params['square_ft']
 
 
 #     def update_square_ft(self, request):

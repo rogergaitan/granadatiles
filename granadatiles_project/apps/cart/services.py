@@ -10,7 +10,7 @@ class CartService:
         request.session['cart_id'] = cart.id
         return cart
 
-    def get_cart(request, language):
+    def get_session_cart(request):
         cart_id = request.session.get('cart_id')
         if cart_id:
             try:
@@ -19,4 +19,8 @@ class CartService:
                 cart = CartService.new(request)
         else:
             cart = CartService.new(request)
-        return CartDto(cart, language)
+        return cart
+
+    def show_cart(cart, language):
+        cartdto = CartDto(cart, language)
+        return cartdto
