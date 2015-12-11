@@ -69,7 +69,7 @@ class TileDesignDto(BaseCatalogDto):
         tiles_filter = tile_design.tiles.exclude(image='')
         if size: tiles_filter = tiles_filter.filter(size=size)
         if new: tiles_filter = tiles_filter.filter(new=True)
-        if in_stock: tiles_filter = tiles_filter.filter(quantity_on_hand__gt=0)
+        if in_stock: tiles_filter = tiles_filter.filter(custom=False)
         if special: tiles_filter = tiles_filter.filter(on_sale=True)
 
         super().__init__(tile_design, language)
