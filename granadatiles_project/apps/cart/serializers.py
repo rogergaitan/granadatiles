@@ -16,3 +16,8 @@ class TileOrdersSerializer(BaseSerializer):
     quantity = serializers.IntegerField()
     boxes = serializers.IntegerField()
     tile = TileSerializer()
+
+
+class SampleOrdersSerializer(BaseSerializer):
+    quantity = serializers.IntegerField()
+    tile = TileSerializer()

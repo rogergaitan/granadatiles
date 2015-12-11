@@ -23,3 +23,11 @@ class TileOrdersDto(BaseDto):
         self.quantity = tileorder.quantity
         self.boxes = tileorder.boxes
         self.tile = TileDto(tileorder.tiles, language)
+
+
+class SampleOrdersDto(BaseDto):
+
+    def __init__(self, sampleorder, language):
+        super().__init__(sampleorder)
+        self.quantity = sampleorder.quantity
+        self.tile = TileDto(sampleorder.tiles, language)

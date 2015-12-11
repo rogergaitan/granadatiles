@@ -4,7 +4,7 @@ from rest_framework.decorators import list_route, detail_route
 from core.views import BaseViewSet
 from apps.tiles.models import Tile
 from .services import CartService
-from .serializers import TileOrdersSerializer
+from .serializers import TileOrdersSerializer, SampleOrdersSerializer
 
 
 class CartViewSet(BaseViewSet):
@@ -14,6 +14,14 @@ class CartViewSet(BaseViewSet):
         session_cart = CartService.get_session_cart(request)
         cart = CartService.show_tile_orders(session_cart, language=self.get_language(request))
         serializer = TileOrdersSerializer(cart, many=True)
+        return Response(serializer.data)
+
+
+    @list_route(methods=['get'])
+    def show_sample_orders(self, request):
+        session_cart = CartService.get_session_cart(request)
+        cart = CartService.show_sample_orders(session_cart, language=self.get_language(request))
+        serializer = SampleOrdersSerializer(cart, many=True)
         return Response(serializer.data)
 
     #@list_route(methods=['get'])

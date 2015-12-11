@@ -1,6 +1,6 @@
 from apps.tiles.models import Tile
 from .models import Cart
-from .dtos import TileOrdersDto
+from .dtos import TileOrdersDto, SampleOrdersDto
 
 
 class CartService:
@@ -24,3 +24,7 @@ class CartService:
     def show_tile_orders(cart, language):
         tileordersdto = [TileOrdersDto(tileorder, language) for tileorder in cart.tile_orders.all()]
         return tileordersdto
+
+    def show_sample_orders(cart, language):
+        sampleordersdto = [SampleOrdersDto(sampleorder, language) for sampleorder in cart.sample_orders.all()]
+        return sampleordersdto
