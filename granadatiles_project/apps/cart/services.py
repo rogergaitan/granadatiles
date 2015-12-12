@@ -1,3 +1,5 @@
+from django.shortcuts import get_object_or_404
+
 from apps.tiles.models import Tile
 from .models import Cart
 from .dtos import TileOrdersDto, SampleOrdersDto
@@ -10,7 +12,7 @@ class CartService:
         request.session['cart_id'] = cart.id
         return cart
 
-    def get_session_cart(request):
+    def get_cart(request):
         cart_id = request.session.get('cart_id')
         if cart_id:
             try:
@@ -21,10 +23,28 @@ class CartService:
             cart = CartService.new(request)
         return cart
 
-    def show_tile_orders(cart, language):
+    def get_tile_orders(cart, language):
         tileordersdto = [TileOrdersDto(tileorder, language) for tileorder in cart.tile_orders.all()]
         return tileordersdto
 
-    def show_sample_orders(cart, language):
+    def get_sample_orders(cart, language):
         sampleordersdto = [SampleOrdersDto(sampleorder, language) for sampleorder in cart.sample_orders.all()]
         return sampleordersdto
+
+    def tile_quantity(sq_ft, tile):
+        quantity = int(sq_ft)/tile.get_sq_ft()
+        return quantity
+
+    #def tile_boxes(sq_ft)
+
+    def add_tile(cart, id, sq_ft):
+        tile = get_object_or_404(Tile, list_id=id)
+
+        data = {
+            'tiles': tile,
+            'sq_ft': sq_ft,
+            'quantity': CartService.tile_quantity(sq_ft, tile),
+            #'boxes': CartService.tile_boxes
+        }
+
+        cart.tile_orders.update_or_create(cart=cart, tiles=tile, defaults=data)

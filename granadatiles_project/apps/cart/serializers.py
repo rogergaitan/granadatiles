@@ -7,6 +7,8 @@ class TileColorSerializer(BaseCatalogSerializer):
 
 
 class TileSerializer(BaseCatalogSerializer):
+    list_id = serializers.CharField()
+    size = serializers.CharField()
     image = serializers.CharField()
     colors = TileColorSerializer(many=True)
 

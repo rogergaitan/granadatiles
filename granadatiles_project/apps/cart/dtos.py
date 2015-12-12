@@ -11,10 +11,12 @@ class TileDto(BaseCatalogDto):
 
     def __init__(self, tile, language):
         super().__init__(tile, language)
+        self.list_id = tile.list_id
+        self.size = tile.size
         self.image = tile.mosaic.url if tile.mosaic else ''
         self.colors = [TileColorDto(color, language) for color in tile.colors.all()]
 
-
+#TODO add price field
 class TileOrdersDto(BaseDto):
 
     def __init__(self, tileorder, language):

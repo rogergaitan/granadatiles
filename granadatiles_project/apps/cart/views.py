@@ -1,4 +1,5 @@
 from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.decorators import list_route, detail_route
 
 from core.views import BaseViewSet
@@ -11,27 +12,26 @@ class CartViewSet(BaseViewSet):
 
     @list_route(methods=['get'])
     def show_tile_orders(self, request):
-        session_cart = CartService.get_session_cart(request)
-        cart = CartService.show_tile_orders(session_cart, language=self.get_language(request))
-        serializer = TileOrdersSerializer(cart, many=True)
+        cart = CartService.get_cart(request)
+        tileorders = CartService.get_tile_orders(cart, language=self.get_language(request))
+        serializer = TileOrdersSerializer(tileorders, many=True)
         return Response(serializer.data)
-
 
     @list_route(methods=['get'])
     def show_sample_orders(self, request):
-        session_cart = CartService.get_session_cart(request)
-        cart = CartService.show_sample_orders(session_cart, language=self.get_language(request))
-        serializer = SampleOrdersSerializer(cart, many=True)
+        cart = CartService.get_cart(request)
+        sampleorders = CartService.get_sample_orders(cart, language=self.get_language(request))
+        serializer = SampleOrdersSerializer(sampleorders, many=True)
         return Response(serializer.data)
 
-    #@list_route(methods=['get'])
-    #def add_to_cart(self, request):
-    #    tile = Tile.objects.get(list_id=request.query_params['list_id'])
-    #    square_ft = request.query_params['square_ft']
+    @list_route(methods=['get'])
+    def add_tile(self, request):
+        cart = CartService.get_cart(request)
+        id = request.query_params.get('id')
+        sq_ft = request.query_params.get('sq_ft')
+        CartService.add_tile(cart, id, sq_ft)
+        return Response(status=status.HTTP_200_OK)
 
-
-#     def update_square_ft(self, request):
-
-
-
-#     def remove_item(self, request):
+#     @list_route(methods=['get'])
+#     def add_sample(self, request):
+#         cart = CartService.get_cart(request)
