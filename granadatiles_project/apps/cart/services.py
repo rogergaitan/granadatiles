@@ -1,5 +1,6 @@
 import math
 
+from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404
 
 from apps.tiles.models import Tile
@@ -46,6 +47,12 @@ class CartService:
 
     def add_tile(cart, id, sq_ft):
         tile = CartService.get_tile(id)
+
+        if sq_ft < tile.design.group.collection.minimum_input_square_foot:
+            return {'message': _('minimum_input_square_foot_message') }
+
+        if sq_ft > tile.design.group.collection.maximum_input_square_foot:
+            return {'message': _('maximum_input_square_foot_message') }
 
         data = {
             'tiles': tile,

@@ -21,9 +21,9 @@ class CartViewSet(BaseViewSet):
     def add_tile(self, request):
         cart = CartService.get_cart(request)
         id = request.query_params.get('id')
-        sq_ft = request.query_params.get('sq_ft')
-        CartService.add_tile(cart, id, sq_ft)
-        return Response(status=status.HTTP_200_OK)
+        sq_ft = int(request.query_params.get('sq_ft'))
+        return Response(CartService.add_tile(cart, id, sq_ft),
+                        status=status.HTTP_200_OK)
 
     @list_route(methods=['get'])
     def remove_tile(self, request):
