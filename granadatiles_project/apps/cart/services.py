@@ -1,3 +1,5 @@
+import math
+
 from django.shortcuts import get_object_or_404
 
 from apps.tiles.models import Tile
@@ -32,7 +34,7 @@ class CartService:
         return sampleordersdto
 
     def tile_quantity(sq_ft, tile):
-        quantity = int(sq_ft)/tile.get_sq_ft()
+        quantity = math.ceil(int(sq_ft)/tile.get_sq_ft())
         return quantity
 
     #def tile_boxes(sq_ft)
