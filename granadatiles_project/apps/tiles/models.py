@@ -26,6 +26,10 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
     introduction_es = models.TextField(blank=True, null=True, verbose_name=_('Introduction_es'))
     list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
     uses = models.ManyToManyField('Use', blank=True, related_name='collection', verbose_name=_('Uses'))
+    maximum_input_square_foot = models.PositiveIntegerField(null=True, blank=True,
+                                                            verbose_name=_('maximum_input_square_foot'))
+    minimum_input_square_foot = models.PositiveIntegerField(null=True, blank=True,
+                                                            verbose_name=_('minimum_input_square_foot'))
 
     @property
     def menu_thumbnail(self):
