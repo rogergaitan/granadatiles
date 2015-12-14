@@ -39,6 +39,8 @@ class CartService:
 
     #def tile_boxes(sq_ft)
 
+    #def get_subtotal()
+
     def add_tile(cart, id, sq_ft):
         tile = get_object_or_404(Tile, list_id=id)
 
@@ -47,6 +49,18 @@ class CartService:
             'sq_ft': sq_ft,
             'quantity': CartService.tile_quantity(sq_ft, tile),
             #'boxes': CartService.tile_boxes
+            #'subtotal':
         }
 
         cart.tile_orders.update_or_create(cart=cart, tiles=tile, defaults=data)
+
+    def add_sample(cart, id, quantity):
+        tile = get_object_or_404(Tile, list_id=id)
+
+        data = {
+            'tiles': tile,
+            'quantity': quantity,
+            #'subtotal':
+        }
+
+        cart.sample_orders.update_or_create(cart=cart, tiles=tile, defaults=data)

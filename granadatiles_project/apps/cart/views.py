@@ -32,6 +32,10 @@ class CartViewSet(BaseViewSet):
         CartService.add_tile(cart, id, sq_ft)
         return Response(status=status.HTTP_200_OK)
 
-#     @list_route(methods=['get'])
-#     def add_sample(self, request):
-#         cart = CartService.get_cart(request)
+    @list_route(methods=['get'])
+    def add_sample(self, request):
+        cart = CartService.get_cart(request)
+        id = request.query_params.get('id')
+        quantity = request.query_params.get('quantity')
+        CartService.add_sample(cart, id, quantity)
+        return Response(status=status.HTTP_200_OK)
