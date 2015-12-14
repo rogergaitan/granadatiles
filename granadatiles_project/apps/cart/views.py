@@ -18,13 +18,6 @@ class CartViewSet(BaseViewSet):
         return Response(serializer.data)
 
     @list_route(methods=['get'])
-    def show_sample_orders(self, request):
-        cart = CartService.get_cart(request)
-        sampleorders = CartService.get_sample_orders(cart, language=self.get_language(request))
-        serializer = SampleOrdersSerializer(sampleorders, many=True)
-        return Response(serializer.data)
-
-    @list_route(methods=['get'])
     def add_tile(self, request):
         cart = CartService.get_cart(request)
         id = request.query_params.get('id')
@@ -33,9 +26,30 @@ class CartViewSet(BaseViewSet):
         return Response(status=status.HTTP_200_OK)
 
     @list_route(methods=['get'])
+    def remove_tile(self, request):
+        cart = CartService.get_cart(request)
+        id = request.query_params.get('id')
+        CartService.remove_tile(cart, id)
+        return Response(status=status.HTTP_200_OK)
+
+    @list_route(methods=['get'])
+    def show_sample_orders(self, request):
+        cart = CartService.get_cart(request)
+        sampleorders = CartService.get_sample_orders(cart, language=self.get_language(request))
+        serializer = SampleOrdersSerializer(sampleorders, many=True)
+        return Response(serializer.data)
+
+    @list_route(methods=['get'])
     def add_sample(self, request):
         cart = CartService.get_cart(request)
         id = request.query_params.get('id')
         quantity = request.query_params.get('quantity')
         CartService.add_sample(cart, id, quantity)
+        return Response(status=status.HTTP_200_OK)
+
+    @list_route(methods=['get'])
+    def remove_sample(self, request):
+        cart = CartService.get_cart(request)
+        id = request.query_params.get('id')
+        CartService.remove_sample(cart, id)
         return Response(status=status.HTTP_200_OK)

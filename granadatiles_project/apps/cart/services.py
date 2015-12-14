@@ -41,8 +41,11 @@ class CartService:
 
     #def get_subtotal()
 
+    def get_tile(id):
+        return get_object_or_404(Tile, list_id=id)
+
     def add_tile(cart, id, sq_ft):
-        tile = get_object_or_404(Tile, list_id=id)
+        tile = CartService.get_tile(id)
 
         data = {
             'tiles': tile,
@@ -54,8 +57,13 @@ class CartService:
 
         cart.tile_orders.update_or_create(cart=cart, tiles=tile, defaults=data)
 
+    def remove_tile(cart, id):
+        tile = CartService.get_tile(id)
+        cart.tile_orders.get(tiles=tile).delete()
+
+
     def add_sample(cart, id, quantity):
-        tile = get_object_or_404(Tile, list_id=id)
+        tile = CartService.get_tile(id)
 
         data = {
             'tiles': tile,
@@ -64,3 +72,7 @@ class CartService:
         }
 
         cart.sample_orders.update_or_create(cart=cart, tiles=tile, defaults=data)
+
+    def remove_sample(cart, id):
+        tile = CartService.get_tile(id)
+        cart.sample_orders.get(tiles=tile).delete()
