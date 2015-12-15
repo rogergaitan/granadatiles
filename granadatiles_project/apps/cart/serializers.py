@@ -11,6 +11,7 @@ class TileSerializer(BaseCatalogSerializer):
     size = serializers.CharField()
     image = serializers.CharField()
     colors = TileColorSerializer(many=True)
+    subtotal = serializers.IntegerField()
 
 
 class TileOrdersSerializer(BaseSerializer):

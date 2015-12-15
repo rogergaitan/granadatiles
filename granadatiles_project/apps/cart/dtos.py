@@ -9,14 +9,14 @@ class TileColorDto(BaseCatalogDto):
 
 class TileDto(BaseCatalogDto):
 
-    def __init__(self, tile, language):
+    def __init__(self, tile, qty, language):
         super().__init__(tile, language)
         self.list_id = tile.list_id
         self.size = tile.size
         self.image = tile.mosaic.url if tile.mosaic else ''
         self.colors = [TileColorDto(color, language) for color in tile.colors.all()]
+        self.subtotal = qty * tile.sales_price
 
-#TODO add price field
 class TileOrdersDto(BaseDto):
 
     def __init__(self, tileorder, language):
@@ -24,7 +24,7 @@ class TileOrdersDto(BaseDto):
         self.sq_ft = tileorder.sq_ft
         self.quantity = tileorder.quantity
         self.boxes = tileorder.boxes
-        self.tile = TileDto(tileorder.tiles, language)
+        self.tile = TileDto(tileorder.tiles, tileorder.quantity, language)
 
 
 class SampleOrdersDto(BaseDto):
@@ -32,4 +32,4 @@ class SampleOrdersDto(BaseDto):
     def __init__(self, sampleorder, language):
         super().__init__(sampleorder)
         self.quantity = sampleorder.quantity
-        self.tile = TileDto(sampleorder.tiles, language)
+        self.tile = TileDto(sampleorder.tiles, sampleorder.quantity, language)
