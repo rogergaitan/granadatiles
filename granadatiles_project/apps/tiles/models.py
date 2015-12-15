@@ -188,7 +188,6 @@ class Style(BaseCatalogModel):
 
 
 class Use(BaseCatalogModel):
-    pass
 
     class Meta:
        verbose_name = _('Use')
@@ -213,3 +212,15 @@ class LeadTime(BaseContentModel):
 
 class Portfolio(models.Model):
     user = models.ForeignKey(User, related_name='portfolio', verbose_name=_('Portfolio'))
+
+
+class Box(models.Model):
+    MEASUREMENT_UNITS = ((1, 'Unit'), (2, 'Square Foot'))
+
+    description = models.CharField(max_length=100, verbose_name=_('Description'))
+    measurement_unit = models.PositiveIntegerField(choices=MEASUREMENT_UNITS, verbose_name=_('Measurement Unit'))
+    quantity = models.FloatField(verbose_name=_('Quantity'))
+
+    class Meta:
+        verbose_name = _('Box')
+        verbose_name_plural = _('Boxes')

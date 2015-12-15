@@ -2,7 +2,7 @@ from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django.utils.translation import ugettext as _
 from .models import (Tile, Collection, Group, TileDesign, Use, Style,
-                     PalleteColor, Warehouse, LeadTime)
+                     PalleteColor, Warehouse, LeadTime, Box)
 
 
 class TileInline(admin.StackedInline):
@@ -56,8 +56,8 @@ class TileSizeFilter(admin.SimpleListFilter):
 @admin.register(Tile)
 class TileAdmin(admin.ModelAdmin):
     fields = ('name', 'name_es', 'list_id', 'design', 'sales_description',
-              'sales_description_es', 'size', 'thickness', 'weight',
-              'sales_price','average_cost', 'quantity_on_hand',
+              'sales_description_es', 'size', 'height', 'width' ,'thickness',
+              'weight','sales_price','average_cost', 'quantity_on_hand',
               'image', 'mosaic', 'tearsheet', 'similar_tiles', 'colors',
               'is_active', 'main', 'new', 'on_sale', 'is_sample')
 
@@ -69,7 +69,7 @@ class TileAdmin(admin.ModelAdmin):
     list_filter = ('new', TileSizeFilter)
     actions = ['tile_new']
     readonly_fields = ('list_id', 'design', 'name', 'quantity_on_hand',
-                       'sales_price', 'average_cost')
+                       'sales_price', 'size', 'average_cost')
 
     def tile_new(self, request, queryset):
         queryset.update(new=True)
@@ -176,3 +176,7 @@ class LeadTimeAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request):
         return False
+
+@admin.register(Box)
+class BoxAdmin(admin.ModelAdmin):
+   pass
