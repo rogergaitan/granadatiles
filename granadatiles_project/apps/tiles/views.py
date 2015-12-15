@@ -11,7 +11,8 @@ from .serializers import (
     GroupSerializer, GroupDesignSerializer, MenuCollectionSerializer,
     CollectionSerializer, CollectionRetrieveSerializer, TileDesignSerializer,
     StyleSerializer, GroupTileSizeSerializer, TileDetailSerializer,
-    TileInstallationPhotosSerializer, TileOrderSerializer
+    TileInstallationPhotosSerializer, TileOrderSerializer, CollectionsFilterSerializer,
+    InStockSerializer
 )
 from .services import CollectionService, GroupService, TileService
 from .models import Collection, Group
@@ -139,6 +140,24 @@ class TileViewSet(BaseViewSet):
     def order(self, request, pk=None):
         tile = TileService.get_tile_order(id=pk, language=self.get_language(request))
         serializer = TileOrderSerializer(tile)
+        return Response(serializer.data)
+
+    @list_route(methods=['get'])
+    def in_stock_tiles(self, request):
+        tiles = TileService.get_in_stock_tiles(language=self.get_language(request))
+        serializer = InStockSerializer(tiles, many=True)
+        return Response(serializer.data)
+
+    @list_route(methods=['get'])
+    def in_stock_samples(self, request):
+        tiles = TileService.get_in_stock_samples(language=self.get_language(request))
+        serializer = InStockSerializer(tiles, many=True)
+        return Response(serializer.data)
+
+    @list_route(methods=['get'])
+    def collections_filters(self, request):
+        collections = TileService.get_tiles_collections_filters(language=self.get_language(request))
+        serializer = CollectionsFilterSerializer(collections, many=True)
         return Response(serializer.data)
 
 

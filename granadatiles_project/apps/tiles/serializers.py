@@ -11,6 +11,10 @@ class CollectionRetrieveSerializer(CollectionSerializer):
     introduction = serializers.CharField()
 
 
+class CollectionsFilterSerializer(BaseContentSerializer):
+    pass
+
+
 class TileSizeSerializer(serializers.Serializer):
     size = serializers.CharField()
 
@@ -82,6 +86,14 @@ class TileOrderSerializer(BaseCatalogSerializer):
     price = serializers.FloatField()
     tearsheet = serializers.CharField()
     ship_from = WarehouseSerializer(many=True)
+
+
+class InStockSerializer(BaseCatalogSerializer):
+    mosaic = serializers.CharField()
+    name = serializers.CharField()
+    collection = serializers.CharField()
+    size = serializers.CharField()
+    has_installation_photos = serializers.BooleanField()
 
 
 class GroupSerializer(BaseGalleryImageSerializer):

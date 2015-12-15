@@ -149,11 +149,20 @@ class TileOrderDto(BaseCatalogDto):
             self.ship_from = [WarehouseDto(warehouse, language) for warehouse in
                               Warehouse.objects.filter(custom=False)]
 
+class InStockDto(BaseCatalogDto):
 
-class CartDto(BaseCatalogDto):
+    def __init__(self, tile, language):
+        super().__init__(tile, language)
+        self.mosaic = tile.mosaic.url if tile.mosaic else ''
+        self.collection = tile.design.group.collection.get_title(language)
+        self.size = tile.size
+        self.has_installation_photos = tile.has_installation_photos()
 
-  def __init__(self, tile):
-      self.name = tile.name
+
+class CollectionsFiltersDto(BaseContentDto):
+
+    def __init__(self, collection, language):
+        super().__init__(collection, language)
 
 
 class GroupDto(BaseGalleryImageDto):

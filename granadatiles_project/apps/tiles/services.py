@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404
 from .models import Collection, Group, Tile
 from .dtos import (
-    CollectionDto, CollectionDetailDto, GroupDto,
-    TileDesignDto, MenuCollectionDto, TileStyleDto, TileDetailDto,
-    TileInstallationPhotosDto, TileSizeDto, TileOrderDto
+    CollectionDto, CollectionDetailDto, GroupDto, TileDesignDto,
+    MenuCollectionDto, TileStyleDto, TileDetailDto, TileInstallationPhotosDto,
+    TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto
 )
 
 from apps.tiles.models import Style
@@ -98,3 +98,19 @@ class TileService:
           tile = get_object_or_404(Tile, pk=id)
           tileorderDto = TileOrderDto(tile, language)
           return tileorderDto
+
+      def get_in_stock_tiles(language):
+          tiles = Tile.objects.filter(is_sample=False)
+          instockdto = [InStockDto(tile, language) for tile in tiles if tile.design]
+          return instockdto
+
+      def get_in_stock_samples(language):
+          tiles = Tile.objects.filter(is_sample=True)
+
+          instockdto = [InStockDto(tile, language) for tile in tiles]
+          return instockdto
+
+      def get_tiles_collections_filters(language):
+          collections = Collection.objects.filter(featured=True)
+          collectiondto = [CollectionsFiltersDto(collection, language) for collection in collections]
+          return collectiondto
