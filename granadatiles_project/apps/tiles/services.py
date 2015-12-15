@@ -99,15 +99,14 @@ class TileService:
           tileorderDto = TileOrderDto(tile, language)
           return tileorderDto
 
-      def get_in_stock_tiles(language):
-          tiles = Tile.objects.filter(is_sample=False)
-          instockdto = [InStockDto(tile, language) for tile in tiles if tile.design]
-          return instockdto
+      def get_in_stock_tiles(ids, is_sample, limit, offset, language):
+          if ids: tiles = Tile.objects.filter(design__group__collection__in=ids)
 
-      def get_in_stock_samples(language):
-          tiles = Tile.objects.filter(is_sample=True)
-
-          instockdto = [InStockDto(tile, language) for tile in tiles]
+          if is_sample:
+              tiles = Tile.objects.filter(is_sample=True)
+          else:
+              tiles = Tile.objects.filter(is_sample=False)
+          instockdto = [InStockDto(tile, language) for tile in tiles[offset:limit] if tile.design]
           return instockdto
 
       def get_tiles_collections_filters(language):

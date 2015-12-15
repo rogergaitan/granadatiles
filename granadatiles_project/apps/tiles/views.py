@@ -144,13 +144,13 @@ class TileViewSet(BaseViewSet):
 
     @list_route(methods=['get'])
     def in_stock_tiles(self, request):
-        tiles = TileService.get_in_stock_tiles(language=self.get_language(request))
-        serializer = InStockSerializer(tiles, many=True)
-        return Response(serializer.data)
+        collection_filter = request.query_params.getlist('ids')
+        is_sample = request.query_params.get('is_sample')
+        limit = int(request.query_params.get('limit', 6))
+        offset = int(request.query_params.get('offset', 0))
 
-    @list_route(methods=['get'])
-    def in_stock_samples(self, request):
-        tiles = TileService.get_in_stock_samples(language=self.get_language(request))
+        tiles = TileService.get_in_stock_tiles(collection_filter, is_sample,
+                                               limit, offset, language=self.get_language(request))
         serializer = InStockSerializer(tiles, many=True)
         return Response(serializer.data)
 
