@@ -134,6 +134,7 @@ class Tile(BaseCatalogModel):
     portfolio = models.ForeignKey('Portfolio', blank=True, null=True, related_name='tiles', verbose_name=_('Portfolio'))
     customized = models.BooleanField(default=False, blank=True, verbose_name=_('Customized'))
     override_collection_box = models.BooleanField(default=False, verbose_name=_('Override Collection Box'))
+    box = models.ForeignKey('Box', null=True, blank=True, verbose_name=_('Box'))
 
     def get_sq_ft(self):
         return self.width * self.height * 0.00694444
@@ -222,6 +223,9 @@ class Box(models.Model):
     description = models.CharField(max_length=100, verbose_name=_('Description'))
     measurement_unit = models.PositiveIntegerField(choices=MEASUREMENT_UNITS, verbose_name=_('Measurement Unit'))
     quantity = models.FloatField(verbose_name=_('Quantity'))
+
+    def __str__(self):
+        return self.description
 
     class Meta:
         verbose_name = _('Box')

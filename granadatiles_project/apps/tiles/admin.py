@@ -58,7 +58,7 @@ class TileAdmin(admin.ModelAdmin):
     fields = ('name', 'name_es', 'list_id', 'design', 'sales_description',
               'sales_description_es', 'size', 'height', 'width' ,'thickness',
               'weight','sales_price','average_cost', 'quantity_on_hand',
-              'image', 'mosaic', 'tearsheet', 'similar_tiles', 'colors',
+              'image', 'mosaic', 'tearsheet', 'similar_tiles', 'colors', 'box',
               'is_active', 'main', 'new', 'on_sale', 'is_sample')
 
     list_display = ('name', 'sales_description', 'size', 'weight', 'thickness',
@@ -80,6 +80,12 @@ class TileAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+    def save_model(self, request, obj, form, change):
+        tiles = Tile.objects.filter(design__group__collection__id=obj.design.group.collection.id)
+        tiles = tiles.filter(override_collection_box=True)
+        tiles.update(box=request.POST.get('box'))
+        obj.save()
 
 
 class GroupInline(admin.StackedInline):
@@ -180,4 +186,4 @@ class LeadTimeAdmin(admin.ModelAdmin):
 
 @admin.register(Box)
 class BoxAdmin(admin.ModelAdmin):
-   pass
+    list_display = ('description', 'measurement_unit', 'quantity')
