@@ -66,7 +66,7 @@ class TileAdmin(admin.ModelAdmin):
 
     list_editable = ['is_active', 'new', 'on_sale', 'size', 'weight', 'thickness']
     search_fields = ['name', 'name_es', 'list_id', 'size']
-    list_filter = ('new', TileSizeFilter)
+    list_filter = ('new', 'override_collection_box', TileSizeFilter)
     actions = ['tile_new']
     readonly_fields = ('list_id', 'design', 'name', 'quantity_on_hand',
                        'sales_price', 'size', 'average_cost')
@@ -176,6 +176,7 @@ class LeadTimeAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request):
         return False
+
 
 @admin.register(Box)
 class BoxAdmin(admin.ModelAdmin):
