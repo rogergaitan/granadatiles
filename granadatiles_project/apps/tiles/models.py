@@ -30,6 +30,7 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
                                                             verbose_name=_('maximum_input_square_foot'))
     minimum_input_square_foot = models.PositiveIntegerField(null=True, blank=True,
                                                             verbose_name=_('minimum_input_square_foot'))
+    box = models.ForeignKey('Box', null=True, blank=True, verbose_name=_('Box'))
 
     @property
     def menu_thumbnail(self):
