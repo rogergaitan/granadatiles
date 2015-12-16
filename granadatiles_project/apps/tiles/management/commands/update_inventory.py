@@ -76,6 +76,11 @@ class Command(BaseCommand):
             data['height'] = size_width[0]
             data['width'] = size_width[1]
 
+        #check quantity square feet
+        data['qty_is_sq_ft'] = False
+        if re.search('per square foot', item['SalesDesc'], re.I):
+            data['qty_is_sq_ft'] = True
+
         #get tile design
         design = Command.create_update_tiles_designs(item, group)
         if design: data['design'] = design[0]
