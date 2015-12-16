@@ -135,9 +135,13 @@ class Tile(BaseCatalogModel):
     customized = models.BooleanField(default=False, blank=True, verbose_name=_('Customized'))
     override_collection_box = models.BooleanField(default=False, verbose_name=_('Override Collection Box'))
     box = models.ForeignKey('Box', null=True, blank=True, verbose_name=_('Box'))
+    qty_is_sq_ft = models.BooleanField(default=False, verbose_name=_('Quantity Square Foot'))
 
     def get_sq_ft(self):
-        return self.width * self.height * 0.00694444
+        if self.qty_is_sq_ft:
+           return self.quantity_on_hand
+        else:
+           return self.width * self.height * 0.00694444
 
     def get_price_by_sq_ft(self):
         return (1/self.get_sq_ft()) * self.sales_price
@@ -215,6 +219,10 @@ class LeadTime(BaseContentModel):
 
 class Portfolio(models.Model):
     user = models.ForeignKey(User, related_name='portfolio', verbose_name=_('Portfolio'))
+
+    class Meta:
+        verbose_name = _('Portfolio')
+        verbose_name = _('Portfolios')
 
 
 class Box(models.Model):

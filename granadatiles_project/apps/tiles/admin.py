@@ -58,8 +58,8 @@ class TileAdmin(admin.ModelAdmin):
     fields = ('name', 'name_es', 'list_id', 'design', 'sales_description',
               'sales_description_es', 'size', 'height', 'width' ,'thickness',
               'weight','sales_price','average_cost', 'quantity_on_hand',
-              'image', 'mosaic', 'tearsheet', 'similar_tiles', 'colors', 'box',
-              'is_active', 'main', 'new', 'on_sale', 'is_sample')
+              'image', 'mosaic', 'tearsheet', 'box',  'similar_tiles', 'colors',
+              'main', 'new', 'override_collection_box', 'is_active', 'on_sale', 'is_sample')
 
     list_display = ('name', 'sales_description', 'size', 'weight', 'thickness',
                     'quantity_on_hand', 'is_active', 'new', 'on_sale',)
@@ -81,12 +81,6 @@ class TileAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
-    def save_model(self, request, obj, form, change):
-        tiles = Tile.objects.filter(design__group__collection__id=obj.design.group.collection.id)
-        tiles = tiles.filter(override_collection_box=True)
-        tiles.update(box=request.POST.get('box'))
-        obj.save()
-
 
 class GroupInline(admin.StackedInline):
     model = Group
@@ -105,7 +99,7 @@ class GroupInline(admin.StackedInline):
 @admin.register(Collection)
 class CollectionAdmin(SummernoteModelAdmin):
     fields = ('title', 'title_es', 'list_id', 'description', 'description_es', 'introduction',
-              'introduction_es', 'slug', 'slug_es', 'image', 'menu_image', 'uses',
+              'introduction_es', 'slug', 'slug_es', 'image', 'menu_image', 'box', 'uses',
               'featured', 'show_in_menu')
 
     list_display = ('title', 'groups_count', 'featured', 'show_in_menu')
@@ -120,6 +114,12 @@ class CollectionAdmin(SummernoteModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+    def save_model(self, request, obj, form, change):
+        tiles = Tile.objects.filter(design__group__collection__id=obj.id)
+        tiles = tiles.filter(override_collection_box=True)
+        tiles.update(box=request.POST.get('box'))
+        obj.save()
 
 
 class TileDesignInline(admin.StackedInline):
