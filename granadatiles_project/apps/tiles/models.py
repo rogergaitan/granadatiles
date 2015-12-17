@@ -131,7 +131,6 @@ class Tile(BaseCatalogModel):
     tearsheet = models.FileField(upload_to='tearsheets', null=True, blank=True, verbose_name=_('Tearsheet'))
     custom = models.BooleanField(default=False, blank=True, verbose_name=_('Custom'))
     sample = models.ForeignKey('self', blank=True, null=True, related_name='samples', verbose_name=_('Sample'))
-    portfolio = models.ForeignKey('Portfolio', blank=True, null=True, related_name='tiles', verbose_name=_('Portfolio'))
     customized = models.BooleanField(default=False, blank=True, verbose_name=_('Customized'))
     override_collection_box = models.BooleanField(default=False, verbose_name=_('Override Collection Box'))
     box = models.ForeignKey('Box', null=True, blank=True, verbose_name=_('Box'))
@@ -223,6 +222,15 @@ class Portfolio(models.Model):
     class Meta:
         verbose_name = _('Portfolio')
         verbose_name = _('Portfolios')
+
+
+class PortfolioTile(models.Model):
+    portfolio = models.ForeignKey(Portfolio, related_name='tiles', verbose_name=_('Portfolio'))
+    tile = models.ForeignKey(Tile, related_name='portfolio', verbose_name=_('Tile'))
+
+    class Meta:
+        verbose_name = _('Portfolio Tile')
+        verbose_name_plural = _('Portfolio Tiles')
 
 
 class Box(models.Model):

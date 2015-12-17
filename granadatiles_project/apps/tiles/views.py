@@ -161,6 +161,14 @@ class TileViewSet(BaseViewSet):
         return Response(serializer.data)
 
 
+class PortfolioViewSet(BaseViewSet):
+
+    def retrieve(self, request, pk=None):
+        portfolio = PortFolioService.get_portfolio(id=pk, language=self.get_language(request))
+        serializer = PortfolioSerializer(portfolio)
+        return Response(serializer.data)
+
+
 class ItemViewSet(viewsets.ViewSet):
 
     permission_classes = (IsAdminUser,)
