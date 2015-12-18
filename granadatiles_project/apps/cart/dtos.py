@@ -33,4 +33,5 @@ class SampleOrdersDto(BaseDto):
     def __init__(self, sampleorder, language):
         super().__init__(sampleorder)
         self.quantity = sampleorder.quantity
-        self.tile = TileDto(sampleorder.tiles, sampleorder.quantity, language)
+        self.subtotal = sampleorder.subtotal
+        self.tile = TileDto(sampleorder.tiles, language)

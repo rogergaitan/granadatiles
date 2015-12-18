@@ -40,7 +40,9 @@ class CartService:
 
     #def tile_boxes(sq_ft)
 
-    #def get_subtotal()
+    def get_subtotal(tile, quantity):
+        subtotal = quantity * tile.sales_price
+        return subtotal
 
     def get_tile(id):
         return get_object_or_404(Tile, list_id=id)
@@ -49,17 +51,20 @@ class CartService:
         tile = CartService.get_tile(id)
 
         if sq_ft < tile.design.group.collection.minimum_input_square_foot:
-            return {'message': _('minimum_input_square_foot_message') }
+            return {'message': _('minimum_input_square_foot_message')}
 
         if sq_ft > tile.design.group.collection.maximum_input_square_foot:
-            return {'message': _('maximum_input_square_foot_message') }
+            return {'message': _('maximum_input_square_foot_message')}
+
+        quantity = CartService.tile_quantity(sq_ft, tile)
+        subtotal = CartService.get_subtotal(tile, quantity)
 
         data = {
             'tiles': tile,
             'sq_ft': sq_ft,
-            'quantity': CartService.tile_quantity(sq_ft, tile),
-            #'boxes': CartService.tile_boxes()
-            #'subtotal':
+            'quantity': quantity,
+            #'boxes': CartService.tile_boxes(sq, tile)
+            'subtotal': subtotal
         }
 
         cart.tile_orders.update_or_create(cart=cart, tiles=tile, defaults=data)
@@ -68,14 +73,14 @@ class CartService:
         tile = CartService.get_tile(id)
         cart.tile_orders.get(tiles=tile).delete()
 
-
     def add_sample(cart, id, quantity):
         tile = CartService.get_tile(id)
+        subtotal = int(quantity) * tile.sales_price
 
         data = {
             'tiles': tile,
             'quantity': quantity,
-            #'subtotal':
+            'subtotal': subtotal
         }
 
         cart.sample_orders.update_or_create(cart=cart, tiles=tile, defaults=data)

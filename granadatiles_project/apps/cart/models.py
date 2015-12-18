@@ -28,6 +28,7 @@ class SampleOrder(models.Model):
     cart = models.ForeignKey(Cart, related_name='sample_orders', verbose_name=_('Sample Orders'))
     tiles = models.ForeignKey(Tile, null=True, blank=True, verbose_name=_('Tiles'))
     quantity = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Quantity'))
+    subtotal = models.FloatField(null=True, blank=True, verbose_name=_('Subtotal'))
 
     class Meta:
          verbose_name = _('Sample Order')
