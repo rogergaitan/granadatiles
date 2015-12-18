@@ -58,7 +58,7 @@ class CartService:
             'tiles': tile,
             'sq_ft': sq_ft,
             'quantity': CartService.tile_quantity(sq_ft, tile),
-            #'boxes': CartService.tile_boxes
+            #'boxes': CartService.tile_boxes()
             #'subtotal':
         }
 

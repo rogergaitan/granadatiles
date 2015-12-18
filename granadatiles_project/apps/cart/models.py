@@ -17,6 +17,7 @@ class TileOrder(models.Model):
     sq_ft = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Square feet'))
     quantity = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Quantity'))
     boxes = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Tile Boxes'))
+    subtotal = models.FloatField(null=True, blank=True, verbose_name=_('Subtotal'))
 
     class Meta:
          verbose_name = _('Tile Order')
