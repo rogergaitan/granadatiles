@@ -18,6 +18,12 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
         Token.objects.create(user=instance)
 
 
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_portfolio(sender, instance=None, created=False, **kwargs):
+    if created and instance.is_superuser == False:
+        Portfolio.objects.create(user=instance)
+
+
 class Collection(BaseGalleryImageModel, BaseSlugModel):
     menu_image = ImageField(upload_to='Galleries/menu', null = True, blank=True)
     featured = models.BooleanField(default=False, verbose_name=_('Featured'))
