@@ -48,10 +48,10 @@ class CartService:
             return math.ceil(quantity/tile.box.quantity)
 
         if tile.qty_is_sq_ft and tile.box.measurement_unit == 1:
-            raise ApiException("Cannot use boxes of unit for tiles measure in square foot")
+            return APIException("Cannot use boxes of unit for tiles measure in square foot")
 
         if not tile.qty_is_sq_ft and tile.box.measurement_unit == 2:
-            return ApiException("Cannot use boxes of square foot for tiles measure in units")
+            return APIException("Cannot use boxes of square foot for tiles measure in units")
 
     def get_subtotal(tile, quantity):
         return quantity * tile.sales_price
