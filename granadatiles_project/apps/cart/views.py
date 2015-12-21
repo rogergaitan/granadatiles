@@ -50,8 +50,8 @@ class CartViewSet(BaseViewSet):
         cart = CartService.get_cart(request)
         id = request.query_params.get('id')
         quantity = request.query_params.get('quantity')
-        CartService.add_sample(cart, id, quantity)
-        return Response(status=status.HTTP_200_OK)
+        return Response(CartService.add_sample(cart, id, quantity),
+                                        status=status.HTTP_200_OK)
 
     @list_route(methods=['get'])
     def remove_sample(self, request):

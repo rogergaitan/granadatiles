@@ -3,6 +3,8 @@ import math
 from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404
 
+from rest_framework.exceptions import APIException
+
 from apps.tiles.models import Tile
 from .models import Cart
 from .dtos import TileOrdersDto, SampleOrdersDto
@@ -35,14 +37,24 @@ class CartService:
         return sampleordersdto
 
     def tile_quantity(sq_ft, tile):
-        quantity = math.ceil(int(sq_ft)/tile.get_sq_ft())
-        return quantity
+        return math.ceil(int(sq_ft)/tile.get_sq_ft())
 
-    #def tile_boxes(sq_ft)
+    def get_boxes(tile, quantity):
+
+        if tile.qty_is_sq_ft and tile.box.measurement_unit == 2:
+            return math.ceil(quantity/tile.box.quantity)
+
+        if not tile.qty_is_sq_ft and tile.box.measurement_unit == 1:
+            return math.ceil(quantity/tile.box.quantity)
+
+        if tile.qty_is_sq_ft and tile.box.measurement_unit == 1:
+            raise ApiException("Cannot use boxes of unit for tiles measure in square foot")
+
+        if not tile.qty_is_sq_ft and tile.box.measurement_unit == 2:
+            return ApiException("Cannot use boxes of square foot for tiles measure in units")
 
     def get_subtotal(tile, quantity):
-        subtotal = quantity * tile.sales_price
-        return subtotal
+        return quantity * tile.sales_price
 
     def get_tile(id):
         return get_object_or_404(Tile, list_id=id)
@@ -51,19 +63,20 @@ class CartService:
         tile = CartService.get_tile(id)
 
         if sq_ft < tile.design.group.collection.minimum_input_square_foot:
-            return {'message': _('minimum_input_square_foot_message')}
+            return APIException(_('minimum_input_square_foot_message'))
 
         if sq_ft > tile.design.group.collection.maximum_input_square_foot:
-            return {'message': _('maximum_input_square_foot_message')}
+            return APIException(_('maximum_input_square_foot_message'))
 
         quantity = CartService.tile_quantity(sq_ft, tile)
         subtotal = CartService.get_subtotal(tile, quantity)
+        boxes = CartService.get_boxes(tile, quantity)
 
         data = {
             'tiles': tile,
             'sq_ft': sq_ft,
             'quantity': quantity,
-            #'boxes': CartService.tile_boxes(sq, tile)
+            'boxes': boxes,
             'subtotal': subtotal
         }
 
