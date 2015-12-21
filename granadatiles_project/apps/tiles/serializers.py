@@ -112,3 +112,12 @@ class MenuCollectionSerializer(serializers.Serializer):
     title = serializers.CharField()
     image = serializers.CharField()
     url = serializers.URLField()
+
+
+class PortfolioTilesSerializer(BaseSerializer):
+    name = serializers.CharField()
+    sizes = TileSizeSerializer(many=True)
+
+
+class PortfolioSerializer(serializers.Serializer):
+    tiles = PortfolioTilesSerializer(many=True)

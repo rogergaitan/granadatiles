@@ -12,9 +12,9 @@ from .serializers import (
     CollectionSerializer, CollectionRetrieveSerializer, TileDesignSerializer,
     StyleSerializer, GroupTileSizeSerializer, TileDetailSerializer,
     TileInstallationPhotosSerializer, TileOrderSerializer, CollectionsFilterSerializer,
-    InStockSerializer
+    InStockSerializer, PortfolioSerializer
 )
-from .services import CollectionService, GroupService, TileService
+from .services import CollectionService, GroupService, TileService, PortfolioService
 from .models import Collection, Group
 
 
@@ -163,8 +163,9 @@ class TileViewSet(BaseViewSet):
 
 class PortfolioViewSet(BaseViewSet):
 
-    def retrieve(self, request, pk=None):
-        portfolio = PortFolioService.get_portfolio(id=pk, language=self.get_language(request))
+    @list_route(methods=['get'])
+    def tiles(self, request):
+        portfolio = PortfolioService.get_portfolio(user=request.user, language=self.get_language(request))
         serializer = PortfolioSerializer(portfolio)
         return Response(serializer.data)
 

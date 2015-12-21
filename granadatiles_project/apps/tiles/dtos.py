@@ -183,3 +183,14 @@ class MenuCollectionDto(object):
             self.title = collection.title
             self.url = collection.get_absolute_url()
         self.image = collection.menu_image.url if collection.image else ''
+
+class PortfolioTilesDto(BaseCatalogDto):
+
+    def __init__(self, tile, language):
+        super().__init__(tile, language)
+        self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
+
+class PortfolioDto:
+
+    def __init__(self, portfolio, language):
+        self.tiles = [PortfolioTilesDto(tile.tile, language) for tile in portfolio.tiles.all()]

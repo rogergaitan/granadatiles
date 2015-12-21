@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404
-from .models import Collection, Group, Tile
+from .models import Collection, Group, Tile, Portfolio
 from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto, TileDesignDto,
     MenuCollectionDto, TileStyleDto, TileDetailDto, TileInstallationPhotosDto,
-    TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto
+    TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto, PortfolioDto
 )
 
 from apps.tiles.models import Style
@@ -113,3 +113,11 @@ class TileService:
           collections = Collection.objects.filter(featured=True)
           collectiondto = [CollectionsFiltersDto(collection, language) for collection in collections]
           return collectiondto
+
+
+class PortfolioService:
+
+     def get_portfolio(user, language):
+         portfolio = Portfolio.objects.get(user=user)
+         portfoliodto = PortfolioDto(portfolio, language)
+         return portfoliodto
