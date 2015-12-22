@@ -252,3 +252,14 @@ class Box(models.Model):
     class Meta:
         verbose_name = _('Box')
         verbose_name_plural = _('Boxes')
+
+
+class Layout(models.Model):
+    name = models.CharField(max_length=150, verbose_name=_('Name'))
+    length_ft = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Length Ft'))
+    length_in = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Length In'))
+    width_ft = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Width Ft'))
+    width_in = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Width In'))
+    image = ImageField(upload_to='layouts', verbose_name=_('Image'), null = True, blank=True)
+    date = models.DateField(auto_now_add=True, verbose_name=_('Date'))
+    portfolio = models.ForeignKey(Portfolio, default=False, related_name='layouts', verbose_name=_('Portfolio'))
