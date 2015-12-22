@@ -164,7 +164,7 @@ class TileViewSet(BaseViewSet):
 class PortfolioViewSet(BaseViewSet):
 
     @list_route(methods=['get'])
-    def tiles(self, request):
+    def show_tiles(self, request):
         portfolio = PortfolioService.get_portfolio(request.user)
         tiles = PortfolioService.show_tiles(portfolio, self.get_language(request))
         serializer = PortfolioTilesSerializer(tiles, many=True)
@@ -175,6 +175,12 @@ class PortfolioViewSet(BaseViewSet):
         portfolio = PortfolioService.get_portfolio(request.user)
         id = request.query_params.get('id')
         return Response(PortfolioService.remove_tile(portfolio, id))
+
+    @list_route(methods=['get'])
+    def add_tile(self, request):
+        portfolio = PortfolioService.get_portfolio(request.user)
+        id = request.query_params.get('id')
+        return Response(PortfolioService.add_tile(portfolio, id))
 
 
 class ItemViewSet(viewsets.ViewSet):

@@ -131,3 +131,7 @@ class PortfolioService:
      def remove_tile(portfolio, id):
          tile = PortfolioService.get_tile(id)
          portfolio.tiles.get(tile=tile).delete()
+
+     def add_tile(portfolio, id):
+         tile = PortfolioService.get_tile(id)
+         portfolio.tiles.create(tile=tile)
