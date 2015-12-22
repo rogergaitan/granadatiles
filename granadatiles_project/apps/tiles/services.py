@@ -3,7 +3,7 @@ from .models import Collection, Group, Tile, Portfolio
 from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto, TileDesignDto,
     MenuCollectionDto, TileStyleDto, TileDetailDto, TileInstallationPhotosDto,
-    TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto, PortfolioDto
+    TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto, PortfolioTilesDto
 )
 
 from apps.tiles.models import Style
@@ -117,7 +117,17 @@ class TileService:
 
 class PortfolioService:
 
-     def get_portfolio(user, language):
-         portfolio = Portfolio.objects.get(user=user)
-         portfoliodto = PortfolioDto(portfolio, language)
-         return portfoliodto
+     def get_tile(id):
+         return get_object_or_404(Tile, list_id=id)
+
+     def get_portfolio(user):
+         return get_object_or_404(Portfolio, user=user)
+
+     def show_tiles(portfolio,language):
+         portfoliotilesdto = [PortfolioTilesDto(portfoliotile.tile, language)
+                              for portfoliotile in portfolio.tiles.all()]
+         return portfoliotilesdto
+
+     def remove_tile(portfolio, id):
+         tile = PortfolioService.get_tile(id)
+         portfolio.tiles.get(tile=tile).delete()

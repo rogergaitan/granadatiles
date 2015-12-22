@@ -12,7 +12,7 @@ from .serializers import (
     CollectionSerializer, CollectionRetrieveSerializer, TileDesignSerializer,
     StyleSerializer, GroupTileSizeSerializer, TileDetailSerializer,
     TileInstallationPhotosSerializer, TileOrderSerializer, CollectionsFilterSerializer,
-    InStockSerializer, PortfolioSerializer
+    InStockSerializer, PortfolioTilesSerializer
 )
 from .services import CollectionService, GroupService, TileService, PortfolioService
 from .models import Collection, Group
@@ -165,9 +165,16 @@ class PortfolioViewSet(BaseViewSet):
 
     @list_route(methods=['get'])
     def tiles(self, request):
-        portfolio = PortfolioService.get_portfolio(user=request.user, language=self.get_language(request))
-        serializer = PortfolioSerializer(portfolio)
+        portfolio = PortfolioService.get_portfolio(request.user)
+        tiles = PortfolioService.show_tiles(portfolio, self.get_language(request))
+        serializer = PortfolioTilesSerializer(tiles, many=True)
         return Response(serializer.data)
+
+    @list_route(methods=['get'])
+    def remove_tile(self, request):
+        portfolio = PortfolioService.get_portfolio(request.user)
+        id = request.query_params.get('id')
+        return Response(PortfolioService.remove_tile(portfolio, id))
 
 
 class ItemViewSet(viewsets.ViewSet):

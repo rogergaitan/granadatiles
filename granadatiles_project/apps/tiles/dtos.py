@@ -188,9 +188,5 @@ class PortfolioTilesDto(BaseCatalogDto):
 
     def __init__(self, tile, language):
         super().__init__(tile, language)
+        self.list_id = tile.list_id
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
-
-class PortfolioDto:
-
-    def __init__(self, portfolio, language):
-        self.tiles = [PortfolioTilesDto(tile.tile, language) for tile in portfolio.tiles.all()]
