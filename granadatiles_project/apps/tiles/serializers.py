@@ -117,3 +117,12 @@ class MenuCollectionSerializer(serializers.Serializer):
 class PortfolioTilesSerializer(BaseSerializer):
     name = serializers.CharField()
     sizes = TileSizeSerializer(many=True)
+
+
+class LayoutSerializer(BaseSerializer):
+    name = serializers.CharField()
+    length_ft = serializers.CharField()
+    length_in = serializers.CharField()
+    width_ft = serializers.CharField()
+    width_in = serializers.CharField()
+    date = serializers.CharField()

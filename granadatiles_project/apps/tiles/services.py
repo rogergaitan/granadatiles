@@ -3,7 +3,8 @@ from .models import Collection, Group, Tile, Portfolio
 from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto, TileDesignDto,
     MenuCollectionDto, TileStyleDto, TileDetailDto, TileInstallationPhotosDto,
-    TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto, PortfolioTilesDto
+    TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto, PortfolioTilesDto,
+    LayoutDto
 )
 
 from apps.tiles.models import Style
@@ -123,7 +124,7 @@ class PortfolioService:
      def get_portfolio(user):
          return get_object_or_404(Portfolio, user=user)
 
-     def show_tiles(portfolio,language):
+     def show_tiles(portfolio, language):
          portfoliotilesdto = [PortfolioTilesDto(portfoliotile.tile, language)
                               for portfoliotile in portfolio.tiles.all()]
          return portfoliotilesdto
@@ -135,3 +136,7 @@ class PortfolioService:
      def add_tile(portfolio, id):
          tile = PortfolioService.get_tile(id)
          portfolio.tiles.create(tile=tile)
+
+     def show_layouts(portfolio):
+         layoutsdto = [LayoutDto(layout) for layout in portfolio.layouts.all()]
+         return layoutsdto

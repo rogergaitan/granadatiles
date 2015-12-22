@@ -1,4 +1,4 @@
-from core.dtos import BaseGalleryImageDto, BaseContentDto, BaseCatalogDto
+from core.dtos import BaseGalleryImageDto, BaseContentDto, BaseCatalogDto, BaseDto
 from .models import Warehouse
 
 
@@ -190,3 +190,16 @@ class PortfolioTilesDto(BaseCatalogDto):
         super().__init__(tile, language)
         self.list_id = tile.list_id
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
+
+
+class LayoutDto(BaseDto):
+
+    def __init__(self, layout):
+        super().__init__(layout)
+        self.name = layout.name
+        self.length_ft = layout.length_ft
+        self.length_in = layout.length_in
+        self.width_ft = layout.width_ft
+        self.width_in = layout.width_in
+        self.image = layout.image
+        self.date = layout.date

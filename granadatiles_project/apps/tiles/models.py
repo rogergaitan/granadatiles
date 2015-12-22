@@ -260,6 +260,6 @@ class Layout(models.Model):
     length_in = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Length In'))
     width_ft = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Width Ft'))
     width_in = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Width In'))
-    image = ImageField(upload_to='layouts', verbose_name=_('Image'), null = True, blank=True)
+    image = ImageField(upload_to='layouts', verbose_name=_('Image'), null=True, blank=True)
     date = models.DateField(auto_now_add=True, verbose_name=_('Date'))
     portfolio = models.ForeignKey(Portfolio, default=False, related_name='layouts', verbose_name=_('Portfolio'))
