@@ -145,6 +145,11 @@ class PortfolioService:
          layout = get_object_or_404(Layout, pk=id)
          portfolio.layouts.get(pk=layout.id).delete()
 
-     def create_layout(portfolio, name, length_ft, length_in, width_ft, width_in):
-         portfolio.layouts.create(name=name, length_ft=length_ft, length_in=length_in,
-                                  width_ft=width_ft, width_in=width_in)
+     def save_layout(portfolio, id, name, length_ft, length_in, width_ft, width_in, image):
+         if id:
+             layout = get_object_or_404(Layout, pk=id)
+             layout.update(name=name, length_ft=length_ft, length_in=length_in,
+                           width_ft=width_ft, width_in=width_in, image=image)
+         else:
+             portfolio.layouts.create(name=name, length_ft=length_ft, length_in=length_in,
+                                      width_ft=width_ft, width_in=width_in, image=image)
