@@ -146,12 +146,5 @@ class PortfolioService:
          portfolio.layouts.get(pk=layout.id).delete()
 
      def create_layout(portfolio, name, length_ft, length_in, width_ft, width_in):
-         data = {
-             'name': name,
-             'length_ft': length_ft,
-             'length_in': length_in,
-             'width_ft': width_ft,
-             'width_in': width_in,
-         }
-
-         Portfolio.layouts.create(data)
+         portfolio.layouts.create(name=name, length_ft=length_ft, length_in=length_in,
+                                  width_ft=width_ft, width_in=width_in)
