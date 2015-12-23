@@ -190,6 +190,12 @@ class PortfolioViewSet(BaseViewSet):
         serializer = LayoutSerializer(layouts, many=True)
         return Response(serializer.data)
 
+    @list_route(methods=['get'])
+    def remove_layout(self, request):
+        portfolio = PortfolioService.get_portfolio(request.user)
+        id = request.query_params.get('id')
+        return Response(PortfolioService.remove_layout(portfolio, id))
+
 
 class ItemViewSet(viewsets.ViewSet):
 

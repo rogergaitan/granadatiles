@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from .models import Collection, Group, Tile, Portfolio
+from .models import Collection, Group, Tile, Portfolio, Layout
 from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto, TileDesignDto,
     MenuCollectionDto, TileStyleDto, TileDetailDto, TileInstallationPhotosDto,
@@ -140,3 +140,7 @@ class PortfolioService:
      def show_layouts(portfolio):
          layoutsdto = [LayoutDto(layout) for layout in portfolio.layouts.all()]
          return layoutsdto
+
+     def remove_layout(portfolio, id):
+         layout = get_object_or_404(Layout, pk=id)
+         portfolio.layouts.get(pk=layout.id).delete()
