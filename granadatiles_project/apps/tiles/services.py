@@ -4,7 +4,7 @@ from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto, TileDesignDto,
     MenuCollectionDto, TileStyleDto, TileDetailDto, TileInstallationPhotosDto,
     TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto, PortfolioTilesDto,
-    LayoutDto
+    LayoutDto, LayoutTilesDto
 )
 
 from apps.tiles.models import Style
@@ -153,3 +153,7 @@ class PortfolioService:
          else:
              portfolio.layouts.create(name=name, length_ft=length_ft, length_in=length_in,
                                       width_ft=width_ft, width_in=width_in, image=image)
+
+     def layout_tiles(portfolio, language):
+         layouttilesdto = [LayoutTilesDto(portfoliotile.tile, language) for portfoliotile in portfolio.tiles.all()]
+         return layouttilesdto

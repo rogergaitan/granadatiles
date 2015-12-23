@@ -126,3 +126,9 @@ class LayoutSerializer(BaseSerializer):
     width_ft = serializers.CharField()
     width_in = serializers.CharField()
     date = serializers.CharField()
+
+
+class LayoutTilesSerializer(BaseCatalogSerializer):
+    image = serializers.CharField()
+    collection = serializers.CharField()
+    size = serializers.CharField()

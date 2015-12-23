@@ -203,3 +203,11 @@ class LayoutDto(BaseDto):
         self.width_in = layout.width_in
         self.image = layout.image
         self.date = layout.date
+
+class LayoutTilesDto(BaseCatalogDto):
+
+    def __init__(self, tile, language):
+        super().__init__(tile, language)
+        self.collection = tile.design.group.collection.get_title(language)
+        self.image = tile.mosaic.url if tile.mosaic else ''
+        self.size = tile.size
