@@ -189,6 +189,7 @@ class PortfolioTilesDto(BaseCatalogDto):
     def __init__(self, tile, language):
         super().__init__(tile, language)
         self.list_id = tile.list_id
+        self.image = tile.mosaic.url if tile.mosaic else ''
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
 
 
