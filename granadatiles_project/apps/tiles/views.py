@@ -216,6 +216,13 @@ class PortfolioViewSet(BaseViewSet):
         return Response(serializer.data)
 
 
+    @list_route(methods=['get'])
+    def duplicate_layout(self, request):
+        portfolio = PortfolioService.get_portfolio(request.user)
+        id = request.query_params.get('id')
+        return Response(PortfolioService.duplicate_layout(portfolio, id))
+
+
 class ItemViewSet(viewsets.ViewSet):
 
     permission_classes = (IsAdminUser,)

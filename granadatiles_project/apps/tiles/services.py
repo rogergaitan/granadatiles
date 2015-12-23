@@ -157,3 +157,9 @@ class PortfolioService:
      def layout_tiles(portfolio, language):
          layouttilesdto = [LayoutTilesDto(portfoliotile.tile, language) for portfoliotile in portfolio.tiles.all()]
          return layouttilesdto
+
+     def duplicate_layout(portfolio, id):
+         layout = Layout.objects.get(pk=id)
+         layout.id = None
+         layout.name = layout.name + " copy"
+         layout.save()
