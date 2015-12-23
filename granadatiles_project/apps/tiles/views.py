@@ -196,6 +196,17 @@ class PortfolioViewSet(BaseViewSet):
         id = request.query_params.get('id')
         return Response(PortfolioService.remove_layout(portfolio, id))
 
+    @list_route(methods=['post'])
+    def create_layout(self, request):
+        portfolio = PortfolioService.get_portfolio(request.user)
+        name = request.query_params.post('name')
+        lenght_ft = request.query_params.post('lenght_ft')
+        lenght_in = request.query_params.post('lenght_in')
+        width_ft = request.query_params.post('width_ft')
+        width_in = request.query_params.post('width_in')
+        return Response(PortfolioService.create_layout(portfolio, name, lenght_ft,
+                                                       lenght_in, width_ft, width_in))
+
 
 class ItemViewSet(viewsets.ViewSet):
 
