@@ -6,7 +6,9 @@ class SectionManager(models.Manager):
         section = self.get(pk=section_id)
         data = {
             'title': section.get_page_title(language),
-            'meta_description': section.get_meta_description(language),
-            'meta_keywords': section.get_meta_keywords(language)
+            'meta_description': section.meta_description,
+            'meta_description_es': section.meta_description_es,
+            'meta_keywords': section.meta_keywords,
+            'meta_keywords_es': section.meta_keywords_es
         }
         return data

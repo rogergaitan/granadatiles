@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %} Granada Tiles {% endblock %}
+{% block title %} {{ section.title }} {% endblock %}
+
+{% block seo %} {% include "meta.html" %} {% endblock %}
 
 {% block main %}
 <div class="row">

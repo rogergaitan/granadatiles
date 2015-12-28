@@ -27,6 +27,7 @@ urlpatterns += i18n_patterns(
     url(_(r'^compare-our-products/$'), compare_products, name='compare_products'),
     url(_(r'^cement-vs-ceramic/$'), cement_vs_ceramic, name='cement_vs_ceramic'),
     url(_(r'^color-palletes/$'), color_palletes, name='color_palletes'),
+    url(r'^videos/$', videos, name='videos'),
     url(_(r'^collections/'),
         include('apps.tiles.serve_urls', namespace='sr-collections')),
     url(_(r'^news/'),

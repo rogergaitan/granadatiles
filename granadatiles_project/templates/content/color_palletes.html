@@ -1,7 +1,9 @@
 ﻿{% extends "base.html" %}
 {% load i18n %}
 
-{% block title %} Granada Tiles - {% trans 'Compare our products'%} {% endblock %}
+{% block title %} Granada Tiles - {{ section.title }} {% endblock %}
+
+{% block seo %} {% include "meta.html" %} {% endblock %}
 
 {% block content%}
     <div class="row">
