@@ -135,6 +135,7 @@ class Tile(BaseCatalogModel):
     thickness = models.CharField(max_length=10, default='', null=True, verbose_name=('Thickness'))
     on_sale = models.BooleanField(default=False, verbose_name=_('On Sale'))
     tearsheet = models.FileField(upload_to='tearsheets', null=True, blank=True, verbose_name=_('Tearsheet'))
+    plane = models.FileField(upload_to='designs', null= True, blank=True, verbose_name=_('Plane'))
     custom = models.BooleanField(default=False, blank=True, verbose_name=_('Custom'))
     sample = models.ForeignKey('self', blank=True, null=True, related_name='samples', verbose_name=_('Sample'))
     customized = models.BooleanField(default=False, blank=True, verbose_name=_('Customized'))
@@ -149,17 +150,16 @@ class Tile(BaseCatalogModel):
            return self.width * self.height * 0.00694444
 
     def get_price_by_sq_ft(self):
-        return (1/self.get_sq_ft()) * self.sales_price
+        return (1 / self.get_sq_ft()) * self.sales_price
 
     @property
     def get_admin_url(self):
         return reverse("admin:%s_%s_change" % (self._meta.app_label, self._meta.model_name), args=(self.id,))
 
     def get_available_sizes(self):
-        tiles_of_myself = Tile.objects.filter(
-            name=self.name, is_sample=False)
+        tiles_of_myself = Tile.objects.filter(name=self.name, is_sample=False)
         sizes = []
-        size =  re.search('\d+"*\s*x\s*\d+"*', self.sales_description)
+        size = re.search('\d+"*\s*x\s*\d+"*', self.sales_description)
         sales_description_no_size = self.sales_description.replace(size.group(),'')
         for tile in tiles_of_myself:
             size = re.search('\d+"*\s*x\s*\d+"*', tile.sales_description)
