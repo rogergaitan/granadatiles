@@ -4,6 +4,7 @@ from apps.tiles.models import Tile
 from django.utils.translation import ugettext as _
 from apps.galleries.models import Designer, Photographer
 from core.models import BaseContentModel, BaseCatalogModel, BaseGalleryNavImageModel, BaseCatalogOrderModel
+from .managers import SectionManager
 
 
 class Section(BaseCatalogModel, BaseContentModel):
@@ -16,6 +17,8 @@ class Section(BaseCatalogModel, BaseContentModel):
     meta_keywords = models.CharField(default='', blank=True, null=True, max_length=500, verbose_name=_('Metakeywords'))
     meta_keywords_es = models.CharField(default='', blank=True, null=True, max_length=500,
                                         verbose_name=_('Metakeywords_es'))
+    objects = models.Manager()
+    seo = SectionManager()
 
     def get_page_title(self, language):
         if language == 'es' and self.page_title_es is not None and self.page_title_es:
