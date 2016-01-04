@@ -223,6 +223,16 @@ class PortfolioViewSet(BaseViewSet):
         return Response(PortfolioService.duplicate_layout(portfolio, id))
 
 
+class CustomizedTileViewSet(BaseViewSet):
+
+    @list_route(methods=['post'])
+    def save_custom_tile(self, request):
+        portfolio = PortfolioService.get_portfolio(request.user)
+        tile = PortfolioService.get_tile(request.data.get('id'))
+        colors = request.data.getlist('colors')
+        return Response(PortfolioService.save_custom_tile(portfolio, tile, colors))
+
+
 class ItemViewSet(viewsets.ViewSet):
 
     permission_classes = (IsAdminUser,)

@@ -1,13 +1,11 @@
 from django.shortcuts import get_object_or_404
-from .models import Collection, Group, Tile, Portfolio, Layout
+from .models import Collection, Group, Tile, Portfolio, Layout, Style, CustomizedTile
 from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto, TileDesignDto,
     MenuCollectionDto, TileStyleDto, TileDetailDto, TileInstallationPhotosDto,
     TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto, PortfolioTilesDto,
     LayoutDto, LayoutTilesDto
 )
-
-from apps.tiles.models import Style
 
 class CollectionService:
 
@@ -163,3 +161,8 @@ class PortfolioService:
          layout.id = None
          layout.name = layout.name + " copy"
          layout.save()
+
+    def save_custom_tiles(portfolio, tile, colors):
+        customized_tile = CustomizedTile.objects.create(tile=tile, portfolio=portfolio)
+        customized_tile.colors.add(colors)
+        customized_tile.save()

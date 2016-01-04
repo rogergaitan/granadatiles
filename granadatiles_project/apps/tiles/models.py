@@ -272,5 +272,5 @@ class GroupColor(models.Model):
 
 class CustomizedTile(models.Model):
     tile = models.ForeignKey(Tile, related_name='customizations')
-    user = models.ForeignKey(User, related_name='customizations')
     colors = models.ManyToManyField(PalleteColor, through='GroupColor')
+    portfolio = models.ForeignKey(Portfolio, related_name='customized_tiles')
