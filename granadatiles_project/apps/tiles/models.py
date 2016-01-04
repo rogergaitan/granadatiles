@@ -138,7 +138,6 @@ class Tile(BaseCatalogModel):
     plane = models.FileField(upload_to='designs', null= True, blank=True, verbose_name=_('Plane'))
     custom = models.BooleanField(default=False, blank=True, verbose_name=_('Custom'))
     sample = models.ForeignKey('self', blank=True, null=True, related_name='samples', verbose_name=_('Sample'))
-    customized = models.BooleanField(default=False, blank=True, verbose_name=_('Customized'))
     override_collection_box = models.BooleanField(default=False, verbose_name=_('Override Collection Box'))
     box = models.ForeignKey('Box', null=True, blank=True, verbose_name=_('Box'))
     qty_is_sq_ft = models.BooleanField(default=False, verbose_name=_('Quantity Square Foot'))
@@ -263,3 +262,15 @@ class Layout(models.Model):
     image = ImageField(upload_to='layouts', verbose_name=_('Image'), null=True, blank=True)
     date = models.DateField(auto_now_add=True, verbose_name=_('Date'))
     portfolio = models.ForeignKey(Portfolio, default=False, related_name='layouts', verbose_name=_('Portfolio'))
+
+
+class GroupColor(models.Model):
+    color = models.ForeignKey(PalleteColor)
+    customized_tile = models.ForeignKey('CustomizedTile')
+    group = models.CharField(max_length=5)
+
+
+class CustomizedTile(models.Model):
+    tile = models.ForeignKey(Tile, related_name='customizations')
+    user = models.ForeignKey(User, related_name='customizations')
+    colors = models.ManyToManyField(PalleteColor, through='GroupColor')
