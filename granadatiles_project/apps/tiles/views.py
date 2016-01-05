@@ -222,6 +222,13 @@ class PortfolioViewSet(BaseViewSet):
         id = request.query_params.get('id')
         return Response(PortfolioService.duplicate_layout(portfolio, id))
 
+    @list_route(methods=['get'])
+    def show_custom_tiles(self, request):
+        portfolio = PortfolioService.get_portfolio(request.user)
+        tiles = PortfolioService.show_custom_tiles(portfolio, self.get_language(request))
+        serializer = PortfolioTilesSerializer(tiles, many=True)
+        return Response(serializer.data)
+
 
 class CustomizedTileViewSet(BaseViewSet):
 

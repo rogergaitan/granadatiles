@@ -162,7 +162,12 @@ class PortfolioService:
          layout.name = layout.name + " copy"
          layout.save()
 
-    def save_custom_tiles(portfolio, tile, colors):
-        customized_tile = CustomizedTile.objects.create(tile=tile, portfolio=portfolio)
-        customized_tile.colors.add(colors)
-        customized_tile.save()
+     def show_custom_tiles(portfolio, language):
+         customtilesdto = [PortfolioTilesDto(custom_tile.tile, language)
+                              for custom_tile in portfolio.customized_tiles.all()]
+         return customtilesdto
+
+     def save_custom_tiles(portfolio, tile, colors):
+         customized_tile = CustomizedTile.objects.create(tile=tile, portfolio=portfolio)
+         customized_tile.colors.add(colors)
+         customized_tile.save()
