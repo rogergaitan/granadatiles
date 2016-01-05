@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from .models import Collection, Group, Tile, Portfolio, Layout, Style, CustomizedTile
+from .models import Collection, Group, Tile, Portfolio, Layout, Style, CustomizedTile, GroupColor, PalleteColor
 from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto, TileDesignDto,
     MenuCollectionDto, TileStyleDto, TileDetailDto, TileInstallationPhotosDto,
@@ -167,7 +167,8 @@ class PortfolioService:
                               for custom_tile in portfolio.customized_tiles.all()]
          return customtilesdto
 
-     def save_custom_tiles(portfolio, tile, colors):
+     def save_custom_tile(portfolio, tile, colors):
          customized_tile = CustomizedTile.objects.create(tile=tile, portfolio=portfolio)
-         customized_tile.colors.add(colors)
-         customized_tile.save()
+         for color in colors:
+             pallete = PalleteColor.objects.get(pk=color)
+             GroupColor.objects.create(customized_tile=customized_tile, color=pallete)
