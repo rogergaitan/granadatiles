@@ -71,6 +71,7 @@ class WarehouseSerializer(BaseCatalogSerializer):
 
 
 class TileOrderSerializer(BaseCatalogSerializer):
+    list_id = serializers.CharField()
     image = serializers.CharField()
     mosaic = serializers.CharField()
     sizes = TileSizeSerializer(many=True)
