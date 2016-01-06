@@ -12,7 +12,8 @@ from .serializers import (
     CollectionSerializer, CollectionRetrieveSerializer, TileDesignSerializer,
     StyleSerializer, GroupTileSizeSerializer, TileDetailSerializer,
     TileInstallationPhotosSerializer, TileOrderSerializer, CollectionsFilterSerializer,
-    InStockSerializer, PortfolioTilesSerializer, LayoutSerializer, LayoutTilesSerializer
+    InStockSerializer, PortfolioTilesSerializer, PortfolioCustomTilesSerializer, LayoutSerializer,
+    LayoutTilesSerializer
 )
 from .services import CollectionService, GroupService, TileService, PortfolioService
 from .models import Collection, Group
@@ -173,8 +174,8 @@ class PortfolioViewSet(BaseViewSet):
     @list_route(methods=['get'])
     def remove_tile(self, request):
         portfolio = PortfolioService.get_portfolio(request.user)
-        id = request.query_params.get('id')
-        return Response(PortfolioService.remove_tile(portfolio, id))
+        portfoliotile_id = request.query_params.get('portfoliotile_id')
+        return Response(PortfolioService.remove_tile(portfolio, portfoliotile_id))
 
     @list_route(methods=['get'])
     def add_tile(self, request):
@@ -226,8 +227,14 @@ class PortfolioViewSet(BaseViewSet):
     def show_custom_tiles(self, request):
         portfolio = PortfolioService.get_portfolio(request.user)
         tiles = PortfolioService.show_custom_tiles(portfolio, self.get_language(request))
-        serializer = PortfolioTilesSerializer(tiles, many=True)
+        serializer = PortfolioCustomTilesSerializer(tiles, many=True)
         return Response(serializer.data)
+
+    @list_route(methods=['get'])
+    def remove_custom_tile(self, request):
+        portfolio = PortfolioService.get_portfolio(request.user)
+        customizedtile_id = request.query_params.get('customizedtile_id')
+        return Response(PortfolioService.remove_custom_tile(portfolio, customizedtile_id))
 
 
 class CustomizedTileViewSet(BaseViewSet):

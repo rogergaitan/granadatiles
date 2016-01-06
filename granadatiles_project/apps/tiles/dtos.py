@@ -184,13 +184,28 @@ class MenuCollectionDto(object):
             self.url = collection.get_absolute_url()
         self.image = collection.menu_image.url if collection.image else ''
 
-class PortfolioTilesDto(BaseCatalogDto):
+
+class BasePortfolioTilesDto(BaseCatalogDto):
 
     def __init__(self, tile, language):
         super().__init__(tile, language)
         self.list_id = tile.list_id
         self.image = tile.mosaic.url if tile.mosaic else ''
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
+
+
+class PortfolioTilesDto(BasePortfolioTilesDto):
+
+    def __init__(self, portfoliotile_id, tile, language):
+        super().__init__(tile, language)
+        self.portfoliotile_id = portfoliotile_id
+
+
+class PortfolioCustomTilesDto(BasePortfolioTilesDto):
+
+    def __init__(self, customizedtile_id, tile, language):
+        super().__init__(tile, language)
+        self.customizedtile_id = customizedtile_id
 
 
 class LayoutDto(BaseDto):
@@ -204,6 +219,7 @@ class LayoutDto(BaseDto):
         self.width_in = layout.width_in
         self.image = layout.image
         self.date = layout.date
+
 
 class LayoutTilesDto(BaseCatalogDto):
 

@@ -114,10 +114,19 @@ class MenuCollectionSerializer(serializers.Serializer):
     url = serializers.URLField()
 
 
-class PortfolioTilesSerializer(BaseSerializer):
+class BasePortfolioTilesSerializer(BaseSerializer):
+    list_id = serializers.CharField()
     name = serializers.CharField()
     image = serializers.CharField()
     sizes = TileSizeSerializer(many=True)
+
+
+class PortfolioTilesSerializer(BasePortfolioTilesSerializer):
+    portfoliotile_id = serializers.CharField()
+
+
+class PortfolioCustomTilesSerializer(BasePortfolioTilesSerializer):
+    customizedtile_id = serializers.CharField()
 
 
 class LayoutSerializer(BaseSerializer):

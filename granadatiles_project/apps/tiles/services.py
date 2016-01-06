@@ -4,7 +4,7 @@ from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto, TileDesignDto,
     MenuCollectionDto, TileStyleDto, TileDetailDto, TileInstallationPhotosDto,
     TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto, PortfolioTilesDto,
-    LayoutDto, LayoutTilesDto
+    LayoutDto, LayoutTilesDto, PortfolioCustomTilesDto
 )
 
 class CollectionService:
@@ -123,13 +123,12 @@ class PortfolioService:
          return get_object_or_404(Portfolio, user=user)
 
      def show_tiles(portfolio, language):
-         portfoliotilesdto = [PortfolioTilesDto(portfoliotile.tile, language)
+         portfoliotilesdto = [PortfolioTilesDto(portfoliotile.id, portfoliotile.tile, language)
                               for portfoliotile in portfolio.tiles.all()]
          return portfoliotilesdto
 
-     def remove_tile(portfolio, id):
-         tile = PortfolioService.get_tile(id)
-         portfolio.tiles.get(tile=tile).delete()
+     def remove_tile(portfolio, portfoliotile_id):
+         portfolio.tiles.get(pk=portfoliotile_id).delete()
 
      def add_tile(portfolio, id):
          tile = PortfolioService.get_tile(id)
@@ -163,8 +162,8 @@ class PortfolioService:
          layout.save()
 
      def show_custom_tiles(portfolio, language):
-         customtilesdto = [PortfolioTilesDto(custom_tile.tile, language)
-                              for custom_tile in portfolio.customized_tiles.all()]
+         customtilesdto = [PortfolioCustomTilesDto(customtile.id, customtile.tile, language)
+                              for customtile in portfolio.customized_tiles.all()]
          return customtilesdto
 
      def save_custom_tile(portfolio, tile, colors):
@@ -172,3 +171,8 @@ class PortfolioService:
          for color in colors:
              pallete = PalleteColor.objects.get(pk=color)
              GroupColor.objects.create(customized_tile=customized_tile, color=pallete)
+
+     def remove_custom_tile(portfolio, customizedtile_id):
+         customizedtile = CustomizedTile.objects.get(pk=customizedtile_id)
+         customizedtile.colors.clear()
+         portfolio.customized_tiles.get(pk=customizedtile.id).delete()
