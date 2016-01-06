@@ -173,6 +173,4 @@ class PortfolioService:
              GroupColor.objects.create(customized_tile=customized_tile, color=pallete)
 
      def remove_custom_tile(portfolio, customizedtile_id):
-         customizedtile = CustomizedTile.objects.get(pk=customizedtile_id)
-         customizedtile.colors.clear()
-         portfolio.customized_tiles.get(pk=customizedtile.id).delete()
+         portfolio.customized_tiles.get(pk=customizedtile_id).delete()
