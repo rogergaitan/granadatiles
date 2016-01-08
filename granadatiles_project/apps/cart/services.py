@@ -7,7 +7,7 @@ from rest_framework.exceptions import APIException
 
 from apps.tiles.models import Tile
 from .models import Cart
-from .dtos import TileOrdersDto, SampleOrdersDto
+from .dtos import TileOrdersDto, SampleOrdersDto, CustomizedTileOrdersDto
 
 
 class CartService:
@@ -29,8 +29,13 @@ class CartService:
         return cart
 
     def get_tile_orders(cart, language):
-        tileordersdto = [TileOrdersDto(tileorder, language) for tileorder in cart.tile_orders.all()]
-        return tileordersdto
+        tile_orders_dto = [TileOrdersDto(tile_order, language) for tile_order in cart.tile_orders.all()]
+        return tile_orders_dto
+
+    def get_customized_tile_orders(cart, language):
+        customized_tile_orders_dto = [CustomizedTileOrdersDto(customized_tile_order, language)
+                                      for customized_tile_order in cart.customized_tile_orders.all()]
+        return customized_tile_orders_dto
 
     def get_sample_orders(cart, language):
         sampleordersdto = [SampleOrdersDto(sampleorder, language) for sampleorder in cart.sample_orders.all()]
@@ -101,3 +106,6 @@ class CartService:
     def remove_sample(cart, id):
         tile = CartService.get_tile(id)
         cart.sample_orders.get(tiles=tile).delete()
+
+    def save_custom_tile(cart, tile):
+        cart.customizedtiles_orders.get()

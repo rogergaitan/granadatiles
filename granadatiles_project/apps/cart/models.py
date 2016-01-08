@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from apps.tiles.models import Tile
+from apps.tiles.models import Tile, CustomizedTile
 
 
 class Cart(models.Model):
@@ -11,25 +11,51 @@ class Cart(models.Model):
         verbose_name_plural = _('Carts')
 
 
-class TileOrder(models.Model):
-    cart = models.ForeignKey(Cart, related_name='tile_orders', verbose_name=_('Tile Orders'))
-    tiles = models.ForeignKey(Tile, null=True, blank=True, verbose_name=_('Tiles'))
+class BaseTileOder(models.Model):
     sq_ft = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Square feet'))
     quantity = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Quantity'))
     boxes = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Tile Boxes'))
     subtotal = models.FloatField(null=True, blank=True, verbose_name=_('Subtotal'))
 
     class Meta:
+        abstract = True
+
+class TileOrder(BaseTileOder):
+    cart = models.ForeignKey(Cart, related_name='tile_orders', verbose_name=_('Tile Orders'))
+    tile = models.ForeignKey(Tile, null=True, blank=True, verbose_name=_('Tiles'))
+
+    class Meta:
          verbose_name = _('Tile Order')
          verbose_name_plural = _('Tile Orders')
 
 
-class SampleOrder(models.Model):
-    cart = models.ForeignKey(Cart, related_name='sample_orders', verbose_name=_('Sample Orders'))
-    tiles = models.ForeignKey(Tile, null=True, blank=True, verbose_name=_('Tiles'))
+class CustomizedTileOrder(BaseTileOder):
+    cart = cart = models.ForeignKey(Cart, related_name='customized_tile_orders',
+                                       verbose_name=_('Customized Tile Orders'))
+    customized_tile = models.ForeignKey(CustomizedTile)
+
+
+class BaseSampleOrder(models.Model):
     quantity = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Quantity'))
     subtotal = models.FloatField(null=True, blank=True, verbose_name=_('Subtotal'))
 
     class Meta:
+        abstract = True
+
+class SampleOrder(BaseSampleOrder):
+    cart = models.ForeignKey(Cart, related_name='sample_orders', verbose_name=_('Sample Orders'))
+    tile = models.ForeignKey(Tile, null=True, blank=True, verbose_name=_('Tiles'))
+
+    class Meta:
          verbose_name = _('Sample Order')
          verbose_name_plural = _('Sample Orders')
+
+
+class CustomizedSampleOrder(BaseSampleOrder):
+    cart = models.ForeignKey(Cart, related_name='customized_sample_orders',
+                                verbose_name=_('Customized Sample Orders'))
+    customized_tile = models.ForeignKey(CustomizedTile, verbose_name=_('Customized Tiles'))
+
+    class Meta:
+         verbose_name = _('Customized Sample Order')
+         verbose_name_plural = _('Customized Sample Orders')

@@ -162,8 +162,9 @@ class Tile(BaseCatalogModel):
         sales_description_no_size = self.sales_description.replace(size.group(),'')
         for tile in tiles_of_myself:
             size = re.search('\d+"*\s*x\s*\d+"*', tile.sales_description)
-            if tile.sales_description.replace(size.group(),'') == sales_description_no_size:
-                sizes.append(tile.size)
+            if size:
+                if tile.sales_description.replace(size.group(),'') == sales_description_no_size:
+                    sizes.append(tile.size)
         return sizes
 
     def has_installation_photos(self):
@@ -266,7 +267,7 @@ class Layout(models.Model):
 
 class GroupColor(models.Model):
     color = models.ForeignKey(PalleteColor)
-    customized_tile = models.ForeignKey('CustomizedTile')
+    customized_tile = models.ForeignKey('CustomizedTile', related_name='group_colors')
     group = models.CharField(max_length=5)
 
 
