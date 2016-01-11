@@ -64,7 +64,7 @@ class GroupService:
     def get_styles(id, language=None):
         group = GroupService.group_show_in_web(id)
         styles = Style.objects.filter(designs__group__id=id).distinct()
-        styleDto = [TileStyleDto(style, language) for style in styles]
+        style_dto = [TileStyleDto(style, language) for style in styles]
         return style_dto
 
     def get_sizes(id):

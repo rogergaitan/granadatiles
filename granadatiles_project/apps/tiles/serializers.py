@@ -106,7 +106,7 @@ class GroupDesignSerializer(serializers.Serializer):
 
 
 class GroupTileSizeSerializer(serializers.Serializer):
-    sizes = serializers.CharField()
+    size = serializers.CharField()
 
 
 class MenuCollectionSerializer(serializers.Serializer):
