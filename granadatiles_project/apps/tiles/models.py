@@ -206,7 +206,7 @@ class Use(BaseCatalogModel):
        verbose_name_plural = _('Uses')
 
 class Warehouse(BaseCatalogModel):
-    zipcode = models.BooleanField(blank=True, verbose_name=_('Zipcode'))
+    zipcode = models.CharField(max_length=5)
     custom = models.BooleanField(blank=True, verbose_name=_('Custom'))
     in_stock = models.BooleanField(blank=True, verbose_name=_('In Stock'))
 
