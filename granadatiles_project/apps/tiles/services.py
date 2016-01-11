@@ -43,29 +43,32 @@ class CollectionService:
 
 class GroupService:
 
+    def group_show_in_web(id):
+        return get_object_or_404(Group, pk=id, show_in_web=True)
+
     def get_group(id, language=None):
-        group = get_object_or_404(Group, pk=id, show_in_web=True)
-        groupDto = GroupDto(group, language)
-        return groupDto
+        group = GroupService.group_show_in_web(id)
+        group_dto = GroupDto(group, language)
+        return group_dto
 
     def get_group_designs(id, limit, offset, style, size, new, in_stock, special, language=None):
-        group = get_object_or_404(Group, pk=id, show_in_web=True)
+        group = GroupService.group_show_in_web(id)
         designs = group.designs.filter(show_in_web=True)
         if style: group.designs.filter(styles__name=style)
 
-        tiledesignDto = [TileDesignDto(tile_design, size, new, in_stock, special, language)
+        tile_design_dto = [TileDesignDto(tile_design, size, new, in_stock, special, language)
                          for tile_design in designs[offset:limit]]
 
-        return tiledesignDto
+        return tile_design_dto
 
     def get_styles(id, language=None):
-        group = get_object_or_404(Group, pk=id, show_in_web=True)
+        group = GroupService.group_show_in_web(id)
         styles = Style.objects.filter(designs__group__id=id).distinct()
         styleDto = [TileStyleDto(style, language) for style in styles]
-        return styleDto
+        return style_dto
 
     def get_sizes(id):
-        group = get_object_or_404(Group, pk=id, show_in_web=True)
+        group = GroupService.group_show_in_web(id)
         designs = group.designs.filter(show_in_web=True)
         sizes = [design.tiles.values_list('size', flat=True).distinct() for design in designs]
 
@@ -74,8 +77,8 @@ class GroupService:
             if size[0] not in unique_sizes:
                 unique_sizes.append(size[0])
 
-        sizeDto = TileSizeDto(unique_sizes)
-        return sizeDto
+        size_dto = TileSizeDto(unique_sizes)
+        return size_dto
 
 
 class TileService:
