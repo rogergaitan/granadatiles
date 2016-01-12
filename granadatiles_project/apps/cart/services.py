@@ -68,14 +68,14 @@ class CartService:
         boxes = CartService.get_boxes(tile, quantity)
 
         data = {
-            'tiles': tile,
+            'tile': tile,
             'sq_ft': sq_ft,
             'quantity': quantity,
             'boxes': boxes,
             'subtotal': subtotal
         }
 
-        cart.tile_orders.update_or_create(cart=cart, tiles=tile, defaults=data)
+        cart.tile_orders.update_or_create(cart=cart, tile=tile, defaults=data)
 
     def get_customized_tile_orders(cart, language):
         customized_tile_orders_dto = [CustomizedTileOrdersDto(customized_tile_order, language)
