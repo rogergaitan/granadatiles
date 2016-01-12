@@ -24,18 +24,18 @@ class CartViewSet(BaseViewSet):
         return Response(serializer.data)
 
     @list_route(methods=['get'])
+    def add_tile(self, request):
+        cart = CartService.get_cart(request)
+        tile = CartService.get_tile(request.query_params.get('id'))
+        sq_ft = int(request.query_params.get('sq_ft'))
+        return Response(CartService.add_tile(cart, id, sq_ft))
+
+    @list_route(methods=['get'])
     def show_customized_tile_orders(self, request):
         cart = CartService.get_cart(request)
         customized_tile_orders = CartService.get_customized_tile_orders(cart, self.get_language(request))
         serializer = CustomizedTileOrdersSerializer(customized_tile_orders, many=True)
         return Response(serializer.data)
-
-    @list_route(methods=['get'])
-    def add_tile(self, request):
-        cart = CartService.get_cart(request)
-        id = request.query_params.get('id')
-        sq_ft = int(request.query_params.get('sq_ft'))
-        return Response(CartService.add_tile(cart, id, sq_ft))
 
     @list_route(methods=['get'])
     def add_custom_tile(self, request):

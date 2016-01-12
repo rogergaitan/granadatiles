@@ -28,19 +28,6 @@ class CartService:
             cart = CartService.new(request)
         return cart
 
-    def get_tile_orders(cart, language):
-        tile_orders_dto = [TileOrdersDto(tile_order, language) for tile_order in cart.tile_orders.all()]
-        return tile_orders_dto
-
-    def get_customized_tile_orders(cart, language):
-        customized_tile_orders_dto = [CustomizedTileOrdersDto(customized_tile_order, language)
-                                      for customized_tile_order in cart.customized_tile_orders.all()]
-        return customized_tile_orders_dto
-
-    def get_sample_orders(cart, language):
-        sampleordersdto = [SampleOrdersDto(sampleorder, language) for sampleorder in cart.sample_orders.all()]
-        return sampleordersdto
-
     def tile_quantity(sq_ft, tile):
         return math.ceil(int(sq_ft)/tile.get_sq_ft())
 
@@ -64,8 +51,11 @@ class CartService:
     def get_tile(id):
         return get_object_or_404(Tile, list_id=id)
 
-    def add_tile(cart, id, sq_ft):
-        tile = CartService.get_tile(id)
+    def get_tile_orders(cart, language):
+        tile_orders_dto = [TileOrdersDto(tile_order, language) for tile_order in cart.tile_orders.all()]
+        return tile_orders_dto
+
+    def add_tile(cart, tile, sq_ft):
 
         if sq_ft < tile.design.group.collection.minimum_input_square_foot:
             return APIException(_('minimum_input_square_foot_message'))
@@ -87,9 +77,18 @@ class CartService:
 
         cart.tile_orders.update_or_create(cart=cart, tiles=tile, defaults=data)
 
+    def get_customized_tile_orders(cart, language):
+        customized_tile_orders_dto = [CustomizedTileOrdersDto(customized_tile_order, language)
+                                      for customized_tile_order in cart.customized_tile_orders.all()]
+        return customized_tile_orders_dto
+
     def remove_tile(cart, id):
         tile = CartService.get_tile(id)
         cart.tile_orders.get(tiles=tile).delete()
+
+    def get_sample_orders(cart, language):
+        sampleordersdto = [SampleOrdersDto(sampleorder, language) for sampleorder in cart.sample_orders.all()]
+        return sampleordersdto
 
     def add_sample(cart, id, quantity):
         tile = CartService.get_tile(id)
