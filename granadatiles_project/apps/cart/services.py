@@ -70,7 +70,6 @@ class CartService:
         boxes = CartService.get_boxes(tile, quantity)
 
         data = {
-            'tile': tile,
             'sq_ft': sq_ft,
             'quantity': quantity,
             'boxes': boxes,
@@ -81,7 +80,7 @@ class CartService:
 
     def add_tile(cart, tile, sq_ft):
         data = CartService.calculate_order(tile, sq_ft)
-
+        data['tile'] = tile
         cart.tile_orders.update_or_create(cart=cart, tile=tile, defaults=data)
 
     def remove_tile(cart, id):
@@ -95,8 +94,9 @@ class CartService:
 
     def add_customized_tile(cart, customized_tile, tile, sq_ft):
         data = CartService.calculate_order(tile, sq_ft)
-
-        cart.customized_tile_order.update_or_create(cart=cart, customized_tile=customized_tile,
+        data['customized_tile'] = customized_tile
+        cart.customized_tile_orders.update_or_create(cart=cart,
+                                                    customized_tile=customized_tile,
                                                     defaults=data)
 
     def get_sample_orders(cart, language):

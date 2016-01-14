@@ -49,8 +49,9 @@ class CartViewSet(BaseViewSet):
     def add_customized_tile(self, request):
         cart = CartService.get_cart(request)
         customized_tile = CartService.get_customized_tile(request.query_params.get('id'))
-        tile = customized_tile_id.tile
-        return Response(CartViewSet.add_customized_tile(cart, customized_tile, tile, sq_ft))
+        tile = customized_tile.tile
+        sq_ft = int(request.query_params.get('sq_ft'))
+        return Response(CartService.add_customized_tile(cart, customized_tile, tile, sq_ft))
 
     @list_route(methods=['get'])
     def show_sample_orders(self, request):
