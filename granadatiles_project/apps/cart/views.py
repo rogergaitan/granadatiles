@@ -5,7 +5,10 @@ from rest_framework.decorators import list_route, detail_route
 from core.views import BaseViewSet
 from apps.tiles.models import Tile
 from .services import CartService
-from .serializers import TileOrdersSerializer, SampleOrdersSerializer, CustomizedTileOrdersSerializer
+from .serializers import (
+  TileOrdersSerializer, SampleOrdersSerializer, CustomizedTileOrdersSerializer,
+  CustomizedSampleOrdersSerializer
+)
 
 
 class CartViewSet(BaseViewSet):
@@ -57,7 +60,7 @@ class CartViewSet(BaseViewSet):
     def remove_customized_tile(self, request):
         cart = CartService.get_cart(request)
         customized_tile = CartService.get_customized_tile(request.query_params.get('id'))
-        return Response(CartService.remove_tile(cart, tile))
+        return Response(CartService.remove_customized_tile(cart, customized_tile))
 
     @list_route(methods=['get'])
     def show_sample_orders(self, request):
@@ -69,12 +72,33 @@ class CartViewSet(BaseViewSet):
     @list_route(methods=['get'])
     def add_sample(self, request):
         cart = CartService.get_cart(request)
-        id = request.query_params.get('id')
+        tile = CartService.get_tile(request.query_params.get('id'))
         quantity = request.query_params.get('quantity')
-        return Response(CartService.add_sample(cart, id, quantity))
+        return Response(CartService.add_sample(cart, tile, quantity))
 
     @list_route(methods=['get'])
     def remove_sample(self, request):
         cart = CartService.get_cart(request)
-        id = request.query_params.get('id')
-        return Response(CartService.remove_sample(cart, id))
+        tile = CartService.get_tile(request.query_params.get('id'))
+        return Response(CartService.remove_sample(cart, tile))
+
+    @list_route(methods=['get'])
+    def show_customized_sample_orders(self, request):
+        cart = CartService.get_cart(request)
+        sampleorders = CartService.get_sample_orders(cart, language=self.get_language(request))
+        serializer = CustomizedSampleOrdersSerializer(sampleorders, many=True)
+        return Response(serializer.data)
+
+    @list_route(methods=['get'])
+    def add_customized_sample(self, request):
+        cart = CartService.get_cart(request)
+        customized_tile = CartService.get_customized_tile(request.query_params.get('id'))
+        tile = customized_tile.tile
+        quantity = request.query_params.get('quantity')
+        return Response(CartService.add_customized_tile(cart, customized_tile, tile, quantity))
+
+    @list_route(methods=['get'])
+    def remove_customized_tile(self, request):
+        cart = CartService.get_cart(request)
+        customized_tile = CartService.get_customized_tile(request.query_params.get('id'))
+        return Response(CartService.remove_customized_sample(cart, customized_tile))

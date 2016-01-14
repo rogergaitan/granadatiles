@@ -17,7 +17,7 @@ class TileDto(BaseCatalogDto):
         self.colors = [TileColorDto(color, language) for color in tile.colors.all()]
 
 
-class BaseOrderDto(BaseDto):
+class BaseTileOrdersDto(BaseDto):
 
     def __init__(self, order):
         super().__init__(order)
@@ -27,7 +27,7 @@ class BaseOrderDto(BaseDto):
         self.subtotal = order.subtotal
 
 
-class TileOrdersDto(BaseOrderDto):
+class TileOrdersDto(BaseTileOrdersDto):
 
     def __init__(self, tile_order, language):
         super().__init__(tile_order)
@@ -42,7 +42,7 @@ class GroupColorDto:
         self.color_code = group_color.color.hexadecimalCode
 
 
-class CustomizedTileOrdersDto(BaseOrderDto):
+class CustomizedTileOrdersDto(BaseTileOrdersDto):
 
     def __init__(self, customized_tile_order, language):
         super().__init__(customized_tile_order)
@@ -50,10 +50,24 @@ class CustomizedTileOrdersDto(BaseOrderDto):
         self.group_colors = [GroupColorDto(group_color, language)
                             for group_color in customized_tile_order.customized_tile.group_colors.all()]
 
-class SampleOrdersDto(BaseDto):
+class BaseSampleOrdersDto(BaseDto):
 
-    def __init__(self, sampleorder, language):
-        super().__init__(sampleorder)
-        self.quantity = sampleorder.quantity
-        self.subtotal = sampleorder.subtotal
-        self.tile = TileDto(sampleorder.tile, language)
+    def __init__(self, order, language):
+        super().__init__(order)
+        self.quantity = order.quantity
+        self.subtotal = order.subtotal
+
+class SampleOrdersDto(BaseSampleOrdersDto):
+
+    def __init__(self, sample_order, language):
+        super().__init__(sample_order)
+        self.tile = TileDto(sample_order.tile, language)
+
+
+class CustomizedSampleOrdersDto(BaseSampleOrdersDto):
+
+    def __init__(self, customized_sample_order, language)
+        super().__init__(customized_sample_order)
+        self.tile = TileDto(customized_sample_order.customized_tile.tile, language)
+        self.group_colors = [GroupColorDto(group_color, language)
+                            for group_color in customized_sample_order.customized_tile.group_colors.all()]

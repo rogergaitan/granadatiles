@@ -101,25 +101,37 @@ class CartService:
     def remove_customized_tile(cart, customized_tile):
         cart.customizedtiles_orders.get(customized_tile=customized_tile).delete()
 
-    def get_sample_orders(cart, language):
-        sampleordersdto = [SampleOrdersDto(sampleorder, language) for sampleorder in cart.sample_orders.all()]
-        return sampleordersdto
-
-    def add_sample(cart, id, quantity):
-        tile = CartService.get_tile(id)
+   def calculate_sample_order(tile, quantity):
         subtotal = int(quantity) * tile.sales_price
 
         data = {
-            'tiles': tile,
             'quantity': quantity,
             'subtotal': subtotal
         }
 
-        cart.sample_orders.update_or_create(cart=cart, tiles=tile, defaults=data)
+        return data
 
-    def remove_sample(cart, id):
-        tile = CartService.get_tile(id)
-        cart.sample_orders.get(tiles=tile).delete()
+    def get_sample_orders(cart, language):
+        sample_orders_dto = [SampleOrdersDto(sample_order, language) for sample_order in cart.sample_orders.all()]
+        return sample_orders_dto
 
-    def save_custom_tile(cart, tile):
-        cart.customizedtiles_orders.get()
+    def add_sample(cart, tile, quantity):
+        data = CartService.calculate_sample_order(tile, quantity)
+        data['tile'] = tile
+        cart.sample_orders.update_or_create(cart=cart, tile=tile, defaults=data)
+
+    def remove_sample(cart, tile):
+        cart.sample_orders.get(tile=tile).delete()
+
+    def get_customized_sample_orders(cart, language):
+        customized_sample_orders_dto = [SampleOrdersDto(customized_sample_order, language)
+                                        for customized_sample_order in cart.customized_sample_orders.all()]
+        return sampleordersdto
+
+    def add_sample_order(cart, customized_tile, tile, quantity):
+        data = CartService.calculate_sample_order(tile, quantity)
+        data['customized_tile'] = customized_tile
+        cart.sample_orders.update_or_create(cart=cart, customized_tile=customized_tile, defaults=data)
+
+    def remove_customized_sample(cart, customized_tile):
+        cart.customized_sample_orders.get(customized_tile=customized_tile).delete()

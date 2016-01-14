@@ -35,7 +35,14 @@ class CustomizedTileOrdersSerializer(BaseTileOrderSerializer):
     group_colors = GroupColorSerializer(many=True)
 
 
-class SampleOrdersSerializer(BaseSerializer):
+class BaseSampleOrdersSerializer(BaseSerializer):
     quantity = serializers.IntegerField()
     subtotal = serializers.FloatField()
+
+class SampleOrdersSerializer(BaseSerializer):
     tile = TileSerializer()
+
+
+class CustomizedSampleOrdersSerializer(BaseSampleOrdersSerializer):
+    tile = TileSerializer()
+    group_colors = GroupColorSerializer(many=True)
