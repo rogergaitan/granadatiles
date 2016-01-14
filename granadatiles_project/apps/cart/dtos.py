@@ -66,7 +66,7 @@ class SampleOrdersDto(BaseSampleOrdersDto):
 
 class CustomizedSampleOrdersDto(BaseSampleOrdersDto):
 
-    def __init__(self, customized_sample_order, language)
+    def __init__(self, customized_sample_order, language):
         super().__init__(customized_sample_order)
         self.tile = TileDto(customized_sample_order.customized_tile.tile, language)
         self.group_colors = [GroupColorDto(group_color, language)

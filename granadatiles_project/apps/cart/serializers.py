@@ -39,6 +39,7 @@ class BaseSampleOrdersSerializer(BaseSerializer):
     quantity = serializers.IntegerField()
     subtotal = serializers.FloatField()
 
+
 class SampleOrdersSerializer(BaseSerializer):
     tile = TileSerializer()
 

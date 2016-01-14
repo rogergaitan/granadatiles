@@ -101,7 +101,7 @@ class CartService:
     def remove_customized_tile(cart, customized_tile):
         cart.customizedtiles_orders.get(customized_tile=customized_tile).delete()
 
-   def calculate_sample_order(tile, quantity):
+    def calculate_sample_order(tile, quantity):
         subtotal = int(quantity) * tile.sales_price
 
         data = {
