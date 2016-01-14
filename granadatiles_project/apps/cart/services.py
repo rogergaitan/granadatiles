@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework.exceptions import APIException
 
-from apps.tiles.models import Tile
+from apps.tiles.models import Tile, CustomizedTile
 from .models import Cart
 from .dtos import TileOrdersDto, SampleOrdersDto, CustomizedTileOrdersDto
 
@@ -40,10 +40,10 @@ class CartService:
             return math.ceil(quantity/tile.box.quantity)
 
         if tile.qty_is_sq_ft and tile.box.measurement_unit == 1:
-            return APIException("Cannot use boxes of unit for tiles measure in square foot")
+            raise APIException("Cannot use boxes of unit for tiles measure in square foot")
 
         if not tile.qty_is_sq_ft and tile.box.measurement_unit == 2:
-            return APIException("Cannot use boxes of square foot for tiles measure in units")
+            raise APIException("Cannot use boxes of square foot for tiles measure in units")
 
     def get_subtotal(tile, quantity):
         return quantity * tile.sales_price
@@ -51,17 +51,19 @@ class CartService:
     def get_tile(id):
         return get_object_or_404(Tile, list_id=id)
 
+    def get_customized_tile(id):
+        return get_object_or_404(CustomizedTile, pk=id)
+
     def get_tile_orders(cart, language):
         tile_orders_dto = [TileOrdersDto(tile_order, language) for tile_order in cart.tile_orders.all()]
         return tile_orders_dto
 
-    def add_tile(cart, tile, sq_ft):
-
+    def calculate_order(tile, sq_ft):
         if sq_ft < tile.design.group.collection.minimum_input_square_foot:
-            return APIException(_('minimum_input_square_foot_message'))
+            raise APIException(_('minimum_input_square_foot_message'))
 
         if sq_ft > tile.design.group.collection.maximum_input_square_foot:
-            return APIException(_('maximum_input_square_foot_message'))
+            raise APIException(_('maximum_input_square_foot_message'))
 
         quantity = CartService.tile_quantity(sq_ft, tile)
         subtotal = CartService.get_subtotal(tile, quantity)
@@ -75,16 +77,27 @@ class CartService:
             'subtotal': subtotal
         }
 
+        return data
+
+    def add_tile(cart, tile, sq_ft):
+        data = CartService.calculate_order(tile, sq_ft)
+
         cart.tile_orders.update_or_create(cart=cart, tile=tile, defaults=data)
+
+    def remove_tile(cart, id):
+        tile = CartService.get_tile(id)
+        cart.tile_orders.get(tiles=tile).delete()
 
     def get_customized_tile_orders(cart, language):
         customized_tile_orders_dto = [CustomizedTileOrdersDto(customized_tile_order, language)
                                       for customized_tile_order in cart.customized_tile_orders.all()]
         return customized_tile_orders_dto
 
-    def remove_tile(cart, id):
-        tile = CartService.get_tile(id)
-        cart.tile_orders.get(tiles=tile).delete()
+    def add_customized_tile(cart, customized_tile, tile, sq_ft):
+        data = CartService.calculate_order(tile, sq_ft)
+
+        cart.customized_tile_order.update_or_create(cart=cart, customized_tile=customized_tile,
+                                                    defaults=data)
 
     def get_sample_orders(cart, language):
         sampleordersdto = [SampleOrdersDto(sampleorder, language) for sampleorder in cart.sample_orders.all()]

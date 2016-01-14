@@ -19,6 +19,8 @@ class CartViewSet(BaseViewSet):
     @list_route(methods=['get'])
     def show_tile_orders(self, request):
         cart = CartService.get_cart(request)
+        import pdb
+        pdb.set_trace()
         tile_orders = CartService.get_tile_orders(cart, self.get_language(request))
         serializer = TileOrdersSerializer(tile_orders, many=True)
         return Response(serializer.data)
@@ -38,16 +40,17 @@ class CartViewSet(BaseViewSet):
         return Response(serializer.data)
 
     @list_route(methods=['get'])
-    def add_custom_tile(self, request):
-        cart = CartService.get_cart(request)
-        tile = CartService.get_tile(request.query_params.get('id'))
-        return Response(CartViewSet.add_custom_tile(cart, tile))
-
-    @list_route(methods=['get'])
     def remove_tile(self, request):
         cart = CartService.get_cart(request)
         id = request.query_params.get('id')
         return Response(CartService.remove_tile(cart, id))
+
+    @list_route(methods=['get'])
+    def add_customized_tile(self, request):
+        cart = CartService.get_cart(request)
+        customized_tile = CartService.get_customized_tile(request.query_params.get('id'))
+        tile = customized_tile_id.tile
+        return Response(CartViewSet.add_customized_tile(cart, customized_tile, tile, sq_ft))
 
     @list_route(methods=['get'])
     def show_sample_orders(self, request):
