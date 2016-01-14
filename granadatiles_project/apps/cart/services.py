@@ -83,8 +83,7 @@ class CartService:
         data['tile'] = tile
         cart.tile_orders.update_or_create(cart=cart, tile=tile, defaults=data)
 
-    def remove_tile(cart, id):
-        tile = CartService.get_tile(id)
+    def remove_tile(cart, tile):
         cart.tile_orders.get(tiles=tile).delete()
 
     def get_customized_tile_orders(cart, language):
@@ -98,6 +97,9 @@ class CartService:
         cart.customized_tile_orders.update_or_create(cart=cart,
                                                     customized_tile=customized_tile,
                                                     defaults=data)
+
+    def remove_customized_tile(cart, customized_tile):
+        cart.customizedtiles_orders.get(customized_tile=customized_tile).delete()
 
     def get_sample_orders(cart, language):
         sampleordersdto = [SampleOrdersDto(sampleorder, language) for sampleorder in cart.sample_orders.all()]
