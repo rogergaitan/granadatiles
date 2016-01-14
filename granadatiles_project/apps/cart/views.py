@@ -94,11 +94,11 @@ class CartViewSet(BaseViewSet):
         cart = CartService.get_cart(request)
         customized_tile = CartService.get_customized_tile(request.query_params.get('id'))
         tile = customized_tile.tile
-        quantity = request.query_params.get('quantity')
-        return Response(CartService.add_customized_tile(cart, customized_tile, tile, quantity))
+        quantity = int(request.query_params.get('quantity'))
+        return Response(CartService.add_customized_sample(cart, customized_tile, tile, quantity))
 
     @list_route(methods=['get'])
-    def remove_customized_tile(self, request):
+    def remove_customized_sample(self, request):
         cart = CartService.get_cart(request)
         customized_tile = CartService.get_customized_tile(request.query_params.get('id'))
         return Response(CartService.remove_customized_sample(cart, customized_tile))

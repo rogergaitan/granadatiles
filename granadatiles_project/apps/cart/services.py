@@ -128,10 +128,10 @@ class CartService:
                                         for customized_sample_order in cart.customized_sample_orders.all()]
         return sampleordersdto
 
-    def add_sample_order(cart, customized_tile, tile, quantity):
+    def add_customized_sample(cart, customized_tile, tile, quantity):
         data = CartService.calculate_sample_order(tile, quantity)
         data['customized_tile'] = customized_tile
-        cart.sample_orders.update_or_create(cart=cart, customized_tile=customized_tile, defaults=data)
+        cart.customized_sample_orders.update_or_create(cart=cart, customized_tile=customized_tile, defaults=data)
 
     def remove_customized_sample(cart, customized_tile):
         cart.customized_sample_orders.get(customized_tile=customized_tile).delete()
