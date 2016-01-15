@@ -28,8 +28,8 @@ class MainTileSerialzer(BaseCatalogSerializer):
     image = serializers.CharField()
     mosaic = serializers.CharField()
     sizes = TileSizeSerializer(many=True)
-    has_installation_photos = serializers.BooleanField()
-    has_sample = serializers.BooleanField()
+    hasInstallationPhotos = serializers.BooleanField(required=False)
+    hasSample = serializers.BooleanField()
 
 
 class TileDetailSerializer(BaseCatalogSerializer):
