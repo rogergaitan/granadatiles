@@ -52,6 +52,7 @@ class MainTileDto(TileDto):
         self.mosaic = tile.mosaic.url if tile.mosaic else ''
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
         self.has_installation_photos = tile.has_installation_photos()
+        self.has_sample = tile.has_sample()
 
 
 class MinorTileDto(TileDto):
