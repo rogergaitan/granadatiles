@@ -16,14 +16,13 @@ class CartViewSet(BaseViewSet):
     @list_route(methods=['get'])
     def tiles_count(self, request):
         cart = CartService.get_cart(request)
-        tiles_count = cart.tile_orders.count() + cart.sample_orders.count()
+        tiles_count = cart.tile_orders.count() + cart.sample_orders.count() + \
+                      cart.customized_tile_orders.count() + cart.customized_sample_orders.count()
         return Response({'count': tiles_count})
 
     @list_route(methods=['get'])
     def show_tile_orders(self, request):
         cart = CartService.get_cart(request)
-        import pdb
-        pdb.set_trace()
         tile_orders = CartService.get_tile_orders(cart, self.get_language(request))
         serializer = TileOrdersSerializer(tile_orders, many=True)
         return Response(serializer.data)
