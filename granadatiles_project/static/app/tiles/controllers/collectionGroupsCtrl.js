@@ -125,7 +125,6 @@
         }
 
         vm.showInstallationPhoto = function(tileId) {
-            console.log(tileId);
             $modal.open({
                 templateUrl: baseSettings.staticUrl + 'app/tiles/templates/tileModal.html',
                 controller: 'tileModalCtrl',
