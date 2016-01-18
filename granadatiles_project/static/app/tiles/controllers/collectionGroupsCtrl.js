@@ -98,7 +98,9 @@
                 'id':vm.tiles[index].main.id,
                 'name':vm.tiles[index].main.name,
                 'image':vm.tiles[index].main.image,
-                'sizes':vm.tiles[index].main.sizes
+                'sizes':vm.tiles[index].main.sizes,
+                'hasInstallationPhotos':vm.tiles[index].main.hasInstallationPhotos,
+                'hasSample':vm.tiles[index].main.hasSample
             });
             vm.tiles[index].tiles = arrayTiles;
 
@@ -110,7 +112,9 @@
                 'name':main.name,
                 'mosaic':main.mosaic,
                 'image':main.image,
-                'sizes':main.sizes
+                'sizes':main.sizes,
+                'hasInstallationPhotos':main.hasInstallationPhotos,
+                'hasSample':main.hasSample
             });
             vm.tiles[index].main = setMain[0];
         }
