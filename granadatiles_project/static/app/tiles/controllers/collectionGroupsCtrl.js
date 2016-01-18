@@ -31,10 +31,11 @@
         collectionsSvc.getFilteredMenuCollection(pageSettings.collectionId).then(function (response) {
             vm.filteredMenuCollection = response.data;
         });
-
-        collectionsSvc.getGroup(pageSettings.groupId).then(function (response) {
-            vm.group = response.data;
-        });
+        if(pageSettings.groupId >= 0){
+            collectionsSvc.getGroup(pageSettings.groupId).then(function (response) {
+                vm.group = response.data;
+            });
+        }
 
         /*collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
             vm.tiles = response.data;
@@ -47,28 +48,30 @@
             //vm.selectedSize = vm.sizes[0];
         });*/
 
-        collectionsSvc.getStyles(pageSettings.groupId).then(function (response) {
-            vm.styles = response.data;
+        if(pageSettings.groupId >= 0) {
+            collectionsSvc.getStyles(pageSettings.groupId).then(function (response) {
+                vm.styles = response.data;
 
-            vm.updatedStyles = [];
+                vm.updatedStyles = [];
 
-            vm.updatedStyles.push({
-                'id':0,
-                'name':vm.labels.all
-            });
-
-            for(var i =0; i < vm.styles.length; i++){
-                vm.updatedStyles.push(vm.styles[i]);
-            }
-
-            vm.selectedStyle = vm.updatedStyles[0];
-
-            if(vm.selectedStyle.id == 0){
-                collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
-                    vm.tiles = response.data;
+                vm.updatedStyles.push({
+                    'id': 0,
+                    'name': vm.labels.all
                 });
-            }
-        });
+
+                for (var i = 0; i < vm.styles.length; i++) {
+                    vm.updatedStyles.push(vm.styles[i]);
+                }
+
+                vm.selectedStyle = vm.updatedStyles[0];
+
+                if (vm.selectedStyle.id == 0) {
+                    collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
+                        vm.tiles = response.data;
+                    });
+                }
+            });
+        }
 
         vm.setSize = function(size) {
             vm.selectedSize = size;
