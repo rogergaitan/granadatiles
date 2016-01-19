@@ -74,10 +74,14 @@ class TileDesignDto(BaseCatalogDto):
         if special: tiles_filter = tiles_filter.filter(on_sale=True)
 
         super().__init__(tile_design, language)
-        self.main = MainTileDto(tiles_filter.filter(main=True).first(), language) \
-                    if tiles_filter.filter(main=True).exists() else None
-
-        self.tiles = [MinorTileDto(tile, language) for tile in tiles_filter.filter(main=False)]
+        if tiles_filter.filter(main=True).exists():
+            self.main = MainTileDto(tiles_filter.filter(main=True).first(), language)
+            self.tiles = [MinorTileDto(tile, language) for tile in tiles_filter.filter(main=False)]
+        else:
+            #set first tile in design as main if no main tile exists
+            self.main = MainTileDto(tiles_filter.first(), language)
+            self.tiles = [MinorTileDto(tile, language)
+                          for tile in tiles_filter.exclude(pk=self.main.id)]
 
 
 class TileStyleDto(BaseCatalogDto):
