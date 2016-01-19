@@ -36,10 +36,11 @@
         collectionsSvc.getFilteredMenuCollection(pageSettings.collectionId).then(function (response) {
             vm.filteredMenuCollection = response.data;
         });
-
-        collectionsSvc.getGroup(pageSettings.groupId).then(function (response) {
-            vm.group = response.data;
-        });
+        if(pageSettings.groupId >= 0){
+            collectionsSvc.getGroup(pageSettings.groupId).then(function (response) {
+                vm.group = response.data;
+            });
+        }
 
         /*collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
             vm.tiles = response.data;
@@ -52,28 +53,30 @@
             //vm.selectedSize = vm.sizes[0];
         });*/
 
-        collectionsSvc.getStyles(pageSettings.groupId).then(function (response) {
-            vm.styles = response.data;
+        if(pageSettings.groupId >= 0) {
+            collectionsSvc.getStyles(pageSettings.groupId).then(function (response) {
+                vm.styles = response.data;
 
-            vm.updatedStyles = [];
+                vm.updatedStyles = [];
 
-            vm.updatedStyles.push({
-                'id':0,
-                'name':vm.labels.all
-            });
-
-            for(var i =0; i < vm.styles.length; i++){
-                vm.updatedStyles.push(vm.styles[i]);
-            }
-
-            vm.selectedStyle = vm.updatedStyles[0];
-
-            if(vm.selectedStyle.id == 0){
-                collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
-                    vm.tiles = response.data;
+                vm.updatedStyles.push({
+                    'id': 0,
+                    'name': vm.labels.all
                 });
-            }
-        });
+
+                for (var i = 0; i < vm.styles.length; i++) {
+                    vm.updatedStyles.push(vm.styles[i]);
+                }
+
+                vm.selectedStyle = vm.updatedStyles[0];
+
+                if (vm.selectedStyle.id == 0) {
+                    collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
+                        vm.tiles = response.data;
+                    });
+                }
+            });
+        }
 
         vm.setSize = function(size) {
             vm.selectedSize = size;
@@ -100,7 +103,9 @@
                 'id':vm.tiles[index].main.id,
                 'name':vm.tiles[index].main.name,
                 'image':vm.tiles[index].main.image,
-                'sizes':vm.tiles[index].main.sizes
+                'sizes':vm.tiles[index].main.sizes,
+                'hasInstallationPhotos':vm.tiles[index].main.hasInstallationPhotos,
+                'hasSample':vm.tiles[index].main.hasSample
             });
             vm.tiles[index].tiles = arrayTiles;
 
@@ -112,7 +117,9 @@
                 'name':main.name,
                 'mosaic':main.mosaic,
                 'image':main.image,
-                'sizes':main.sizes
+                'sizes':main.sizes,
+                'hasInstallationPhotos':main.hasInstallationPhotos,
+                'hasSample':main.hasSample
             });
             vm.tiles[index].main = setMain[0];
         }
@@ -130,7 +137,6 @@
         }
 
         vm.showInstallationPhoto = function(tileId) {
-            console.log(tileId);
             $modal.open({
                 templateUrl: baseSettings.staticUrl + 'app/tiles/templates/tileModal.html',
                 controller: 'tileModalCtrl',
