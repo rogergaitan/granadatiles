@@ -4,6 +4,7 @@
             <ng-include src="vm.collectionAsideNavigationTemplateUrl"></ng-include>
         </aside>
         <div class="col-md-9">
+            <div ng-show="!shared.tileDetailTemplateUrl" class="animate-show">
             <h1 class="heading-sec">{{ ::vm.group.title }}</h1>
             <a href="#" class="breadcrumds"><u>Collections</u> <i class="fa fa-angle-double-right"></i> <u></u></a>
             <div class="text-section" ng-bind-html="::vm.group.description"></div>
@@ -80,7 +81,7 @@
 
                                 <ul class="list-inline tile-options">
                                     <li>
-                                        <a href="#"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
+                                            <a href="#" ng-click="vm.showTileDetail(vm.tiles[$index].main.id)"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
                                     </li>
                                     <li ng-if="vm.tiles[$index].main.hasInstallationPhotos">
                                         <a href="#" ng-click="vm.showInstallationPhoto(vm.tiles[$index].main.id)"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
@@ -124,7 +125,7 @@
                                 </div>
                                 <ul class="list-inline tile-options">
                                     <li>
-                                        <a href="#"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
+                                            <a href="#" ng-click="vm.showTileDetail(vm.tiles[$index + 1].main.id)"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
                                     </li>
                                     <li ng-if="vm.tiles[$index + 1].main.hasInstallationPhotos">
                                         <a href="#" ng-click="vm.showInstallationPhoto(vm.tiles[$index + 1].main.id)"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
@@ -168,7 +169,7 @@
                                 </div>
                                 <ul class="list-inline tile-options">
                                     <li>
-                                        <a href="#"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
+                                            <a href="#" ng-click="vm.showTileDetail(vm.tiles[$index + 2].main.id)"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
                                     </li>
                                     <li ng-if="vm.tiles[$index + 2].main.hasInstallationPhotos">
                                         <a href="#" ng-click="vm.showInstallationPhoto(vm.tiles[$index + 2].main.id)"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
@@ -185,7 +186,8 @@
                     </div>
                 </div>
             </div>
-
+            </div>
+        <div ng-include="shared.tileDetailTemplateUrl" class="animate-show" ng-show="shared.tileDetailTemplateUrl"></div>
         </div>
     </div>
 </div>
