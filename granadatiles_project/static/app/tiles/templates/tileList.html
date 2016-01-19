@@ -56,7 +56,8 @@
                     <div class="content-tile">
                         <div class="row">
                             <div class="col-md-8">
-                                <img ng-src="{{ vm.tiles[$index].main.mosaic }}" alt="{{ vm.tiles[$index].main.name }}" class="img-responsive thumbnail" width="100%">
+                                <img ng-src="{{ vm.tiles[$index].previousImage }}" alt="{{ vm.tiles[$index].previousImage }}" class="img-responsive thumbnail animate-show-fade previous-image">
+                                <img ng-src="{{ vm.tiles[$index].main.mosaic }}" alt="{{ vm.tiles[$index].main.name }}" class="img-responsive thumbnail animate-show-fade" fade-in>
                             </div>
                             <div class="col-md-4">
                                 <div ng-repeat="item in vm.tiles[$index].tiles" class="row">
@@ -81,7 +82,7 @@
 
                                 <ul class="list-inline tile-options">
                                     <li>
-                                            <a href="#" ng-click="vm.showTileDetail(vm.tiles[$index].main.id)"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
+                                        <a href="#" ng-click="vm.showTileDetail(vm.tiles[$index].main.id)"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
                                     </li>
                                     <li ng-if="vm.tiles[$index].main.hasInstallationPhotos">
                                         <a href="#" ng-click="vm.showInstallationPhoto(vm.tiles[$index].main.id)"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
@@ -101,7 +102,9 @@
                     <div class="content-tile">
                         <div class="row">
                             <div class="col-md-8">
-                                <img ng-src="{{ vm.tiles[$index + 1].main.mosaic }}" alt="{{ vm.tiles[$index + 1].main.name }}" class="img-responsive thumbnail" width="100%">
+                                <img ng-src="{{ vm.tiles[$index + 1].previousImage }}" alt="{{ vm.tiles[$index + 1].previousImage }}" class="img-responsive thumbnail animate-show-fade previous-image">
+                                <img ng-src="{{ vm.tiles[$index + 1].main.mosaic }}" alt="{{ vm.tiles[$index + 1].main.name }}" class="img-responsive thumbnail animate-show-fade" fade-in>
+                                {{vm.tiles[$index + 1].inProgress}}
                             </div>
                             <div class="col-md-4">
                                 <div ng-repeat="item in vm.tiles[$index + 1].tiles" class="row">
@@ -145,7 +148,8 @@
                     <div class="content-tile">
                         <div class="row">
                             <div class="col-md-8">
-                                <img ng-src="{{ vm.tiles[$index + 2].main.mosaic }}" alt="{{ vm.tiles[$index + 2].main.name }}" class="img-responsive thumbnail" width="100%">
+                                <img ng-src="{{ vm.tiles[$index + 2].previousImage }}" alt="{{ vm.tiles[$index + 2].previousImage }}" class="img-responsive thumbnail animate-show-fade previous-image">
+                                <img ng-src="{{ vm.tiles[$index + 2].main.mosaic }}" alt="{{ vm.tiles[$index + 2].main.name }}" class="img-responsive thumbnail animate-show-fade" fade-in>
                             </div>
                             <div class="col-md-4">
                                 <div ng-repeat="item in vm.tiles[$index + 2].tiles" class="row">
