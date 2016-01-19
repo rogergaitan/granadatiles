@@ -81,7 +81,7 @@ class TileDesignDto(BaseCatalogDto):
             #set first tile in design as main if no main tile exists
             self.main = MainTileDto(tiles_filter.first(), language)
             self.tiles = [MinorTileDto(tile, language)
-                          for tile in tiles_filter.filter(main=False).exclude(pk=self.main.id)]
+                          for tile in tiles_filter.exclude(pk=self.main.id)]
 
 
 class TileStyleDto(BaseCatalogDto):
