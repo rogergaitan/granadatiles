@@ -8,10 +8,15 @@
                      'pageSettings',
                      'collectionsSvc',
                      '$modal',
+                     '$scope',
                      collectionsGroupCtrl
         ]);
 
-    function collectionsGroupCtrl(baseSettings ,pageSettings, collectionsSvc, $modal) {
+    function collectionsGroupCtrl(baseSettings,
+                                  pageSettings,
+                                  collectionsSvc,
+                                  $modal,
+                                  $scope) {
         var vm = this;
 
         vm.labels = pageSettings.labels;
@@ -139,6 +144,12 @@
                     }
                 }
             })
+        };
+
+        vm.showTileDetail = function (tileId) {
+            $scope.shared = {};
+            $scope.shared.tileId = tileId;
+            $scope.shared.tileDetailTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/tileDetails.html'
         };
 
     }
