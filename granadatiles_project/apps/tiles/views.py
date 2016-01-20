@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import list_route, detail_route
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 from core.views import BaseViewSet
 
@@ -96,11 +96,11 @@ class GroupViewSet(BaseViewSet):
     def tiles(self, request, pk=None):
         limit = int(request.query_params.get('limit', 6))
         offset = int(request.query_params.get('offset', 0))
-        style = request.query_params.get('style', None)
-        size = request.query_params.get('size', None)
-        new = request.query_params.get('new', None)
-        in_stock = request.query_params.get('in_stock', None)
-        special = request.query_params.get('special', None)
+        style = request.query_params.get('style')
+        size = request.query_params.get('size')
+        new = request.query_params.get('new')
+        in_stock = request.query_params.get('in_stock')
+        special = request.query_params.get('special')
 
         tile_designs = GroupService.get_group_designs(
             id=pk, language=self.get_language(request), limit=limit,
@@ -163,6 +163,8 @@ class TileViewSet(BaseViewSet):
 
 
 class PortfolioViewSet(BaseViewSet):
+
+    permission_classes = (IsAuthenticated,)
 
     @list_route(methods=['get'])
     def show_tiles(self, request):
@@ -235,9 +237,6 @@ class PortfolioViewSet(BaseViewSet):
         portfolio = PortfolioService.get_portfolio(request.user)
         customizedtile_id = request.query_params.get('customizedtile_id')
         return Response(PortfolioService.remove_custom_tile(portfolio, customizedtile_id))
-
-
-class CustomizedTileViewSet(BaseViewSet):
 
     @list_route(methods=['post'])
     def save_custom_tile(self, request):
