@@ -3,11 +3,30 @@
     <a href="#" class="breadcrumds" ng-click="vm.backToGroup()"><u>Collections</u> <i class="fa fa-angle-double-right"></i> <u></u></a>
     <div class="text-section" ng-bind-html="::vm.areas.tileDetailWelcomeMessage"></div>
     <div class="row">
-                
+        <div class="col-md-12 left-align">
+            <ul class="list-inline tile-button-options">
+                <li><a href="#"><i class="fa fa-eye"></i><p>{{ ::vm.labels.photos | uppercase }}</p></a></li>
+                <li><a href="#">
+                    <img width="28px" src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="ORDER FREE SAMPLE">
+                    <p>{{ ::vm.labels.orderFree | uppercase }}</p>
+                </a></li>
+                <li><a href="#"><i class="fa fa-briefcase"></i><p>{{ ::vm.labels.saveToPortfolio | uppercase }}</p></a></li>
+                <li><a href="#"><i class="fa fa-file"></i><p>{{ ::vm.labels.tearSheet | uppercase }}</p></a></li>
+                <li><a href="#"><i class="fa fa-print"></i><p>{{ ::vm.labels.printPage | uppercase }}</p></a></li>
+            </ul>
+        </div>
     </div>
     <div class="row">
+        <div class="col-md-8">
+            <img src="/static/img/initial/tiles/tiles/kotka-mosaic.jpg" alt="Kotka918-A-Granada-Tile-Cement" class="img-responsive thumbnail">
+        </div>
+        <div class="col-md-4">
+
+
+        </div>
 
     </div>
+    <div class="row"></div>
 </div>
 
       

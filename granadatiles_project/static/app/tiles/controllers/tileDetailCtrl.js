@@ -5,11 +5,14 @@
         .module('app')
         .controller('tileDetailCtrl', tileDetailCtrl);
 
-    tileDetailCtrl.$inject = ['$location', '$scope', 'tilesSvc'];
+    tileDetailCtrl.$inject = ['$location', '$scope', 'tilesSvc','pageSettings'];
 
-    function tileDetailCtrl($location, $scope, tilesSvc) {
+    function tileDetailCtrl($location, $scope, tilesSvc, pageSettings) {
         var vm = this;
         vm.title = 'tileDetail';
+
+        vm.labels = pageSettings.labels;
+        console.log(vm.labels);
 
         var selectedTileId = $scope.shared.tileId;
 
