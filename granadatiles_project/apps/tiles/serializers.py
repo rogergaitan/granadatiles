@@ -15,6 +15,18 @@ class CollectionsFilterSerializer(BaseContentSerializer):
     pass
 
 
+class TileUseSerializer(BaseCatalogSerializer):
+    pass
+
+
+class TileColorSerializer(BaseCatalogSerializer):
+    hexadecimalCode = serializers.CharField()
+
+
+class StyleSerializer(BaseCatalogSerializer):
+    pass
+
+
 class TileSizeSerializer(serializers.Serializer):
     size = serializers.CharField()
 
@@ -36,6 +48,9 @@ class TileDetailSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
     mosaic = serializers.CharField()
     sizes = TileSizeSerializer(many=True)
+    uses = TileUseSerializer(many=True)
+    styles = StyleSerializer(many=True)
+    colors = TileColorSerializer(many=True)
 
 
 class TileInstallationPhotosSerializer(BaseContentSerializer):
@@ -49,18 +64,6 @@ class TileDesignSerializer(BaseCatalogSerializer):
 
 class TileDesignerSerializer(BaseSerializer):
     title = serializers.CharField()
-
-
-class TileColorSerializer(BaseCatalogSerializer):
-    hexadecimalCode = serializers.CharField()
-
-
-class TileUseSerializer(BaseCatalogSerializer):
-    pass
-
-
-class StyleSerializer(BaseCatalogSerializer):
-    pass
 
 
 class SimilarTilesSerializer(BaseCatalogSerializer):
