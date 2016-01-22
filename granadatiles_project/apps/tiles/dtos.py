@@ -56,6 +56,7 @@ class MainTileDto(TileDto):
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
         self.hasInstallationPhotos = tile.has_installation_photos()
         self.hasSample = tile.has_sample()
+        self.new = tile.new
 
 
 class MinorTileDto(TileDto):
