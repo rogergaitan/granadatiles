@@ -21,12 +21,111 @@
             <img src="/static/img/initial/tiles/tiles/kotka-mosaic.jpg" alt="Kotka918-A-Granada-Tile-Cement" class="img-responsive thumbnail">
         </div>
         <div class="col-md-4">
+            <ul class="tile-detail-container">
+                <li class="row">
+                    <div class="col-md-4">
+                        <p>{{ ::vm.labels.colors }}:</p>
+                    </div>
+                    <div class="col-md-8">
+                        <button type="button" class="btn btn-sky">Customize</button>
+                    </div>
+                </li>
+                <li class="row">
+                    <div class="col-md-4">
+                        <p>{{ ::vm.labels.styles }}:</p>
+                    </div>
+                    <div class="col-md-8">
+                        <p>Mediterranean</p>
+                    </div>
+                </li>
+                <li class="row">
+                    <div class="col-md-4">
+                        <p>{{ ::vm.labels.selectSize }}:</p>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="btn-group" dropdown ng-if="vm.tile.sizes.length > 0">
+                            <button type="button" class="btn btn-sky">{{ vm.selectedSize }}</button>
+                            <button type="button" class="btn btn-sky dropdown-toggle" dropdown-toggle>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu filter-list" role="menu">
+                               <li ng-repeat="size in vm.tile.sizes">
+                                    <a href="#" ng-click="vm.setSize(size)">{{ size.size }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="row">
+                    <div class="col-md-4">
+                        <p>{{ ::vm.labels.thickness }}:</p>
+                    </div>
+                    <div class="col-md-8">
+                        <p>{{ vm.tile.thickness }}</p>
+                    </div>
+                </li>
+                <li class="row">
+                    <div class="col-md-4">
+                        <p>{{ ::vm.labels.weight }}:</p>
+                    </div>
+                    <div class="col-md-8">
+                        <p>{{ vm.tile.weight }}</p>
+                    </div>
+                </li>
+                <li class="row">
+                    <div class="col-md-4">
+                        <p>{{ ::vm.labels.uses }}:</p>
+                    </div>
+                    <div class="col-md-8">
+                        <p ng-repeat="use in vm.tile.uses">{{ use.name }}</p>
+                    </div>
+                </li>
+                <li class="row">
+                    <div class="col-md-4">
+                        <p>{{ ::vm.labels.leadTime }}:</p>
+                    </div>
+                    <div class="col-md-8">
+                        8-10 weeks for all custom tiles
+                    </div>
+                </li>
+            </ul>
 
 
         </div>
 
     </div>
-    <div class="row"></div>
+    <div class="row">
+        <div class="col-md-3">
+            <img src="/static/img/initial/tiles/tiles/kotka-mosaic-2.jpg" alt="kotka-mosaic-2" class="img-responsive thumbnail">
+        </div>
+        <div class="col-md-3">
+            <img src="/static/img/initial/tiles/tiles/kotka-mosaic-3.jpg" alt="kotka-mosaic-3" class="img-responsive thumbnail">
+        </div>
+        <div class="col-md-6">
+            <table class="table-tile-detail">
+                <thead>
+                    <tr>
+                        <td>Per Box of 10</td>
+                        <td>= Per Tile</td>
+                        <td>= Per Square Foot</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>$ 80.90</td>
+                        <td>$ 8.09</td>
+                        <td>$ 18.20</td>
+                    </tr>
+                    <tr>
+                        <td>200</td>
+                        <td>20</td>
+                        <td>10</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
 </div>
 
       

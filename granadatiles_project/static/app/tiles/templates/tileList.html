@@ -8,7 +8,7 @@
             <h1 class="heading-sec">{{ ::vm.group.title }}</h1>
             <a href="#" class="breadcrumds"><u>Collections</u> <i class="fa fa-angle-double-right"></i> <u></u></a>
             <div class="text-section" ng-bind-html="::vm.group.description"></div>
-            <div class="row filter">
+            <div class="row filter-container">
                 <div class="col-md-8">
                     <label class="inline-block"><strong>{{ vm.labels.show_only }}</strong></label>
                     <div class="checkbox-content">
@@ -28,22 +28,22 @@
                 </div>
                 <div class="col-md-4 pull-right text-right">
                     <div class="btn-group" dropdown>
-                        <button type="button" class="btn btn-info">{{ vm.selectedSize }}</button>
-                        <button type="button" class="btn btn-info dropdown-toggle" dropdown-toggle>
+                        <button type="button" class="btn btn-sky">{{ vm.selectedSize }}</button>
+                        <button type="button" class="btn btn-sky dropdown-toggle" dropdown-toggle>
                             <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu" role="menu">
+                        <ul class="dropdown-menu filter-list" role="menu">
                             <li ng-repeat="size in vm.sizes">
                                 <a href="#" ng-click="vm.setSize(size)">{{ size.name }}</a>
                             </li>
                         </ul>
                     </div>
                     <div class="btn-group dropdown" dropdown>
-                        <button type="button" class="btn btn-info">{{ vm.selectedStyle.name }}</button>
-                        <button type="button" class="btn btn-info dropdown-toggle" dropdown-toggle aria-haspopup="true" aria-expanded="false">
+                        <button type="button" class="btn btn-sky">{{ vm.selectedStyle.name }}</button>
+                        <button type="button" class="btn btn-sky dropdown-toggle" dropdown-toggle aria-haspopup="true" aria-expanded="false">
                             <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu" role="menu" dropdown-menu>
+                        <ul class="dropdown-menu filter-list" role="menu" dropdown-menu>
                             <li role="menuitem" ng-repeat="style in vm.updatedStyles">
                                 <a href="#" ng-click="vm.setStyle(style)">{{ style.name }}</a>
                             </li>

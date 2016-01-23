@@ -9,14 +9,14 @@
             <div class="text-section" ng-bind-html="::vm.section.description"></div>
         </div>
     </div>
-    <div class="row filter">
+    <div class="row filter-container">
         <div class="col-sm-2 pull-right text-right">
             <div class="btn-group" dropdown>
-                <button type="button" class="btn btn-info">{{ vm.selectedYear.year }}</button>
-                <button type="button" class="btn btn-info dropdown-toggle" dropdown-toggle>
+                <button type="button" class="btn btn-sky">{{ vm.selectedYear.year }}</button>
+                <button type="button" class="btn btn-sky dropdown-toggle" dropdown-toggle>
                     <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" role="menu">
+                <ul class="dropdown-menu filter-list" role="menu">
                     <li ng-repeat="year in vm.years">
                         <a href="#" ng-click="vm.setYear(year)">{{ year.year }}</a>
                     </li>

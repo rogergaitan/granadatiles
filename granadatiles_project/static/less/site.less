@@ -218,30 +218,11 @@ div.gt-index-welcome{
         }
     }
 }
-.filter{
+.filter-container {
     margin-bottom: 20px;
     label{
         font-family: @font-secundary;
         .font-configuration(@font-md,@font-light);
-    }
-    button{
-        background-color: @lightBlue;
-        color: @darkBlue;
-        font-family: @font-secundary;
-        .font-configuration(@font-md,@font-light);
-    }
-    ul{
-        background-color: @lightBlue;
-        li a{
-            color: @darkBlue;
-            font-family: @font-secundary;
-            .font-configuration(@font-md,@font-light);
-            &:hover, &:focus {
-                background-color: transparent;
-                color: @white;
-                text-decoration: none;
-            }
-        }
     }
     .checkbox-content{
         color: @darkGray;
@@ -269,6 +250,19 @@ div.gt-index-welcome{
             content: "\f046";
             color: @darkBlue;
             letter-spacing: 5px;
+        }
+    }
+}
+.filter-list{
+    background-color: @lightBlue;
+    li a{
+        color: @darkBlue;
+        font-family: @font-secundary;
+        .font-configuration(@font-md,@font-light);
+        &:hover, &:focus {
+            background-color: transparent;
+            color: @white;
+            text-decoration: none;
         }
     }
 }
@@ -621,6 +615,42 @@ div.gt-index-welcome{
             }
         }
     }
+}
+
+.tile-detail-container{
+    padding: 0;
+    >li{
+        border-bottom: @lightGray 1px SOLID;
+        list-style: none;
+        padding: 10px 0;
+        p{
+            margin: 0;
+        }
+        div:first-child{
+            padding: 0;
+            p{
+                color: @darkBlue;
+                font-family: @font-primary;
+                .font-configuration(@font-md,@font-medium);
+            }
+        }
+    }
+    li:last-child{
+        border: none;
+    }
+}
+.table-tile-detail{
+    background-color:@blueTable;
+    color: @darkBlue;
+    font-family: @font-primary;
+    .font-configuration(@font-md,@font-medium);
+    text-align: center;
+    td{
+        border: 2px SOLID @darkGray;
+        height: 30px;
+        width: 120px;
+    }
+
 }
 
 
