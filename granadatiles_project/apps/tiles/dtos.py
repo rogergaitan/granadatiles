@@ -35,6 +35,9 @@ class TileDetailDto(BaseCatalogDto):
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
         self.mosaic = tile.mosaic.url if tile.mosaic else ''
         self.image = tile.image.url if tile.image else ''
+        self.uses = [TileUseDto(use, language) for use in tile.design.group.collection.uses.all()]
+        self.styles = [TileStyleDto(style, language) for style in tile.design.styles.all()]
+        self.colors = [TileColorDto(color, language) for color in tile.colors.all()]
 
 
 class TileDto(BaseCatalogDto):
@@ -53,6 +56,7 @@ class MainTileDto(TileDto):
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
         self.hasInstallationPhotos = tile.has_installation_photos()
         self.hasSample = tile.has_sample()
+        self.new = tile.new
 
 
 class MinorTileDto(TileDto):
