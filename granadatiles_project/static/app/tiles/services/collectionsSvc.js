@@ -66,8 +66,8 @@
             return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles')
         }
 
-        function getTileFilteredByStyle(groupId, styleId){
-            return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles/?style=' + styleId)
+        function getTileFilteredByStyle(groupId, styleName){
+            return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles/?style=' + styleName)
         }
 
         function getMainTile(tileId){

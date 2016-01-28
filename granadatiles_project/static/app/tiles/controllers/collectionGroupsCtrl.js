@@ -25,6 +25,8 @@
 
         vm.subMenuCollapsed = true;
 
+        vm.checkNew = false;
+
         vm.collectionAsideNavigationTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/collectionAsideNavigation.html';
 
         collectionsSvc.getCollection(pageSettings.collectionId).then(function (response) {
@@ -54,6 +56,8 @@
             vm.sizes = response.data;
             //vm.selectedSize = vm.sizes[0];
         });*/
+
+        console.log(pageSettings.groupId);
 
         if (pageSettings.groupId >= 0) {
             collectionsSvc.getStyles(pageSettings.groupId).then(function (response) {
@@ -141,6 +145,14 @@
             }
         }
 
+        vm.updateTileByNew = function(value){
+            if(value){
+                console.log("intro");
+            }else{
+                console.log("not intro");
+            }
+        };
+
         vm.showInstallationPhoto = function (tileId) {
             $modal.open({
                 templateUrl: baseSettings.staticUrl + 'app/tiles/templates/tileModal.html',
@@ -157,15 +169,7 @@
             })
         };
 
-        vm.checkNew = false;
 
-        vm.updateTileByNew = function(value){
-            if(value){
-                console.log("intro");
-            }else{
-                console.log("not intro");
-            }
-        };
 
         vm.showTileDetail = function (tileId) {
             $scope.shared = {};
