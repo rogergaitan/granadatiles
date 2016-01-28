@@ -157,6 +157,16 @@
             })
         };
 
+        vm.checkNew = false;
+
+        vm.updateTileByNew = function(value){
+            if(value){
+                console.log("intro");
+            }else{
+                console.log("not intro");
+            }
+        };
+
         vm.showTileDetail = function (tileId) {
             $scope.shared = {};
             $scope.shared.tileId = tileId;

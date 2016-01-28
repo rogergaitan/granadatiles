@@ -13,7 +13,7 @@
                     <label class="inline-block"><strong>{{ vm.labels.show_only }}</strong></label>
                     <div class="checkbox-content">
                         <p class="checkbox-inline">
-                            <input type="checkbox" id="checkbox1" value="option1">
+                            <input type="checkbox" id="checkbox1" value="option1" ng-model="vm.checkNew" ng-click="vm.updateTileByNew(vm.checkNew)">
                             <label for="checkbox1">{{ ::vm.labels.new_tile }}</label>
                         </p>
                         <p class="checkbox-inline">
