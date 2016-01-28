@@ -51,17 +51,24 @@ class GroupService:
         group_dto = GroupDto(group, language)
         return group_dto
 
-    def get_group_designs(id, limit, offset, style, size, new, in_stock, special, language=None):
+    def get_group_designs(id, limit, offset, style, size, new, in_stock, specials, language=None):
         group = GroupService.group_show_in_web(id)
         designs = group.designs.filter(show_in_web=True)
+
         if style:
             if language:
                 designs = designs.filter(styles__name_es__icontains=style)
             else:
                 designs = designs.filter(styles__name__icontains=style)
-        tile_design_dto = [TileDesignDto(tile_design, size, new, in_stock, special, language)
-                         for tile_design in designs[offset:limit]]
 
+        if new: designs = designs.filter(tiles__new=True)
+
+        if in_stock: designs = designs.filter(tiles__custom=False)
+
+        if specials: designs = designs.filter(tiles__on_sale=True)
+
+        tile_design_dto = [TileDesignDto(tile_design, size, new, in_stock, specials, language)
+                           for tile_design in designs[offset:limit]]
         return tile_design_dto
 
     def get_styles(id, language=None):

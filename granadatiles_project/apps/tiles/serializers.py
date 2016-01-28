@@ -42,6 +42,7 @@ class MainTileSerialzer(BaseCatalogSerializer):
     sizes = TileSizeSerializer(many=True)
     hasInstallationPhotos = serializers.BooleanField(required=False)
     hasSample = serializers.BooleanField()
+    new = serializers.BooleanField()
 
 
 class TileDetailSerializer(BaseCatalogSerializer):
@@ -58,8 +59,8 @@ class TileInstallationPhotosSerializer(BaseContentSerializer):
 
 
 class TileDesignSerializer(BaseCatalogSerializer):
-    main = MainTileSerialzer()
-    tiles = TileSerializer(many=True)
+    main = MainTileSerialzer(required=False)
+    tiles = TileSerializer(many=True, required=False)
 
 
 class TileDesignerSerializer(BaseSerializer):

@@ -100,12 +100,12 @@ class GroupViewSet(BaseViewSet):
         size = request.query_params.get('size')
         new = request.query_params.get('new')
         in_stock = request.query_params.get('in_stock')
-        special = request.query_params.get('special')
+        specials = request.query_params.get('specials')
 
         tile_designs = GroupService.get_group_designs(
             id=pk, language=self.get_language(request), limit=limit,
             offset=offset, style=style, size=size, new=new,
-            in_stock=in_stock, special=special
+            in_stock=in_stock, specials=specials
         )
 
         serializer = TileDesignSerializer(tile_designs, many=True)
@@ -185,7 +185,6 @@ class PortfolioViewSet(BaseViewSet):
         id = request.query_params.get('id')
         return Response(PortfolioService.add_tile(portfolio, id))
 
-
     @list_route(methods=['get'])
     def show_layouts(self, request):
         portfolio = PortfolioService.get_portfolio(request.user)
@@ -217,7 +216,6 @@ class PortfolioViewSet(BaseViewSet):
         tiles = PortfolioService.layout_tiles(portfolio, self.get_language(request))
         serializer = LayoutTilesSerializer(tiles, many=True)
         return Response(serializer.data)
-
 
     @list_route(methods=['get'])
     def duplicate_layout(self, request):
