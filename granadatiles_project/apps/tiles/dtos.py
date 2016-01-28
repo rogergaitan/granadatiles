@@ -69,23 +69,24 @@ class MinorTileDto(TileDto):
 
 class TileDesignDto(BaseCatalogDto):
 
-    def __init__(self, tile_design, size, new, in_stock, special, language=None):
+    def __init__(self, tile_design, size, new, in_stock, specials, language=None):
 
         tiles_filter = tile_design.tiles.exclude(image='')
         if size: tiles_filter = tiles_filter.filter(size=size)
         if new: tiles_filter = tiles_filter.filter(new=True)
         if in_stock: tiles_filter = tiles_filter.filter(custom=False)
-        if special: tiles_filter = tiles_filter.filter(on_sale=True)
+        if specials: tiles_filter = tiles_filter.filter(on_sale=True)
 
         super().__init__(tile_design, language)
-        if tiles_filter.filter(main=True).exists():
-            self.main = MainTileDto(tiles_filter.filter(main=True).first(), language)
-            self.tiles = [MinorTileDto(tile, language) for tile in tiles_filter.filter(main=False)]
-        else:
-            #set first tile in design as main if no main tile exists
-            self.main = MainTileDto(tiles_filter.first(), language)
-            self.tiles = [MinorTileDto(tile, language)
-                          for tile in tiles_filter.exclude(pk=self.main.id)]
+        if tiles_filter:
+            if tiles_filter.filter(main=True).exists():
+                self.main = MainTileDto(tiles_filter.filter(main=True).first(), language)
+                self.tiles = [MinorTileDto(tile, language) for tile in tiles_filter.filter(main=False)]
+            else:
+                #set first tile in design as main if no main tile exists
+                self.main = MainTileDto(tiles_filter.first(), language)
+                self.tiles = [MinorTileDto(tile, language)
+                              for tile in tiles_filter.exclude(pk=self.main.id)]
 
 
 class TileStyleDto(BaseCatalogDto):
