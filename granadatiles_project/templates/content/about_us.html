@@ -8,7 +8,10 @@
 {% block seo %} {% content_meta_tags section %} {% endblock %}
 
 {% block content%}
-
+<div class="row">
+    <ng-include id="about-us-content" src="'{{STATIC_URL}}app/content/templates/aboutUs.html'">
+    </ng-include>
+</div>
 {% endblock content%}
 
 {% block js%}
@@ -21,7 +24,7 @@
 
         function pageSettings(appSettings) {
             return{
-                sectionId: 3,
+                sectionId: 9,
                 language: '{{LANGUAGE_CODE}}',
                 labels: {
                     aboutUs: '{% trans 'About us'%}'

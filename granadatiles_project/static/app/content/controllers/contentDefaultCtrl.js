@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app')
+        .module('app.content')
         .controller('contentDefaultCtrl',
             ['baseSettings',
              'pageSettings',
