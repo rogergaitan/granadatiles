@@ -1,9 +1,11 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n content %}
+
+{% section 1 LANGUAGE_CODE  as section %}
 
 {% block title %} {{ section.title }} {% endblock %}
 
-{% block seo %} {% include "meta.html" %} {% endblock %}
+{% block seo %} {% content_meta_tags section %} {% endblock %}
 
 {% block main %}
 <div class="row">
