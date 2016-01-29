@@ -61,11 +61,11 @@ class GroupService:
             else:
                 designs = designs.filter(styles__name__icontains=style)
 
-        if new: designs = designs.filter(tiles__new=True)
+        if new: designs = designs.filter(tiles__new=True).distinct()
 
-        if in_stock: designs = designs.filter(tiles__custom=False)
+        if in_stock: designs = designs.filter(tiles__custom=False).distinct()
 
-        if specials: designs = designs.filter(tiles__on_sale=True)
+        if specials: designs = designs.filter(tiles__on_sale=True).distinct()
 
         tile_design_dto = [TileDesignDto(tile_design, size, new, in_stock, specials, language)
                            for tile_design in designs[offset:limit]]
