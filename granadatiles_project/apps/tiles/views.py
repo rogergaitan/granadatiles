@@ -244,7 +244,7 @@ class PortfolioViewSet(BaseViewSet):
         return Response(PortfolioService.save_custom_tile(portfolio, tile, colors))
 
 
-class ItemViewSet(viewsets.ViewSet):
+class TaskViewSet(viewsets.ViewSet):
 
     permission_classes = (IsAdminUser,)
 
