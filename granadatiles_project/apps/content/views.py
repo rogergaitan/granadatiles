@@ -9,29 +9,27 @@ from core.views import BaseViewSet
 from core.serializers import BaseContentSerializer
 from rest_framework.status import HTTP_404_NOT_FOUND
 
-def get_seo_data(id, request):
-    return {'section': Section.seo.get_seo_data(id, request.META.get('HTTP_X_LANGUAGE_CODE'))}
 
 def index(request):
-    return render(request, 'index.html', get_seo_data(1, request))
+    return render(request, 'index.html')
 
 
 def about_us(request):
-    return render(request, 'content/about_us.html', get_seo_data(9, request))
+    return render(request, 'content/about_us.html')
 
 
 def videos(request):
-    return render(request, 'content/featured_videos.html', get_seo_data(8, request))
+    return render(request, 'content/featured_videos.html')
 
 
 def compare_products(request):
-    return render(request, 'content/compare_products.html', get_seo_data(2, request))
+    return render(request, 'content/compare_products.html')
 
 def cement_vs_ceramic(request):
-    return render(request, 'content/cement_vs_ceramic.html', get_seo_data(3, request))
+    return render(request, 'content/cement_vs_ceramic.html')
 
 def color_palletes(request):
-    return render(request, 'content/color_palletes.html', get_seo_data(4, request))
+    return render(request, 'content/color_palletes.html')
 
 
 class TestimonyViewSet(BaseViewSet):

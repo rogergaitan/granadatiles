@@ -4,7 +4,7 @@ from core.serializers import BaseGalleryImageSerializer, BaseCatalogSerializer
 
 class SectionFeaturedArticleSerializer(serializers.Serializer):
     title = serializers.CharField()
-    image = serializers.ImageField()
+    image = serializers.CharField()
     url = serializers.URLField()
     
 
