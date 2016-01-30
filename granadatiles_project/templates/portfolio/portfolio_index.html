@@ -1,0 +1,42 @@
+﻿{% extends "base.html" %}
+{% load i18n content %}
+
+{% block seo %}
+    {% section 10 LANGUAGE_CODE  as section %}
+    <title>{{ section.page_title }}</title>
+    {% content_meta_tags section %}
+{% endblock seo %}
+
+{% block content %}
+
+{% endblock content %}
+
+{% block js%}
+{% get_current_language as LANGUAGE_CODE %}
+<script>
+    (function () {
+        "use strict";
+        angular
+        .module("app.core")
+        .factory("pageSettings", ['appSettings',pageSettings]);
+
+        function pageSettings(appSettings) {
+            return{
+                sectionId: 10,
+                language: '{{LANGUAGE_CODE}}',
+                labels: {
+                    myPortfolio: '{% trans 'My Portfolio'%}',
+                    tilesInMyPortfolio: '{% trans 'Tiles in my Portfolio' %}',
+                    layouts: '{%trans 'Layouts' %}',
+                    myAccount : '{%trans 'My Account '%}',
+                    logout: '{% trans 'Logout'%}',
+                    buy: 'BUY',
+                    edit: 'EDIT',
+                    share: 'SHARE',
+                    delete: 'DELETE'
+                }
+    }
+    };
+    })();
+</script>
+{% endblock js %}

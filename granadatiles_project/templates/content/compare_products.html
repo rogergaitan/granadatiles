@@ -1,11 +1,11 @@
 ﻿{% extends "base.html" %}
 {% load i18n content %}
 
-{% section 2 LANGUAGE_CODE  as section %}
-
-{% block title %} {{ section.title }} {% endblock %}
-
-{% block seo %} {% content_meta_tags section %} {% endblock %}
+{% block seo %}
+    {% section 2 LANGUAGE_CODE  as section %}
+    <title>{{ section.page_title }}</title>
+    {% content_meta_tags section %}
+{% endblock seo %}
 
 {% block content%}
     <div class="row">

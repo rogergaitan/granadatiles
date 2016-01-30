@@ -13,6 +13,7 @@
             'app.content',
             'app.tiles',
             'app.galleries',
-            'app.news'
+            'app.news',
+            'app.portfolio'
         ]);
 }());

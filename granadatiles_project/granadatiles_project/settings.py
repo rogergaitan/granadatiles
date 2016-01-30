@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'apps.content',
     'apps.tiles',
     'apps.cart',
+    'apps.portfolio',
 ]
 
 MIDDLEWARE_CLASSES = [
