@@ -1,4 +1,6 @@
 from django.shortcuts import get_object_or_404
+from django.utils.translation import ugettext as _
+
 from .models import Collection, Group, Tile, Portfolio, Layout, Style, CustomizedTile, GroupColor, PalleteColor
 from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto, TileDesignDto,
@@ -156,22 +158,25 @@ class PortfolioService:
          portfolio.layouts.get(pk=layout.id).delete()
 
      def save_layout(portfolio, id, name, length_ft, length_in, width_ft, width_in, image):
-         if id:
-             layout = get_object_or_404(Layout, pk=id)
-             layout.update(name=name, length_ft=length_ft, length_in=length_in,
-                           width_ft=width_ft, width_in=width_in, image=image)
-         else:
-             portfolio.layouts.create(name=name, length_ft=length_ft, length_in=length_in,
-                                      width_ft=width_ft, width_in=width_in, image=image)
+         data = {
+            'name': name,
+            'length_ft': length_ft,
+            'length_in': length_in,
+            'width_ft': width_ft,
+            'width_in': width_in,
+            'image': image
+         }
+         portfolio.layouts.update_or_create(pk=id, defaults=data)
 
      def layout_tiles(portfolio, language):
-         layouttilesdto = [LayoutTilesDto(portfoliotile.tile, language) for portfoliotile in portfolio.tiles.all()]
-         return layouttilesdto
+         layout_tiles_dto = [LayoutTilesDto(portfolio_tile.tile, language)
+                             for portfolio_tile in portfolio.tiles.all()]
+         return layout_tiles_dto
 
      def duplicate_layout(portfolio, id):
          layout = Layout.objects.get(pk=id)
          layout.id = None
-         layout.name = layout.name + " copy"
+         layout.name = layout.name + ' ' + _('copy')
          layout.save()
 
      def show_custom_tiles(portfolio, language):
