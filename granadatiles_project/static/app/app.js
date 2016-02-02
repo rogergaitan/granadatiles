@@ -8,6 +8,7 @@
             'mega-menu',
             'angular-loading-bar',
             '720kb.socialshare',
+            'vcRecaptcha',
 
             'app.core',
             'app.content',
