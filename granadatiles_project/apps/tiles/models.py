@@ -163,7 +163,7 @@ class Tile(BaseCatalogModel):
         for tile in tiles_of_myself:
             size = re.search('\d+"*\s*x\s*\d+"*', tile.sales_description)
             if size:
-                if tile.sales_description.replace(size.group(),'') == sales_description_no_size:
+                if size.group() not in sizes:
                     sizes.append(tile.size)
         return sizes
 
@@ -260,7 +260,7 @@ class Layout(models.Model):
     length_in = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Length In'))
     width_ft = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Width Ft'))
     width_in = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Width In'))
-    image = ImageField(upload_to='layouts', verbose_name=_('Image'), null=True, blank=True)
+    image = models.FileField(upload_to='layouts', verbose_name=_('Image'), null=True, blank=True)
     date = models.DateField(auto_now_add=True, verbose_name=_('Date'))
     portfolio = models.ForeignKey(Portfolio, default=False, related_name='layouts', verbose_name=_('Portfolio'))
 
