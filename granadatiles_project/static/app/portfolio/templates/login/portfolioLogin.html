@@ -1,39 +1,10 @@
 ﻿<div class="col-xs-12 fadeInUp form-horizontal text-center" ng-controller="portfolioLoginCtrl as vm">
     <div class="row">
         <div class="col-md-offset-4 col-md-6">
-            <form action="/" method="post" id="login-form" class="panel panel-default">
-                <div class="panel-heading">
-                     <h1 class="heading-sec panel-title">{{::vm.labels.logInToYourPortfolio}}</h1>
-                </div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <input class="form-control" type="text"
-                               ng-model="vm.login.user" placeholder="Email"
-                               id="username" name="username" autofocus />
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="password"
-                               ng-model="vm.login.password" placeholder="Password"
-                               id="password" name="password" />
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-info btn-login">{{::vm.labels.logIn}}</button>
+             <div class="slide-animate-container">
+                    <div class="slide-animate" ng-include="vm.activeTemplateUrl">
                     </div>
                 </div>
-                <div class="panel-footer">
-                    <div class="form-group">
-                        <a href="#">{{vm.labels.forgotPassword}}</a>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-info btn-login">{{::vm.labels.signUp}}</button>
-                    </div>
-                    <div class="form-group">
-                        <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-info btn-login">
-                            <i class="fa fa-facebook fa-fw"></i>{{::vm.labels.LogInOrSignUpFacebook}}
-                        </a>
-                    </div>
-                </div>
-            </form>
         </div>
     </div>
 </div>

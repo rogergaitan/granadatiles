@@ -1,0 +1,33 @@
+﻿<form action="/" method="post" class="panel panel-default portoflio-auth-form">
+    <div class="panel-heading">
+        <h1 class="heading-sec panel-title">{{::vm.labels.logInToYourPortfolio}}</h1>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <input class="form-control" type="email"
+                   ng-model="vm.login.user" placeholder="Email"
+                   id="username" name="username" autofocus />
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password"
+                   ng-model="vm.login.password" placeholder="Password"
+                   id="password" name="password" />
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-info btn-login">{{::vm.labels.logIn}}</button>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="form-group">
+            <a href="#" ng-click="vm.goToForgotPassword()">{{vm.labels.forgotPassword}}</a>
+        </div>
+        <div class="form-group">
+            <a href="#" class="btn btn-info btn-login" ng-click="vm.goToSignUp()">{{::vm.labels.signUp}}</a>
+        </div>
+        <div class="form-group">
+            <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-info btn-login">
+                <i class="fa fa-facebook fa-fw"></i>{{::vm.labels.LogInOrSignUpFacebook}}
+            </a>
+        </div>
+    </div>
+</form>

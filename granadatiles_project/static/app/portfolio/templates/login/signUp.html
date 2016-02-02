@@ -1,0 +1,40 @@
+﻿<form action="/" method="post" class="panel panel-default portoflio-auth-form">
+    <div class="panel-heading">
+        <h1 class="heading-sec panel-title">{{::vm.labels.signUpForPortfolio}}</h1>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <input class="form-control" type="email"
+                   ng-model="vm.login.user" placeholder="Email"
+                   id="username" name="username" autofocus />
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password"
+                   ng-model="vm.login.password" placeholder="Password"
+                   id="password" name="password" />
+        </div>
+         <div class="form-group">
+            <input class="form-control" type="text"
+                   ng-model="vm.login.firstName" placeholder="First Name"
+                   id="name" name="name" />
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text"
+                   ng-model="vm.login.lastName" placeholder="Last Name"
+                   id="lastName" name="lastName" />
+        </div>
+        <div class="form-group">
+            <select class="form-control" name="type" id="type"
+                    ng-model="vm.login.type"
+                    ></select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-info btn-login">{{::vm.labels.register}}</button>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="form-group">
+            <a href="#" class="btn btn-info btn-login" ng-click="vm.goToLogIn()">{{::vm.labels.backToLogin}}</a>
+        </div>
+    </div>
+</form>

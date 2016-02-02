@@ -1,29 +1,65 @@
 .animate-show {
-  opacity: 1;
- 
+    opacity: 1;
 }
 
 .animate-show.ng-hide-add, .animate-show.ng-hide-remove {
-  transition: all linear 0.5s;
+    transition: all linear 0.5s;
 }
 
 .animate-show.ng-hide {
-  opacity: 0;
+    opacity: 0;
 }
 
-.animate-show-fade{
-    &.ng-hide-fade{
+.animate-show-fade {
+    &.ng-hide-fade {
         opacity: 0;
-       transition: 0s all linear;
+        transition: 0s all linear;
     }
-     
-    &.ng-show{
+
+    &.ng-show {
         opacity: 1;
-       transition: 1s all linear;
+        transition: 1s all linear;
     }
 }
 
-.previous-image{
+.previous-image {
     position: absolute;
     z-index: -1;
+}
+
+.slide-animate-container {
+    position: relative;
+    height: 485px;
+    overflow: hidden;
+}
+
+.slide-animate {
+    padding: 10px;
+}
+
+.slide-animate.ng-enter, .slide-animate.ng-leave {
+    transition: all cubic-bezier(0.17,0.67,0.83,0.67) 0.7s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    padding: 10px;
+}
+
+.slide-animate.ng-enter {
+    top: 400px;
+}
+
+.slide-animate.ng-enter.ng-enter-active {
+    top: 0;
+}
+
+.slide-animate.ng-leave {
+    top: 0;
+}
+
+.slide-animate.ng-leave.ng-leave-active {
+    top: 400px;
 }
