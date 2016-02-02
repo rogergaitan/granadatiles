@@ -29,7 +29,8 @@
     "angular-socialshare": "angularjs-socialshare#~0.1.14",
     "eonasdan-bootstrap-datetimepicker": "~4.17.37",
     "select2": "~4.0.0",
-    "select2-bootstrap-css": "~1.4.6"
+    "select2-bootstrap-css": "~1.4.6",
+    "angular-recaptcha": "~2.3.0"
   },
   "overrides": {
     "bootstrap": {
