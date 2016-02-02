@@ -3,50 +3,53 @@
 @import "mixins";
 @import "base";
 @import "stylish";
-@import "animations.less";
+@import "animations";
+@import "portfolio";
 
 /********************Index page**************************/
 
 #home-page-header {
     background-color: rgba(99,172,172,0.5);
-    margin-bottom:-54px;
+    margin-bottom: -54px;
     z-index: 100;
 
-    @media screen and (max-width:1200px){
-        margin-bottom:-94px;
+    @media screen and (max-width:1200px) {
+        margin-bottom: -94px;
         padding: 11px;
     }
 
-    @media screen and (max-width:768px){
+    @media screen and (max-width:768px) {
         margin-top: 0;
     }
 
-    @media screen and (max-width:760px){
+    @media screen and (max-width:760px) {
         margin-top: 0;
-        padding:5px;
+        padding: 5px;
     }
+
     h1 {
         color: white;
         font-size: 22px;
 
-        @media screen and (max-width: 760px){
-            font-size:18px;
+        @media screen and (max-width: 760px) {
+            font-size: 18px;
         }
     }
 }
 
-.gt-residential-main{
-    margin-top:-40px;
+.gt-residential-main {
+    margin-top: -40px;
 }
 
-div.gt-index-welcome{
-    > h2{
+div.gt-index-welcome {
+    > h2 {
         .font-configuration(32px;@font-light);
-        color:@darkBlue;
+        color: @darkBlue;
     }
-    > h3{
+
+    > h3 {
         .font-configuration(21px, @font-light);
-        color:@darkBlue;
+        color: @darkBlue;
     }
 }
 
@@ -54,19 +57,19 @@ div.gt-index-welcome{
 
 /********************Cover Section**********************/
 
-#gt-cover-image{
-    width:100%;
-    max-height:600px;
+#gt-cover-image {
+    width: 100%;
+    max-height: 600px;
 }
 
-#gt-cover-spinner{
-    text-align:center;
+#gt-cover-spinner {
+    text-align: center;
     margin-top: 65px;
     font-size: 20px;
-    i{
-        color:@blue;
+
+    i {
+        color: @blue;
     }
-    
 }
 
 /*******************************************************/
@@ -92,24 +95,24 @@ div.gt-index-welcome{
 /*****************************************/
 
 /***********Styles Site***************/
-.explore-collections{
+.explore-collections {
     margin-bottom: 20px;
-    padding-left:15px;
-    padding-right:15px;
+    padding-left: 15px;
+    padding-right: 15px;
 
-    .explore-collection-content{
+    .explore-collection-content {
         background-color: @lightBlue;
         height: 270px;
         text-align: left;
         padding: 20px;
 
-        h3{
+        h3 {
             font-family: @font-primary;
             .font-configuration(@font-xxll,@font-light);
             color: @darkBlue;
         }
 
-        .description{
+        .description {
             font-family: @font-primary;
             .font-configuration(@font-lg,@font-light);
             color: @darkBlue;
@@ -117,126 +120,131 @@ div.gt-index-welcome{
             overflow: hidden;
         }
 
-        a.btn{
+        a.btn {
             margin: 10px 0 0 0;
         }
     }
 
-    .explore-collection-thumbnail{
+    .explore-collection-thumbnail {
         padding-left: 0;
         padding-right: 0;
 
-        img{
+        img {
             height: 270px;
             width: 100%;
         }
     }
 }
 
-.menu-browse-collections{
+.menu-browse-collections {
 
-    h4{
+    h4 {
         font-family: @font-secundary;
         .font-configuration(@font-sm,@font-light);
-        color:@darkBlue;
+        color: @darkBlue;
         letter-spacing: 4px;
     }
 
-    .tile-collection{
+    .tile-collection {
         text-align: center;
 
-        img{
+        img {
             margin: 0 auto;
             padding-bottom: 5px;
         }
     }
 }
 
-.testimony-content{
-    background-color:@white;
+.testimony-content {
+    background-color: @white;
     padding: 30px 55px 15px 55px;
     height: 200px;
     text-align: left;
 
-    .fa-quotes-left{
+    .fa-quotes-left {
         font-family: @font-primary;
         .font-configuration(@font-quotes,@font-light);
-        color:@lightBlue;
+        color: @lightBlue;
         margin-left: -55px;
         position: absolute;
         top: 0;
     }
 
-    .quote{
-        font-family:@font-primary;
-        font-style:@italic;
+    .quote {
+        font-family: @font-primary;
+        font-style: @italic;
         .font-configuration(@font-sm,@font-light);
-        color:@darkGray;
+        color: @darkGray;
     }
 
-    .author{
+    .author {
         font-family: @font-primary;
         .font-configuration(@font-xl,@font-medium);
-        color:@darkGray;
+        color: @darkGray;
         padding-top: 25px;
     }
 
-    .country{
+    .country {
         font-family: @font-primary;
         .font-configuration(@font-sm,@font-light);
     }
 }
 
-.press{
+.press {
 
-    label{
-        float:left;
+    label {
+        float: left;
         margin-right: 15px;
     }
 }
 
-.mainNavigation{
+.mainNavigation {
+    margin-top: 20px;
 
-    margin-top:20px;
+    .options {
+        text-align: left;
 
-    .options{
-        text-align:left;
-
-        @media screen and (max-width:1024px){
-            text-align:center;
-            margin-bottom:25px;
+        @media screen and (max-width:1024px) {
+            text-align: center;
+            margin-bottom: 25px;
         }
 
-        img{
+        img {
             box-shadow: 0 8px 10px -7px @gray;
         }
 
-        div{
+        div {
             font-family: @font-primary;
             .font-configuration(@font-sm,@font-light);
-            color:@darkGray;
-            height:85px;
+            color: @darkGray;
+            height: 85px;
         }
     }
 }
-.filter{
+
+.filter {
     margin-bottom: 20px;
-    label{
+
+    label {
         font-family: @font-secundary;
         .font-configuration(@font-md,@font-light);
     }
-    button{
+
+    button {
         background-color: @lightBlue;
         color: @darkBlue;
         font-family: @font-secundary;
         .font-configuration(@font-md,@font-light);
     }
-    ul{
+
+    ul {
         background-color: @lightBlue;
-        li a{
+
+        li a {
             color: @darkBlue;
             font-family: @font-secundary;
             .font-configuration(@font-md,@font-light);
+
             &:hover, &:focus {
                 background-color: transparent;
                 color: @white;
@@ -244,28 +252,35 @@ div.gt-index-welcome{
             }
         }
     }
-    .checkbox-content{
+
+    .checkbox-content {
         color: @darkGray;
         display: inline-block;
-        p,label{
+
+        p, label {
             margin: 0;
         }
+
         input[type=checkbox] {
-            display:none;
+            display: none;
         }
-        input[type=checkbox] + label{
+
+        input[type=checkbox] + label {
             cursor: pointer;
         }
+
         input[type=checkbox] + label:before {
             font-family: FontAwesome;
             vertical-align: middle;
         }
+
         input[type=checkbox] + label:before {
             color: @gray;
             content: "\f096";
             font-size: 30px;
             letter-spacing: 10px;
         }
+
         input[type=checkbox]:checked + label:before {
             content: "\f046";
             color: @darkBlue;
@@ -273,51 +288,59 @@ div.gt-index-welcome{
         }
     }
 }
-.sub-menu-container{
-    .menu-section{
+
+.sub-menu-container {
+    .menu-section {
         border-bottom: @orange 4px SOLID;
         padding: 0 20px 0 0;
         margin-top: 20px;
-        li{
+
+        li {
             border-bottom: @lightGray 1px SOLID;
             list-style: none;
             margin-bottom: 10px;
-            a{
+
+            a {
                 color: @darkGray;
                 font-family: @font-secundary;
                 .font-configuration(@font-sm,@font-light);
-                &:hover, &:focus{
+
+                &:hover, &:focus {
                     color: @orange;
                     text-decoration: none;
                 }
             }
         }
     }
-    a{
-        &:hover,&:focus{
+
+    a {
+        &:hover, &:focus {
             text-decoration: none;
-            h3{
+
+            h3 {
                 color: @orange;
             }
         }
     }
 }
-.active-submenu{
+
+.active-submenu {
     margin-top: 20px;
     padding: 0 0 10px 0;
     border-bottom: @orange 5px solid;
 
-    > li{
+    > li {
         list-style: none;
         padding: 5px 0 5px 0;
         border-bottom: @lightGray 1px solid;
-        a{
+
+        a {
             color: @darkGray;
             font-family: @font-secundary;
             .font-configuration(@font-sm,@font-light);
 
             &:hover,
-            &:focus{
+            &:focus {
                 color: @orange;
                 text-decoration: none;
                 .font-configuration(@font-sm,@font-normal);
@@ -325,52 +348,54 @@ div.gt-index-welcome{
         }
     }
 
-    .collapsed-submenu{
+    .collapsed-submenu {
         padding-left: 20px;
-        
-        > li{
-            list-style:none;
+
+        > li {
+            list-style: none;
             margin-top: 10px;
         }
     }
 }
 
-.submenu-selected{
+.submenu-selected {
     margin-top: 20px;
 
-    .submenu-selected-image{
+    .submenu-selected-image {
         padding-right: 0;
 
-        img{
+        img {
             width: 100%;
 
-            @media screen and (max-width:988px){
-                width:80%;
+            @media screen and (max-width:988px) {
+                width: 80%;
             }
         }
     }
-    .submenu-selected-title{
-        h3{
+
+    .submenu-selected-title {
+        h3 {
             color: @orange;
             font-family: @font-secundary;
             .font-configuration(@font-sm,@font-normal);
 
-            i{
+            i {
                 font-size: 25px;
             }
         }
     }
 }
 
-.navigation-submenu-option{
-    img{
+.navigation-submenu-option {
+    img {
         width: 100%;
 
-         @media screen and (max-width:988px){
-                width:95%;
-            }
+        @media screen and (max-width:988px) {
+            width: 95%;
+        }
     }
-    h3{
+
+    h3 {
         color: @darkBlue;
         text-align: center;
         font-family: @font-secundary;
@@ -378,50 +403,51 @@ div.gt-index-welcome{
     }
 }
 
-.blue-box{
+.blue-box {
     margin-bottom: 20px;
-    a:link {
-        text-decoration:none
-    }
 
+    a:link {
+        text-decoration: none;
+    }
 }
 
-.blue-box-content{
+.blue-box-content {
     background-color: @lightSteelBlue;
     .blue-box-padding(5px);
 
-    img, iframe{
+    img, iframe {
         width: 100%;
     }
 
-    h2{
+    h2 {
         color: @darkBlue;
         padding-left: 10px;
         font-family: @font-secundary;
         .font-configuration(@font-xlll,@font-light);
     }
 
-    .view-more{
+    .view-more {
         bottom: 0;
         right: 40px;
         color: @darkBlue;
         position: absolute;
 
-        i{
+        i {
             font-size: 25px;
             vertical-align: super;
         }
-        label{
+
+        label {
             font-family: @font-secundary;
             .font-configuration(@font-sm,@font-light);
             width: 25px;
-        }   
+        }
     }
 
-    .blue-box-options{
+    .blue-box-options {
         padding-left: 10px;
 
-        a{
+        a {
             padding: 5px;
             color: @darkGray;
             border-radius: 3px;
@@ -429,7 +455,7 @@ div.gt-index-welcome{
             font-family: @font-secundary;
             .font-configuration(@font-md,@font-light);
 
-            &:hover, &:focus, &:active{
+            &:hover, &:focus, &:active {
                 color: @darkBlue;
                 text-decoration: none;
                 border-color: @lightBlue;
@@ -438,33 +464,38 @@ div.gt-index-welcome{
         }
     }
 }
-.content-catalog{
+
+.content-catalog {
     background-color: @lightSteelBlue;
 
-    .catalog-body{
+    .catalog-body {
         padding: 0 10px 10px;
 
-        h2{
+        h2 {
             color: @darkBlue;
             font-family: @font-secundary;
             .font-configuration(@font-xlll,@font-light);
         }
-        .catalog-options{
+
+        .catalog-options {
             margin: 0;
             padding-top: 10px;
             border-top: 1px solid @darkGray;
 
-            li{
+            li {
                 text-align: center;
-                a{
+
+                a {
                     color: @darkGray;
                     font-family: @font-secundary;
                     .font-configuration(@font-sm,@font-light);
-                    &:hover, &:focus{
+
+                    &:hover, &:focus {
                         color: @darkBlue;
                         text-decoration: none;
                     }
-                    i{
+
+                    i {
                         font-size: @font-xxl;
                     }
                 }
@@ -472,26 +503,31 @@ div.gt-index-welcome{
         }
     }
 }
+
 .content-tile {
     background-color: @lightSteelBlue;
     padding: 10px;
 
-    img{
+    img {
         margin: auto;
     }
+
     a {
         color: @darkGray;
-        &:hover,&:focus{
-            label{
-                color:@darkBlue;
+
+        &:hover, &:focus {
+            label {
+                color: @darkBlue;
             }
         }
     }
-    .label-tile{
+
+    .label-tile {
         font-family: @font-secundary;
         .font-configuration(@font-xs,@font-light);
-        cursor:pointer;
+        cursor: pointer;
     }
+
     .tile-body {
         margin: 10px 0 20px 0;
 
@@ -501,73 +537,81 @@ div.gt-index-welcome{
             .font-configuration(@font-xlll, @font-light);
             margin: 0;
         }
-        div{
+
+        div {
             margin-bottom: 10px;
+
             .title-tile {
                 display: inline;
                 font-family: @font-secundary;
                 .font-configuration(@font-sm, @font-light);
             }
         }
-        .tile-options{
+
+        .tile-options {
             margin: 0;
             padding-top: 10px;
             border-top: 1px solid @darkGray;
 
-            li{
+            li {
                 margin-bottom: 10px;
-                a{
+
+                a {
                     color: @darkGray;
                     font-family: @font-secundary;
                     .font-configuration(@font-sm,@font-light);
                     display: inline-flex;
-                    &:hover, &:focus{
+
+                    &:hover, &:focus {
                         color: @darkBlue;
                         text-decoration: none;
                     }
-                    i,img{
+
+                    i, img {
                         font-size: @font-xxll;
                         margin: auto;
                         padding-right: 5px;
                     }
-                    p{
+
+                    p {
                         width: 100px;
                         margin: auto;
                     }
                 }
             }
-            li:first-child{
-                p{
+
+            li:first-child {
+                p {
                     width: 50px;
                 }
             }
         }
     }
-
-
 }
 
-.article-content{
+.article-content {
     background-color: @lightSteelBlue;
 
-    .row{
+    .row {
         padding: 15px;
     }
 
-    .article-body{
-        h2{
-            margin:0;
+    .article-body {
+        h2 {
+            margin: 0;
             color: @darkBlue;
             font-family: @font-secundary;
             .font-configuration(@font-xlll,@font-light);
         }
-        h3{
-            margin:0;
+
+        h3 {
+            margin: 0;
             color: @darkGray;
             font-family: @font-primary;
             .font-configuration(@font-sm,@font-bold);
         }
-        p, label{
+
+        p, label {
             color: @darkGray;
             font-family: @font-primary;
             .font-configuration(@font-sm,@font-light);
@@ -575,25 +619,25 @@ div.gt-index-welcome{
     }
 }
 
-.social-share{
+.social-share {
     .font-configuration(@font-xlll,@font-light);
 
-    .fa-facebook-official{
+    .fa-facebook-official {
         font-size: @font-xxll;
         color: @facebook;
     }
 
-    .fa-twitter-square{
+    .fa-twitter-square {
         font-size: @font-xxll;
         color: @twitter;
     }
 
-    .fa-google-plus-square{
+    .fa-google-plus-square {
         font-size: @font-xxll;
         color: @pinterest;
     }
 
-    .fa-linkedin-square{
+    .fa-linkedin-square {
         font-size: @font-xxll;
         color: @linkedin;
     }
@@ -603,90 +647,136 @@ div.gt-index-welcome{
 
 
 /*********** Style Reusable *************/
+.login-content {
+    border-radius: 0;
+
+    form {
+        padding: 10px 25px;
+        margin: auto;
+
+        input, button {
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: @darkBlue;
+            font-family: @font-secundary;
+            .font-configuration(@font-xl,@font-light);
+            margin-top: 0;
+            text-align: left;
+        }
+    }
+}
+
 .heading-sec-home {
     font-family: @font-primary;
     .font-configuration(@font-xxlll,@font-light);
-    color:@darkBlue;
+    color: @darkBlue;
 }
+
 .heading-sec {
-    color:@darkBlue;
+    color: @darkBlue;
     font-family: @font-primary;
     .font-configuration(@font-xxll,@font-light);
     margin-bottom: 0;
-
 }
-.text-section{
+
+.text-section {
     margin: 20px 0;
     text-align: justify;
     font-family: @font-primary;
     .font-configuration(@font-sm,@font-light);
 }
-.slogan{
+
+.slogan {
     color: @darkBlue;
     font-family: @font-primary;
     .font-configuration(@font-xlll,@font-light);
 }
-.btn-green{
-    color:@darkBlue;
-    background-color:@green;
-    border-color:@olive;
-    font-family:@font-secundary;
+
+.btn-login {
+    background-color: @lightBlue;
+    color: @darkBlue;
+    font-family: @font-secundary;
     .font-configuration(@font-md,@font-light);
 
-    &:hover{
-        background-color:@olive;
-        border-color:@green;
+    i {
+        color: white;
+    }
+
+    &:hover, &:focus {
+        color: #fff !important;
+        background-color: #31b0d5;
+        border-color: #269abc;
     }
 }
-.btn-sky{
-    color:@darkBlue;
-    background-color:@lightBlue;
-    border-color:@lightBlue;
-    font-family:@font-secundary;
+
+.btn-green {
+    color: @darkBlue;
+    background-color: @green;
+    border-color: @olive;
+    font-family: @font-secundary;
     .font-configuration(@font-md,@font-light);
 
-    &:hover{
-        background-color:@greenBlue;
-        border-color:@lightBlue;
+    &:hover {
+        background-color: @olive;
+        border-color: @green;
     }
 }
+
+.btn-sky {
+    color: @darkBlue;
+    background-color: @lightBlue;
+    border-color: @lightBlue;
+    font-family: @font-secundary;
+    .font-configuration(@font-md,@font-light);
+
+    &:hover {
+        background-color: @greenBlue;
+        border-color: @lightBlue;
+    }
+}
+
 .breadcrumds {
     color: @darkGray;
     font-style: @italic;
     font-family: @font-primary;
     .font-configuration(@font-xxxs,@font-light);
 
-    &:hover, &:focus{
+    &:hover, &:focus {
         color: @orange;
     }
 }
-.shadow-image{
+
+.shadow-image {
     width: 100%;
     margin: auto;
     box-shadow: 2px 6px 5px -2px rgba(89, 89, 89, 0.5);
     -moz-box-shadow: 2px 6px 5px -2px rgba(89, 89, 89, 0.5);
     -webkit-box-shadow: 2px 6px 5px -2px rgba(89, 89, 89, 0.5);
 
-    @media screen and (max-width:768px){
-        width:80%;
+    @media screen and (max-width:768px) {
+        width: 80%;
     }
 }
-hr{
+
+hr {
     border-top: 1px solid @lightSylver;
 }
 
 /************************************/
 
 /*********** Style Gallery **********/
-#gt-gallery-carousel{
-    div{
-        h1{
+#gt-gallery-carousel {
+    div {
+        h1 {
             color: @darkBlue;
             text-align: left;
             font-family: @font-secundary;
             .font-configuration(@font-xlll,@font-light);
         }
-        p{
+
+        p {
             color: @darkGray;
             text-align: justify;
             font-family: @font-primary;
@@ -694,25 +784,29 @@ hr{
         }
     }
 }
-.gt-gallery-img{
+
+.gt-gallery-img {
     margin: 0 auto;
 }
+
 .carousel-control.left,
-.carousel-control.right{
+.carousel-control.right {
     background-image: none;
 }
+
 .carousel-control .glyphicon-chevron-left,
-.carousel-control .glyphicon-chevron-right{
+.carousel-control .glyphicon-chevron-right {
     width: 40px;
     height: 40px;
     padding: 4px;
     border-radius: 25px;
     background-color: black;
 }
+
 .modal-header {
     border-bottom: 1px solid transparent;
 
-    .close{
+    .close {
         color: @blue;
         font-size: 45px;
         margin-top: -14px;
@@ -722,7 +816,7 @@ hr{
 
 
 /***********************************/
-.form-control{
+.form-control {
     font-family: @font-secundary;
     .font-configuration(@font-md,@font-light);
     color: @darkGray;

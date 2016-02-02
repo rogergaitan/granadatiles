@@ -4,7 +4,7 @@
 {% block title %} Login to your Granada Tile Portfolio {% endblock %}
 
 {% block content %}
-<ng-include src="'{{ STATIC_URL }}app/portfolio/templates/portfolioLogin.html'">
+<ng-include src="'{{ STATIC_URL }}app/portfolio/templates/login/portfolioLogin.html'">
 </ng-include>
 {% endblock content %}
 
@@ -23,10 +23,10 @@
                 language: '{{LANGUAGE_CODE}}',
                 labels: {
                     logInToYourPortfolio: '{% trans 'Log in to your Granada Tile Portfolio'%}',
-                    view_collection: '{% trans 'View collection' %}',
-                    getInspired: '{%trans 'Get inspired by Residential and Commercial installation photos'%}',
-                    thenChoose: '{%trans 'then choose from in stock and custom tiles.'%}',
-                    testominalsIntro: '{% trans 'Read what our architect, designer, and homeowner clients say'%}'
+                    logIn: '{% trans 'Log In' %}',
+                    signUp: '{%trans 'Sign Up'%}',
+                    forgotPassword: '{%trans 'I forgot my password'%}',
+                    LogInOrSignUpFacebook: '{% trans 'Log In or Sign Up with Facebook'%}'
                 }
             }
         };
