@@ -11,6 +11,7 @@
         /* jshint validthis:true */
         var vm = this;
         vm.labels = pageSettings.labels;
+        vm.facebookLoginUrls = pageSettings.facebookLoginUrls;
 
         vm.activeTemplateUrl = appSettings.staticUrl + 'app/portfolio/templates/login/login.html';
 
