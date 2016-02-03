@@ -8,6 +8,6 @@ router.register('collections', CollectionViewSet, base_name='collections')
 router.register('groups', GroupViewSet, base_name='groups')
 router.register('tiles', TileViewSet, base_name='tiles')
 router.register('portfolio', PortfolioViewSet, base_name='portfolio')
-router.register('task', TaskViewSet, base_name='taks')
+router.register('task', TaskViewSet, base_name='tasks')
 
 urlpatterns = router.urls
