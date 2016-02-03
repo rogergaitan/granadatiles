@@ -158,12 +158,9 @@ class Tile(BaseCatalogModel):
     def get_available_sizes(self):
         tiles_of_myself = Tile.objects.filter(name=self.name, is_sample=False)
         sizes = []
-        size = re.search('\d+"*\s*x\s*\d+"*', self.sales_description)
-        sales_description_no_size = self.sales_description.replace(size.group(),'')
         for tile in tiles_of_myself:
-            size = re.search('\d+"*\s*x\s*\d+"*', tile.sales_description)
-            if size:
-                if size.group() not in sizes:
+            if tile.size:
+                if tile.size not in sizes:
                     sizes.append(tile.size)
         return sizes
 
