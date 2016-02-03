@@ -55,14 +55,14 @@ header.navbar-fixed-top {
             font-size: @font-xs;
         }
 
-        li {
+        & > li {
             margin: 0 2px;
 
             &:last-child {
                 margin-right: 0;
             }
 
-            a {
+            & > a, .contact-item {
                 color: @gray;
 
                 &:hover, &:focus {

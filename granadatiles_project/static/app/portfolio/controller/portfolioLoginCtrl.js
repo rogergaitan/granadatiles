@@ -8,9 +8,10 @@
     portfolioLoginCtrl.$inject = ['pageSettings',
                                   'appSettings',
                                   '$sce',
-                                  'authenticationSvc'];
+                                  'authenticationSvc',
+                                  'gtUtilsSvc'];
 
-    function portfolioLoginCtrl(pageSettings, appSettings, $sce, authenticationSvc) {
+    function portfolioLoginCtrl(pageSettings, appSettings, $sce, authenticationSvc, gtUtilsSvc) {
         /* jshint validthis:true */
         var vm = this;
         vm.labels = pageSettings.labels;
@@ -18,6 +19,8 @@
         vm.portfolioLoginsUrls = pageSettings.portfolioLoginsUrls;
         vm.token = $sce.trustAsHtml(pageSettings.token);
         vm.loginResult = pageSettings.loginResult;
+
+       
 
 
         vm.activeTemplateUrl = appSettings.staticUrl + 'app/portfolio/templates/login/login.html';
@@ -36,6 +39,10 @@
             vm.containerCssExtraClass = 'slide-animate-container-lg';
             vm.activeTemplateUrl = appSettings.staticUrl + 'app/portfolio/templates/login/signUp.html';
         }
+
+        var initialSignup = gtUtilsSvc.getQueryStringParameterByName('signUp')
+        if (initialSignup)
+            vm.goToSignUp();
 
         /*Sign up*/
 
@@ -57,10 +64,10 @@
                     window.location = response.redirect_url;
                 });
         }
-       
+
 
         /*recaptcha*/
-        
+
         vm.key = '6LdcMRcTAAAAALCmZ-3TdMsExELDsQvytBlq0qSl';
         vm.response = null;
 
