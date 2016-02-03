@@ -8,7 +8,8 @@
 {% endblock seo %}
 
 {% block content %}
-
+<ng-include src="'{{ STATIC_URL }}app/portfolio/templates/portfolioHome.html'">
+</ng-include>
 {% endblock content %}
 
 {% block js%}
@@ -30,10 +31,11 @@
                     layouts: '{%trans 'Layouts' %}',
                     myAccount : '{%trans 'My Account '%}',
                     logout: '{% trans 'Logout'%}',
-                    buy: 'BUY',
-                    edit: 'EDIT',
-                    share: 'SHARE',
-                    delete: 'DELETE'
+                    buy: '{% trans 'BUY' %}' ,
+                    edit: '{% trans 'EDIT' %}',
+                    share: '{% trans 'SHARE' %}',
+                    delete: '{% trans 'DELETE'%}',
+                    welcome: '{% trans 'WELCOME' %}'
                 }
     }
     };

@@ -54,7 +54,7 @@
             vm.signUp.recaptchaResponse = vm.response;
             authenticationSvc.registerUser(vm.signUp)
                 .then(function (response) {
-                    console.log(response);
+                    window.location = response.redirect_url;
                 });
         }
        

@@ -80,11 +80,12 @@
                                         <div dropdown>
                                             <a href="#" class="dropdown-toggle" dropdown-toggle><i class="fa fa-briefcase"></i>&nbsp;<span>{% trans 'MY PORTFOLIO' %}</span></a>
                                             <div class="dropdown-menu login-content" role="menu">
-                                                <form class="text-center">
+                                                <form class="text-center" method="post" action="{% url 'sr-portfolio:login_user'%}">
+                                                    {% csrf_token %}
                                                     <h2>{% trans 'Login to My Portfolio' %}</h2>
                                                     <div class="form-group">
-                                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                                        <input type="email" name="user" class="form-control" id="user" placeholder="Email">
+                                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                                                     </div>
                                                     <div class="form-group">
                                                         <button type="submit" class="btn btn-info btn-login">{% trans 'Log In' %}</button>
@@ -255,6 +256,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/controllers/catalogListCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/services/articleSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/services/catalogSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/controller/portfolioHomeCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/controller/portfolioLoginCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/services/authenticationSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/collectionGroupsCtrl.js"></script>
