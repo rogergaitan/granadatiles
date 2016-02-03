@@ -155,13 +155,23 @@ class Tile(BaseCatalogModel):
     def get_admin_url(self):
         return reverse("admin:%s_%s_change" % (self._meta.app_label, self._meta.model_name), args=(self.id,))
 
+    def _add_sizes(self, size, sizes):
+        if size:
+            if size not in sizes:
+                sizes.append(size)
+
     def get_available_sizes(self):
         tiles_of_myself = Tile.objects.filter(name=self.name, is_sample=False)
         sizes = []
         for tile in tiles_of_myself:
-            if tile.size:
-                if tile.size not in sizes:
-                    sizes.append(tile.size)
+            #check size format change if not in standard format
+            #else use tile size property
+            size = re.match('(\d+)\s*x\s*(\d+)', tile.size)
+            if size:
+                size = size.group(1) + '"' + 'x' + size.group(2) + '"' #standardize size format
+                self._add_sizes(size, sizes)
+            elif tile.size:
+                self._add_sizes(tile.size, sizes)
         return sizes
 
     def has_installation_photos(self):
