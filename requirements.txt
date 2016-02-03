@@ -1,4 +1,4 @@
-Django==1.8.8
+Django==1.8.9
 Pillow==2.9.0
 PyJWT==1.4.0
 amqp==1.4.7
