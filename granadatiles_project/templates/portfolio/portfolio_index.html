@@ -36,7 +36,9 @@
                     share: '{% trans 'SHARE' %}',
                     delete: '{% trans 'DELETE'%}',
                     welcome: '{% trans 'WELCOME' %}'
-                }
+                },
+                logoutUrl: '{% url 'sr-portfolio:logout_user'%}',
+                loggedUser: '{{ username |safe}}'
     }
     };
     })();

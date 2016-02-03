@@ -7,4 +7,6 @@ class AuthenticationService(object):
                                         email=user_email,
                                         password=userdata.get('password'))
         user.type_id =   userdata.get('type').get('id')
+        user.first_name = userdata.get('firstName')
+        user.last_name = userdata.get('lastName')
         user.save()

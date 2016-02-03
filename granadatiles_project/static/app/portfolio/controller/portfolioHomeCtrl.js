@@ -11,8 +11,12 @@
         /* jshint validthis:true */
         var vm = this;
         vm.labels = pageSettings.labels;
+        vm.logoutUrl = pageSettings.logoutUrl;
+        vm.loggedUser = pageSettings.loggedUser;
+
         vm.portfolioAsideMenuTemplateURl = baseSettings.staticUrl + 'app/portfolio/templates/portfolioAsideMenu.html'
         
+
         vm.user = {
             name: 'Melanie'
         }
