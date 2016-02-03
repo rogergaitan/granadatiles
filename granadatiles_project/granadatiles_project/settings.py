@@ -117,6 +117,10 @@ USE_I18N = True
 
 USE_L10N = True
 
+FORMAT_MODULE_PATH =[
+      'apps.news.formats',
+    ]
+
 USE_TZ = True
 
 from django.utils.translation import ugettext_lazy as _
