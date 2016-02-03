@@ -1,13 +1,17 @@
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext as _
 
-from .models import Collection, Group, Tile, Portfolio, Layout, Style, CustomizedTile, GroupColor, PalleteColor
+from .models import (
+    Collection, Group, Tile, Portfolio, Layout, Style,
+    CustomizedTile, GroupColor, PalleteColor, PortfolioTile
+)
 from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto, TileDesignDto,
     MenuCollectionDto, TileStyleDto, TileDetailDto, TileInstallationPhotosDto,
     TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto, PortfolioTilesDto,
     LayoutDto, LayoutTilesDto, PortfolioCustomTilesDto
 )
+
 
 class CollectionService:
 
@@ -137,25 +141,31 @@ class PortfolioService:
      def get_portfolio(user):
          return get_object_or_404(Portfolio, user=user)
 
-     def show_tiles(portfolio, language):
-         portfoliotilesdto = [PortfolioTilesDto(portfoliotile.id, portfoliotile.tile, language)
-                              for portfoliotile in portfolio.tiles.all()]
-         return portfoliotilesdto
+     def get_portfolio_tile(id):
+         return get_object_or_404(PortfolioTile, pk=id)
 
-     def remove_tile(portfolio, portfoliotile_id):
-         portfolio.tiles.get(pk=portfoliotile_id).delete()
+     def get_layout(id):
+         return get_object_or_404(Layout, pk=id)
 
-     def add_tile(portfolio, id):
+     def show_tiles(user, language):
+         portfolio = PortfolioService.get_portfolio(user)
+         portfolio_tiles_dto = [PortfolioTilesDto(portfolio_tile.id, portfolio_tile.tile, language)
+                                for portfolio_tile in portfolio.tiles.all()]
+         return portfolio_tiles_dto
+
+     def remove_tile(request, id):
+         portfolio = PortfolioService.get_portfolio(request.user)
+         portfolio.tiles.get(pk=id).delete()
+
+     def add_tile(request, id):
+         portfolio = PortfolioService.get_portfolio(request.user)
          tile = PortfolioService.get_tile(id)
          portfolio.tiles.create(tile=tile)
 
-     def show_layouts(portfolio):
-         layoutsdto = [LayoutDto(layout) for layout in portfolio.layouts.all()]
-         return layoutsdto
-
-     def remove_layout(portfolio, id):
-         layout = get_object_or_404(Layout, pk=id)
-         portfolio.layouts.get(pk=layout.id).delete()
+     def show_layouts(user):
+         portfolio = PortfolioService.get_portfolio(user)
+         layouts_dto = [LayoutDto(layout) for layout in portfolio.layouts.all()]
+         return layouts_dto
 
      def save_layout(portfolio, id, name, length_ft, length_in, width_ft, width_in, image):
          data = {
