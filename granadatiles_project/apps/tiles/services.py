@@ -1,6 +1,9 @@
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext as _
 
+
+
+
 from .models import (
     Collection, Group, Tile, Portfolio, Layout, Style,
     CustomizedTile, GroupColor, PalleteColor, PortfolioTile
@@ -49,9 +52,10 @@ class CollectionService:
     def get_installation_photos(collection, language):
         tiles = Tile.objects.filter(design__group__collection=collection.id)
 
+        #filter unique gallery images
+        filter_photos = {photo for tile in tiles for photo in tile.installation_photos.all()}
         installation_photos_dto = [CollectionInstallationPhotosDto(photo, language)
-                                   for tile in tiles
-                                   for photo in tile.installation_photos.all()]
+                                   for photo in filter_photos]
         return installation_photos_dto
 
 
