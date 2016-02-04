@@ -9,7 +9,7 @@ from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto, TileDesignDto,
     MenuCollectionDto, TileStyleDto, TileDetailDto, TileInstallationPhotosDto,
     TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto, PortfolioTilesDto,
-    LayoutDto, LayoutTilesDto, PortfolioCustomTilesDto
+    LayoutDto, LayoutTilesDto, PortfolioCustomTilesDto, CollectionInstallationPhotosDto
 )
 
 
@@ -45,6 +45,14 @@ class CollectionService:
         menuCollectionsDto = [MenuCollectionDto(collection, language = language)
                               for collection in collections]
         return menuCollectionsDto
+
+    def get_installation_photos(collection, language):
+        tiles = Tile.objects.filter(design__group__collection=collection.id)
+
+        installation_photos_dto = [CollectionInstallationPhotosDto(photo, language)
+                                   for tile in tiles
+                                   for photo in tile.installation_photos.all()]
+        return installation_photos_dto
 
 
 class GroupService:
