@@ -13,7 +13,7 @@ from .serializers import (
     StyleSerializer, GroupTileSizeSerializer, TileDetailSerializer,
     TileInstallationPhotosSerializer, TileOrderSerializer, CollectionsFilterSerializer,
     InStockSerializer, PortfolioTilesSerializer, PortfolioCustomTilesSerializer, LayoutSerializer,
-    LayoutTilesSerializer
+    LayoutTilesSerializer, CollectionInstallationPhotosSerializer
 )
 from .services import CollectionService, GroupService, TileService, PortfolioService
 from .models import Collection, Group
@@ -60,7 +60,7 @@ class CollectionViewSet(BaseViewSet):
 
     # /collections/:id/groups
     @detail_route(methods=['get'])
-    def groups(self, request, pk = None):
+    def groups(self, request, pk=None):
         groups = CollectionService.get_groups(
                                         collection_id=pk,
                                         language=self.get_language(request))
@@ -82,6 +82,14 @@ class CollectionViewSet(BaseViewSet):
         collections = CollectionService.get_featured_collections(
             language= self.get_language(request))
         serializer = CollectionSerializer(collections, many=True)
+        return Response(serializer.data)
+
+    @detail_route(methods=['get'])
+    def installationphotos(self, request, pk=None):
+        collection = CollectionService.get_collection(pk, self.get_language(request))
+        installation_photos = CollectionService.get_installation_photos(collection,
+                                                                        self.get_language(request))
+        serializer = CollectionInstallationPhotosSerializer(installation_photos, many=True)
         return Response(serializer.data)
 
 

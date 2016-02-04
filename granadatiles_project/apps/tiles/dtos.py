@@ -100,6 +100,13 @@ class TileInstallationPhotosDto(BaseContentDto):
         self.image = photo.image.url if photo.image else ''
 
 
+class CollectionInstallationPhotosDto(TileInstallationPhotosDto):
+
+    def __init__(self, photo, language):
+        super().__init__(photo, language)
+        self.designer = photo.designer
+
+
 class SimilarTileDto(BaseCatalogDto):
 
     def __init__(self, tile, language):

@@ -25,3 +25,10 @@ class GroupsByCollectionSerializer(serializers.Serializer):
     color = serializers.CharField()
     cssclass = serializers.CharField()
     highlight = serializers.CharField()
+
+
+class SearchSerializer(BaseCatalogSerializer):
+    image = serializers.CharField()
+    type = serializers.CharField()
+    additional = serializers.CharField()
+    additional2 = serializers.CharField()

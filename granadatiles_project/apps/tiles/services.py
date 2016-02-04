@@ -1,6 +1,9 @@
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext as _
 
+
+
+
 from .models import (
     Collection, Group, Tile, Portfolio, Layout, Style,
     CustomizedTile, GroupColor, PalleteColor, PortfolioTile
@@ -9,7 +12,7 @@ from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto, TileDesignDto,
     MenuCollectionDto, TileStyleDto, TileDetailDto, TileInstallationPhotosDto,
     TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto, PortfolioTilesDto,
-    LayoutDto, LayoutTilesDto, PortfolioCustomTilesDto
+    LayoutDto, LayoutTilesDto, PortfolioCustomTilesDto, CollectionInstallationPhotosDto
 )
 
 
@@ -45,6 +48,15 @@ class CollectionService:
         menuCollectionsDto = [MenuCollectionDto(collection, language = language)
                               for collection in collections]
         return menuCollectionsDto
+
+    def get_installation_photos(collection, language):
+        tiles = Tile.objects.filter(design__group__collection=collection.id)
+
+        #filter unique gallery images
+        filter_photos = {photo for tile in tiles for photo in tile.installation_photos.all()}
+        installation_photos_dto = [CollectionInstallationPhotosDto(photo, language)
+                                   for photo in filter_photos]
+        return installation_photos_dto
 
 
 class GroupService:
