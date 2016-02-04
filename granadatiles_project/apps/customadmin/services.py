@@ -1,10 +1,11 @@
 from django.contrib.auth.models import User
 from django.db.models import Count
 
-from .dtos import ItemCountDto, LatestTilesDto, LatestUsersDto, GroupsByCollectionDto
-from apps.tiles.models import Tile, Collection
+from .dtos import ItemCountDto, LatestTilesDto, LatestUsersDto, GroupsByCollectionDto, SearchDto
+from apps.tiles.models import Tile, Collection, Group
+from apps.news.models import Catalog, Article
 
-class ItemCountService():
+class ItemCountService:
 
     def get_item_count():
         itemcountDto = ItemCountDto()
@@ -66,3 +67,22 @@ class GroupsByCollectionService():
                                 for collection, color in zip(collections, colors)]
 
         return groupbycollectionDto
+
+
+class SearchService:
+
+    def get_results(search_term, language):
+        if language == 'es':
+            tiles = Tile.objects.filter(name_es__icontains=search_term)
+            groups = Group.objects.filter(title_es__icontains=search_term)
+            article = Article.objects.filter(title_es__icontains=search_term)
+            catalogs = Catalog.objects.filter(name_es__icontains=search_term)
+        else:
+            tiles = Tile.objects.filter(name__icontains=search_term)
+            groups = Group.objects.filter(title__icontains=search_term)
+            article = Article.objects.filter(title__icontains=search_term)
+            catalogs = Catalog.objects.filter(name__icontains=search_term)
+
+        search_items = list(tiles) + list(groups) + list(article) + list(catalogs)
+        search_dto = [SearchDto(item, language) for item in search_items]
+        return search_dto
