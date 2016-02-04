@@ -20,6 +20,9 @@
                 <li><a ng-href="{{ ::vm.navigation.cementVsCeramic }}">{{::vm.labels.cementVsCeramic}}</a></li>
                 <li><a ng-href="{{ ::vm.navigation.colorPalletes }}">{{::vm.labels.colorPalletes}}</a></li>
                 <li><a ng-href="{{::vm.navigation.catalogs}}">{{::vm.labels.catalogs}}</a></li>
+                <li ng-repeat="flatPage in vm.flatPages">
+                    <a ng-href="{{flatPage.url}}">{{::flatPage.title}}</a>
+                </li>
             </ul>
         </div>
     </div>

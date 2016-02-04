@@ -14,7 +14,8 @@
         };
 
         function getCover(sectionId) {
-            return $http.get(appSettings.serverPath + 'sections/' + sectionId + '/cover');
+                return $http.get(appSettings.serverPath + 'sections/' + sectionId + '/cover');
+            
         }
 
         function getSection(sectionId) {

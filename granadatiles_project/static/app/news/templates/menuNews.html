@@ -3,4 +3,7 @@
     <li><a ng-href="{{ ::vm.navigation.catalog }}">{{ ::vm.labels.catalog }}</a></li>
     <li><a href="http://www.granadatile.com/blog/" target="_blank">{{ ::vm.labels.blog }}</a></li>
     <li><a ng-href="{{ ::vm.navigation.video }}">{{ ::vm.labels.video }}</a></li>
+    <li ng-repeat="flatpage in vm.flatPages">
+        <a ng-href="{{ ::flatpage.url }}">{{::flatpage.title}}</a>
+    </li>
 </ul>

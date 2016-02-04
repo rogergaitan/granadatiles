@@ -6,6 +6,7 @@ from .managers import SectionManager
 from apps.news.models import Article
 from apps.tiles.models import Tile
 from apps.galleries.models import Designer, Photographer
+from sorl.thumbnail.fields import ImageField
 
 
 class Section(BaseCatalogModel, BaseContentModel):
@@ -131,16 +132,31 @@ class IndexNavigation(BaseGalleryNavImageModel):
 
 class ExtendedFlatPage(FlatPage):
     MENU_CHOICES = (
-            (1, 'Collections'),
+            (1, 'Product Information'),
             (2, 'News/Press'),
             (3, 'About Us'),
         )
-
+    title_es = models.CharField(max_length=200, blank=True, null = True)
+    content_es = models.TextField(blank=True, null = True)
     order = models.PositiveIntegerField(verbose_name=_('Order'),
                                         help_text='El orden en el que aparecera en el menu selecciondado despues de los elementos predefinidos')
     menu = models.IntegerField(choices=MENU_CHOICES, default=1)
+    cover = ImageField(null=True, blank=True, verbose_name=_('Cover'))
 
     class Meta:
         verbose_name = _('flat page')
         verbose_name_plural = _('flat pages')
         ordering = ('order', )
+
+    def get_title(self, language):
+        if language == 'es' and self.title_es is not None and self.title_es:
+            return self.title_es
+        return self.title
+
+    def get_content(self, language):
+        if language == 'es' and self.content_es is not None and self.content_es:
+            return self.content_es
+        return self.content
+
+    def __str__(self):
+        return self.title

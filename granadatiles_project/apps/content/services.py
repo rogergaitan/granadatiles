@@ -5,8 +5,8 @@ from .dtos import TestimonyDto, SectionCoverDto, FeaturedVideoDto
 from apps.news.models import Article
 from apps.news.dtos import  SectionFeaturedArticleDto, ArticleMagazineDto
 from core.dtos import BaseContentDto
-from apps.content.models import IndexNavigation
-from apps.content.dtos import IndexNavigationDto
+from apps.content.models import IndexNavigation, ExtendedFlatPage
+from apps.content.dtos import IndexNavigationDto, FlatPageDto, FlatPageCoverDto, FlatPageMenuDto
 
 
 class TestimonyService(object):
@@ -49,6 +49,23 @@ class SectionService(object):
             return sectioncoverDto
         else:
             return None
+
+class FlatPageService(object):
+
+    def get_flatpages_for_menu(menuId , language = None):
+        flatpages = ExtendedFlatPage.objects.filter(menu=int(menuId))
+        flatpagesDto = [FlatPageMenuDto(flatpage, language) for flatpage in flatpages]
+        return flatpagesDto
+
+    def get_flatpage(title, language = None):
+        flatpage = get_object_or_404(ExtendedFlatPage, title=title)
+        flatPageDto = FlatPageDto(flatpage, language = language)
+        return flatPageDto
+
+    def get_cover(title):
+       flatPage = get_object_or_404(ExtendedFlatPage, title=title)
+       flatPageCoverDto = FlatPageCoverDto(flatPage)
+       return flatPageCoverDto
 
 
 class FeaturedVideoService(object):

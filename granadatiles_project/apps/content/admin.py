@@ -78,8 +78,8 @@ class ExtendedFlatPageForm(FlatpageForm):
 class ExtendedFlatPageAdmin(FlatPageAdmin):
     form = ExtendedFlatPageForm
     fieldsets = (
-            (None, {'fields': ('url', 'title', 'order', 'content', 'sites')}),
-            (_('Advanced options'), {'classes': ('collapse in',), 'fields': ('enable_comments', 'registration_required', 'template_name', 'menu')}),
+            (None, {'fields': ('url', 'title', 'title_es', 'order', 'content', 'content_es', 'sites', 'cover', 'template_name', 'menu')}),
+            (_('Advanced options'), {'classes': ('collapse',), 'fields': ('enable_comments', 'registration_required', )}),
         )
 
 admin.site.unregister(FlatPage)

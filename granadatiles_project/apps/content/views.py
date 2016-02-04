@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework import viewsets, mixins
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
-from apps.content.serializers import TestimonySerializer, SectionSerializer, SocialSerializer, SectionCoverSerializer, FeaturedVideoSerializer, IndexNavigationSerializer
-from apps.content.services import TestimonyService, SectionService, FeaturedVideoService, AreaService, IndexNavigationService
+from apps.content.serializers import TestimonySerializer, SectionSerializer, SocialSerializer, SectionCoverSerializer, FeaturedVideoSerializer, IndexNavigationSerializer, FlatPageSerializer, FlatPageCoverSerializer, FlatPageMenuSerializer
+from apps.content.services import TestimonyService, SectionService, FeaturedVideoService, AreaService, IndexNavigationService, FlatPageService
 from .models import Social, Section
 from core.views import BaseViewSet
 from core.serializers import BaseContentSerializer
@@ -63,6 +63,27 @@ class SectionViewSet(BaseViewSet):
                                          language=self.get_language(request))
         serializer = SectionCoverSerializer(cover)
         return self.response(cover, serializer)
+
+class FlatPageViewSet(BaseViewSet):
+    def list(self, request):
+        menuid = request.query_params.get('menuId')
+        flatPages = FlatPageService.get_flatpages_for_menu(menuid, 
+                                                           language = self.get_language(request))
+        serializer = FlatPageMenuSerializer(flatPages, many=True)
+        return Response(serializer.data)
+    
+    def retrieve(self, request, pk=None):
+        flatPage = FlatPageService.get_flatpage(pk, 
+                                                self.get_language(request))
+        serializer = FlatPageSerializer(flatPage)
+        return Response(serializer.data)
+    
+    @detail_route(methods=['get'])
+    def cover(self, request, pk = None):
+        cover = FlatPageService.get_cover(pk)
+        serializer = FlatPageCoverSerializer(cover)
+        return Response(serializer.data)
+
 
 
 class SocialViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
