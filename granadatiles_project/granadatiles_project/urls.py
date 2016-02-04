@@ -35,7 +35,8 @@ urlpatterns += i18n_patterns(
     url(_(r'^news/'),
         include('apps.news.serve_urls', namespace='sr-news')),
     url(_(r'^gallery/'),
-        include('apps.galleries.serve_urls', namespace='sr-galleries'))
+        include('apps.galleries.serve_urls', namespace='sr-galleries')),
+     url(r'^pages/', include('django.contrib.flatpages.urls')),
 )
 
 if settings.DEBUG:

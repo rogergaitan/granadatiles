@@ -1,10 +1,11 @@
 from django.db import models
-from apps.news.models import Article
-from apps.tiles.models import Tile
 from django.utils.translation import ugettext as _
-from apps.galleries.models import Designer, Photographer
+from django.contrib.flatpages.models import FlatPage
 from core.models import BaseContentModel, BaseCatalogModel, BaseGalleryNavImageModel, BaseCatalogOrderModel
 from .managers import SectionManager
+from apps.news.models import Article
+from apps.tiles.models import Tile
+from apps.galleries.models import Designer, Photographer
 
 
 class Section(BaseCatalogModel, BaseContentModel):
@@ -127,3 +128,19 @@ class IndexNavigation(BaseGalleryNavImageModel):
     class Meta:
         verbose_name = _('Index Link')
         verbose_name_plural = _('Index Links')
+
+class ExtendedFlatPage(FlatPage):
+    MENU_CHOICES = (
+            (1, 'Collections'),
+            (2, 'News/Press'),
+            (3, 'About Us'),
+        )
+
+    order = models.PositiveIntegerField(verbose_name=_('Order'),
+                                        help_text='El orden en el que aparecera en el menu selecciondado despues de los elementos predefinidos')
+    menu = models.IntegerField(choices=MENU_CHOICES, default=1)
+
+    class Meta:
+        verbose_name = _('flat page')
+        verbose_name_plural = _('flat pages')
+        ordering = ('order', )
