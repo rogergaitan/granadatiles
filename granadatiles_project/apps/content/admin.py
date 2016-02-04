@@ -1,6 +1,12 @@
 ﻿from django.contrib import admin
-from apps.content.models import Section, SectionImage, Social, FeaturedVideo, Area, Testimony, IndexNavigation
+from apps.content.models import Section, SectionImage, Social, FeaturedVideo, Area, Testimony, IndexNavigation, ExtendedFlatPage
 from django_summernote.admin import SummernoteModelAdmin, SummernoteInlineModelAdmin
+from django.contrib.flatpages.admin import FlatPageAdmin
+from django.contrib.flatpages.forms import FlatpageForm
+from django import forms
+from django_summernote.widgets import SummernoteWidget
+from django.utils.translation import ugettext as _
+from django.contrib.flatpages.models import FlatPage
 
 
 class ImagesInline(admin.StackedInline, SummernoteInlineModelAdmin):
@@ -54,4 +60,26 @@ class IndexNavigationAdmin(SummernoteModelAdmin):
     def has_add_permission(self, request):
         return False;
 
-    
+class ExtendedFlatPageForm(FlatpageForm):
+    TEMPLATES_CHOICES = (
+             ('flatpages/default.html', 'Content template 1') ,
+        )
+    template_name  = forms.ChoiceField(choices=TEMPLATES_CHOICES, label=_('Template'))
+
+    class Meta:
+        model = ExtendedFlatPage
+        fields = '__all__'
+        widgets = {
+                 'content': SummernoteWidget(),
+            }
+
+
+@admin.register(ExtendedFlatPage)    
+class ExtendedFlatPageAdmin(FlatPageAdmin):
+    form = ExtendedFlatPageForm
+    fieldsets = (
+            (None, {'fields': ('url', 'title', 'order', 'content', 'sites')}),
+            (_('Advanced options'), {'classes': ('collapse in',), 'fields': ('enable_comments', 'registration_required', 'template_name', 'menu')}),
+        )
+
+admin.site.unregister(FlatPage)
