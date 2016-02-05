@@ -34,6 +34,11 @@ def group_detail(request, collection_slug, group_slug):
         'group_id': group_id
     })
 
+def instock_samples(request):
+    return render(request, 'tiles/instock_samples.html')
+
+def instock_tiles(request):
+    return render(request, 'tiles/instock_tiles.html')
 
 """
 These are the views for the api

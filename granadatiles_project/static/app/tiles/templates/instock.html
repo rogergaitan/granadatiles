@@ -1,0 +1,16 @@
+﻿<div class="col-md-12" ng-controller="instockCtrl as vm">
+    <div class="row">
+        <aside class="col-sm-3 col-xs-4"></aside>
+        <div class="col-sm-9 col-xs-8">
+            <h1 class="heading-sec">{{ ::vm.section.title }} </h1>
+            <a href="#" class="breadcrumds"><u>{{vm.labels.collections}}</u> <i class="fa fa-angle-double-right"></i></a>
+            <div class="text-section" ng-bind-html="::vm.section.description"></div>
+            <div class="row filter">
+
+            </div>
+            <div ng-repeat="tile in vm.tiles">
+
+            </div>
+        </div>
+    </div>
+</div>

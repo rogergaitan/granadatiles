@@ -1,0 +1,38 @@
+﻿{% extends "base.html" %}
+{% load i18n content %}
+
+{% block seo %}
+    {% section 11 LANGUAGE_CODE  as section %}
+    <title>{{ section.page_title }}</title>
+    {% content_meta_tags section %}
+{% endblock seo %}
+
+
+{% block content %}
+<div class="row">
+    <ng-include id="gt-main-content" src="'{{STATIC_URL}}app/tiles/templates/instock.html'">
+    </ng-include>
+</div>
+{% endblock content %}
+
+{% block js%}
+{% get_current_language as LANGUAGE_CODE %}
+<script>
+    (function () {
+        "use strict";
+        angular
+        .module("app.core")
+        .factory("pageSettings", ['appSettings',pageSettings]);
+
+        function pageSettings(appSettings) {
+            return{
+                sectionId: 11,
+                language: '{{LANGUAGE_CODE}}',
+                labels: {
+                   collections: '{% trans 'Collections'%}'
+                }
+            }
+        };
+    })();
+</script>
+{% endblock js %}

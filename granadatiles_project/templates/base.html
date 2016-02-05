@@ -149,9 +149,20 @@
                                         </span>
                                     </li>
                                     <li>
-                                        <span>
-                                            <a href="/">{% trans 'IN STOCK' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
-                                        </span>
+                                        <div ng-init="isInStockOpen=false" dropdown is-open="isInStockOpen">
+                                            <a href="#"
+                                               class="dropdown-toggle  drop-button" data-toggle="dropdown"
+                                               dropdown-toggle ng-disabled="disabled"
+                                               aria-expanded="false">{% trans 'IN STOCK' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <a href="{% url 'sr-collections:sr-instock-samples'%}">{% trans 'Samples'%}</a>
+                                                </li>
+                                                 <li>
+                                                    <a href="{% url 'sr-collections:sr-instock-tiles'%}">{% trans 'Tiles'%}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </li>
                                     <li>
                                         <span>
@@ -196,11 +207,10 @@
                                     </li>
                                     <li>
                                         <div ng-init="isAboutUsOpen=false" dropdown is-open="isAboutUsOpen">
-                                            <a  href="#"
+                                            <a href="#"
                                                class="dropdown-toggle  drop-button" data-toggle="dropdown"
                                                dropdown-toggle ng-disabled="disabled"
-                                               aria-expanded="false"
-                                               >{% trans 'ABOUT US' %}</a>
+                                               aria-expanded="false">{% trans 'ABOUT US' %}</a>
                                             <ul class="dropdown-menu" role="menu">
                                                 <li>
                                                     <a href="{% url 'about_us'%}">{% trans 'Contact Us'%}</a>
@@ -301,10 +311,12 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/controller/portfolioLoginCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/services/authenticationSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/collectionGroupsCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/instockCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/menuCollectionCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/tileDetailCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/tileModalCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/collectionsSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/instockSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/tilesSvc.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
