@@ -1,9 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext as _
 
-
-
-
 from .models import (
     Collection, Group, Tile, Portfolio, Layout, Style,
     CustomizedTile, GroupColor, PalleteColor, PortfolioTile
@@ -136,7 +133,7 @@ class TileService:
               tiles = Tile.objects.filter(is_sample=True)
           else:
               tiles = Tile.objects.filter(is_sample=False)
-          instockdto = [InStockDto(tile, language) for tile in tiles[offset:limit] if tile.design]
+          instockdto = [InStockDto(tile, is_sample, language) for tile in tiles[offset:limit] if tile.design]
           return instockdto
 
       def get_tiles_collections_filters(language):
