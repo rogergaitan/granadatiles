@@ -1,6 +1,22 @@
 ﻿<div class="col-md-12" ng-controller="instockCtrl as vm">
     <div class="row">
-        <aside class="col-sm-3 col-xs-4"></aside>
+        <aside class="col-sm-3 col-xs-4">
+            <div class="row submenu-selected submenu-selected-smtopmargin">
+                <div class="col-xs-12 submenu-selected-title">
+                    <h3 class="text-uppercase">
+                        {{::vm.labels.inStock}}
+                    </h3>
+                </div>
+            </div>
+            <ul class="active-submenu active-submenu-smtopmargin">
+                <li>
+                    <a ng-href="{{::vm.navigation.inStockSamples}}" ng-class="(vm.isSample)? 'active':''">{{::vm.labels.inStockSamples}}</a>
+                </li>
+                <li>
+                    <a ng-href="{{::vm.navigation.inStockTiles}}" ng-class="(vm.isSample)? '':'active'">{{::vm.labels.inStockTiles}}</a>
+                </li>
+            </ul>
+        </aside>
         <div class="col-sm-9 col-xs-8">
             <h1 class="heading-sec">{{ ::vm.section.title }} </h1>
             <a href="#" class="breadcrumds"><u>{{vm.labels.collections}}</u> <i class="fa fa-angle-double-right"></i></a>

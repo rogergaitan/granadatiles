@@ -2,9 +2,9 @@
 {% load i18n content %}
 
 {% block seo %}
-    {% section 11 LANGUAGE_CODE  as section %}
-    <title>{{ section.page_title }}</title>
-    {% content_meta_tags section %}
+{% section 11 LANGUAGE_CODE  as section %}
+<title>{{ section.page_title }}</title>
+{% content_meta_tags section %}
 {% endblock seo %}
 
 
@@ -29,8 +29,16 @@
                 sectionId: 11,
                 language: '{{LANGUAGE_CODE}}',
                 labels: {
-                   collections: '{% trans 'Collections'%}'
-                }
+                   collections: '{% trans 'Collections'%}',
+                   inStock: '{% trans 'In Stock'%}',
+                   inStockSamples: '{% trans 'In Stock Samples'%}',
+                   inStockTiles: '{% trans 'In Stock Tiles'%}'
+                },
+                navigation: {
+                   inStockSamples: '{% url 'sr-collections:sr-instock-samples'%}',
+                   inStockTiles: '{% url 'sr-collections:sr-instock-tiles'%}'
+                },
+                samples: true
             }
         };
     })();

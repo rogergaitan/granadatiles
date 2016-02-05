@@ -11,6 +11,11 @@
         /* jshint validthis:true */
         var vm = this;
         vm.labels = pageSettings.labels;
+        vm.navigation = pageSettings.navigation;
+        vm.isSample = false;
+
+        if (pageSettings.samples)
+            vm.isSample = true;
 
         sectionSvc.getSection(pageSettings.sectionId).then(function (response) {
             vm.section = response.data;

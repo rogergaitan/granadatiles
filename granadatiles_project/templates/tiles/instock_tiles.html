@@ -29,7 +29,14 @@
                 sectionId: 12,
                 language: '{{LANGUAGE_CODE}}',
                 labels: {
-                   collections: '{% trans 'Collections'%}'
+                   collections: '{% trans 'Collections'%}',
+                   inStock: '{% trans 'In Stock'%}',
+                   inStockSamples: '{% trans 'In Stock Samples'%}',
+                   inStockTiles: '{% trans 'In Stock Tiles'%}'
+                },
+                navigation: {
+                   inStockSamples: '{% url 'sr-collections:sr-instock-samples'%}',
+                   inStockTiles: '{% url 'sr-collections:sr-instock-tiles'%}'
                 }
             }
         };
