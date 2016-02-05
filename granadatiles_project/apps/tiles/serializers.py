@@ -11,8 +11,8 @@ class CollectionRetrieveSerializer(CollectionSerializer):
     introduction = serializers.CharField()
 
 
-class CollectionsFilterSerializer(BaseContentSerializer):
-    pass
+class CollectionsFilterSerializer(BaseSerializer):
+    title = serializers.CharField()
 
 
 class TileUseSerializer(BaseCatalogSerializer):
@@ -103,7 +103,8 @@ class InStockSerializer(BaseCatalogSerializer):
     name = serializers.CharField()
     collection = serializers.CharField()
     size = serializers.CharField()
-    has_installation_photos = serializers.BooleanField()
+    hasInstallationPhotos = serializers.BooleanField()
+    hasSample = serializers.BooleanField()
 
 
 class GroupSerializer(BaseGalleryImageSerializer):

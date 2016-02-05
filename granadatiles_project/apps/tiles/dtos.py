@@ -178,10 +178,11 @@ class InStockDto(BaseCatalogDto):
         self.hasSample = True if tile.has_sample() else False
 
 
-class CollectionsFiltersDto(BaseContentDto):
+class CollectionsFiltersDto(BaseDto):
 
     def __init__(self, collection, language):
-        super().__init__(collection, language)
+        super().__init__(collection)
+        self.title = collection.get_title(language)
 
 
 class GroupDto(BaseGalleryImageDto):
