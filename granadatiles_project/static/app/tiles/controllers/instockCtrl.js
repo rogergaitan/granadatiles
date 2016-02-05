@@ -14,15 +14,21 @@
         vm.navigation = pageSettings.navigation;
         vm.isSample = false;
 
-        if (pageSettings.samples)
+        if (pageSettings.samples) {
             vm.isSample = true;
+            instockSvc.getSamples().then(function (response) {
+                vm.tiles = response.data;
+            });
+        }
+        else {
+            instockSvc.getTiles().then(function (response) {
+                vm.tiles = response.data;
+            })
+        }
 
         sectionSvc.getSection(pageSettings.sectionId).then(function (response) {
             vm.section = response.data;
         });
-
-        
-
 
     }
 })();
