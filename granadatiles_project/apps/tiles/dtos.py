@@ -174,7 +174,8 @@ class InStockDto(BaseCatalogDto):
         self.mosaic = tile.mosaic.url if tile.mosaic else ''
         self.collection = tile.design.group.collection.get_title(language)
         self.size = tile.size
-        self.has_installation_photos = tile.has_installation_photos()
+        self.hasInstallationPhotos = tile.has_installation_photos()
+        self.hasSample = True if tile.has_sample() else False
 
 
 class CollectionsFiltersDto(BaseContentDto):
