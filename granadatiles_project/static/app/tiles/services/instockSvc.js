@@ -17,7 +17,7 @@
         return service;
 
         function getCollectionFilter() {
-            return $http.get(appSettings.serverPath + 'tiles/collection_filters/');
+            return $http.get(appSettings.serverPath + 'tiles/collections_filters/');
         }
 
         function getSamples() {
