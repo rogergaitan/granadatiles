@@ -26,6 +26,10 @@
             })
         }
 
+        instockSvc.getCollectionFilter(function (response) {
+            vm.collectionFilters = response.data;
+        });
+
         sectionSvc.getSection(pageSettings.sectionId).then(function (response) {
             vm.section = response.data;
         });
