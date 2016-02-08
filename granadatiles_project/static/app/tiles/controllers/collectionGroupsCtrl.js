@@ -27,6 +27,10 @@
 
         vm.checkNew = false;
 
+        vm. arrayFilter = [];
+
+        vm.filterValue = 0;
+
         vm.collectionAsideNavigationTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/collectionAsideNavigation.html';
 
         collectionsSvc.getCollection(pageSettings.collectionId).then(function (response) {
@@ -56,8 +60,6 @@
             vm.sizes = response.data;
             //vm.selectedSize = vm.sizes[0];
         });*/
-
-        console.log(pageSettings.groupId);
 
         if (pageSettings.groupId >= 0) {
             collectionsSvc.getStyles(pageSettings.groupId).then(function (response) {
@@ -90,7 +92,8 @@
 
         vm.setStyle = function (style) {
             vm.selectedStyle = style;
-            updateTilesByStyle(style);
+            //updateTilesByStyle(style);
+            updateTiles( vm.filterValue = 5,style);
         };
 
         vm.setTile = function (index, tileId) {
@@ -145,13 +148,29 @@
             }
         }
 
-        vm.updateTileByNew = function(value){
-            if(value){
-                console.log("intro");
-            }else{
-                console.log("not intro");
-            }
+        vm.updateTileByNew = function(checkNewValue){
+            (checkNewValue) ? updateTiles ( vm.filterValue = 1 , checkNewValue) : console.log("not intro");
         };
+
+        function updateTiles (id,style){
+            var tiles = [];
+
+            var index = vm.arrayFilter.map(function (option) {
+                return option;
+            }).indexOf(id);
+            if(index == -1){
+                vm.arrayFilter.push(id);
+            }
+            for(var i = 0; i < vm.arrayFilter.length; i++){
+                console.log(vm.arrayFilter[i]);
+                switch (vm.arrayFilter[i]){
+                    case 1:
+
+                }
+            }
+
+
+        }
 
         vm.showInstallationPhoto = function (tileId) {
             $modal.open({
