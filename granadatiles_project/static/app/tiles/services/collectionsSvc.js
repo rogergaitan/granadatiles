@@ -16,6 +16,7 @@
             getFeaturedCollections: getFeaturedCollections,
             getCollection: getCollection,
             getCollectionGroups: getCollectionGroups,
+            getCollectionGallery: getCollectionGallery,
             getFilteredMenuCollection: getFilteredMenuCollection,
             getGroup: getGroup,
             getSizes: getSizes,
@@ -48,6 +49,10 @@
 
         function getCollectionGroups(collectionId) {
             return $http.get(appSettings.serverPath + 'collections/'+ collectionId + '/groups');
+        }
+
+        function getCollectionGallery(collectionId) {
+            return $http.get(appSettings.serverPath + 'collections/' + collectionId + '/installationphotos');
         }
 
         function getGroup(groupId) {

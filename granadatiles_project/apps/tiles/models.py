@@ -155,16 +155,23 @@ class Tile(BaseCatalogModel):
     def get_admin_url(self):
         return reverse("admin:%s_%s_change" % (self._meta.app_label, self._meta.model_name), args=(self.id,))
 
+    def _add_sizes(self, size, sizes):
+        if size:
+            if size not in sizes:
+                sizes.append(size)
+
     def get_available_sizes(self):
         tiles_of_myself = Tile.objects.filter(name=self.name, is_sample=False)
         sizes = []
-        size = re.search('\d+"*\s*x\s*\d+"*', self.sales_description)
-        sales_description_no_size = self.sales_description.replace(size.group(),'')
         for tile in tiles_of_myself:
-            size = re.search('\d+"*\s*x\s*\d+"*', tile.sales_description)
+            #check size format change if not in standard format
+            #else use tile size property
+            size = re.match('(\d+)\s*x\s*(\d+)', tile.size)
             if size:
-                if tile.sales_description.replace(size.group(),'') == sales_description_no_size:
-                    sizes.append(tile.size)
+                size = size.group(1) + '"' + 'x' + size.group(2) + '"' #standardize size format
+                self._add_sizes(size, sizes)
+            elif tile.size:
+                self._add_sizes(tile.size, sizes)
         return sizes
 
     def has_installation_photos(self):
@@ -260,7 +267,7 @@ class Layout(models.Model):
     length_in = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Length In'))
     width_ft = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Width Ft'))
     width_in = models.PositiveIntegerField(blank=True, null=True, verbose_name=_('Width In'))
-    image = ImageField(upload_to='layouts', verbose_name=_('Image'), null=True, blank=True)
+    image = models.FileField(upload_to='layouts', verbose_name=_('Image'), null=True, blank=True)
     date = models.DateField(auto_now_add=True, verbose_name=_('Date'))
     portfolio = models.ForeignKey(Portfolio, default=False, related_name='layouts', verbose_name=_('Portfolio'))
 

@@ -28,12 +28,15 @@ urlpatterns += i18n_patterns(
     url(_(r'^cement-vs-ceramic/$'), cement_vs_ceramic, name='cement_vs_ceramic'),
     url(_(r'^color-palletes/$'), color_palletes, name='color_palletes'),
     url(r'^videos/$', videos, name='videos'),
+    url(_(r'^portfolio/'),
+        include('apps.portfolio.serve_urls', namespace='sr-portfolio')),
     url(_(r'^collections/'),
         include('apps.tiles.serve_urls', namespace='sr-collections')),
     url(_(r'^news/'),
         include('apps.news.serve_urls', namespace='sr-news')),
     url(_(r'^gallery/'),
-        include('apps.galleries.serve_urls', namespace='sr-galleries'))
+        include('apps.galleries.serve_urls', namespace='sr-galleries')),
+     url(r'^pages/', include('django.contrib.flatpages.urls')),
 )
 
 if settings.DEBUG:

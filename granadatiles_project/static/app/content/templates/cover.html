@@ -23,7 +23,7 @@
                         <ul class="list-inline">
                             <li ng-repeat="article in vm.cover.articles">
                                 <a href="{{ ::article.url }}">
-                                    <img ng-src="{{ ::article.magazineLogo }}" alt="{{ ::article.magazineName }}">
+                                    <img ng-src="{{ ::article.magazineLogo }}" alt="{{ ::article.magazineName }}" style="max-width:97px;">
                                 </a>
                             </li>
                         </ul>

@@ -1,0 +1,46 @@
+﻿{% extends "base.html" %}
+{% load i18n content %}
+
+{% block seo %}
+    <title>Granada Tile - {{ flatpage.title }}</title>
+{% endblock seo %}
+
+{% block content%}
+    <div class="row">
+        <ng-include src="'{{STATIC_URL}}app/content/templates/contentDefault.html'"></ng-include>
+    </div>
+{% endblock content%}
+
+{% block js%}
+<script>
+    (function () {
+        "use strict";
+        angular
+        .module("app.core")
+        .factory("pageSettings", ['appSettings',pageSettings]);
+
+        function pageSettings(appSettings) {
+            return{
+                sectionId: 0,
+                language: '{{LANGUAGE_CODE}}',
+                labels: {
+                    news: '{% trans 'News'%}',
+                    date: '{% trans 'Date'  %}',
+                    magazine: '{% trans 'Magazines'%}',
+                    catalog: '{% trans 'Catalogs / Inspiration Books'%}',
+                    blog: '{% trans 'Cement Tile Blog'%}',
+                    video: '{% trans 'Videos'%}',
+                    collections: '{% trans 'Collections '%}'
+                },
+                navigation:{
+                    magazine: '{% url 'sr-news:sr-news' %}',
+                    catalog: '{% url 'sr-news:sr-catalogs' %}',
+                    video: '{% url 'sr-news:sr-videos' %}'
+                },
+                areaId: 0,
+                flatPageTitle: '{{ flatpage.title | safe }}'
+            }
+        };
+    })();
+</script>
+{% endblock js%}

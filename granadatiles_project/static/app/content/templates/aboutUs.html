@@ -1,0 +1,44 @@
+﻿<div class="col-md-12" ng-controller="aboutUsCtrl as vm">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="heading-sec">{{::vm.section.title}}</h2>
+            <a class="breadcrumds" href="#"><u>{{ ::vm.breadcrumds }}</u> <i class="fa fa-angle-double-right"></i></a>
+            <div class="text-section" ng-bind-html="::vm.section.description"></div>
+        </div>
+    </div>
+    <div class="row">
+        <form id="contact-us-form">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="InputName" placeholder="Name and Lastname">
+                    </div>
+                    <div class="form-group">
+                        <select name="" id="InputIndividual" class="form-control">
+                            <option value="1">Individual</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="InputCompany" placeholder="Company">
+                    </div>
+                    <div class="form-group">
+                        <select name="" id="InputIndividual" class="form-control">
+                            <option value="1">Country</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="InputPhone" placeholder="Phone">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="InputEmail" placeholder="Email">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <textarea class="form-control" rows="10" placeholder="Comments or questions"></textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
+
 
 # Application definition
 
@@ -38,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
 
     #third party apps
     'django_summernote',
@@ -54,6 +58,7 @@ INSTALLED_APPS = [
     'apps.content',
     'apps.tiles',
     'apps.cart',
+    'apps.portfolio',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -115,6 +120,10 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_L10N = True
+
+FORMAT_MODULE_PATH =[
+      'apps.news.formats',
+    ]
 
 USE_TZ = True
 

@@ -35,3 +35,21 @@ class IndexNavigationDto(BaseGalleryNavImageDto):
         self.actionName = baseGalleryNavImageModel.get_action_name(language=language)
         if language == 'es' and baseGalleryNavImageModel.link_es:
             self.link = baseGalleryNavImageModel.link_es
+
+class FlatPageDto(object):
+
+    def __init__(self, flatpage, language):
+        self.title = flatpage.get_title(language = language)
+        self.description = flatpage.get_content(language=language)
+        self.menu = flatpage.menu
+
+class FlatPageCoverDto(object):
+
+    def __init__(self, flatPage):
+        self.image = flatPage.cover.url if flatPage.cover else ''
+
+class FlatPageMenuDto(object):
+
+    def __init__(self, flatPage, language):
+        self.title = flatPage.get_title(language = language)
+        self.url = '/' + language +  '/pages' + flatPage.get_absolute_url()

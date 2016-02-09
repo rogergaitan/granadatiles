@@ -1,11 +1,17 @@
 from django.shortcuts import get_object_or_404
-from .models import Collection, Group, Tile, Portfolio, Layout, Style, CustomizedTile, GroupColor, PalleteColor
+from django.utils.translation import ugettext as _
+
+from .models import (
+    Collection, Group, Tile, Portfolio, Layout, Style,
+    CustomizedTile, GroupColor, PalleteColor, PortfolioTile
+)
 from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto, TileDesignDto,
     MenuCollectionDto, TileStyleDto, TileDetailDto, TileInstallationPhotosDto,
     TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto, PortfolioTilesDto,
-    LayoutDto, LayoutTilesDto, PortfolioCustomTilesDto
+    LayoutDto, LayoutTilesDto, PortfolioCustomTilesDto, CollectionInstallationPhotosDto
 )
+
 
 class CollectionService:
 
@@ -39,6 +45,15 @@ class CollectionService:
         menuCollectionsDto = [MenuCollectionDto(collection, language = language)
                               for collection in collections]
         return menuCollectionsDto
+
+    def get_installation_photos(collection, language):
+        tiles = Tile.objects.filter(design__group__collection=collection.id)
+
+        #filter unique gallery images
+        filter_photos = {photo for tile in tiles for photo in tile.installation_photos.all()}
+        installation_photos_dto = [CollectionInstallationPhotosDto(photo, language)
+                                   for photo in filter_photos]
+        return installation_photos_dto
 
 
 class GroupService:
@@ -118,7 +133,7 @@ class TileService:
               tiles = Tile.objects.filter(is_sample=True)
           else:
               tiles = Tile.objects.filter(is_sample=False)
-          instockdto = [InStockDto(tile, language) for tile in tiles[offset:limit] if tile.design]
+          instockdto = [InStockDto(tile, is_sample, language) for tile in tiles[offset:limit] if tile.design]
           return instockdto
 
       def get_tiles_collections_filters(language):
@@ -135,43 +150,52 @@ class PortfolioService:
      def get_portfolio(user):
          return get_object_or_404(Portfolio, user=user)
 
-     def show_tiles(portfolio, language):
-         portfoliotilesdto = [PortfolioTilesDto(portfoliotile.id, portfoliotile.tile, language)
-                              for portfoliotile in portfolio.tiles.all()]
-         return portfoliotilesdto
+     def get_portfolio_tile(id):
+         return get_object_or_404(PortfolioTile, pk=id)
 
-     def remove_tile(portfolio, portfoliotile_id):
-         portfolio.tiles.get(pk=portfoliotile_id).delete()
+     def get_layout(id):
+         return get_object_or_404(Layout, pk=id)
 
-     def add_tile(portfolio, id):
+     def show_tiles(user, language):
+         portfolio = PortfolioService.get_portfolio(user)
+         portfolio_tiles_dto = [PortfolioTilesDto(portfolio_tile.id, portfolio_tile.tile, language)
+                                for portfolio_tile in portfolio.tiles.all()]
+         return portfolio_tiles_dto
+
+     def remove_tile(request, id):
+         portfolio = PortfolioService.get_portfolio(request.user)
+         portfolio.tiles.get(pk=id).delete()
+
+     def add_tile(request, id):
+         portfolio = PortfolioService.get_portfolio(request.user)
          tile = PortfolioService.get_tile(id)
          portfolio.tiles.create(tile=tile)
 
-     def show_layouts(portfolio):
-         layoutsdto = [LayoutDto(layout) for layout in portfolio.layouts.all()]
-         return layoutsdto
-
-     def remove_layout(portfolio, id):
-         layout = get_object_or_404(Layout, pk=id)
-         portfolio.layouts.get(pk=layout.id).delete()
+     def show_layouts(user):
+         portfolio = PortfolioService.get_portfolio(user)
+         layouts_dto = [LayoutDto(layout) for layout in portfolio.layouts.all()]
+         return layouts_dto
 
      def save_layout(portfolio, id, name, length_ft, length_in, width_ft, width_in, image):
-         if id:
-             layout = get_object_or_404(Layout, pk=id)
-             layout.update(name=name, length_ft=length_ft, length_in=length_in,
-                           width_ft=width_ft, width_in=width_in, image=image)
-         else:
-             portfolio.layouts.create(name=name, length_ft=length_ft, length_in=length_in,
-                                      width_ft=width_ft, width_in=width_in, image=image)
+         data = {
+            'name': name,
+            'length_ft': length_ft,
+            'length_in': length_in,
+            'width_ft': width_ft,
+            'width_in': width_in,
+            'image': image
+         }
+         portfolio.layouts.update_or_create(pk=id, defaults=data)
 
      def layout_tiles(portfolio, language):
-         layouttilesdto = [LayoutTilesDto(portfoliotile.tile, language) for portfoliotile in portfolio.tiles.all()]
-         return layouttilesdto
+         layout_tiles_dto = [LayoutTilesDto(portfolio_tile.tile, language)
+                             for portfolio_tile in portfolio.tiles.all()]
+         return layout_tiles_dto
 
      def duplicate_layout(portfolio, id):
          layout = Layout.objects.get(pk=id)
          layout.id = None
-         layout.name = layout.name + " copy"
+         layout.name = layout.name + ' ' + _('copy')
          layout.save()
 
      def show_custom_tiles(portfolio, language):

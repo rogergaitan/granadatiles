@@ -2,36 +2,34 @@ from django.shortcuts import render
 from rest_framework import viewsets, mixins
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
-from apps.content.serializers import TestimonySerializer, SectionSerializer, SocialSerializer, SectionCoverSerializer, FeaturedVideoSerializer, IndexNavigationSerializer
-from apps.content.services import TestimonyService, SectionService, FeaturedVideoService, AreaService, IndexNavigationService
+from apps.content.serializers import TestimonySerializer, SectionSerializer, SocialSerializer, SectionCoverSerializer, FeaturedVideoSerializer, IndexNavigationSerializer, FlatPageSerializer, FlatPageCoverSerializer, FlatPageMenuSerializer
+from apps.content.services import TestimonyService, SectionService, FeaturedVideoService, AreaService, IndexNavigationService, FlatPageService
 from .models import Social, Section
 from core.views import BaseViewSet
 from core.serializers import BaseContentSerializer
 from rest_framework.status import HTTP_404_NOT_FOUND
 
-def get_seo_data(id, request):
-    return {'section': Section.seo.get_seo_data(id, request.META.get('HTTP_X_LANGUAGE_CODE'))}
 
 def index(request):
-    return render(request, 'index.html', get_seo_data(1, request))
+    return render(request, 'index.html')
 
 
 def about_us(request):
-    return render(request, 'content/about_us.html', get_seo_data(9, request))
+    return render(request, 'content/about_us.html')
 
 
 def videos(request):
-    return render(request, 'content/featured_videos.html', get_seo_data(8, request))
+    return render(request, 'content/featured_videos.html')
 
 
 def compare_products(request):
-    return render(request, 'content/compare_products.html', get_seo_data(2, request))
+    return render(request, 'content/compare_products.html')
 
 def cement_vs_ceramic(request):
-    return render(request, 'content/cement_vs_ceramic.html', get_seo_data(3, request))
+    return render(request, 'content/cement_vs_ceramic.html')
 
 def color_palletes(request):
-    return render(request, 'content/color_palletes.html', get_seo_data(4, request))
+    return render(request, 'content/color_palletes.html')
 
 
 class TestimonyViewSet(BaseViewSet):
@@ -65,6 +63,27 @@ class SectionViewSet(BaseViewSet):
                                          language=self.get_language(request))
         serializer = SectionCoverSerializer(cover)
         return self.response(cover, serializer)
+
+class FlatPageViewSet(BaseViewSet):
+    def list(self, request):
+        menuid = request.query_params.get('menuId')
+        flatPages = FlatPageService.get_flatpages_for_menu(menuid, 
+                                                           language = self.get_language(request))
+        serializer = FlatPageMenuSerializer(flatPages, many=True)
+        return Response(serializer.data)
+    
+    def retrieve(self, request, pk=None):
+        flatPage = FlatPageService.get_flatpage(pk, 
+                                                self.get_language(request))
+        serializer = FlatPageSerializer(flatPage)
+        return Response(serializer.data)
+    
+    @detail_route(methods=['get'])
+    def cover(self, request, pk = None):
+        cover = FlatPageService.get_cover(pk)
+        serializer = FlatPageCoverSerializer(cover)
+        return Response(serializer.data)
+
 
 
 class SocialViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):

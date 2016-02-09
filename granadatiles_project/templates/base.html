@@ -3,11 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300,700|Ubuntu:300,300italic,500' rel='stylesheet' type='text/css'>
-    <title>{% block title %} {% endblock title %}</title>
+    {% block seo %} {% endblock seo %}
     <link rel="icon" type="image/x-icon" href="{{STATIC_URL}}img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Granada Cement and Concrete Tile makes a wide variety of custom and in stock tile designs for cement and concrete tiles, including for kitchen and bathroom floors and walls.">
-    {% block seo %} {% endblock seo %}
     <!-- build:css ../static/build/css/lib.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="{{ STATIC_URL }}lib/angular-loading-bar/build/loading-bar.css" />
@@ -79,31 +77,33 @@
                                         <a href="#"><i class="fa fa-envelope"></i>&nbsp;<span>sales@granadatile.com</span></a>
                                     </li>
                                     <li>
+                                        {% if user.is_authenticated %}
+                                            <a href="{% url 'sr-portfolio:home'%}" class="dropdown-toggle" dropdown-toggle><i class="fa fa-briefcase"></i>&nbsp;<span>{% trans 'MY PORTFOLIO' %}</span></a>
+                                        {% else %}
                                         <div dropdown>
-                                            <a href="{% url 'social:begin' 'facebook' %}" class="dropdown-toggle" dropdown-toggle><i class="fa fa-briefcase"></i>&nbsp;<span>{% trans 'MY PORTFOLIO' %}</span></a>
+                                            <a href="#" class="dropdown-toggle contact-item" dropdown-toggle><i class="fa fa-briefcase"></i>&nbsp;<span>{% trans 'MY PORTFOLIO' %}</span></a>
                                             <div class="dropdown-menu login-content" role="menu">
-                                                <form class="text-center">
+                                                <form class="text-center" method="post" action="{% url 'sr-portfolio:login_user'%}">
+                                                    {% csrf_token %}
                                                     <h2>{% trans 'Login to My Portfolio' %}</h2>
                                                     <div class="form-group">
-                                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                                        <input type="email" name="username" class="form-control" id="username" placeholder="Email">
+                                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                                                     </div>
                                                     <div class="form-group">
-                                                        <button type="submit" class="btn btn-info">{% trans 'Log In' %}</button>
+                                                        <button type="submit" class="btn btn-info btn-login">{% trans 'Log In' %}</button>
                                                         <p><a href="#">{% trans 'I forgot my password' %}</a></p>
                                                     </div>
                                                     <div class="form-group">
-                                                        <button type="submit" class="btn btn-info">{% trans 'Sign Up' %}</button>
-                                                        <button type="submit" class="btn btn-info"><i class="fa fa-facebook fa-fw"></i>{% trans 'Log In or Sign Up with Facebook' %}</button>
+                                                        <a href="{% url 'sr-portfolio:login_to_portfolio' %}?signUp=true" class="btn btn-info btn-login">{% trans 'Sign Up' %}</a>
                                                     </div>
-                                                    <a href="#">
-                                                        <div>
-                                                            <img src="{{ STATIC_URL }}img/arrow.png" alt="arrow" height="15px">
-                                                        </div>
-                                                    </a>
+                                                    <div class="form-group">
+                                                        <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-info btn-login"><i class="fa fa-facebook fa-fw"></i>{% trans 'Log In or Sign Up with Facebook' %}</a>
+                                                    </div>
                                                 </form>
                                             </div>
                                         </div>
+                                        {% endif %}
                                     </li>
                                     <li>
                                         <a href="#"><i class="fa fa-shopping-cart"></i>&nbsp;<span>{% trans 'CART' %}</span></a>
@@ -134,7 +134,7 @@
                         </div>
                         <div class="row">
                             <nav class="col-sm-12" id="gt-header-nav">
-                                <ul class="nav nav-justified">
+                                <ul class="nav nav-justified" ng-controller="flatPagesMenuCtrl as vm">
                                     <li class="dropdown" dropdown>
                                         <span class="dropdown-toggle" dropdown-toggle data-toggle="dropdown">
                                             <a href="#">{% trans 'COLLECTIONS' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
@@ -149,9 +149,20 @@
                                         </span>
                                     </li>
                                     <li>
-                                        <span>
-                                            <a href="/">{% trans 'IN STOCK' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
-                                        </span>
+                                        <div ng-init="isInStockOpen=false" dropdown is-open="isInStockOpen">
+                                            <a href="#"
+                                               class="dropdown-toggle  drop-button" data-toggle="dropdown"
+                                               dropdown-toggle ng-disabled="disabled"
+                                               aria-expanded="false">{% trans 'IN STOCK' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <a href="{% url 'sr-collections:sr-instock-samples'%}">{% trans 'Samples'%}</a>
+                                                </li>
+                                                 <li>
+                                                    <a href="{% url 'sr-collections:sr-instock-tiles'%}">{% trans 'Tiles'%}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </li>
                                     <li>
                                         <span>
@@ -164,14 +175,50 @@
                                         </span>
                                     </li>
                                     <li>
-                                        <span>
-                                            <a href="{% url 'sr-news:sr-news'%}">{% trans 'NEWS/PRESS' %}</a><span class="gt-header-nav-separator hidden-xs">|</span>
-                                        </span>
+                                        <div ng-init="isNewsOpen=false" dropdown is-open="isNewsOpen">
+                                            <a href="#"
+                                               class="dropdown-toggle  drop-button" data-toggle="dropdown"
+                                               dropdown-toggle ng-disabled="disabled"
+                                               aria-expanded="false">
+                                                {% trans 'NEWS/PRESS' %}
+                                            </a><span class="gt-header-nav-separator hidden-xs">|</span>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <a href="{% url 'sr-news:sr-news'%}">{% trans 'Magazines' %}</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{% url 'sr-news:sr-catalogs' %}">{% trans 'Catalogs / Inspiration Books'%}</a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.granadatile.com/blog/" target="_blank">Cement Tile Blog</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{% url 'sr-news:sr-videos' %}">Videos</a>
+                                                </li>
+                                                <ng-include src="vm.newsPressFlatPagesMenuUrl">
+                                                </ng-include>
+                                            </ul>
+                                        </div>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <a href="/{{ language.code }}">{{ language.name_local|title  }} ({{ language.code }})</a>
+                                            </li>
+                                        </ul>
                                     </li>
                                     <li>
-                                        <span>
-                                            <a href="{% url 'about_us'%}">{% trans 'ABOUT US' %}</a>
-                                        </span>
+                                        <div ng-init="isAboutUsOpen=false" dropdown is-open="isAboutUsOpen">
+                                            <a href="#"
+                                               class="dropdown-toggle  drop-button" data-toggle="dropdown"
+                                               dropdown-toggle ng-disabled="disabled"
+                                               aria-expanded="false">{% trans 'ABOUT US' %}</a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <a href="{% url 'about_us'%}">{% trans 'Contact Us'%}</a>
+                                                </li>
+                                                <ng-include src="vm.aboutUsFlatPagesMenuUrl">
+                                                </ng-include>
+                                            </ul>
+                                        </div>
                                     </li>
                                 </ul>
                             </nav>
@@ -221,6 +268,7 @@
     <script src="{{ STATIC_URL }}lib/wow/dist/wow.js"></script>
     <script src="{{ STATIC_URL }}lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="{{ STATIC_URL }}lib/angular-socialshare/dist/angular-socialshare.min.js"></script>
+    <script src="{{ STATIC_URL }}lib/angular-recaptcha/release/angular-recaptcha.js"></script>
     <!-- endbower -->
     <!-- inject:js -->
     <script type="text/javascript" src="{{ STATIC_URL }}app/app.js"></script>
@@ -229,9 +277,12 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/module.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/module.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/aboutUsCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/contentDefaultCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/coverCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/flatPagesMenuCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/indexCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/sectionCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/testimonyCtrl.js"></script>
@@ -239,6 +290,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/directives/imagePreload.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/filters/ResourceUrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/areaSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/flatPagesSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/mainNavigationSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/sectionSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/testimonySvc.js"></script>
@@ -246,6 +298,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/directives/angular-yamm3.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/directives/fadeIn.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/interceptors/languageCode.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/core/services/gtUtilsSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/services/sharePageSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/controllers/galleriesListCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/controllers/galleryModalCtrl.js"></script>
@@ -254,11 +307,16 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/controllers/catalogListCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/services/articleSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/services/catalogSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/controller/portfolioHomeCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/controller/portfolioLoginCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/services/authenticationSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/collectionGroupsCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/instockCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/menuCollectionCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/tileDetailCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/tileModalCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/collectionsSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/instockSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/tilesSvc.js"></script>
     <!-- endinject -->
     <!-- endbuild -->

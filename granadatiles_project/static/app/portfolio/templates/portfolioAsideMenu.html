@@ -1,0 +1,21 @@
+﻿<div class="row submenu-selected submenu-selected-smtopmargin">
+    <div class="col-xs-12 submenu-selected-title">
+        <h3 class="text-uppercase">
+            {{::vm.labels.welcome}} {{vm.loggedUser}}
+        </h3>
+    </div>
+</div>
+<ul class="active-submenu active-submenu-smtopmargin">
+    <li>
+        <a href="#">{{::vm.labels.tilesInMyPortfolio}}</a>
+    </li>
+    <li>
+        <a href="#">{{::vm.labels.layouts}}</a>
+    </li>
+    <li>
+        <a href="#">{{::vm.labels.myAccount}}</a>
+    </li>
+    <li>
+        <a ng-href="{{vm.logoutUrl}}">{{::vm.labels.logout}}</a>
+    </li>
+</ul>

@@ -13,7 +13,7 @@ from .serializers import (
     StyleSerializer, GroupTileSizeSerializer, TileDetailSerializer,
     TileInstallationPhotosSerializer, TileOrderSerializer, CollectionsFilterSerializer,
     InStockSerializer, PortfolioTilesSerializer, PortfolioCustomTilesSerializer, LayoutSerializer,
-    LayoutTilesSerializer
+    LayoutTilesSerializer, CollectionInstallationPhotosSerializer
 )
 from .services import CollectionService, GroupService, TileService, PortfolioService
 from .models import Collection, Group
@@ -34,6 +34,11 @@ def group_detail(request, collection_slug, group_slug):
         'group_id': group_id
     })
 
+def instock_samples(request):
+    return render(request, 'tiles/instock_samples.html')
+
+def instock_tiles(request):
+    return render(request, 'tiles/instock_tiles.html')
 
 """
 These are the views for the api
@@ -60,7 +65,7 @@ class CollectionViewSet(BaseViewSet):
 
     # /collections/:id/groups
     @detail_route(methods=['get'])
-    def groups(self, request, pk = None):
+    def groups(self, request, pk=None):
         groups = CollectionService.get_groups(
                                         collection_id=pk,
                                         language=self.get_language(request))
@@ -82,6 +87,14 @@ class CollectionViewSet(BaseViewSet):
         collections = CollectionService.get_featured_collections(
             language= self.get_language(request))
         serializer = CollectionSerializer(collections, many=True)
+        return Response(serializer.data)
+
+    @detail_route(methods=['get'])
+    def installationphotos(self, request, pk=None):
+        collection = CollectionService.get_collection(pk, self.get_language(request))
+        installation_photos = CollectionService.get_installation_photos(collection,
+                                                                        self.get_language(request))
+        serializer = CollectionInstallationPhotosSerializer(installation_photos, many=True)
         return Response(serializer.data)
 
 
@@ -168,35 +181,30 @@ class PortfolioViewSet(BaseViewSet):
 
     @list_route(methods=['get'])
     def show_tiles(self, request):
-        portfolio = PortfolioService.get_portfolio(request.user)
-        tiles = PortfolioService.show_tiles(portfolio, self.get_language(request))
+        tiles = PortfolioService.show_tiles(request.user, self.get_language(request))
         serializer = PortfolioTilesSerializer(tiles, many=True)
         return Response(serializer.data)
 
     @list_route(methods=['get'])
     def remove_tile(self, request):
-        portfolio = PortfolioService.get_portfolio(request.user)
-        portfoliotile_id = request.query_params.get('portfoliotile_id')
-        return Response(PortfolioService.remove_tile(portfolio, portfoliotile_id))
+        id = request.query_params.get('id')
+        return Response(PortfolioService.get_portfolio_tile(id).delete())
 
     @list_route(methods=['get'])
     def add_tile(self, request):
-        portfolio = PortfolioService.get_portfolio(request.user)
         id = request.query_params.get('id')
-        return Response(PortfolioService.add_tile(portfolio, id))
+        return Response(PortfolioService.add_tile(request, id))
 
     @list_route(methods=['get'])
     def show_layouts(self, request):
-        portfolio = PortfolioService.get_portfolio(request.user)
-        layouts = PortfolioService.show_layouts(portfolio)
+        layouts = PortfolioService.show_layouts(request.user)
         serializer = LayoutSerializer(layouts, many=True)
         return Response(serializer.data)
 
     @list_route(methods=['get'])
     def remove_layout(self, request):
-        portfolio = PortfolioService.get_portfolio(request.user)
         id = request.query_params.get('id')
-        return Response(PortfolioService.remove_layout(portfolio, id))
+        return Response(PortfolioService.get_layout(id).delete())
 
     @list_route(methods=['post'])
     def save_layout(self, request):
@@ -210,18 +218,19 @@ class PortfolioViewSet(BaseViewSet):
         image = request.data.get('image')
         return Response(PortfolioService.save_layout(portfolio, id, name, lenght_ft,
                                                      lenght_in, width_ft, width_in, image))
-    @list_route(methods=['get'])
-    def layout_tiles(self, request):
-        portfolio = PortfolioService.get_portfolio(request.user)
-        tiles = PortfolioService.layout_tiles(portfolio, self.get_language(request))
-        serializer = LayoutTilesSerializer(tiles, many=True)
-        return Response(serializer.data)
 
     @list_route(methods=['get'])
     def duplicate_layout(self, request):
         portfolio = PortfolioService.get_portfolio(request.user)
         id = request.query_params.get('id')
         return Response(PortfolioService.duplicate_layout(portfolio, id))
+
+    @list_route(methods=['get'])
+    def layout_tiles(self, request):
+        portfolio = PortfolioService.get_portfolio(request.user)
+        tiles = PortfolioService.layout_tiles(portfolio, self.get_language(request))
+        serializer = LayoutTilesSerializer(tiles, many=True)
+        return Response(serializer.data)
 
     @list_route(methods=['get'])
     def show_custom_tiles(self, request):
@@ -244,10 +253,9 @@ class PortfolioViewSet(BaseViewSet):
         return Response(PortfolioService.save_custom_tile(portfolio, tile, colors))
 
 
-class ItemViewSet(viewsets.ViewSet):
+class TaskViewSet(viewsets.ViewSet):
 
     permission_classes = (IsAdminUser,)
-
 
     @list_route(methods=['post'])
     def update_inventory(self, request):

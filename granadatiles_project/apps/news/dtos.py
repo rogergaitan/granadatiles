@@ -5,7 +5,7 @@ class SectionFeaturedArticleDto(object):
 
     def __init__(self, article, language=None):
         self.title = article.get_title(language)
-        self.image = article.image.url if article.image else ''
+        self.image = article.magazine.logo.url if article.magazine.logo.url else ''
         self.url = article.url
 
 

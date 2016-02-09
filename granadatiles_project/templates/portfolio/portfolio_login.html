@@ -1,0 +1,65 @@
+﻿{% extends "base.html" %}
+{% load i18n content %}
+
+{% block title %} Login to your Granada Tile Portfolio {% endblock %}
+
+{% block css %}
+<script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit"
+        async defer></script>
+{% endblock css %}
+
+{% block content %}
+<ng-include src="'{{ STATIC_URL }}app/portfolio/templates/login/portfolioLogin.html'">
+</ng-include>
+{% endblock content %}
+
+{% block js%}
+{% get_current_language as LANGUAGE_CODE %}
+<script>
+    (function () {
+        "use strict";
+        angular
+        .module("app.core")
+        .factory("pageSettings", ['appSettings',pageSettings]);
+
+        function pageSettings(appSettings) {
+            return{
+                sectionId: 0,
+                language: '{{LANGUAGE_CODE}}',
+                labels: {
+                    logInToYourPortfolio: '{% trans 'Log in to your Granada Tile Portfolio'%}',
+                    logIn: '{% trans 'Log In' %}',
+                    signUp: '{%trans 'Sign Up'%}',
+                    forgotPassword: '{%trans 'I forgot my password'%}',
+                    LogInOrSignUpFacebook: '{% trans 'Log In or Sign Up with Facebook'%}',
+                    recoverYourPassword: '{% trans 'Recover your password'%}',
+                    sendMeEmail: '{% trans 'Send me an email'%}',
+                    pleaseProvideSameEmail: '{% trans 'Please, provide the SAME email address you used to register or'%}',
+                    invalidEmail: '{% trans 'Invalid email'%}',
+                    register: '{% trans 'Register'%}',
+                    backToLogin: '{% trans 'Back To Login'%}',
+                    signUpForPortfolio: '{% trans 'Sign Up for Portfolio '%}'
+                },
+                facebookLoginUrls: {
+                    begin: '{% url 'social:begin' 'facebook' %}'
+                },
+                portfolioLoginsUrls: {
+                    authenticate: '{% url 'sr-portfolio:login_user'%}'
+                },
+                loginResult: {
+                    invalid_login: '{{invalid_login}}',
+                    reason: '{{reason|safe}}'
+                },
+                next: '{{next}}',
+                token: "{% csrf_token %}"
+            }
+        };
+    })();
+</script>
+<script>
+    var app = angular.module('app.portfolio'); // Not including a list of dependent modules (2nd parameter to `module`) "re-opens" the module for additional configuration
+    app.config(['$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.headers.common['X-CSRFToken'] = '{{ csrf_token|escapejs }}';
+    }]);
+</script>
+{% endblock js %}

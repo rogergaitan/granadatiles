@@ -44,6 +44,23 @@
         collectionsSvc.getFilteredMenuCollection(pageSettings.collectionId).then(function (response) {
             vm.filteredMenuCollection = response.data;
         });
+
+        vm.showCollectionGallery = function () {
+            $modal.open({
+                templateUrl: baseSettings.staticUrl + 'app/tiles/templates/tileModal.html',
+                controller: 'tileModalCtrl',
+                controllerAs: 'vm',
+                size: 'lg',
+                resolve: {
+                    installationPhotos: function () {
+                        return collectionsSvc.getCollectionGallery(pageSettings.collectionId).then(function (response) {
+                            return response.data;
+                        });
+                    }
+                }
+            })
+        };
+
         if (pageSettings.groupId >= 0) {
             collectionsSvc.getGroup(pageSettings.groupId).then(function (response) {
                 vm.group = response.data;

@@ -8,11 +8,13 @@
             'mega-menu',
             'angular-loading-bar',
             '720kb.socialshare',
+            'vcRecaptcha',
 
             'app.core',
             'app.content',
             'app.tiles',
             'app.galleries',
-            'app.news'
+            'app.news',
+            'app.portfolio'
         ]);
 }());

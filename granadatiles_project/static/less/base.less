@@ -55,14 +55,14 @@ header.navbar-fixed-top {
             font-size: @font-xs;
         }
 
-        li {
+        & > li {
             margin: 0 2px;
 
             &:last-child {
                 margin-right: 0;
             }
 
-            a {
+            & > a, .contact-item {
                 color: @gray;
 
                 &:hover, &:focus {
@@ -79,38 +79,6 @@ header.navbar-fixed-top {
                 &:hover, &:focus {
                     .navigation-hover();
                 }
-            }
-            .login-content{
-                border-radius: 0;
-                form{
-                    padding: 10px 25px;
-                    margin: auto;
-                    input,button{
-                        margin-bottom: 10px;
-                    }
-                    h2{
-                        color: @darkBlue;
-                        font-family: @font-secundary;
-                        .font-configuration(@font-xl,@font-light);
-                        margin-top: 0;
-                        text-align: left;
-                    }
-                    button{
-                        background-color: @lightBlue;
-                        color: @darkBlue;
-                        font-family: @font-secundary;
-                        .font-configuration(@font-md,@font-light);
-                        i{
-                            color: white;
-                        }
-                        &:hover,&:focus{
-                            color: #fff;
-                            background-color: #31b0d5;
-                            border-color: #269abc;
-                        }
-                    }
-                }
-
             }
         }
     }
@@ -303,3 +271,14 @@ footer {
     cursor: pointer;
 }
 /***********/
+
+
+.dropdown-menu > ng-include > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}

@@ -100,6 +100,13 @@ class TileInstallationPhotosDto(BaseContentDto):
         self.image = photo.image.url if photo.image else ''
 
 
+class CollectionInstallationPhotosDto(TileInstallationPhotosDto):
+
+    def __init__(self, photo, language):
+        super().__init__(photo, language)
+        self.designer = photo.designer
+
+
 class SimilarTileDto(BaseCatalogDto):
 
     def __init__(self, tile, language):
@@ -162,18 +169,24 @@ class TileOrderDto(BaseCatalogDto):
 
 class InStockDto(BaseCatalogDto):
 
-    def __init__(self, tile, language):
+    def __init__(self, tile, is_sample, language):
         super().__init__(tile, language)
         self.mosaic = tile.mosaic.url if tile.mosaic else ''
         self.collection = tile.design.group.collection.get_title(language)
         self.size = tile.size
-        self.has_installation_photos = tile.has_installation_photos()
+        self.hasInstallationPhotos = tile.has_installation_photos()
+
+        if is_sample:
+          self.hasSample = True
+        else:
+          self.hasSample = True if tile.has_sample() else False
 
 
-class CollectionsFiltersDto(BaseContentDto):
+class CollectionsFiltersDto(BaseDto):
 
     def __init__(self, collection, language):
-        super().__init__(collection, language)
+        super().__init__(collection)
+        self.title = collection.get_title(language)
 
 
 class GroupDto(BaseGalleryImageDto):

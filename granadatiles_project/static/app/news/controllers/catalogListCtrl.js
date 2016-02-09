@@ -10,14 +10,19 @@
                 'catalogSvc',
                 'sectionSvc',
                 'sharePageSvc',
+                'flatPagesSvc',
                 catalogListCtrl]);
 
-    function catalogListCtrl(baseSettings,pageSettings, catalogSvc, sectionSvc, sharePageSvc) {
+    function catalogListCtrl(baseSettings, pageSettings, catalogSvc, sectionSvc, sharePageSvc, flatPagesSvc) {
 
         var vm = this;
 
         catalogSvc.getCatalogs().then(function (response) {
             vm.catalogs = response.data;
+        });
+
+        flatPagesSvc.getFlatPagesMenu(2).then(function (response) {
+            vm.flatPages = response.data;
         });
 
         if(pageSettings.sectionId != 0){
