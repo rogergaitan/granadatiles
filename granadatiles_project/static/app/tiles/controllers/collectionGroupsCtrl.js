@@ -27,9 +27,9 @@
 
         vm.checkNew = false;
 
-        vm. arrayFilter = [];
+        //vm. arrayFilter = [];
 
-        vm.filterValue = 0;
+        //vm.filterValue = 0;
 
         vm.collectionAsideNavigationTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/collectionAsideNavigation.html';
 
@@ -109,8 +109,8 @@
 
         vm.setStyle = function (style) {
             vm.selectedStyle = style;
-            //updateTilesByStyle(style);
-            updateTiles( vm.filterValue = 5,style);
+            updateTilesByStyle(style);
+            //updateTiles( vm.filterValue = 5,style);
         };
 
         vm.setTile = function (index, tileId) {
@@ -163,13 +163,14 @@
                     vm.tiles = response.data;
                 });
             }
-        }
-
-        vm.updateTileByNew = function(checkNewValue){
-            (checkNewValue) ? updateTiles ( vm.filterValue = 1 , checkNewValue) : console.log("not intro");
         };
 
-        function updateTiles (id,style){
+        vm.updateTileByNew = function(checkNewValue){
+            (checkNewValue) ? console.log("intro") : console.log("not intro");
+            //(checkNewValue) ? updateTiles ( vm.filterValue = 1 , checkNewValue) : console.log("not intro");
+        };
+
+        /*function updateTiles (id,style){
             var tiles = [];
 
             var index = vm.arrayFilter.map(function (option) {
@@ -185,9 +186,7 @@
 
                 }
             }
-
-
-        }
+        }*/
 
         vm.showInstallationPhoto = function (tileId) {
             $modal.open({
