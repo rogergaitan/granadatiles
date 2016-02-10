@@ -9,6 +9,7 @@
             'angular-loading-bar',
             '720kb.socialshare',
             'vcRecaptcha',
+            'checklist-model',
 
             'app.core',
             'app.content',

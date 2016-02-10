@@ -22,7 +22,15 @@
             <a href="#" class="breadcrumds"><u>{{vm.labels.collections}}</u> <i class="fa fa-angle-double-right"></i></a>
             <div class="text-section" ng-bind-html="::vm.section.description"></div>
             <div class="row filter">
-
+                <div class="col-xs-12">
+                    <label class="inline-block"><strong>{{ vm.labels.showOnly }}</strong></label>
+                    <div class="checkbox-content">
+                        <p class="checkbox-inline" ng-repeat="collectionFilter in vm.collectionFilters">
+                            <input type="checkbox" id="collection-{{collectionFilter.id}}" checklist-model="vm.selectedCollectionFilters" checklist-value="collectionFilter.id" checklist-change="vm.refreshTiles()" />
+                            <label for="collection-{{collectionFilter.id}}">{{::collectionFilter.title}}</label>
+                        </p>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div ng-repeat="tile in vm.tiles">
