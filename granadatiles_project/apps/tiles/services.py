@@ -133,10 +133,12 @@ class TileService:
           else:
               tiles = Tile.objects.all()
 
-          if is_sample:
+          if is_sample == 'true':
               tiles = tiles.filter(is_sample=True)
+          elif is_sample == 'false' or is_sample is None:
+              tiles = tiles.filter(is_sample=False)
 
-          instock_dto = [InStockDto(tile, language) for tile in tiles[offset:limit]]
+          instock_dto = [InStockDto(tile, is_sample, language) for tile in tiles[offset:limit]]
           return instock_dto
 
       def get_tiles_collections_filters(language):
