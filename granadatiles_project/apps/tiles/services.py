@@ -127,14 +127,17 @@ class TileService:
           return tileorderDto
 
       def get_in_stock_tiles(ids, is_sample, limit, offset, language):
-          if ids: tiles = Tile.objects.filter(design__group__collection__in=ids)
+
+          if ids:
+              tiles = Tile.objects.filter(design__group__collection__in=ids)
+          else:
+              tiles = Tile.objects.all()
 
           if is_sample:
-              tiles = Tile.objects.filter(is_sample=True)
-          else:
-              tiles = Tile.objects.filter(is_sample=False)
-          instockdto = [InStockDto(tile, is_sample, language) for tile in tiles[offset:limit] if tile.design]
-          return instockdto
+              tiles = tiles.filter(is_sample=True)
+
+          instock_dto = [InStockDto(tile, language) for tile in tiles[offset:limit]]
+          return instock_dto
 
       def get_tiles_collections_filters(language):
           collections = Collection.objects.filter(featured=True)
