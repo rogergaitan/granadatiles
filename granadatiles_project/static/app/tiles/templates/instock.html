@@ -32,14 +32,14 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" infinite-scroll='vm.nextPage()' infinite-scroll-distance='1'>
                 <div ng-repeat="tile in vm.tiles">
                     <div class="clearfix" ng-if="$index % 3 == 0"></div>
                     <div class="col-md-4 blue-box">
                         <div class="content-tile">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <img ng-src="{{ tile.mosaic }}" alt="{{ tile.name }}" class="img-responsive thumbnail animate-show-fade" fade-in>
+                                    <img ng-src="{{ tile.mosaic }}" alt="{{ tile.name }}" class="img-responsive thumbnail animate-show-fade instock-img" fade-in>
                                 </div>
                             </div>
                             <div class="row">

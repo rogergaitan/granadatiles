@@ -19,13 +19,15 @@
             return $http.get(appSettings.serverPath + 'tiles/collections_filters/');
         }
 
-        function getTiles(collectionIds, isSample) {
+        function getTiles(collectionIds, isSample, offset) {
             return $http.get(appSettings.serverPath + 'tiles/in_stock_tiles/',
                 {
                     params:
                         {
                             ids: collectionIds,
-                            is_sample: isSample
+                            is_sample: isSample,
+                            limit: 6,
+                            offset: offset
                         }
                 });
         }

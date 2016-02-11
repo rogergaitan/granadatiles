@@ -10,6 +10,7 @@
             '720kb.socialshare',
             'vcRecaptcha',
             'checklist-model',
+            'infinite-scroll',
 
             'app.core',
             'app.content',
