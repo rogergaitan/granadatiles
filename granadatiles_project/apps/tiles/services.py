@@ -83,7 +83,7 @@ class GroupService:
         if specials: designs = designs.filter(tiles__on_sale=True).distinct()
 
         tile_design_dto = [TileDesignDto(tile_design, size, new, in_stock, specials, language)
-                           for tile_design in designs[offset:limit]]
+                           for tile_design in designs[offset:(limit+offset)]]
         return tile_design_dto
 
     def get_styles(id, language=None):
@@ -138,7 +138,8 @@ class TileService:
           elif is_sample == 'false' or is_sample is None:
               tiles = tiles.filter(is_sample=False).order_by('name')
 
-          instock_dto = [InStockDto(tile, is_sample, language) for tile in tiles[offset:(limit+offset)]]
+          instock_dto = [InStockDto(tile, is_sample, language)
+                         for tile in tiles[offset:(limit+offset)]]
           return instock_dto
 
       def get_tiles_collections_filters(language):
