@@ -121,7 +121,7 @@ class Command(BaseCommand):
 
         collections = [collection for collection in items.json() if collection['SubLevel'] == 0]
         groups = [group for group in items.json() if group['SubLevel'] == 1]
-        tiles = [item for item in items.json() if item['SubLevel'] == 2 or item['SubLevel'] == 3]
+        tiles = [item for item in items.json() if item['SubLevel'] == 2]
 
         for collection in collections:
             Command.create_update_collections(collection)
