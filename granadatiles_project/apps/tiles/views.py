@@ -164,7 +164,7 @@ class TileViewSet(BaseViewSet):
         offset = int(request.query_params.get('offset', 0))
 
         tiles = TileService.get_in_stock_tiles(collection_filter, is_sample,
-                                               limit, offset, language=self.get_language(request))
+                                               limit, offset, self.get_language(request))
         serializer = InStockSerializer(tiles, many=True)
         return Response(serializer.data)
 

@@ -172,14 +172,15 @@ class InStockDto(BaseCatalogDto):
     def __init__(self, tile, is_sample, language):
         super().__init__(tile, language)
         self.mosaic = tile.mosaic.url if tile.mosaic else ''
-        self.collection = tile.design.group.collection.get_title(language)
+        self.collection = tile.design.group.collection.get_title(language) \
+                          if tile.design.group.collection else ''
         self.size = tile.size
         self.hasInstallationPhotos = tile.has_installation_photos()
 
-        if is_sample:
-          self.hasSample = True
+        if is_sample == 'true':
+            self.hasSample = True
         else:
-          self.hasSample = True if tile.has_sample() else False
+            self.hasSample = True if tile.has_sample() else False
 
 
 class CollectionsFiltersDto(BaseDto):

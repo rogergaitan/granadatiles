@@ -10,7 +10,6 @@
     function instockSvc($http, appSettings) {
         var service = {
             getCollectionFilter: getCollectionFilter,
-            getSamples: getSamples,
             getTiles: getTiles
         };
 
@@ -20,12 +19,17 @@
             return $http.get(appSettings.serverPath + 'tiles/collections_filters/');
         }
 
-        function getSamples() {
-            return $http.get(appSettings.serverPath + 'tiles/in_stock_tiles/?is_sample=true');
-        }
-
-        function getTiles() {
-            return $http.get(appSettings.serverPath + 'tiles/in_stock_tiles/');
+        function getTiles(collectionIds, isSample, offset) {
+            return $http.get(appSettings.serverPath + 'tiles/in_stock_tiles/',
+                {
+                    params:
+                        {
+                            ids: collectionIds,
+                            is_sample: isSample,
+                            limit: 6,
+                            offset: offset
+                        }
+                });
         }
 
     }

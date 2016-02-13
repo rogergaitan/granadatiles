@@ -22,16 +22,24 @@
             <a href="#" class="breadcrumds"><u>{{vm.labels.collections}}</u> <i class="fa fa-angle-double-right"></i></a>
             <div class="text-section" ng-bind-html="::vm.section.description"></div>
             <div class="row filter">
-
+                <div class="col-xs-12">
+                    <label class="inline-block"><strong>{{ vm.labels.showOnly }}</strong></label>
+                    <div class="checkbox-content">
+                        <p class="checkbox-inline" ng-repeat="collectionFilter in vm.collectionFilters">
+                            <input type="checkbox" id="collection-{{collectionFilter.id}}" checklist-model="vm.selectedCollectionFilters" checklist-value="collectionFilter.id" checklist-change="vm.refreshTiles()" />
+                            <label for="collection-{{collectionFilter.id}}">{{::collectionFilter.title}}</label>
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="row">
+            <div class="row" infinite-scroll='vm.nextPage()' infinite-scroll-distance='1'>
                 <div ng-repeat="tile in vm.tiles">
                     <div class="clearfix" ng-if="$index % 3 == 0"></div>
                     <div class="col-md-4 blue-box">
                         <div class="content-tile">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <img ng-src="{{ tile.mosaic }}" alt="{{ tile.name }}" class="img-responsive thumbnail animate-show-fade" fade-in>
+                                    <img ng-src="{{ tile.mosaic }}" alt="{{ tile.name }}" class="img-responsive thumbnail animate-show-fade instock-img" fade-in>
                                 </div>
                             </div>
                             <div class="row">

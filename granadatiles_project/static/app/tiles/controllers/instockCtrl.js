@@ -12,27 +12,46 @@
         var vm = this;
         vm.labels = pageSettings.labels;
         vm.navigation = pageSettings.navigation;
-        vm.isSample = false;
+        vm.isSample = (pageSettings.samples) ? true : false;
+        UpdateTiles();
 
-        if (pageSettings.samples) {
-            vm.isSample = true;
-            instockSvc.getSamples().then(function (response) {
-                vm.tiles = response.data;
-            });
-        }
-        else {
-            instockSvc.getTiles().then(function (response) {
-                vm.tiles = response.data;
-            })
-        }
-
-        instockSvc.getCollectionFilter(function (response) {
+        instockSvc.getCollectionFilter().then(function (response) {
             vm.collectionFilters = response.data;
         });
 
         sectionSvc.getSection(pageSettings.sectionId).then(function (response) {
             vm.section = response.data;
         });
+
+        vm.selectedCollectionFilters = [];
+
+        vm.refreshTiles = function () {
+            vm.offset = 0;
+            UpdateTiles(true);
+        };
+
+        vm.nextPage = function () {
+            if (!vm.inProgress) {
+                vm.offset = vm.tiles.length;
+                UpdateTiles(false);
+            }
+        }
+
+        function UpdateTiles(reset) {
+            vm.inProgress = true;
+            instockSvc.getTiles(vm.selectedCollectionFilters, vm.isSample, vm.offset)
+                .then(function (response) {
+                    if (!vm.tiles || reset) {
+                        vm.tiles = response.data;
+                    }
+                    else {
+                        for (var i = 0; i < response.data.length; i++) {
+                            vm.tiles.push(response.data[i]);
+                        }
+                    }
+                    vm.inProgress = false;
+                });
+        }
 
     }
 })();
