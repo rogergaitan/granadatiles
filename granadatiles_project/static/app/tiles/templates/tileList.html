@@ -1,9 +1,9 @@
 <div class="col-md-12" ng-controller="collectionsGroupCtrl as vm">
     <div class="row">
-        <aside class="col-md-3">
+        <aside class="col-md-3 col-sm-3">
             <ng-include src="vm.collectionAsideNavigationTemplateUrl"></ng-include>
         </aside>
-        <div class="col-md-9">
+        <div class="col-md-9 col-sm-9">
             <div ng-show="!shared.tileDetailTemplateUrl" class="animate-show">
             <h1 class="heading-sec">{{ ::vm.group.title }}</h1>
             <a href="#" class="breadcrumds"><u>Collections</u> <i class="fa fa-angle-double-right"></i> <u></u></a>
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div ng-repeat="tile in ::vm.tiles" ng-if="$index % 3 == 0" class="row">
-                <div class="col-md-4 blue-box" ng-if="$index <= vm.tiles.length - 1">
+                <div class="col-md-4 col-sm-4 blue-box" ng-if="$index <= vm.tiles.length - 1">
                     <div class="content-tile">
                         <div class="row">
                             <div class="col-md-8">
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 blue-box" ng-if="$index + 1 <= vm.tiles.length - 1">
+                <div class="col-md-4 col-sm-4 blue-box" ng-if="$index + 1 <= vm.tiles.length - 1">
                     <div class="content-tile">
                         <div class="row">
                             <div class="col-md-8">
@@ -144,7 +144,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 blue-box" ng-if="$index + 2 <= vm.tiles.length - 1">
+                <div class="col-md-4 col-sm-4 blue-box" ng-if="$index + 2 <= vm.tiles.length - 1">
                     <div class="content-tile">
                         <div class="row">
                             <div class="col-md-8">

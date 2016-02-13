@@ -3,7 +3,7 @@
     <a href="#" class="breadcrumds" ng-click="vm.backToGroup()"><u>Collections</u> <i class="fa fa-angle-double-right"></i> <u></u></a>
     <div class="text-section" ng-bind-html="::vm.areas.tileDetailWelcomeMessage"></div>
     <div class="row">
-        <div class="col-md-12 left-align">
+        <div class="col-md-12 col-sm-12 left-align">
             <ul class="list-inline tile-button-options">
                 <li><a href="#"><i class="fa fa-eye"></i><p>{{ ::vm.labels.photos | uppercase }}</p></a></li>
                 <li><a href="#">
@@ -17,10 +17,10 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8">
-            <img src="/static/img/initial/tiles/tiles/kotka-mosaic.jpg" alt="Kotka918-A-Granada-Tile-Cement" class="img-responsive thumbnail">
+        <div class="col-md-8 col-sm-8">
+            <img ng-src="{{ vm.tile.image }}" alt="Kotka918-A-Granada-Tile-Cement" class="img-responsive thumbnail" width="100%">
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-4">
             <ul class="tile-detail-container">
                 <li class="row">
                     <div class="col-md-4">
@@ -92,16 +92,15 @@
 
 
         </div>
-
     </div>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-3">
             <img src="/static/img/initial/tiles/tiles/kotka-mosaic-2.jpg" alt="kotka-mosaic-2" class="img-responsive thumbnail">
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-3">
             <img src="/static/img/initial/tiles/tiles/kotka-mosaic-3.jpg" alt="kotka-mosaic-3" class="img-responsive thumbnail">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6">
             <table class="table-tile-detail">
                 <thead>
                     <tr>
@@ -124,8 +123,146 @@
                 </tbody>
             </table>
         </div>
-        
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="line-order-tile-detail"><p>{{ vm.labels.order | uppercase }}</p></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-7 col-sm-7 form-order-tile-detail">
+            <div class="row space-bottom">
+                <div class="col-md-5 col-sm-5">
+                    <label for="squareFootage">{{ ::vm.labels.inputSquareFootage }}</label>
+                </div>
+                <div class="col-md-7 col-sm-7">
+                    <input type="text" id="squareFootage" class="form-control" placeholder="10">
+                </div>
+            </div>
+            <div class="row space-bottom">
+                <div class="col-md-5 col-sm-5">
+                    <label for="shippingCost">{{ ::vm.labels.estimateShippingCost }}</label>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="btn-group space-bottom" dropdown>
+                        <button type="button" class="btn btn-sky">Ship From</button>
+                        <button type="button" class="btn btn-sky dropdown-toggle" dropdown-toggle>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu filter-list" role="menu">
+                            <li>
+                                <a href="#"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <input type="text" id="shippingCost" class="form-control space-bottom" placeholder="{{ ::vm.labels.destinationZip }}">
+                    <input type="button" value="{{ ::vm.labels.calculate }}" class="btn btn-green space-bottom btn-custom">
+                    <p>{{ ::vm.labels.estimatedDelivery }}: <span>3 {{ ::vm.labels.weeks  }}</span></p>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-2">
+            <img src="{{ STATIC_URL }}img/Norton-seal.png" alt="Norton_Seal">
+        </div>
+        <div class="col-md-3 col-sm-3 text-right resume-order-tile-detail">
+            <ul>
+                <li>
+                    <label>{{ ::vm.labels.subtotal  }}: </label><span>$242.70</span>
+                </li>
+                <li class="text-orange">
+                    <label>- {{ ::vm.labels.discount  }}: </label><span>$48.54</span>
+                </li>
+                <li>
+                    <label>{{ ::vm.labels.shipping  }}: </label><span>$194.16</span>
+                </li>
+                <li>
+                    <label>{{ ::vm.labels.yourCost  }}: </label><span>$194.16</span>
+                </li>
+            </ul>
+            <button type="button" class="btn btn-green">{{ ::vm.labels.addToCart }}</button>
+            <button type="button" class="btn btn-green">{{ ::vm.labels.orderFree }}</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-7 col-sm-12 calculation-order-tile-detail">
+            <span class="text-header">{{ ::vm.labels.tileCalculationDetail }}</span>
+            <ul>
+                <li>
+                    <div class="row">
+                        <div class="col-md-9 col-sm-9">
+                            Tiles needed (10 Sq. Ft / 0.44 Sq. Ft Per Tile)=
+                        </div>
+                        <div class="col-md-3 col-sm-3 text-right">
+                            22.73 Tiles *
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-md-9 col-sm-9">
+                            Tiles needed and 10% Overage (22.73 X 10%)=
+                        </div>
+                        <div class="col-md-3 col-sm-3 text-right">
+                            25 Tiles *
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-md-9 col-sm-9">
+                            Boxes needed (25 Tiles / 10 Tiles Per Box)=
+                        </div>
+                        <div class="col-md-3 col-sm-3 text-right">
+                            3 Boxes *
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-md-9 col-sm-9">
+                            Base cost (3 Boxes X $80.9 Per Box)=
+                        </div>
+                        <div class="col-md-3 col-sm-3 text-right">
+                            $242.70 *
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-md-9 col-sm-9">
+                            Shipping Weight (70 lbs Per Box x 3 Boxes)=
+                        </div>
+                        <div class="col-md-3 col-sm-3 text-right">
+                            210.00 lbs
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <span class="text-footer">* Numbers are rounded to nearest tile or box</br>** Minimum 100 square feet for custom tiles</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p>Similar Tile</p>
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="/static/img/initial/tiles/tiles/Kotka918-B-Granada-Tile-Cement.jpg" alt="" class="img-responsive">
+                </div>
+                <div class="col-md-3">
+                    <img src="/static/img/initial/tiles/tiles/Kotka918-C-Granada-Tile-Cement.jpg" alt="" class="img-responsive">
+                </div>
+                <div class="col-md-3">
+                    <img src="/static/img/initial/tiles/tiles/Kotka918-D-Granada-Tile-Cement.jpg" alt="" class="img-responsive">
+                </div>
+                <div class="col-md-3">
+                    <img src="/static/img/initial/tiles/tiles/Kotka918-A-Granada-Tile-Cement.jpg" alt="" class="img-responsive">
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
       

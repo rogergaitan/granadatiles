@@ -1,9 +1,9 @@
 ﻿<div class="row submenu-selected">
     <a ng-href="{{ vm.collection.url }}">
-        <div class="col-md-6 submenu-selected-image">
+        <div class="col-md-6 col-sm-6 submenu-selected-image">
             <img ng-src="{{ vm.collection.menu_image }}" alt="{{ vm.collection.title }}" class="img-responsive">
         </div>
-        <div class="col-md-3 submenu-selected-title">
+        <div class="col-md-3 col-sm-3 submenu-selected-title">
             <h3 class="text-uppercase">{{ vm.collection.title | uppercase }}<i class="fa fa-caret-down hidden-sm hidden-xs"></i></h3>
         </div>
     </a>
@@ -26,13 +26,13 @@
     <li><a href="#">{{ ::vm.labels.installing }}</a></li>
 </ul>
 <div ng-repeat="item in vm.filteredMenuCollection" ng-if="$index % 2 == 0" class="row">
-    <div class="col-md-6" ng-if="$index <= vm.filteredMenuCollection.length - 1">
+    <div class="col-md-6 col-sm-6" ng-if="$index <= vm.filteredMenuCollection.length - 1">
         <a ng-href="{{ vm.filteredMenuCollection[$index].url }}" class="navigation-submenu-option">
             <img ng-src="{{ ::vm.filteredMenuCollection[$index].image }}" alt="{{ ::vm.filteredMenuCollection[$index].title }}" class="img-responsive">
             <h3>{{ ::vm.filteredMenuCollection[$index].title | uppercase }}</h3>
         </a>
     </div>
-    <div class="col-md-6" ng-if="$index + 1 <= vm.filteredMenuCollection.length - 1">
+    <div class="col-md-6 col-sm-6" ng-if="$index + 1 <= vm.filteredMenuCollection.length - 1">
         <a ng-href="{{ vm.filteredMenuCollection[$index + 1].url }}" class="navigation-submenu-option">
             <img ng-src="{{ ::vm.filteredMenuCollection[$index + 1].image }}" alt="{{ ::vm.filteredMenuCollection[$index + 1].title }}" class="img-responsive">
             <h3>{{ ::vm.filteredMenuCollection[$index + 1].title | uppercase }}</h3>

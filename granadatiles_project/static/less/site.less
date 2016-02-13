@@ -703,11 +703,77 @@ div.gt-index-welcome {
         height: 30px;
         width: 120px;
     }
-
 }
-
-
-
+.line-order-tile-detail{
+    background-color: @blue;
+    margin-top: 20px;
+    p{
+        color: @white;
+        font-family: @font-secundary;
+        .font-configuration(@font-sm,@font-light);
+        margin-left: 10px;
+    }
+}
+.form-order-tile-detail{
+    .space-bottom{
+        margin-bottom:10px ;
+    }
+    label{
+        color: @darkGray;
+        font-family: @font-primary;
+        .font-configuration(@font-md,@font-bold);
+    }
+    .btn-custom{
+        width: 100%;
+    }
+    p{
+        color: @darkBlue;
+        font-family: @font-primary;
+        .font-configuration(@font-xl,@font-light);
+    }
+}
+.resume-order-tile-detail{
+    ul{
+        padding: 0;
+        list-style: none;
+        li {
+            color: @darkBlue;
+            label, span {
+                font-family: @font-secundary;
+                .font-configuration(@font-xlll, @font-light);
+                margin: 0;
+            }
+        }
+        .text-orange {
+            color: @orange;
+        }
+    }
+    button{
+        margin-bottom: 10px;
+    }
+}
+.calculation-order-tile-detail{
+    .text-header{
+        font-family: @font-primary;
+        .font-configuration(@font-md, @font-bold);
+    }
+    ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li{
+            border-top: 1px SOLID @gray;
+            color: @darkGray;
+            font-family: @font-primary;
+            .font-configuration(@font-md, @font-light);
+        }
+    }
+    .text-footer{
+        color: @darkBlue;
+        font-family: @font-primary;
+        .font-configuration(@font-sm, @font-light);
+    }
+}
 /************************************/
 
 

@@ -145,8 +145,8 @@ class TileOrderDto(BaseCatalogDto):
     def __init__(self, tile, language):
         super().__init__(tile, language)
         self.list_id = tile.list_id
-        self.image = tile.image
-        self.mosaic = tile.mosaic
+        self.image = tile.image.url
+        self.mosaic = tile.mosaic.url
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
         self.thickness = tile.thickness
         self.weight = tile.weight
