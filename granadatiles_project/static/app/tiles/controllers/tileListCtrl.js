@@ -69,7 +69,6 @@
         };
 
         vm.setTile = function (index, tileId) {
-
             collectionsSvc.getMainTile(tileId).then(function (response) {
                 var arrayTiles = [];
                 for (var i = 0; i < vm.tiles[index].tiles.length; i++) {
@@ -90,9 +89,7 @@
                 vm.tiles[index].previousImage = vm.tiles[index].main.mosaic;
                 updateMain(index, vm.main);
             });
-
         };
-
 
         function updateMain(index, main) {
             var setMain = [];
