@@ -9,8 +9,6 @@
 
     function tilesSvc($http, appSettings) {
 
-        /*TODO: Declarar y retornar los metodos que obtienen los datos del api*/
-
         return {
            getTileDetail: getTileDetail
         };

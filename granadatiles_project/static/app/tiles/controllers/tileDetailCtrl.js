@@ -14,10 +14,7 @@
         vm.labels = pageSettings.labels;
 
         var selectedTileId = $scope.shared.tileId;
-        console.log(selectedTileId);
-
-        /*TODO: Llamar el metodo del servicio para obtener los datos del tile aqui
-           y enlazar los datos */
+        
 
         vm.backToGroup = function () {
             $scope.shared.tileDetailTemplateUrl = '';
@@ -28,7 +25,6 @@
             if(vm.tile.sizes.length > 0){
                 vm.selectedSize = vm.tile.sizes[0].size
             }
-            console.log(vm.tile);
         });
 
         vm.setSize = function (size) {
