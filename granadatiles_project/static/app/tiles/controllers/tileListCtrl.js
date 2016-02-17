@@ -144,6 +144,8 @@
             $scope.shared = {};
             $scope.shared.tileId = tileId;
             $scope.shared.tileDetailTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/tileDetails.html'
+            $scope.shared.collection = vm.collection;
+            $scope.shared.group = vm.group;
         };
 
     }

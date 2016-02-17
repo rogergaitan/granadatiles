@@ -14,7 +14,8 @@
         vm.labels = pageSettings.labels;
 
         var selectedTileId = $scope.shared.tileId;
-        
+        vm.collection = $scope.shared.collection;
+        vm.group = $scope.shared.group;
 
         vm.backToGroup = function () {
             $scope.shared.tileDetailTemplateUrl = '';

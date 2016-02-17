@@ -1,13 +1,16 @@
 ﻿<div ng-controller="tileDetailCtrl as vm">
     <h1 class="heading-sec">{{ ::vm.tile.name }}</h1>
-    <a href="#" class="breadcrumds" ng-click="vm.backToGroup()"><u>Collections</u> <i class="fa fa-angle-double-right"></i> <u></u></a>
+    <a href="#" class="breadcrumds"><u>Collections</u> <i class="fa fa-angle-double-right"></i></a>
+    <a ng-href="{{::vm.collection.url}}" class="breadcrumds"><u>{{::vm.collection.title}}</u> <i class="fa fa-angle-double-right"></i></a>
+    <a class="breadcrumds" href="#" ng-click="vm.backToGroup()"><u>{{::vm.group.title}}</u> <i class="fa fa-angle-double-right"></i></a>
+    <a class="breadcrumds" href="#"><u>{{::vm.tile.name}}</u></a>
     <div class="text-section" ng-bind-html="::vm.areas.tileDetailWelcomeMessage"></div>
     <div class="row">
         <div class="col-md-12 col-sm-12 left-align">
             <ul class="list-inline tile-button-options">
                 <li><a href="#"><i class="fa fa-eye"></i><p>{{ ::vm.labels.photos | uppercase }}</p></a></li>
                 <li><a href="#">
-                    <img width="28px" src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="ORDER FREE SAMPLE">
+                    <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="ORDER FREE SAMPLE">
                     <p>{{ ::vm.labels.orderFree | uppercase }}</p>
                 </a></li>
                 <li><a href="#"><i class="fa fa-briefcase"></i><p>{{ ::vm.labels.saveToPortfolio | uppercase }}</p></a></li>
@@ -18,7 +21,7 @@
     </div>
     <div class="row">
         <div class="col-md-8 col-sm-8">
-            <img ng-src="{{ vm.tile.image }}" alt="Kotka918-A-Granada-Tile-Cement" class="img-responsive thumbnail" width="100%">
+            <img ng-src="{{ vm.tile.image }}" alt="Kotka918-A-Granada-Tile-Cement" class="img-responsive thumbnail">
         </div>
         <div class="col-md-4 col-sm-4">
             <ul class="tile-detail-container">
