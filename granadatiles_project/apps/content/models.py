@@ -4,7 +4,7 @@ from django.contrib.flatpages.models import FlatPage
 from core.models import BaseContentModel, BaseCatalogModel, BaseGalleryNavImageModel, BaseCatalogOrderModel
 from .managers import SectionManager
 from apps.news.models import Article
-from apps.tiles.models import Tile
+from apps.tiles.models import Tile, Collection
 from apps.galleries.models import Designer, Photographer
 from sorl.thumbnail.fields import ImageField
 
@@ -146,6 +146,36 @@ class ExtendedFlatPage(FlatPage):
     class Meta:
         verbose_name = _('flat page')
         verbose_name_plural = _('flat pages')
+        ordering = ('order', )
+
+    def get_title(self, language):
+        if language == 'es' and self.title_es is not None and self.title_es:
+            return self.title_es
+        return self.title
+
+    def get_content(self, language):
+        if language == 'es' and self.content_es is not None and self.content_es:
+            return self.content_es
+        return self.content
+
+    def __str__(self):
+        return self.title
+
+class CollectionContent(FlatPage):
+    MENU_CHOICES = (
+            (1, 'Collection Content'),
+        )
+    title_es = models.CharField(max_length=200, blank=True, null = True)
+    content_es = models.TextField(blank=True, null = True)
+    order = models.PositiveIntegerField(verbose_name=_('Order'),
+                                        help_text='El orden en el que aparecera en el menu selecciondado despues de los elementos predefinidos')
+    menu = models.IntegerField(choices=MENU_CHOICES, default=1)
+    cover = ImageField(null=True, blank=True, verbose_name=_('Cover'))
+    collection = models.ForeignKey(Collection, related_name='content', verbose_name='collection')
+
+    class Meta:
+        verbose_name = _('Collection content')
+        verbose_name_plural = _('Collection content')
         ordering = ('order', )
 
     def get_title(self, language):
