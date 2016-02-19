@@ -3,12 +3,6 @@ from apps.galleries.models import Gallery, GalleryImage, GalleryCategory, Design
 from django_summernote.admin import SummernoteInlineModelAdmin
 
 
-class ImagesInline(admin.StackedInline, SummernoteInlineModelAdmin):
-    model = GalleryImage
-    extra = 3
-    verbose_name = "Images"
-
-
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
     list_display = ('name', 'name_es', 'categories_count')
@@ -18,13 +12,19 @@ class GalleryAdmin(admin.ModelAdmin):
 @admin.register(GalleryCategory)
 class GalleryCategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'name_es', 'images_count',  'gallery')
-    inlines = [ImagesInline]
     list_filter = ['name']
     search_fields = ['name']
+    
+    
+@admin.register(GalleryImage)
+class GalleryImageAdmin(admin.ModelAdmin):
+     pass
+    
 
 @admin.register(Designer)
 class DesignerAdmin(admin.ModelAdmin):
     pass
+  
 
 @admin.register(Photographer)
 class PhotographerAdmin(admin.ModelAdmin):
