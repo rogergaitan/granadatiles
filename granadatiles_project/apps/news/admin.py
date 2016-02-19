@@ -14,6 +14,7 @@ class ArticleAdmin(admin.ModelAdmin):
 class MagazineAdmin(admin.ModelAdmin):
     list_display = ('name', 'articles_count')
     search_fields = ['name']
+    ordering = ['name']
 
 
 @admin.register(Catalog)

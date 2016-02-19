@@ -13,7 +13,7 @@ class CatalogService(object):
 class ArticleService(object):
 	
     def get_articles(year, language=None):
-        articles = Article.objects.select_related('magazine').order_by('-date')
+        articles = Article.objects.select_related('magazine')
         
         if year:
             articles = articles.filter(date__year=year)

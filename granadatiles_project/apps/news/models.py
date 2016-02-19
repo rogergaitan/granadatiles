@@ -19,7 +19,7 @@ class Catalog(BaseCatalogModel):
 
 class Magazine(models.Model):
     name = models.CharField(max_length=130, verbose_name=_('Name'))
-    logo = models.ImageField(upload_to='Magazines')
+    logo = models.ImageField(upload_to='Magazines', null=True, blank=True)
 
     def articles_count(self):
         return str(self.articles.count())
@@ -45,3 +45,4 @@ class Article(BaseGalleryImageModel):
     class Meta:
         verbose_name = _('Article')
         verbose_name_plural = _('Articles')
+        ordering = ['-date']
