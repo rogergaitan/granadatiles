@@ -43,6 +43,9 @@ class Gallery(BaseCatalogModel):
 class GalleryCategory(BaseCatalogModel):
     gallery = models.ForeignKey(
         Gallery, verbose_name=_('Gallery'), related_name='categories')
+    images = models.ManyToManyField(
+        'GalleryImage', related_name='categories',
+        verbose_name=_('Images'))
 
     def images_count(self):
         return str(self.images.count())
@@ -55,9 +58,6 @@ class GalleryCategory(BaseCatalogModel):
 
 
 class GalleryImage(BaseGalleryImageModel):
-    galleryCategory = models.ForeignKey(
-        GalleryCategory, related_name='images',
-        verbose_name=_('Gallery Category'))
     designer = models.ForeignKey(
         Designer, blank=True, null=True, related_name='gallery_images',
         verbose_name=_('Author'))
