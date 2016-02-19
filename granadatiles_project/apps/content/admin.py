@@ -1,5 +1,5 @@
 ﻿from django.contrib import admin
-from apps.content.models import Section, SectionImage, Social, FeaturedVideo, Area, Testimony, IndexNavigation, ExtendedFlatPage
+from apps.content.models import Section, SectionImage, Social, FeaturedVideo, Area, Testimony, IndexNavigation, ExtendedFlatPage, CollectionContent
 from django_summernote.admin import SummernoteModelAdmin, SummernoteInlineModelAdmin
 from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.forms import FlatpageForm
@@ -79,6 +79,28 @@ class ExtendedFlatPageAdmin(FlatPageAdmin):
     form = ExtendedFlatPageForm
     fieldsets = (
             (None, {'fields': ('url', 'title', 'title_es', 'order', 'content', 'content_es', 'sites', 'cover', 'template_name', 'menu')}),
+            (_('Advanced options'), {'classes': ('collapse',), 'fields': ('enable_comments', 'registration_required', )}),
+        )
+
+class CollectionContentForm(FlatpageForm):
+    TEMPLATES_CHOICES = (
+             ('flatpages/collection_content.html', 'Collection Content') ,
+        )
+    template_name  = forms.ChoiceField(choices=TEMPLATES_CHOICES, label=_('Template'))
+
+    class Meta:
+        model = ExtendedFlatPage
+        fields = '__all__'
+        widgets = {
+                 'content': SummernoteWidget(),
+            }
+
+
+@admin.register(CollectionContent)    
+class CollectionContentAdmin(FlatPageAdmin):
+    form = CollectionContentForm
+    fieldsets = (
+            (None, {'fields': ('collection', 'url', 'title', 'title_es', 'order', 'content', 'content_es', 'sites', 'cover', 'template_name', )}),
             (_('Advanced options'), {'classes': ('collapse',), 'fields': ('enable_comments', 'registration_required', )}),
         )
 

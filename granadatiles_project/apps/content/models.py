@@ -162,14 +162,10 @@ class ExtendedFlatPage(FlatPage):
         return self.title
 
 class CollectionContent(FlatPage):
-    MENU_CHOICES = (
-            (1, 'Collection Content'),
-        )
     title_es = models.CharField(max_length=200, blank=True, null = True)
     content_es = models.TextField(blank=True, null = True)
     order = models.PositiveIntegerField(verbose_name=_('Order'),
                                         help_text='El orden en el que aparecera en el menu selecciondado despues de los elementos predefinidos')
-    menu = models.IntegerField(choices=MENU_CHOICES, default=1)
     cover = ImageField(null=True, blank=True, verbose_name=_('Cover'))
     collection = models.ForeignKey(Collection, related_name='content', verbose_name='collection')
 
