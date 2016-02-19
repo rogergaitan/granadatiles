@@ -27,7 +27,7 @@
     </div>
     <div ng-repeat="article in ::vm.articles" ng-if="$index % 2 == 0" class="row">
         <div class="col-xs-6 blue-box" ng-if="$index <= vm.articles.length - 1">
-            <a href="#">
+            <a ng-href="{{vm.articles[$index].url}}" target="_blank">
                 <div class="article-content">
                     <div class="row">
                         <div class="col-md-4">
@@ -45,7 +45,7 @@
             </a>
         </div>
         <div class="col-xs-6 blue-box" ng-if="$index + 1 <= vm.articles.length - 1">
-            <a href="#">
+            <a ng-href="{{vm.articles[$index + 1].url}}" target="_blank">
                 <div class="article-content">
                     <div class="row">
                         <div class="col-md-4">
