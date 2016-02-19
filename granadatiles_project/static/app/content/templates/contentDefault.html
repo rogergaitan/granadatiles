@@ -22,7 +22,8 @@
         </aside>
         <div ng-class="(vm.section.menu == 3)? 'col-md-12':'col-md-9'">
             <h1 class="heading-sec">{{ ::vm.section.title }}</h1>
-            <a href="#" class="breadcrumds"><u>{{ vm.breadcrumb }} <i class="fa fa-angle-double-right"></i></u></a>
+            <a href="#" class="breadcrumds"><u>{{ vm.breadcrumb.main }} <i class="fa fa-angle-double-right"></i></u></a>
+            <a href="#" class="breadcrumds"><u>{{ vm.breadcrumb.subMain }} <i class="fa fa-angle-double-right"></i></u></a>
             <div class="text-section" ng-bind-html="vm.section.description"></div>
             <div ng-bind-html="vm.area"></div>
         </div>

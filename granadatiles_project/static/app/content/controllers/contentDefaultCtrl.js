@@ -18,7 +18,7 @@
 
         vm.navigation = pageSettings.navigation;
         vm.labels = pageSettings.labels;
-        vm.breadcrumb = pageSettings.labels.collections;
+        
 
         vm.productInformationMenuTemplateUrl = baseSettings.staticUrl + 'app/content/templates/productInformationMenu.html';
         vm.menuNewsTemplateUrl = baseSettings.staticUrl + 'app/news/templates/menuNews.html';
@@ -27,6 +27,7 @@
             sectionSvc.getSection(pageSettings.sectionId).then(function (response) {
                 vm.section = response.data;
                 vm.section.menu = 1;
+                setBreadCrumps(1);
                 collectionsSvc.getMenuCollections().then(function (response) {
                     vm.menuCollections = response.data;
                 });
@@ -40,6 +41,7 @@
                         vm.menuCollections = response.data;
                     });
                 }
+                setBreadCrumps(vm.section.menu);
                 flatPagesSvc.getFlatPagesMenu(vm.section.menu).then(function (response) {
                     vm.flatPages = response.data;
                 });
@@ -53,6 +55,27 @@
             });
         }
 
+        function setBreadCrumps(menuId)
+        {
+            if (menuId == 1) {
+                vm.breadcrumb = {
+                    main: pageSettings.labels.productInformation,
+                    subMain: vm.section.title
+                };
+            }
+            if (menuId == 2) {
+                vm.breadcrumb = {
+                    main: pageSettings.labels.newsPress,
+                    subMain: vm.section.title
+                }
+            }
+            if (menuId == 3) {
+                vm.breadcrumb = {
+                    main: pageSettings.labels.aboutUs,
+                    subMain: vm.section.title
+                }
+            }
+        }
         
     }
 })();

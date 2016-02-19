@@ -41,7 +41,6 @@
 
         vm.labels = pageSettings.labels;
 
-        vm.breadcrumds = 'News / Press';
     }
 
 }());

@@ -5,7 +5,8 @@
         </aside>
         <div class="col-sm-9">
             <h1 class="heading-sec">{{ ::vm.section.title }}</h1>
-            <a href="#" class="breadcrumds"><u>{{ ::vm.breadcrumds }}</u> <i class="fa fa-angle-double-right"></i></a>
+            <a href="#" class="breadcrumds"><u>{{ ::vm.labels.newsPress }}</u> <i class="fa fa-angle-double-right"></i></a>
+            <a href="#" class="breadcrumds"><u>{{ ::vm.labels.news }}</u> <i class="fa fa-angle-double-right"></i></a>
             <div ng-bind-html="vm.section.description" class="text-section"></div>
         </div>
     </div>
@@ -19,7 +20,7 @@
                     <h2>{{ ::vm.catalogs[$index].name }}</h2>
                     <ul class="list-inline catalog-options">
                         <li><a href="#"><i class="fa fa-eye"></i><br />{{ ::vm.labels.view | uppercase }}</a></li>
-                        <li><a target="_self" href="{{ ::vm.catalogs[$index].file }}" target="_self"><i class="fa fa-download"></i><br />{{ ::vm.labels.download | uppercase }}</a></li>
+                        <li><a target="_self" href="{{ ::vm.catalogs[$index].file }}"><i class="fa fa-download"></i><br />{{ ::vm.labels.download | uppercase }}</a></li>
                         <li><a href="#" ng-click="vm.share()"><i class="fa fa-share-alt"></i><br />{{ ::vm.labels.shared | uppercase }}</a></li>
                     </ul>
                 </div>

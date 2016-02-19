@@ -30,12 +30,15 @@
                     catalog: '{% trans 'Catalogs / Inspiration Books'%}',
                     blog: '{% trans 'Cement Tile Blog'%}',
                     video: '{% trans 'Videos'%}',
-                    collections: '{% trans 'Collections '%}'
+                    collections: '{% trans 'Collections '%}',
+                    productInformation: '{% trans 'Product Information'%}',
+                    newsPress: '{% trans 'News/Press'%}',
+                    aboutUs: '{% trans 'About us'%}'
                 },
                 navigation:{
                     magazine: '{% url 'sr-news:sr-news' %}',
                     catalog: '{% url 'sr-news:sr-catalogs' %}',
-                    video: '{% url 'sr-news:sr-videos' %}'
+                    video: '{% url 'sr-news:sr-videos' %}',
                 },
                 areaId: 0,
                 flatPageTitle: '{{ flatpage.title | safe }}'

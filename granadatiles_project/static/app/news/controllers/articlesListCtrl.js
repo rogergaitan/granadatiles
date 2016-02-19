@@ -36,8 +36,6 @@
 
         vm.labels = pageSettings.labels;
 
-        vm.breadcrumds = 'My Portafolio';
-
         vm.setYear = function(year) {
             vm.selectedYear = year;
             updateArticles(year.year);
