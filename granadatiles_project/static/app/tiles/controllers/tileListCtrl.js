@@ -8,10 +8,11 @@
     tileListCtrl.$inject = ['baseSettings',
                             'pageSettings',
                             'collectionsSvc',
+                            'flatPagesSvc',
                             '$modal',
                             '$scope'];
 
-    function tileListCtrl(baseSettings, pageSettings, collectionsSvc, $modal, $scope) {
+    function tileListCtrl(baseSettings, pageSettings, collectionsSvc, flatPagesSvc, $modal, $scope) {
         /* jshint validthis:true */
         var vm = this;
 
@@ -143,6 +144,26 @@
             $scope.shared.tileDetailTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/tileDetails.html'
             $scope.shared.collection = vm.collection;
             $scope.shared.group = vm.group;
+        };
+
+        flatPagesSvc.getCollectionContentMenu(pageSettings.collectionId).then(function (response) {
+            vm.collectionContent = response.data;
+        });
+
+        vm.showCollectionGallery = function () {
+            $modal.open({
+                templateUrl: baseSettings.staticUrl + 'app/tiles/templates/tileModal.html',
+                controller: 'tileModalCtrl',
+                controllerAs: 'vm',
+                size: 'lg',
+                resolve: {
+                    installationPhotos: function () {
+                        return collectionsSvc.getCollectionGallery(pageSettings.collectionId).then(function (response) {
+                            return response.data;
+                        });
+                    }
+                }
+            })
         };
 
     }

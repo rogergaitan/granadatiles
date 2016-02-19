@@ -17,13 +17,10 @@
             </li>
         </ul>
     </li>
-    <li><a href="#">{{ ::vm.labels.customCement }}</a></li>
-    <li><a href="#">{{ ::vm.labels.about }}{{ ::vm.collection.title }}</a></li>
-    <li><a href="#">{{ ::vm.labels.applications }}</a></li>
     <li><a href="#" ng-click="vm.showCollectionGallery()">{{ ::vm.collection.title }}{{ ::vm.labels.galleryMenu }}</a></li>
-    <li><a href="#">{{ ::vm.labels.technical }}</a></li>
-    <li><a href="#">{{ ::vm.labels.ordering }}</a></li>
-    <li><a href="#">{{ ::vm.labels.installing }}</a></li>
+    <li ng-repeat="content in vm.collectionContent">
+        <a ng-href="{{content.url}}">{{content.title}}</a>
+    </li>
 </ul>
 <div ng-repeat="item in vm.filteredMenuCollection" ng-if="$index % 2 == 0" class="row">
     <div class="col-md-6 col-sm-6" ng-if="$index <= vm.filteredMenuCollection.length - 1">

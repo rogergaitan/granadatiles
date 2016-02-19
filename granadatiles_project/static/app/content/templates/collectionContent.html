@@ -1,0 +1,14 @@
+﻿<div class="col-md-12" ng-controller="collectionContentCtrl as vm">
+    <div class="row">
+        <aside class="col-sm-3 col-xs-4">
+            <ng-include src="vm.collectionAsideNavigationTemplateUrl"></ng-include>
+        </aside>
+        <div class="col-sm-9 col-xs-8">
+            <h1 class="heading-sec">{{ ::vm.section.title }}</h1>
+            <a href="#" class="breadcrumds"><u>{{::vm.labels.collection}}</u> <i class="fa fa-angle-double-right"></i> </a>
+            <a ng-href="{{vm.collection.url}}" class="breadcrumds"><u>{{::vm.collection.title}}</u> <i class="fa fa-angle-double-right"></i> </a>
+            <a href="#" class="breadcrumds"><u>{{::vm.section.title}}</u> <i class="fa fa-angle-double-right"></i> </a>
+            <div class="text-section" ng-bind-html="::vm.section.description"></div>
+        </div>
+    </div>
+</div>
