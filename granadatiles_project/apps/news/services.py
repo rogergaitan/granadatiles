@@ -14,9 +14,10 @@ class ArticleService(object):
 	
     def get_articles(year, language=None):
         if year is None:
-            articles = Article.objects.all()
+            articles = Article.objects.select_related('magazine').order_by('-date')
         else:
-            articles = Article.objects.filter(date__year=year)
+            articles = Article.objects.select_related('magazine') \
+                       .filter(date__year=year).order_by('-date')
         articlesDto = [ArticleDto(article, language=language) for article in articles]
         return articlesDto
 

@@ -26,7 +26,7 @@ class CatalogViewSet(BaseViewSet):
 class ArticleViewSet(BaseViewSet):
 
     def list(self, request):
-        year = int(request.query_params.get('year', None))
+        year = request.query_params.get('year')
         articles = ArticleService.get_articles(year=year, language=self.get_language(request))
         serializer = ArticleSerializer(articles, many=True)
         return Response(serializer.data)

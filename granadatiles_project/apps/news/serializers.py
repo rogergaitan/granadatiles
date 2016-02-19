@@ -21,7 +21,7 @@ class ArticleYearSerializer(serializers.Serializer):
 class ArticleSerializer(BaseGalleryImageSerializer):
     date = serializers.CharField()
     magazine = serializers.CharField()
-
+    url = serializers.URLField()
 
 class CatalogSerializer(BaseCatalogSerializer):
     file = serializers.CharField()

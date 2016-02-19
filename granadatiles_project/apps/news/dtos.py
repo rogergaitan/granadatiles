@@ -27,6 +27,7 @@ class ArticleDto(BaseGalleryImageDto):
        super().__init__(article, language)
        self.date = article.date
        self.magazine = article.magazine.name
+       self.url = article.url
 
 
 class CatalogDto(BaseCatalogDto):
