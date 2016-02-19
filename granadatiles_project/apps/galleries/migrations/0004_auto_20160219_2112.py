@@ -16,8 +16,8 @@ class Migration(migrations.Migration):
             name='galleryCategory',
         ),
         migrations.AddField(
-            model_name='gallerycategory',
-            name='images',
-            field=models.ManyToManyField(related_name='categories', to='galleries.GalleryImage', verbose_name='Images'),
+            model_name='galleryimage',
+            name='gallery_categories',
+            field=models.ManyToManyField(verbose_name='Gallery Categories', to='galleries.GalleryCategory', related_name='images'),
         ),
     ]
