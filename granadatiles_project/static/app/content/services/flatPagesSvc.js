@@ -11,7 +11,9 @@
         var service = {
             getFlatPageCover:getFlatPageCover,
             getFlatPage: getFlatPage,
-            getFlatPagesMenu: getFlatPagesMenu
+            getFlatPagesMenu: getFlatPagesMenu,
+            getCollectionContent: getCollectionContent,
+            getCollectionContentMenu: getCollectionContentMenu
         };
 
         function getFlatPageCover(pageTitle) {
@@ -24,6 +26,14 @@
 
         function getFlatPagesMenu(menuId) {
             return $http.get(appSettings.serverPath + 'flatpages/?menuId=' + menuId);
+        }
+
+        function getCollectionContent(pageTitle) {
+            return $http.get(appSettings.serverPath + 'collection_content/' + pageTitle);
+        }
+
+        function getCollectionContentMenu(collectionId) {
+            return $http.get(appSettings.serverPath + 'collection_content/?collectionId=' + collectionId);
         }
 
         return service

@@ -3,18 +3,19 @@
 
     angular
         .module('app.tiles')
-        .controller('collectionsGroupCtrl',
+        .controller('collectionsGroupsCtrl',
                     ['baseSettings',
                      'pageSettings',
                      'collectionsSvc',
+                     'flatPagesSvc',
                      '$modal',
-                     '$timeout',
-                     collectionsGroupCtrl
+                     collectionsGroupsCtrl
                     ]);
 
-    function collectionsGroupCtrl(baseSettings,
+    function collectionsGroupsCtrl(baseSettings,
                                   pageSettings,
                                   collectionsSvc,
+                                  flatPagesSvc,
                                   $modal) {
         var vm = this;
 
@@ -34,6 +35,10 @@
 
         collectionsSvc.getFilteredMenuCollection(pageSettings.collectionId).then(function (response) {
             vm.filteredMenuCollection = response.data;
+        });
+
+        flatPagesSvc.getCollectionContentMenu(pageSettings.collectionId).then(function (response) {
+            vm.collectionContent = response.data;
         });
 
         vm.showCollectionGallery = function () {
