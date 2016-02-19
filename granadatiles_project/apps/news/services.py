@@ -13,11 +13,11 @@ class CatalogService(object):
 class ArticleService(object):
 	
     def get_articles(year, language=None):
-        if year is None:
-            articles = Article.objects.select_related('magazine').order_by('-date')
-        else:
-            articles = Article.objects.select_related('magazine') \
-                       .filter(date__year=year).order_by('-date')
+        articles = Article.objects.select_related('magazine').order_by('-date')
+        
+        if year:
+            articles = articles.filter(date__year=year)
+            
         articlesDto = [ArticleDto(article, language=language) for article in articles]
         return articlesDto
 
