@@ -30,6 +30,11 @@ class FlatPageCoverSerializer(serializers.Serializer):
 class FlatPageMenuSerializer(serializers.Serializer):
     title = serializers.CharField()
     url = serializers.URLField()
+
+class CollectionContentSerializer(serializers.Serializer):
+    title = serializers.CharField()
+    description = serializers.CharField()
+    collectionId = serializers.IntegerField()
     
 
 class SocialSerializer(serializers.ModelSerializer):

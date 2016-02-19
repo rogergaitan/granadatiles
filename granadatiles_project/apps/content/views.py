@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework import viewsets, mixins
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
-from apps.content.serializers import TestimonySerializer, SectionSerializer, SocialSerializer, SectionCoverSerializer, FeaturedVideoSerializer, IndexNavigationSerializer, FlatPageSerializer, FlatPageCoverSerializer, FlatPageMenuSerializer
-from apps.content.services import TestimonyService, SectionService, FeaturedVideoService, AreaService, IndexNavigationService, FlatPageService
+from apps.content.serializers import TestimonySerializer, SectionSerializer, SocialSerializer, SectionCoverSerializer, FeaturedVideoSerializer, IndexNavigationSerializer, FlatPageSerializer, FlatPageCoverSerializer, FlatPageMenuSerializer, CollectionContentSerializer
+from apps.content.services import TestimonyService, SectionService, FeaturedVideoService, AreaService, IndexNavigationService, FlatPageService, CollectionContentService
 from .models import Social, Section
 from core.views import BaseViewSet
 from core.serializers import BaseContentSerializer
@@ -84,7 +84,19 @@ class FlatPageViewSet(BaseViewSet):
         serializer = FlatPageCoverSerializer(cover)
         return Response(serializer.data)
 
+class CollectionContentViewSet(BaseViewSet):
+    def list(self, request):
+        collectionid = request.query_params.get('collectionId', 0)
+        collectionContent = CollectionContentService.get_menu_content(collectionid,
+                                                                 self.get_language(request))
+        serializer = FlatPageMenuSerializer(collectionContent, many=True)
+        return Response(serializer.data)
 
+    def retrieve(self, request, pk=None):
+        collectionContent = CollectionContentService.get_content(pk, 
+                                                self.get_language(request))
+        serializer = CollectionContentSerializer(collectionContent)
+        return Response(serializer.data)
 
 class SocialViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = Social.objects.exclude(url='')

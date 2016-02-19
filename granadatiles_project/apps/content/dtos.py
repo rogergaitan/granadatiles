@@ -51,5 +51,14 @@ class FlatPageCoverDto(object):
 class FlatPageMenuDto(object):
 
     def __init__(self, flatPage, language):
+        if(language is None):
+            language='en'
         self.title = flatPage.get_title(language = language)
         self.url = '/' + language +  '/pages' + flatPage.get_absolute_url()
+
+class CollectionContentDto(object):
+
+    def __init__(self, content, language):
+        self.title = content.get_title(language = language)
+        self.description = content.get_content(language=language)
+        self.collectionId = content.collection.id
