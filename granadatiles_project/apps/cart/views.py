@@ -40,10 +40,36 @@ class TileOrdersViewSet(BaseViewSet):
         tile = OrdersService.get_tile(pk)
         return Response(OrdersService.remove_tile(cart, tile))
       
+      
+class SamepleOrdersViewSet(BaseViewSet):
+    
+    def list(self, request):
+        cart = CartService.get_cart(request)
+        sampleorders = OrdersService.get_sample_orders(cart, language=self.get_language(request))
+        serializer = SampleOrdersSerializer(sampleorders, many=True)
+        return Response(serializer.data)
+      
+    def create(self, request):
+        cart = CartService.get_cart(request)
+        tile = OrdersService.get_tile(request.data.get('id'))
+        quantity = request.data.get('quantity')
+        return Response(OrdersService.add_sample(cart, tile, quantity))
+      
+    def update(self, request, pk=None):
+        cart = CartService.get_cart(request)
+        tile = OrdersService.get_tile(pk)
+        quantity = request.data.get('quantity')
+        return Response(OrdersService.update_sample(cart, tile, quantity))
+        
+    def destroy(self, request, pk=None):
+        cart = CartService.get_cart(request)
+        tile = OrdersService.get_tile(pk)
+        return Response(OrdersService.remove_sample(cart, tile))
+
+  
 class TilesCountViewSet(BaseViewSet):
   
     def list(self, request):
         cart = CartService.get_cart(request)
         tiles_count = cart.tile_orders.count() + cart.sample_orders.count()
         return Response({'count': tiles_count})
-    
