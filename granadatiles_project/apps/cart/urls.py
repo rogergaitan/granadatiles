@@ -1,8 +1,7 @@
-from django.conf.urls import patterns, url
 from rest_framework.routers import DefaultRouter
-from .views import CartViewSet
+from .views import TileOrdersViewSet, TilesCountViewSet
 
 router = DefaultRouter()
-router.register('cart', CartViewSet, base_name='cart')
-
+router.register('cart/tiles', TileOrdersViewSet, base_name='tiles')
+router.register('cart/tiles_count', TileOrdersViewSet, base_name='tiles_count')
 urlpatterns = router.urls

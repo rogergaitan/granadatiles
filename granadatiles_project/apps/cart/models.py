@@ -15,7 +15,8 @@ class BaseTileOder(models.Model):
     sq_ft = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Square feet'))
     quantity = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Quantity'))
     boxes = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Tile Boxes'))
-    subtotal = models.FloatField(null=True, blank=True, verbose_name=_('Subtotal'))
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2, null=True,
+                                   blank=True, verbose_name=_('Subtotal'))
 
     class Meta:
         abstract = True
@@ -37,7 +38,8 @@ class CustomizedTileOrder(BaseTileOder):
 
 class BaseSampleOrder(models.Model):
     quantity = models.PositiveIntegerField(null=True, blank=True, verbose_name=_('Quantity'))
-    subtotal = models.FloatField(null=True, blank=True, verbose_name=_('Subtotal'))
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2, null=True,
+                                   blank=True, verbose_name=_('Subtotal'))
 
     class Meta:
         abstract = True

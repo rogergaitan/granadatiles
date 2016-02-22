@@ -27,7 +27,12 @@ class CartService:
         else:
             cart = CartService.new(request)
         return cart
-
+      
+class OrdersService:
+    
+    def get_tile(id):
+        return get_object_or_404(Tile, pk=id)
+    
     def tile_quantity(sq_ft, tile):
         return math.ceil(int(sq_ft)/tile.get_sq_ft())
 
@@ -48,9 +53,6 @@ class CartService:
     def get_subtotal(tile, quantity):
         return quantity * tile.sales_price
 
-    def get_tile(id):
-        return get_object_or_404(Tile, list_id=id)
-
     def get_customized_tile(id):
         return get_object_or_404(CustomizedTile, pk=id)
 
@@ -65,12 +67,11 @@ class CartService:
         if sq_ft > tile.design.group.collection.maximum_input_square_foot:
             raise APIException(_('maximum_input_square_foot_message'))
 
-        quantity = CartService.tile_quantity(sq_ft, tile)
-        subtotal = CartService.get_subtotal(tile, quantity)
-        boxes = CartService.get_boxes(tile, quantity)
+        quantity = OrdersService.tile_quantity(sq_ft, tile)
+        subtotal = OrdersService.get_subtotal(tile, quantity)
+        boxes = OrdersService.get_boxes(tile, quantity)
 
         data = {
-            'sq_ft': sq_ft,
             'quantity': quantity,
             'boxes': boxes,
             'subtotal': subtotal
@@ -79,12 +80,24 @@ class CartService:
         return data
 
     def add_tile(cart, tile, sq_ft):
-        data = CartService.calculate_order(tile, sq_ft)
-        data['tile'] = tile
-        cart.tile_orders.update_or_create(cart=cart, tile=tile, defaults=data)
-
+        data = OrdersService.calculate_order(tile, sq_ft)
+        cart.tile_orders.create(tile=tile,
+				sq_ft=sq_ft,
+				quantity=data['quantity'],
+				boxes=data['boxes'],
+				subtotal=data['subtotal'])
+        
+    def update_tile(cart, tile, sq_ft):
+        data = OrdersService.calculate_order(tile, sq_ft)
+        tile_order = cart.tile_orders.get(tile=tile)
+        tile_order.sq_ft = sq_ft
+        tile_order.quantity = data['quantity']
+        tile_order.boxes = data['boxes']
+        tile_order.subtotal = data['subtotal']
+        tile_order.save()
+		      
     def remove_tile(cart, tile):
-        cart.tile_orders.get(tiles=tile).delete()
+        cart.tile_orders.get(tile=tile).delete()
 
     def get_customized_tile_orders(cart, language):
         customized_tile_orders_dto = [CustomizedTileOrdersDto(customized_tile_order, language)
@@ -193,4 +206,4 @@ class CartService:
         ET.SubElement(dimensions, 'Height').text = '48.0'
         ET.SubElement(dimensions, 'Uom').text = 'in'
 
-        return ET.tostring(root)
+        return ET.tostring(root, encoding='unicode')
