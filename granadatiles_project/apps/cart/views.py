@@ -41,7 +41,7 @@ class TileOrdersViewSet(BaseViewSet):
         return Response(OrdersService.remove_tile(cart, tile))
       
       
-class SamepleOrdersViewSet(BaseViewSet):
+class SampleOrdersViewSet(BaseViewSet):
     
     def list(self, request):
         cart = CartService.get_cart(request)
