@@ -106,7 +106,7 @@
                                         {% endif %}
                                     </li>
                                     <li>
-                                        <a href="#"><i class="fa fa-shopping-cart"></i>&nbsp;<span>{% trans 'CART' %}</span></a>
+                                        <a href="{% url 'sr-cart:sr-home'%}"><i class="fa fa-shopping-cart"></i>&nbsp;<span>{% trans 'CART' %}</span></a>
                                     </li>
                                     <li>
                                         {% get_current_language as LANGUAGE_CODE %}
@@ -275,12 +275,15 @@
     <!-- inject:js -->
     <script type="text/javascript" src="{{ STATIC_URL }}app/app.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/stylish.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/cart/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/module.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/module.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/module.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/cart/controllers/cartCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/cart/services/cartSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/aboutUsCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/collectionContentCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/contentDefaultCtrl.js"></script>
@@ -298,30 +301,30 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/sectionSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/testimonySvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/videoSvc.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/controllers/galleriesListCtrl.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/controllers/galleryModalCtrl.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/services/gallerySvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/directives/angular-yamm3.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/directives/fadeIn.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/interceptors/languageCode.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/services/gtUtilsSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/services/sharePageSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/controllers/galleriesListCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/controllers/galleryModalCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/services/gallerySvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/controllers/articlesListCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/controllers/catalogListCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/services/articleSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/services/catalogSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/services/authenticationSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/controller/portfolioHomeCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/controller/portfolioLoginCtrl.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/services/authenticationSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/collectionsSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/instockSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/tilesSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/collectionGroupsCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/instockCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/menuCollectionCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/tileDetailCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/tileListCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/tileModalCtrl.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/collectionsSvc.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/instockSvc.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/tilesSvc.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
     <script>

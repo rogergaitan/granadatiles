@@ -17,6 +17,7 @@
             'app.tiles',
             'app.galleries',
             'app.news',
-            'app.portfolio'
+            'app.portfolio',
+            'app.cart'
         ]);
 }());
