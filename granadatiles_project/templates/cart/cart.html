@@ -1,0 +1,54 @@
+﻿{% extends "base.html" %}
+{% load i18n %}
+
+{% block seo %} 
+<title>Granada Tile - {% trans 'Cart'%} </title>
+{% endblock %}
+
+{% block content%}
+<div class="row">
+    <ng-include id="gt-main-groups" src="'{{STATIC_URL}}app/cart/templates/cart.html'"></ng-include>
+</div>
+{% endblock content%}
+
+{% block js%}
+<script>
+    (function () {
+        "use strict";
+        angular
+        .module("app.core")
+        .factory("pageSettings", ['appSettings',pageSettings]);
+
+        function pageSettings(appSettings) {
+            return{
+                sectionId: 0,
+                language: '{{LANGUAGE_CODE}}',
+                labels: {
+                    yourCart: '{% trans 'Your Cart'%}',
+                    cart: '{% trans 'Cart' %}',
+                    tileOrders: '{% trans 'Tile Orders' %}',
+                    sampleOrders: '{% trans 'Sample Orders'%}',
+                    product: '{% trans 'Product'%}',
+                    squareFootage: '{% trans 'SQUARE FOOTAGE'%}',
+                    tileQty: '{% trans 'TILE QTY'%}',
+                    tileBoxes: '{% trans 'TILE BOXES'%}',
+                    subTotal: '{% trans 'Subtotal'%}',
+                    shipping: '{% trans 'Shipping'%}',
+                    estimatedShippingCost: '{% trans 'Estimated Shipping Cost' %}',
+                    estimatedDeliveryTime: '{% trans 'Estimated Delivery Time' %}',
+                    questions: '{% trans 'Questions?'%}',
+                    liveChat: '{% trans 'LIVE CHAT' %}',
+                    callUs: '{% trans 'CALL US'%}',
+                    emailUs: '{% trans 'EMAIL US' %}',
+                    termsofSale: '{% trans 'Terms of Sale' %}',
+                    termsOfSaleContent: 'Hand made cement tile is as much an art as a science. The natural ...',
+                    phone: '213-482-8070',
+                    email: 'sales@granadatile.com',
+                    checkout: '{% trans 'CheckOut'%}',
+                    iAuthorize: 'I  authorize Granada Tile to produce this custom tile order for me using the colors I have selected'
+                }
+            }
+        }
+    })();
+</script>
+{% endblock js%}

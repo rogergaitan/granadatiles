@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import list_route, detail_route
@@ -9,6 +10,9 @@ from .serializers import (
   TileOrdersSerializer, SampleOrdersSerializer, CustomizedTileOrdersSerializer,
   CustomizedSampleOrdersSerializer
 )
+
+def cart_home(request):
+    return render(request, 'cart/cart.html', {})
 
 
 class CartViewSet(BaseViewSet):
