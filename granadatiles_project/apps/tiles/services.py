@@ -151,7 +151,7 @@ class TileService:
 class PortfolioService:
 
      def get_tile(id):
-         return get_object_or_404(Tile, list_id=id)
+         return get_object_or_404(Tile, pk=id)
 
      def get_portfolio(user):
          return get_object_or_404(Portfolio, user=user)
