@@ -12,5 +12,9 @@
         var vm = this;
         vm.labels = pageSettings.labels;
 
+        cartSvc.getCartTiles().then(function (response) {
+            vm.tiles = response.data;
+        });
+
     }
 })();

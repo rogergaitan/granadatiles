@@ -36,7 +36,7 @@
         }
 
         function updateTile(tile) {
-            return $http.put(appSettings.serverPath + 'cart/tiles/' + tile.id);
+            return $http.put(appSettings.serverPath + 'cart/tiles/' + tile.id, tile);
         }
 
         function removeTile(tileId) {
@@ -52,7 +52,7 @@
         }
 
         function updateSample(sample) {
-            return $http.put(appSettings.serverPath + 'cart/samples/' + sample.id);
+            return $http.put(appSettings.serverPath + 'cart/samples/' + sample.id, sample);
         }
 
         function removeSample(sampleId) {
