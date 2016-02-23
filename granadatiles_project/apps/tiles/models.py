@@ -136,7 +136,7 @@ class Tile(BaseCatalogModel):
     on_sale = models.BooleanField(default=False, verbose_name=_('On Sale'))
     tearsheet = models.FileField(upload_to='tearsheets', null=True, blank=True, verbose_name=_('Tearsheet'))
     plane = models.FileField(upload_to='designs', null= True, blank=True, verbose_name=_('Plane'))
-    custom = models.BooleanField(default=False, blank=True, verbose_name=_('Custom'))
+    custom = models.BooleanField(default=False, blank=True, verbose_name=_('In Stock'))
     sample = models.ForeignKey('self', blank=True, null=True, related_name='samples', verbose_name=_('Sample'))
     override_collection_box = models.BooleanField(default=False, verbose_name=_('Override Collection Box'))
     box = models.ForeignKey('Box', null=True, blank=True, verbose_name=_('Box'))

@@ -35,14 +35,14 @@ class TileDesignAdmin(admin.ModelAdmin):
 
 class TileSizeFilter(admin.SimpleListFilter):
 
-    title = 'tile size available'
+    title = _('tile size available')
 
     parameter_name = 'size'
 
     def lookups(self, request, model_admin):
         return(
             ('y', _('Yes')),
-            ('n', _('No')),
+            ('n', 'No'),
         )
 
     def queryset(self, request, queryset):
@@ -51,25 +51,45 @@ class TileSizeFilter(admin.SimpleListFilter):
 
         if self.value() == 'n':
             return queryset.filter(size='')
-
+	  
+	  
+class CustomTileFilter(admin.SimpleListFilter):
+  
+    title = _('Custom')
+    
+    parameter_name = 'custom'
+    
+    def lookups(self, request, model_admin):
+        return(
+	    ('y', _('Yes')),
+	    ('n', 'No')       
+	)
+    
+    def queryset(self, request, queryset):
+        if self.value() == 'y':
+            return queryset.filter(custom=True)
+	
+        if self.value() == 'n':
+            return queryset.filter(custom=False)
+	  
 
 @admin.register(Tile)
 class TileAdmin(admin.ModelAdmin):
     fields = ('name', 'name_es', 'list_id', 'design', 'sales_description',
-              'sales_description_es', 'size', 'height', 'width' ,'thickness',
-              'weight','sales_price','average_cost', 'quantity_on_hand',
-              'image', 'mosaic', 'plane', 'tearsheet', 'box',  'similar_tiles', 'colors',
-              'main', 'new', 'override_collection_box', 'is_active', 'on_sale', 'is_sample')
+              'sales_description_es', 'size', 'height', 'width' ,'thickness','weight',
+              'sales_price','average_cost', 'quantity_on_hand','image', 'mosaic', 'plane', 
+              'tearsheet', 'box',  'similar_tiles', 'colors','main', 'new', 'in_stock', 
+              'is_sample', 'override_collection_box', 'is_active', 'on_sale')
 
     list_display = ('name', 'sales_description', 'size', 'weight', 'thickness',
-                    'quantity_on_hand', 'is_active', 'new', 'on_sale',)
+                    'quantity_on_hand', 'in_stock', 'is_active', 'new', 'on_sale')
 
     list_editable = ['is_active', 'new', 'on_sale', 'size', 'weight', 'thickness']
     search_fields = ['name', 'name_es', 'list_id', 'size']
-    list_filter = ('new', 'override_collection_box', TileSizeFilter)
+    list_filter = ('new', CustomTileFilter, TileSizeFilter, 'override_collection_box')
     actions = ['tile_new']
     readonly_fields = ('list_id', 'design', 'name', 'quantity_on_hand',
-                       'sales_price', 'size', 'average_cost')
+                       'sales_price', 'size', 'average_cost', 'is_sample', 'in_stock')
 
     def tile_new(self, request, queryset):
         queryset.update(new=True)
@@ -80,7 +100,10 @@ class TileAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
-
+      
+    def in_stock(self, obj):
+        return obj.custom is False
+        
 
 class GroupInline(admin.StackedInline):
     model = Group

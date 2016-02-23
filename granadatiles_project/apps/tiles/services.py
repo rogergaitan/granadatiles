@@ -70,13 +70,9 @@ class GroupService:
         group = GroupService.group_show_in_web(id)
         designs = group.designs.filter(show_in_web=True)
 
-        if style:
-            if language:
-                designs = designs.filter(styles__name_es__icontains=style)
-            else:
-                designs = designs.filter(styles__name__icontains=style)
-
-        if new: designs = designs.filter(tiles__new=True).distinct()
+        if style != '0': designs = designs.filter(styles__id=style)
+            
+        if new == 'true': designs = designs.filter(tiles__new=True).distinct()
 
         if in_stock: designs = designs.filter(tiles__custom=False).distinct()
 
