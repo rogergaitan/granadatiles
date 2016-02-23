@@ -67,13 +67,17 @@
             return $http.get(appSettings.serverPath + 'groups/' + groupId + '/sizes');
         }
 
-        function getTiles(groupId, offset) {
+        function getTiles(groupId, offset, onlyNews, onlyInStock, onlySpecials, styleId) {
             return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles',
                 {
                     params:
                         {
                             limit: 6,
-                            offset: offset
+                            offset: offset,
+                            recent: onlyNews,
+                            in_stock: onlyInStock,
+                            specials:onlySpecials,
+                            style: styleId
                         }
                 })
         }

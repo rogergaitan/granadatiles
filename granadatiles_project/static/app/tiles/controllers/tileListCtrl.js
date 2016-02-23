@@ -18,7 +18,7 @@
 
         vm.labels = pageSettings.labels;
         vm.subMenuCollapsed = true;
-        vm.checkNew = false;
+        vm.onlyNews = false;
         vm.collectionAsideNavigationTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/collectionAsideNavigation.html';
         vm.offset = 0;
 
@@ -38,9 +38,15 @@
             vm.group = response.data;
         });
 
+        vm.selectedStyle = {
+            'id': 0,
+            'name': vm.labels.all
+        };
+
         UpdateTiles(false);
 
         vm.refreshTiles = function () {
+            debugger;
             vm.offset = 0;
             UpdateTiles(true);
         };
@@ -54,7 +60,12 @@
 
         function UpdateTiles(reset) {
             vm.inProgress = true;
-            collectionsSvc.getTiles(pageSettings.groupId, vm.offset)
+            collectionsSvc.getTiles(pageSettings.groupId,
+                                    vm.offset,
+                                    vm.onlyNews,
+                                    vm.onlyInStock,
+                                    vm.onlySpecials,
+                                    vm.selectedStyle.id)
                 .then(function (response) {
                     if (!vm.tiles || reset) {
                         vm.tiles = response.data;

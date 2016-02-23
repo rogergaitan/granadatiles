@@ -15,39 +15,28 @@
                         <label class="inline-block"><strong>{{ vm.labels.show_only }}</strong></label>
                         <div class="checkbox-content">
                             <p class="checkbox-inline">
-                                <input type="checkbox" id="checkbox1" value="option1" ng-model="vm.checkNew" ng-click="vm.updateTileByNew(vm.checkNew)">
-                                <label for="checkbox1">{{ ::vm.labels.new_tile }}</label>
+                                <input type="checkbox" id="chk-news" ng-click="vm.refreshTiles()" ng-model="vm.onlyNews">
+                                <label for="chk-news">{{ ::vm.labels.new_tile }}</label>
                             </p>
                             <p class="checkbox-inline">
-                                <input type="checkbox" id="checkbox2" value="option2">
-                                <label for="checkbox2">{{ ::vm.labels.stock }}</label>
+                                <input type="checkbox" id="chk-instock" ng-click="vm.refreshTiles()" ng-model="vm.onlyInStock">
+                                <label for="chk-instock">{{ ::vm.labels.stock }}</label>
                             </p>
                             <p class="checkbox-inline">
-                                <input type="checkbox" id="checkbox3" value="option3">
+                                <input type="checkbox" id="chk-specials" ng-click="vm.refreshTiles()" ng-model="vm.onlySpecials">
                                 <label for="checkbox3">{{ ::vm.labels.special }}</label>
                             </p>
                         </div>
                     </div>
                     <div class="col-md-4 pull-right text-right">
-                        <div class="btn-group" dropdown>
-                            <button type="button" class="btn btn-sky">{{ vm.selectedSize }}</button>
-                            <button type="button" class="btn btn-sky dropdown-toggle" dropdown-toggle>
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu filter-list" role="menu">
-                                <li ng-repeat="size in vm.sizes">
-                                    <a href="#" ng-click="vm.setSize(size)">{{ size.name }}</a>
-                                </li>
-                            </ul>
-                        </div>
                         <div class="btn-group dropdown" dropdown>
-                            <button type="button" class="btn btn-sky">{{ vm.selectedStyle.name }}</button>
-                            <button type="button" class="btn btn-sky dropdown-toggle" dropdown-toggle aria-haspopup="true" aria-expanded="false">
+                            <button type="button" id="btn-selected-style" class="btn btn-sky">{{ vm.selectedStyle.name }}</button>
+                            <button type="button" class="btn btn-sky dropdown-toggle" dropdown-toggle aria-haspopup="true" aria-expanded="true">
                                 <span class="caret"></span>
                             </button>
-                            <ul class="dropdown-menu filter-list" role="menu" dropdown-menu>
+                            <ul class="dropdown-menu filter-list" role="menu" dropdown-menu aria-labelledby="btn-selected-style">
                                 <li role="menuitem" ng-repeat="style in vm.updatedStyles">
-                                    <a href="#" ng-click="vm.setStyle(style)">{{ style.name }}</a>
+                                    <a href="#" ng-click="vm.setStyle(style)" >{{ style.name }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -78,7 +67,8 @@
                                     <div class="col-md-12 tile-body">
                                         <div>
                                             <h2>{{ tile.main.name }}</h2>
-                                            <label class="title-tile">CUSTOM:</label>
+                                            <label class="title-tile" ng-if="!tile.main.inStock">CUSTOM:</label>
+                                            <label class="title-tile" ng-if="tile.main.inStock">In Stock:</label>
                                             <ul class="list-inline title-tile">
                                                 <li ng-repeat="size in tile.main.sizes">{{ size.size }}</li>
                                             </ul>
