@@ -72,7 +72,7 @@ class GroupService:
 
         if style != '0': designs = designs.filter(styles__id=style)
             
-        if new == 'true': designs = designs.filter(tiles__new=True).distinct()
+        if new: designs = designs.filter(tiles__new=True).distinct()
 
         if in_stock: designs = designs.filter(tiles__custom=False).distinct()
 

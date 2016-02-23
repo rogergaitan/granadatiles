@@ -66,7 +66,7 @@ class MainTileDto(BaseDto):
         self.hasInstallationPhotos = tile.has_installation_photos()
         self.hasSample = tile.has_sample()
         self.new = tile.new
-        self.inStock = True if tile.custom == True else False
+        self.inStock = False if tile.custom == True else True
 
 
 class MinorTileDto(TileDto):

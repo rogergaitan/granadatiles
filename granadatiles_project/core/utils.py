@@ -9,3 +9,8 @@ def check_recaptcha_response(recaptcha_response):
         return True
     else:
         return False
+
+def convert_to_boolean(value):
+    if value == 'true':
+        return True
+    return False

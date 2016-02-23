@@ -75,8 +75,8 @@
                             limit: 6,
                             offset: offset,
                             recent: onlyNews,
-                            in_stock: onlyInStock,
-                            specials:onlySpecials,
+                            in_stock: (onlyInStock) ? onlyInStock:undefined,
+                            specials:(onlySpecials) ? onlySpecials:undefined,
                             style: styleId
                         }
                 })

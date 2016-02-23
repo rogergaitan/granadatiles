@@ -46,7 +46,6 @@
         UpdateTiles(false);
 
         vm.refreshTiles = function () {
-            debugger;
             vm.offset = 0;
             UpdateTiles(true);
         };

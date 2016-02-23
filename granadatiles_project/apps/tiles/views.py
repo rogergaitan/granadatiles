@@ -6,6 +6,7 @@ from rest_framework.decorators import list_route, detail_route
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 from core.views import BaseViewSet
+from core.utils import convert_to_boolean
 
 from .serializers import (
     GroupSerializer, GroupDesignSerializer, MenuCollectionSerializer,
@@ -111,9 +112,9 @@ class GroupViewSet(BaseViewSet):
         offset = int(request.query_params.get('offset', 0))
         style = request.query_params.get('style')
         size = request.query_params.get('size')
-        new = request.query_params.get('new')
-        in_stock = request.query_params.get('in_stock')
-        specials = request.query_params.get('specials')
+        new = convert_to_boolean(request.query_params.get('recent'))
+        in_stock = convert_to_boolean(request.query_params.get('in_stock'))
+        specials = convert_to_boolean(request.query_params.get('specials'))
 
         tile_designs = GroupService.get_group_designs(
             id=pk, language=self.get_language(request), limit=limit,
