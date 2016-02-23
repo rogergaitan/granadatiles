@@ -43,6 +43,7 @@ class MainTileSerialzer(BaseCatalogSerializer):
     hasInstallationPhotos = serializers.BooleanField(required=False)
     hasSample = serializers.BooleanField()
     new = serializers.BooleanField()
+    inStock = serializers.BooleanField()
 
 
 class TileDetailSerializer(BaseCatalogSerializer):

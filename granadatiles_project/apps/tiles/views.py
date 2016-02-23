@@ -175,26 +175,25 @@ class TileViewSet(BaseViewSet):
         return Response(serializer.data)
 
 
-class PortfolioViewSet(BaseViewSet):
+class PortfolioTilesViewSet(BaseViewSet):
 
     permission_classes = (IsAuthenticated,)
 
-    @list_route(methods=['get'])
-    def show_tiles(self, request):
+    def list(self, request):
         tiles = PortfolioService.show_tiles(request.user, self.get_language(request))
         serializer = PortfolioTilesSerializer(tiles, many=True)
         return Response(serializer.data)
 
-    @list_route(methods=['get'])
-    def remove_tile(self, request):
-        id = request.query_params.get('id')
-        return Response(PortfolioService.get_portfolio_tile(id).delete())
+    def destroy(self, request, pk=None):
+        return Response(PortfolioService.remove_tile(request, pk))
 
-    @list_route(methods=['get'])
-    def add_tile(self, request):
-        id = request.query_params.get('id')
+    def create(self, request):
+        id = request.data.get('id')
         return Response(PortfolioService.add_tile(request, id))
-
+      
+      
+class LayoutsViewSet(BaseViewSet):      
+      
     @list_route(methods=['get'])
     def show_layouts(self, request):
         layouts = PortfolioService.show_layouts(request.user)
@@ -231,6 +230,9 @@ class PortfolioViewSet(BaseViewSet):
         tiles = PortfolioService.layout_tiles(portfolio, self.get_language(request))
         serializer = LayoutTilesSerializer(tiles, many=True)
         return Response(serializer.data)
+      
+
+class PortfolioCustomizedTiles(BaseViewSet):
 
     @list_route(methods=['get'])
     def show_custom_tiles(self, request):

@@ -47,16 +47,26 @@ class TileDto(BaseCatalogDto):
         self.sizes = tile.size
 
 
-class MainTileDto(TileDto):
+class MainTileDto(BaseDto):
 
     def __init__(self, tile, language):
-        super().__init__(tile, language)
+        import re
+        
+        super().__init__(tile)
+        if language:
+            self.name = tile.get_name(language)
+        else:
+	    #filter tile name if match
+            m = re.search('- In Stock', tile.name, re.I) 
+            self.name = tile.name[:m.start() - 1] if m else tile.name
+        self.sizes = tile.size
         self.image = tile.image.url if tile.image else ''
         self.mosaic = tile.mosaic.url if tile.mosaic else ''
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
         self.hasInstallationPhotos = tile.has_installation_photos()
         self.hasSample = tile.has_sample()
         self.new = tile.new
+        self.inStock = True if tile.custom == True else False
 
 
 class MinorTileDto(TileDto):
