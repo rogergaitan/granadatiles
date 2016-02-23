@@ -97,6 +97,7 @@
 
         vm.setStyle = function (style) {
             vm.selectedStyle = style;
+            UpdateTiles(true);
         };
 
         vm.setTile = function (index, tileId) {
