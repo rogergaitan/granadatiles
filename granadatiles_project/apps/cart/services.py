@@ -129,9 +129,17 @@ class OrdersService:
         return sample_orders_dto
 
     def add_sample(cart, tile, quantity):
-        data = CartService.calculate_sample_order(tile, quantity)
-        data['tile'] = tile
-        cart.sample_orders.update_or_create(cart=cart, tile=tile, defaults=data)
+        data = OrdersService.calculate_sample_order(tile, quantity)
+        cart.sample_orders.create(tile=tile,
+				  quantity=data['quantity'],
+				  subtotal=data['subtotal'])
+	
+    def update_sample(cart, tile, quantity):
+        data = OrdersService.calculate_sample_order(tile, quantity)
+        sample_order = cart.sample_orders.get(tile=tile)
+        sample_order.quantity = data['quantity']
+        sample_order.subtotal = data['subtotal']
+        sample_order.save()					  
 
     def remove_sample(cart, tile):
         cart.sample_orders.get(tile=tile).delete()
