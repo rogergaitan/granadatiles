@@ -1,4 +1,4 @@
-﻿<div class="col-md-12" ng-controller="instockCtrl as vm">
+<div class="col-md-12" ng-controller="instockCtrl as vm">
     <div class="row">
         <aside class="col-sm-3 col-xs-4">
             <div class="row submenu-selected submenu-selected-smtopmargin">
@@ -21,7 +21,7 @@
             <h1 class="heading-sec">{{ ::vm.section.title }} </h1>
             <a href="#" class="breadcrumds"><u>{{vm.labels.collections}}</u> <i class="fa fa-angle-double-right"></i></a>
             <div class="text-section" ng-bind-html="::vm.section.description"></div>
-            <div class="row filter">
+            <div class="row filter-container">
                 <div class="col-xs-12">
                     <label class="inline-block"><strong>{{ vm.labels.showOnly }}</strong></label>
                     <div class="checkbox-content">

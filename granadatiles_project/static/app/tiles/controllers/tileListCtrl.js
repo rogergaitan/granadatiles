@@ -20,6 +20,7 @@
         vm.subMenuCollapsed = true;
         vm.checkNew = false;
         vm.collectionAsideNavigationTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/collectionAsideNavigation.html';
+        vm.offset = 0;
 
         collectionsSvc.getCollection(pageSettings.collectionId).then(function (response) {
             vm.collection = response.data;
@@ -37,36 +38,55 @@
             vm.group = response.data;
         });
 
+        UpdateTiles(false);
+
+        vm.refreshTiles = function () {
+            vm.offset = 0;
+            UpdateTiles(true);
+        };
+
+        vm.nextPage = function () {
+            if (!vm.inProgress) {
+                vm.offset = vm.tiles.length;
+                UpdateTiles(false);
+            }
+        }
+
+        function UpdateTiles(reset) {
+            vm.inProgress = true;
+            collectionsSvc.getTiles(pageSettings.groupId, vm.offset)
+                .then(function (response) {
+                    if (!vm.tiles || reset) {
+                        vm.tiles = response.data;
+                    }
+                    else {
+                        for (var i = 0; i < response.data.length; i++) {
+                            vm.tiles.push(response.data[i]);
+                        }
+                    }
+                    vm.inProgress = false;
+                });
+        }
+
+        flatPagesSvc.getCollectionContentMenu(pageSettings.collectionId).then(function (response) {
+            vm.collectionContent = response.data;
+        });
+
         collectionsSvc.getStyles(pageSettings.groupId).then(function (response) {
             vm.styles = response.data;
-
             vm.updatedStyles = [];
-
             vm.updatedStyles.push({
                 'id': 0,
                 'name': vm.labels.all
             });
-
             for (var i = 0; i < vm.styles.length; i++) {
                 vm.updatedStyles.push(vm.styles[i]);
             }
-
             vm.selectedStyle = vm.updatedStyles[0];
-
-            if (vm.selectedStyle.id == 0) {
-                collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
-                    vm.tiles = response.data;
-                });
-            }
         });
-
-        vm.setSize = function (size) {
-            vm.selectedSize = size;
-        };
 
         vm.setStyle = function (style) {
             vm.selectedStyle = style;
-            updateTilesByStyle(style);
         };
 
         vm.setTile = function (index, tileId) {
@@ -106,22 +126,6 @@
             vm.tiles[index].main = setMain[0];
         }
 
-        function updateTilesByStyle(selectedStyle) {
-            if (selectedStyle.id == 0) {
-                collectionsSvc.getTiles(pageSettings.groupId).then(function (response) {
-                    vm.tiles = response.data;
-                });
-            } else {
-                collectionsSvc.getTileFilteredByStyle(pageSettings.groupId, selectedStyle.name).then(function (response) {
-                    vm.tiles = response.data;
-                });
-            }
-        };
-
-        vm.updateTileByNew = function (checkNewValue) {
-            (checkNewValue) ? console.log("intro") : console.log("not intro");
-        };
-
         vm.showInstallationPhoto = function (tileId) {
             $modal.open({
                 templateUrl: baseSettings.staticUrl + 'app/tiles/templates/tileModal.html',
@@ -145,10 +149,6 @@
             $scope.shared.collection = vm.collection;
             $scope.shared.group = vm.group;
         };
-
-        flatPagesSvc.getCollectionContentMenu(pageSettings.collectionId).then(function (response) {
-            vm.collectionContent = response.data;
-        });
 
         vm.showCollectionGallery = function () {
             $modal.open({
