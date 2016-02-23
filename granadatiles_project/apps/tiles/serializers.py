@@ -34,7 +34,7 @@ class TileSizeSerializer(serializers.Serializer):
 class TileSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
     sizes = serializers.CharField()
-
+    onSale = serializers.BooleanField()
 
 class MainTileSerialzer(BaseCatalogSerializer):
     image = serializers.CharField()
@@ -44,6 +44,7 @@ class MainTileSerialzer(BaseCatalogSerializer):
     hasSample = serializers.BooleanField()
     new = serializers.BooleanField()
     inStock = serializers.BooleanField()
+    onSale = serializers.BooleanField()
 
 
 class TileDetailSerializer(BaseCatalogSerializer):

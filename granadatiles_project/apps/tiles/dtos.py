@@ -67,6 +67,7 @@ class MainTileDto(BaseDto):
         self.hasSample = tile.has_sample()
         self.new = tile.new
         self.inStock = False if tile.custom == True else True
+        self.onSale = True if tile.on_sale else False
 
 
 class MinorTileDto(TileDto):
@@ -75,6 +76,7 @@ class MinorTileDto(TileDto):
         super().__init__(tile, language)
         self.image = tile.image.url if tile.image else ''
         self.mosaic = tile.mosaic.url if tile.mosaic else ''
+        self.onSale = True if tile.on_sale else False
 
 
 class TileDesignDto(BaseCatalogDto):
