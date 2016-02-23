@@ -139,7 +139,8 @@ class TileService:
               tiles = tiles.filter(is_sample=False).order_by('name')
 
           instock_dto = [InStockDto(tile, is_sample, language)
-                         for tile in tiles[offset:(limit+offset)]]
+                         for tile in tiles[offset:(limit+offset)]
+                         if tile.design]
           return instock_dto
 
       def get_tiles_collections_filters(language):
