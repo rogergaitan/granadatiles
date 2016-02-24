@@ -179,7 +179,7 @@ class PortfolioService:
          layouts_dto = [LayoutDto(layout) for layout in portfolio.layouts.all()]
          return layouts_dto
 
-     def save_layout(portfolio, id, name, length_ft, length_in, width_ft, width_in, image):
+     def create_layout(portfolio, id, name, length_ft, length_in, width_ft, width_in, image):
          data = {
             'name': name,
             'length_ft': length_ft,

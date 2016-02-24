@@ -195,19 +195,15 @@ class PortfolioTilesViewSet(BaseViewSet):
       
 class LayoutsViewSet(BaseViewSet):      
       
-    @list_route(methods=['get'])
-    def show_layouts(self, request):
+    def list(self, request):
         layouts = PortfolioService.show_layouts(request.user)
         serializer = LayoutSerializer(layouts, many=True)
         return Response(serializer.data)
 
-    @list_route(methods=['get'])
-    def remove_layout(self, request):
-        id = request.query_params.get('id')
-        return Response(PortfolioService.get_layout(id).delete())
+    def destroy(self, request, pk=None):
+        return Response(PortfolioService.get_layout(pk).delete())
 
-    @list_route(methods=['post'])
-    def save_layout(self, request):
+    def create(self, request):
         portfolio = PortfolioService.get_portfolio(request.user)
         id = request.data.get('id')
         name = request.data.get('name')
@@ -216,22 +212,14 @@ class LayoutsViewSet(BaseViewSet):
         width_ft = request.data.get('width_ft')
         width_in = request.data.get('width_in')
         image = request.data.get('image')
-        return Response(PortfolioService.save_layout(portfolio, id, name, lenght_ft,
+        return Response(PortfolioService.create_layout(portfolio, id, name, lenght_ft,
                                                      lenght_in, width_ft, width_in, image))
 
-    @list_route(methods=['get'])
-    def duplicate_layout(self, request):
+    @detail_route(methods=['post'])
+    def duplicates(self, request, pk=None):
         portfolio = PortfolioService.get_portfolio(request.user)
-        id = request.query_params.get('id')
-        return Response(PortfolioService.duplicate_layout(portfolio, id))
+        return Response(PortfolioService.duplicate_layout(portfolio, pk))
 
-    @list_route(methods=['get'])
-    def layout_tiles(self, request):
-        portfolio = PortfolioService.get_portfolio(request.user)
-        tiles = PortfolioService.layout_tiles(portfolio, self.get_language(request))
-        serializer = LayoutTilesSerializer(tiles, many=True)
-        return Response(serializer.data)
-      
 
 class PortfolioCustomizedTiles(BaseViewSet):
 
