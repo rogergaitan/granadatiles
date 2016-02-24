@@ -103,7 +103,7 @@ class TileAdmin(admin.ModelAdmin):
       
     def in_stock(self, obj):
         return obj.custom is False
-        
+    in_stock.boolean = True
 
 class GroupInline(admin.StackedInline):
     model = Group
