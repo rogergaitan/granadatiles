@@ -10,6 +10,7 @@ from core.models import BaseGalleryImageModel, BaseCatalogModel, BaseContentMode
 from sorl.thumbnail.shortcuts import get_thumbnail
 from sorl.thumbnail.fields import ImageField
 from rest_framework.authtoken.models import Token
+from colorfield.fields import ColorField
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
@@ -186,7 +187,7 @@ class Tile(BaseCatalogModel):
 
 
 class PalleteColor(BaseCatalogModel):
-    hexadecimalCode = models.CharField(max_length=20, verbose_name=_('Color'))
+    hexadecimalCode = ColorField(default='#FF0000')
 
     class Meta:
         verbose_name = _('Pallete Color')
