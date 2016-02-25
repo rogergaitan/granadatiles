@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'social.apps.django_app.default',
     'kombu.transport.django',
+    'colorfield',
 
     #project apps
     'apps.customadmin',
