@@ -1,5 +1,5 @@
 from core.dtos import BaseGalleryImageDto, BaseContentDto, BaseCatalogDto, BaseDto
-from .models import Warehouse
+from .models import Warehouse, LeadTime
 
 
 class CollectionDto(BaseGalleryImageDto):
@@ -160,6 +160,12 @@ class BoxDto:
         self.quantity = box.quantity
 
 
+class LeadTimeDto(BaseContentDto):
+
+    def __init__(self, lead_time, language):
+        super().__init__(lead_time, language)
+
+
 class TileOrderDto(BaseCatalogDto):
 
     def __init__(self, tile, portfolio, language):
@@ -187,6 +193,7 @@ class TileOrderDto(BaseCatalogDto):
         self.tearsheet = tile.tearsheet.url if tile.tearsheet else ''
         self.sqFt = tile.get_sq_ft()
         self.sqFtPrice = tile.get_price_by_sq_ft()
+        self.lead_time = [LeadTimeDto(lead_time, language) for lead_time in LeadTime.objects.all()]
         if tile.box:
             self.box = BoxDto(tile.box)
         if tile.custom:
