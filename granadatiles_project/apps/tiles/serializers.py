@@ -81,6 +81,12 @@ class WarehouseSerializer(BaseCatalogSerializer):
     zipcode = serializers.CharField()
 
 
+class BoxSerializer(serializers.Serializer):
+    description = serializers.CharField()
+    measurementUnit = serializers.CharField()
+    quantity = serializers.IntegerField()
+
+
 class TileOrderSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
     mosaic = serializers.CharField()
@@ -99,6 +105,7 @@ class TileOrderSerializer(BaseCatalogSerializer):
     inStock = serializers.BooleanField()
     price = serializers.FloatField()
     tearsheet = serializers.CharField()
+    box = BoxSerializer()
     shipFrom = WarehouseSerializer(many=True)
 
 

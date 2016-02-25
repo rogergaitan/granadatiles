@@ -152,12 +152,20 @@ class WarehouseDto(BaseCatalogDto):
         self.zipcode = warehouse.zipcode
 
 
+class BoxDto(BaseDto):
+
+    def __init__(self, box):
+        self.description = box.description
+        self.measurementUnit = box.measurement_unit
+        self.quantity = box.quantity
+
+
 class TileOrderDto(BaseCatalogDto):
 
     def __init__(self, tile, portfolio, language):
         super().__init__(tile, language)
-        self.image = tile.image.url
-        self.mosaic = tile.mosaic.url
+        self.image = tile.image.url if tile.image else ''
+        self.mosaic = tile.mosaic.url if tile.mosaic else ''
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
         self.thickness = tile.thickness
         self.weight = tile.weight
@@ -177,6 +185,9 @@ class TileOrderDto(BaseCatalogDto):
         self.inStock = False if tile.custom == True else True
         self.price = tile.sales_price
         self.tearsheet = tile.tearsheet.url if tile.tearsheet else ''
+        self.sqFt = tile.get_sq_ft()
+        self.sqFtPrice = tile.get_price_by_sq_ft()
+        self.box = BoxDto(tile.box) if tile.box else ''
         if tile.custom:
             self.shipFrom = [WarehouseDto(warehouse, language) for warehouse in
                               Warehouse.objects.filter(custom=True)]
