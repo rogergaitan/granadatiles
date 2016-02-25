@@ -156,7 +156,6 @@ class TileOrderDto(BaseCatalogDto):
 
     def __init__(self, tile, portfolio, language):
         super().__init__(tile, language)
-        self.list_id = tile.list_id
         self.image = tile.image.url
         self.mosaic = tile.mosaic.url
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
@@ -165,7 +164,7 @@ class TileOrderDto(BaseCatalogDto):
         self.colors = [TileColorDto(color, language) for color in tile.colors.all()]
         self.uses = [TileUseDto(use, language) for use in tile.design.group.collection.uses.all()]
         self.styles = [TileStyleDto(style, language) for style in tile.design.styles.all()]
-        self.similar_tiles = [SimilarTileDto(tile, language) for tile in tile.similar_tiles.all()]
+        self.similarTiles = [SimilarTileDto(tile, language) for tile in tile.similar_tiles.all()]
         self.designer = TileDesignerDto(tile.design.group, language)
         self.quantity = tile.quantity_on_hand
         self.sample = tile.is_sample
