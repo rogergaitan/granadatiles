@@ -71,7 +71,7 @@ class GroupService:
         designs = group.designs.filter(show_in_web=True)
 
         if style != '0': designs = designs.filter(styles__id=style)
-            
+
         if new: designs = designs.filter(tiles__new=True).distinct()
 
         if in_stock: designs = designs.filter(tiles__custom=False).distinct()
@@ -117,9 +117,9 @@ class TileService:
           else: tileinstallationphotosDto = None
           return tileinstallationphotosDto
 
-      def get_tile_order(id, language):
+      def get_tile_order(id, portfolio, language):
           tile = get_object_or_404(Tile, pk=id)
-          tileorderDto = TileOrderDto(tile, language)
+          tileorderDto = TileOrderDto(tile, portfolio, language)
           return tileorderDto
 
       def get_in_stock_tiles(ids, is_sample, limit, offset, language):

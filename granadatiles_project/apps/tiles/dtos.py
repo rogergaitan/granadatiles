@@ -51,13 +51,13 @@ class MainTileDto(BaseDto):
 
     def __init__(self, tile, language):
         import re
-        
+
         super().__init__(tile)
         if language:
             self.name = tile.get_name(language)
         else:
 	    #filter tile name if match
-            m = re.search('- In Stock', tile.name, re.I) 
+            m = re.search('- In Stock', tile.name, re.I)
             self.name = tile.name[:m.start() - 1] if m else tile.name
         self.sizes = tile.size
         self.image = tile.image.url if tile.image else ''
@@ -154,7 +154,7 @@ class WarehouseDto(BaseCatalogDto):
 
 class TileOrderDto(BaseCatalogDto):
 
-    def __init__(self, tile, language):
+    def __init__(self, tile, portfolio, language):
         super().__init__(tile, language)
         self.list_id = tile.list_id
         self.image = tile.image.url
@@ -169,14 +169,20 @@ class TileOrderDto(BaseCatalogDto):
         self.designer = TileDesignerDto(tile.design.group, language)
         self.quantity = tile.quantity_on_hand
         self.sample = tile.is_sample
-        self.has_sample = tile.has_sample()
+        self.hasSample = tile.has_sample()
+        if portfolio:
+            self.inPortfolio = True if portfolio.tiles.filter(tile=tile).exists() else False
+        else:
+            self.inPortfolio = False
+        self.hasInstallationPhotos = tile.has_installation_photos()
+        self.inStock = False if tile.custom == True else True
         self.price = tile.sales_price
         self.tearsheet = tile.tearsheet.url if tile.tearsheet else ''
         if tile.custom:
-            self.ship_from = [WarehouseDto(warehouse, language) for warehouse in
+            self.shipFrom = [WarehouseDto(warehouse, language) for warehouse in
                               Warehouse.objects.filter(custom=True)]
         else:
-            self.ship_from = [WarehouseDto(warehouse, language) for warehouse in
+            self.shipFrom = [WarehouseDto(warehouse, language) for warehouse in
                               Warehouse.objects.filter(custom=False)]
 
 class InStockDto(BaseCatalogDto):

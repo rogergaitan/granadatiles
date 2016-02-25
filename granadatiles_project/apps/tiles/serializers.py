@@ -94,10 +94,13 @@ class TileOrderSerializer(BaseCatalogSerializer):
     designer = TileDesignerSerializer()
     quantity = serializers.IntegerField()
     sample = serializers.BooleanField()
-    has_sample = serializers.BooleanField()
+    hasSample = serializers.BooleanField()
+    inPortfolio = serializers.BooleanField()
+    hasInstallationPhotos = serializers.BooleanField()
+    inStock = serializers.BooleanField()
     price = serializers.FloatField()
     tearsheet = serializers.CharField()
-    ship_from = WarehouseSerializer(many=True)
+    shipFrom = WarehouseSerializer(many=True)
 
 
 class InStockSerializer(BaseCatalogSerializer):
