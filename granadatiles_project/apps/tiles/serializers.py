@@ -82,7 +82,6 @@ class WarehouseSerializer(BaseCatalogSerializer):
 
 
 class TileOrderSerializer(BaseCatalogSerializer):
-    list_id = serializers.CharField()
     image = serializers.CharField()
     mosaic = serializers.CharField()
     sizes = TileSizeSerializer(many=True)
@@ -90,14 +89,17 @@ class TileOrderSerializer(BaseCatalogSerializer):
     weight = serializers.CharField()
     colors = TileColorSerializer(many=True)
     uses = TileUseSerializer(many=True)
-    similar_tiles = BaseCatalogSerializer(many=True)
+    similarTiles = BaseCatalogSerializer(many=True)
     designer = TileDesignerSerializer()
     quantity = serializers.IntegerField()
     sample = serializers.BooleanField()
-    has_sample = serializers.BooleanField()
+    hasSample = serializers.BooleanField()
+    inPortfolio = serializers.BooleanField()
+    hasInstallationPhotos = serializers.BooleanField()
+    inStock = serializers.BooleanField()
     price = serializers.FloatField()
     tearsheet = serializers.CharField()
-    ship_from = WarehouseSerializer(many=True)
+    shipFrom = WarehouseSerializer(many=True)
 
 
 class InStockSerializer(BaseCatalogSerializer):

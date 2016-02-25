@@ -153,7 +153,13 @@ class TileViewSet(BaseViewSet):
 
     @detail_route(methods=['get'])
     def order(self, request, pk=None):
-        tile = TileService.get_tile_order(id=pk, language=self.get_language(request))
+        if request.user.is_authenticated():
+            portfolio = PortfolioService.get_portfolio(request.user)
+        else:
+            portfolio = False
+        tile = TileService.get_tile_order(id=pk,
+                                          portfolio=portfolio,
+                                          language=self.get_language(request))
         serializer = TileOrderSerializer(tile)
         return Response(serializer.data)
 
@@ -191,10 +197,15 @@ class PortfolioTilesViewSet(BaseViewSet):
     def create(self, request):
         id = request.data.get('id')
         return Response(PortfolioService.add_tile(request, id))
-      
-      
-class LayoutsViewSet(BaseViewSet):      
-      
+
+    def retrieve(self, request, pk=None):
+        return Response(PortfolioService.check_tile(request, pk))
+
+
+class LayoutsViewSet(BaseViewSet):
+
+    permission_classes = (IsAuthenticated,)
+
     def list(self, request):
         layouts = PortfolioService.show_layouts(request.user)
         serializer = LayoutSerializer(layouts, many=True)
@@ -222,6 +233,8 @@ class LayoutsViewSet(BaseViewSet):
 
 
 class PortfolioCustomizedTiles(BaseViewSet):
+
+    permission_classes = (IsAuthenticated,)
 
     @list_route(methods=['get'])
     def show_custom_tiles(self, request):
