@@ -20,7 +20,6 @@
         vm.labels = pageSettings.labels;
         vm.collection = $scope.shared.collection;
         vm.group = $scope.shared.group;
-        vm.addedToPortfolio = false;
         vm.isAuthenticated = baseSettings.userIsAuthenticated;
         vm.navigation = baseSettings.navigation;
 
@@ -54,7 +53,7 @@
 
         vm.saveToPortfolio = function (tileId) {
             portfolioSvc.addtile(tileId).then(function (response) {
-                vm.addedToPortfolio = true;
+                vm.tile.inPortfolio = true;
             });
         };
 

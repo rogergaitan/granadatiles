@@ -220,7 +220,7 @@ class LeadTime(BaseContentModel):
 
     class Meta:
        verbose_name = _('Lead Time')
-       verbose_name = _('Lead Times')
+       verbose_name_plural = _('Lead Times')
 
 
 class Portfolio(models.Model):
