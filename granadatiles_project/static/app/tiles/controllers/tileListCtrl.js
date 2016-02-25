@@ -21,6 +21,7 @@
         vm.onlyNews = false;
         vm.collectionAsideNavigationTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/collectionAsideNavigation.html';
         vm.offset = 0;
+        $scope.shared = {};
 
         collectionsSvc.getCollection(pageSettings.collectionId).then(function (response) {
             vm.collection = response.data;
@@ -51,7 +52,7 @@
         };
 
         vm.nextPage = function () {
-            if (!vm.inProgress) {
+            if (!vm.inProgress && !$scope.shared.tileDetailTemplateUrl) {
                 vm.offset = vm.tiles.length;
                 UpdateTiles(false);
             }
@@ -154,7 +155,6 @@
         };
 
         vm.showTileDetail = function (tileId) {
-            $scope.shared = {};
             $scope.shared.tileId = tileId;
             $scope.shared.tileDetailTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/tileDetails.html'
             $scope.shared.collection = vm.collection;

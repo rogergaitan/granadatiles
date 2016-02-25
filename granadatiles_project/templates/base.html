@@ -313,18 +313,19 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/controllers/catalogListCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/services/articleSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/services/catalogSvc.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/services/authenticationSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/controller/portfolioHomeCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/controller/portfolioLoginCtrl.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/collectionsSvc.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/instockSvc.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/tilesSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/services/authenticationSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/services/portfolioSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/collectionGroupsCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/instockCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/menuCollectionCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/tileDetailCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/tileListCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/tileModalCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/collectionsSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/instockSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/tilesSvc.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
     <script>
@@ -355,8 +356,10 @@
                         cementVsCeramic: '{% url 'cement_vs_ceramic'%}',
                         colorPalletes:'{% url 'color_palletes'%}',
                         inStock: '{% url 'sr-collections:sr-instock-tiles'%}',
-                        inStockSamples: '{% url 'sr-collections:sr-instock-samples'%}'
-                   }
+                        inStockSamples: '{% url 'sr-collections:sr-instock-samples'%}',
+                        login: '{% url 'sr-portfolio:login_to_portfolio'%}'
+                   },
+                   userIsAuthenticated: ('{{ user.is_authenticated }}' == 'True')? true:false
             }
         };
     })();

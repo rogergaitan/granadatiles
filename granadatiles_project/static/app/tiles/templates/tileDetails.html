@@ -8,20 +8,22 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 left-align">
             <ul class="list-inline tile-button-options">
-                <li><a href="#"><i class="fa fa-eye"></i><p>{{ ::vm.labels.photos | uppercase }}</p></a></li>
+                <li><a href="#" ng-click="vm.showInstallationPhoto(vm.tile.id)"><i class="fa fa-eye"></i><p>{{ ::vm.labels.photos | uppercase }}</p></a></li>
                 <li><a href="#">
                     <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="ORDER FREE SAMPLE">
                     <p>{{ ::vm.labels.orderFree | uppercase }}</p>
                 </a></li>
-                <li><a href="#"><i class="fa fa-briefcase"></i><p>{{ ::vm.labels.saveToPortfolio | uppercase }}</p></a></li>
+                <li ng-if="!vm.isAuthenticated"><a ng-href="{{::vm.navigation.login}}"><i class="fa fa-briefcase"></i><p>{{ ::vm.labels.saveToPortfolio | uppercase }}</p></a></li>
+                <li ng-if="!vm.addedToPortfolio && vm.isAuthenticated"><a href="#" ng-click="vm.saveToPortfolio(vm.tile.id)"><i class="fa fa-briefcase"></i><p>{{ ::vm.labels.saveToPortfolio | uppercase }}</p></a></li>
+                <li ng-if="vm.addedToPortfolio && vm.isAuthenticated"><a href="#"><i class="fa fa-briefcase"></i><p>{{ ::vm.labels.addedPortfolio | uppercase }}</p></a></li>
                 <li><a href="#"><i class="fa fa-file"></i><p>{{ ::vm.labels.tearSheet | uppercase }}</p></a></li>
-                <li><a href="#"><i class="fa fa-print"></i><p>{{ ::vm.labels.printPage | uppercase }}</p></a></li>
+                <li><a href="#" ng-click="vm.printPage()"><i class="fa fa-print"></i><p>{{ ::vm.labels.printPage | uppercase }}</p></a></li>
             </ul>
         </div>
     </div>
     <div class="row">
         <div class="col-md-8 col-sm-8">
-            <img ng-src="{{ vm.tile.image }}" alt="Kotka918-A-Granada-Tile-Cement" class="img-responsive thumbnail">
+            <img ng-src="{{ vm.tile.image }}" alt="Kotka918-saveA-Granada-Tile-Cement" class="img-responsive thumbnail">
         </div>
         <div class="col-md-4 col-sm-4">
             <ul class="tile-detail-container">
@@ -30,7 +32,7 @@
                         <p>{{ ::vm.labels.colors }}:</p>
                     </div>
                     <div class="col-md-8">
-                        <button type="button" class="btn btn-sky">Customize</button>
+                        <button type="button" class="btn btn-sky">{{vm.labels.customize}}</button>
                     </div>
                 </li>
                 <li class="row">
@@ -115,7 +117,7 @@
                 <tbody>
                     <tr>
                         <td>$ 80.90</td>
-                        <td>$ 8.09</td>
+                        <td>${{::vm.tile.price}}</td>
                         <td>$ 18.20</td>
                     </tr>
                     <tr>

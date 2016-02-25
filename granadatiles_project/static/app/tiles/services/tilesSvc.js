@@ -17,6 +17,5 @@
             return $http.get(appSettings.serverPath + 'tiles/' + tileId + '/order');
         }
 
-
     }
 })();
