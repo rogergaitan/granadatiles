@@ -42,6 +42,7 @@
                     photos: '{% trans 'Installation Photos' %}',
                     orderFree: '{% trans 'Order Free Sample' %}',
                     saveToPortfolio: '{% trans 'Save To Portfolio' %}',
+                    addedPortfolio: '{% trans 'Added To Portfolio' %}',
                     tearSheet: '{% trans 'Tear Sheet' %}',
                     printPage: '{% trans 'Print Page' %}',
                     colors: '{% trans 'Colors' %}',
@@ -64,6 +65,7 @@
                     addToCart: '{% trans 'Add To Cart' %}',
                     estimatedDelivery: '{% trans 'Estimated Delivery Time' %}',
                     weeks: '{% trans 'Weeks' %}',
+                    customize: '{% trans 'Customize'%}',
                     tileCalculationDetail: '{% trans 'Tile calculation detail' %}',
                     all: '{% trans 'All' %}',
                     collection: '{% trans 'Collections' %}'
@@ -71,5 +73,12 @@
             }
         }
     })();
+</script>
+<script>
+// Add the CSRF Token
+var app = angular.module('app.tiles');
+app.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.headers.common['X-CSRFToken'] = '{{ csrf_token|escapejs }}';
+}]);
 </script>
 {% endblock js%}

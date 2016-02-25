@@ -5,17 +5,24 @@
         .module('app')
         .controller('tileDetailCtrl', tileDetailCtrl);
 
-    tileDetailCtrl.$inject = ['$location', '$scope', 'tilesSvc','pageSettings'];
+    tileDetailCtrl.$inject = ['$scope',
+                              'tilesSvc',
+                              'pageSettings',
+                              'portfolioSvc',
+                              '$modal',
+                              'baseSettings',
+                              'collectionsSvc'];
 
-    function tileDetailCtrl($location, $scope, tilesSvc, pageSettings) {
-        var vm = this;
-        vm.title = 'tileDetail';
-
-        vm.labels = pageSettings.labels;
-
+    function tileDetailCtrl($scope, tilesSvc, pageSettings, portfolioSvc, $modal, baseSettings, collectionsSvc) {
         var selectedTileId = $scope.shared.tileId;
+
+        var vm = this;
+        vm.labels = pageSettings.labels;
         vm.collection = $scope.shared.collection;
         vm.group = $scope.shared.group;
+        vm.addedToPortfolio = false;
+        vm.isAuthenticated = baseSettings.userIsAuthenticated;
+        vm.navigation = baseSettings.navigation;
 
         vm.backToGroup = function () {
             $scope.shared.tileDetailTemplateUrl = '';
@@ -26,10 +33,37 @@
             if(vm.tile.sizes.length > 0){
                 vm.selectedSize = vm.tile.sizes[0].size
             }
+            
         });
+
+        vm.showInstallationPhoto = function (tileId) {
+            $modal.open({
+                templateUrl: baseSettings.staticUrl + 'app/tiles/templates/tileModal.html',
+                controller: 'tileModalCtrl',
+                controllerAs: 'vm',
+                size: 'lg',
+                resolve: {
+                    installationPhotos: function () {
+                        return collectionsSvc.getInstallationPhoto(tileId).then(function (response) {
+                            return response.data;
+                        });
+                    }
+                }
+            })
+        };
+
+        vm.saveToPortfolio = function (tileId) {
+            portfolioSvc.addtile(tileId).then(function (response) {
+                vm.addedToPortfolio = true;
+            });
+        };
 
         vm.setSize = function (size) {
             vm.selectedSize = size.size;
         };
+
+        vm.printPage = function () {
+            print();
+        }
     }
 })();
