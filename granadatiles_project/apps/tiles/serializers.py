@@ -87,6 +87,10 @@ class BoxSerializer(serializers.Serializer):
     quantity = serializers.IntegerField()
 
 
+class LeadTimeSerializer(BaseContentSerializer):
+    pass
+
+
 class TileOrderSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
     mosaic = serializers.CharField()
@@ -98,6 +102,8 @@ class TileOrderSerializer(BaseCatalogSerializer):
     similarTiles = BaseCatalogSerializer(many=True)
     designer = TileDesignerSerializer()
     quantity = serializers.IntegerField()
+    sqFt = serializers.IntegerField()
+    sqFtPrice = serializers.FloatField()
     sample = serializers.BooleanField()
     hasSample = serializers.BooleanField()
     inPortfolio = serializers.BooleanField()
@@ -105,7 +111,9 @@ class TileOrderSerializer(BaseCatalogSerializer):
     inStock = serializers.BooleanField()
     price = serializers.FloatField()
     tearsheet = serializers.CharField()
+    styles = StyleSerializer(many=True)
     box = BoxSerializer(required=False)
+    lead_time = LeadTimeSerializer(many=True)
     shipFrom = WarehouseSerializer(many=True)
 
 
