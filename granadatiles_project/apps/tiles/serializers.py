@@ -83,7 +83,7 @@ class WarehouseSerializer(BaseCatalogSerializer):
 
 class BoxSerializer(serializers.Serializer):
     description = serializers.CharField()
-    measurementUnit = serializers.CharField()
+    measurementUnit = serializers.IntegerField()
     quantity = serializers.IntegerField()
 
 
@@ -105,7 +105,7 @@ class TileOrderSerializer(BaseCatalogSerializer):
     inStock = serializers.BooleanField()
     price = serializers.FloatField()
     tearsheet = serializers.CharField()
-    box = BoxSerializer()
+    box = BoxSerializer(required=False)
     shipFrom = WarehouseSerializer(many=True)
 
 

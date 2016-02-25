@@ -152,7 +152,7 @@ class WarehouseDto(BaseCatalogDto):
         self.zipcode = warehouse.zipcode
 
 
-class BoxDto(BaseDto):
+class BoxDto:
 
     def __init__(self, box):
         self.description = box.description
@@ -187,7 +187,8 @@ class TileOrderDto(BaseCatalogDto):
         self.tearsheet = tile.tearsheet.url if tile.tearsheet else ''
         self.sqFt = tile.get_sq_ft()
         self.sqFtPrice = tile.get_price_by_sq_ft()
-        self.box = BoxDto(tile.box) if tile.box else ''
+        if tile.box:
+            self.box = BoxDto(tile.box)
         if tile.custom:
             self.shipFrom = [WarehouseDto(warehouse, language) for warehouse in
                               Warehouse.objects.filter(custom=True)]

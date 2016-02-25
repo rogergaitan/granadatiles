@@ -153,7 +153,7 @@ class TileViewSet(BaseViewSet):
 
     @detail_route(methods=['get'])
     def order(self, request, pk=None):
-        if request.user.is_authenticated():
+        if request.user.is_authenticated() and request.user.is_superuser == False:
             portfolio = PortfolioService.get_portfolio(request.user)
         else:
             portfolio = False
