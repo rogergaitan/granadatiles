@@ -9,7 +9,8 @@ from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto, TileDesignDto,
     MenuCollectionDto, TileStyleDto, TileDetailDto, TileInstallationPhotosDto,
     TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto, PortfolioTilesDto,
-    LayoutDto, LayoutTilesDto, PortfolioCustomTilesDto, CollectionInstallationPhotosDto
+    LayoutDto, LayoutTilesDto, PortfolioCustomTilesDto, CollectionInstallationPhotosDto,
+    TileColorDto
 )
 
 
@@ -214,3 +215,10 @@ class PortfolioService:
 
      def remove_custom_tile(portfolio, customizedtile_id):
          portfolio.customized_tiles.get(pk=customizedtile_id).delete()
+
+
+class PalleteColorService:
+
+     def get_pallete_colors(language):
+         pallete_colors_dto = [TileColorDto(pallete_color, language) for pallete_color in PalleteColor.objects.all()]
+         return pallete_colors_dto

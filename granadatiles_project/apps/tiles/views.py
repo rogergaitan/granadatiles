@@ -14,9 +14,9 @@ from .serializers import (
     StyleSerializer, GroupTileSizeSerializer, TileDetailSerializer,
     TileInstallationPhotosSerializer, TileOrderSerializer, CollectionsFilterSerializer,
     InStockSerializer, PortfolioTilesSerializer, PortfolioCustomTilesSerializer, LayoutSerializer,
-    LayoutTilesSerializer, CollectionInstallationPhotosSerializer
+    LayoutTilesSerializer, CollectionInstallationPhotosSerializer, TileColorSerializer
 )
-from .services import CollectionService, GroupService, TileService, PortfolioService
+from .services import CollectionService, GroupService, TileService, PortfolioService, PalleteColorService
 from .models import Collection, Group
 
 
@@ -255,6 +255,14 @@ class PortfolioCustomizedTiles(BaseViewSet):
         tile = PortfolioService.get_tile(request.data.get('id'))
         colors = request.data.getlist('colors')
         return Response(PortfolioService.save_custom_tile(portfolio, tile, colors))
+
+
+class PalleteColorsViewSet(BaseViewSet):
+
+    def list(self, request):
+        pallete_colors = PalleteColorService.get_pallete_colors(self.get_language(request))
+        serializer = TileColorSerializer(pallete_colors, many=True)
+        return Response(serializer.data)
 
 
 class TaskViewSet(viewsets.ViewSet):
