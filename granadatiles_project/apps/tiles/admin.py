@@ -51,34 +51,34 @@ class TileSizeFilter(admin.SimpleListFilter):
 
         if self.value() == 'n':
             return queryset.filter(size='')
-	  
-	  
+
+
 class CustomTileFilter(admin.SimpleListFilter):
-  
+
     title = _('Custom')
-    
+
     parameter_name = 'custom'
-    
+
     def lookups(self, request, model_admin):
         return(
 	    ('y', _('Yes')),
-	    ('n', 'No')       
+	    ('n', 'No')
 	)
-    
+
     def queryset(self, request, queryset):
         if self.value() == 'y':
             return queryset.filter(custom=True)
-	
+
         if self.value() == 'n':
             return queryset.filter(custom=False)
-	  
+
 
 @admin.register(Tile)
 class TileAdmin(admin.ModelAdmin):
     fields = ('name', 'name_es', 'list_id', 'design', 'sales_description',
               'sales_description_es', 'size', 'height', 'width' ,'thickness','weight',
-              'sales_price','average_cost', 'quantity_on_hand','image', 'mosaic', 'plane', 
-              'tearsheet', 'box',  'similar_tiles', 'colors','main', 'new', 'in_stock', 
+              'sales_price','average_cost', 'quantity_on_hand','image', 'mosaic', 'plane',
+              'tearsheet', 'box',  'similar_tiles', 'colors','main', 'new', 'in_stock',
               'is_sample', 'override_collection_box', 'is_active', 'on_sale')
 
     list_display = ('name', 'sales_description', 'size', 'weight', 'thickness',
@@ -100,10 +100,11 @@ class TileAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
-      
+
     def in_stock(self, obj):
         return obj.custom is False
     in_stock.boolean = True
+
 
 class GroupInline(admin.StackedInline):
     model = Group
@@ -140,7 +141,8 @@ class CollectionAdmin(SummernoteModelAdmin):
 
     def save_model(self, request, obj, form, change):
         tiles = Tile.objects.filter(design__group__collection__id=obj.id)
-        tiles = tiles.filter(override_collection_box=True)
+        tiles = tiles.filter(override_collection_box=False)
+        tiles = tiles.filter(box=True)
         tiles.update(box=request.POST.get('box'))
         obj.save()
 
