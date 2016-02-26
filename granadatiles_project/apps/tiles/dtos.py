@@ -188,12 +188,15 @@ class TileOrderDto(BaseCatalogDto):
         else:
             self.inPortfolio = False
         self.hasInstallationPhotos = tile.has_installation_photos()
-        self.inStock = False if tile.custom == True else True
+        self.inStock = tile.in_stock
         self.price = tile.sales_price
         self.tearsheet = tile.tearsheet.url if tile.tearsheet else ''
         self.sqFt = tile.get_sq_ft()
         self.sqFtPrice = tile.get_price_by_sq_ft()
-        self.lead_time = [LeadTimeDto(lead_time, language) for lead_time in LeadTime.objects.all()]
+        if tile.in_stock:
+            self.lead_time = LeadTimeDto(LeadTime.objects.get(pk=1), language)
+        else:
+            self.lead_time = LeadTimeDto(LeadTime.objects.get(pk=2), language)
         if tile.box:
             self.box = BoxDto(tile.box)
         if tile.custom:

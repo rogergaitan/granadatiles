@@ -178,6 +178,9 @@ class Tile(BaseCatalogModel):
     def has_sample(self):
         return self.sample is not None
 
+    def in_stock(self):
+        return self.custom is False
+
     def __str__(self):
         return self.name + ' - ' + self.sales_description
 

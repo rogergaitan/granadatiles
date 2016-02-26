@@ -113,7 +113,7 @@ class TileOrderSerializer(BaseCatalogSerializer):
     tearsheet = serializers.CharField()
     styles = StyleSerializer(many=True)
     box = BoxSerializer(required=False)
-    lead_time = LeadTimeSerializer(many=True)
+    lead_time = LeadTimeSerializer()
     shipFrom = WarehouseSerializer(many=True)
 
 
