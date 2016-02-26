@@ -124,7 +124,7 @@ class GroupInline(admin.StackedInline):
 class CollectionAdmin(SummernoteModelAdmin):
     fields = ('title', 'title_es', 'list_id', 'description', 'description_es', 'introduction',
               'introduction_es', 'slug', 'slug_es', 'image', 'menu_image', 'box', 'uses',
-              'featured', 'show_in_menu')
+              'maximum_input_square_foot', 'minimum_input_square_foot', 'featured', 'show_in_menu')
 
     list_display = ('title', 'groups_count', 'featured', 'show_in_menu')
     search_fields = ['title', 'title_es', 'list_id']
