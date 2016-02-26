@@ -52,7 +52,7 @@
                         <p>{{ ::vm.labels.styles }}:</p>
                     </div>
                     <div class="col-md-8">
-                        <p>Mediterranean</p>
+                        <p ng-repeat="style in vm.tile.styles">{{ style.name }}</p>
                     </div>
                 </li>
                 <li class="row">
@@ -121,7 +121,7 @@
             <table class="table-tile-detail">
                 <thead>
                     <tr>
-                        <td>Per Box of 10</td>
+                        <td>Per {{::vm.tile.box.description}}</td>
                         <td>= Per Tile</td>
                         <td>= Per Square Foot</td>
                     </tr>
@@ -130,12 +130,12 @@
                     <tr>
                         <td>$ 80.90</td>
                         <td>${{::vm.tile.price}}</td>
-                        <td>$ 18.20</td>
+                        <td>${{::vm.tile.sqFtPrice | number:2}}</td>
                     </tr>
                     <tr>
                         <td>200</td>
                         <td>{{::vm.tile.quantity}}</td>
-                        <td>10</td>
+                        <td>{{vm.tile.quantity * vm.tile.sqFt}}</td>
                     </tr>
                 </tbody>
             </table>
