@@ -87,10 +87,6 @@ class BoxSerializer(serializers.Serializer):
     quantity = serializers.IntegerField()
 
 
-class LeadTimeSerializer(BaseContentSerializer):
-    pass
-
-
 class TileOrderSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
     mosaic = serializers.CharField()
@@ -113,7 +109,7 @@ class TileOrderSerializer(BaseCatalogSerializer):
     tearsheet = serializers.CharField()
     styles = StyleSerializer(many=True)
     box = BoxSerializer(required=False)
-    lead_time = LeadTimeSerializer()
+    leadTime = serializers.CharField()
     shipFrom = WarehouseSerializer(many=True)
 
 
