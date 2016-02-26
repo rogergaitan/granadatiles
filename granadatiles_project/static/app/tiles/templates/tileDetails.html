@@ -22,10 +22,10 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8 col-sm-8">
+        <div class="col-md-7 col-sm-8">
             <img ng-src="{{ vm.tile.image }}" alt="Kotka918-saveA-Granada-Tile-Cement" class="img-responsive thumbnail">
         </div>
-        <div class="col-md-4 col-sm-4">
+        <div class="col-md-5 col-sm-4">
             <ul class="tile-detail-container">
                 <li class="row">
                     <div class="col-md-4">
@@ -102,7 +102,7 @@
                         <p>{{ ::vm.labels.leadTime }}:</p>
                     </div>
                     <div class="col-md-8">
-                        8-10 weeks for all custom tiles
+                        {{ ::vm.tile.leadTime }}
                     </div>
                 </li>
             </ul>
@@ -121,19 +121,22 @@
             <table class="table-tile-detail">
                 <thead>
                     <tr>
-                        <td>Per {{::vm.tile.box.description}}</td>
-                        <td>= Per Tile</td>
-                        <td>= Per Square Foot</td>
+                        <td></td>
+                        <td>{{:: vm.labels.per}} {{::vm.tile.box.description}}</td>
+                        <td>= {{::vm.labels.perTile}}</td>
+                        <td>= {{::vm.labels.perSqFt}}</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>$ 80.90</td>
-                        <td>${{::vm.tile.price}}</td>
-                        <td>${{::vm.tile.sqFtPrice | number:2}}</td>
+                        <td>Retail Price:</td>
+                        <td>$&nbsp;{{::vm.tile.pricePerBox}}</td>
+                        <td>$&nbsp;{{::vm.tile.price}}</td>
+                        <td>$&nbsp;{{::vm.tile.sqFtPrice | number:2}}</td>
                     </tr>
                     <tr>
-                        <td>200</td>
+                        <td>Quantity in Stock:</td>
+                        <td>{{::vm.tile.quantityPerBox}}</td>
                         <td>{{::vm.tile.quantity}}</td>
                         <td>{{vm.tile.quantity * vm.tile.sqFt}}</td>
                     </tr>
@@ -153,7 +156,7 @@
                     <label for="squareFootage">{{ ::vm.labels.inputSquareFootage }}</label>
                 </div>
                 <div class="col-md-7 col-sm-7">
-                    <input type="text" id="squareFootage" class="form-control" placeholder="10">
+                    <input type="text" id="squareFootage" name="squareFootage" class="form-control">
                 </div>
             </div>
             <div class="row space-bottom">
@@ -162,13 +165,13 @@
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <div class="btn-group space-bottom" dropdown>
-                        <button type="button" class="btn btn-sky">Ship From</button>
+                        <button type="button" class="btn btn-sky">{{vm.selectedWarehouse}}</button>
                         <button type="button" class="btn btn-sky dropdown-toggle" dropdown-toggle>
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu filter-list" role="menu">
-                            <li>
-                                <a href="#"></a>
+                            <li ng-repeat="warehouse in vm.tile.shipFrom">
+                                <a href="#" ng-click="vm.setWarehouse(warehouse)">{{ warehouse.name + ' - ' + warehouse.zipcode}}</a>
                             </li>
                         </ul>
                     </div>
@@ -181,7 +184,7 @@
             </div>
         </div>
         <div class="col-md-2 col-sm-2">
-            <img src="{{ STATIC_URL }}img/Norton-seal.png" alt="Norton_Seal">
+            <img ng-src="{{ ::vm.nortonImage }}" alt="Norton_Seal">
         </div>
         <div class="col-md-3 col-sm-3 text-right resume-order-tile-detail">
             <ul>
