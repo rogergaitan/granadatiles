@@ -101,6 +101,8 @@ class TileOrderSerializer(BaseCatalogSerializer):
     sqFt = serializers.FloatField()
     sqFtPrice = serializers.FloatField()
     qtyIsSqFt = serializers.BooleanField()
+    maximumInputSquareFoot = serializers.IntegerField()
+    minimumInputSquareFoot = serializers.IntegerField()
     sample = serializers.BooleanField()
     hasSample = serializers.BooleanField()
     inPortfolio = serializers.BooleanField()
