@@ -39,6 +39,7 @@ class Article(BaseGalleryImageModel):
         max_length=200, verbose_name=_('Link'), null=True, blank=True)
     date = models.DateField(verbose_name=_('Date'))
     magazine = models.ForeignKey(Magazine, related_name='articles')
+    file = models.FileField(upload_to='articles_files', null=True, blank=True, verbose_name=_('File'))
 
     objects = BaseDateManager()
 
