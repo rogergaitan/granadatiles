@@ -194,8 +194,8 @@ class TileOrderDto(BaseCatalogDto):
         self.sqFt = tile.get_sq_ft()
         self.sqFtPrice = tile.get_price_by_sq_ft()
         self.qtyIsSqFt = tile.qty_is_sq_ft
-        self.maximumInputSquareFoot = tile.design.group.collection.maximum_input_square_foot
-        self.minimumInputSquareFoot = tile.design.group.collection.minimum_input_square_foot
+        self.maximumSqFt = tile.design.group.collection.maximum_input_square_foot
+        self.minimumSqFt = tile.design.group.collection.minimum_input_square_foot
         if tile.in_stock():
             self.leadTime = LeadTime.objects.get(pk=1).get_description(language)
         else:
