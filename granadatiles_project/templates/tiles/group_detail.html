@@ -23,6 +23,9 @@
                 language: '{{LANGUAGE_CODE}}',
                 collectionId: {{collection_id}},
                 groupId:{{group_id}},
+                navigation:{
+                    cart: '{% url 'sr-cart:sr-home'%}'
+                },
                 labels: {
                     interactiveCatalog: '{% trans 'Interactive Catalog' %}',
                     customCement: '{% trans 'Custom Cement Tiles' %}',

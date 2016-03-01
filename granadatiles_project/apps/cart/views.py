@@ -26,13 +26,13 @@ class TileOrdersViewSet(BaseViewSet):
     def create(self, request):
         cart = CartService.get_cart(request)
         tile = OrdersService.get_tile(request.data.get('id'))
-        sq_ft = int(request.data.get('sq_ft'))
+        sq_ft = int(request.data.get('sqFt'))
         return Response(OrdersService.add_tile(cart, tile, sq_ft))
       
     def update(self, request, pk=None):
         cart = CartService.get_cart(request)
         tile = OrdersService.get_tile(pk)
-        sq_ft = int(request.data.get('sq_ft'))
+        sq_ft = int(request.data.get('sqFt'))
         return Response(OrdersService.update_tile(cart, tile, sq_ft))
       
     def destroy(self, request, pk=None):

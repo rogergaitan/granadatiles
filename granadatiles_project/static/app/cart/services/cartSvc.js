@@ -32,7 +32,7 @@
         }
 
         function addTile(tile) {
-            return $http.post(appSettings.serverPath + 'cart/tiles', tile);
+            return $http.post(appSettings.serverPath + 'cart/tiles/', tile );
         }
 
         function updateTile(tile) {
@@ -48,7 +48,7 @@
         }
 
         function addSample(sample) {
-            return $http.post(appSettings.serverPath + 'cart/samples', sample);
+            return $http.post(appSettings.serverPath + 'cart/samples/', sample);
         }
 
         function updateSample(sample) {

@@ -201,8 +201,8 @@
                     <label>{{ ::vm.labels.yourCost  }}: </label><span>${{vm.order.total | number:2 }}</span>
                 </li>
             </ul>
-            <button type="button" class="btn btn-green">{{ ::vm.labels.addToCart }}</button>
-            <button type="button" class="btn btn-green">{{ ::vm.labels.orderFree }}</button>
+            <button type="button" class="btn btn-green" ng-click="vm.addToCart()">{{ ::vm.labels.addToCart }}</button>
+            <button type="button" class="btn btn-green" ng-if="vm.tile.hasSample">{{ ::vm.labels.orderFree }}</button>
         </div>
     </div>
     <div class="row">
