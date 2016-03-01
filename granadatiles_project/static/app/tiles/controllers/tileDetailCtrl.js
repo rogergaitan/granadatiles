@@ -25,7 +25,7 @@
         vm.isAuthenticated = baseSettings.userIsAuthenticated;
         vm.navigation = baseSettings.navigation;
         vm.nortonImage = baseSettings.staticUrl + 'img/Norton-seal.png';
-        vm.Order = {
+        vm.order = {
             inputSqFt: 0,
             shipFromWarehouseId:0
         }
@@ -72,6 +72,7 @@
 
         vm.setWarehouse = function (warehouse) {
             vm.selectedWarehouse = warehouse.name;
+            vm.order.shipFromWarehouseId = warehouse.id;
         }
 
         vm.printPage = function () {

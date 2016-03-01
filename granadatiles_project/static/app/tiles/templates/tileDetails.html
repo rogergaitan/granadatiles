@@ -156,7 +156,7 @@
                     <label for="squareFootage">{{ ::vm.labels.inputSquareFootage }}</label>
                 </div>
                 <div class="col-md-7 col-sm-7">
-                    <input type="text" id="squareFootage" name="squareFootage" class="form-control">
+                    <input type="text" id="squareFootage" name="squareFootage" class="form-control" ng-model="vm.order.inputSqFt">
                 </div>
             </div>
             <div class="row space-bottom">
@@ -212,30 +212,30 @@
                 <li>
                     <div class="row">
                         <div class="col-md-9 col-sm-9">
-                            Tiles needed (10 Sq. Ft / 0.44 Sq. Ft Per Tile)=
+                            Tiles needed ({{vm.order.inputSqFt}} Sq. Ft / {{vm.tile.sqFt | number:2}} Sq. Ft Per Tile)=
                         </div>
                         <div class="col-md-3 col-sm-3 text-right">
-                            22.73 Tiles *
+                            {{vm.order.inputSqFt / vm.tile.sqFt | number:2 }} *
                         </div>
                     </div>
                 </li>
                 <li>
                     <div class="row">
                         <div class="col-md-9 col-sm-9">
-                            Tiles needed and 10% Overage (22.73 X 10%)=
+                            Tiles needed and 10% Overage ({{vm.order.inputSqFt / vm.tile.sqFt | number:2 }} X 10%)=
                         </div>
                         <div class="col-md-3 col-sm-3 text-right">
-                            25 Tiles *
+                            {{(vm.order.inputSqFt / vm.tile.sqFt) + ((vm.order.inputSqFt / vm.tile.sqFt) * 0.1) | number:2 }} *
                         </div>
                     </div>
                 </li>
                 <li>
                     <div class="row">
                         <div class="col-md-9 col-sm-9">
-                            Boxes needed (25 Tiles / 10 Tiles Per Box)=
+                            Boxes needed ({{(vm.order.inputSqFt / vm.tile.sqFt) + ((vm.order.inputSqFt / vm.tile.sqFt) * 0.1) | number:2 }} Tiles / {{vm.tile.box.quantity}} Tiles Per Box)=
                         </div>
                         <div class="col-md-3 col-sm-3 text-right">
-                            3 Boxes *
+                            {{( (vm.order.inputSqFt / vm.tile.sqFt) + ((vm.order.inputSqFt / vm.tile.sqFt) * 0.1) ) / vm.tile.box.quantity | number:0 }} Boxes *
                         </div>
                     </div>
                 </li>
