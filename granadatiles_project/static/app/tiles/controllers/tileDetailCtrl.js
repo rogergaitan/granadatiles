@@ -10,11 +10,12 @@
                               'tilesLogicSvc',
                               'pageSettings',
                               'portfolioSvc',
+                              'cartSvc',
                               '$modal',
                               'baseSettings',
                               'collectionsSvc'];
 
-    function tileDetailCtrl($scope, tilesSvc, tilesLogicSvc, pageSettings, portfolioSvc, $modal, baseSettings, collectionsSvc) {
+    function tileDetailCtrl($scope, tilesSvc, tilesLogicSvc, pageSettings, portfolioSvc, cartSvc, $modal, baseSettings, collectionsSvc) {
         var selectedTileId = $scope.shared.tileId;
 
         var vm = this;
@@ -93,5 +94,15 @@
             vm.order.baseCost = vm.order.boxesNeeded * vm.tile.pricePerBox;
             vm.order.total = vm.order.baseCost + vm.order.shippingCost - vm.order.discount;
         }
+
+        vm.addToCart = function () {
+            var cartItem = {
+                sqFt: vm.order.inputSqFt,
+                id: vm.tile.id
+            };
+            cartSvc.addTile(cartItem).then(function (resp) {
+                window.location = pageSettings.navigation.cart;
+            });
+        };
     }
 })();
