@@ -250,6 +250,7 @@ class Box(models.Model):
     description = models.CharField(max_length=100, verbose_name=_('Description'))
     measurement_unit = models.PositiveIntegerField(choices=MEASUREMENT_UNITS, verbose_name=_('Measurement Unit'))
     quantity = models.FloatField(verbose_name=_('Quantity'))
+    weight = models.PositiveIntegerField(default=0, verbose_name=_('Weight'))
 
     def __str__(self):
         return self.description
