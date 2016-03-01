@@ -33,10 +33,8 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
     introduction_es = models.TextField(blank=True, null=True, verbose_name=_('Introduction_es'))
     list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
     uses = models.ManyToManyField('Use', blank=True, related_name='collection', verbose_name=_('Uses'))
-    maximum_input_square_foot = models.PositiveIntegerField(null=True, blank=True,
-                                                            verbose_name=_('Maximum Input Square Foot'))
-    minimum_input_square_foot = models.PositiveIntegerField(null=True, blank=True,
-                                                            verbose_name=_('Minimum Input Square Foot'))
+    maximum_input_square_foot = models.PositiveIntegerField(default=5000, verbose_name=_('Maximum Input Square Foot'))
+    minimum_input_square_foot = models.PositiveIntegerField(default=1, verbose_name=_('Minimum Input Square Foot'))
     box = models.ForeignKey('Box', null=True, blank=True, verbose_name=_('Box'))
 
     @property
