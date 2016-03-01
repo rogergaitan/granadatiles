@@ -85,6 +85,7 @@ class BoxSerializer(serializers.Serializer):
     description = serializers.CharField()
     measurementUnit = serializers.IntegerField()
     quantity = serializers.IntegerField()
+    weight = serializers.IntegerField()
 
 
 class TileOrderSerializer(BaseCatalogSerializer):

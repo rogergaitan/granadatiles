@@ -158,6 +158,7 @@ class BoxDto:
         self.description = box.description
         self.measurementUnit = box.measurement_unit
         self.quantity = box.quantity
+        self.weight = box.weight
 
 
 class LeadTimeDto(BaseContentDto):
