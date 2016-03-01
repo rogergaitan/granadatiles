@@ -156,7 +156,7 @@
                     <label for="squareFootage">{{ ::vm.labels.inputSquareFootage }}</label>
                 </div>
                 <div class="col-md-7 col-sm-7">
-                    <input type="text" id="squareFootage" name="squareFootage" class="form-control" ng-model="vm.order.inputSqFt">
+                    <input type="text" id="squareFootage" name="squareFootage" class="form-control" ng-model="vm.order.inputSqFt" ng-change="vm.updateOrderDetail()">
                 </div>
             </div>
             <div class="row space-bottom">
@@ -189,16 +189,16 @@
         <div class="col-md-3 col-sm-3 text-right resume-order-tile-detail">
             <ul>
                 <li>
-                    <label>{{ ::vm.labels.subtotal  }}: </label><span>$242.70</span>
+                    <label>{{ ::vm.labels.subtotal  }}: </label><span>${{vm.order.baseCost | number:2 }}</span>
                 </li>
                 <li class="text-orange">
-                    <label>- {{ ::vm.labels.discount  }}: </label><span>$48.54</span>
+                    <label>- {{ ::vm.labels.discount  }}: </label><span>${{vm.order.discount | number:2 }}</span>
                 </li>
                 <li>
-                    <label>{{ ::vm.labels.shipping  }}: </label><span>$194.16</span>
+                    <label>{{ ::vm.labels.shipping  }}: </label><span>${{vm.order.shippingCost | number:2 }}</span>
                 </li>
                 <li>
-                    <label>{{ ::vm.labels.yourCost  }}: </label><span>$194.16</span>
+                    <label>{{ ::vm.labels.yourCost  }}: </label><span>${{vm.order.total | number:2 }}</span>
                 </li>
             </ul>
             <button type="button" class="btn btn-green">{{ ::vm.labels.addToCart }}</button>
@@ -215,7 +215,7 @@
                             Tiles needed ({{vm.order.inputSqFt}} Sq. Ft / {{vm.tile.sqFt | number:2}} Sq. Ft Per Tile)=
                         </div>
                         <div class="col-md-3 col-sm-3 text-right">
-                            {{vm.order.inputSqFt / vm.tile.sqFt | number:2 }} *
+                            {{vm.order.tilesNeeded | number:2 }} *
                         </div>
                     </div>
                 </li>
@@ -225,34 +225,34 @@
                             Tiles needed and 10% Overage ({{vm.order.inputSqFt / vm.tile.sqFt | number:2 }} X 10%)=
                         </div>
                         <div class="col-md-3 col-sm-3 text-right">
-                            {{(vm.order.inputSqFt / vm.tile.sqFt) + ((vm.order.inputSqFt / vm.tile.sqFt) * 0.1) | number:2 }} *
+                            {{ vm.order.tilesNeededOverage }} *
                         </div>
                     </div>
                 </li>
                 <li>
                     <div class="row">
                         <div class="col-md-9 col-sm-9">
-                            Boxes needed ({{(vm.order.inputSqFt / vm.tile.sqFt) + ((vm.order.inputSqFt / vm.tile.sqFt) * 0.1) | number:2 }} Tiles / {{vm.tile.box.quantity}} Tiles Per Box)=
+                            Boxes needed ({{vm.order.tilesNeededOverage }} Tiles / {{vm.tile.box.quantity}} Tiles Per Box)=
                         </div>
                         <div class="col-md-3 col-sm-3 text-right">
-                            {{( (vm.order.inputSqFt / vm.tile.sqFt) + ((vm.order.inputSqFt / vm.tile.sqFt) * 0.1) ) / vm.tile.box.quantity | number:0 }} Boxes *
+                            {{( (vm.order.inputSqFt / vm.tile.sqFt) + ((vm.order.inputSqFt / vm.tile.sqFt) * 0.1) ) / vm.tile.box.quantity | nextInt }} Boxes *
                         </div>
                     </div>
                 </li>
                 <li>
                     <div class="row">
                         <div class="col-md-9 col-sm-9">
-                            Base cost (3 Boxes X $80.9 Per Box)=
+                            Base cost ({{ vm.order.boxesNeeded }} Boxes X ${{vm.tile.pricePerBox}} Per Box)=
                         </div>
                         <div class="col-md-3 col-sm-3 text-right">
-                            $242.70 *
+                            ${{ vm.order.baseCost | number:2}} *
                         </div>
                     </div>
                 </li>
                 <li>
                     <div class="row">
                         <div class="col-md-9 col-sm-9">
-                            Shipping Weight (70 lbs Per Box x 3 Boxes)=
+                            Shipping Weight (70 lbs Per Box x {{vm.order.boxesNeeded}} Boxes)=
                         </div>
                         <div class="col-md-3 col-sm-3 text-right">
                             210.00 lbs

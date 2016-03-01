@@ -27,7 +27,14 @@
         vm.nortonImage = baseSettings.staticUrl + 'img/Norton-seal.png';
         vm.order = {
             inputSqFt: 0,
-            shipFromWarehouseId:0
+            shipFromWarehouseId: 0,
+            tilesNeeded: 0,
+            tilesNeededOverage: 0,
+            boxesNeeded: 0,
+            baseCost: 0,
+            discount: 0,
+            shippingCost: 0,
+            total: 0
         }
 
         vm.backToGroup = function () {
@@ -77,6 +84,14 @@
 
         vm.printPage = function () {
             print();
+        }
+
+        vm.updateOrderDetail = function () {
+            vm.order.tilesNeeded = vm.order.inputSqFt / vm.tile.sqFt;
+            vm.order.tilesNeededOverage = Math.ceil((vm.order.inputSqFt / vm.tile.sqFt) + ((vm.order.inputSqFt / vm.tile.sqFt) * 0.1));
+            vm.order.boxesNeeded = Math.ceil(vm.order.tilesNeededOverage / vm.tile.box.quantity);
+            vm.order.baseCost = vm.order.boxesNeeded * vm.tile.pricePerBox;
+            vm.order.total = vm.order.baseCost + vm.order.shippingCost - vm.order.discount;
         }
     }
 })();
