@@ -200,3 +200,8 @@ SOCIAL_AUTH_FACEBOOK_KEY = '1653932784823559'
 SOCIAL_AUTH_FACEBOOK_SECRET = '4d0e4c10fee651e388b74bcf68a6ced2'
 
 BROKER_URL = 'django://'
+
+from core.utils import uploaded_filepath
+SUMMERNOTE_CONFIG = {
+    'attachment_upload_to':   uploaded_filepath
+    }

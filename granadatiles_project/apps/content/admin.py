@@ -20,7 +20,7 @@ class SectionAdmin(SummernoteModelAdmin):
     list_display = ('name', 'title', )
     inlines = [ImagesInline]
     search_fields = ['name', 'name_es']
-    exclude  = ('name', 'name_es',)
+    #exclude  = ('name', 'name_es',)
 
     def has_add_permission(self, request):
         return False;

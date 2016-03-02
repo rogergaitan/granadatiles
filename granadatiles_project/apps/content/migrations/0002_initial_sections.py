@@ -18,9 +18,9 @@ def addInitialData(apps, schema_editor):
                 ),
             #2
             Section(
-                    name='Collections/Compare our products',
+                    name='Collections/Product Comparison',
                     name_es='Colecciones/Compare nuestros productos',
-                    title='Compare our Products ',
+                    title='Product Comparison',
                     title_es='Compare our Products ',
                     description='''This Tile Comparison Chart is designed to give you an overview of Granada Tile's 
                                     6 cement and concrete tile collections, with their varied characteristics and uses.''',
