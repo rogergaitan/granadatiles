@@ -49,7 +49,7 @@
             });
         }
 
-        if (pageSettings.areaId != 0) {
+        if (pageSettings.areaId != 0 && pageSettings.areaId) {
             areaSvc.getArea(pageSettings.areaId).then(function (response) {
                 vm.area = response.data.description;
             });
