@@ -222,7 +222,7 @@
                 <li>
                     <div class="row">
                         <div class="col-md-9 col-sm-9">
-                            Tiles needed and 10% Overage ({{vm.order.inputSqFt / vm.tile.sqFt | number:2 }} X 10%)=
+                            Tiles needed and 10% Overage ({{vm.order.tilesNeeded  | number:2 }} X 10%)=
                         </div>
                         <div class="col-md-3 col-sm-3 text-right">
                             {{ vm.order.tilesNeededOverage }} *
@@ -235,7 +235,7 @@
                             Boxes needed ({{vm.order.tilesNeededOverage }} Tiles / {{vm.tile.box.quantity}} Tiles Per Box)=
                         </div>
                         <div class="col-md-3 col-sm-3 text-right">
-                            {{( (vm.order.inputSqFt / vm.tile.sqFt) + ((vm.order.inputSqFt / vm.tile.sqFt) * 0.1) ) / vm.tile.box.quantity | nextInt }} Boxes *
+                            {{vm.order.tilesNeededOverage / vm.tile.box.quantity | nextInt }} Boxes *
                         </div>
                     </div>
                 </li>
@@ -252,15 +252,15 @@
                 <li>
                     <div class="row">
                         <div class="col-md-9 col-sm-9">
-                            Shipping Weight (70 lbs Per Box x {{vm.order.boxesNeeded}} Boxes)=
+                            Shipping Weight ({{vm.tile.box.weight}} lbs Per Box x {{vm.order.boxesNeeded}} Boxes)=
                         </div>
                         <div class="col-md-3 col-sm-3 text-right">
-                            210.00 lbs
+                            {{vm.tile.box.weight * vm.order.boxesNeeded}}
                         </div>
                     </div>
                 </li>
             </ul>
-            <span class="text-footer">* Numbers are rounded to nearest tile or box</br>** Minimum 100 square feet for custom tiles</span>
+            <span class="text-footer">* Numbers are rounded to nearest tile or box<br/>** Minimum 100 square feet for custom tiles</span>
         </div>
     </div>
     <div class="row">

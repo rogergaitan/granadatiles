@@ -24,7 +24,7 @@
         return service;
 
         function getCartTilesCount() {
-            return $http.get(appSettings.serverPath + 'cart/tiles_count')
+            return $http.get(appSettings.serverPath + 'cart/tiles/count')
         }
 
         function getCartTiles() {

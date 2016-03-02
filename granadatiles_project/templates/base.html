@@ -106,7 +106,7 @@
                                         {% endif %}
                                     </li>
                                     <li>
-                                        <a href="{% url 'sr-cart:sr-home'%}"><i class="fa fa-shopping-cart"></i>&nbsp;<span>{% trans 'CART' %}</span></a>
+                                        <ng-include src="'{{STATIC_URL}}app/cart/templates/cartMenuItem.html'"></ng-include>
                                     </li>
                                     <li>
                                         {% get_current_language as LANGUAGE_CODE %}
@@ -275,13 +275,16 @@
     <!-- inject:js -->
     <script type="text/javascript" src="{{ STATIC_URL }}app/app.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/stylish.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/content/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/cart/module.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/content/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/module.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/module.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/cart/controllers/cartCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/cart/controllers/cartMenuCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/cart/services/cartSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/aboutUsCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/collectionContentCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/contentDefaultCtrl.js"></script>
@@ -291,22 +294,22 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/sectionCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/testimonyCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/videoCtrl.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/content/filters/ResourceUrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/directives/imagePreload.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/content/filters/ResourceUrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/areaSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/flatPagesSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/mainNavigationSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/sectionSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/testimonySvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/videoSvc.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/cart/controllers/cartCtrl.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/cart/services/cartSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/core/filters/nextInt.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/directives/angular-yamm3.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/directives/fadeIn.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/core/filters/nextInt.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/core/interceptors/languageCode.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/services/gtUtilsSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/services/sharePageSvc.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/core/interceptors/languageCode.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/controllers/galleriesListCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/controllers/galleryModalCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/services/gallerySvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/controllers/articlesListCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/news/controllers/catalogListCtrl.js"></script>
@@ -322,8 +325,6 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/tileDetailCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/tileListCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/tileModalCtrl.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/controllers/galleriesListCtrl.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/controllers/galleryModalCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/collectionsSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/instockSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/tilesLogicSvc.js"></script>
@@ -350,7 +351,8 @@
                         catalogs:'{% trans 'Catalogs / Inspiration Boooks' %}',
                         designer: '{% trans 'Designer' %}',
                         photographer: '{% trans 'Photographer' %}',
-                        featured: '{% trans 'Also Featured in' %}'
+                        featured: '{% trans 'Also Featured in' %}',
+                        cart: '{% trans 'CART' %}'
                     },
                    navigation:{
                         catalogs: '{% url 'sr-news:sr-catalogs' %}',
@@ -359,7 +361,8 @@
                         colorPalletes:'{% url 'color_palletes'%}',
                         inStock: '{% url 'sr-collections:sr-instock-tiles'%}',
                         inStockSamples: '{% url 'sr-collections:sr-instock-samples'%}',
-                        login: '{% url 'sr-portfolio:login_to_portfolio'%}'
+                        login: '{% url 'sr-portfolio:login_to_portfolio'%}',
+                        cart: '{% url 'sr-cart:sr-home'%}'
                    },
                    userIsAuthenticated: ('{{ user.is_authenticated }}' == 'True')? true:false
             }

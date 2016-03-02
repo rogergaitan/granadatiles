@@ -88,8 +88,8 @@
         }
 
         vm.updateOrderDetail = function () {
-            vm.order.tilesNeeded = vm.order.inputSqFt / vm.tile.sqFt;
-            vm.order.tilesNeededOverage = Math.ceil((vm.order.inputSqFt / vm.tile.sqFt) + ((vm.order.inputSqFt / vm.tile.sqFt) * 0.1));
+            vm.order.tilesNeeded = vm.order.inputSqFt / parseFloat(vm.tile.sqFt.toPrecision(2));
+            vm.order.tilesNeededOverage = Math.ceil(vm.order.tilesNeeded + ((vm.order.tilesNeeded) * 0.1));
             vm.order.boxesNeeded = Math.ceil(vm.order.tilesNeededOverage / vm.tile.box.quantity);
             vm.order.baseCost = vm.order.boxesNeeded * vm.tile.pricePerBox;
             vm.order.total = vm.order.baseCost + vm.order.shippingCost - vm.order.discount;
