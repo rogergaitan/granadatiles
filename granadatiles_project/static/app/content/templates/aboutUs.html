@@ -4,7 +4,7 @@
             <h2 class="heading-sec">{{::vm.section.title}}</h2>
             <a class="breadcrumds" href="#"><u>{{ ::vm.labels.aboutUs }}</u> <i class="fa fa-angle-double-right"></i></a>
             <a class="breadcrumds" href="#"><u>{{ ::vm.labels.contactUs }}</u> <i class="fa fa-angle-double-right"></i></a>
-            <div class="text-section" ng-bind-html="::vm.section.description"></div>
+            <div class="text-section" ng-bind-html="::vm.section.description | unsafe"></div>
         </div>
     </div>
     <div class="row">

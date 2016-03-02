@@ -9,7 +9,7 @@
                 <a href="#" class="breadcrumds"><u>{{::vm.labels.collection}}</u> <i class="fa fa-angle-double-right"></i></a>
                 <a ng-href="{{vm.collection.url}}" class="breadcrumds"><u>{{ ::vm.collection.title }}</u> <i class="fa fa-angle-double-right"></i></a>
                 <a href="#" class="breadcrumds"><u>{{ ::vm.group.title }}</u></a>
-                <div class="text-section" ng-bind-html="::vm.group.description"></div>
+                <div class="text-section" ng-bind-html="::vm.group.description | unsafe"></div>
                 <div class="row filter-container">
                     <div class="col-md-8">
                         <label class="inline-block"><strong>{{ vm.labels.show_only }}</strong></label>

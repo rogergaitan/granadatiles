@@ -10,7 +10,7 @@
                     <img class="gt-gallery-img" ng-src="{{::slide.image}}" alt="{{::slide.title}}" />
                     <div>
                         <h1>{{::slide.title}}</h1>
-                        <p ng-bind-html="slide.description"></p>
+                        <p ng-bind-html="slide.description | unsafe"></p>
                         <p>{{::slide.designer}}</p>
                         <p>{{::slide.photographer}}</p>
                     </div>

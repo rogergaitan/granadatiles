@@ -20,7 +20,7 @@
         <div class="col-sm-9 col-xs-8">
             <h1 class="heading-sec">{{ ::vm.section.title }} </h1>
             <a href="#" class="breadcrumds"><u>{{vm.labels.collections}}</u> <i class="fa fa-angle-double-right"></i></a>
-            <div class="text-section" ng-bind-html="::vm.section.description"></div>
+            <div class="text-section" ng-bind-html="::vm.section.description | unsafe"></div>
             <div class="row filter-container">
                 <div class="col-xs-12">
                     <label class="inline-block"><strong>{{ vm.labels.showOnly }}</strong></label>

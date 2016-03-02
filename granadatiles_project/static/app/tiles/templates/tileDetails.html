@@ -4,7 +4,7 @@
     <a ng-href="{{::vm.collection.url}}" class="breadcrumds"><u>{{::vm.collection.title}}</u> <i class="fa fa-angle-double-right"></i></a>
     <a class="breadcrumds" href="#" ng-click="vm.backToGroup()"><u>{{::vm.group.title}}</u> <i class="fa fa-angle-double-right"></i></a>
     <a class="breadcrumds" href="#"><u>{{::vm.tile.name}}</u></a>
-    <div class="text-section" ng-bind-html="::vm.areas.tileDetailWelcomeMessage"></div>
+    <div class="text-section" ng-bind-html="::vm.areas.tileDetailWelcomeMessage | unsafe"></div>
     <div class="row">
         <div class="col-md-12 col-sm-12 left-align">
             <ul class="list-inline tile-button-options">

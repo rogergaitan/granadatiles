@@ -7,7 +7,7 @@
             <h1 class="heading-sec">{{ ::vm.section.title }}</h1>
             <a href="#" class="breadcrumds"><u>{{ ::vm.labels.newsPress }}</u> <i class="fa fa-angle-double-right"></i></a>
             <a href="#" class="breadcrumds"><u>{{ ::vm.labels.news }}</u> <i class="fa fa-angle-double-right"></i></a>
-            <div ng-bind-html="vm.section.description" class="text-section"></div>
+            <div ng-bind-html="vm.section.description | unsafe" class="text-section"></div>
         </div>
     </div>
     <div ng-repeat="catalog in vm.catalogs" ng-if="$index % 3 == 0" class="row">

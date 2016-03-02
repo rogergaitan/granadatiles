@@ -7,7 +7,7 @@
             <h1 class="heading-sec">{{ ::vm.section.title }}</h1>
             <a href="#" class="breadcrumds"><u>{{ ::vm.labels.newsPress }}</u> <i class="fa fa-angle-double-right"></i></a>
             <a href="#" class="breadcrumds"><u>{{ ::vm.labels.magazine }}</u> <i class="fa fa-angle-double-right"></i></a>
-            <div class="text-section" ng-bind-html="::vm.section.description"></div>
+            <div class="text-section" ng-bind-html="::vm.section.description | unsafe"></div>
         </div>
     </div>
     <div class="row filter-container">
@@ -36,7 +36,7 @@
                         <div class="col-md-8 article-body">
                             <h2>{{ vm.articles[$index].title }}</h2>
                             <h3>{{ vm.articles[$index].magazine }}</h3>
-                            <p ng-bind-html="vm.articles[$index].description"></p>
+                            <p ng-bind-html="vm.articles[$index].description | unsafe"></p>
                             <label>{{ vm.labels.date}}:</label>
                             <label>{{ vm.articles[$index].date }}</label>
                         </div>
@@ -54,7 +54,7 @@
                         <div class="col-md-8 article-body">
                             <h2>{{ vm.articles[$index + 1].title }}</h2>
                             <h3>{{ vm.articles[$index + 1].magazine }}</h3>
-                            <p ng-bind-html="vm.articles[$index + 1].description"></p>
+                            <p ng-bind-html="vm.articles[$index + 1].description | unsafe"></p>
                             <label>{{ vm.labels.date}}:</label>
                             <label>{{ vm.articles[$index + 1].date }}</label>
                         </div>
