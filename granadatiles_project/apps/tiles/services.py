@@ -119,7 +119,7 @@ class TileService:
           return tileinstallationphotosDto
 
       def get_tile_order(id, portfolio, language):
-          tile = get_object_or_404(Tile, pk=id)
+          tile = get_object_or_404(Tile.objects.select_related('box','sample', 'design'), pk=id)
           tileorderDto = TileOrderDto(tile, portfolio, language)
           return tileorderDto
 
