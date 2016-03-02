@@ -3,6 +3,6 @@
 
     angular
         .module('app.core')
-        .filter('unsafe', function ($sce) { return $sce.trustAsHtml; });
+        .filter('unsafe', ['$sce', function ($sce) { return $sce.trustAsHtml; }]);
     
 })();
