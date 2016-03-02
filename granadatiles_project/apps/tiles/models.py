@@ -145,7 +145,7 @@ class Tile(BaseCatalogModel):
         if self.qty_is_sq_ft:
            return self.quantity_on_hand
         else:
-           return self.width * self.height * 0.00694444
+           return round(self.width * self.height * 0.00694444, 2)
 
     def get_price_by_sq_ft(self):
         return (1 / self.get_sq_ft()) * self.sales_price

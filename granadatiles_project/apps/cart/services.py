@@ -28,13 +28,14 @@ class CartService:
             cart = CartService.new(request)
         return cart
       
+      
 class OrdersService:
     
     def get_tile(id):
         return get_object_or_404(Tile, pk=id)
     
-    def tile_quantity(sq_ft, tile):
-        return math.ceil(int(sq_ft)/tile.get_sq_ft())
+    def tile_quantity(tile, sq_ft):
+        return math.ceil(sq_ft/tile.get_sq_ft())
 
     def get_boxes(tile, quantity):
 
@@ -53,13 +54,6 @@ class OrdersService:
     def get_subtotal(tile, quantity):
         return quantity * tile.sales_price
 
-    def get_customized_tile(id):
-        return get_object_or_404(CustomizedTile, pk=id)
-
-    def get_tile_orders(cart, language):
-        tile_orders_dto = [TileOrdersDto(tile_order, language) for tile_order in cart.tile_orders.all()]
-        return tile_orders_dto
-
     def calculate_order(tile, sq_ft):
         if sq_ft < tile.design.group.collection.minimum_input_square_foot:
             raise APIException(_('minimum_input_square_foot_message'))
@@ -67,7 +61,7 @@ class OrdersService:
         if sq_ft > tile.design.group.collection.maximum_input_square_foot:
             raise APIException(_('maximum_input_square_foot_message'))
 
-        quantity = OrdersService.tile_quantity(sq_ft, tile)
+        quantity = OrdersService.tile_quantity(tile, sq_ft)
         subtotal = OrdersService.get_subtotal(tile, quantity)
         boxes = OrdersService.get_boxes(tile, quantity)
 
@@ -78,8 +72,13 @@ class OrdersService:
         }
 
         return data
+      
+    def get_tile_orders(cart, language):
+        tile_orders_dto = [TileOrdersDto(tile_order, language) for tile_order in cart.tile_orders.all()]
+        return tile_orders_dto
 
     def add_tile(cart, tile, sq_ft):
+        sq_ft = sq_ft + (sq_ft * 0.1)
         data = OrdersService.calculate_order(tile, sq_ft)
         cart.tile_orders.create(tile=tile,
 				sq_ft=sq_ft,
@@ -98,6 +97,9 @@ class OrdersService:
 		      
     def remove_tile(cart, tile):
         cart.tile_orders.get(tile=tile).delete()
+        
+    def get_customized_tile(id):
+        return get_object_or_404(CustomizedTile, pk=id)
 
     def get_customized_tile_orders(cart, language):
         customized_tile_orders_dto = [CustomizedTileOrdersDto(customized_tile_order, language)
