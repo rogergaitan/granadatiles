@@ -14,7 +14,7 @@ class TileSerializer(BaseCatalogSerializer):
 
 
 class BaseTileOrderSerializer(BaseSerializer):
-    sq_ft = serializers.IntegerField()
+    sqFt = serializers.IntegerField()
     quantity = serializers.IntegerField()
     boxes = serializers.IntegerField()
     subtotal = serializers.FloatField()

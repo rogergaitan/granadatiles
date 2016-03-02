@@ -21,7 +21,7 @@ class BaseTileOrdersDto(BaseDto):
 
     def __init__(self, order):
         super().__init__(order)
-        self.sq_ft = order.sq_ft
+        self.sqFt = order.sq_ft
         self.quantity = order.quantity
         self.boxes = order.boxes
         self.subtotal = order.subtotal
