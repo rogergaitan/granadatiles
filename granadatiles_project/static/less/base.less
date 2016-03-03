@@ -62,13 +62,15 @@ header.navbar-fixed-top {
                 margin-right: 0;
             }
 
-            & > a, .contact-item {
+            & > a, .contact-item, & > ng-include > a {
                 color: @gray;
 
                 &:hover, &:focus {
                     .navigation-hover();
                 }
             }
+
+
 
             .drop-button {
                 color: @gray;

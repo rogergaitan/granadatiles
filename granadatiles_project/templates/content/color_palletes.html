@@ -9,7 +9,7 @@
 
 {% block content%}
     <div class="row">
-        <ng-include src="'{{STATIC_URL}}app/content/templates/compareProducts.html'"></ng-include>
+        <ng-include src="'{{STATIC_URL}}app/content/templates/colorPalletes.html'"></ng-include>
     </div>
 {% endblock content%}
 
@@ -26,7 +26,7 @@
                 sectionId: 4,
                 language: '{{LANGUAGE_CODE}}',
                 labels: {
-                   
+                   productInformation: '{% trans 'Product Information'%}'
                 },
                 navigation:{
                    

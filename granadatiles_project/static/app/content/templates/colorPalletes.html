@@ -1,0 +1,37 @@
+﻿<div class="col-md-12" ng-controller="colorPalleteCtrl as vm">
+    <div class="row">
+        <aside class="col-md-3 sub-menu-container">
+            <ng-include src="::vm.productInformationMenuTemplateUrl"></ng-include>
+            <div ng-repeat="item in vm.menuCollections" ng-if="$index % 2 == 0" class="row">
+                <div class="col-md-6" ng-if="$index <= vm.menuCollections.length - 1">
+                    <a ng-href="{{ vm.menuCollections[$index].url }}" class="navigation-submenu-option">
+                        <img ng-src="{{ ::vm.menuCollections[$index].image }}" alt="{{ ::vm.menuCollections[$index].title }}" class="img-responsive">
+                        <h3>{{ ::vm.menuCollections[$index].title | uppercase }}</h3>
+                    </a>
+                </div>
+                <div class="col-md-6" ng-if="$index + 1 <= vm.menuCollections.length - 1">
+                    <a ng-href="{{ vm.menuCollections[$index + 1].url }}" class="navigation-submenu-option">
+                        <img ng-src="{{ ::vm.menuCollections[$index + 1].image }}" alt="{{ ::vm.menuCollections[$index + 1].title }}" class="img-responsive">
+                        <h3>{{ ::vm.menuCollections[$index + 1].title | uppercase }}</h3>
+                    </a>
+                </div>
+            </div>
+        </aside>
+        <div class="col-md-9">
+            <h1 class="heading-sec">{{ ::vm.section.title }}</h1>
+            <a href="#" class="breadcrumds"><u>{{ vm.breadcrumb.main }} <i class="fa fa-angle-double-right"></i></u></a>
+            <a href="#" class="breadcrumds"><u>{{ vm.breadcrumb.subMain }} <i class="fa fa-angle-double-right"></i></u></a>
+            <div class="text-section" ng-bind-html="vm.section.description | unsafe"></div>
+            <div class="row">
+                <div class="col-md-3" ng-repeat="color in vm.colors">
+                    <div class="color-case" ng-style="{ 'background-color' : color.hexadecimalCode}">
+
+                    </div>
+                    <div class="color-caption">
+                        <span>{{::color.name}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,11 +10,16 @@
     function tilesSvc($http, appSettings) {
 
         return {
-           getTileDetail: getTileDetail
+            getTileDetail: getTileDetail,
+            getColorPallete: getColorPallete
         };
 
         function getTileDetail(tileId){
             return $http.get(appSettings.serverPath + 'tiles/' + tileId + '/order');
+        }
+
+        function getColorPallete() {
+            return $http.get(appSettings.serverPath + 'palleteColors');
         }
 
     }
