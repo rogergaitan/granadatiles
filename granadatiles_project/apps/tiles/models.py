@@ -189,10 +189,12 @@ class Tile(BaseCatalogModel):
 
 class PalleteColor(BaseCatalogModel):
     hexadecimalCode = ColorField(default='#FF0000')
+    order = models.PositiveIntegerField(verbose_name=_('Order'))
 
     class Meta:
         verbose_name = _('Pallete Color')
         verbose_name_plural = _('Pallete Colors')
+        ordering = ['order']
 
 
 class Style(BaseCatalogModel):

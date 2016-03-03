@@ -191,7 +191,8 @@ class StyleAdmin(admin.ModelAdmin):
 
 @admin.register(PalleteColor)
 class PalleteColorAdmin(admin.ModelAdmin):
-    list_display = ('name', 'hexadecimalCode')
+    list_display = ('name', 'hexadecimalCode', 'order')
+    list_editable = ('order',)
 
 
 @admin.register(Warehouse)
