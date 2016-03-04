@@ -18,11 +18,13 @@ class ArticleMagazineDto(object):
 
 
 class ArticleYearDto(object):
+    
     def __init__(self, years_choice):
         self.year = years_choice
 
 
 class ArticleDto(BaseGalleryImageDto):
+    
     def __init__(self, article, language=None):
        super().__init__(article, language)
        self.date = article.date
@@ -34,7 +36,16 @@ class ArticleDto(BaseGalleryImageDto):
            
 
 class CatalogDto(BaseCatalogDto):
+   
    def __init__(self, catalog, language=None):
        super().__init__(catalog, language)
        self.file = catalog.file.url if catalog.file else ''
        self.image = catalog.image.url
+
+
+class CatalogPageDto:
+     
+    def __init__(self, page):
+        self.pageNumber = page.page_number
+        self.image = page.image.url if page.image else ''
+   

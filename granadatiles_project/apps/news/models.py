@@ -15,6 +15,7 @@ class Catalog(BaseCatalogModel):
 
     def __str__(self):
         return self.name
+      
 
 class CatalogPage(models.Model):
     catalog = models.ForeignKey(Catalog, related_name='pages', verbose_name=_('Catalog'))
@@ -24,6 +25,7 @@ class CatalogPage(models.Model):
     class Meta:
         verbose_name = _('Catalog Page')
         verbose_name_plural = _('Catalog Pages')
+        ordering = ['page_number']
 
     def __str__(self):
         return self.catalog.name

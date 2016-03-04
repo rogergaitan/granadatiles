@@ -22,7 +22,13 @@ class ArticleSerializer(BaseGalleryImageSerializer):
     date = serializers.CharField()
     magazine = serializers.CharField()
     url = serializers.URLField()
+    
 
 class CatalogSerializer(BaseCatalogSerializer):
     file = serializers.CharField()
+    image = serializers.CharField()
+    
+    
+class CatalogPageSerializer(serializers.Serializer):
+    pageNumber = serializers.IntegerField()
     image = serializers.CharField()
