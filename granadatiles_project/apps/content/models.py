@@ -138,6 +138,8 @@ class ExtendedFlatPage(FlatPage):
         )
     title_es = models.CharField(max_length=200, blank=True, null = True)
     content_es = models.TextField(blank=True, null = True)
+    menu_title = models.TextField(max_length=200, default='')
+    menu_title_es = models.TextField(max_length=200, default='', blank=True)
     order = models.PositiveIntegerField(verbose_name=_('Order'),
                                         help_text='El orden en el que aparecera en el menu selecciondado despues de los elementos predefinidos')
     menu = models.IntegerField(choices=MENU_CHOICES, default=1)
@@ -153,6 +155,11 @@ class ExtendedFlatPage(FlatPage):
             return self.title_es
         return self.title
 
+    def get_menu(self, language):
+        if language == 'es' and self.menu_title_es is not None and self.menu_title_es:
+            return self.menu_title_es
+        return self.menu_title
+
     def get_content(self, language):
         if language == 'es' and self.content_es is not None and self.content_es:
             return self.content_es
@@ -164,6 +171,8 @@ class ExtendedFlatPage(FlatPage):
 class CollectionContent(FlatPage):
     title_es = models.CharField(max_length=200, blank=True, null = True)
     content_es = models.TextField(blank=True, null = True)
+    menu_title = models.TextField(max_length=200, default='')
+    menu_title_es = models.TextField(max_length=200, default='', blank=True)
     order = models.PositiveIntegerField(verbose_name=_('Order'),
                                         help_text='El orden en el que aparecera en el menu selecciondado despues de los elementos predefinidos')
     cover = ImageField(null=True, blank=True, verbose_name=_('Cover'))
@@ -178,6 +187,11 @@ class CollectionContent(FlatPage):
         if language == 'es' and self.title_es is not None and self.title_es:
             return self.title_es
         return self.title
+
+    def get_menu(self, language):
+        if language == 'es' and self.menu_title_es is not None and self.menu_title_es:
+            return self.menu_title_es
+        return self.menu_title
 
     def get_content(self, language):
         if language == 'es' and self.content_es is not None and self.content_es:
