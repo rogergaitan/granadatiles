@@ -96,7 +96,7 @@ class TileOrderSerializer(BaseCatalogSerializer):
     weight = serializers.CharField()
     colors = TileColorSerializer(many=True)
     uses = TileUseSerializer(many=True)
-    similarTiles = BaseCatalogSerializer(many=True)
+    similarTiles = SimilarTilesSerializer(many=True)
     designer = TileDesignerSerializer()
     quantity = serializers.IntegerField()
     sqFt = serializers.FloatField()
