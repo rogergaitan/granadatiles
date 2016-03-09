@@ -1,4 +1,25 @@
-﻿.gt-shopping-cart-table {
+﻿.gt-cart-tabs{
+	.nav-tabs{
+		padding-top: 20px;
+
+		li.active > a,
+		li.active > a:hover{
+			color: @orange;
+			background-color: rgba(0, 0, 0, .0001);
+			border: 1px solid rgba(0, 0, 0, .0001);
+			border-bottom-color: transparent; 
+		}
+		li > a{
+			color: @darkGray;
+			padding: 10px 15px 10px 0;
+			background-color: rgba(0, 0, 0, .0001);
+			border: 1px solid rgba(0, 0, 0, .0001);
+			border-bottom-color: transparent; 				
+		}
+	}
+}
+
+.gt-shopping-cart-table {
 	thead{
 		background-color: @blue;
 		tr{
@@ -7,6 +28,14 @@
 				font-family: @font-secundary;
 				padding: 0 10px 0 10px;
 				.font-configuration(@font-size: @font-sm,@font-weight: @font-normal);
+			}
+		}
+	}
+
+	tbody{
+		tr{
+			td.item{
+				padding-left: 0;
 			}
 		}
 	}
@@ -33,5 +62,20 @@
 			.font-configuration(@font-size: @font-sm,@font-weight:@font-normal);
 
 		}
+	}
+}
+
+.gt-box-shipping{
+	h3{
+		margin: 0;
+		padding: 10px;
+		color:@white;
+		font-family: @font-secundary;
+		.font-configuration(@font-size: @font-sm,@font-weight:@font-normal);
+		background-color: @blue;
+	}
+	form{
+		padding: 10px;
+		background-color: @blueTable;
 	}
 }

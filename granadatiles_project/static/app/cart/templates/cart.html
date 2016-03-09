@@ -6,101 +6,126 @@
         </div>
     </div>
     <div class="row">
-    	<div class="col-md-1"><img src="" alt=""></div>
-    	<div class="col-md-1"><span>TILE ORDERS</span></div>
-    	<div class="col-md-1"><img src="" alt=""></div>
-    	<div class="col-md-1"><span>SAMPLE ORDERS</span></div>
-    </div>
-    <div class="row">
-    	<table class="table gt-shopping-cart-table">
-    		<thead>
-    			<tr>
-    				<th>PRODUCT</th>
-    				<th>SQUARE FOOTAGE</th>
-    				<th>TILE QTY.</th>
-    				<th>TILE BOXES</th>
-    				<th>SUBTOTAL</th>
-    			</tr>
-    		</thead>
-    		<tbody>
-    			<tr>
-    				<td class="item">
-                        <div class="media">
-                            <span class="media-left">
-                                <img class="product-image" src="/static/img/initial/tiles/tiles/kotka-mosaic-2.jpg" alt="">
-                            </span>
-                            <div class="media-body">
-                                <a href=""><h2>Kotka - In Stock Tile</h2></a>
-                                <span>Color: Teal, Yellow, Aqua, White</span>
+        <div class="col-md-12">
+            <tabset class="gt-cart-tabs">
+                <tab>
+                    <tab-heading>
+                        <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="">
+                        TILE ORDERS
+                    </tab-heading>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table gt-shopping-cart-table">
+                            <thead>
+                                <tr>
+                                    <th>PRODUCT</th>
+                                    <th>SQUARE FOOTAGE</th>
+                                    <th>TILE QTY.</th>
+                                    <th>TILE BOXES</th>
+                                    <th>SUBTOTAL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="item">
+                                        <div class="media">
+                                            <span class="media-left">
+                                                <img class="product-image" src="/static/img/initial/tiles/tiles/kotka-mosaic-2.jpg" alt="">
+                                            </span>
+                                            <div class="media-body">
+                                                <a href=""><h2>Kotka - In Stock Tile</h2></a>
+                                                <span>Color: Teal, Yellow, Aqua, White</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="square-footage">
+                                        <div class="input-group">
+                                            <input type="number" name="sfootage" min="20" value="100" class="form-control input-sm">
+                                            <span class="input-group-addon">UPDATE</span>
+                                        </div>
+                                    </td>
+                                    <td>30</td>
+                                    <td>3</td>
+                                    <td>197.40</td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6 gt-box-shipping">
+                                    <h3>ESTIMATE SHIPPING COST</h3>
+                                    <form action="">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <select name="" id="" class="form-control">
+                                                        <option value="1">Ship From</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="inputZipCode" placeholder="Destination Zip">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 text-center">
+                                                <button class="btn btn-green">CALCULATE</button>     
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-3">
+                                    <img src="/static/img/Norton-seal.png" alt="">
+                                </div>
+                                <div class="col-md-3">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>Subtotal:</td>
+                                                <td class="text-rigth">$297.40</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Shipping:</td>
+                                                <td class="text-rigth">$100.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TOTAL:</td>
+                                                <td class="text-rigth">$397.40</td>
+                                            </tr>
+                                        </tbody>      
+                                    </table>
+                                    <label>
+                                      <input type="checkbox" id="checkboxSuccess" value="option1">
+                                      I authorize Granada Tile to produce this custom tile order for me
+                                      using the colors I have selected
+                                    </label>
+                                    <button class="btn btn-green">CHECKOUT</button>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-    				<td class="square-footage">
-                        <div class="input-group">
-                            <input type="number" name="sfootage" min="20" value="100" class="form-control input-sm">
-                            <span class="input-group-addon">UPDATE</span>
-                        </div>
-                    </td>
-    				<td>30</td>
-    				<td>3</td>
-    				<td>197.40</td>
-    			</tr>
-    		</tbody>
-    	</table>
-    </div>
-    <hr>
-    <div class="row">
-    	<div class="col-md-6">
-    		<h3>ESTIMATE SHIPPING COST</h3>
-            <form action="">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <select name="" id="" class="form-control">
-                                <option value="1">Ship From</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="inputZipCode" placeholder="Destination Zip">
-                        </div>
-                    </div>
-                    <div class="col-md-12 text-center">
-                        <button class="btn btn-green">CALCULATE</button>     
-                    </div>
-                </div>
-            </form>
-    	</div>
-        <div class="col-md-3">
-            <img src="/static/img/Norton-seal.png" alt="">
+                        </div>    
+                    </div>  
+                </tab>
+                <tab heading="SAMPLE ORDERS">
+
+                </tab>
+            </tabset>
         </div>
-    	<div class="col-md-3">
-    		<table class="table">
-                <tbody>
-                    <tr>
-                        <td>Subtotal:</td>
-                        <td class="text-rigth">$297.40</td>
-                    </tr>
-                    <tr>
-                        <td>Shipping:</td>
-                        <td class="text-rigth">$100.00</td>
-                    </tr>
-                    <tr>
-                        <td>TOTAL:</td>
-                        <td class="text-rigth">$397.40</td>
-                    </tr>
-                </tbody>      
-            </table>
-            <label>
-              <input type="checkbox" id="checkboxSuccess" value="option1">
-              I authorize Granada Tile to produce this custom tile order for me
-              using the colors I have selected
-            </label>
-            <button class="btn btn-green">CHECKOUT</button>
-    	</div>
     </div>
     <div class="row">
-        
+        <div class="col-md-12">
+            <h2>Questions?</h2>
+            <ul class="list-inline">
+                <li><i class="fa fa-comments"></i>LIVE CHAT</li>
+                <li><i class="fa fa-comments"></i>CALL US</li>
+                <li><i class="fa fa-envelope"></i>EMAIL US</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <p>Scroll</p>
     </div>
 </div>
