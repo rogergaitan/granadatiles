@@ -14,6 +14,9 @@ from .serializers import (
 def cart_home(request):
     return render(request, 'cart/cart.html', {})
 
+def checkout_home(request):
+    return render(request, 'cart/checkout.html',{})
+
 
 class TileOrdersViewSet(BaseViewSet):
     

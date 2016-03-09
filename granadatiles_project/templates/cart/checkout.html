@@ -1,0 +1,53 @@
+﻿{% extends "base.html" %}
+{% load i18n %}
+
+{% block seo %} 
+<title>Granada Tile - {% trans 'Checkout'%} </title>
+{% endblock %}
+
+{% block content%}
+<div class="row">
+    <ng-include id="gt-main-groups" src="'{{STATIC_URL}}app/cart/templates/checkout.html'"></ng-include>
+</div>
+{% endblock content%}
+
+{% block js%}
+<script>
+    (function () {
+        "use strict";
+        angular
+        .module("app.core")
+        .factory("pageSettings", ['appSettings',pageSettings]);
+
+        function pageSettings(appSettings) {
+            return{
+                sectionId: 0,
+                language: '{{LANGUAGE_CODE}}',
+                labels: {
+                    backToCart: '{% trans 'Back to Cart'%}',
+                    shippingInformation: '{% trans 'Shipping Information' %}',
+                    paymentInformation: '{% trans 'Payment Information' %}',
+                    orderCompleted: '{% trans 'Order Completed'%}',
+                    product: '{% trans 'Product'%}',
+                    squareFootage: '{% trans 'SQUARE FOOTAGE'%}',
+                    tileQty: '{% trans 'TILE QTY'%}',
+                    tileBoxes: '{% trans 'TILE BOXES'%}',
+                    subTotal: '{% trans 'Subtotal'%}',
+                    shipping: '{% trans 'Shipping'%}',
+                    estimatedShippingCost: '{% trans 'Estimated Shipping Cost' %}',
+                    estimatedDeliveryTime: '{% trans 'Estimated Delivery Time' %}',
+                    questions: '{% trans 'Questions?'%}',
+                    liveChat: '{% trans 'LIVE CHAT' %}',
+                    callUs: '{% trans 'CALL US'%}',
+                    emailUs: '{% trans 'EMAIL US' %}',
+                    termsofSale: '{% trans 'Terms of Sale' %}',
+                    termsOfSaleContent: 'Hand made cement tile is as much an art as a science. The natural ...',
+                    phone: '213-482-8070',
+                    email: 'sales@granadatile.com',
+                    checkout: '{% trans 'CheckOut'%}',
+                }
+            }
+        }
+    })();
+</script>
+{% endblock js%}

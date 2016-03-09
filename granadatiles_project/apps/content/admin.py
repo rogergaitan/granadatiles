@@ -78,7 +78,7 @@ class ExtendedFlatPageForm(FlatpageForm):
 class ExtendedFlatPageAdmin(FlatPageAdmin):
     form = ExtendedFlatPageForm
     fieldsets = (
-            (None, {'fields': ('url', 'title', 'title_es', 'order', 'content', 'content_es', 'sites', 'cover', 'template_name', 'menu')}),
+            (None, {'fields': ('url', 'title', 'title_es', 'menu_title', 'menu_title_es', 'order', 'content', 'content_es', 'sites', 'cover', 'template_name', 'menu')}),
             (_('Advanced options'), {'classes': ('collapse',), 'fields': ('enable_comments', 'registration_required', )}),
         )
 
@@ -100,7 +100,7 @@ class CollectionContentForm(FlatpageForm):
 class CollectionContentAdmin(FlatPageAdmin):
     form = CollectionContentForm
     fieldsets = (
-            (None, {'fields': ('collection', 'url', 'title', 'title_es', 'order', 'content', 'content_es', 'sites', 'cover', 'template_name', )}),
+            (None, {'fields': ('collection', 'url', 'title', 'title_es', 'menu_title', 'menu_title_es', 'order', 'content', 'content_es', 'sites', 'cover', 'template_name', )}),
             (_('Advanced options'), {'classes': ('collapse',), 'fields': ('enable_comments', 'registration_required', )}),
         )
 

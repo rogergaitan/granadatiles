@@ -53,7 +53,7 @@ class FlatPageMenuDto(object):
     def __init__(self, flatPage, language):
         if(language is None):
             language='en'
-        self.title = flatPage.get_title(language = language)
+        self.title = flatPage.get_menu(language = language)
         self.url = '/' + language +  '/pages' + flatPage.get_absolute_url()
 
 class CollectionContentDto(object):

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
 from core.views import BaseViewSet
-from .serializers import CatalogSerializer, ArticleYearSerializer, ArticleSerializer
+from .serializers import CatalogSerializer, ArticleYearSerializer, ArticleSerializer, CatalogPageSerializer
 from .services import CatalogService, ArticleService
 
 
@@ -20,6 +20,12 @@ class CatalogViewSet(BaseViewSet):
         catalogs = CatalogService.get_catalogs(language=self.get_language(request))
         serializer = CatalogSerializer(catalogs, many=True)
 
+        return Response(serializer.data)
+    
+    @detail_route(methods=['get'])
+    def pages(self, request, pk=None):
+        page_catalogs = CatalogService.get_page_catalogs(pk)
+        serializer = CatalogPageSerializer(page_catalogs, many=True)
         return Response(serializer.data)
 
 

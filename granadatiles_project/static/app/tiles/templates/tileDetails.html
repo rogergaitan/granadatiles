@@ -23,7 +23,7 @@
     </div>
     <div class="row">
         <div class="col-md-7 col-sm-8">
-            <img ng-src="{{ vm.tile.image }}" alt="Kotka918-saveA-Granada-Tile-Cement" class="img-responsive thumbnail">
+            <img ng-src="{{ vm.tile.image }}" alt="{{vm.tile.name}}" class="img-responsive similar-tile-container">
         </div>
         <div class="col-md-5 col-sm-4">
             <ul class="tile-detail-container">
@@ -112,10 +112,10 @@
     </div>
     <div class="row">
         <div class="col-md-3 col-sm-3">
-            <img src="/static/img/initial/tiles/tiles/kotka-mosaic-2.jpg" alt="kotka-mosaic-2" class="img-responsive thumbnail">
+            <!--<img src="/static/img/initial/tiles/tiles/kotka-mosaic-2.jpg" alt="kotka-mosaic-2" class="img-responsive thumbnail">-->
         </div>
         <div class="col-md-3 col-sm-3">
-            <img src="/static/img/initial/tiles/tiles/kotka-mosaic-3.jpg" alt="kotka-mosaic-3" class="img-responsive thumbnail">
+            <!--<img src="/static/img/initial/tiles/tiles/kotka-mosaic-3.jpg" alt="kotka-mosaic-3" class="img-responsive thumbnail">-->
         </div>
         <div class="col-md-6 col-sm-6">
             <table class="table-tile-detail">
@@ -263,21 +263,17 @@
             <span class="text-footer">* Numbers are rounded to nearest tile or box<br/>** Minimum 100 square feet for custom tiles</span>
         </div>
     </div>
-    <div class="row">
+    <div class="row" ng-if="vm.tile.similarTiles.length > 0">
         <div class="col-md-12">
-            <p>Similar Tile</p>
+            <p>{{::vm.labels.similarTiles}}</p>
             <div class="row">
                 <div class="col-md-3">
-                    <img src="/static/img/initial/tiles/tiles/Kotka918-B-Granada-Tile-Cement.jpg" alt="" class="img-responsive">
-                </div>
-                <div class="col-md-3">
-                    <img src="/static/img/initial/tiles/tiles/Kotka918-C-Granada-Tile-Cement.jpg" alt="" class="img-responsive">
-                </div>
-                <div class="col-md-3">
-                    <img src="/static/img/initial/tiles/tiles/Kotka918-D-Granada-Tile-Cement.jpg" alt="" class="img-responsive">
-                </div>
-                <div class="col-md-3">
-                    <img src="/static/img/initial/tiles/tiles/Kotka918-A-Granada-Tile-Cement.jpg" alt="" class="img-responsive">
+                    <div class="similar-tile-container">
+                        <img src="/static/img/initial/tiles/tiles/Kotka918-B-Granada-Tile-Cement.jpg" alt="" class="img-responsive">
+                    </div>
+                    <div class="similar-tile-caption">
+                        <span>Kotka 918 B</span>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 ﻿from django.contrib import admin
-from .models import Catalog, Magazine, Article
+from .models import Catalog, Magazine, Article, CatalogPage
 
 
 @admin.register(Article)
@@ -16,8 +16,11 @@ class MagazineAdmin(admin.ModelAdmin):
     search_fields = ['name']
     ordering = ['name']
 
+class PageCatalogInline(admin.TabularInline):
+    model = CatalogPage
 
 @admin.register(Catalog)
 class CatalogAdmin(admin.ModelAdmin):
     list_display = ('name', 'name_es')
     search_fields = ['name', 'name_es']
+    inlines = [PageCatalogInline, ]

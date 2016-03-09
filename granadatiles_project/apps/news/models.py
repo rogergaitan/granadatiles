@@ -15,6 +15,20 @@ class Catalog(BaseCatalogModel):
 
     def __str__(self):
         return self.name
+      
+
+class CatalogPage(models.Model):
+    catalog = models.ForeignKey(Catalog, related_name='pages', verbose_name=_('Catalog'))
+    page_number = models.PositiveIntegerField(verbose_name=_('Page Number'))
+    image = ImageField(upload_to='Catalogs/Pages', verbose_name=_('Image'))
+
+    class Meta:
+        verbose_name = _('Catalog Page')
+        verbose_name_plural = _('Catalog Pages')
+        ordering = ['page_number']
+
+    def __str__(self):
+        return self.catalog.name
 
 
 class Magazine(models.Model):
