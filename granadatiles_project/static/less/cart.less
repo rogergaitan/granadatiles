@@ -1,4 +1,11 @@
 ﻿.gt-cart-tabs{
+
+	.icon-tile{
+		float: left;
+	}
+	.tab-title{
+		margin-left: 35px;
+	}
 	.nav-tabs{
 		padding-top: 20px;
 
@@ -8,13 +15,15 @@
 			background-color: rgba(0, 0, 0, .0001);
 			border: 1px solid rgba(0, 0, 0, .0001);
 			border-bottom-color: transparent; 
+			.font-configuration(@font-size: @font-xl,@font-weight: @font-bold);
 		}
 		li > a{
 			color: @darkGray;
 			padding: 10px 15px 10px 0;
 			background-color: rgba(0, 0, 0, .0001);
 			border: 1px solid rgba(0, 0, 0, .0001);
-			border-bottom-color: transparent; 				
+			border-bottom-color: transparent;
+			.font-configuration(@font-size: @font-xl,@font-weight: @font-light); 				
 		}
 	}
 }
@@ -31,20 +40,20 @@
 			}
 		}
 	}
-
 	tbody{
 		tr{
-			td.item{
+			.item{
 				padding-left: 0;
 			}
 		}
+		td{
+			border-bottom: 1px solid transparent!important;
+		}
 	}
-
 	.product-image{
 		width: 140px;
 		border: 4px solid white;
 	}
-
 	.media-body{
 		width: 60%;
 
@@ -56,12 +65,17 @@
 				.font-configuration(@font-size: @font-xlll,@font-weight:@font-normal);
 			}
 		}
-
 		span{
 			color: @darkGray;
 			font-family: @font-primary;
-			.font-configuration(@font-size: @font-sm,@font-weight:@font-normal);
-
+			.font-configuration(@font-size: @font-sm,@font-weight:@font-light);
+		}
+		.btn-delete{
+			color:@darkBlue;
+			margin-top: 5px;
+			border-color: @btnDelete;
+			background-color: @lightBlue;
+			.font-configuration(@font-size: @font-md,@font-weight:@font-light);
 		}
 	}
 }
@@ -95,7 +109,11 @@
 	font-family: @font-secundary;
 	.font-configuration(@font-size: @font-md,@font-weight:@font-light);
 }
-
+.form-control-inline{
+	min-width: 0;
+    width: auto!important;
+    display: inline!important;
+}
 .gt-box-shipping{
 	h3{
 		margin: 0;
