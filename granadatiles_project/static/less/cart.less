@@ -147,3 +147,47 @@
 		}
 	}
 }
+/************** Checkout *******************/
+.checkout-steps{
+	.checkout-step{
+		display: inline-block;
+		.number{
+			height: 40px;
+			width: 40px;
+			margin: 0 auto;
+			text-align: center;
+			color:@darkBlue;
+			font-family: @font-secundary;
+			.font-configuration(@font-size: @font-xxll,@font-weight:@font-light);
+			background-color: @green;
+			border-radius: 50%;
+		}
+		.title{
+			color:@darkBlue;
+			text-align: center;
+			font-family: @font-secundary;
+			line-height: 1;
+			margin-top: 10px;
+			.font-configuration(@font-size: @font-xl,@font-weight:@font-bold);
+		}
+	}
+}
+.order-summary{
+	h3{
+		margin: 0;
+		padding: 10px;
+		color:@white;
+		background-color: @blue;
+		font-family: @font-secundary;
+		.font-configuration(@font-size: @font-sm,@font-weight:@font-light);
+	}
+	.order-detail{
+		background-color: @blueTable;
+
+		.gt-table-order-summary{
+			thead tr{
+				background-color: transparent;
+			}
+		}
+	}
+}
