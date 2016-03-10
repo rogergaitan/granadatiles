@@ -46,6 +46,7 @@
 	}
 
 	.media-body{
+		width: 60%;
 
 		 a{
 			h2{
@@ -64,6 +65,32 @@
 		}
 	}
 }
+.gt-table-total-price{
+	color:@darkBlue;
+	font-family: @font-secundary;
+	.font-configuration(@font-size: @font-xl,@font-weight:@font-normal);
+
+	.total{
+		font-size: 20px;
+
+		td{
+			border-bottom: 1px solid transparent !important;
+		}
+	}
+
+	tbody{ 
+		td{
+			padding: 4px !important;
+			border-bottom: 1px solid @grayBorder !important;
+		}
+	}
+}
+.labelAuthorize{
+	color:@darkGray;
+	font-style: @italic;
+	font-family: @font-secundary;
+	.font-configuration(@font-size: @font-md,@font-weight:@font-light);
+}
 
 .gt-box-shipping{
 	h3{
@@ -71,11 +98,30 @@
 		padding: 10px;
 		color:@white;
 		font-family: @font-secundary;
-		.font-configuration(@font-size: @font-sm,@font-weight:@font-normal);
+		.font-configuration(@font-size: @font-sm,@font-weight:@font-light);
 		background-color: @blue;
 	}
 	form{
 		padding: 10px;
 		background-color: @blueTable;
+	}
+}
+.list-question{
+	li{
+		color:@darkBlue;
+		font-family: @font-secundary;
+	}
+	.icon{
+		float: left;
+	}
+	.question-content{
+		margin-left: 25px;
+		.font-configuration(@font-size: @font-xl,@font-weight:@font-bold);
+
+		span,a{
+			color:@darkBlue;
+			display: block;
+			.font-configuration(@font-size: @font-xl,@font-weight:@font-light);
+		}
 	}
 }
