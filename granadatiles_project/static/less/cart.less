@@ -168,9 +168,12 @@
 			font-family: @font-secundary;
 			line-height: 1;
 			margin-top: 10px;
-			.font-configuration(@font-size: @font-xl,@font-weight:@font-bold);
+			.font-configuration(@font-size:@font-xl,@font-weight:@font-bold);
 		}
 	}
+}
+.shipping-information > .form-group{
+	margin-bottom: 10px;
 }
 .order-summary{
 	h3{
@@ -179,14 +182,44 @@
 		color:@white;
 		background-color: @blue;
 		font-family: @font-secundary;
-		.font-configuration(@font-size: @font-sm,@font-weight:@font-light);
+		.font-configuration(@font-size:@font-sm,@font-weight:@font-light);
 	}
 	.order-detail{
+		margin-bottom: 20px;
+		padding-bottom: 5px;
 		background-color: @blueTable;
 
 		.gt-table-order-summary{
 			thead tr{
-				background-color: transparent;
+				background-color: transparent;	
+
+				th{
+					color:@darkBlue;
+					font-family: @font-secundary;
+					.font-configuration(@font-size:@font-sm,@font-weight:@font-light);
+					border-bottom: 1px solid transparent;				
+				}
+			}
+			tbody{
+				color:#58595B;
+				font-family: @font-primary;
+				.font-configuration(@font-size:@font-sm,@font-weight:@font-light);
+
+				tr{
+					td{
+						border-bottom: 1px solid @grayBorder!important;
+					}
+					&:last-child{
+						td{
+							border-bottom: 1px solid @blueTable!important;
+						}
+					}
+				}
+
+				h2{
+					margin: 0;
+					.font-configuration(@font-size:@font-xlll,@font-weight:@font-light);
+				}
 			}
 		}
 	}
