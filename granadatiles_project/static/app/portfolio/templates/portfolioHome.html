@@ -7,6 +7,7 @@
             <h1 class="heading-sec">{{ ::vm.section.title }} </h1>
             <a href="#" class="breadcrumds"><u>{{::vm.labels.myPortfolio}}</u></a>
             <div class="text-section" ng-bind-html="::vm.section.description | unsafe"></div>
+            <span ng-repeat="tile in vm.tiles">{{tile.name}}</span>
         </div>
     </div>
 </div>

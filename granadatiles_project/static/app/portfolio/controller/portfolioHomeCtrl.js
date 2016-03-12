@@ -5,9 +5,9 @@
         .module('app.portfolio')
         .controller('portfolioHomeCtrl', portfolioHomeCtrl);
 
-    portfolioHomeCtrl.$inject = ['pageSettings', 'sectionSvc', 'baseSettings'];
+    portfolioHomeCtrl.$inject = ['pageSettings', 'sectionSvc', 'baseSettings', 'portfolioSvc'];
 
-    function portfolioHomeCtrl(pageSettings, sectionSvc, baseSettings) {
+    function portfolioHomeCtrl(pageSettings, sectionSvc, baseSettings, portfolioSvc) {
         /* jshint validthis:true */
         var vm = this;
         vm.labels = pageSettings.labels;
@@ -16,13 +16,12 @@
 
         vm.portfolioAsideMenuTemplateURl = baseSettings.staticUrl + 'app/portfolio/templates/portfolioAsideMenu.html'
         
-
-        vm.user = {
-            name: 'Melanie'
-        }
-
         sectionSvc.getSection(pageSettings.sectionId).then(function (response) {
             vm.section = response.data;
+        });
+
+        portfolioSvc.getPortfolioTiles().then(function (response) {
+            vm.tiles = response.data;
         });
 
     }
