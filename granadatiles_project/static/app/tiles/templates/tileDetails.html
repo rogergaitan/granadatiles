@@ -1,18 +1,27 @@
 ﻿<div ng-controller="tileDetailCtrl as vm">
     <h1 class="heading-sec">{{ ::vm.tile.name }}</h1>
-    <a href="#" class="breadcrumds"><u>Collections</u> <i class="fa fa-angle-double-right"></i></a>
-    <a ng-href="{{::vm.collection.url}}" class="breadcrumds"><u>{{::vm.collection.title}}</u> <i class="fa fa-angle-double-right"></i></a>
-    <a class="breadcrumds" href="#" ng-click="vm.backToGroup()"><u>{{::vm.group.title}}</u> <i class="fa fa-angle-double-right"></i></a>
-    <a class="breadcrumds" href="#"><u>{{::vm.tile.name}}</u></a>
+    <div ng-if="vm.collection">
+        <a href="#" class="breadcrumds"><u>Collections</u> <i class="fa fa-angle-double-right"></i></a>
+        <a ng-href="{{::vm.collection.url}}" class="breadcrumds"><u>{{::vm.collection.title}}</u> <i class="fa fa-angle-double-right"></i></a>
+        <a class="breadcrumds" href="#" ng-click="vm.backToGroup()"><u>{{::vm.group.title}}</u> <i class="fa fa-angle-double-right"></i></a>
+        <a class="breadcrumds" href="#"><u>{{::vm.tile.name}}</u></a>
+    </div>
+     <div ng-if="!vm.collection">
+        <a href="#" class="breadcrumds"><u>{{vm.labels.inStock}}</u> <i class="fa fa-angle-double-right"></i></a>
+        <a class="breadcrumds" href="#" ng-click="vm.backToGroup()"><u>{{::shared.inStockType}}</u> <i class="fa fa-angle-double-right"></i></a>
+        <a class="breadcrumds" href="#"><u>{{::vm.tile.name}}</u></a>
+    </div>
     <div class="text-section" ng-bind-html="::vm.areas.tileDetailWelcomeMessage | unsafe"></div>
     <div class="row">
         <div class="col-md-12 col-sm-12 left-align">
             <ul class="list-inline tile-button-options">
                 <li ng-if="vm.tile.hasInstallationPhotos"><a href="#" ng-click="vm.showInstallationPhoto(vm.tile.id)"><i class="fa fa-eye"></i><p>{{ ::vm.labels.photos | uppercase }}</p></a></li>
-                <li ng-if="vm.tile.hasSample"><a href="#">
-                    <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="ORDER FREE SAMPLE">
-                    <p>{{ ::vm.labels.orderFree | uppercase }}</p>
-                </a></li>
+                <li ng-if="vm.tile.hasSample">
+                    <a href="#">
+                        <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="ORDER FREE SAMPLE">
+                        <p>{{ ::vm.labels.orderFree | uppercase }}</p>
+                    </a>
+                </li>
                 <li ng-if="!vm.isAuthenticated"><a ng-href="{{::vm.navigation.login}}"><i class="fa fa-briefcase"></i><p>{{ ::vm.labels.saveToPortfolio | uppercase }}</p></a></li>
                 <li ng-if="!vm.tile.inPortfolio && vm.isAuthenticated"><a href="#" ng-click="vm.saveToPortfolio(vm.tile.id)"><i class="fa fa-briefcase"></i><p>{{ ::vm.labels.saveToPortfolio | uppercase }}</p></a></li>
                 <li ng-if="vm.tile.inPortfolio && vm.isAuthenticated"><a href="#"><i class="fa fa-briefcase"></i><p>{{ ::vm.labels.addedPortfolio | uppercase }}</p></a></li>
@@ -129,13 +138,13 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Retail Price:</td>
+                        <td>{{::vm.labels.retailPrice}}:</td>
                         <td>$&nbsp;{{::vm.tile.pricePerBox}}</td>
                         <td>$&nbsp;{{::vm.tile.price}}</td>
                         <td>$&nbsp;{{::vm.tile.sqFtPrice | number:2}}</td>
                     </tr>
                     <tr>
-                        <td>Quantity in Stock:</td>
+                        <td>{{::vm.labels.quantityInStock}}:</td>
                         <td>{{::vm.tile.quantityPerBox}}</td>
                         <td>{{::vm.tile.quantity}}</td>
                         <td>{{vm.tile.quantity * vm.tile.sqFt}}</td>
@@ -212,7 +221,7 @@
                 <li>
                     <div class="row">
                         <div class="col-md-9 col-sm-9">
-                            Tiles needed ({{vm.order.inputSqFt}} Sq. Ft / {{vm.tile.sqFt | number:2}} Sq. Ft Per Tile)=
+                            {{vm.labels.tilesNeeded}} ({{vm.order.inputSqFt}} {{::vm.labels.sqFt}} / {{vm.tile.sqFt | number:2}} {{::vm.labels.sqFtPerTile}})=
                         </div>
                         <div class="col-md-3 col-sm-3 text-right">
                             {{vm.order.tilesNeeded | number:2 }} *
@@ -222,7 +231,7 @@
                 <li>
                     <div class="row">
                         <div class="col-md-9 col-sm-9">
-                            Tiles needed and 10% Overage ({{vm.order.tilesNeeded  | number:2 }} X 10%)=
+                            {{::vm.labels.tilesNeededOverage}} ({{vm.order.tilesNeeded  | number:2 }} X 10%)=
                         </div>
                         <div class="col-md-3 col-sm-3 text-right">
                             {{ vm.order.tilesNeededOverage }} *
@@ -232,17 +241,17 @@
                 <li>
                     <div class="row">
                         <div class="col-md-9 col-sm-9">
-                            Boxes needed ({{vm.order.tilesNeededOverage }} Tiles / {{vm.tile.box.quantity}} Tiles Per Box)=
+                            {{::vm.labels.boxesNeeded}}({{vm.order.tilesNeededOverage }} {{::vm.labels.tiles}} / {{vm.tile.box.quantity}} {{::vm.labels.tilesPerBox}})=
                         </div>
                         <div class="col-md-3 col-sm-3 text-right">
-                            {{vm.order.tilesNeededOverage / vm.tile.box.quantity | nextInt }} Boxes *
+                            {{vm.order.tilesNeededOverage / vm.tile.box.quantity | nextInt }} {{::vm.labels.boxes}} *
                         </div>
                     </div>
                 </li>
                 <li>
                     <div class="row">
                         <div class="col-md-9 col-sm-9">
-                            Base cost ({{ vm.order.boxesNeeded }} Boxes X ${{vm.tile.pricePerBox}} Per Box)=
+                            {{vm.labels.baseCost}}({{ vm.order.boxesNeeded }} {{::vm.labels.boxes}} X ${{vm.tile.pricePerBox}} {{vm.labels.perBox}})=
                         </div>
                         <div class="col-md-3 col-sm-3 text-right">
                             ${{ vm.order.baseCost | number:2}} *
@@ -252,7 +261,7 @@
                 <li>
                     <div class="row">
                         <div class="col-md-9 col-sm-9">
-                            Shipping Weight ({{vm.tile.box.weight}} lbs Per Box x {{vm.order.boxesNeeded}} Boxes)=
+                            {{::vm.labels.shippingWeight}} ({{vm.tile.box.weight}} {{vm.labels.lbsPerBox}} x {{vm.order.boxesNeeded}} {{::vm.labels.boxes}})=
                         </div>
                         <div class="col-md-3 col-sm-3 text-right">
                             {{vm.tile.box.weight * vm.order.boxesNeeded}}
@@ -260,7 +269,7 @@
                     </div>
                 </li>
             </ul>
-            <span class="text-footer">* Numbers are rounded to nearest tile or box<br/>** Minimum 100 square feet for custom tiles</span>
+            <span class="text-footer">* {{::vm.labels.numbersRounded}}<br />**{{vm.labels.minimunSqFt}} 100 {{::vm.labels.forCustomTiles}}</span>
         </div>
     </div>
     <div class="row" ng-if="vm.tile.similarTiles.length > 0">
@@ -281,4 +290,3 @@
 
 </div>
 
-      

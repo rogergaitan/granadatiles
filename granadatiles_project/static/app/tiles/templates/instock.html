@@ -18,64 +18,68 @@
             </ul>
         </aside>
         <div class="col-sm-9 col-xs-8">
-            <h1 class="heading-sec">{{ ::vm.section.title }} </h1>
-            <a href="#" class="breadcrumds"><u>{{vm.labels.collections}}</u> <i class="fa fa-angle-double-right"></i></a>
-            <div class="text-section" ng-bind-html="::vm.section.description | unsafe"></div>
-            <div class="row filter-container">
-                <div class="col-xs-12">
-                    <label class="inline-block"><strong>{{ vm.labels.showOnly }}</strong></label>
-                    <div class="checkbox-content">
-                        <p class="checkbox-inline" ng-repeat="collectionFilter in vm.collectionFilters">
-                            <input type="checkbox" id="collection-{{collectionFilter.id}}" checklist-model="vm.selectedCollectionFilters" checklist-value="collectionFilter.id" checklist-change="vm.refreshTiles()" />
-                            <label for="collection-{{collectionFilter.id}}">{{::collectionFilter.title}}</label>
-                        </p>
+            <div class="animate-show"  ng-show="!shared.tileDetailTemplateUrl">
+                <h1 class="heading-sec">{{ ::vm.section.title }} </h1>
+                <a href="#" class="breadcrumds"><u>{{::vm.labels.inStock}}</u> <i class="fa fa-angle-double-right"></i></a>
+                <a href="#" class="breadcrumds"><u>{{::shared.inStockType}}</u> <i class="fa fa-angle-double-right"></i></a>
+                <div class="text-section" ng-bind-html="::vm.section.description | unsafe"></div>
+                <div class="row filter-container">
+                    <div class="col-xs-12">
+                        <label class="inline-block"><strong>{{ vm.labels.showOnly }}</strong></label>
+                        <div class="checkbox-content">
+                            <p class="checkbox-inline" ng-repeat="collectionFilter in vm.collectionFilters">
+                                <input type="checkbox" id="collection-{{collectionFilter.id}}" checklist-model="vm.selectedCollectionFilters" checklist-value="collectionFilter.id" checklist-change="vm.refreshTiles()" />
+                                <label for="collection-{{collectionFilter.id}}">{{::collectionFilter.title}}</label>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row" infinite-scroll='vm.nextPage()' infinite-scroll-distance='1'>
-                <div ng-repeat="tile in vm.tiles">
-                    <div class="clearfix" ng-if="$index % 3 == 0"></div>
-                    <div class="col-md-4 blue-box">
-                        <div class="content-tile">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <img ng-src="{{ tile.mosaic }}" alt="{{ tile.name }}" class="img-responsive thumbnail animate-show-fade instock-img" fade-in>
+                <div class="row" infinite-scroll='vm.nextPage()' infinite-scroll-distance='1'>
+                    <div ng-repeat="tile in vm.tiles">
+                        <div class="clearfix" ng-if="$index % 3 == 0"></div>
+                        <div class="col-md-4 blue-box">
+                            <div class="content-tile">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img ng-src="{{ tile.mosaic }}" alt="{{ tile.name }}" class="img-responsive thumbnail animate-show-fade instock-img" fade-in>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 tile-body">
-                                    <div>
-                                        <h2>{{ tile.name }}</h2>
-                                        <label class="title-tile">CUSTOM:</label>
-                                        <ul class="list-inline title-tile">
-                                            <li>{{ tile.size }}</li>
+                                <div class="row">
+                                    <div class="col-md-12 tile-body">
+                                        <div>
+                                            <h2>{{ tile.name }}</h2>
+                                            <label class="title-tile">CUSTOM:</label>
+                                            <ul class="list-inline title-tile">
+                                                <li>{{ tile.size }}</li>
+                                            </ul>
+                                        </div>
+                                        <ul class="list-inline tile-options">
+                                            <li>
+                                                <a href="#" ng-click="vm.showTileDetail(tile.id)">
+                                                    <i class="fa fa-plus-circle"></i>
+                                                    <p>{{ vm.labels.moreInfo | uppercase }}</p>
+                                                </a>
+                                            </li>
+                                            <li ng-if="tile.hasInstallationPhotos">
+                                                <a href="#" ng-click="vm.showInstallationPhoto(tile.id)">
+                                                    <i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p>
+                                                </a>
+                                            </li>
+                                            <li ng-if="tile.hasSample">
+                                                <a href="#">
+                                                    <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="">
+                                                    <p>{{ vm.labels.orderFree | uppercase }}</p>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
-                                    <ul class="list-inline tile-options">
-                                        <li>
-                                            <a href="#" ng-click="vm.showTileDetail(tile.id)">
-                                                <i class="fa fa-plus-circle"></i>
-                                                <p>{{ vm.labels.moreInfo | uppercase }}</p>
-                                            </a>
-                                        </li>
-                                        <li ng-if="tile.hasInstallationPhotos">
-                                            <a href="#" ng-click="vm.showInstallationPhoto(tile.id)">
-                                                <i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p>
-                                            </a>
-                                        </li>
-                                        <li ng-if="tile.hasSample">
-                                            <a href="#">
-                                                <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="">
-                                                <p>{{ vm.labels.orderFree | uppercase }}</p>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div ng-include="shared.tileDetailTemplateUrl" class="animate-show" ng-show="shared.tileDetailTemplateUrl"></div>
         </div>
     </div>
 </div>

@@ -15,6 +15,9 @@
         return service;
 
         function calculateQuantityInBox(tile) {
+            if (!tile.box)
+                return 0;
+
             if (tile.box.measurementUnit == 1 && !tile.qtyIsSqFt) {
                 return tile.quantity/tile.box.quantity
             }
@@ -29,6 +32,9 @@
         }
 
         function calculatePricePerBox(tile) {
+            if (!tile.box)
+                return 0;
+
             if (tile.box.measurementUnit == 1 && !tile.qtyIsSqFt) {
                 return tile.price * tile.box.quantity
             }

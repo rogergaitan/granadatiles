@@ -5,14 +5,16 @@
         .module('app.tiles')
         .controller('instockCtrl', instockCtrl);
 
-    instockCtrl.$inject = ['pageSettings', 'instockSvc', 'sectionSvc'];
+    instockCtrl.$inject = ['baseSettings', 'pageSettings', 'instockSvc', 'sectionSvc', '$scope'];
 
-    function instockCtrl(pageSettings, instockSvc, sectionSvc) {
+    function instockCtrl(baseSettings, pageSettings, instockSvc, sectionSvc, $scope) {
         /* jshint validthis:true */
         var vm = this;
         vm.labels = pageSettings.labels;
         vm.navigation = pageSettings.navigation;
         vm.isSample = (pageSettings.samples) ? true : false;
+        $scope.shared = {};
+        $scope.shared.inStockType = (pageSettings.samples) ? vm.labels.samples : vm.labels.tiles;
         UpdateTiles();
 
         instockSvc.getCollectionFilter().then(function (response) {
@@ -36,6 +38,11 @@
                 UpdateTiles(false);
             }
         }
+
+        vm.showTileDetail = function (tileId) {
+            $scope.shared.tileId = tileId;
+            $scope.shared.tileDetailTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/tileDetails.html'
+        };
 
         function UpdateTiles(reset) {
             vm.inProgress = true;
