@@ -8,7 +8,7 @@ from apps.tiles.models import Tile
 from .services import CartService, OrdersService
 from .serializers import (
   TileOrdersSerializer, SampleOrdersSerializer, CustomizedTileOrdersSerializer,
-  CustomizedSampleOrdersSerializer
+  CustomizedSampleOrdersSerializer, BaseTileOrdersSerializer
 )
 
 def cart_home(request):
@@ -36,7 +36,8 @@ class TileOrdersViewSet(BaseViewSet):
         cart = CartService.get_cart(request)
         tile = OrdersService.get_tile(pk)
         sq_ft = int(request.data.get('sqFt'))
-        return Response(OrdersService.update_tile(cart, tile, sq_ft))
+        serializer = BaseTileOrdersSerializer(OrdersService.update_tile(cart, tile, sq_ft))
+        return Response(serializer.data)
       
     def destroy(self, request, pk=None):
         cart = CartService.get_cart(request)

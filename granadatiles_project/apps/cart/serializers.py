@@ -13,14 +13,14 @@ class TileSerializer(BaseCatalogSerializer):
     colors = TileColorSerializer(many=True)
 
 
-class BaseTileOrderSerializer(BaseSerializer):
+class BaseTileOrdersSerializer(BaseSerializer):
     sqFt = serializers.IntegerField()
     quantity = serializers.IntegerField()
     boxes = serializers.IntegerField()
     subtotal = serializers.FloatField()
 
 
-class TileOrdersSerializer(BaseTileOrderSerializer):
+class TileOrdersSerializer(BaseTileOrdersSerializer):
     tile = TileSerializer()
 
 
@@ -30,7 +30,7 @@ class GroupColorSerializer(serializers.Serializer):
     color_code = serializers.CharField()
 
 
-class CustomizedTileOrdersSerializer(BaseTileOrderSerializer):
+class CustomizedTileOrdersSerializer(BaseTileOrdersSerializer):
     tile = TileSerializer()
     group_colors = GroupColorSerializer(many=True)
 

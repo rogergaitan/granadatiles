@@ -7,7 +7,7 @@ from rest_framework.exceptions import APIException
 
 from apps.tiles.models import Tile, CustomizedTile
 from .models import Cart
-from .dtos import TileOrdersDto, SampleOrdersDto, CustomizedTileOrdersDto
+from .dtos import TileOrdersDto, SampleOrdersDto, CustomizedTileOrdersDto, BaseTileOrdersDto
 
 
 class CartService:
@@ -61,7 +61,7 @@ class OrdersService:
         if sq_ft > tile.design.group.collection.maximum_input_square_foot:
             raise APIException(_('maximum_input_square_foot_message'))
 
-        quantity = OrdersService.tile_quantity(tile, sq_ft)
+        quantity = OrdersService.tile_quantity(tile, sq_ft + (sq_ft * 0.1))
         subtotal = OrdersService.get_subtotal(tile, quantity)
         boxes = OrdersService.get_boxes(tile, quantity)
 
@@ -78,7 +78,6 @@ class OrdersService:
         return tile_orders_dto
 
     def add_tile(cart, tile, sq_ft):
-        sq_ft = sq_ft + (sq_ft * 0.1)
         data = OrdersService.calculate_order(tile, sq_ft)
         cart.tile_orders.create(tile=tile,
 				sq_ft=sq_ft,
@@ -94,6 +93,7 @@ class OrdersService:
         tile_order.boxes = data['boxes']
         tile_order.subtotal = data['subtotal']
         tile_order.save()
+        return BaseTileOrdersDto(tile_order)
 		      
     def remove_tile(cart, tile):
         cart.tile_orders.get(tile=tile).delete()
