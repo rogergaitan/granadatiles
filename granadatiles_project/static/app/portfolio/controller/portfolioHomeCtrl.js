@@ -24,5 +24,11 @@
             vm.tiles = response.data;
         });
 
+        vm.removeTile = function (tile) {
+            portfolioSvc.removeTile(tile.portfoliotile_id).then(function (response) {
+                tile.removed = true;
+            });
+        }
+
     }
 })();
