@@ -3,12 +3,14 @@
 
     angular
         .module('app')
-        .factory('gtUtilsSvc', gtUtilsSvc);
+        .factory('gtUtilsSvc', ['$window', gtUtilsSvc]);
 
 
-    function gtUtilsSvc() {
+    function gtUtilsSvc($window) {
         var service = {
-            getQueryStringParameterByName: getQueryStringParameterByName
+            getQueryStringParameterByName: getQueryStringParameterByName,
+            addQueryStringParameter: addQueryStringParameter,
+            removeQueryStringParameters: removeQueryStringParameters
         };
 
         return service;
@@ -19,5 +21,16 @@
                 results = regex.exec(location.search);
             return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
         }
+
+        function addQueryStringParameter(name, value) {
+            var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + name + '=' + value;
+            $window.history.pushState({ path: newurl }, '', newurl)
+        }
+
+        function removeQueryStringParameters() {
+            var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+            $window.history.pushState({ path: newurl }, '', newurl)
+        }
+
     }
 })();

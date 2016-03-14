@@ -19,8 +19,8 @@
         </aside>
         <div class="col-md-9">
             <h1 class="heading-sec">{{ ::vm.section.title }}</h1>
-            <a href="#" class="breadcrumds"><u>{{ vm.breadcrumb.main }} <i class="fa fa-angle-double-right"></i></u></a>
-            <a href="#" class="breadcrumds"><u>{{ vm.breadcrumb.subMain }} <i class="fa fa-angle-double-right"></i></u></a>
+            <a  class="breadcrumds"><u>{{ vm.breadcrumb.main }} <i class="fa fa-angle-double-right"></i></u></a>
+            <a  class="breadcrumds"><u>{{ vm.breadcrumb.subMain }} <i class="fa fa-angle-double-right"></i></u></a>
             <div class="text-section" ng-bind-html="vm.section.description | unsafe"></div>
             <div class="row">
                 <div class="col-md-3" ng-repeat="color in vm.colors">

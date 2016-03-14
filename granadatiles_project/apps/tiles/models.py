@@ -11,6 +11,7 @@ from sorl.thumbnail.shortcuts import get_thumbnail
 from sorl.thumbnail.fields import ImageField
 from rest_framework.authtoken.models import Token
 from colorfield.fields import ColorField
+from django.utils.functional import cached_property
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
@@ -153,6 +154,9 @@ class Tile(BaseCatalogModel):
     @property
     def get_admin_url(self):
         return reverse("admin:%s_%s_change" % (self._meta.app_label, self._meta.model_name), args=(self.id,))
+    
+    def get_absolute_url(self, language):
+        return self.design.group.get_absolute_url(language) + '?tile='+ str(self.id)
 
     def get_available_sizes(self):
         tiles_of_myself = Tile.objects.filter(name=self.name, is_sample=False)

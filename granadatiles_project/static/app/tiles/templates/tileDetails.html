@@ -1,32 +1,32 @@
 ﻿<div ng-controller="tileDetailCtrl as vm">
     <h1 class="heading-sec">{{ ::vm.tile.name }}</h1>
     <div ng-if="vm.collection">
-        <a href="#" class="breadcrumds"><u>Collections</u> <i class="fa fa-angle-double-right"></i></a>
+        <a  class="breadcrumds"><u>Collections</u> <i class="fa fa-angle-double-right"></i></a>
         <a ng-href="{{::vm.collection.url}}" class="breadcrumds"><u>{{::vm.collection.title}}</u> <i class="fa fa-angle-double-right"></i></a>
-        <a class="breadcrumds" href="#" ng-click="vm.backToGroup()"><u>{{::vm.group.title}}</u> <i class="fa fa-angle-double-right"></i></a>
-        <a class="breadcrumds" href="#"><u>{{::vm.tile.name}}</u></a>
+        <a class="breadcrumds"  ng-click="vm.backToGroup()"><u>{{::vm.group.title}}</u> <i class="fa fa-angle-double-right"></i></a>
+        <a class="breadcrumds" ><u>{{::vm.tile.name}}</u></a>
     </div>
      <div ng-if="!vm.collection">
-        <a href="#" class="breadcrumds"><u>{{vm.labels.inStock}}</u> <i class="fa fa-angle-double-right"></i></a>
-        <a class="breadcrumds" href="#" ng-click="vm.backToGroup()"><u>{{::shared.inStockType}}</u> <i class="fa fa-angle-double-right"></i></a>
-        <a class="breadcrumds" href="#"><u>{{::vm.tile.name}}</u></a>
+        <a  class="breadcrumds"><u>{{vm.labels.inStock}}</u> <i class="fa fa-angle-double-right"></i></a>
+        <a class="breadcrumds"  ng-click="vm.backToGroup()"><u>{{::shared.inStockType}}</u> <i class="fa fa-angle-double-right"></i></a>
+        <a class="breadcrumds" ><u>{{::vm.tile.name}}</u></a>
     </div>
     <div class="text-section" ng-bind-html="::vm.areas.tileDetailWelcomeMessage | unsafe"></div>
     <div class="row">
         <div class="col-md-12 col-sm-12 left-align">
             <ul class="list-inline tile-button-options">
-                <li ng-if="vm.tile.hasInstallationPhotos"><a href="#" ng-click="vm.showInstallationPhoto(vm.tile.id)"><i class="fa fa-eye"></i><p>{{ ::vm.labels.photos | uppercase }}</p></a></li>
+                <li ng-if="vm.tile.hasInstallationPhotos"><a  ng-click="vm.showInstallationPhoto(vm.tile.id)"><i class="fa fa-eye"></i><p>{{ ::vm.labels.photos | uppercase }}</p></a></li>
                 <li ng-if="vm.tile.hasSample">
-                    <a href="#">
+                    <a >
                         <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="ORDER FREE SAMPLE">
                         <p>{{ ::vm.labels.orderFree | uppercase }}</p>
                     </a>
                 </li>
                 <li ng-if="!vm.isAuthenticated"><a ng-href="{{::vm.navigation.login}}"><i class="fa fa-briefcase"></i><p>{{ ::vm.labels.saveToPortfolio | uppercase }}</p></a></li>
-                <li ng-if="!vm.tile.inPortfolio && vm.isAuthenticated"><a href="#" ng-click="vm.saveToPortfolio(vm.tile.id)"><i class="fa fa-briefcase"></i><p>{{ ::vm.labels.saveToPortfolio | uppercase }}</p></a></li>
-                <li ng-if="vm.tile.inPortfolio && vm.isAuthenticated"><a href="#"><i class="fa fa-briefcase"></i><p>{{ ::vm.labels.addedPortfolio | uppercase }}</p></a></li>
-                <li><a href="#"><i class="fa fa-file"></i><p>{{ ::vm.labels.tearSheet | uppercase }}</p></a></li>
-                <li><a href="#" ng-click="vm.printPage()"><i class="fa fa-print"></i><p>{{ ::vm.labels.printPage | uppercase }}</p></a></li>
+                <li ng-if="!vm.tile.inPortfolio && vm.isAuthenticated"><a  ng-click="vm.saveToPortfolio(vm.tile.id)"><i class="fa fa-briefcase"></i><p>{{ ::vm.labels.saveToPortfolio | uppercase }}</p></a></li>
+                <li ng-if="vm.tile.inPortfolio && vm.isAuthenticated"><a ><i class="fa fa-briefcase"></i><p>{{ ::vm.labels.addedPortfolio | uppercase }}</p></a></li>
+                <li><a ><i class="fa fa-file"></i><p>{{ ::vm.labels.tearSheet | uppercase }}</p></a></li>
+                <li><a  ng-click="vm.printPage()"><i class="fa fa-print"></i><p>{{ ::vm.labels.printPage | uppercase }}</p></a></li>
             </ul>
         </div>
     </div>
@@ -76,7 +76,7 @@
                             </button>
                             <ul class="dropdown-menu filter-list" role="menu">
                                 <li ng-repeat="size in vm.tile.sizes">
-                                    <a href="#" ng-click="vm.setSize(size)">{{ size.size }}</a>
+                                    <a  ng-click="vm.setSize(size)">{{ size.size }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -180,7 +180,7 @@
                         </button>
                         <ul class="dropdown-menu filter-list" role="menu">
                             <li ng-repeat="warehouse in vm.tile.shipFrom">
-                                <a href="#" ng-click="vm.setWarehouse(warehouse)">{{ warehouse.name + ' - ' + warehouse.zipcode}}</a>
+                                <a  ng-click="vm.setWarehouse(warehouse)">{{ warehouse.name + ' - ' + warehouse.zipcode}}</a>
                             </li>
                         </ul>
                     </div>

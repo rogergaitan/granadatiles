@@ -10,14 +10,14 @@
 </div>
 <ul class="active-submenu">
     <li>
-        <a href="#" ng-click="vm.subMenuCollapsed = !vm.subMenuCollapsed">{{ ::vm.labels.interactiveCatalog }}</a>
+        <a  ng-click="vm.subMenuCollapsed = !vm.subMenuCollapsed">{{ ::vm.labels.interactiveCatalog }}</a>
         <ul class="collapsed-submenu" collapse="vm.subMenuCollapsed">
             <li ng-repeat="group in vm.collectionGroups">
                 <a ng-href="{{::group.url}}">{{::group.title}}</a>
             </li>
         </ul>
     </li>
-    <li><a href="#" ng-click="vm.showCollectionGallery()">{{ ::vm.collection.title }}{{ ::vm.labels.galleryMenu }}</a></li>
+    <li><a  ng-click="vm.showCollectionGallery()">{{ ::vm.collection.title }}{{ ::vm.labels.galleryMenu }}</a></li>
     <li ng-repeat="content in vm.collectionContent">
         <a ng-href="{{content.url}}">{{content.title}}</a>
     </li>

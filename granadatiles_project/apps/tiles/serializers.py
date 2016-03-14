@@ -145,10 +145,10 @@ class MenuCollectionSerializer(serializers.Serializer):
 
 
 class BasePortfolioTilesSerializer(BaseSerializer):
-    list_id = serializers.CharField()
     name = serializers.CharField()
     image = serializers.CharField()
     sizes = TileSizeSerializer(many=True)
+    url = serializers.CharField()
 
 
 class PortfolioTilesSerializer(BasePortfolioTilesSerializer):

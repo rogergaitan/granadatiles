@@ -13,10 +13,12 @@
                               'cartSvc',
                               '$modal',
                               'baseSettings',
-                              'collectionsSvc'];
+                              'collectionsSvc',
+                              'gtUtilsSvc'];
 
-    function tileDetailCtrl($scope, tilesSvc, tilesLogicSvc, pageSettings, portfolioSvc, cartSvc, $modal, baseSettings, collectionsSvc) {
+    function tileDetailCtrl($scope, tilesSvc, tilesLogicSvc, pageSettings, portfolioSvc, cartSvc, $modal, baseSettings, collectionsSvc, gtUtilsSvc) {
         var selectedTileId = $scope.shared.tileId;
+        gtUtilsSvc.addQueryStringParameter('tile', selectedTileId);
 
         var vm = this;
         vm.labels = pageSettings.labels;
@@ -40,6 +42,7 @@
 
         vm.backToGroup = function () {
             $scope.shared.tileDetailTemplateUrl = '';
+            gtUtilsSvc.removeQueryStringParameters();
         };
 
         tilesSvc.getTileDetail(selectedTileId).then(function (response){
@@ -96,13 +99,25 @@
         }
 
         vm.addToCart = function () {
-            var cartItem = {
-                sqFt: vm.order.inputSqFt,
-                id: vm.tile.id
-            };
-            cartSvc.addTile(cartItem).then(function (resp) {
-                window.location = pageSettings.navigation.cart;
-            });
+            if (vm.tile.sample) {
+                var cartSample = {
+                    quantity: vm.order.quantity,
+                    id: vm.tile.id
+                };
+                cartSvc.addSample(cartSample).then(function (resp) {
+                    window.location = pageSettings.navigation.cart;
+                });
+            }
+            else {
+                var cartItem = {
+                    sqFt: vm.order.inputSqFt,
+                    id: vm.tile.id
+                };
+                cartSvc.addTile(cartItem).then(function (resp) {
+                    window.location = pageSettings.navigation.cart;
+                });
+            }
         };
+
     }
 })();

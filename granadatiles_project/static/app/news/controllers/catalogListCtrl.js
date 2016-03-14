@@ -32,7 +32,7 @@
         }
 
         vm.share = function () {
-            sharePageSvc.shareModal();
+            sharePageSvc.shareModal(window.location.href);
         };
 
         vm.menuNewsTemplateUrl = baseSettings.staticUrl + 'app/news/templates/menuNews.html';

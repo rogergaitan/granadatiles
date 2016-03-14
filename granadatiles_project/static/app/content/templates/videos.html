@@ -5,8 +5,8 @@
         </aside>
         <div class="col-md-9">
             <h1 class="heading-sec">{{ ::vm.section.title }}</h1>
-            <a href="#" class="breadcrumds"><u>{{ vm.labels.newsPress }} <i class="fa fa-angle-double-right"></i></u></a>
-            <a href="#" class="breadcrumds"><u>{{ vm.labels.video }} <i class="fa fa-angle-double-right"></i></u></a>
+            <a  class="breadcrumds"><u>{{ vm.labels.newsPress }} <i class="fa fa-angle-double-right"></i></u></a>
+            <a  class="breadcrumds"><u>{{ vm.labels.video }} <i class="fa fa-angle-double-right"></i></u></a>
             <div class="text-section" ng-bind-html="vm.section.description | unsafe"></div>
             <div ng-repeat="video in vm.videos" ng-if="$index % 2 == 0" class="row" >
                 <div class="col-md-6 blue-box" ng-if="$index <= vm.videos.length - 1">

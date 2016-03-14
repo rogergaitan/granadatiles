@@ -10,9 +10,11 @@
                             'collectionsSvc',
                             'flatPagesSvc',
                             '$modal',
-                            '$scope'];
+                            '$scope',
+                            'gtUtilsSvc',
+                            '$q'];
 
-    function tileListCtrl(baseSettings, pageSettings, collectionsSvc, flatPagesSvc, $modal, $scope) {
+    function tileListCtrl(baseSettings, pageSettings, collectionsSvc, flatPagesSvc, $modal, $scope, gtUtilsSvc, $q) {
         /* jshint validthis:true */
         var vm = this;
 
@@ -23,8 +25,16 @@
         vm.offset = 0;
         $scope.shared = {};
 
-        collectionsSvc.getCollection(pageSettings.collectionId).then(function (response) {
-            vm.collection = response.data;
+        var collection = collectionsSvc.getCollection(pageSettings.collectionId)
+
+        var group = collectionsSvc.getGroup(pageSettings.groupId)
+
+        $q.all([collection, group]).then(function (response) {
+            vm.collection = response[0].data;
+            vm.group = response[1].data;
+            var selectedTileId = gtUtilsSvc.getQueryStringParameterByName('tile');
+            if (selectedTileId)
+                vm.showTileDetail(selectedTileId);
         });
 
         collectionsSvc.getCollectionGroups(pageSettings.collectionId).then(function (response) {
@@ -33,10 +43,6 @@
 
         collectionsSvc.getFilteredMenuCollection(pageSettings.collectionId).then(function (response) {
             vm.filteredMenuCollection = response.data;
-        });
-
-        collectionsSvc.getGroup(pageSettings.groupId).then(function (response) {
-            vm.group = response.data;
         });
 
         vm.selectedStyle = {

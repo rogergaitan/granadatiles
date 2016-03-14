@@ -13,9 +13,16 @@
             shareModal: shareModal
         };
 
-        function shareModal() {
+        function shareModal(url) {
             $modal.open({
-                templateUrl: baseSettings.staticUrl + 'app/core/templates/sharePageModal.html'
+                templateUrl: baseSettings.staticUrl + 'app/core/templates/sharePageModal.html',
+                controller: 'shareModalCtrl',
+                controllerAs: 'vm',
+                resolve: {
+                    shareUrl: function () {
+                        return url;
+                    }
+                }
             });
         }
     }

@@ -5,8 +5,8 @@
         </aside>
         <div class="col-sm-9">
             <h1 class="heading-sec">{{ ::vm.section.title }}</h1>
-            <a href="#" class="breadcrumds"><u>{{ ::vm.labels.newsPress }}</u> <i class="fa fa-angle-double-right"></i></a>
-            <a href="#" class="breadcrumds"><u>{{ ::vm.labels.magazine }}</u> <i class="fa fa-angle-double-right"></i></a>
+            <a  class="breadcrumds"><u>{{ ::vm.labels.newsPress }}</u> <i class="fa fa-angle-double-right"></i></a>
+            <a  class="breadcrumds"><u>{{ ::vm.labels.magazine }}</u> <i class="fa fa-angle-double-right"></i></a>
             <div class="text-section" ng-bind-html="::vm.section.description | unsafe"></div>
         </div>
     </div>
@@ -19,7 +19,7 @@
                 </button>
                 <ul class="dropdown-menu filter-list" role="menu">
                     <li ng-repeat="year in vm.years">
-                        <a href="#" ng-click="vm.setYear(year)">{{ year.year }}</a>
+                        <a  ng-click="vm.setYear(year)">{{ year.year }}</a>
                     </li>
                 </ul>
             </div>

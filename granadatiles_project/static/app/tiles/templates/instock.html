@@ -20,8 +20,8 @@
         <div class="col-sm-9 col-xs-8">
             <div class="animate-show"  ng-show="!shared.tileDetailTemplateUrl">
                 <h1 class="heading-sec">{{ ::vm.section.title }} </h1>
-                <a href="#" class="breadcrumds"><u>{{::vm.labels.inStock}}</u> <i class="fa fa-angle-double-right"></i></a>
-                <a href="#" class="breadcrumds"><u>{{::shared.inStockType  }}</u> <i class="fa fa-angle-double-right"></i></a>
+                <a  class="breadcrumds"><u>{{::vm.labels.inStock}}</u> <i class="fa fa-angle-double-right"></i></a>
+                <a  class="breadcrumds"><u>{{::shared.inStockType  }}</u> <i class="fa fa-angle-double-right"></i></a>
                 <div class="text-section" ng-bind-html="::vm.section.description | unsafe"></div>
                 <div class="row filter-container">
                     <div class="col-xs-12">
@@ -55,18 +55,18 @@
                                         </div>
                                         <ul class="list-inline tile-options">
                                             <li>
-                                                <a href="#" ng-click="vm.showTileDetail(tile.id)">
+                                                <a  ng-click="vm.showTileDetail(tile.id)">
                                                     <i class="fa fa-plus-circle"></i>
                                                     <p>{{ vm.labels.moreInfo | uppercase }}</p>
                                                 </a>
                                             </li>
                                             <li ng-if="tile.hasInstallationPhotos">
-                                                <a href="#" ng-click="vm.showInstallationPhoto(tile.id)">
+                                                <a  ng-click="vm.showInstallationPhoto(tile.id)">
                                                     <i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p>
                                                 </a>
                                             </li>
                                             <li ng-if="tile.hasSample">
-                                                <a href="#">
+                                                <a >
                                                     <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="">
                                                     <p>{{ vm.labels.orderFree | uppercase }}</p>
                                                 </a>
