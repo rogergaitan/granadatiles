@@ -11,10 +11,25 @@
         /* jshint validthis:true */
         var vm = this;
         vm.labels = pageSettings.labels;
+        vm.navigation = pageSettings.navigation;
+        vm.subTotal = 0;
+        vm.total = 0;
 
         cartSvc.getCartTiles().then(function (response) {
-            vm.tiles = response.data;
+            vm.orders = response.data;
+            for (var i = 0; i < vm.orders.length; i++) {
+                vm.subTotal += vm.orders[i].subtotal;
+            }
+            vm.total = vm.subTotal;
         });
 
+        vm.updateSqFt = function (order) {
+            cartSvc.updateTile({
+                sqFt: order.sqFt,
+                id:order.tile.id
+            }).then(function (response) {
+                console.log(response);
+            });
+        }
     }
 })();

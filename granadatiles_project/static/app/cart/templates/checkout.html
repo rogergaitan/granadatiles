@@ -6,141 +6,185 @@
         </div>
     </div>
     <div class="row">
-    	<div class="col-md-6">
-    		<h2>Shipping Information</h2>
-    	</div>
-    	<div class="col-md-6">
-    		<div class="checkout-steps text-right">
-	    		<div class="checkout-step">
-					<div class="number">1</div>
-					<div class="title">Shipping <br>Information</div>
-				</div>
-				<div class="checkout-step">
-					<div class="number">2</div>
-					<div class="title">Payment <br>Information</div>
-				</div>
-				<div class="checkout-step">
-					<div class="number">3</div>
-					<div class="title">Order <br>Completed</div>
-				</div>
-			</div>
-    	</div>
+        <div class="col-md-6">
+            <h2 ng-show="(vm.activeStep == 1)">{{::vm.labels.shippingInformation}}</h2>
+            <h2 ng-show="(vm.activeStep == 2)">{{::vm.labels.paymentInformation}}</h2>
+            <h2 ng-show="(vm.activeStep == 3)">{{::vm.labels.thankyou}}</h2>
+            <div class="text-section animate-show" ng-show="(vm.activeStep == 3)">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ex erat, euismod vel libero at, vulputate consequat nisl. Sed molestie dolor sit amet nisi porta fringilla. Suspendisse dignissim, nibh non condimentum egestas, mauris nunc suscipit erat, ac vestibulum ex ante tincidunt eros. Phasellus eu turpis malesuada eros eﬃcitur mollis a sed lorem.
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="checkout-steps text-right">
+                <div class="checkout-step" ng-class="(vm.activeStep == 1)? 'active':''">
+                    <a href="" ng-click="vm.navigateToStep(1)">
+                        <div class="number">1</div>
+                        <div class="title">Shipping <br>Information</div>
+                    </a>
+                </div>
+                <div class="checkout-step" ng-class="(vm.activeStep == 2)? 'active':''">
+                    <a href="" ng-click="vm.navigateToStep(2)">
+                        <div class="number">2</div>
+                        <div class="title">Payment <br>Information</div>
+                    </a>
+                </div>
+                <div class="checkout-step" ng-class="(vm.activeStep == 3)? 'active':''">
+                    <a href="" ng-click="vm.navigateToStep(3)">
+                        <div class="number">3</div>
+                        <div class="title">Order <br>Completed</div>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
-    	<div class="col-md-6">
-    		<form action="">
-    			<div class="shipping-information">
-    				<div class="form-group">
-    					<input type="text" class="form-control" placeholder="First Name">
-    				</div>
-    				<div class="form-group">
-    					<input type="text" class="form-control" placeholder="Last Name">
-    				</div>
-    				<div class="form-group">
-    					<input type="text" class="form-control" placeholder="Company Name">
-    				</div>
-    				<div class="form-group">
-    					<input type="text" class="form-control" placeholder="Address">
-    				</div>
-    				<div class="form-group">
-    					<input type="text" class="form-control" placeholder="Address 2">
-    				</div>
-    				<div class="form-group">
-    					<input type="number" class="form-control" placeholder="Zip Code: 45674">
-    				</div>
-    				<div class="form-group">
-    					<input type="text" class="form-control" placeholder="City: Rio Grande">
-    				</div>
-    				<div class="form-group">
-    					<input type="text" class="form-control" placeholder="State: Ohio">
-    				</div>
-    				<div class="form-group">
-    					<input type="email" class="form-control" placeholder="E-mail: Address">
-    				</div>
-    				<div class="form-group">
-    					<input type="number" class="form-control" placeholder="Phone Number">
-    				</div>
-    			</div>
-    		</form>
-    	</div>
-    	<div class="col-md-6">
-    		<div class="order-summary">
-    			<h3>ORDER SUMMARY</h3>
-    			<div class="order-detail">
-    				<table class="table gt-table-order-summary">
-    					<thead>
-    						<tr>
-    							<th>PRODUCT</th>
-    							<th>SQ. FT</th>
-    							<th>SUBTOTAL</th>
-    						</tr>
-    					</thead>
-    					<tbody>
-    						<tr>
-    							<td><h2>Kotka - In Stock Tile</h2><span>Color: Teal, Yellow, Aqua, White</span></td>
-    							<td>100</td>
-    							<td>197.40</td>
-    						</tr>
+        <div class="col-md-6" ng-show="(vm.activeStep == 1 ||vm.activeStep == 2)" ng-class="(vm.activeStep == 1 ||vm.activeStep == 2)? 'col-md-6':''">
+            <form class="animate-show" ng-show="(vm.activeStep == 1)">
+                <div class="shipping-information">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Company Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Address">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Address 2">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" placeholder="Zip Code: 45674">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="City: Rio Grande">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="State: Ohio">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="E-mail: Address">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" placeholder="Phone Number">
+                    </div>
+                </div>
+            </form>
+            <form class="animate-show" ng-show="(vm.activeStep == 2)">
+                <div class="shipping-information">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Address">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" placeholder="Zip Code: 45674">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="E-mail: Address">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" placeholder="Phone Number">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div class="order-summary">
+                <h3>ORDER SUMMARY</h3>
+                <div class="order-detail">
+                    <table class="table gt-table-order-summary">
+                        <thead>
                             <tr>
-                                <td><h2>Jaen 918 - Custom Tile</h2><span>Color: Mustard, White, Olive, Coral</span></td>
-                                <td>50</td>
-                                <td>100.00</td>
+                                <th>PRODUCT</th>
+                                <th>SQ. FT</th>
+                                <th>SUBTOTAL</th>
                             </tr>
-    					</tbody>
-    				</table>
-    			</div>
-    		</div>
-    		<div class="row">
-    			<div class="col-md-6"></div>
-    			<div class="col-md-6">
-    				<table class="table gt-table-total-price">
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="order in vm.orders">
+                                <td>
+                                    <h2>{{::order.tile.name}} - In Stock Tile</h2>
+                                    <span>
+                                        Color:
+                                        <span ng-repeat="color in order.tile.colors">
+                                            <span ng-bind="color.name"></span>
+                                            <span ng-if="($index < (order.tile.colors.length -1))">,&nbsp;</span>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td>{{::order.sqFt}}</td>
+                                <td>{{::order.subtotal}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" ng-show="(vm.activeStep == 1 ||vm.activeStep == 2)"></div>
+                <div class="col-md-6">
+                    <table class="table gt-table-total-price">
                         <tbody>
                             <tr>
                                 <td>Subtotal:</td>
-                                <td class="text-right">$297.40</td>
+                                <td class="text-right">${{vm.subTotal}}</td>
                             </tr>
                             <tr>
                                 <td>Shipping:</td>
-                                <td class="text-right">$100.00</td>
+                                <td class="text-right">$0.00</td>
                             </tr>
                             <tr class="total">
                                 <td>TOTAL:</td>
-                                <td class="text-right">$397.40</td>
+                                <td class="text-right">${{vm.total}}</td>
                             </tr>
-                        </tbody>      
+                        </tbody>
                     </table>
-    			</div>
-    		</div>
-            <div class="row text-right">
-                <button class="btn sky-select btn-sm">Back to Cart</button>
-                <button class="btn btn-green btn-lg">CONTINUE</button>
+                </div>
             </div>
-    		<div class="row">
-    			<div class="col-md-12">
-    				<h2>Questions?</h2>
-		            <ul class="list-inline list-question">
-		                <li class="col-md-4">
-		                    <div class="icon"><i class="fa fa-comments"></i></div>
-		                    <div class="question-content">
-		                        <a href=""><strong>LIVE CHAT</strong></a>
-		                        <span>&nbsp;</span>
-		                    </div>
-		                </li>
-		                <li class="col-md-4">
-		                    <div class="icon"><i class="fa fa-comments"></i></div>
-		                    <div class="question-content">CALL US 
-		                    	<span>213-482-8070</span>
-		                    </div>
-		                </li>
-		                <li class="col-md-4">
-		                    <div class="icon"><i class="fa fa-envelope"></i></div>
-		                    <div class="question-content">EMAIL US
-		                        <span><a href="">sales@granadatile.com</a></span>
-		                    </div>
-		                </li>
-		            </ul>
-    			</div>
-    		</div>
-    	</div>
+            <div class="row text-right" ng-show="(vm.activeStep == 1 ||vm.activeStep == 2)">
+                <a ng-href="{{vm.navigation.cart}}" class="btn sky-select btn-sm">Back to Cart</a>
+                <button type="button" class="btn btn-green btn-lg" ng-click="vm.navigateToNextStep()">CONTINUE</button>
+            </div>
+            <div class="row text-left" ng-show="(vm.activeStep == 3)">
+                <div class="col-xs-12">
+                    <button type="button" class="btn btn-green btn-lg" ng-click="vm.printOrder()">{{::vm.labels.printOrder}}</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Questions?</h2>
+                    <ul class="list-inline list-question">
+                        <li class="col-md-4">
+                            <div class="icon"><i class="fa fa-comments"></i></div>
+                            <div class="question-content">
+                                <a href=""><strong>LIVE CHAT</strong></a>
+                                <span>&nbsp;</span>
+                            </div>
+                        </li>
+                        <li class="col-md-4">
+                            <div class="icon"><i class="fa fa-comments"></i></div>
+                            <div class="question-content">
+                                CALL US
+                                <span>213-482-8070</span>
+                            </div>
+                        </li>
+                        <li class="col-md-4">
+                            <div class="icon"><i class="fa fa-envelope"></i></div>
+                            <div class="question-content">
+                                EMAIL US
+                                <span><a href="">sales@granadatile.com</a></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

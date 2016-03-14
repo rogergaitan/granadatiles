@@ -96,10 +96,18 @@
                 },
                 navigation: {
                    inStockSamples: '{% url 'sr-collections:sr-instock-samples'%}',
-                   inStockTiles: '{% url 'sr-collections:sr-instock-tiles'%}'
+                   inStockTiles: '{% url 'sr-collections:sr-instock-tiles'%}',
+                   cart: '{% url 'sr-cart:sr-home'%}'
                 }
             }
         };
     })();
+</script>
+<script>
+// Add the CSRF Token
+var app = angular.module('app.tiles');
+app.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.headers.common['X-CSRFToken'] = '{{ csrf_token|escapejs }}';
+}]);
 </script>
 {% endblock js %}

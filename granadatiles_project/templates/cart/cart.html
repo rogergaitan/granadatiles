@@ -1,7 +1,7 @@
 ﻿{% extends "base.html" %}
 {% load i18n %}
 
-{% block seo %} 
+{% block seo %}
 <title>Granada Tile - {% trans 'Cart'%} </title>
 {% endblock %}
 
@@ -23,6 +23,9 @@
             return{
                 sectionId: 0,
                 language: '{{LANGUAGE_CODE}}',
+                navigation:{
+                    checkout: '{% url 'sr-cart:sr-checkout' %}'
+                },
                 labels: {
                     yourCart: '{% trans 'Your Cart'%}',
                     cart: '{% trans 'Cart' %}',
@@ -50,5 +53,12 @@
             }
         }
     })();
+</script>
+<script>
+// Add the CSRF Token
+var app = angular.module('app.tiles');
+app.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.headers.common['X-CSRFToken'] = '{{ csrf_token|escapejs }}';
+}]);
 </script>
 {% endblock js%}

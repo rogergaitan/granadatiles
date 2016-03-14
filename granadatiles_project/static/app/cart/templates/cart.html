@@ -28,28 +28,34 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr ng-repeat="order in vm.orders">
                                     <td class="item">
                                         <div class="media">
                                             <span class="media-left">
-                                                <img class="product-image" src="/static/img/initial/tiles/tiles/kotka-mosaic-2.jpg" alt="">
+                                                <img class="product-image" ng-src="{{::order.tile.image}}" alt="{{::order.tile.name}}">
                                             </span>
                                             <div class="media-body">
-                                                <a href=""><h2>Kotka - In Stock Tile</h2></a>
-                                                <span>Color: Teal, Yellow, Aqua, White</span><br>
+                                                <a href=""><h2>{{::order.tile.name}} - In Stock Tile</h2></a>
+                                                <span>
+                                                    Color:
+                                                    <span ng-repeat="color in order.tile.colors">
+                                                        <span ng-bind="color.name"></span>
+                                                        <span ng-if="($index < (order.tile.colors.length -1))">,&nbsp;</span>
+                                                    </span>
+                                                </span><br>
                                                 <a href="" class="btn btn-delete btn-sm">X</a>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="square-footage">
                                         <form action="" class="form-inline">
-                                            <input type="number" name="sfootage" min="20" value="100" class="form-control input-sm">
-                                            <button class="btn btn-default btn-sm">UPDATE</button>
+                                            <input type="number" name="sqFt" ng-model="order.sqFt" id="sqFt" class="form-control input-sm">
+                                            <button class="btn btn-default btn-sm" type="button" ng-click="vm.updateSqFt(order)">UPDATE</button>
                                         </form>
                                     </td>
-                                    <td class="text-center">30</td>
-                                    <td class="text-center">3</td>
-                                    <td class="text-center">197.40</td>
+                                    <td class="text-center">{{order.quantity}}</td>
+                                    <td class="text-center">{{order.boxes}}</td>
+                                    <td class="text-center">{{order.subtotal}}</td>
                                 </tr>
                             </tbody>
                             </table>
@@ -89,15 +95,15 @@
                                         <tbody>
                                             <tr>
                                                 <td>Subtotal:</td>
-                                                <td class="text-right">$297.40</td>
+                                                <td class="text-right">${{vm.subTotal}}</td>
                                             </tr>
                                             <tr>
                                                 <td>Shipping:</td>
-                                                <td class="text-right">$100.00</td>
+                                                <td class="text-right">$0.00</td>
                                             </tr>
                                             <tr class="total">
                                                 <td>TOTAL:</td>
-                                                <td class="text-right">$397.40</td>
+                                                <td class="text-right">${{vm.total}}</td>
                                             </tr>
                                         </tbody>      
                                     </table>
@@ -106,7 +112,7 @@
                                       I authorize Granada Tile to produce this custom tile order for me
                                       using the colors I have selected
                                     </label>
-                                    <button class="btn btn-green"><strong>CHECKOUT</strong></button>
+                                    <a ng-href="{{::vm.navigation.checkout}}" class="btn btn-green"><strong>CHECKOUT</strong></a>
                                 </div>
                             </div>
                         </div>    

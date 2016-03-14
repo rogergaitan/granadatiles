@@ -23,6 +23,9 @@
             return{
                 sectionId: 0,
                 language: '{{LANGUAGE_CODE}}',
+                navigation:{
+                                cart: '{% url 'sr-cart:sr-home' %}'
+                           },
                 labels: {
                     backToCart: '{% trans 'Back to Cart'%}',
                     shippingInformation: '{% trans 'Shipping Information' %}',
@@ -45,9 +48,18 @@
                     phone: '213-482-8070',
                     email: 'sales@granadatile.com',
                     checkout: '{% trans 'CheckOut'%}',
+                    thankyou: '{% trans 'Thank you for your purchase' %}',
+                    printOrder:'{% trans 'PRINT ORDER'%}'
                 }
             }
         }
     })();
+</script>
+<script>
+// Add the CSRF Token
+var app = angular.module('app.tiles');
+app.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.headers.common['X-CSRFToken'] = '{{ csrf_token|escapejs }}';
+}]);
 </script>
 {% endblock js%}
