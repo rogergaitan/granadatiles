@@ -1,18 +1,8 @@
 ﻿<div class="col-md-12" ng-controller="checkoutCtrl as vm">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <h2 class="heading-sec">{{::vm.labels.checkout}}</h2>
             <a class="breadcrumds" href="#"><u>{{ ::vm.labels.checkout }}</u> <i class="fa fa-angle-double-right"></i></a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <h2 ng-show="(vm.activeStep == 1)">{{::vm.labels.shippingInformation}}</h2>
-            <h2 ng-show="(vm.activeStep == 2)">{{::vm.labels.paymentInformation}}</h2>
-            <h2 ng-show="(vm.activeStep == 3)">{{::vm.labels.thankyou}}</h2>
-            <div class="text-section animate-show" ng-show="(vm.activeStep == 3)">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ex erat, euismod vel libero at, vulputate consequat nisl. Sed molestie dolor sit amet nisi porta fringilla. Suspendisse dignissim, nibh non condimentum egestas, mauris nunc suscipit erat, ac vestibulum ex ante tincidunt eros. Phasellus eu turpis malesuada eros eﬃcitur mollis a sed lorem.
-            </div>
         </div>
         <div class="col-md-6">
             <div class="checkout-steps text-right">
@@ -34,6 +24,16 @@
                         <div class="title">Order <br>Completed</div>
                     </a>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h2 ng-show="(vm.activeStep == 1)">{{::vm.labels.shippingInformation}}</h2>
+            <h2 ng-show="(vm.activeStep == 2)">{{::vm.labels.paymentInformation}}</h2>
+            <h2 ng-show="(vm.activeStep == 3)">{{::vm.labels.thankyou}}</h2>
+            <div class="text-section animate-show" ng-show="(vm.activeStep == 3)">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ex erat, euismod vel libero at, vulputate consequat nisl. Sed molestie dolor sit amet nisi porta fringilla. Suspendisse dignissim, nibh non condimentum egestas, mauris nunc suscipit erat, ac vestibulum ex ante tincidunt eros. Phasellus eu turpis malesuada eros eﬃcitur mollis a sed lorem.
             </div>
         </div>
     </div>

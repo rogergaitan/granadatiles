@@ -151,6 +151,33 @@
 .checkout-steps{
 	.checkout-step{
 		display: inline-block;
+		margin: 5px 15px;
+		
+		a:hover{
+			text-decoration: none;
+		}
+		.number{
+			height: 40px;
+			width: 40px;
+			margin: 0 auto;
+			text-align: center;
+			color:@darkBlue;
+			font-family: @font-secundary;
+			.font-configuration(@font-size: @font-xxll,@font-weight:@font-light);
+			background-color: @lightSteelBlue;
+			border-radius: 50%;
+		}
+		.title{
+			color:@darkBlue;
+			text-align: center;
+			font-family: @font-secundary;
+			line-height: 1;
+			margin-top: 10px;
+			.font-configuration(@font-size:@font-xl,@font-weight:@font-light);
+		}	
+	}
+	.checkout-step.active{
+		display: inline-block;
 		.number{
 			height: 40px;
 			width: 40px;
