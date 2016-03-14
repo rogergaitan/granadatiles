@@ -1023,3 +1023,36 @@ hr {
 }
 
 /**************************************/
+
+/********* Tag New *************/
+.tag-new{
+    position: absolute;
+    top: 262px;
+    left: 20px;
+    width: 78%;
+    color: @white;
+    font-size: 20px;
+    font-weight: 300;
+    text-align: center;
+    background-color: @orange;
+}
+.tag-new:after, .tag-new:before {
+    content: " ";
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+}
+.tag-new.arrowTop:before, .tag-new.arrowTop:after {
+    left: 0;
+    border-left: 70px solid transparent;
+    border-right: 70px solid transparent;
+}
+.arrowTop:after {
+    border-bottom: 10px solid #F16531;
+    top: -8px;
+    z-index: 1;
+}
+
+
+/*******************************/
