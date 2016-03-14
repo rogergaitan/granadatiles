@@ -26,9 +26,18 @@
         vm.updateSqFt = function (order) {
             cartSvc.updateTile({
                 sqFt: order.sqFt,
-                id:order.tile.id
+                id: order.tile.id
             }).then(function (response) {
-                console.log(response);
+                var data = response.data;
+                order.boxes = data.boxes;
+                order.quantity = data.quantity;
+                order.subtotal = data.subtotal;
+            });
+        };
+
+        vm.removeTile = function (order) {
+            cartSvc.removeTile(order.tile.id).then(function (response) {
+                order.removed = true;
             });
         }
     }

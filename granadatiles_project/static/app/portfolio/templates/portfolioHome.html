@@ -10,68 +10,25 @@
         </div>
     </div>
     <br>
-    <div ng-repeat="tile in vm.tiles" ng-if="$index % 4 == 0" class="row">
-        <div class="col-md-3 blue-box" ng-if="$index <= vm.tiles.length - 1">
-            <div class="content-catalog">
-                <a href="">
-                    <img src="{{ ::vm.tiles[$index].image }}" alt="" class="shadow-image thumbnail img-responsive">
-                </a>
-                <div class="catalog-body">
-                    <h2>{{ ::vm.tiles[$index].name }}</h2>
-                    <ul class="list-inline catalog-options row">
-                        <li class="col-md-3"><a href=""><i class="fa fa-shopping-cart"></i><br>BUY</a></li>
-                        <li class="col-md-3"><a href=""><i class="fa fa-beer"></i><br>EDIT</a></li>
-                        <li class="col-md-3"><a href=""><i class="fa fa-share-alt"></i><br>SHARE</a></li>
-                        <li class="col-md-3"><a href=""><i class="fa fa-times-circle-o"></i><br>DELETE</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 blue-box" ng-if="$index + 1 <= vm.tiles.length - 1">
-            <div class="content-catalog">
-                <a href="">
-                    <img src="{{ ::vm.tiles[$index + 1].image }}" alt="" class="shadow-image thumbnail img-responsive">
-                </a>
-                <div class="catalog-body">
-                    <h2>{{ ::vm.tiles[$index + 1].name }}</h2>
-                    <ul class="list-inline catalog-options row">
-                        <li class="col-md-3"><a href=""><i class="fa fa-shopping-cart"></i><br>BUY</a></li>
-                        <li class="col-md-3"><a href=""><i class="fa fa-beer"></i><br>EDIT</a></li>
-                        <li class="col-md-3"><a href=""><i class="fa fa-share-alt"></i><br>SHARE</a></li>
-                        <li class="col-md-3"><a href=""><i class="fa fa-times-circle-o"></i><br>DELETE</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 blue-box" ng-if="$index + 2 <= vm.tiles.length - 1">
-            <div class="content-catalog">
-                <a href="">
-                    <img src="{{ ::vm.tiles[$index + 2].image }}" alt="" class="shadow-image thumbnail img-responsive">
-                </a>
-                <div class="catalog-body">
-                    <h2>{{ ::vm.tiles[$index + 2].name }}</h2>
-                    <ul class="list-inline catalog-options row">
-                        <li class="col-md-3"><a href=""><i class="fa fa-shopping-cart"></i><br>BUY</a></li>
-                        <li class="col-md-3"><a href=""><i class="fa fa-beer"></i><br>EDIT</a></li>
-                        <li class="col-md-3"><a href=""><i class="fa fa-share-alt"></i><br>SHARE</a></li>
-                        <li class="col-md-3"><a href=""><i class="fa fa-times-circle-o"></i><br>DELETE</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 blue-box" ng-if="$index + 3 <= vm.tiles.length - 1">
-            <div class="content-catalog">
-                <a href="">
-                    <img src="{{ ::vm.tiles[$index + 3].image }}" alt="" class="shadow-image thumbnail img-responsive">
-                </a>
-                <div class="catalog-body">
-                    <h2>{{ ::vm.tiles[$index + 3].name }}</h2>
-                    <ul class="list-inline catalog-options row">
-                        <li class="col-md-3"><a href=""><i class="fa fa-shopping-cart"></i><br>BUY</a></li>
-                        <li class="col-md-3"><a href=""><i class="fa fa-beer"></i><br>EDIT</a></li>
-                        <li class="col-md-3"><a href=""><i class="fa fa-share-alt"></i><br>SHARE</a></li>
-                        <li class="col-md-3"><a href=""><i class="fa fa-times-circle-o"></i><br>DELETE</a></li>
-                    </ul>
+    <div class="row">
+        <div ng-repeat="tile in vm.tiles">
+            <div class="clearfix" ng-if="$index % 4 == 0"></div>
+            <div class="col-md-3 blue-box animate-show" ng-show="!tile.removed">
+                <div class="content-catalog">
+                    <a href="">
+                        <img src="{{ ::tile.image }}" alt="" class="shadow-image thumbnail img-responsive">
+                    </a>
+                    <div class="catalog-body">
+                        <h2>{{ ::tile.name }}</h2>
+                        <ul class="list-inline catalog-options row">
+                            <li class="col-md-3"><a href=""><i class="fa fa-shopping-cart"></i><br>BUY</a></li>
+                            <li class="col-md-3"><a href=""><i class="fa fa-beer"></i><br>EDIT</a></li>
+                            <li class="col-md-3"><a href=""><i class="fa fa-share-alt"></i><br>SHARE</a></li>
+                            <li class="col-md-3">
+                                <a href="" ng-click="vm.removeTile(tile)"><i class="fa fa-times-circle-o"></i><br>DELETE</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
