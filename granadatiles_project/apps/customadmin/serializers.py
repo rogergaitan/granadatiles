@@ -32,3 +32,4 @@ class SearchSerializer(BaseCatalogSerializer):
     type = serializers.CharField()
     additional = serializers.CharField()
     additional2 = serializers.CharField()
+    url = serializers.CharField()

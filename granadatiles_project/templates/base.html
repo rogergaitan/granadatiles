@@ -52,14 +52,14 @@
                                         <img class="gt-header-logo-sm " src="{{ STATIC_URL }}img/Granada-Tile-logo.png" alt="Granada Tile logo">
                                     </a>
                                 </div>
-                                <div class="col-xs-12 col-sm-6 col-md-4 pull-right input-group" id="gt-header-search">
-                                    <input type="text" class="form-control input-sm" placeholder="Search">
+                                <form method="get" action="{% url 'search'%}" class="col-xs-12 col-sm-6 col-md-4 pull-right input-group" id="gt-header-search">
+                                    <input type="text" class="form-control input-sm" placeholder="Search" name="searchTerm" id="searchTerm" pattern=".{3,}" required title="{% trans '3 characters minimum' %}">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default btn-sm">
                                             <span class="fa fa-angle-right"></span>
                                         </button>
                                     </span>
-                                </div>
+                                </form>
                             </div>
                         </div>
                         <div class="row text-right" id="gt-header-contact-info">
@@ -287,6 +287,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/cart/controllers/checkoutCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/cart/services/cartSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/cart/services/checkoutSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/content/directives/imagePreload.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/aboutUsCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/collectionContentCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/colorPalleteCtrl.js"></script>
@@ -294,14 +295,15 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/coverCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/flatPagesMenuCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/indexCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/searchCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/sectionCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/testimonyCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/videoCtrl.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/content/directives/imagePreload.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/filters/ResourceUrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/areaSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/flatPagesSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/mainNavigationSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/searchSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/sectionSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/testimonySvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/videoSvc.js"></script>

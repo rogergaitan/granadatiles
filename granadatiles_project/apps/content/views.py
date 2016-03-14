@@ -31,6 +31,9 @@ def cement_vs_ceramic(request):
 def color_palletes(request):
     return render(request, 'content/color_palletes.html')
 
+def search(request):
+    return render(request, 'content/search.html')
+
 
 class TestimonyViewSet(BaseViewSet):
     # /testimonials

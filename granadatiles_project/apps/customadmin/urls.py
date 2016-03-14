@@ -6,10 +6,6 @@ from rest_framework.routers import DefaultRouter
 
 from .views import ItemCountViewSet, LatestTilesViewset, LatestUsersViewSet, GroupsByCollectionViewSet, SearchViewSet
 
-urlpatterns = patterns('',
-    url(r'^search$', 'apps.customadmin.views.search', name="search"),
-)
-
 router = DefaultRouter()
 router.register('dashboard/itemcounts', ItemCountViewSet, base_name='itemcounts')
 router.register('dashboard/latesttiles', LatestTilesViewset, base_name='latesttiles')
@@ -17,4 +13,4 @@ router.register('dashboard/latestusers', LatestUsersViewSet, base_name='latestus
 router.register('dashboard/groupsbycollection', GroupsByCollectionViewSet, base_name='groupsbycollection')
 router.register('search', SearchViewSet, base_name='search')
 
-urlpatterns += router.urls
+urlpatterns = router.urls

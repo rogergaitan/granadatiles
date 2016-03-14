@@ -1,0 +1,17 @@
+﻿<div class="col-md-12" ng-controller="searchCtrl as vm">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="heading-sec">{{ ::vm.labels.searchResults }}</h1>
+            <a  class="breadcrumds"><u>{{ ::vm.labels.searchResults }} <i class="fa fa-angle-double-right"></i></u></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <ul>
+                <li ng-repeat="result in vm.searchResults">
+                    {{result.name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

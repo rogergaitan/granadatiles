@@ -55,10 +55,13 @@ class SearchDto:
         if self.type == 'Article':
             self.additional = search_item.magazine.name
             self.additional2 = search_item.date
+            self.url = reverse('sr-news:sr-news')
         elif self.type == 'Tile':
-            self.additional = search_item.design.group.collection.get_title(language)
+            self.additional = search_item.design.group.collection.get_title(language) if search_item.design else '' 
+            self.url = search_item.get_absolute_url(language)
         elif self.type == 'Group':
             self.additional = search_item.collection.get_title(language)
+            self.url = search_item.get_absolute_url(language)
         else:
             self.additional = ''
 
