@@ -142,8 +142,8 @@ class CollectionAdmin(SummernoteModelAdmin):
     def save_model(self, request, obj, form, change):
         tiles = Tile.objects.filter(design__group__collection__id=obj.id)
         tiles = tiles.filter(override_collection_box=False)
-        tiles = tiles.filter(box=True)
-        tiles.update(box=request.POST.get('box'))
+        box = Box.objects.get(pk=request.POST.get('box'))
+        tiles.update(box=box)
         obj.save()
 
 
