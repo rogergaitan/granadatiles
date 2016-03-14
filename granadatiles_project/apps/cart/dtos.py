@@ -13,7 +13,7 @@ class TileDto(BaseCatalogDto):
         super().__init__(tile, language)
         self.list_id = tile.list_id
         self.size = tile.size
-        self.image = tile.mosaic.url if tile.mosaic else ''
+        self.image = tile.image.url if tile.image else ''
         self.colors = [TileColorDto(color, language) for color in tile.colors.all()]
 
 
