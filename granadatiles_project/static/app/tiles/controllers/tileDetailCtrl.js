@@ -101,7 +101,7 @@
         vm.addToCart = function () {
             if (vm.tile.sample) {
                 var cartSample = {
-                    quantity: vm.order.quantity,
+                    quantity: vm.order.inputQuantity,
                     id: vm.tile.id
                 };
                 cartSvc.addSample(cartSample).then(function (resp) {

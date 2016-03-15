@@ -5,9 +5,9 @@
         .module('app.tiles')
         .controller('instockCtrl', instockCtrl);
 
-    instockCtrl.$inject = ['baseSettings', 'pageSettings', 'instockSvc', 'sectionSvc', '$scope'];
+    instockCtrl.$inject = ['baseSettings', 'pageSettings', 'instockSvc', 'sectionSvc', '$scope', 'gtUtilsSvc', 'cartSvc'];
 
-    function instockCtrl(baseSettings, pageSettings, instockSvc, sectionSvc, $scope) {
+    function instockCtrl(baseSettings, pageSettings, instockSvc, sectionSvc, $scope, gtUtilsSvc, cartSvc) {
         /* jshint validthis:true */
         var vm = this;
         vm.labels = pageSettings.labels;
@@ -33,7 +33,7 @@
         };
 
         vm.nextPage = function () {
-            if (!vm.inProgress) {
+            if (!vm.inProgress && !$scope.shared.tileDetailTemplateUrl) {
                 vm.offset = vm.tiles.length;
                 UpdateTiles(false);
             }
@@ -43,6 +43,20 @@
             $scope.shared.tileId = tileId;
             $scope.shared.tileDetailTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/tileDetails.html'
         };
+
+        vm.orderFreeSample = function (tile) {
+            var cartSample = {
+                quantity: 1,
+                id: tile.sampleId
+            };
+            cartSvc.addSample(cartSample).then(function (resp) {
+                //window.location = pageSettings.navigation.cart;
+            });
+        };
+
+        var selectedTileId = gtUtilsSvc.getQueryStringParameterByName('tile');
+        if (selectedTileId)
+            vm.showTileDetail(selectedTileId);
 
         function UpdateTiles(reset) {
             vm.inProgress = true;

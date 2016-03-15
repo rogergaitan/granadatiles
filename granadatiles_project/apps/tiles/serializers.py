@@ -124,6 +124,7 @@ class InStockSerializer(BaseCatalogSerializer):
     size = serializers.CharField()
     hasInstallationPhotos = serializers.BooleanField()
     hasSample = serializers.BooleanField()
+    sampleId = serializers.IntegerField()
 
 
 class GroupSerializer(BaseGalleryImageSerializer):

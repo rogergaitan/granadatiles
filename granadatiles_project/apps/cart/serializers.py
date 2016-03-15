@@ -7,10 +7,10 @@ class TileColorSerializer(BaseCatalogSerializer):
 
 
 class TileSerializer(BaseCatalogSerializer):
-    list_id = serializers.CharField()
     size = serializers.CharField()
     image = serializers.CharField()
     colors = TileColorSerializer(many=True)
+    inStock = serializers.BooleanField()
 
 
 class BaseTileOrdersSerializer(BaseSerializer):
@@ -40,7 +40,7 @@ class BaseSampleOrdersSerializer(BaseSerializer):
     subtotal = serializers.FloatField()
 
 
-class SampleOrdersSerializer(BaseSerializer):
+class SampleOrdersSerializer(BaseSampleOrdersSerializer):
     tile = TileSerializer()
 
 

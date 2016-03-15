@@ -11,10 +11,10 @@ class TileDto(BaseCatalogDto):
 
     def __init__(self, tile, language):
         super().__init__(tile, language)
-        self.list_id = tile.list_id
         self.size = tile.size
         self.image = tile.image.url if tile.image else ''
         self.colors = [TileColorDto(color, language) for color in tile.colors.all()]
+        self.inStock = tile.in_stock()
 
 
 class BaseTileOrdersDto(BaseDto):
@@ -60,7 +60,7 @@ class BaseSampleOrdersDto(BaseDto):
 class SampleOrdersDto(BaseSampleOrdersDto):
 
     def __init__(self, sample_order, language):
-        super().__init__(sample_order)
+        super().__init__(sample_order, language)
         self.tile = TileDto(sample_order.tile, language)
 
 

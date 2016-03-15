@@ -54,7 +54,7 @@
                                             </ul>
                                         </div>
                                         <ul class="list-inline tile-options">
-                                            <li>
+                                            <li ng-show="!vm.isSample">
                                                 <a  ng-click="vm.showTileDetail(tile.id)">
                                                     <i class="fa fa-plus-circle"></i>
                                                     <p>{{ vm.labels.moreInfo | uppercase }}</p>
@@ -66,7 +66,7 @@
                                                 </a>
                                             </li>
                                             <li ng-if="tile.hasSample">
-                                                <a >
+                                                <a ng-click="vm.orderFreeSample(tile)">
                                                     <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="">
                                                     <p>{{ vm.labels.orderFree | uppercase }}</p>
                                                 </a>

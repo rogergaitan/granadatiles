@@ -35,7 +35,12 @@
                                                 <img class="product-image" ng-src="{{::order.tile.image}}" alt="{{::order.tile.name}}">
                                             </span>
                                             <div class="media-body">
-                                                <a href=""><h2>{{::order.tile.name}} - In Stock Tile</h2></a>
+                                                <h2>
+                                                    {{::order.tile.name}} -
+                                                    <span ng-if="order.tile.inStock">In Stock</span>
+                                                    <span ng-if="!order.tile.inStock">Custom</span>
+                                                    Tile
+                                                </h2>
                                                 <span>
                                                     Color:
                                                     <span ng-repeat="color in order.tile.colors">
@@ -99,7 +104,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Shipping:</td>
-                                                <td class="text-right">$0.00</td>
+                                                <td class="text-right">$0</td>
                                             </tr>
                                             <tr class="total">
                                                 <td>TOTAL:</td>
@@ -136,27 +141,39 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr ng-repeat="sampleOrder in vm.sampleOrders" class="animate-show" ng-show="!sampleOrder.removed">
                                     <td class="item">
                                         <div class="media">
                                             <span class="media-left">
-                                                <img class="product-image" src="/static/img/initial/tiles/tiles/kotka-mosaic-2.jpg" alt="">
+                                                <img class="product-image" ng-src="{{sampleOrder.tile.image}}" alt="{{::sampleOrder.tile.name}}">
                                             </span>
                                             <div class="media-body">
-                                                <a href=""><h2>Kotka - In Stock Tile</h2></a>
-                                                <span>Color: Teal, Yellow, Aqua, White</span><br>
-                                                <a href="" class="btn btn-delete btn-sm">X</a>
+                                                <h2>
+                                                    {{::sampleOrder.tile.name}}
+                                                    <span ng-if="(sampleOrder.subtotal == 0)">FREE</span>
+                                                    <span ng-if="sampleOrder.tile.inStock">In Stock</span>
+                                                    <span ng-if="!sampleOrder.tile.inStock">Custom</span>
+                                                    Sample
+                                                </h2>
+                                                <span>
+                                                    Color:
+                                                    <span ng-repeat="color in sampleOrder.tile.colors">
+                                                        <span ng-bind="color.name"></span>
+                                                        <span ng-if="($index < (order.tile.colors.length -1))">,&nbsp;</span>
+                                                    </span>
+                                                </span>
+                                                <a ng-click="vm.removeSample(sampleOrder)" class="btn btn-delete btn-sm">X</a>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="form-group">
-                                            <select name="" id="" class="form-control form-control-inline sky-select">
-                                                <option value="1">4</option>
+                                            <select class="form-control form-control-inline sky-select" ng-model="sampleOrder.selectedQuantity" ng-change="vm.updateSampleQuantity(sampleOrder)">
+                                                <option ng-repeat="item in vm.quantityForSamples" value="{{item}}" ng-selected="(item==sampleOrder.quantity)">{{item}}</option>
                                             </select>
                                         </div>
                                     </td>
-                                    <td class="text-center">12.00</td>
+                                    <td class="text-center">{{::sampleOrder.subtotal}}</td>
                                 </tr>
                             </tbody>
                             </table>
@@ -210,15 +227,15 @@
                                         <tbody>
                                             <tr>
                                                 <td>Subtotal:</td>
-                                                <td class="text-right">$297.40</td>
+                                                <td class="text-right">${{vm.sampleSubTotal}}</td>
                                             </tr>
                                             <tr>
                                                 <td>Shipping:</td>
-                                                <td class="text-right">$100.00</td>
+                                                <td class="text-right">$0</td>
                                             </tr>
                                             <tr class="total">
                                                 <td>TOTAL:</td>
-                                                <td class="text-right">$397.40</td>
+                                                <td class="text-right">${{vm.sampleTotal}}</td>
                                             </tr>
                                         </tbody>      
                                     </table>
@@ -274,7 +291,7 @@
         <div class="col-md-12">
             <h2>Terms of Sale</h2>
             <div class="gt-scroll-terms" data-spy="scroll">
-                <p>HAND MADE TILE 
+                <p class="text-section">HAND MADE TILE 
                 Hand made cement tile is as much an art as a science. The natural components of the cement, sand, marble dust and color pigment change over time, leading to slight variations in shade and tone. These variations are inherent to hand made cement tiles and therefore must be expected. To ensure the smallest possible range in color variation, it is best to order enough tile to complete your installation and, depending on the project, 10 - 15% extra. Also, to avoid miscalculations it is recommended that you have a professional tile contractor calculate the measurements and quantities for your tile project. Furthermore, Granada Tile's products are used in a variety of applications such as kitchens, bathroom, ﬂoors, walls, pools, fountains, and stairs. Some products may not be suitable for all applications. If values for characteristics such as absorption or coeﬃcient of friction are required, please contact us in writing before placing order. No claims for any tile order will be accepted after installation. 
                 MINIMUM ORDER POLICY 
                 All non-stock or custom orders must meet the minimum order requirement of 50 square feet for the Echo, Minis and Mauresque Collections and 100 square feet for the Milano, Rustico and Antique Collections. A small order charge of 30% applies to non-stock or custom Echo Collection orders of 50-100</p>
