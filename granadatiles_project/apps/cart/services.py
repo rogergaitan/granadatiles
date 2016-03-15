@@ -2,12 +2,15 @@ import math
 
 from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404
+from django.core.urlresolvers import reverse
 
 from rest_framework.exceptions import APIException
 
+from quickbooks import QuickBooks
+
 from apps.tiles.models import Tile, CustomizedTile
 from .models import Cart
-from .dtos import TileOrdersDto, SampleOrdersDto, CustomizedTileOrdersDto, BaseTileOrdersDto
+from .dtos import TileOrdersDto, SampleOrdersDto, CustomizedTileOrdersDto, BaseTileOrdersDto, BaseSampleOrdersDto
 
 
 class CartService:
@@ -79,20 +82,19 @@ class OrdersService:
 
     def add_tile(cart, tile, sq_ft):
         data = OrdersService.calculate_order(tile, sq_ft)
-        cart.tile_orders.create(tile=tile,
-				sq_ft=sq_ft,
-				quantity=data['quantity'],
-				boxes=data['boxes'],
-				subtotal=data['subtotal'])
+        data['sq_ft'] = sq_ft
+        cart.tile_orders.update_or_create(
+            tile=tile,
+	    defaults=data
+	)
         
     def update_tile(cart, tile, sq_ft):
         data = OrdersService.calculate_order(tile, sq_ft)
-        tile_order = cart.tile_orders.get(tile=tile)
-        tile_order.sq_ft = sq_ft
-        tile_order.quantity = data['quantity']
-        tile_order.boxes = data['boxes']
-        tile_order.subtotal = data['subtotal']
-        tile_order.save()
+        data['sq_ft'] = sq_ft
+        tile_order, _ = cart.tile_orders.update_or_create(
+            tile=tile,
+            defaults=data
+        )
         return BaseTileOrdersDto(tile_order)
 		      
     def remove_tile(cart, tile):
@@ -132,17 +134,19 @@ class OrdersService:
 
     def add_sample(cart, tile, quantity):
         data = OrdersService.calculate_sample_order(tile, quantity)
-        cart.sample_orders.create(tile=tile,
-				  quantity=data['quantity'],
-				  subtotal=data['subtotal'])
+        cart.sample_orders.update_or_create(
+            tile=tile,
+            defaults=data
+        )
 	
     def update_sample(cart, tile, quantity):
         data = OrdersService.calculate_sample_order(tile, quantity)
-        sample_order = cart.sample_orders.get(tile=tile)
-        sample_order.quantity = data['quantity']
-        sample_order.subtotal = data['subtotal']
-        sample_order.save()					  
-
+        sample_order, _ = cart.sample_orders.update_or_create(
+            tile=tile,
+            defaults=data
+        )
+        return BaseSampleOrdersDto(sample_order)
+        
     def remove_sample(cart, tile):
         cart.sample_orders.get(tile=tile).delete()
 
