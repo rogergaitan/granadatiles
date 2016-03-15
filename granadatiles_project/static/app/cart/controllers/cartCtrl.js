@@ -63,8 +63,13 @@
         }
 
         vm.updateSampleQuantity = function (sampleOrder) {
-            console.log(sampleOrder);
-            //Update backEnd and total
+            var sample = {
+                id: sampleOrder.tile.id,
+                quantity: parseInt(sampleOrder.selectedQuantity)
+            }
+            cartSvc.updateSample(sample).then(function (response) {
+                
+            });
         };
 
     }
