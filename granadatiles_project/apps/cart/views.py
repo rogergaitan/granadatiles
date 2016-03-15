@@ -81,11 +81,3 @@ class TilesCountViewSet(BaseViewSet):
         cart = CartService.get_cart(request)
         tiles_count = cart.tile_orders.count() + cart.sample_orders.count()
         return Response({'count': tiles_count})
-      
-@api_view(['GET'])      
-def request_oauth_token(request):
-    return Response(QuickBooksService.get_request_token(request))
-    
-def get_access_token(request):
-    QuickBooksService.get_access_token(request)
-    

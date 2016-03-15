@@ -6,8 +6,6 @@ from django.core.urlresolvers import reverse
 
 from rest_framework.exceptions import APIException
 
-from quickbooks import QuickBooks
-
 from apps.tiles.models import Tile, CustomizedTile
 from .models import Cart
 from .dtos import TileOrdersDto, SampleOrdersDto, CustomizedTileOrdersDto, BaseTileOrdersDto, BaseSampleOrdersDto
@@ -145,6 +143,7 @@ class OrdersService:
             tile=tile,
             defaults=data
         )
+
         return BaseSampleOrdersDto(sample_order)
         
     def remove_sample(cart, tile):
@@ -221,3 +220,4 @@ class OrdersService:
         ET.SubElement(dimensions, 'Uom').text = 'in'
 
         return ET.tostring(root, encoding='unicode')
+      
