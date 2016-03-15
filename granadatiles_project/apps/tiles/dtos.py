@@ -64,7 +64,12 @@ class MainTileDto(BaseDto):
         self.mosaic = tile.mosaic.url if tile.mosaic else ''
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
         self.hasInstallationPhotos = tile.has_installation_photos()
-        self.hasSample = tile.has_sample()
+        self.isSample = tile.is_sample
+        if self.isSample:
+            self.sampleId = tile.id
+        else:
+            self.sampleId = tile.sample.id if tile.sample else 0
+        self.hasSample = tile.has_sample() if not tile.is_sample else True
         self.new = tile.new
         self.inStock = False if tile.custom == True else True
         self.onSale = True if tile.on_sale else False
@@ -183,7 +188,11 @@ class TileOrderDto(BaseCatalogDto):
         self.designer = TileDesignerDto(tile.design.group, language)
         self.quantity = tile.quantity_on_hand
         self.sample = tile.is_sample
-        self.hasSample = tile.has_sample()
+        self.hasSample = tile.has_sample() 
+        if self.sample:
+            self.sampleId = tile.id
+        else:
+            self.sampleId = tile.sample.id if tile.sample else 0
         if portfolio:
             self.inPortfolio = True if portfolio.tiles.filter(tile=tile).exists() else False
         else:
@@ -219,7 +228,10 @@ class InStockDto(BaseCatalogDto):
                           if tile.design.group.collection else ''
         self.size = tile.size
         self.hasInstallationPhotos = tile.has_installation_photos()
-        self.sampleId = tile.sample.id if tile.sample else 0
+        if self.is_sample:
+            self.sampleId = tile.id
+        else:
+            self.sampleId = tile.sample.id if tile.sample else 0
 
         if is_sample == 'true':
             self.hasSample = True

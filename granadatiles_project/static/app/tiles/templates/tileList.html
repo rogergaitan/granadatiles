@@ -78,15 +78,15 @@
                                         </div>
 
                                         <ul class="list-inline tile-options">
-                                            <li>
+                                            <li ng-if="!tile.main.isSample">
                                                 <a  ng-click="vm.showTileDetail(tile.main.id)"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
                                             </li>
                                             <li ng-if="tile.main.hasInstallationPhotos">
                                                 <a  ng-click="vm.showInstallationPhoto(tile.main.id)"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
                                             </li>
                                             <li ng-if="tile.main.hasSample">
-                                                <a >
-                                                    <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="">
+                                                <a ng-click="vm.orderFreeSample(tile.main)">
+                                                    <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="{{::vm.main.name}}">
                                                     <p>{{ vm.labels.orderFree | uppercase }}</p>
                                                 </a>
                                             </li>
