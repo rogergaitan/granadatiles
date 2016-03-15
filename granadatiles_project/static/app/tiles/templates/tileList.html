@@ -78,7 +78,7 @@
                                         </div>
 
                                         <ul class="list-inline tile-options">
-                                            <li ng-if="!tile.main.isSample">
+                                            <li ng-show="!tile.main.isSample">
                                                 <a  ng-click="vm.showTileDetail(tile.main.id)"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
                                             </li>
                                             <li ng-if="tile.main.hasInstallationPhotos">

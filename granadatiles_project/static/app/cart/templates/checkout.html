@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div ng-class="(vm.activeStep == 3)? 'col-md-12':'col-md-6'">
             <h2 ng-show="(vm.activeStep == 1)">{{::vm.labels.shippingInformation}}</h2>
             <h2 ng-show="(vm.activeStep == 2)">{{::vm.labels.paymentInformation}}</h2>
             <h2 ng-show="(vm.activeStep == 3)">{{::vm.labels.thankyou}}</h2>
@@ -111,7 +111,11 @@
                         <tbody>
                             <tr ng-repeat="order in vm.orders">
                                 <td>
-                                    <h2>{{::order.tile.name}} - In Stock Tile</h2>
+                                    <h2>
+                                        {{::order.tile.name}} -
+                                        <span ng-if="order.tile.inStock">{{::vm.labels.inStockTile}}</span>
+                                        <span ng-if="!order.tile.inStock" class="order-custom-label">{{::vm.labels.custom}}</span>
+                                    </h2>
                                     <span>
                                         Color:
                                         <span ng-repeat="color in order.tile.colors">
@@ -121,6 +125,34 @@
                                     </span>
                                 </td>
                                 <td>{{::order.sqFt}}</td>
+                                <td>{{::order.subtotal}}</td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>SAMPLE</th>
+                                <th>QUANTITY</th>
+                                <th>SUBTOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="order in vm.sampleOrders">
+                                <td>
+                                    <h2>
+                                        {{::order.tile.name}} -
+                                        <span ng-if="(order.subtotal == 0)" class="order-custom-label">{{vm.labels.free}}</span>
+                                        <span ng-if="order.tile.inStock" ng-class="(order.subtotal == 0)? 'order-custom-label':''">{{::vm.labels.inStockSample}}</span>
+                                        <span ng-if="!order.tile.inStock">{{vm.labels.customSample}}</span>
+                                    </h2>
+                                    <span>
+                                        Color:
+                                        <span ng-repeat="color in order.tile.colors">
+                                            <span ng-bind="color.name"></span>
+                                            <span ng-if="($index < (order.tile.colors.length -1))">,&nbsp;</span>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td>{{::order.quantity}}</td>
                                 <td>{{::order.subtotal}}</td>
                             </tr>
                         </tbody>
