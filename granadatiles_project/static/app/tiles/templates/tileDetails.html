@@ -17,7 +17,7 @@
             <ul class="list-inline tile-button-options">
                 <li ng-if="vm.tile.hasInstallationPhotos"><a  ng-click="vm.showInstallationPhoto(vm.tile.id)"><i class="fa fa-eye"></i><p>{{ ::vm.labels.photos | uppercase }}</p></a></li>
                 <li ng-if="vm.tile.hasSample">
-                    <a >
+                    <a ng-click=" vm.orderFreeSample(vm.tile)">
                         <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="ORDER FREE SAMPLE">
                         <p>{{ ::vm.labels.orderFree | uppercase }}</p>
                     </a>

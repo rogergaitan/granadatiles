@@ -119,5 +119,15 @@
             }
         };
 
+        vm.orderFreeSample = function (tile) {
+            var cartSample = {
+                quantity: 1,
+                id: tile.sampleId
+            };
+            cartSvc.addSample(cartSample).then(function (resp) {
+                //window.location = pageSettings.navigation.cart;
+            });
+        }
+
     }
 })();

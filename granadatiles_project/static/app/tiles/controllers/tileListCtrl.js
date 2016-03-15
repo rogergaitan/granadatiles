@@ -12,9 +12,10 @@
                             '$modal',
                             '$scope',
                             'gtUtilsSvc',
+                            'cartSvc',
                             '$q'];
 
-    function tileListCtrl(baseSettings, pageSettings, collectionsSvc, flatPagesSvc, $modal, $scope, gtUtilsSvc, $q) {
+    function tileListCtrl(baseSettings, pageSettings, collectionsSvc, flatPagesSvc, $modal, $scope, gtUtilsSvc, cartSvc, $q) {
         /* jshint validthis:true */
         var vm = this;
 
@@ -182,6 +183,16 @@
                 }
             })
         };
+
+        vm.orderFreeSample = function (tile) {
+            var cartSample = {
+                quantity: 1,
+                id: tile.sampleId
+            };
+            cartSvc.addSample(cartSample).then(function (resp) {
+                //window.location = pageSettings.navigation.cart;
+            });
+        }
 
     }
 })();

@@ -150,10 +150,9 @@
                                             <div class="media-body">
                                                 <h2>
                                                     {{::sampleOrder.tile.name}}
-                                                    <span ng-if="(sampleOrder.subtotal == 0)">FREE</span>
-                                                    <span ng-if="sampleOrder.tile.inStock">In Stock</span>
-                                                    <span ng-if="!sampleOrder.tile.inStock">Custom</span>
-                                                    Sample
+                                                    <span ng-if="(sampleOrder.subtotal == 0)" class="order-custom-label">FREE</span>
+                                                    <span ng-if="sampleOrder.tile.inStock" ng-class="(sampleOrder.subtotal == 0)? 'order-custom-label':''">Sample Tile</span>
+                                                    <span ng-if="!sampleOrder.tile.inStock">Custom Sample Tile</span>
                                                 </h2>
                                                 <span>
                                                     Color:
