@@ -8,7 +8,7 @@ from rest_framework.decorators import api_view
 
 from core.views import BaseViewSet
 from apps.tiles.models import Tile
-from .services import CartService, OrdersService, QuickBooksService
+from .services import CartService, OrdersService
 from .serializers import (
   TileOrdersSerializer, SampleOrdersSerializer, CustomizedTileOrdersSerializer,
   CustomizedSampleOrdersSerializer, BaseTileOrdersSerializer, BaseSampleOrdersSerializer
