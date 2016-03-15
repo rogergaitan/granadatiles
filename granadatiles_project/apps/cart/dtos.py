@@ -52,7 +52,7 @@ class CustomizedTileOrdersDto(BaseTileOrdersDto):
 
 class BaseSampleOrdersDto(BaseDto):
 
-    def __init__(self, order, language):
+    def __init__(self, order):
         super().__init__(order)
         self.quantity = order.quantity
         self.subtotal = order.subtotal
@@ -60,7 +60,7 @@ class BaseSampleOrdersDto(BaseDto):
 class SampleOrdersDto(BaseSampleOrdersDto):
 
     def __init__(self, sample_order, language):
-        super().__init__(sample_order, language)
+        super().__init__(sample_order)
         self.tile = TileDto(sample_order.tile, language)
 
 
