@@ -196,8 +196,8 @@ class PalleteColor(BaseCatalogModel):
     order = models.PositiveIntegerField(verbose_name=_('Order'))
 
     class Meta:
-        verbose_name = _('Pallete Color')
-        verbose_name_plural = _('Pallete Colors')
+        verbose_name = _('Palette Color')
+        verbose_name_plural = _('Palette Colors')
         ordering = ['order']
 
 
