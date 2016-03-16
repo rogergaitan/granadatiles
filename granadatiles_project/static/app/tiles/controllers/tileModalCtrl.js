@@ -10,7 +10,6 @@
 
     function tileModalCtrl(installationPhotos, $modalInstance) {
         var vm = this;
-
         vm.installationPhotos = installationPhotos;
 
         vm.close = function () {

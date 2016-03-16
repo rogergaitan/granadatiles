@@ -14,9 +14,15 @@
                               '$modal',
                               'baseSettings',
                               'collectionsSvc',
-                              'gtUtilsSvc'];
+                              'gtUtilsSvc',
+                              'customTilesSvc'];
 
-    function tileDetailCtrl($scope, tilesSvc, tilesLogicSvc, pageSettings, portfolioSvc, cartSvc, $modal, baseSettings, collectionsSvc, gtUtilsSvc) {
+    function tileDetailCtrl($scope, tilesSvc,
+                            tilesLogicSvc, pageSettings,
+                            portfolioSvc, cartSvc,
+                            $modal, baseSettings,
+                            collectionsSvc, gtUtilsSvc,
+                            customTilesSvc) {
         var selectedTileId = $scope.shared.tileId;
         gtUtilsSvc.addQueryStringParameter('tile', selectedTileId);
 
@@ -45,14 +51,14 @@
             gtUtilsSvc.removeQueryStringParameters();
         };
 
-        tilesSvc.getTileDetail(selectedTileId).then(function (response){
+        tilesSvc.getTileDetail(selectedTileId).then(function (response) {
             vm.tile = response.data;
             vm.tile.quantityPerBox = tilesLogicSvc.calculateQuantityInBox(vm.tile);
             vm.tile.pricePerBox = tilesLogicSvc.calculatePricePerBox(vm.tile)
-            if(vm.tile.sizes.length > 0){
+            if (vm.tile.sizes.length > 0) {
                 vm.selectedSize = vm.tile.sizes[0].size
             }
-            
+
         });
 
         vm.showInstallationPhoto = function (tileId) {
@@ -127,7 +133,11 @@
             cartSvc.addSample(cartSample).then(function (resp) {
                 //window.location = pageSettings.navigation.cart;
             });
-        }
+        };
+
+        vm.customizeTile = function (tile) {
+            customTilesSvc.customTileModal(tile);
+        };
 
     }
 })();

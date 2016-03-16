@@ -93,6 +93,7 @@ class BoxSerializer(serializers.Serializer):
 class TileOrderSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
     mosaic = serializers.CharField()
+    plane = serializers.CharField()
     sizes = TileSizeSerializer(many=True)
     thickness = serializers.CharField()
     weight = serializers.CharField()
