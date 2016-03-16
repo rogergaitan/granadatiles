@@ -5,13 +5,22 @@
             <a  class="breadcrumds"><u>{{ ::vm.labels.searchResults }} <i class="fa fa-angle-double-right"></i></u></a>
         </div>
     </div>
+    <br>
     <div class="row">
         <div class="col-xs-12">
-            <ul>
-                <li ng-repeat="result in vm.searchResults">
-                    {{result.name}}
-                </li>
-            </ul>
+            <div class="row search-list">
+                <div ng-repeat="result in vm.searchResults">
+                    <div class="clearfix" ng-if="$index % 4 == 0"></div>
+                    <div class="col-xs-3 result-item">
+                        <h2>{{ result.additional }}</h2>
+                        <a href="{{ result.url }}">
+                            <img ng-src="{{ result.image }}" alt="{{ result.name }}" class="img-responsive thumbnail animate-show-fade" fade-in>
+                        </a>
+                        <small>{{ result.name }}</small><br>
+                        <a class="result-url" href="{{ result.url }}">View Product</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
