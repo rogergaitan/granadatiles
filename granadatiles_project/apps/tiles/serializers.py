@@ -92,6 +92,10 @@ class BoxSerializer(serializers.Serializer):
 
 class TileOrderSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
+    rotateDeg1 = serializers.IntegerField()
+    rotateDeg2 = serializers.IntegerField()
+    rotateDeg3 = serializers.IntegerField()
+    rotateDeg4 = serializers.IntegerField()
     mosaic = serializers.CharField()
     plane = serializers.CharField()
     sizes = TileSizeSerializer(many=True)

@@ -177,6 +177,10 @@ class TileOrderDto(BaseCatalogDto):
     def __init__(self, tile, portfolio, language):
         super().__init__(tile, language)
         self.image = tile.image.url if tile.image else ''
+        self.rotateDeg1 = tile.rotate_deg1
+        self.rotateDeg2 = tile.rotate_deg2
+        self.rotateDeg3 = tile.rotate_deg3
+        self.rotateDeg4 = tile.rotate_deg4
         self.mosaic = tile.mosaic.url if tile.mosaic else ''
         self.plane = tile.plane.url if tile.plane else ''
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]

@@ -112,6 +112,12 @@ class TileDesign(BaseCatalogModel):
 
 
 class Tile(BaseCatalogModel):
+    ROTATE_DEGREES = (
+         (0, '0 deg'),
+         (90, '90 deg'),
+         (270, '270 deg'),
+         (180, '180 deg'),
+        )
     list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
     is_active = models.BooleanField(verbose_name=_('Is Active'), default=True)
     sales_price = models.FloatField(verbose_name=_('Sales Price'), blank=True, null=True)
@@ -141,6 +147,10 @@ class Tile(BaseCatalogModel):
     override_collection_box = models.BooleanField(default=False, verbose_name=_('Override Collection Box'))
     box = models.ForeignKey('Box', null=True, blank=True, verbose_name=_('Box'))
     qty_is_sq_ft = models.BooleanField(default=False, verbose_name=_('Quantity Square Foot'))
+    rotate_deg1 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 0)
+    rotate_deg2 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 90)
+    rotate_deg3 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 270)
+    rotate_deg4 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 180)
 
     def get_sq_ft(self):
         if self.qty_is_sq_ft:

@@ -77,7 +77,8 @@ class CustomTileFilter(admin.SimpleListFilter):
 class TileAdmin(admin.ModelAdmin):
     fields = ('name', 'name_es', 'list_id', 'design', 'sales_description',
               'sales_description_es', 'size', 'height', 'width' ,'thickness','weight',
-              'sales_price','average_cost', 'quantity_on_hand','image', 'mosaic', 'plane',
+              'sales_price','average_cost', 'quantity_on_hand','image','rotate_deg1', 
+              'rotate_deg2', 'rotate_deg3', 'rotate_deg4', 'mosaic', 'plane',
               'tearsheet', 'box',  'similar_tiles', 'colors','main', 'new', 'in_stock',
               'is_sample', 'sample', 'override_collection_box', 'is_active', 'on_sale')
 
