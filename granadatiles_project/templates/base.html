@@ -287,7 +287,6 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/cart/controllers/checkoutCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/cart/services/cartSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/cart/services/checkoutSvc.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/content/directives/imagePreload.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/aboutUsCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/collectionContentCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/colorPalleteCtrl.js"></script>
@@ -299,7 +298,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/sectionCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/testimonyCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/controllers/videoCtrl.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}app/content/filters/ResourceUrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/content/directives/imagePreload.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/areaSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/flatPagesSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/mainNavigationSvc.js"></script>
@@ -307,6 +306,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/sectionSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/testimonySvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/videoSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/content/filters/ResourceUrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/controllers/shareModalCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/directives/angular-yamm3.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/directives/fadeIn.js"></script>
@@ -327,12 +327,14 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/services/authenticationSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/portfolio/services/portfolioSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/collectionGroupsCtrl.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/customTilesCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/instockCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/menuCollectionCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/tileDetailCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/tileListCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/controllers/tileModalCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/collectionsSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/customTilesSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/instockSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/tilesLogicSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/tiles/services/tilesSvc.js"></script>
@@ -354,7 +356,7 @@
                         inStockTiles: '{% trans 'In Stock Tiles' %}',
                         compareProducts: '{% trans 'Product Comparison' %}',
                         cementVsCeramic: '{% trans 'Cement Vs. Ceramic' %}',
-                        colorPalletes: '{% trans 'Color Palletes' %}',
+                        colorPalletes: '{% trans 'Color Palette' %}',
                         catalogs:'{% trans 'Catalogs / Inspiration Boooks' %}',
                         designer: '{% trans 'Designer' %}',
                         photographer: '{% trans 'Photographer' %}',
