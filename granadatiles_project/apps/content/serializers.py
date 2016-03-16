@@ -18,6 +18,7 @@ class SectionCoverSerializer(serializers.Serializer):
     photographer = serializers.CharField()
     featuredArticle = SectionFeaturedArticleSerializer(required=False)
     articles = ArticleMagazineSerializer(many=True, required=False)
+    shopCustomTilesUrl = serializers.CharField()
 
 class FlatPageSerializer(serializers.Serializer):
     title = serializers.CharField()

@@ -41,7 +41,7 @@ class SectionService(object):
         section = get_object_or_404(Section, pk=section_id)
         cover = SectionService.get_random_cover(section)
         if cover:
-            sectioncoverDto = SectionCoverDto(cover)
+            sectioncoverDto = SectionCoverDto(cover, language)
             if cover.featured_article:
                 sectioncoverDto.featuredArticle = SectionFeaturedArticleDto(cover.featured_article, language)
             if cover.articles.count() > 0:
