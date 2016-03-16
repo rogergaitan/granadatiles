@@ -16,10 +16,11 @@ class SectionCoverDto(object):
     featuredArticle = None
     articles = None
 
-    def __init__(self, section_image):
+    def __init__(self, section_image, language):
         self.image = section_image.image.url
         self.designer = section_image.designer
         self.photographer = section_image.photographer
+        self.shopCustomTilesUrl = section_image.tile.design.group.get_absolute_url(language) if section_image.tile else ''
 
 
 class FeaturedVideoDto(BaseCatalogOrderDto):

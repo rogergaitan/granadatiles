@@ -1,14 +1,17 @@
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import list_route, detail_route
+from rest_framework.decorators import api_view
 
 from core.views import BaseViewSet
 from apps.tiles.models import Tile
 from .services import CartService, OrdersService
 from .serializers import (
   TileOrdersSerializer, SampleOrdersSerializer, CustomizedTileOrdersSerializer,
-  CustomizedSampleOrdersSerializer, BaseTileOrdersSerializer
+  CustomizedSampleOrdersSerializer, BaseTileOrdersSerializer, BaseSampleOrdersSerializer
 )
 
 def cart_home(request):
@@ -63,7 +66,8 @@ class SampleOrdersViewSet(BaseViewSet):
         cart = CartService.get_cart(request)
         tile = OrdersService.get_tile(pk)
         quantity = request.data.get('quantity')
-        return Response(OrdersService.update_sample(cart, tile, quantity))
+        serializer = BaseSampleOrdersSerializer(OrdersService.update_sample(cart, tile, quantity))
+        return Response(serializer.data)
         
     def destroy(self, request, pk=None):
         cart = CartService.get_cart(request)

@@ -2,6 +2,18 @@
     <div ng-if="vm.cover.image" class="col-xs-12">
         <div class="row">
                 <img ng-src="{{::vm.cover.image}}" alt="Granada Tiles Cover" class="img-responsive" id="gt-cover-image" />
+                <div class="btn-cover-container" ng-if="vm.cover.shopCustomTilesUrl != ''">
+                    <a ng-href="{{::vm.navigation.inStock}}" class="btn btn-sky btn-cover">{{::vm.labels.shopInstock}}</a>
+                    <br />
+                    <br />
+                    <a ng-href="{{::vm.navigation.inStockSamples}}" class="btn btn-sky btn-cover">{{::vm.labels.shopInStockSamples}}</a>
+                    <br />
+                    <br />
+                    <a ng-href="{{::vm.cover.shopCustomTilesUrl}}" class="btn btn-sky btn-cover">{{::vm.labels.shopCustoms}}</a>
+                    <br />
+                    <br />
+                    <a ng-href="{{::vm.cover.shopCustomTilesUrl}}" class="btn btn-sky btn-cover">{{::vm.labels.shopSpecials}}</a>
+                </div>
         </div>
         <div class="row bg-slider-footer">
             <div class="container">

@@ -228,15 +228,16 @@ class InStockDto(BaseCatalogDto):
                           if tile.design.group.collection else ''
         self.size = tile.size
         self.hasInstallationPhotos = tile.has_installation_photos()
-        if self.is_sample:
-            self.sampleId = tile.id
-        else:
-            self.sampleId = tile.sample.id if tile.sample else 0
 
         if is_sample == 'true':
             self.hasSample = True
         else:
             self.hasSample = True if tile.has_sample() else False
+        
+        if tile.is_sample:
+            self.sampleId = tile.id
+        else:
+            self.sampleId = tile.sample.id if tile.sample else 0
 
 
 class CollectionsFiltersDto(BaseDto):

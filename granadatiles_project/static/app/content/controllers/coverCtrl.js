@@ -15,6 +15,9 @@
     function coverCtrl(baseSettings, pageSettings, sectionSvc, flatPagesSvc) {
         var vm = this;
 
+        vm.labels = baseSettings.labels;
+        vm.navigation = baseSettings.navigation;
+
         if (pageSettings.sectionId != 0) {
             sectionSvc.getCover(pageSettings.sectionId).then(function (response) {
                 vm.cover = response.data;
