@@ -4,6 +4,13 @@
             <h2 class="heading-sec">{{::vm.labels.checkout}}</h2>
             <a class="breadcrumds" ><u>{{ ::vm.labels.checkout }}</u> <i class="fa fa-angle-double-right"></i></a>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h2 ng-show="(vm.activeStep == 1)">{{::vm.labels.shippingInformation}}</h2>
+            <h2 ng-show="(vm.activeStep == 2)">{{::vm.labels.paymentInformation}}</h2>
+            <h2 ng-show="(vm.activeStep == 3)">{{::vm.labels.thankyou}}</h2>
+        </div>
         <div class="col-md-6">
             <div class="checkout-steps text-right">
                 <div class="checkout-step" ng-class="(vm.activeStep == 1)? 'active':''">
@@ -28,10 +35,13 @@
         </div>
     </div>
     <div class="row">
-        <div ng-class="(vm.activeStep == 3)? 'col-md-12':'col-md-6'">
-            <h2 ng-show="(vm.activeStep == 1)">{{::vm.labels.shippingInformation}}</h2>
-            <h2 ng-show="(vm.activeStep == 2)">{{::vm.labels.paymentInformation}}</h2>
-            <h2 ng-show="(vm.activeStep == 3)">{{::vm.labels.thankyou}}</h2>
+        <div class="col-md-12">
+            <div class="text-section animate-show" ng-show="(vm.activeStep == 1)">
+                Fields marked with <span class="asterisk">*</span> are required
+            </div>
+            <div class="text-section animate-show" ng-show="(vm.activeStep == 2)">
+                Fields marked with <span class="asterisk">*</span> are required
+            </div>
             <div class="text-section animate-show" ng-show="(vm.activeStep == 3)">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ex erat, euismod vel libero at, vulputate consequat nisl. Sed molestie dolor sit amet nisi porta fringilla. Suspendisse dignissim, nibh non condimentum egestas, mauris nunc suscipit erat, ac vestibulum ex ante tincidunt eros. Phasellus eu turpis malesuada eros eﬃcitur mollis a sed lorem.
             </div>
@@ -41,57 +51,94 @@
         <div class="col-md-6" ng-show="(vm.activeStep == 1 ||vm.activeStep == 2)" ng-class="(vm.activeStep == 1 ||vm.activeStep == 2)? 'col-md-6':''">
             <form class="animate-show" ng-show="(vm.activeStep == 1)">
                 <div class="shipping-information">
-                    <div class="form-group">
+                    <div class="form-group required">
                         <input type="text" class="form-control" placeholder="First Name">
+                        <i class="asterisk">*</i>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <input type="text" class="form-control" placeholder="Last Name">
+                        <i class="asterisk">*</i>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <input type="text" class="form-control" placeholder="Company Name">
+                        <i class="asterisk">*</i>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <input type="text" class="form-control" placeholder="Address">
+                        <i class="asterisk">*</i>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Address 2">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <input type="number" class="form-control" placeholder="Zip Code: 45674">
+                        <i class="asterisk">*</i>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <input type="text" class="form-control" placeholder="City: Rio Grande">
+                        <i class="asterisk">*</i>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <input type="text" class="form-control" placeholder="State: Ohio">
+                        <i class="asterisk">*</i>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <input type="email" class="form-control" placeholder="E-mail: Address">
+                        <i class="asterisk">*</i>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <input type="number" class="form-control" placeholder="Phone Number">
+                        <i class="asterisk">*</i>
                     </div>
                 </div>
             </form>
             <form class="animate-show" ng-show="(vm.activeStep == 2)">
                 <div class="shipping-information">
-                    <div class="form-group">
+                    <div class="checkbox-content">
+                        <p class="checkbox-inline">
+                            <input type="checkbox" id="chk-news" ng-click="vm.refreshTiles()" ng-model="vm.onlyNews">
+                            <label for="chk-news">SAME AS SHIPPING</label>
+                        </p>
+                    </div>
+                    <div class="form-group required">
                         <input type="text" class="form-control" placeholder="First Name">
+                        <i class="asterisk">*</i>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <input type="text" class="form-control" placeholder="Last Name">
+                        <i class="asterisk">*</i>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <input type="text" class="form-control" placeholder="Address">
+                        <i class="asterisk">*</i>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <input type="number" class="form-control" placeholder="Zip Code: 45674">
+                        <i class="asterisk">*</i>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <input type="email" class="form-control" placeholder="E-mail: Address">
+                        <i class="asterisk">*</i>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group required">
                         <input type="number" class="form-control" placeholder="Phone Number">
+                        <i class="asterisk">*</i>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <select name="" id="" class="form-control">
+                                    <option value="1">Expiration Month</option>
+                                </select>
+                            </div>       
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <select name="" id="" class="form-control">
+                                    <option value="1">Expiration Year</option>
+                                </select>
+                            </div>       
+                        </div>
                     </div>
                 </div>
             </form>
@@ -182,7 +229,9 @@
             </div>
             <div class="row text-right" ng-show="(vm.activeStep == 1 ||vm.activeStep == 2)">
                 <a ng-href="{{vm.navigation.cart}}" class="btn sky-select btn-sm">Back to Cart</a>
-                <button type="button" class="btn btn-green btn-lg" ng-click="vm.navigateToNextStep()">CONTINUE</button>
+                <button type="button" class="btn btn-green btn-lg" ng-click="vm.navigateToNextStep()">
+                    <strong>CONTINUE</strong>
+                </button>
             </div>
             <div class="row text-left" ng-show="(vm.activeStep == 3)">
                 <div class="col-xs-12">

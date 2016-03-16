@@ -1029,6 +1029,20 @@ hr {
 
 /**************************************/
 
+.required {
+    position: relative;
+
+        .form-control{
+            padding-left: 22px;
+        }
+        .asterisk{
+        top: 4px;
+        left: 10px;
+        color: @red;
+        position: absolute;
+        .font-configuration(@font-size:@font-xl,@font-weight:@font-light);
+    }
+}
 /********* Tag New *************/
 .tag-new{
     position: absolute;
