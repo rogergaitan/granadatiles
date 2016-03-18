@@ -5,9 +5,9 @@
         .module('app')
         .factory('customTilesSvc', customTilesSvc);
 
-    customTilesSvc.$inject = ['baseSettings', 'tilesSvc', '$http', '$modal'];
+    customTilesSvc.$inject = ['appSettings', 'baseSettings', 'tilesSvc', '$http', '$modal'];
 
-    function customTilesSvc(baseSettings, tilesSvc, $http, $modal) {
+    function customTilesSvc(appSettings, baseSettings, tilesSvc, $http, $modal) {
         var service = {
             customTileModal: customTileModal,
             getTilePlane: getTilePlane
@@ -17,6 +17,16 @@
 
         function getTilePlane(url) {
             return $http.get(window.location.origin + url);
+        }
+
+        function addCustomizedTile(tileId) {
+            return $http.post(appSettings.serverPath + 'customizedtiles', {
+                tileId: tileId
+            })
+        }
+
+        function addColorGroup(customizedTileId, colorGroup) {
+            return $http.post(appSettings.serverPath + 'customizedtiles', colorGroup)
         }
 
         function customTileModal(tileData) {
