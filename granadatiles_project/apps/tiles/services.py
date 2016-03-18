@@ -10,7 +10,7 @@ from .dtos import (
     MenuCollectionDto, TileStyleDto, TileDetailDto, TileInstallationPhotosDto,
     TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto, PortfolioTilesDto,
     LayoutDto, LayoutTilesDto, PortfolioCustomTilesDto, CollectionInstallationPhotosDto,
-    TileColorDto
+    TileColorDto, GroupColorDto
 )
 
 
@@ -206,17 +206,32 @@ class PortfolioService:
          customtilesdto = [PortfolioCustomTilesDto(customtile.id, customtile.tile, language)
                               for customtile in portfolio.customized_tiles.all()]
          return customtilesdto
+     
+     def add_custom_tile(portfolio, customized_tile):
+         customized_tile = CustomizedTile.objects.create(tile=customized_tile, portfolio=portfolio)
+         return {'tileId': customized_tile.id}
 
-     def save_custom_tile(portfolio, tile, colors):
-         customized_tile = CustomizedTile.objects.create(tile=tile, portfolio=portfolio)
-         for color in colors:
-             pallete = PalleteColor.objects.get(pk=color)
-             GroupColor.objects.create(customized_tile=customized_tile, color=pallete)
+     def add_custom_tile_color(customized_tile_id, group, color_id):
+        customized_tile = get_object_or_404(CustomizedTile, pk=customized_tile_id)
+        color = get_object_or_404(PalleteColor, pk=color_id)
+        data = {'group': group}
+         
+        GroupColor.objects.update_or_create(
+             customized_tile=customized_tile, 
+             color=color,
+             defaults=data
+        )
+        return {'customizedTileId': customized_tile.id, 'group': group, 'colorId': color.id}
 
      def remove_custom_tile(portfolio, customizedtile_id):
          portfolio.customized_tiles.get(pk=customizedtile_id).delete()
 
-
+     def get_group_colors(portfolio, customized_tile_id, language):
+         customized_tile = get_object_or_404(CustomizedTile, pk=customized_tile_id)
+         group_color_dto = [GroupColorDto(group_color, language) for group_color in customized_tile.group_colors.all() ]
+         return group_color_dto
+     
+     
 class PalleteColorService:
 
      def get_pallete_colors(language):

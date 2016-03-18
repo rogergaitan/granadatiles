@@ -315,3 +315,10 @@ class LayoutTilesDto(BaseCatalogDto):
         self.collection = tile.design.group.collection.get_title(language)
         self.image = tile.mosaic.url if tile.mosaic else ''
         self.size = tile.size
+
+
+class GroupColorDto:
+    
+    def __init__(self, group_color, language):
+        self.group = group_color.group
+        self.color = TileColorDto(group_color.color, language)

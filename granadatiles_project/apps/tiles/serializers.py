@@ -181,3 +181,13 @@ class LayoutTilesSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
     collection = serializers.CharField()
     size = serializers.CharField()
+    
+    
+class PalleteColorSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    hexadecimalCode = serializers.CharField()
+    
+    
+class GroupColorSerializer(serializers.Serializer):
+    group = serializers.CharField()
+    color = PalleteColorSerializer()

@@ -14,7 +14,7 @@ from .serializers import (
     StyleSerializer, GroupTileSizeSerializer, TileDetailSerializer,
     TileInstallationPhotosSerializer, TileOrderSerializer, CollectionsFilterSerializer,
     InStockSerializer, PortfolioTilesSerializer, PortfolioCustomTilesSerializer, LayoutSerializer,
-    LayoutTilesSerializer, CollectionInstallationPhotosSerializer, TileColorSerializer
+    LayoutTilesSerializer, CollectionInstallationPhotosSerializer, TileColorSerializer, GroupColorSerializer
 )
 from .services import CollectionService, GroupService, TileService, PortfolioService, PalleteColorService
 from .models import Collection, Group
@@ -232,29 +232,31 @@ class LayoutsViewSet(BaseViewSet):
         return Response(PortfolioService.duplicate_layout(portfolio, pk))
 
 
-class PortfolioCustomizedTiles(BaseViewSet):
+class CustomizedTilesViewSet(BaseViewSet):
 
     permission_classes = (IsAuthenticated,)
 
-    @list_route(methods=['get'])
-    def show_custom_tiles(self, request):
+    @detail_route(methods=['get'])
+    def groupcolors(self, request, pk=None):
         portfolio = PortfolioService.get_portfolio(request.user)
-        tiles = PortfolioService.show_custom_tiles(portfolio, self.get_language(request))
-        serializer = PortfolioCustomTilesSerializer(tiles, many=True)
+        group_colors = PortfolioService.get_group_colors(portfolio, pk, self.get_language(request))
+        serializer = GroupColorSerializer(group_colors, many=True)
         return Response(serializer.data)
+    
+    @detail_route(methods=['post'])
+    def groupcolors(self, request, pk=None):
+        color_id = request.data.get('colorId')
+        group = request.data.get('group')
+        return Response(PortfolioService.add_custom_tile_color(pk, group, color_id))
 
-    @list_route(methods=['get'])
-    def remove_custom_tile(self, request):
+    def destroy(self, request, pk=None):
         portfolio = PortfolioService.get_portfolio(request.user)
-        customizedtile_id = request.query_params.get('customizedtile_id')
-        return Response(PortfolioService.remove_custom_tile(portfolio, customizedtile_id))
+        return Response(PortfolioService.remove_custom_tile(portfolio, pk))
 
-    @list_route(methods=['post'])
-    def save_custom_tile(self, request):
+    def create(self, request):
         portfolio = PortfolioService.get_portfolio(request.user)
         tile = PortfolioService.get_tile(request.data.get('id'))
-        colors = request.data.getlist('colors')
-        return Response(PortfolioService.save_custom_tile(portfolio, tile, colors))
+        return Response(PortfolioService.add_custom_tile(portfolio, tile))
 
 
 class PalleteColorsViewSet(BaseViewSet):
