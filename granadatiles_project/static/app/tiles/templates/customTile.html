@@ -1,24 +1,100 @@
 ﻿<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.close()">&times;</button>
-    <h4 class="modal-title">Modal Title</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="modal-title title-custom-tile">Modal Title</h4>
+        </div>
+        <div class="col-md-6 rotate-tile">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.close()">&times;</button>
+            <div class="custom-checkbox">
+                <p class="checkbox-inline">
+                    <input type="checkbox">
+                    <label>&nbsp;</label>
+                </p>
+            </div>
+            <div><p>RESET TO <br> ORIGINAL</p></div>
+            <div>
+                <a href="" class="btn btn-rotate-left"><i class="fa fa-rotate-left"></i></a>
+                <a href="" class="btn btn-rotate-right"><i class="fa fa-rotate-right"></i></a>
+            </div>
+            <div><p class="text-right">CLICK ON TILE <br> BELOW TO ROTATE</p></div>
+        </div>
+    </div>
 </div>
 <div class="modal-body">
-    <div ng-bind-html="vm.plane | unsafe">
-
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <ul class="list-unstyled tile-button-options">
+                        <li>
+                            <a href="">
+                                <i class="fa fa-briefcase"></i>
+                                <p>SAVE TO PORTFOLIO</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fa fa-file"></i>
+                                <p>TEAR <br> SHEET</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fa fa-shopping-cart"></i>
+                                <p>ADD TO <br> CART</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fa fa-briefcase"></i>
+                                <p>ORDER FREE SAMPLE</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fa fa-print"></i>
+                                <p>PRINT <br> PAGE</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-9">
+                    <div class="similar-tile-container" ng-bind-html="vm.plane | unsafe"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="section-information"><span>Color Palette:</span> Drag colors to tile above to customize</p>
+                    <ul class="list-inline color-pallete-content">
+                        <li class="col-md-2 list-color-pallete" ng-repeat="color in vm.colorPallete">
+                            <div class="color" ng-style="{ 'background-color' : color.hexadecimalCode}">&nbsp;</div>
+                            <p class="color-name">{{color.name}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tile-container-rotate">
+                        <img class="img-responsive" src="/static/img/initial/tiles/tiles/kotka-mosaic.jpg" alt="">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span>Colors Used:</span>
+                            </div>
+                            <div class="col-md-9">
+                                <ul class="list-inline color-pallete-content">
+                                    <li class="col-md-2 list-color-pallete" ng-repeat="color in vm.colorsUsed">
+                                        <div class="color" ng-style="{ 'background-color' : color.hexadecimalCode}">&nbsp;</div>
+                                        <p class="color-name">{{color.name}}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
     </div>
-    <ul>
-        <li ng-repeat="color in vm.colorPallete">
-            <div ng-style="{ 'background-color' : color.hexadecimalCode}">
-                {{color.name}}
-            </div>
-        </li>
-    </ul>
-    Color Used:
-    <ul>
-        <li ng-repeat="color in vm.colorsUsed">
-            <div ng-style="{ 'background-color' : color.hexadecimalCode}">
-                {{color.name}}
-            </div>
-        </li>
-    </ul>
 </div>

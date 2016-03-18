@@ -240,41 +240,6 @@ span.asterisk{
         font-family: @font-secundary;
         .font-configuration(@font-md,@font-light);
     }
-    .checkbox-content {
-        color: @darkGray;
-        display: inline-block;
-
-        p, label {
-            margin: 0;
-            padding-left: 0;
-        }
-
-        input[type=checkbox] {
-            display: none;
-        }
-
-        input[type=checkbox] + label {
-            cursor: pointer;
-        }
-
-        input[type=checkbox] + label:before {
-            font-family: FontAwesome;
-            vertical-align: middle;
-        }
-
-        input[type=checkbox] + label:before {
-            color: @gray;
-            content: "\f096";
-            font-size: 30px;
-            letter-spacing: 10px;
-        }
-
-        input[type=checkbox]:checked + label:before {
-            content: "\f046";
-            color: @darkBlue;
-            letter-spacing: 5px;
-        }
-    }
     .form-group {
         margin-bottom: 10px;
     }
@@ -335,4 +300,39 @@ span.asterisk{
 .order-custom-label{
     color:@rss !important;
     font-weight: bold !important;
+}
+.custom-checkbox {
+    color: @darkGray;
+    display: inline-block;
+
+    p, label {
+        margin: 0;
+        padding-left: 0;
+    }
+
+    input[type=checkbox] {
+        display: none;
+    }
+
+    input[type=checkbox] + label {
+        cursor: pointer;
+    }
+
+    input[type=checkbox] + label:before {
+        font-family: FontAwesome;
+        vertical-align: middle;
+    }
+
+    input[type=checkbox] + label:before {
+        color: @gray;
+        content: "\f096";
+        font-size: 30px;
+        letter-spacing: 10px;
+    }
+
+    input[type=checkbox]:checked + label:before {
+        content: "\f046";
+        color: @darkBlue;
+        letter-spacing: 5px;
+    }
 }

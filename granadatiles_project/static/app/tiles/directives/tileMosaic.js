@@ -15,7 +15,9 @@
             link: link,
             restrict: 'E',
             scope: {
-                tile: '='
+                tile: '=',
+                repeatHorinzotal: '=',
+                repeatVertical: '='
             },
             templateUrl: baseSettings.staticUrl + 'app/tiles/directives/tileMosaic.html'
         };

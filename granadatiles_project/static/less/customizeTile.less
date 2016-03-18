@@ -1,0 +1,70 @@
+.modal-custom-tile{
+	.modal-dialog {
+		.modal-content{
+			border-radius: 0;
+			background-color: @backgroundHomepage;
+		}
+	}
+}
+.title-custom-tile{
+	color:@darkBlue;
+	margin-left: 110px;
+	font-family: @font-secundary;
+	.font-configuration(@font-xlll,@font-light);
+}
+.rotate-tile{
+	div{
+		float: right;
+		margin-right: 20px;
+
+		p{
+			color:@darkGray;
+			font-family: @font-secundary;
+			.font-configuration(@font-md,@font-light);
+		}
+		.btn-rotate-left{
+			color:@white;
+			background-color: @lightBlue;
+			border-color:@btnDelete;
+		}
+		.btn-rotate-right{
+			color:@white;
+			background-color:@darkGray ;
+			border-color:#4C4C4C;
+		}
+	}
+}
+.section-information{
+	color:@darkGray;
+	.font-configuration(@font-sm,@font-light);
+	span{
+		.font-configuration(@font-sm,@font-medium);
+	}
+}
+.color-pallete-content{
+	margin-top: 10px;
+	.list-color-pallete{
+		text-align: center;
+
+		.color{
+			height: 32px;
+		}
+		.color-name{
+			color: @darkGray;
+			font-family: @font-primary;
+			.font-configuration(10px;@font-light);
+		}
+	}
+}
+.tile-container-rotate{
+	border:7px solid @white;
+	background-color: @white;
+	box-shadow: 2px 4px 10px 2px rgba(0, 0, 0, 0.5);
+
+	span{
+		margin-top:10px;
+		color:@darkBlue;
+		font-family: @font-primary;
+		.font-configuration(@font-sm,@font-light);
+	}
+}
