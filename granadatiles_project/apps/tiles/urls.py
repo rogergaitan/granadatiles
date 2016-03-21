@@ -13,7 +13,7 @@ router.register('tiles', TileViewSet, base_name='tiles')
 router.register('portfolio/tiles', PortfolioTilesViewSet, base_name='portfolio_tiles')
 router.register('portfolio/layouts', LayoutsViewSet, base_name='portfolio_layouts')
 router.register('palleteColors', PalleteColorsViewSet, base_name='pallete_colors')
-router.register('customizedtiles', CustomizedTilesViewSet, base_name='customizedtiles')
+router.register('customizedtiles', CustomizedTilesViewSet, base_name='group_colors')
 router.register('task', TaskViewSet, base_name='tasks')
 
 urlpatterns = router.urls

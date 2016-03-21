@@ -9,7 +9,7 @@ from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto, TileDesignDto,
     MenuCollectionDto, TileStyleDto, TileDetailDto, TileInstallationPhotosDto,
     TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto, PortfolioTilesDto,
-    LayoutDto, LayoutTilesDto, PortfolioCustomTilesDto, CollectionInstallationPhotosDto,
+    LayoutDto, LayoutTilesDto, PortfolioCustomizedTilesDto, CollectionInstallationPhotosDto,
     TileColorDto, GroupColorDto
 )
 
@@ -105,135 +105,141 @@ class GroupService:
 
 class TileService:
 
-      def get_tile(id, language):
-          tile = get_object_or_404(Tile, pk=id)
-          tiledetailDto = TileDetailDto(tile, language)
-          return tiledetailDto
+    def get_tile(id, language):
+        tile = get_object_or_404(Tile, pk=id)
+        tiledetailDto = TileDetailDto(tile, language)
+        return tiledetailDto
 
-      def get_tile_installation_photos(id, language):
-          tile = get_object_or_404(Tile, pk=id)
-          if tile.installation_photos.exists():
-              tileinstallationphotosDto = [TileInstallationPhotosDto(photo, language)
-                                           for photo in tile.installation_photos.all()]
-          else: tileinstallationphotosDto = None
-          return tileinstallationphotosDto
+    def get_tile_installation_photos(id, language):
+        tile = get_object_or_404(Tile, pk=id)
+        if tile.installation_photos.exists():
+            tileinstallationphotosDto = [TileInstallationPhotosDto(photo, language)
+                                        for photo in tile.installation_photos.all()]
+        else: tileinstallationphotosDto = None
+        return tileinstallationphotosDto
 
-      def get_tile_order(id, portfolio, language):
-          tile = get_object_or_404(Tile.objects.select_related('box','sample', 'design'), pk=id)
-          tileorderDto = TileOrderDto(tile, portfolio, language)
-          return tileorderDto
+    def get_tile_order(id, portfolio, language):
+        tile = get_object_or_404(Tile.objects.select_related('box','sample', 'design'), pk=id)
+        tileorderDto = TileOrderDto(tile, portfolio, language)
+        return tileorderDto
 
-      def get_in_stock_tiles(ids, is_sample, limit, offset, language):
+    def get_in_stock_tiles(ids, is_sample, limit, offset, language):
 
-          if ids:
-              tiles = Tile.objects.filter(design__group__collection__id__in=ids)
-          else:
-              tiles = Tile.objects.all()
+        if ids:
+            tiles = Tile.objects.filter(design__group__collection__id__in=ids)
+        else:
+            tiles = Tile.objects.all()
 
-          if is_sample == 'true':
-              tiles = tiles.filter(is_sample=True).order_by('name')
-          elif is_sample == 'false' or is_sample is None:
-              tiles = tiles.filter(is_sample=False).order_by('name')
+        if is_sample == 'true':
+            tiles = tiles.filter(is_sample=True).order_by('name')
+        elif is_sample == 'false' or is_sample is None:
+            tiles = tiles.filter(is_sample=False).order_by('name')
 
-          instock_dto = [InStockDto(tile, is_sample, language)
-                         for tile in tiles[offset:(limit+offset)]
-                         if tile.design]
-          return instock_dto
+        instock_dto = [InStockDto(tile, is_sample, language)
+                        for tile in tiles[offset:(limit+offset)]
+                        if tile.design]
+        return instock_dto
 
-      def get_tiles_collections_filters(language):
-          collections = Collection.objects.filter(featured=True)
-          collectiondto = [CollectionsFiltersDto(collection, language) for collection in collections]
-          return collectiondto
+    def get_tiles_collections_filters(language):
+        collections = Collection.objects.filter(featured=True)
+        collectiondto = [CollectionsFiltersDto(collection, language) for collection in collections]
+        return collectiondto
 
 
 class PortfolioService:
 
-     def get_tile(id):
-         return get_object_or_404(Tile, pk=id)
+    def get_tile(id):
+        return get_object_or_404(Tile, pk=id)
 
-     def get_portfolio(user):
-         return get_object_or_404(Portfolio, user=user)
+    def get_portfolio(user):
+        return get_object_or_404(Portfolio, user=user)
 
-     def get_portfolio_tile(id):
-         return get_object_or_404(PortfolioTile, pk=id)
+    def get_portfolio_tile(id):
+        return get_object_or_404(PortfolioTile, pk=id)
+     
+    def get_customized_tile(id):
+        return get_object_or_404(CustomizedTile, pk=id)
 
-     def get_layout(id):
-         return get_object_or_404(Layout, pk=id)
+    def get_layout(id):
+        return get_object_or_404(Layout, pk=id)
 
-     def show_tiles(user, language):
-         portfolio = PortfolioService.get_portfolio(user)
-         portfolio_tiles_dto = [PortfolioTilesDto(portfolio_tile.id, portfolio_tile.tile, language)
+    def show_tiles(user, language):
+        portfolio = PortfolioService.get_portfolio(user)
+        portfolio_tiles_dto = [PortfolioTilesDto(portfolio_tile.id, portfolio_tile.tile, language)
                                 for portfolio_tile in portfolio.tiles.all()]
-         return portfolio_tiles_dto
+        return portfolio_tiles_dto
 
-     def remove_tile(request, id):
-         portfolio = PortfolioService.get_portfolio(request.user)
-         portfolio.tiles.get(pk=id).delete()
+    def remove_tile(request, id):
+        portfolio = PortfolioService.get_portfolio(request.user)
+        portfolio.tiles.get(pk=id).delete()
 
-     def add_tile(request, id):
-         portfolio = PortfolioService.get_portfolio(request.user)
-         tile = PortfolioService.get_tile(id)
-         portfolio.tiles.create(tile=tile)
+    def add_tile(request, id):
+        portfolio = PortfolioService.get_portfolio(request.user)
+        tile = PortfolioService.get_tile(id)
+        portfolio.tiles.create(tile=tile)
 
-     def show_layouts(user):
-         portfolio = PortfolioService.get_portfolio(user)
-         layouts_dto = [LayoutDto(layout) for layout in portfolio.layouts.all()]
-         return layouts_dto
+    def show_layouts(user):
+        portfolio = PortfolioService.get_portfolio(user)
+        layouts_dto = [LayoutDto(layout) for layout in portfolio.layouts.all()]
+        return layouts_dto
 
-     def create_layout(portfolio, id, name, length_ft, length_in, width_ft, width_in, image):
-         data = {
+    def create_layout(portfolio, id, name, length_ft, length_in, width_ft, width_in, image):
+        data = {
             'name': name,
             'length_ft': length_ft,
             'length_in': length_in,
             'width_ft': width_ft,
             'width_in': width_in,
             'image': image
-         }
-         portfolio.layouts.update_or_create(pk=id, defaults=data)
+        }
+        portfolio.layouts.update_or_create(pk=id, defaults=data)
 
-     def layout_tiles(portfolio, language):
-         layout_tiles_dto = [LayoutTilesDto(portfolio_tile.tile, language)
+    def layout_tiles(portfolio, language):
+        layout_tiles_dto = [LayoutTilesDto(portfolio_tile.tile, language)
                              for portfolio_tile in portfolio.tiles.all()]
-         return layout_tiles_dto
+        return layout_tiles_dto
 
-     def duplicate_layout(portfolio, id):
-         layout = Layout.objects.get(pk=id)
-         layout.id = None
-         layout.name = layout.name + ' ' + _('copy')
-         layout.save()
+    def duplicate_layout(portfolio, id):
+        layout = Layout.objects.get(pk=id)
+        layout.id = None
+        layout.name = layout.name + ' ' + _('copy')
+        layout.save()
 
-     def show_custom_tiles(portfolio, language):
-         customtilesdto = [PortfolioCustomTilesDto(customtile.id, customtile.tile, language)
+    def show_customized_tiles(portfolio, language):
+        customized_tiles_dto = [PortfolioCustomTilesDto(custom_tile.id, custom_tile.tile, language)
                               for customtile in portfolio.customized_tiles.all()]
-         return customtilesdto
+        return customized_tiles_dto
      
-     def add_custom_tile(portfolio, customized_tile):
-         customized_tile = CustomizedTile.objects.create(tile=customized_tile, portfolio=portfolio)
-         return {'tileId': customized_tile.id}
+    def show_customized_tile(id, language):
+        customized_tile = PortfolioService.get_customized_tile(id)
+        customized_tile_dto = PortfolioCustomizedTilesDto(customized_tile, language)
+        return customized_tile_dto
+     
+    #def add_custom_tile(portfolio, customized_tile):
+        #customized_tile = CustomizedTile.objects.create(tile=customized_tile, portfolio=portfolio)
+        #return {'tileId': customized_tile.id}
 
-     def add_custom_tile_color(customized_tile_id, group, color_id):
-        customized_tile = get_object_or_404(CustomizedTile, pk=customized_tile_id)
+    def add_custom_tile(request, tile_id, group, color_id):
+        portfolio = PortfolioService.get_portfolio(request.user)
+        tile = PortfolioService.get_tile(tile_id)
         color = get_object_or_404(PalleteColor, pk=color_id)
+        customized_tile = CustomizedTile.objects.create(tile=tile, portfolio=portfolio)
+        
         data = {'group': group}
          
         GroupColor.objects.update_or_create(
-             customized_tile=customized_tile, 
+             customized_tile=customized_tile,
              color=color,
              defaults=data
         )
         return {'customizedTileId': customized_tile.id, 'group': group, 'colorId': color.id}
 
-     def remove_custom_tile(portfolio, customizedtile_id):
-         portfolio.customized_tiles.get(pk=customizedtile_id).delete()
+    def remove_custom_tile(portfolio, customizedtile_id):
+        portfolio.customized_tiles.get(pk=customizedtile_id).delete()
 
-     def get_group_colors(portfolio, customized_tile_id, language):
-         customized_tile = get_object_or_404(CustomizedTile, pk=customized_tile_id)
-         group_color_dto = [GroupColorDto(group_color, language) for group_color in customized_tile.group_colors.all() ]
-         return group_color_dto
-     
      
 class PalleteColorService:
 
-     def get_pallete_colors(language):
-         pallete_colors_dto = [TileColorDto(pallete_color, language) for pallete_color in PalleteColor.objects.all()]
-         return pallete_colors_dto
+    def get_pallete_colors(language):
+        pallete_colors_dto = [TileColorDto(pallete_color, language) for pallete_color in PalleteColor.objects.all()]
+        return pallete_colors_dto
