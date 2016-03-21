@@ -243,8 +243,8 @@ class CustomizedTilesViewSet(BaseViewSet):
     
     def create(self, request):
         tile_id = request.data.get('tileId')
-        color_id = request.data.get('colorId')
-        group = request.data.get('group')
+        color_groups = request.data.get('colorGroups')
+        x = 2
         return Response(PortfolioService.add_custom_tile(request, tile_id, group, color_id))
 
     def destroy(self, request, pk=None):

@@ -10,7 +10,9 @@
     function customTilesSvc(appSettings, baseSettings, tilesSvc, $http, $modal) {
         var service = {
             customTileModal: customTileModal,
-            getTilePlane: getTilePlane
+            getTilePlane: getTilePlane,
+            addCustomizedTile: addCustomizedTile,
+            addColorGroup: addColorGroup
         };
 
         return service;
@@ -20,11 +22,11 @@
         }
 
         function addCustomizedTile(customizedTile) {
-            return $http.post(appSettings.serverPath + 'customizedtiles', customizedTile);
+            return $http.post(appSettings.serverPath + 'customizedtiles/', customizedTile);
         }
 
         function addColorGroup(customizedTileId, colorGroup) {
-            return $http.post(appSettings.serverPath + 'customizedtiles', colorGroup)
+            return $http.post(appSettings.serverPath + 'customizedtiles/', colorGroup)
         }
 
         function customTileModal(tileData) {
