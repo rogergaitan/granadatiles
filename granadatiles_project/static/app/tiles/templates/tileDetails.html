@@ -51,7 +51,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <button ng-if="!vm.tile.sample" ng-click="vm.customizeTile(vm.tile)" type="button" class="btn btn-sky">{{vm.labels.customize}}</button>
+                                <button ng-if="!vm.tile.sample && vm.tile.plane" ng-click="vm.customizeTile(vm.tile)" type="button" class="btn btn-sky">{{vm.labels.customize}}</button>
                             </div>
                         </div>
                     </div>

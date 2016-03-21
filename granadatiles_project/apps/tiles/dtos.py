@@ -33,8 +33,12 @@ class TileDetailDto(BaseCatalogDto):
     def __init__(self, tile, language):
         super().__init__(tile, language)
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
-        self.mosaic = tile.mosaic.url if tile.mosaic else ''
         self.image = tile.image.url if tile.image else ''
+        self.rotateDeg1 = tile.rotate_deg1
+        self.rotateDeg2 = tile.rotate_deg2
+        self.rotateDeg3 = tile.rotate_deg3
+        self.rotateDeg4 = tile.rotate_deg4
+        self.new = tile.new
         self.uses = [TileUseDto(use, language) for use in tile.design.group.collection.uses.all()]
         self.styles = [TileStyleDto(style, language) for style in tile.design.styles.all()]
         self.colors = [TileColorDto(color, language) for color in tile.colors.all()]
@@ -61,7 +65,10 @@ class MainTileDto(BaseDto):
             self.name = tile.name[:m.start() - 1] if m else tile.name
         self.sizes = tile.size
         self.image = tile.image.url if tile.image else ''
-        self.mosaic = tile.mosaic.url if tile.mosaic else ''
+        self.rotateDeg1 = tile.rotate_deg1
+        self.rotateDeg2 = tile.rotate_deg2
+        self.rotateDeg3 = tile.rotate_deg3
+        self.rotateDeg4 = tile.rotate_deg4
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
         self.hasInstallationPhotos = tile.has_installation_photos()
         self.isSample = tile.is_sample
@@ -80,7 +87,6 @@ class MinorTileDto(TileDto):
     def __init__(self, tile, language):
         super().__init__(tile, language)
         self.image = tile.image.url if tile.image else ''
-        self.mosaic = tile.mosaic.url if tile.mosaic else ''
         self.onSale = True if tile.on_sale else False
 
 
@@ -128,7 +134,7 @@ class SimilarTileDto(BaseCatalogDto):
 
     def __init__(self, tile, language):
         super().__init__(tile, language)
-        self.image = tile.mosaic.url if tile.mosaic else ''
+        self.image = tile.image.url if tile.image else ''
 
 
 class TileDesignerDto(BaseContentDto):
@@ -181,7 +187,6 @@ class TileOrderDto(BaseCatalogDto):
         self.rotateDeg2 = tile.rotate_deg2
         self.rotateDeg3 = tile.rotate_deg3
         self.rotateDeg4 = tile.rotate_deg4
-        self.mosaic = tile.mosaic.url if tile.mosaic else ''
         self.plane = tile.plane.url if tile.plane else ''
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
         self.thickness = tile.thickness
@@ -228,7 +233,11 @@ class InStockDto(BaseCatalogDto):
 
     def __init__(self, tile, is_sample, language):
         super().__init__(tile, language)
-        self.mosaic = tile.mosaic.url if tile.mosaic else ''
+        self.image = tile.image.url if tile.image else ''
+        self.rotateDeg1 = tile.rotate_deg1
+        self.rotateDeg2 = tile.rotate_deg2
+        self.rotateDeg3 = tile.rotate_deg3
+        self.rotateDeg4 = tile.rotate_deg4
         self.collection = tile.design.group.collection.get_title(language) \
                           if tile.design.group.collection else ''
         self.size = tile.size
@@ -313,7 +322,7 @@ class LayoutTilesDto(BaseCatalogDto):
     def __init__(self, tile, language):
         super().__init__(tile, language)
         self.collection = tile.design.group.collection.get_title(language)
-        self.image = tile.mosaic.url if tile.mosaic else ''
+        self.image = tile.image.url if tile.image else ''
         self.size = tile.size
 
 

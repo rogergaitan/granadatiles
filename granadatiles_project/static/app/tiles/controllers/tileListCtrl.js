@@ -139,6 +139,11 @@
                 'mosaic': main.mosaic,
                 'image': main.image,
                 'sizes': main.sizes,
+                'new': main.new,
+                'rotateDeg1': main.rotateDeg1,
+                'rotateDeg2': main.rotateDeg2,
+                'rotateDeg3': main.rotateDeg3,
+                'rotateDeg4': main.rotateDeg4,
                 'hasInstallationPhotos': main.hasInstallationPhotos,
                 'hasSample': main.hasSample
             });

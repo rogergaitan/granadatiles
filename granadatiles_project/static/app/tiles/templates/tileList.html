@@ -49,10 +49,9 @@
                             <div class="content-tile">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <img ng-src="{{ tile.previousImage }}" alt="{{ tile.previousImage }}" class="img-responsive thumbnail animate-show-fade previous-image">
-                                        <img ng-src="{{ tile.main.mosaic }}" alt="{{ tile.main.name }}" class="img-responsive thumbnail animate-show-fade" fade-in>
+                                        <tile-mosaic tile="tile.main" repeat-vertical="2" repeat-horinzotal="1" fade-in class="animate-show-fade"></tile-mosaic>
                                         <div class="tag-new arrowTop" ng-if="tile.main.new">
-                                            <span class="label-new">NEW</span>
+                                            <span class="label-new">{{::vm.labels.new_tile}}</span>
                                         </div>
                                     </div>
                                     <div class="col-md-4">

@@ -38,7 +38,10 @@ class TileSerializer(BaseCatalogSerializer):
 
 class MainTileSerialzer(BaseCatalogSerializer):
     image = serializers.CharField()
-    mosaic = serializers.CharField()
+    rotateDeg1 = serializers.IntegerField()
+    rotateDeg2 = serializers.IntegerField()
+    rotateDeg3 = serializers.IntegerField()
+    rotateDeg4 = serializers.IntegerField()
     sizes = TileSizeSerializer(many=True)
     hasInstallationPhotos = serializers.BooleanField(required=False)
     hasSample = serializers.BooleanField()
@@ -51,7 +54,11 @@ class MainTileSerialzer(BaseCatalogSerializer):
 
 class TileDetailSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
-    mosaic = serializers.CharField()
+    rotateDeg1 = serializers.IntegerField()
+    rotateDeg2 = serializers.IntegerField()
+    rotateDeg3 = serializers.IntegerField()
+    rotateDeg4 = serializers.IntegerField()
+    new = serializers.BooleanField()
     sizes = TileSizeSerializer(many=True)
     uses = TileUseSerializer(many=True)
     styles = StyleSerializer(many=True)
@@ -96,7 +103,6 @@ class TileOrderSerializer(BaseCatalogSerializer):
     rotateDeg2 = serializers.IntegerField()
     rotateDeg3 = serializers.IntegerField()
     rotateDeg4 = serializers.IntegerField()
-    mosaic = serializers.CharField()
     plane = serializers.CharField()
     sizes = TileSizeSerializer(many=True)
     thickness = serializers.CharField()
@@ -126,8 +132,12 @@ class TileOrderSerializer(BaseCatalogSerializer):
 
 
 class InStockSerializer(BaseCatalogSerializer):
-    mosaic = serializers.CharField()
     name = serializers.CharField()
+    image = serializers.CharField()
+    rotateDeg1 = serializers.IntegerField()
+    rotateDeg2 = serializers.IntegerField()
+    rotateDeg3 = serializers.IntegerField()
+    rotateDeg4 = serializers.IntegerField()
     collection = serializers.CharField()
     size = serializers.CharField()
     hasInstallationPhotos = serializers.BooleanField()
