@@ -215,17 +215,20 @@ class PortfolioService:
         customized_tile_dto = PortfolioCustomizedTilesDto(customized_tile, language)
         return customized_tile_dto
      
-    def add_custom_tile(portfolio, customized_tile):
-        customized_tile = CustomizedTile.objects.create(tile=customized_tile, portfolio=portfolio)
-        return {'tileId': customized_tile.id}
+    #def add_custom_tile(portfolio, customized_tile):
+        #customized_tile = CustomizedTile.objects.create(tile=customized_tile, portfolio=portfolio)
+        #return {'tileId': customized_tile.id}
 
-    def add_custom_tile_color(customized_tile_id, group, color_id):
-        customized_tile = get_object_or_404(CustomizedTile, pk=customized_tile_id)
+    def add_custom_tile(request, tile_id, group, color_id):
+        portfolio = PortfolioService.get_portfolio(request.user)
+        tile = PortfolioService.get_tile(tile_id)
         color = get_object_or_404(PalleteColor, pk=color_id)
+        customized_tile = CustomizedTile.objects.create(tile=tile, portfolio=portfolio)
+        
         data = {'group': group}
          
         GroupColor.objects.update_or_create(
-             customized_tile=customized_tile, 
+             customized_tile=customized_tile,
              color=color,
              defaults=data
         )

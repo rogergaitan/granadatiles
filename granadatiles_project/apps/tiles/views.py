@@ -241,20 +241,15 @@ class CustomizedTilesViewSet(BaseViewSet):
         serializer = PortfolioCustomizedTilesSerializer(customized_tile)
         return Response(serializer.data)
     
-    @detail_route(methods=['post'])
-    def groupcolors(self, request, pk=None):
+    def create(self, request):
+        tile_id = request.data.get('tileId')
         color_id = request.data.get('colorId')
         group = request.data.get('group')
-        return Response(PortfolioService.add_custom_tile_color(pk, group, color_id))
+        return Response(PortfolioService.add_custom_tile(request, tile_id, group, color_id))
 
     def destroy(self, request, pk=None):
         portfolio = PortfolioService.get_portfolio(request.user)
         return Response(PortfolioService.remove_custom_tile(portfolio, pk))
-
-    def create(self, request):
-        portfolio = PortfolioService.get_portfolio(request.user)
-        tile = PortfolioService.get_tile(request.data.get('id'))
-        return Response(PortfolioService.add_custom_tile(portfolio, tile))
     
     
 class PalleteColorsViewSet(BaseViewSet):
