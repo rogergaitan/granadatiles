@@ -1,14 +1,15 @@
 ﻿{% extends "base.html" %}
 {% load i18n content %}
 
-{% block seo %}
-{% section 10 LANGUAGE_CODE  as section %}
-<title>{{ section.page_title }}</title>
-{% content_meta_tags section %}
-{% endblock seo %}
+{% block title %} Login to your Granada Tile Portfolio {% endblock %}
+
+{% block css %}
+<script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit"
+        async defer></script>
+{% endblock css %}
 
 {% block content %}
-<ng-include src="'{{ STATIC_URL }}app/portfolio/templates/portfolioHome.html'">
+<ng-include src="'{{ STATIC_URL }}app/portfolio/templates/layouts.html'">
 </ng-include>
 {% endblock content %}
 
@@ -23,8 +24,7 @@
 
         function pageSettings(appSettings) {
             return{
-                sectionId: 10,
-                language: '{{LANGUAGE_CODE}}',
+                sectionId: 13,
                 labels: {
                     myPortfolio: '{% trans 'My Portfolio'%}',
                     tilesInMyPortfolio: '{% trans 'Tiles in my Portfolio' %}',
@@ -36,7 +36,7 @@
                     share: '{% trans 'SHARE' %}',
                     delete: '{% trans 'DELETE'%}',
                     welcome: '{% trans 'WELCOME' %}',
-                    tiles: '{% trans 'Tiles' %}'
+                    layouts: '{% trans 'Layouts' %}'
                 },
                 navigation: {
                     layouts: '{% url 'sr-portfolio:layouts'%}',
@@ -44,15 +44,14 @@
                 },
                 logoutUrl: '{% url 'sr-portfolio:logout_user'%}',
                 loggedUser: '{{ username |safe}}'
-    }
-    };
+            }
+        };
     })();
 </script>
 <script>
-// Add the CSRF Token
-var app = angular.module('app.tiles');
-app.config(['$httpProvider', function($httpProvider) {
-    $httpProvider.defaults.headers.common['X-CSRFToken'] = '{{ csrf_token|escapejs }}';
-}]);
+    var app = angular.module('app.portfolio'); // Not including a list of dependent modules (2nd parameter to `module`) "re-opens" the module for additional configuration
+    app.config(['$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.headers.common['X-CSRFToken'] = '{{ csrf_token|escapejs }}';
+    }]);
 </script>
 {% endblock js %}

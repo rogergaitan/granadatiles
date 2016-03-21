@@ -46,6 +46,12 @@ def portfolio_home(request):
             'username': request.user.first_name
         })
 
+@login_required(login_url='/portfolio/login')
+def portfolio_layouts(request):
+    return render(request , "portfolio/layouts.html", { 
+            'username': request.user.first_name
+        })
+
 @api_view(['POST',])
 def register_user(request):
     recaptcha_valid = utils.check_recaptcha_response(request.data.get('recaptchaResponse'))

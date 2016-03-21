@@ -11,6 +11,7 @@
         /* jshint validthis:true */
         var vm = this;
         vm.labels = pageSettings.labels;
+        vm.navigation = pageSettings.navigation;
         vm.logoutUrl = pageSettings.logoutUrl;
         vm.loggedUser = pageSettings.loggedUser;
 

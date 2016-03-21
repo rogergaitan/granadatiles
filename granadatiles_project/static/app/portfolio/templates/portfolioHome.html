@@ -5,7 +5,8 @@
         </aside>
         <div class="col-sm-9 col-xs-8">
             <h1 class="heading-sec">{{ ::vm.section.title }} </h1>
-            <a  class="breadcrumds"><u>{{::vm.labels.myPortfolio}}</u></a>
+            <a  class="breadcrumds"><u>{{::vm.labels.myPortfolio}}</u> <i class="fa fa-angle-double-right"></i> </a>
+            <a  class="breadcrumds"><u>{{::vm.labels.tiles}}</u> </a>
             <div class="text-section" ng-bind-html="::vm.section.description | unsafe"></div>
         </div>
     </div>
