@@ -296,13 +296,21 @@ class PortfolioTilesDto(BasePortfolioTilesDto):
     def __init__(self, portfoliotile_id, tile, language):
         super().__init__(tile, language)
         self.portfoliotile_id = portfoliotile_id
+        
+        
+class GroupColorDto:
+    
+    def __init__(self, group_color, language):
+        self.group = group_color.group
+        self.color = TileColorDto(group_color.color, language)      
 
 
-class PortfolioCustomTilesDto(BasePortfolioTilesDto):
+class PortfolioCustomizedTilesDto(BasePortfolioTilesDto):
 
-    def __init__(self, customizedtile_id, tile, language):
-        super().__init__(tile, language)
-        self.customizedtile_id = customizedtile_id
+    def __init__(self, customized_tile, language):
+        super().__init__(customized_tile.tile, language)
+        self.customizedTileId = customized_tile.id
+        self.groupColors = [GroupColorDto(group_color, language) for group_color in customized_tile.group_colors.all() ]
 
 
 class LayoutDto(BaseDto):
@@ -325,10 +333,3 @@ class LayoutTilesDto(BaseCatalogDto):
         self.collection = tile.design.group.collection.get_title(language)
         self.image = tile.image.url if tile.image else ''
         self.size = tile.size
-
-
-class GroupColorDto:
-    
-    def __init__(self, group_color, language):
-        self.group = group_color.group
-        self.color = TileColorDto(group_color.color, language)

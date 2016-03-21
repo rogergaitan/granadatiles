@@ -13,8 +13,8 @@ from .serializers import (
     CollectionSerializer, CollectionRetrieveSerializer, TileDesignSerializer,
     StyleSerializer, GroupTileSizeSerializer, TileDetailSerializer,
     TileInstallationPhotosSerializer, TileOrderSerializer, CollectionsFilterSerializer,
-    InStockSerializer, PortfolioTilesSerializer, PortfolioCustomTilesSerializer, LayoutSerializer,
-    LayoutTilesSerializer, CollectionInstallationPhotosSerializer, TileColorSerializer, GroupColorSerializer
+    InStockSerializer, PortfolioTilesSerializer, PortfolioCustomizedTilesSerializer, LayoutSerializer,
+    LayoutTilesSerializer, CollectionInstallationPhotosSerializer, TileColorSerializer
 )
 from .services import CollectionService, GroupService, TileService, PortfolioService, PalleteColorService
 from .models import Collection, Group
@@ -236,11 +236,9 @@ class CustomizedTilesViewSet(BaseViewSet):
 
     permission_classes = (IsAuthenticated,)
 
-    @detail_route(methods=['get'])
-    def groupcolors(self, request, pk=None):
-        portfolio = PortfolioService.get_portfolio(request.user)
-        group_colors = PortfolioService.get_group_colors(portfolio, pk, self.get_language(request))
-        serializer = GroupColorSerializer(group_colors, many=True)
+    def retrieve(self, request, pk=None):
+        customized_tile = PortfolioService.show_customized_tile(pk, self.get_language(request))
+        serializer = PortfolioCustomizedTilesSerializer(customized_tile)
         return Response(serializer.data)
     
     @detail_route(methods=['post'])
@@ -257,8 +255,8 @@ class CustomizedTilesViewSet(BaseViewSet):
         portfolio = PortfolioService.get_portfolio(request.user)
         tile = PortfolioService.get_tile(request.data.get('id'))
         return Response(PortfolioService.add_custom_tile(portfolio, tile))
-
-
+    
+    
 class PalleteColorsViewSet(BaseViewSet):
 
     def list(self, request):
