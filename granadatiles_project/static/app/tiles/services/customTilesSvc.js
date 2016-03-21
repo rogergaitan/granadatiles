@@ -19,10 +19,8 @@
             return $http.get(window.location.origin + url);
         }
 
-        function addCustomizedTile(tileId) {
-            return $http.post(appSettings.serverPath + 'customizedtiles', {
-                tileId: tileId
-            })
+        function addCustomizedTile(customizedTile) {
+            return $http.post(appSettings.serverPath + 'customizedtiles', customizedTile);
         }
 
         function addColorGroup(customizedTileId, colorGroup) {

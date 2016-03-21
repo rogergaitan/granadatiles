@@ -27,7 +27,7 @@
                 <div class="col-md-3">
                     <ul class="list-unstyled tile-button-options">
                         <li>
-                            <a href="">
+                            <a href="" ng-click="vm.saveToPortfolio()">
                                 <i class="fa fa-briefcase"></i>
                                 <p>SAVE TO PORTFOLIO</p>
                             </a>
@@ -59,7 +59,9 @@
                     </ul>
                 </div>
                 <div class="col-md-9">
-                    <div class="similar-tile-container" ng-bind-html="vm.plane | unsafe"></div>
+                      <div class="similar-tile-container" ng-bind-html="vm.plane | unsafe"
+                       ui-on-drop="vm.addColor($event,$data)">
+                    </div> 
                 </div>
             </div>
             <div class="row">
@@ -67,7 +69,8 @@
                     <p class="section-information"><span>Color Palette:</span> Drag colors to tile above to customize</p>
                     <ul class="list-inline color-pallete-content">
                         <li class="col-md-2 list-color-pallete" ng-repeat="color in vm.colorPallete">
-                            <div class="color" ng-style="{ 'background-color' : color.hexadecimalCode}">&nbsp;</div>
+                             <div class="color dragable"  ui-draggable="true"  drag="color"
+                                 ng-style="{ 'background-color' : color.hexadecimalCode}" >&nbsp;</div>
                             <p class="color-name">{{color.name}}</p>
                         </li>
                     </ul>
@@ -78,7 +81,27 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="tile-container-rotate">
-                        <tile-mosaic tile="vm.tile" repeat-vertical="4" repeat-horinzotal="4" no-borders="true"></tile-mosaic>
+                        <!--<tile-mosaic tile="vm.tile" repeat-vertical="4" repeat-horinzotal="4" no-borders="true"></tile-mosaic>-->
+                        <div class="tile-detail-mosaic" ng-class="(noBorders)? '':'similar-tile-container'">
+                            <div ng-repeat="n in  [] | range:4">
+                                <div ng-style="{ 'width':  100/4 + '%'}" class="tile-mosaic-conatiner" ng-repeat="n in  [] | range:4">
+                                    <div  class="tile-mosaic-image" ng-style="{'transform': 'rotate3d(0, 0 , 1, ' + vm.tile.rotateDeg1 +'deg)'}">
+                                        <div ng-bind-html="vm.mosaic | unsafe" class="svg-container"></div>
+                                    </div>
+                                    <div  class="tile-mosaic-image" ng-style="{'transform': 'rotate3d(0, 0 , 1, ' + vm.tile.rotateDeg2 +'deg)'}">
+                                        <div ng-bind-html="vm.mosaic | unsafe" class="svg-container"></div>
+                                    </div>
+                                    <div  class="tile-mosaic-image" ng-style="{'transform': 'rotate3d(0, 0 , 1, ' + vm.tile.rotateDeg3 +'deg)'}">
+                                        <div ng-bind-html="vm.mosaic | unsafe" class="svg-container"></div>
+                                    </div>
+                                    <div  class="tile-mosaic-image" ng-style="{'transform': 'rotate3d(0, 0 , 1, ' + vm.tile.rotateDeg4 +'deg)'}">
+                                        <div ng-bind-html="vm.mosaic | unsafe" class="svg-container"></div>
+                                    </div>
+                                    <br style="clear:both;" />
+                                </div>
+                            </div>
+                            <br style="clear:both;" />
+                        </div>
                         <div class="row">
                             <div class="col-md-3">
                                 <span>Colors Used:</span>

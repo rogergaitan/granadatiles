@@ -11,6 +11,8 @@
             'vcRecaptcha',
             'checklist-model',
             'infinite-scroll',
+            'ang-drag-drop',
+
 
             'app.core',
             'app.content',
