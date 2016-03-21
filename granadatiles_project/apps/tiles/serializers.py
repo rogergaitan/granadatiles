@@ -84,6 +84,7 @@ class TileDesignerSerializer(BaseSerializer):
 
 class SimilarTilesSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
+    url = serializers.CharField()
 
 
 class WarehouseSerializer(BaseCatalogSerializer):

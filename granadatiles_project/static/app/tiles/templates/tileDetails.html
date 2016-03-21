@@ -281,13 +281,18 @@
         <div class="col-md-12">
             <p>{{::vm.labels.similarTiles}}</p>
             <div class="row">
-                <div class="col-md-3">
-                    <div class="similar-tile-container">
-                        <img src="/static/img/initial/tiles/tiles/Kotka918-B-Granada-Tile-Cement.jpg" alt="" class="img-responsive">
-                    </div>
-                    <div class="similar-tile-caption">
-                        <span>Kotka 918 B</span>
-                    </div>
+                <div ng-repeat="similarTile in vm.tile.similarTiles">
+                <div ng-if="$index % 3 == 0"></div>
+                    <a ng-href="{{similarTile.url}}">
+                        <div class="col-md-3">
+                            <div class="similar-tile-container">
+                                <img ng-src="{{similarTile.image}}" alt="{{similarTile.name}}" class="img-responsive">
+                            </div>
+                            <div class="similar-tile-caption">
+                                <span>{{similarTile.name}}</span>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
