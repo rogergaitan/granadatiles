@@ -9,3 +9,73 @@
         padding: 30px;
     }
 }
+
+.layout-content{
+    background-color: @lightSteelBlue;
+
+    .layout-body {
+        padding: 0 10px 10px;
+
+        h2 {
+            color: @darkBlue;
+            margin-bottom: 0;
+            font-family: @font-secundary;
+            .font-configuration(@font-xlll,@font-light);
+        }
+        span{
+            color:@darkGray;
+            font-family: @font-primary;
+            .font-configuration(@font-sm,@font-light);   
+        }
+    }
+    .layout-footer{
+    	margin: 0 10px;
+    	border-top: 1px solid @darkGray;
+
+    	p{
+    		margin: 6px;
+    		a{
+    			color:@darkGray;
+    			.font-configuration(@font-sm,@font-light);
+    			&:hover{
+    				color: @darkBlue;
+    			}
+    		}
+    		i{
+    			margin-right: 10px;
+    			.font-configuration(@font-xll,@font-light);
+    		}
+    	}
+
+    	.layout-options {
+            padding-top: 10px;
+
+            li {
+                text-align: center;
+                a {
+                    color: @darkGray;
+                    font-family: @font-secundary;
+                    .font-configuration(@font-sm,@font-light);
+                    &:hover, &:focus {
+                        color: @darkBlue;
+                        text-decoration: none;
+                    }
+                    i {
+                        font-size: @font-xxl;
+                    }
+                }
+            }
+        }
+    }
+}
+.form-layout{
+	.form-group > label{
+		color: @darkGray;
+		margin-right: 20px;
+		font-family: @font-secundary;
+		.font-configuration(@font-md,@font-bold);
+	}
+	.btn-group-sky{
+		margin: 5px;
+	}
+}
