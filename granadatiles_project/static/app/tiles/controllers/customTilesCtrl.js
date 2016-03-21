@@ -79,7 +79,6 @@
                 console.log(response);
                 vm.tile.customizedTile = response.data;
             });
-            console.log(sendObject);
         }
       
     }
