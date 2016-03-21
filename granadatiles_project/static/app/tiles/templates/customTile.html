@@ -1,7 +1,7 @@
 ﻿<div class="modal-header">
     <div class="row">
         <div class="col-md-6">
-            <h4 class="modal-title title-custom-tile">Modal Title</h4>
+            <h4 class="modal-title title-custom-tile">{{::vm.tile.name}}</h4>
         </div>
         <div class="col-md-6 rotate-tile">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.close()">&times;</button>
@@ -78,7 +78,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="tile-container-rotate">
-                        <img class="img-responsive" src="/static/img/initial/tiles/tiles/kotka-mosaic.jpg" alt="">
+                        <tile-mosaic tile="vm.tile" repeat-vertical="4" repeat-horinzotal="4" no-borders="true"></tile-mosaic>
                         <div class="row">
                             <div class="col-md-3">
                                 <span>Colors Used:</span>

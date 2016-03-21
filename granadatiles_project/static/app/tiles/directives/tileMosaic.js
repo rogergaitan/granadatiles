@@ -17,7 +17,8 @@
             scope: {
                 tile: '=',
                 repeatHorinzotal: '=',
-                repeatVertical: '='
+                repeatVertical: '=',
+                noBorders: '=',
             },
             templateUrl: baseSettings.staticUrl + 'app/tiles/directives/tileMosaic.html'
         };
