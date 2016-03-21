@@ -12,5 +12,212 @@
     </div>
     <br>
     <div class="row">
+        <div class="col-md-12">
+            <form action="" class="form-inline form-layout">
+                <div class="form-group">
+                    <label for="">NEW LAYOUT</label>
+                    <input type="text" class="form-control" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <div class="btn-group btn-group-sky" dropdown>
+                        <button id="split-button" type="button" class="btn btn-sky">Length Ft.</button>
+                        <button type="button" class="btn btn-sky" dropdown-toggle>
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="split-button">
+                            <li role="menuitem"><a href="#">Action</a></li>
+                            <li role="menuitem"><a href="#">Another action</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="btn-group btn-group-sky" dropdown>
+                        <button id="split-button" type="button" class="btn btn-sky">Length In</button>
+                        <button type="button" class="btn btn-sky" dropdown-toggle>
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="split-button">
+                            <li role="menuitem"><a href="#">Action</a></li>
+                            <li role="menuitem"><a href="#">Another action</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span>X</span>
+                </div>
+                <div class="form-group">
+                    <div class="btn-group btn-group-sky" dropdown>
+                        <button id="split-button" type="button" class="btn btn-sky">Width Ft.</button>
+                        <button type="button" class="btn btn-sky" dropdown-toggle>
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="split-button">
+                            <li role="menuitem"><a href="#">Action</a></li>
+                            <li role="menuitem"><a href="#">Another action</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="btn-group btn-group-sky" dropdown>
+                        <button id="split-button" type="button" class="btn btn-sky">Width In</button>
+                        <button type="button" class="btn btn-sky" dropdown-toggle>
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="split-button">
+                            <li role="menuitem"><a href="#">Action</a></li>
+                            <li role="menuitem"><a href="#">Another action</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-green">CREATE LAYOUT</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div>
+            <div class="clearfix" ng-if="$index % 4 == 0"></div>
+            <div class="col-md-3 blue-box animate-show" ng-show="!tile.removed">
+                <div class="layout-content">
+                    <a href="">
+                        <img src="/static/img/initial/tiles/tiles/Avesta-800-C-Granada-Tile-Cement.jpg" alt="" class="shadow-image thumbnail img-responsive">
+                    </a>
+                    <div class="layout-body">
+                        <h2>Layout Title</h2>
+                        <span>8'0" x 8'0"</span><br>
+                        <span>Date: 04-28-2015</span>
+                    </div>
+                    <div class="layout-footer">
+                        <p><a href=""><i class="fa fa-envelope"></i><span>SEND TO GRANADA TILE</span></a></p>
+                        <ul class="list-inline layout-options row">
+                            <li class="col-md-3"><a href=""><i class="fa fa-beer"></i><br>EDIT</a></li>
+                            <li class="col-md-3">
+                                <a ng-href=""><i class="fa fa-shopping-cart"></i><br>DUPLICATE</a>
+                            </li>
+                            <li class="col-md-3">
+                                <a href="" ng-click="vm.shareTile(tile)"><i class="fa fa-share-alt"></i><br>SHARE</a>
+                            </li>
+                            <li class="col-md-3">
+                                <a href="" ng-click="vm.removeTile(tile)"><i class="fa fa-times-circle-o"></i><br>DELETE</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 blue-box animate-show" ng-show="!tile.removed">
+                <div class="layout-content">
+                    <a href="">
+                        <img src="/static/img/initial/tiles/tiles/Avesta-800-C-Granada-Tile-Cement.jpg" alt="" class="shadow-image thumbnail img-responsive">
+                    </a>
+                    <div class="layout-body">
+                        <h2>Layout Title</h2>
+                        <span>8'0" x 8'0"</span><br>
+                        <span>Date: 04-28-2015</span>
+                    </div>
+                    <div class="layout-footer">
+                        <p><a href=""><i class="fa fa-envelope"></i><span>SEND TO GRANADA TILE</span></a></p>
+                        <ul class="list-inline layout-options row">
+                            <li class="col-md-3"><a href=""><i class="fa fa-beer"></i><br>EDIT</a></li>
+                            <li class="col-md-3">
+                                <a ng-href=""><i class="fa fa-shopping-cart"></i><br>DUPLICATE</a>
+                            </li>
+                            <li class="col-md-3">
+                                <a href="" ng-click="vm.shareTile(tile)"><i class="fa fa-share-alt"></i><br>SHARE</a>
+                            </li>
+                            <li class="col-md-3">
+                                <a href="" ng-click="vm.removeTile(tile)"><i class="fa fa-times-circle-o"></i><br>DELETE</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 blue-box animate-show" ng-show="!tile.removed">
+                <div class="layout-content">
+                    <a href="">
+                        <img src="/static/img/initial/tiles/tiles/Avesta-800-C-Granada-Tile-Cement.jpg" alt="" class="shadow-image thumbnail img-responsive">
+                    </a>
+                    <div class="layout-body">
+                        <h2>Layout Title</h2>
+                        <span>8'0" x 8'0"</span><br>
+                        <span>Date: 04-28-2015</span>
+                    </div>
+                    <div class="layout-footer">
+                        <p><a href=""><i class="fa fa-envelope"></i><span>SEND TO GRANADA TILE</span></a></p>
+                        <ul class="list-inline layout-options row">
+                            <li class="col-md-3"><a href=""><i class="fa fa-beer"></i><br>EDIT</a></li>
+                            <li class="col-md-3">
+                                <a ng-href=""><i class="fa fa-shopping-cart"></i><br>DUPLICATE</a>
+                            </li>
+                            <li class="col-md-3">
+                                <a href="" ng-click="vm.shareTile(tile)"><i class="fa fa-share-alt"></i><br>SHARE</a>
+                            </li>
+                            <li class="col-md-3">
+                                <a href="" ng-click="vm.removeTile(tile)"><i class="fa fa-times-circle-o"></i><br>DELETE</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 blue-box animate-show" ng-show="!tile.removed">
+                <div class="layout-content">
+                    <a href="">
+                        <img src="/static/img/initial/tiles/tiles/Avesta-800-C-Granada-Tile-Cement.jpg" alt="" class="shadow-image thumbnail img-responsive">
+                    </a>
+                    <div class="layout-body">
+                        <h2>Layout Title</h2>
+                        <span>8'0" x 8'0"</span><br>
+                        <span>Date: 04-28-2015</span>
+                    </div>
+                    <div class="layout-footer">
+                        <p><a href=""><i class="fa fa-envelope"></i><span>SEND TO GRANADA TILE</span></a></p>
+                        <ul class="list-inline layout-options row">
+                            <li class="col-md-3"><a href=""><i class="fa fa-beer"></i><br>EDIT</a></li>
+                            <li class="col-md-3">
+                                <a ng-href=""><i class="fa fa-shopping-cart"></i><br>DUPLICATE</a>
+                            </li>
+                            <li class="col-md-3">
+                                <a href="" ng-click="vm.shareTile(tile)"><i class="fa fa-share-alt"></i><br>SHARE</a>
+                            </li>
+                            <li class="col-md-3">
+                                <a href="" ng-click="vm.removeTile(tile)"><i class="fa fa-times-circle-o"></i><br>DELETE</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 blue-box animate-show" ng-show="!tile.removed">
+                <div class="layout-content">
+                    <a href="">
+                        <img src="/static/img/initial/tiles/tiles/Avesta-800-C-Granada-Tile-Cement.jpg" alt="" class="shadow-image thumbnail img-responsive">
+                    </a>
+                    <div class="layout-body">
+                        <h2>Layout Title</h2>
+                        <span>8'0" x 8'0"</span><br>
+                        <span>Date: 04-28-2015</span>
+                    </div>
+                    <div class="layout-footer">
+                        <p><a href=""><i class="fa fa-envelope"></i><span>SEND TO GRANADA TILE</span></a></p>
+                        <ul class="list-inline layout-options row">
+                            <li class="col-md-3"><a href=""><i class="fa fa-beer"></i><br>EDIT</a></li>
+                            <li class="col-md-3">
+                                <a ng-href=""><i class="fa fa-shopping-cart"></i><br>DUPLICATE</a>
+                            </li>
+                            <li class="col-md-3">
+                                <a href="" ng-click="vm.shareTile(tile)"><i class="fa fa-share-alt"></i><br>SHARE</a>
+                            </li>
+                            <li class="col-md-3">
+                                <a href="" ng-click="vm.removeTile(tile)"><i class="fa fa-times-circle-o"></i><br>DELETE</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
