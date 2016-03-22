@@ -3,6 +3,7 @@ from django_summernote.admin import SummernoteModelAdmin
 from django.utils.translation import ugettext as _
 from .models import (Tile, Collection, Group, TileDesign, Use, Style,
                      PalleteColor, Warehouse, LeadTime, Box)
+from apps.tiles.models import TileGroupColor
 
 
 class TileInline(admin.StackedInline):
@@ -72,6 +73,11 @@ class CustomTileFilter(admin.SimpleListFilter):
         if self.value() == 'n':
             return queryset.filter(custom=False)
 
+class TileColorGroupInline(admin.TabularInline):
+    model = TileGroupColor
+    fields = ('color', 'group')
+    
+
 
 @admin.register(Tile)
 class TileAdmin(admin.ModelAdmin):
@@ -91,6 +97,7 @@ class TileAdmin(admin.ModelAdmin):
     actions = ['tile_new']
     readonly_fields = ('list_id', 'design', 'name', 'quantity_on_hand',
                        'sales_price', 'size', 'average_cost', 'is_sample', 'in_stock')
+    inlines = [TileColorGroupInline, ]
 
     def tile_new(self, request, queryset):
         queryset.update(new=True)
