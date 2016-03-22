@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
 from core.dtos import BaseCatalogDto, BaseContentDto
-from apps.tiles.models import Collection, Group, Tile
+from apps.tiles.models import Collection, Group, CustomGroup, Tile
 
 
 class ItemCountDto():
@@ -33,7 +33,7 @@ class GroupsByCollectionDto():
 
     def __init__(self, collection, color, language):
         self.label = collection.get_title(language) if language else collection.title
-        self.value = collection.groups.count()
+        self.value = collection.customgroups.count()
         self.color = color['color']
         self.cssclass = color['cssclass']
         self.highlight = color['highlight']
@@ -59,7 +59,7 @@ class SearchDto:
         elif self.type == 'Tile':
             self.additional = search_item.design.group.collection.get_title(language) if search_item.design else '' 
             self.url = search_item.get_absolute_url(language)
-        elif self.type == 'Group':
+        elif self.type == 'CustomGroup':
             self.additional = search_item.collection.get_title(language)
             self.url = search_item.get_absolute_url(language)
         else:

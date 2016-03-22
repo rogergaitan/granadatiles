@@ -3,7 +3,7 @@ from django.utils.translation import ugettext as _
 
 from .models import (
     Collection, Group, Tile, Portfolio, Layout, Style,
-    CustomizedTile, GroupColor, PalleteColor, PortfolioTile
+    CustomizedTile, GroupColor, PalleteColor, PortfolioTile, CustomGroup
 )
 from .dtos import (
     CollectionDto, CollectionDetailDto, GroupDto, TileDesignDto,
@@ -35,7 +35,7 @@ class CollectionService:
 
     def get_groups(collection_id, language=None):
         collection = get_object_or_404(Collection, pk=collection_id)
-        groups = collection.groups.filter(show_in_web=True)
+        groups = collection.customgroups.filter(show_in_web=True)
         groupsDto = [GroupDto(group, language)
                      for group in groups]
         return groupsDto
@@ -60,7 +60,7 @@ class CollectionService:
 class GroupService:
 
     def group_show_in_web(id):
-        return get_object_or_404(Group, pk=id, show_in_web=True)
+        return get_object_or_404(CustomGroup, pk=id, show_in_web=True)
 
     def get_group(id, language=None):
         group = GroupService.group_show_in_web(id)
@@ -85,8 +85,9 @@ class GroupService:
 
     def get_styles(id, language=None):
         group = GroupService.group_show_in_web(id)
-        styles = Style.objects.filter(designs__group__id=id).distinct()
-        style_dto = [TileStyleDto(style, language) for style in styles]
+        designs = group.designs.all()
+        
+        style_dto = [TileStyleDto(style, language) for design in designs for style in design.styles.all()]
         return style_dto
 
     def get_sizes(id):
