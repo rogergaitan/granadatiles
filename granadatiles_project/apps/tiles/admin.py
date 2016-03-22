@@ -2,7 +2,7 @@ from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django.utils.translation import ugettext as _
 from .models import (Tile, Collection, Group, TileDesign, Use, Style,
-                     PalleteColor, Warehouse, LeadTime, Box)
+                     PalleteColor, Warehouse, LeadTime, Box, CustomGroup)
 
 
 class TileInline(admin.StackedInline):
@@ -216,3 +216,12 @@ class LeadTimeAdmin(admin.ModelAdmin):
 @admin.register(Box)
 class BoxAdmin(admin.ModelAdmin):
     list_display = ('description', 'measurement_unit', 'quantity')
+
+
+@admin.register(CustomGroup)
+class CustomGroupAdmin(SummernoteModelAdmin):
+    fields = ('title', 'title_es', 'collection', 'description', 'description_es',
+              'slug', 'slug_es', 'image', 'show_in_web', 'designs')
+
+    list_display = ('title','collection', 'designs_count', 'tiles_count')
+    search_fields = ['title', 'title_es', 'id']

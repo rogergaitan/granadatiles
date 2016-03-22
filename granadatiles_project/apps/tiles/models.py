@@ -65,7 +65,6 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
         
 class BaseGroup(BaseGalleryImageModel, BaseSlugModel):
     collection = models.ForeignKey(Collection, related_name='%(class)ss', verbose_name=_('Collection'))
-    list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
     show_in_web = models.BooleanField(default=True, verbose_name=_('Show in web'))
 
     def designs_count(self):
@@ -86,6 +85,7 @@ class BaseGroup(BaseGalleryImageModel, BaseSlugModel):
 
 
 class Group(BaseGroup):
+    list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
    
     def get_absolute_url(self, language=None):
         slug = self.get_slug(language)
