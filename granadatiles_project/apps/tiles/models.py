@@ -61,10 +61,10 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
     class Meta:
         verbose_name = _('Collection')
         verbose_name_plural = _('Collections')
-
-
-class Group(BaseGalleryImageModel, BaseSlugModel):
-    collection = models.ForeignKey(Collection, related_name='groups', verbose_name=_('Collection'))
+        
+        
+class BaseGroup(BaseGalleryImageModel, BaseSlugModel):
+    collection = models.ForeignKey(Collection, related_name='%(class)ss', verbose_name=_('Collection'))
     list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
     show_in_web = models.BooleanField(default=True, verbose_name=_('Show in web'))
 
@@ -80,7 +80,13 @@ class Group(BaseGalleryImageModel, BaseSlugModel):
 
     designs_count.short_description = _('Designs count')
     tiles_count.short_description = _('Tiles count')
+    
+    class Meta:
+        abstract = True
 
+
+class Group(BaseGroup):
+   
     def get_absolute_url(self, language=None):
         slug = self.get_slug(language)
         return reverse('sr-collections:sr-group-detail',
@@ -93,6 +99,13 @@ class Group(BaseGalleryImageModel, BaseSlugModel):
         verbose_name = _('Group')
         verbose_name_plural = _('Groups')
 
+
+class CustomGroup(BaseGroup):
+    designs = models.ManyToManyField('TileDesign', related_name='designs', verbose_name=_('Designs'))
+    
+    class Meta:
+        verbose_name = _('Custom Group')
+        verbose_name_plural = _('Custom Groups')
 
 
 class TileDesign(BaseCatalogModel):
