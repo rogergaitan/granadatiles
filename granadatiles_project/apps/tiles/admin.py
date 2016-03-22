@@ -2,8 +2,7 @@ from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django.utils.translation import ugettext as _
 from .models import (Tile, Collection, Group, TileDesign, Use, Style,
-                     PalleteColor, Warehouse, LeadTime, Box)
-from apps.tiles.models import TileGroupColor
+                     PalleteColor, Warehouse, LeadTime, Box, CustomGroup, TileGroupColor)
 
 
 class TileInline(admin.StackedInline):
@@ -76,7 +75,7 @@ class CustomTileFilter(admin.SimpleListFilter):
 class TileColorGroupInline(admin.TabularInline):
     model = TileGroupColor
     fields = ('color', 'group')
-    
+
 
 
 @admin.register(Tile)
@@ -85,7 +84,7 @@ class TileAdmin(admin.ModelAdmin):
               'sales_description_es', 'size', 'height', 'width' ,'thickness','weight',
               'sales_price','average_cost', 'quantity_on_hand','image','rotate_deg1', 
               'rotate_deg2', 'rotate_deg3', 'rotate_deg4', 'plane',
-              'tearsheet', 'box',  'similar_tiles', 'colors','main', 'new', 'in_stock',
+              'tearsheet', 'box',  'similar_tiles', 'main', 'new', 'in_stock',
               'is_sample', 'sample', 'override_collection_box', 'is_active', 'on_sale')
 
     list_display = ('name', 'sales_description', 'size', 'weight', 'thickness',
@@ -223,3 +222,12 @@ class LeadTimeAdmin(admin.ModelAdmin):
 @admin.register(Box)
 class BoxAdmin(admin.ModelAdmin):
     list_display = ('description', 'measurement_unit', 'quantity')
+
+
+@admin.register(CustomGroup)
+class CustomGroupAdmin(SummernoteModelAdmin):
+    fields = ('title', 'title_es', 'collection', 'description', 'description_es',
+              'slug', 'slug_es', 'image', 'show_in_web', 'designs')
+
+    list_display = ('title','collection', 'designs_count', 'tiles_count')
+    search_fields = ['title', 'title_es', 'id']
