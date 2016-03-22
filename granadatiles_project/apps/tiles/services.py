@@ -219,20 +219,22 @@ class PortfolioService:
         #customized_tile = CustomizedTile.objects.create(tile=customized_tile, portfolio=portfolio)
         #return {'tileId': customized_tile.id}
 
-    def add_custom_tile(request, tile_id, group, color_id):
+    def add_custom_tile(request, tile_id, color_groups):
         portfolio = PortfolioService.get_portfolio(request.user)
         tile = PortfolioService.get_tile(tile_id)
-        color = get_object_or_404(PalleteColor, pk=color_id)
         customized_tile = CustomizedTile.objects.create(tile=tile, portfolio=portfolio)
         
-        data = {'group': group}
+        for color_group in color_groups:
+            color = get_object_or_404(PalleteColor, pk=color_group['colorId'])
+        
+            data = {'group': color_group['group']}
          
-        GroupColor.objects.update_or_create(
-             customized_tile=customized_tile,
-             color=color,
-             defaults=data
-        )
-        return {'customizedTileId': customized_tile.id, 'group': group, 'colorId': color.id}
+            GroupColor.objects.update_or_create(
+                customized_tile=customized_tile,
+                color=color,
+                defaults=data
+            )
+        return {'customizedTileId': customized_tile.id, 'colorGroups': color_groups}
 
     def remove_custom_tile(portfolio, customizedtile_id):
         portfolio.customized_tiles.get(pk=customizedtile_id).delete()
