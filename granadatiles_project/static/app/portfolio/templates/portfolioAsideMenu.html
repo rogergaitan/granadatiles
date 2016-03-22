@@ -7,13 +7,18 @@
 </div>
 <ul class="active-submenu active-submenu-smtopmargin">
     <li>
-        <a ng-href="{{::vm.navigation.portfolio}}">{{::vm.labels.tilesInMyPortfolio}}</a>
+        <a ng-class="(vm.section.id == 10)? 'active':''" ng-href="{{::vm.navigation.portfolio}}">{{::vm.labels.tilesInMyPortfolio}}</a>
     </li>
     <li>
-        <a ng-href="{{::vm.navigation.layouts}}">{{::vm.labels.layouts}}</a>
+        <a ng-class="(vm.section.id == 13)? 'active':''" ng-href="{{::vm.navigation.layouts}}">{{::vm.labels.layouts}}</a>
+        <ul class="collapsed-submenu" ng-if="vm.labels.createLayout">
+            <li>
+                <a ng-class="(vm.createLayout)? 'active':''" ng-href="{{::vm.navigation.createLayout}}">{{::vm.labels.createLayout}}</a>
+            </li>
+        </ul>
     </li>
     <li>
-        <a>{{::vm.labels.myAccount}}</a>
+        <a ng-click="vm.myAccount()">{{::vm.labels.myAccount}}</a>
     </li>
     <li>
         <a ng-href="{{vm.logoutUrl}}">{{::vm.labels.logout}}</a>

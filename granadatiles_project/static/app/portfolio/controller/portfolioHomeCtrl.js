@@ -5,9 +5,9 @@
         .module('app.portfolio')
         .controller('portfolioHomeCtrl', portfolioHomeCtrl);
 
-    portfolioHomeCtrl.$inject = ['pageSettings', 'sectionSvc', 'baseSettings', 'portfolioSvc', 'sharePageSvc'];
+    portfolioHomeCtrl.$inject = ['pageSettings', 'sectionSvc', 'baseSettings', 'portfolioSvc', 'sharePageSvc', 'authenticationSvc'];
 
-    function portfolioHomeCtrl(pageSettings, sectionSvc, baseSettings, portfolioSvc, sharePageSvc) {
+    function portfolioHomeCtrl(pageSettings, sectionSvc, baseSettings, portfolioSvc, sharePageSvc, authenticationSvc) {
         /* jshint validthis:true */
         var vm = this;
         vm.labels = pageSettings.labels;
@@ -32,6 +32,10 @@
         }
         vm.shareTile = function (tile) {
             sharePageSvc.shareModal(tile.url);
-        }
+        };
+
+        vm.myAccount = function () {
+            authenticationSvc.myAccountModal(vm.loggedUser)
+        };
     }
 })();
