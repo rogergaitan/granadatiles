@@ -88,9 +88,9 @@ class TileAdmin(admin.ModelAdmin):
               'is_sample', 'sample', 'override_collection_box', 'is_active', 'on_sale')
 
     list_display = ('name', 'sales_description', 'size', 'weight', 'thickness',
-                    'quantity_on_hand', 'in_stock', 'is_active', 'new', 'on_sale')
+                    'quantity_on_hand', 'in_stock', 'qty_is_sq_ft', 'is_active', 'new', 'on_sale')
 
-    list_editable = ['is_active', 'new', 'on_sale', 'size', 'weight', 'thickness']
+    list_editable = ['is_active', 'new', 'on_sale', 'size', 'weight', 'thickness', 'qty_is_sq_ft']
     search_fields = ['name', 'name_es', 'list_id', 'size']
     list_filter = ('new', CustomTileFilter, TileSizeFilter, 'override_collection_box')
     actions = ['tile_new']
