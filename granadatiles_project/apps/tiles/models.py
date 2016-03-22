@@ -101,7 +101,7 @@ class Group(BaseGroup):
 
 
 class CustomGroup(BaseGroup):
-    designs = models.ManyToManyField('TileDesign', related_name='designs', verbose_name=_('Designs'))
+    designs = models.ManyToManyField('TileDesign', related_name='custom_groups', verbose_name=_('Designs'))
     
     class Meta:
         verbose_name = _('Custom Group')
