@@ -204,7 +204,7 @@ class TileOrderDto(BaseCatalogDto):
         self.designer = TileDesignerDto(tile.design.group, language)
         self.quantity = tile.quantity_on_hand
         self.sample = tile.is_sample
-        self.hasSample = tile.has_sample() 
+        self.hasSample = tile.has_sample()
         if self.sample:
             self.sampleId = tile.id
         else:
@@ -253,7 +253,7 @@ class InStockDto(BaseCatalogDto):
             self.hasSample = True
         else:
             self.hasSample = True if tile.has_sample() else False
-        
+
         if tile.is_sample:
             self.sampleId = tile.id
         else:
@@ -305,13 +305,13 @@ class PortfolioTilesDto(BasePortfolioTilesDto):
         if isCustomTile:
             self.colorGroups = [GroupColorDto(colorGroup, language) for colorGroup in colorGroups]
             self.plane = tile.plane.url if tile.plane else ''
-        
-        
+
+
 class GroupColorDto:
-    
+
     def __init__(self, group_color, language):
         self.group = group_color.group
-        self.color = TileColorDto(group_color.color, language)      
+        self.color = TileColorDto(group_color.color, language)
 
 
 class PortfolioCustomizedTilesDto(BasePortfolioTilesDto):
@@ -319,7 +319,7 @@ class PortfolioCustomizedTilesDto(BasePortfolioTilesDto):
     def __init__(self, customized_tile, language):
         super().__init__(customized_tile.tile, language)
         self.customizedTileId = customized_tile.id
-        self.groupColors = [GroupColorDto(group_color, language) for group_color in customized_tile.group_colors.all() ]
+        self.groupColors = [GroupColorDto(color_group, language) for color_group in customized_tile.color_groups.all() ]
 
 
 class LayoutDto(BaseDto):
