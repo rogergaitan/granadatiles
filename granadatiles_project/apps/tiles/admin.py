@@ -85,7 +85,7 @@ class TileAdmin(admin.ModelAdmin):
               'sales_price','average_cost', 'quantity_on_hand','image','rotate_deg1', 
               'rotate_deg2', 'rotate_deg3', 'rotate_deg4', 'plane',
               'tearsheet', 'box',  'similar_tiles', 'main', 'new', 'in_stock',
-              'is_sample', 'sample', 'override_collection_box', 'is_active', 'on_sale')
+              'is_sample', 'sample', 'override_collection_box', 'is_active', 'on_sale', 'import_colors')
 
     list_display = ('name', 'sales_description', 'size', 'weight', 'thickness',
                     'quantity_on_hand', 'in_stock', 'qty_is_sq_ft', 'is_active', 'new', 'on_sale')
@@ -111,6 +111,23 @@ class TileAdmin(admin.ModelAdmin):
     def in_stock(self, obj):
         return obj.custom is False
     in_stock.boolean = True
+    
+    def save_model(self, request, obj, form, change):
+        import_colors = request.POST.get('import_colors')
+        if import_colors:
+            import_colors = set(import_color.lower() for import_color in import_colors.split(';'))
+            for i, v in enumerate(import_colors, 1):
+                try:
+                    color = PalleteColor.objects.get(name__iexact=v)
+                    TileGroupColor.objects.update_or_create(
+                        color=color,
+                        tile=obj,
+                        defaults={'group': 'G{}'.format(i)}
+                    )
+                except PalleteColor.DoesNotExist:
+                    pass
+                    
+        obj.save()
 
 
 class GroupInline(admin.StackedInline):
