@@ -75,9 +75,17 @@
                 tileId : vm.tile.id,
                 colorGroups: vm.colorGroups
             }
-            customTilesSvc.addCustomizedTile(sendObject).then(function (response) {
-                vm.tile.customizedTileId = response.data.customizedTileId;
-            });
+            if (vm.tile.customizedTileId) {
+                customTilesSvc.addColorGroup(vm.tile.customizedTileId, sendObject).then(function (response) {
+
+                });
+            }
+            else {
+                customTilesSvc.addCustomizedTile(sendObject).then(function (response) {
+                    vm.tile.customizedTileId = response.data.customizedTileId;
+                });
+            }
+            
         }
       
     }
