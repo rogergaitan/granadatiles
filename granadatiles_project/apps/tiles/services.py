@@ -156,7 +156,7 @@ class PortfolioService:
 
     def get_portfolio_tile(id):
         return get_object_or_404(PortfolioTile, pk=id)
-     
+
     def get_customized_tile(id):
         return get_object_or_404(CustomizedTile, pk=id)
 
@@ -211,26 +211,17 @@ class PortfolioService:
         customized_tiles_dto = [PortfolioCustomTilesDto(custom_tile.id, custom_tile.tile, language)
                               for customtile in portfolio.customized_tiles.all()]
         return customized_tiles_dto
-     
+
     def show_customized_tile(id, language):
         customized_tile = PortfolioService.get_customized_tile(id)
         customized_tile_dto = PortfolioCustomizedTilesDto(customized_tile, language)
         return customized_tile_dto
-     
-    #def add_custom_tile(portfolio, customized_tile):
-        #customized_tile = CustomizedTile.objects.create(tile=customized_tile, portfolio=portfolio)
-        #return {'tileId': customized_tile.id}
 
-    def add_custom_tile(request, tile_id, color_groups):
-        portfolio = PortfolioService.get_portfolio(request.user)
-        tile = PortfolioService.get_tile(tile_id)
-        customized_tile = CustomizedTile.objects.create(tile=tile, portfolio=portfolio)
-        
+    def update_or_create_customized_tile(customized_tile, color_groups):
         for color_group in color_groups:
             color = get_object_or_404(PalleteColor, pk=color_group['colorId'])
-        
             data = {'group': color_group['group']}
-         
+
             GroupColor.objects.update_or_create(
                 customized_tile=customized_tile,
                 color=color,
@@ -238,10 +229,23 @@ class PortfolioService:
             )
         return {'customizedTileId': customized_tile.id, 'colorGroups': color_groups}
 
-    def remove_custom_tile(portfolio, customizedtile_id):
+    def add_customized_tile(request, tile_id, color_groups):
+        portfolio = PortfolioService.get_portfolio(request.user)
+        tile = PortfolioService.get_tile(tile_id)
+        customized_tile = CustomizedTile.objects.create(tile=tile, portfolio=portfolio)
+
+        return PortfolioService.update_or_create_customized_tile(customized_tile, color_groups)
+
+    def remove_customized_tile(portfolio, customizedtile_id):
         portfolio.customized_tiles.get(pk=customizedtile_id).delete()
 
-     
+    def update_customized_tile(request, customized_tile_id, color_groups):
+        portfolio = PortfolioService.get_portfolio(request.user)
+        customized_tile = PortfolioService.get_customized_tile(customized_tile_id)
+
+        return PortfolioService.update_or_create_customized_tile(customized_tile, color_groups)
+
+
 class PalleteColorService:
 
     def get_pallete_colors(language):

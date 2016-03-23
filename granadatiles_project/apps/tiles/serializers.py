@@ -171,7 +171,7 @@ class MenuCollectionSerializer(serializers.Serializer):
 
 class GroupColorSerializer(serializers.Serializer):
     group = serializers.CharField()
-    color = PalleteColorSerializer()    
+    color = PalleteColorSerializer()
 
 
 class BasePortfolioTilesSerializer(BaseSerializer):
@@ -181,12 +181,12 @@ class BasePortfolioTilesSerializer(BaseSerializer):
     url = serializers.CharField()
     colorGroups = GroupColorSerializer(required=False, many=True)
     plane = serializers.CharField(required=False)
-    isCustomTile = serializers.BooleanField()
+    isCustomTile = serializers.BooleanField(required=False)
 
 
 class PortfolioTilesSerializer(BasePortfolioTilesSerializer):
     portfoliotile_id = serializers.CharField()
-    
+
 
 class PortfolioCustomizedTilesSerializer(BasePortfolioTilesSerializer):
     customizedTileId = serializers.CharField()

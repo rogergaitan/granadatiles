@@ -320,7 +320,7 @@ class PortfolioCustomizedTilesDto(BasePortfolioTilesDto):
     def __init__(self, customized_tile, language):
         super().__init__(customized_tile.tile, language)
         self.customizedTileId = customized_tile.id
-        self.groupColors = [GroupColorDto(group_color, language) for group_color in customized_tile.group_colors.all() ]
+        self.groupColors = [GroupColorDto(color_group, language) for color_group in customized_tile.color_groups.all() ]
 
 
 class LayoutDto(BaseDto):
