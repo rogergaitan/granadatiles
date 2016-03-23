@@ -25,8 +25,8 @@
             return $http.post(appSettings.serverPath + 'customizedtiles/', customizedTile);
         }
 
-        function addColorGroup(customizedTileId, colorGroup) {
-            return $http.post(appSettings.serverPath + 'customizedtiles/', colorGroup)
+        function addColorGroup(customizedTileId, customizedTile) {
+            return $http.post(appSettings.serverPath + 'customizedtiles/' + customizedTileId + '/', customizedTile)
         }
 
         function customTileModal(tileData) {

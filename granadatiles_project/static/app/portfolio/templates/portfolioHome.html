@@ -24,8 +24,8 @@
                             <li class="col-md-3">
                                 <a ng-href="{{::tile.url}}"><i class="fa fa-shopping-cart"></i><br>BUY</a>
                             </li>
-                            <li class="col-md-3">
-                                <a href=""><i class="fa fa-beer"></i><br>EDIT</a>
+                            <li class="col-md-3" ng-if="tile.plane">
+                                <a href="" ng-click="vm.editTile(tile)"><i class="fa fa-beer"></i><br>EDIT</a>
                             </li>
                             <li class="col-md-3">
                                 <a href="" ng-click="vm.shareTile(tile)"><i class="fa fa-share-alt"></i><br>SHARE</a>
