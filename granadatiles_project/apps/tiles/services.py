@@ -234,7 +234,7 @@ class PortfolioService:
         tile = PortfolioService.get_tile(tile_id)
         customized_tile = CustomizedTile.objects.create(tile=tile, portfolio=portfolio)
 
-        PortfolioService.update_or_create_custom_tile(customized_tile, color_groups)
+        return PortfolioService.update_or_create_custom_tile(customized_tile, color_groups)
 
     def remove_custom_tile(portfolio, customizedtile_id):
         portfolio.customized_tiles.get(pk=customizedtile_id).delete()
@@ -243,7 +243,7 @@ class PortfolioService:
         portfolio = PortfolioService.get_portfolio(request.user)
         customized_tile = PortfolioService.get_customized_tile(customized_tile_id)
 
-        PortfolioService.update_or_create_custom_tile(customized_tile, color_groups)
+        return PortfolioService.update_or_create_custom_tile(customized_tile, color_groups)
 
 
 class PalleteColorService:
