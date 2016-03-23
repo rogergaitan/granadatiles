@@ -302,9 +302,10 @@ class PortfolioTilesDto(BasePortfolioTilesDto):
         super().__init__(tile, language)
         self.portfoliotile_id = portfoliotile_id
         self.isCustomTile = isCustomTile
+        self.plane = tile.plane.url if tile.plane else ''
         if isCustomTile:
             self.colorGroups = [GroupColorDto(colorGroup, language) for colorGroup in colorGroups]
-            self.plane = tile.plane.url if tile.plane else ''
+            
         
         
 class GroupColorDto:

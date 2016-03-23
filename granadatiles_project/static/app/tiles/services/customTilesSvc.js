@@ -26,11 +26,11 @@
         }
 
         function addColorGroup(customizedTileId, customizedTile) {
-            return $http.post(appSettings.serverPath + 'customizedtiles/' + customizedTileId + '/', customizedTile)
+            return $http.post(appSettings.serverPath + 'customizedtiles/' + customizedTileId + '/groupcolors/', customizedTile)
         }
 
         function customTileModal(tileData) {
-            $modal.open({
+            return $modal.open({
                 templateUrl: baseSettings.staticUrl + 'app/tiles/templates/customTile.html',
                 controller: 'customTilesCtrl',
                 controllerAs: 'vm',

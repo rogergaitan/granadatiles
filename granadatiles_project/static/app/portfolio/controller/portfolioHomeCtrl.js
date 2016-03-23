@@ -16,7 +16,7 @@
         vm.loggedUser = pageSettings.loggedUser;
 
         vm.portfolioAsideMenuTemplateURl = baseSettings.staticUrl + 'app/portfolio/templates/portfolioAsideMenu.html'
-        
+
         sectionSvc.getSection(pageSettings.sectionId).then(function (response) {
             vm.section = response.data;
         });
@@ -40,7 +40,20 @@
 
         vm.editTile = function (tile) {
             tilesSvc.getTileDetail(tile.id).then(function (response) {
-                //customTilesSvc.customTileModal(response.data);
+                var tileData = response.data;
+                tileData.colorGroups = tile.colorGroups;
+                if (tile.isCustomTile)
+                    tileData.customizedTileId = tile.portfoliotile_id;
+
+                var modalInstance = customTilesSvc.customTileModal(tileData);
+
+                modalInstance.result.then(function () {
+                }, function () {
+                    vm.tiles = [];
+                    portfolioSvc.getPortfolioTiles().then(function (response) {
+                        vm.tiles = response.data;
+                    });
+                });
             });
         }
     }

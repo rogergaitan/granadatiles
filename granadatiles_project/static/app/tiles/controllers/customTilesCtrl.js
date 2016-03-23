@@ -5,12 +5,11 @@
         .module('app')
         .controller('customTilesCtrl', customTileCtrl);
 
-    customTileCtrl.$inject = ['pageSettings', 'customTilesSvc', 'initData', '$modalInstance'];
+    customTileCtrl.$inject = ['pageSettings', 'customTilesSvc', 'initData', '$modalInstance', '$timeout'];
 
-    function customTileCtrl(pageSettings, customTilesSvc, initData, $modalInstance) {
+    function customTileCtrl(pageSettings, customTilesSvc, initData, $modalInstance, $timeout) {
         /* jshint validthis:true */
         var vm = this;
-
         vm.labels = pageSettings.labels;
         vm.navigation = pageSettings.navigation;
         vm.colorsUsed = [];
@@ -24,6 +23,13 @@
         customTilesSvc.getTilePlane(vm.tile.plane).then(function (response) {
             vm.plane = response.data;
             vm.mosaic = response.data;
+            $timeout(function () {
+                for (var i = 0; i < vm.tile.colorGroups.length; i++) {
+                    var $parentContainer = $('#painting-container');
+                    $parentContainer.find('#' + vm.tile.colorGroups[i].group).css('fill', vm.tile.colorGroups[i].color.hexadecimalCode);
+                    vm.mosaic = $parentContainer.html();
+                }
+            }, 100);
         });
 
 
@@ -47,7 +53,7 @@
             }
 
             if (isGroup) {
-                $.each($(targetElement).children(), function(index, path){
+                $.each($(targetElement).children(), function (index, path) {
                     $(path).attr('fill', vm.dropedColor.hexadecimalCode);
                     $(path).css('fill', vm.dropedColor.hexadecimalCode);
                 })
@@ -55,15 +61,15 @@
             else {
                 var id = $(targetElement).attr('id');
                 group = id;
-                $('#' + id).attr('fill', vm.dropedColor.hexadecimalCode);
-                $('#' + id).css('fill', vm.dropedColor.hexadecimalCode);
+                $(targetElement).attr('fill', vm.dropedColor.hexadecimalCode);
+                $(targetElement).css('fill', vm.dropedColor.hexadecimalCode);
             }
 
             vm.mosaic = $(event.currentTarget).html();
             var count = vm.colorGroups.filter(function (colorGroup) {
                 return (colorGroup.colorId == vm.dropedColor.id && colorGroup.group == group)
             }).length;
-            if(count == 0)
+            if (count == 0)
                 vm.colorGroups.push({
                     colorId: vm.dropedColor.id,
                     group: group
@@ -72,7 +78,7 @@
 
         vm.saveToPortfolio = function () {
             var sendObject = {
-                tileId : vm.tile.id,
+                tileId: vm.tile.id,
                 colorGroups: vm.colorGroups
             }
             if (vm.tile.customizedTileId) {
@@ -85,8 +91,8 @@
                     vm.tile.customizedTileId = response.data.customizedTileId;
                 });
             }
-            
+
         }
-      
+
     }
 })();
