@@ -250,6 +250,11 @@ class CustomizedTilesViewSet(BaseViewSet):
         portfolio = PortfolioService.get_portfolio(request.user)
         return Response(PortfolioService.remove_custom_tile(portfolio, pk))
     
+    @detail_route(methods=['post'])
+    def groupcolors(self, request, pk=None):
+        color_groups = request.data.get('colorGroups')
+        return Response(PortfolioService.update_custom_tile(request, pk, color_groups))
+    
     
 class PalleteColorsViewSet(BaseViewSet):
 
