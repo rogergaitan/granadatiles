@@ -115,14 +115,14 @@ class TileAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         import_colors = request.POST.get('import_colors')
         if import_colors:
-            import_colors = set(import_colors.split(';'))
+            import_colors = set(import_color.lower() for import_color in import_colors.split(';'))
             for i, v in enumerate(import_colors, 1):
                 try:
-                    color = PalleteColor.objects.filter(name__iexact=v).first()
+                    color = PalleteColor.objects.get(name__iexact=v)
                     TileGroupColor.objects.update_or_create(
                         color=color,
                         tile=obj,
-                        group="G{}".format(i)
+                        defaults={'group': 'G{}'.format(i)}
                     )
                 except PalleteColor.DoesNotExist:
                     pass
