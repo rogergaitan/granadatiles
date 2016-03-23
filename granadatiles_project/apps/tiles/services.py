@@ -167,6 +167,8 @@ class PortfolioService:
         portfolio = PortfolioService.get_portfolio(user)
         portfolio_tiles_dto = [PortfolioTilesDto(portfolio_tile.id, portfolio_tile.tile, language)
                                 for portfolio_tile in portfolio.tiles.all()]
+        portfolio_tiles_dto += [PortfolioTilesDto(portfolio_tile.id, portfolio_tile.tile, language, isCustomTile=True, colorGroups=portfolio_tile.color_groups.all())
+                                for portfolio_tile in portfolio.customized_tiles.all()]
         return portfolio_tiles_dto
 
     def remove_tile(request, id):

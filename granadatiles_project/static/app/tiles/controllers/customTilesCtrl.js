@@ -76,7 +76,7 @@
                 colorGroups: vm.colorGroups
             }
             customTilesSvc.addCustomizedTile(sendObject).then(function (response) {
-                vm.tile.customizedTile = response.data;
+                vm.tile.customizedTileId = response.data.customizedTileId;
             });
         }
       

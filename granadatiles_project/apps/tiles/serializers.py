@@ -158,10 +158,20 @@ class GroupTileSizeSerializer(serializers.Serializer):
     size = serializers.CharField()
 
 
+class PalleteColorSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    hexadecimalCode = serializers.CharField()
+
+
 class MenuCollectionSerializer(serializers.Serializer):
     title = serializers.CharField()
     image = serializers.CharField()
     url = serializers.URLField()
+
+
+class GroupColorSerializer(serializers.Serializer):
+    group = serializers.CharField()
+    color = PalleteColorSerializer()    
 
 
 class BasePortfolioTilesSerializer(BaseSerializer):
@@ -169,21 +179,14 @@ class BasePortfolioTilesSerializer(BaseSerializer):
     image = serializers.CharField()
     sizes = TileSizeSerializer(many=True)
     url = serializers.CharField()
+    colorGroups = GroupColorSerializer(required=False, many=True)
+    plane = serializers.CharField(required=False)
+    isCustomTile = serializers.BooleanField()
 
 
 class PortfolioTilesSerializer(BasePortfolioTilesSerializer):
     portfoliotile_id = serializers.CharField()
     
-    
-class PalleteColorSerializer(serializers.Serializer):
-    name = serializers.CharField()
-    hexadecimalCode = serializers.CharField()
-    
-    
-class GroupColorSerializer(serializers.Serializer):
-    group = serializers.CharField()
-    color = PalleteColorSerializer()    
-
 
 class PortfolioCustomizedTilesSerializer(BasePortfolioTilesSerializer):
     customizedTileId = serializers.CharField()

@@ -298,9 +298,13 @@ class BasePortfolioTilesDto(BaseCatalogDto):
 
 class PortfolioTilesDto(BasePortfolioTilesDto):
 
-    def __init__(self, portfoliotile_id, tile, language):
+    def __init__(self, portfoliotile_id, tile, language, isCustomTile=False, colorGroups = []):
         super().__init__(tile, language)
         self.portfoliotile_id = portfoliotile_id
+        self.isCustomTile = isCustomTile
+        if isCustomTile:
+            self.colorGroups = [GroupColorDto(colorGroup, language) for colorGroup in colorGroups]
+            self.plane = tile.plane.url if tile.plane else ''
         
         
 class GroupColorDto:

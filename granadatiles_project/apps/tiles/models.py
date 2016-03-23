@@ -302,13 +302,11 @@ class Layout(models.Model):
     portfolio = models.ForeignKey(Portfolio, default=False, related_name='layouts', verbose_name=_('Portfolio'))
 
 
-class GroupColor(models.Model):
-    color = models.ForeignKey(PalleteColor)
-    customized_tile = models.ForeignKey('CustomizedTile', related_name='group_colors')
-    group = models.CharField(max_length=5)
-
-
 class CustomizedTile(models.Model):
     tile = models.ForeignKey(Tile, related_name='customizations')
-    colors = models.ManyToManyField(PalleteColor, through='GroupColor')
     portfolio = models.ForeignKey(Portfolio, related_name='customized_tiles')
+
+class GroupColor(models.Model):
+    color = models.ForeignKey(PalleteColor)
+    group = models.CharField(max_length=5)
+    customized_tile = models.ForeignKey(CustomizedTile, related_name='color_groups')
