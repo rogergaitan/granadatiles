@@ -118,8 +118,8 @@ class TileAdmin(admin.ModelAdmin):
             import_colors = set(import_colors.split(';'))
             for i, v in enumerate(import_colors, 1):
                 try:
-                    color = PalleteColor.objects.get(name=v)
-                    TileGroupColor.objects.create(
+                    color = PalleteColor.objects.filter(name__iexact=v).first()
+                    TileGroupColor.objects.update_or_create(
                         color=color,
                         tile=obj,
                         group="G{}".format(i)
