@@ -79,3 +79,51 @@
 		margin: 5px;
 	}
 }
+
+.layout-tile{
+    .ctile{
+        img{
+            width: 130px;
+            border: 5px solid @white;
+        }
+        h2{
+            margin-top: 10px;
+            margin-bottom: 0;
+            color:@mediunDarkBlue;
+            font-family: @font-secundary;
+            .font-configuration(@font-xl,@font-light);
+        }
+        span{
+            color:@darkGray;
+            font-family: @font-primary;
+            .font-configuration(@font-md,@font-light);
+        }
+    }
+}
+.list-options-layout{
+    li{
+        text-align: center;
+        font-family: @font-secundary;
+        .font-configuration(@font-sm,@font-light);
+
+        a{
+            color:@darkGray;
+            &:hover{
+                color:@mediunDarkBlue;
+            }
+            i{
+                .font-configuration(@font-xxl,@font-light);
+            }
+        }
+    }
+}
+.rejilla{
+    img{
+        width: 100%;
+    }
+}
+.text-generic{
+    color: @darkGray;
+    font-family: @font-primary;
+    .font-configuration(@font-sm,@font-light);
+}

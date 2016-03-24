@@ -116,7 +116,11 @@ class TileDesign(BaseCatalogModel):
     def tiles_count(self):
         return self.tiles.count()
 
+    def get_collection(self):
+        return self.group.collection.title
+
     tiles_count.short_description = _('Tiles count')
+    get_collection.short_description = _('Collection')
 
     class Meta:
         verbose_name = _('Tile Design')
