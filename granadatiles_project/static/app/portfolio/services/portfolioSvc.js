@@ -33,8 +33,11 @@
                 });
         }
 
-        function removeTile(tileId) {
-            return $http.delete(appSettings.serverPath + 'portfolio/tiles/' + tileId);
+        function removeTile(tileId, isCustomTile) {
+            var queryString = '';
+            if (isCustomTile)
+                queryString = '?isCustomTile=true';
+            return $http.delete(appSettings.serverPath + 'portfolio/tiles/' + tileId + queryString);
         }
     }
 })();

@@ -10,15 +10,16 @@
     function customTileCtrl(pageSettings, customTilesSvc, initData, $modalInstance, $timeout) {
         /* jshint validthis:true */
         var vm = this;
+        vm.hasChanges = false;
+        vm.planeLoaded = false;
         vm.labels = pageSettings.labels;
         vm.navigation = pageSettings.navigation;
         vm.colorsUsed = [];
 
         vm.colorPallete = initData.colorPallete;
         vm.tile = initData.tileData;
-        vm.colorsUsed = [];
-        vm.colorGroups = [];
-        angular.copy(vm.tile.colors, vm.colorsUsed);
+        vm.colorGroups = customTilesSvc.formatColorGroupsForPost(vm.tile.colorGroups);
+        vm.colorsUsed = customTilesSvc.getColorsUsed(vm.tile.colorGroups);
 
         customTilesSvc.getTilePlane(vm.tile.plane).then(function (response) {
             vm.plane = response.data;
@@ -28,6 +29,7 @@
                     var $parentContainer = $('#painting-container');
                     $parentContainer.find('#' + vm.tile.colorGroups[i].group).css('fill', vm.tile.colorGroups[i].color.hexadecimalCode);
                     vm.mosaic = $parentContainer.html();
+                    vm.planeLoaded = true;
                 }
             }, 100);
         });
@@ -69,11 +71,13 @@
             var count = vm.colorGroups.filter(function (colorGroup) {
                 return (colorGroup.colorId == vm.dropedColor.id && colorGroup.group == group)
             }).length;
-            if (count == 0)
+            if (count == 0) {
                 vm.colorGroups.push({
                     colorId: vm.dropedColor.id,
                     group: group
                 });
+                vm.hasChanges = true;
+            }
         }
 
         vm.saveToPortfolio = function () {
@@ -83,12 +87,13 @@
             }
             if (vm.tile.customizedTileId) {
                 customTilesSvc.addColorGroup(vm.tile.customizedTileId, sendObject).then(function (response) {
-
+                    vm.hasChanges = false;
                 });
             }
             else {
                 customTilesSvc.addCustomizedTile(sendObject).then(function (response) {
                     vm.tile.customizedTileId = response.data.customizedTileId;
+                    vm.hasChanges = false;
                 });
             }
 

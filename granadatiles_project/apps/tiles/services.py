@@ -173,7 +173,10 @@ class PortfolioService:
 
     def remove_tile(request, id):
         portfolio = PortfolioService.get_portfolio(request.user)
-        portfolio.tiles.get(pk=id).delete()
+        if request.query_params.get('isCustomTile', False):
+            CustomizedTile.objects.get(pk=id).delete()
+        else:
+            portfolio.tiles.get(pk=id).delete()
 
     def add_tile(request, id):
         portfolio = PortfolioService.get_portfolio(request.user)
@@ -220,11 +223,11 @@ class PortfolioService:
     def update_or_create_customized_tile(customized_tile, color_groups):
         for color_group in color_groups:
             color = get_object_or_404(PalleteColor, pk=color_group['colorId'])
-            data = {'group': color_group['group']}
+            data = {'color':color}
 
             GroupColor.objects.update_or_create(
                 customized_tile=customized_tile,
-                color=color,
+                group= color_group['group'],
                 defaults=data
             )
         return {'customizedTileId': customized_tile.id, 'colorGroups': color_groups}

@@ -154,6 +154,7 @@ class TileColorDto(BaseCatalogDto):
         else:
             super().__init__(color, language)
             self.hexadecimalCode = color.hexadecimalCode
+            self.id = color.id
 
 
 class TileUseDto(BaseCatalogDto):
@@ -198,6 +199,7 @@ class TileOrderDto(BaseCatalogDto):
         self.thickness = tile.thickness
         self.weight = tile.weight
         self.colors = [TileColorDto(color, language, colorIsDict=True) for color in tile.colors.values('color__id', 'color__name', 'color__hexadecimalCode').distinct()]
+        self.colorGroups = [GroupColorDto(colorGroup, language) for colorGroup in tile.colors.all()]
         self.uses = [TileUseDto(use, language) for use in tile.design.group.collection.uses.all()]
         self.styles = [TileStyleDto(style, language) for style in tile.design.styles.all()]
         self.similarTiles = [SimilarTileDto(tile, language) for tile in tile.similar_tiles.all()]

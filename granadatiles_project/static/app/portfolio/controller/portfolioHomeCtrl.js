@@ -26,7 +26,7 @@
         });
 
         vm.removeTile = function (tile) {
-            portfolioSvc.removeTile(tile.portfoliotile_id).then(function (response) {
+            portfolioSvc.removeTile(tile.portfoliotile_id, tile.isCustomTile).then(function (response) {
                 tile.removed = true;
             });
         }
