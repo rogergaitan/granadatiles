@@ -307,6 +307,8 @@ class PortfolioTilesDto(BasePortfolioTilesDto):
         self.plane = tile.plane.url if tile.plane else ''
         if isCustomTile:
             self.colorGroups = [GroupColorDto(colorGroup, language) for colorGroup in colorGroups]
+        else:
+            self.colorGroups = [GroupColorDto(colorGroup, language) for colorGroup in tile.colors.all()]
             
         
         
