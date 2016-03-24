@@ -80,13 +80,6 @@ class BaseGroup(BaseGalleryImageModel, BaseSlugModel):
     designs_count.short_description = _('Designs count')
     tiles_count.short_description = _('Tiles count')
     
-    class Meta:
-        abstract = True
-
-
-class Group(BaseGroup):
-    list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
-   
     def get_absolute_url(self, language=None):
         slug = self.get_slug(language)
         return reverse('sr-collections:sr-group-detail',
@@ -94,7 +87,14 @@ class Group(BaseGroup):
                            'group_slug': slug,
                            'collection_slug': self.collection.get_slug(language)
                            })
+    
+    class Meta:
+        abstract = True
 
+
+class Group(BaseGroup):
+    list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
+   
     class Meta:
         verbose_name = _('Group')
         verbose_name_plural = _('Groups')
