@@ -8,7 +8,7 @@
     
     function tileMosaic(baseSettings, $window) {
         // Usage:
-        //     <tileMosaic></tileMosaic>
+        //     <tile-mosaic></tile-mosaic>
         // Creates:
         // 
         var directive = {

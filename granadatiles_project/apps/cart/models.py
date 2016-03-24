@@ -31,7 +31,7 @@ class TileOrder(BaseTileOder):
 
 
 class CustomizedTileOrder(BaseTileOder):
-    cart = cart = models.ForeignKey(Cart, related_name='customized_tile_orders',
+    cart = models.ForeignKey(Cart, related_name='customized_tile_orders',
                                        verbose_name=_('Customized Tile Orders'))
     customized_tile = models.ForeignKey(CustomizedTile)
 

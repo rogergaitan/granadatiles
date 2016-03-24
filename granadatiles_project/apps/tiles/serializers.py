@@ -97,6 +97,15 @@ class BoxSerializer(serializers.Serializer):
     quantity = serializers.IntegerField()
     weight = serializers.IntegerField()
 
+class PalleteColorSerializer(serializers.Serializer):
+    id = serializers.IntegerField()        
+    name = serializers.CharField()
+    hexadecimalCode = serializers.CharField()
+
+class GroupColorSerializer(serializers.Serializer):
+    group = serializers.CharField()
+    color = PalleteColorSerializer()
+
 
 class TileOrderSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
@@ -109,6 +118,7 @@ class TileOrderSerializer(BaseCatalogSerializer):
     thickness = serializers.CharField()
     weight = serializers.CharField()
     colors = TileColorSerializer(many=True)
+    colorGroups = GroupColorSerializer(required=False, many=True)
     uses = TileUseSerializer(many=True)
     similarTiles = SimilarTilesSerializer(many=True)
     designer = TileDesignerSerializer()
@@ -158,6 +168,7 @@ class GroupTileSizeSerializer(serializers.Serializer):
     size = serializers.CharField()
 
 
+
 class MenuCollectionSerializer(serializers.Serializer):
     title = serializers.CharField()
     image = serializers.CharField()
@@ -169,20 +180,13 @@ class BasePortfolioTilesSerializer(BaseSerializer):
     image = serializers.CharField()
     sizes = TileSizeSerializer(many=True)
     url = serializers.CharField()
+    colorGroups = GroupColorSerializer(required=False, many=True)
+    plane = serializers.CharField(required=False)
+    isCustomTile = serializers.BooleanField(required=False)
 
 
 class PortfolioTilesSerializer(BasePortfolioTilesSerializer):
     portfoliotile_id = serializers.CharField()
-    
-    
-class PalleteColorSerializer(serializers.Serializer):
-    name = serializers.CharField()
-    hexadecimalCode = serializers.CharField()
-    
-    
-class GroupColorSerializer(serializers.Serializer):
-    group = serializers.CharField()
-    color = PalleteColorSerializer()    
 
 
 class PortfolioCustomizedTilesSerializer(BasePortfolioTilesSerializer):

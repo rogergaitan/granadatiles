@@ -3,8 +3,12 @@ from core.dtos import BaseDto, BaseCatalogDto
 
 class TileColorDto(BaseCatalogDto):
 
-    def __init__(self, color, language):
-        super().__init__(color, language)
+    def __init__(self, color, language, colorIsDict = False):
+        if colorIsDict:
+            self.name = color['color__name']
+            self.id = color['color__id']
+        else:
+            super().__init__(color, language)
 
 
 class TileDto(BaseCatalogDto):
@@ -13,7 +17,7 @@ class TileDto(BaseCatalogDto):
         super().__init__(tile, language)
         self.size = tile.size
         self.image = tile.image.url if tile.image else ''
-        self.colors = [TileColorDto(color, language) for color in tile.colors.all()]
+        self.colors = [TileColorDto(color, language, colorIsDict=True) for color in tile.colors.values('color__id', 'color__name').distinct()]
         self.inStock = tile.in_stock()
 
 
@@ -48,7 +52,7 @@ class CustomizedTileOrdersDto(BaseTileOrdersDto):
         super().__init__(customized_tile_order)
         self.tile = TileDto(customized_tile_order.customized_tile.tile, language)
         self.group_colors = [GroupColorDto(group_color, language)
-                            for group_color in customized_tile_order.customized_tile.group_colors.all()]
+                            for group_color in customized_tile_order.customized_tile.color_groups.all()]
 
 class BaseSampleOrdersDto(BaseDto):
 

@@ -41,7 +41,7 @@ class TileDetailDto(BaseCatalogDto):
         self.new = tile.new
         self.uses = [TileUseDto(use, language) for use in tile.design.group.collection.uses.all()]
         self.styles = [TileStyleDto(style, language) for style in tile.design.styles.all()]
-        self.colors = [TileColorDto(color, language) for color in tile.colors.all()]
+        self.colors = [TileColorDto(color, language, colorIsDict=True) for color in tile.colors.values('color__id', 'color__name', 'color__hexadecimalCode').distinct()]
 
 
 class TileDto(BaseCatalogDto):
@@ -146,9 +146,15 @@ class TileDesignerDto(BaseContentDto):
 
 class TileColorDto(BaseCatalogDto):
 
-    def __init__(self, color, language):
-        super().__init__(color, language)
-        self.hexadecimalCode = color.hexadecimalCode
+    def __init__(self, color, language, colorIsDict = False):
+        if colorIsDict:
+            self.id = color['color__id']
+            self.name = color['color__name']
+            self.hexadecimalCode = color['color__hexadecimalCode']
+        else:
+            super().__init__(color, language)
+            self.hexadecimalCode = color.hexadecimalCode
+            self.id = color.id
 
 
 class TileUseDto(BaseCatalogDto):
@@ -192,7 +198,8 @@ class TileOrderDto(BaseCatalogDto):
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
         self.thickness = tile.thickness
         self.weight = tile.weight
-        self.colors = [TileColorDto(color, language) for color in tile.colors.all()]
+        self.colors = [TileColorDto(color, language, colorIsDict=True) for color in tile.colors.values('color__id', 'color__name', 'color__hexadecimalCode').distinct()]
+        self.colorGroups = [GroupColorDto(colorGroup, language) for colorGroup in tile.colors.all()]
         self.uses = [TileUseDto(use, language) for use in tile.design.group.collection.uses.all()]
         self.styles = [TileStyleDto(style, language) for style in tile.design.styles.all()]
         self.similarTiles = [SimilarTileDto(tile, language) for tile in tile.similar_tiles.all()]
@@ -293,9 +300,16 @@ class BasePortfolioTilesDto(BaseCatalogDto):
 
 class PortfolioTilesDto(BasePortfolioTilesDto):
 
-    def __init__(self, portfoliotile_id, tile, language):
+    def __init__(self, portfoliotile_id, tile, language, isCustomTile=False, colorGroups = []):
         super().__init__(tile, language)
         self.portfoliotile_id = portfoliotile_id
+        self.isCustomTile = isCustomTile
+        self.plane = tile.plane.url if tile.plane else ''
+        if isCustomTile:
+            self.colorGroups = [GroupColorDto(colorGroup, language) for colorGroup in colorGroups]
+        else:
+            self.colorGroups = [GroupColorDto(colorGroup, language) for colorGroup in tile.colors.all()]
+            
         
         
 class GroupColorDto:
@@ -310,7 +324,7 @@ class PortfolioCustomizedTilesDto(BasePortfolioTilesDto):
     def __init__(self, customized_tile, language):
         super().__init__(customized_tile.tile, language)
         self.customizedTileId = customized_tile.id
-        self.groupColors = [GroupColorDto(group_color, language) for group_color in customized_tile.group_colors.all() ]
+        self.groupColors = [GroupColorDto(color_group, language) for color_group in customized_tile.color_groups.all() ]
 
 
 class LayoutDto(BaseDto):

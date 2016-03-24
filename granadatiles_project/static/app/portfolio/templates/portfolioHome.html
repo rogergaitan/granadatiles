@@ -16,16 +16,17 @@
             <div class="clearfix" ng-if="$index % 4 == 0"></div>
             <div class="col-md-3 blue-box animate-show" ng-show="!tile.removed">
                 <div class="content-catalog">
-                    <a href="">
-                        <img src="{{ ::tile.image }}" alt="" class="shadow-image thumbnail img-responsive">
-                    </a>
+                        <custom-tile-plane plane="tile.plane" color-groups="tile.colorGroups" ng-if="tile.isCustomTile"></custom-tile-plane>
+                        <img src="{{ ::tile.image }}" class="shadow-image thumbnail img-responsive" ng-if="!tile.isCustomTile">
                     <div class="catalog-body">
                         <h2>{{ ::tile.name }}</h2>
                         <ul class="list-inline catalog-options row">
                             <li class="col-md-3">
                                 <a ng-href="{{::tile.url}}"><i class="fa fa-shopping-cart"></i><br>BUY</a>
                             </li>
-                            <li class="col-md-3"><a href=""><i class="fa fa-beer"></i><br>EDIT</a></li>
+                            <li class="col-md-3" ng-if="tile.plane">
+                                <a href="" ng-click="vm.editTile(tile)"><i class="fa fa-beer"></i><br>EDIT</a>
+                            </li>
                             <li class="col-md-3">
                                 <a href="" ng-click="vm.shareTile(tile)"><i class="fa fa-share-alt"></i><br>SHARE</a>
                             </li>

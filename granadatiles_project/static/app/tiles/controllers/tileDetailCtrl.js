@@ -136,7 +136,12 @@
         };
 
         vm.customizeTile = function (tile) {
-            customTilesSvc.customTileModal(tile);
+            var modalInstance = customTilesSvc.customTileModal(tile);
+            modalInstance.result.then(function () {
+                tile.customizedTileId = undefined;
+            }, function () {
+                tile.customizedTileId = undefined;
+            });
         };
 
     }

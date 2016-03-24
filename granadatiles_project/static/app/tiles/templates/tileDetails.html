@@ -226,14 +226,24 @@
                 <li>
                     <div class="row">
                         <div class="col-md-9 col-sm-9">
-                            {{vm.labels.tilesNeeded}} ({{vm.order.inputSqFt}} {{::vm.labels.sqFt}} / {{vm.tile.sqFt | number:2}} {{::vm.labels.sqFtPerTile}})=
+                            <span ng-if="!vm.tile.qtyIsSqFt">
+                                {{vm.labels.tilesNeeded}} ({{vm.order.inputSqFt}} {{::vm.labels.sqFt}} / {{vm.tile.sqFt | number:2}} {{::vm.labels.sqFtPerTile}})=
+                            </span>
+                            <span ng-if="vm.tile.qtyIsSqFt">
+                                {{vm.labels.sqFtNeeded}} =
+                            </span>
                         </div>
                         <div class="col-md-3 col-sm-3 text-right">
-                            {{vm.order.tilesNeeded | number:2 }} *
+                            <span ng-if="!vm.tile.qtyIsSqFt">
+                                {{vm.order.tilesNeeded | number:2 }} *
+                            </span>
+                             <span ng-if="vm.tile.qtyIsSqFt">
+                                {{vm.order.inputSqFt}} *
+                            </span>
                         </div>
                     </div>
                 </li>
-                <li>
+                <li  ng-if="!vm.tile.qtyIsSqFt">
                     <div class="row">
                         <div class="col-md-9 col-sm-9">
                             {{::vm.labels.tilesNeededOverage}} ({{vm.order.tilesNeeded  | number:2 }} X 10%)=

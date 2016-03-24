@@ -61,11 +61,10 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
     class Meta:
         verbose_name = _('Collection')
         verbose_name_plural = _('Collections')
-
-
-class Group(BaseGalleryImageModel, BaseSlugModel):
-    collection = models.ForeignKey(Collection, related_name='groups', verbose_name=_('Collection'))
-    list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
+        
+        
+class BaseGroup(BaseGalleryImageModel, BaseSlugModel):
+    collection = models.ForeignKey(Collection, related_name='%(class)ss', verbose_name=_('Collection'))
     show_in_web = models.BooleanField(default=True, verbose_name=_('Show in web'))
 
     def designs_count(self):
@@ -80,7 +79,14 @@ class Group(BaseGalleryImageModel, BaseSlugModel):
 
     designs_count.short_description = _('Designs count')
     tiles_count.short_description = _('Tiles count')
+    
+    class Meta:
+        abstract = True
 
+
+class Group(BaseGroup):
+    list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
+   
     def get_absolute_url(self, language=None):
         slug = self.get_slug(language)
         return reverse('sr-collections:sr-group-detail',
@@ -94,9 +100,16 @@ class Group(BaseGalleryImageModel, BaseSlugModel):
         verbose_name_plural = _('Groups')
 
 
+class CustomGroup(BaseGroup):
+    
+    class Meta:
+        verbose_name = _('Custom Group')
+        verbose_name_plural = _('Custom Groups')
+
 
 class TileDesign(BaseCatalogModel):
     group = models.ForeignKey(Group, related_name='designs', verbose_name=_('Tiles Group'))
+    custom_groups = models.ManyToManyField(CustomGroup, related_name='designs', verbose_name=_('Custom Groups'))
     styles = models.ManyToManyField('Style', related_name='designs', verbose_name=_('Styles'))
     show_in_web = models.BooleanField(default=True, verbose_name=_('Show in web'))
 
@@ -130,7 +143,6 @@ class Tile(BaseCatalogModel):
                                help_text='Is the main tile of the design')
     similar_tiles = models.ManyToManyField('Tile', verbose_name=_('Similar Tiles'), blank=True)
     design = models.ForeignKey(TileDesign, related_name='tiles', verbose_name=_('Design'), null=True, blank = True)
-    colors = models.ManyToManyField('PalleteColor', blank=True, related_name='tiles', verbose_name=_('Tiles Colors'))
     is_sample = models.BooleanField(default=False, verbose_name=_('Is Sample'))
     new = models.BooleanField(max_length=10, default=False, verbose_name=_('New'))
     size = models.CharField(max_length=10, default='', null=True, verbose_name=_('Size'))
@@ -150,6 +162,9 @@ class Tile(BaseCatalogModel):
     rotate_deg2 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 90)
     rotate_deg3 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 270)
     rotate_deg4 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 180)
+    import_colors = models.CharField(max_length=50 , blank=True, null=True,
+                                     help_text=_('Warning any input here will override the group colors!'),
+                                     verbose_name=_('Import Colors'))
 
     def get_sq_ft(self):
         if self.qty_is_sq_ft:
@@ -208,6 +223,12 @@ class PalleteColor(BaseCatalogModel):
         verbose_name = _('Palette Color')
         verbose_name_plural = _('Palette Colors')
         ordering = ['order']
+
+
+class TileGroupColor(models.Model):
+    color = models.ForeignKey(PalleteColor)
+    tile = models.ForeignKey(Tile, related_name='colors')
+    group = models.CharField(max_length=5)
 
 
 class Style(BaseCatalogModel):
@@ -284,13 +305,11 @@ class Layout(models.Model):
     portfolio = models.ForeignKey(Portfolio, default=False, related_name='layouts', verbose_name=_('Portfolio'))
 
 
-class GroupColor(models.Model):
-    color = models.ForeignKey(PalleteColor)
-    customized_tile = models.ForeignKey('CustomizedTile', related_name='group_colors')
-    group = models.CharField(max_length=5)
-
-
 class CustomizedTile(models.Model):
     tile = models.ForeignKey(Tile, related_name='customizations')
-    colors = models.ManyToManyField(PalleteColor, through='GroupColor')
     portfolio = models.ForeignKey(Portfolio, related_name='customized_tiles')
+
+class GroupColor(models.Model):
+    color = models.ForeignKey(PalleteColor)
+    group = models.CharField(max_length=5)
+    customized_tile = models.ForeignKey(CustomizedTile, related_name='color_groups')

@@ -18,7 +18,11 @@
             getCartSamples: getCartSamples,
             addSample: addSample,
             updateSample: updateSample,
-            removeSample: removeSample
+            removeSample: removeSample,
+            getCustomizedTiles: getCustomizedTiles,
+            addCustomizedTile: addCustomizedTile,
+            updateSample: updateSample,
+            removeCusomizedTile: removeCusomizedTile
         };
 
         return service;
@@ -57,6 +61,22 @@
 
         function removeSample(sampleId) {
             return $http.delete(appSettings.serverPath + 'cart/samples/' + sampleId);
+        }
+
+        function getCustomizedTiles() {
+            return $http.get(appSettings.serverPath + 'cart/customizedtiles');
+        }
+
+        function addCustomizedTile(customizedTile) {
+            return $http.post(appSettings.serverPath + 'cart/customizedtiles/', customizedTile);
+        }
+
+        function updateSample(customizedTile) {
+            return $http.put(appSettings.serverPath + 'cart/customizedtiles/' + customizedTile.id, customizedTile);
+        }
+
+        function removeCusomizedTile(customizedTileId) {
+            return $http.delete(appSettings.serverPath + 'customizedtiles/' + customizedTileId);
         }
 
     }

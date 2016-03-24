@@ -2,7 +2,7 @@ from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django.utils.translation import ugettext as _
 from .models import (Tile, Collection, Group, TileDesign, Use, Style,
-                     PalleteColor, Warehouse, LeadTime, Box)
+                     PalleteColor, Warehouse, LeadTime, Box, CustomGroup, TileGroupColor)
 
 
 class TileInline(admin.StackedInline):
@@ -20,7 +20,7 @@ class TileInline(admin.StackedInline):
 
 @admin.register(TileDesign)
 class TileDesignAdmin(admin.ModelAdmin):
-    fields = ('name', 'name_es', 'group', 'styles', 'show_in_web')
+    fields = ('name', 'name_es', 'group', 'styles', 'show_in_web', 'custom_groups')
     list_display = ('name', 'group' , 'tiles_count')
     search_fields = ['name', 'name_es']
     readonly_fields = ('name', 'group')
@@ -72,6 +72,11 @@ class CustomTileFilter(admin.SimpleListFilter):
         if self.value() == 'n':
             return queryset.filter(custom=False)
 
+class TileColorGroupInline(admin.TabularInline):
+    model = TileGroupColor
+    fields = ('color', 'group')
+
+
 
 @admin.register(Tile)
 class TileAdmin(admin.ModelAdmin):
@@ -79,18 +84,19 @@ class TileAdmin(admin.ModelAdmin):
               'sales_description_es', 'size', 'height', 'width' ,'thickness','weight',
               'sales_price','average_cost', 'quantity_on_hand','image','rotate_deg1', 
               'rotate_deg2', 'rotate_deg3', 'rotate_deg4', 'plane',
-              'tearsheet', 'box',  'similar_tiles', 'colors','main', 'new', 'in_stock',
-              'is_sample', 'sample', 'override_collection_box', 'is_active', 'on_sale')
+              'tearsheet', 'box',  'similar_tiles', 'main', 'new', 'in_stock',
+              'is_sample', 'sample', 'override_collection_box', 'is_active', 'on_sale', 'import_colors')
 
     list_display = ('name', 'sales_description', 'size', 'weight', 'thickness',
-                    'quantity_on_hand', 'in_stock', 'is_active', 'new', 'on_sale')
+                    'quantity_on_hand', 'in_stock', 'qty_is_sq_ft', 'is_active', 'new', 'on_sale')
 
-    list_editable = ['is_active', 'new', 'on_sale', 'size', 'weight', 'thickness']
+    list_editable = ['is_active', 'new', 'on_sale', 'size', 'weight', 'thickness', 'qty_is_sq_ft']
     search_fields = ['name', 'name_es', 'list_id', 'size']
     list_filter = ('new', CustomTileFilter, TileSizeFilter, 'override_collection_box')
     actions = ['tile_new']
     readonly_fields = ('list_id', 'design', 'name', 'quantity_on_hand',
                        'sales_price', 'size', 'average_cost', 'is_sample', 'in_stock')
+    inlines = [TileColorGroupInline, ]
 
     def tile_new(self, request, queryset):
         queryset.update(new=True)
@@ -105,6 +111,23 @@ class TileAdmin(admin.ModelAdmin):
     def in_stock(self, obj):
         return obj.custom is False
     in_stock.boolean = True
+    
+    def save_model(self, request, obj, form, change):
+        import_colors = request.POST.get('import_colors')
+        if import_colors:
+            import_colors = set(import_color.lower() for import_color in import_colors.split(';'))
+            for i, v in enumerate(import_colors, 1):
+                try:
+                    color = PalleteColor.objects.get(name__iexact=v)
+                    TileGroupColor.objects.update_or_create(
+                        color=color,
+                        tile=obj,
+                        defaults={'group': 'G{}'.format(i)}
+                    )
+                except PalleteColor.DoesNotExist:
+                    pass
+                    
+        obj.save()
 
 
 class GroupInline(admin.StackedInline):
@@ -216,3 +239,12 @@ class LeadTimeAdmin(admin.ModelAdmin):
 @admin.register(Box)
 class BoxAdmin(admin.ModelAdmin):
     list_display = ('description', 'measurement_unit', 'quantity')
+
+
+@admin.register(CustomGroup)
+class CustomGroupAdmin(SummernoteModelAdmin):
+    fields = ('title', 'title_es', 'collection', 'description', 'description_es',
+              'slug', 'slug_es', 'image', 'show_in_web')
+
+    list_display = ('title','collection', 'designs_count', 'tiles_count')
+    search_fields = ['title', 'title_es', 'id']
