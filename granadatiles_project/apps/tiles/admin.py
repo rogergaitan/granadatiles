@@ -3,6 +3,7 @@ from django_summernote.admin import SummernoteModelAdmin
 from django.utils.translation import ugettext as _
 from .models import (Tile, Collection, Group, TileDesign, Use, Style,
                      PalleteColor, Warehouse, LeadTime, Box, CustomGroup, TileGroupColor)
+from django import forms
 
 
 class TileInline(admin.StackedInline):
@@ -17,14 +18,26 @@ class TileInline(admin.StackedInline):
     def has_delete_permission(self, request, obj=None):
         return False
 
+class TileDesignForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(TileDesignForm, self).__init__(*args, **kwargs)
+        self.fields['custom_groups'].queryset = CustomGroup.objects.filter(
+            collection__id=self.instance.group.collection.id)
+
+
 
 @admin.register(TileDesign)
 class TileDesignAdmin(admin.ModelAdmin):
     fields = ('name', 'name_es', 'group', 'styles', 'show_in_web', 'custom_groups')
-    list_display = ('name', 'group' , 'tiles_count')
-    search_fields = ['name', 'name_es']
+    list_display = ('name', 'get_collection', 'group', 'tiles_count', 'show_in_web')
+    search_fields = ['name', 'name_es', 'group']
+    list_filter = ['show_in_web']
     readonly_fields = ('name', 'group')
     inlines = [TileInline]
+    form = TileDesignForm
+
+
 
     def has_add_permission(self, request):
         return False
