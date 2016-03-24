@@ -31,11 +31,11 @@ class TileOrdersViewSet(BaseViewSet):
       
     def create(self, request):
         tile_id = request.data.get('tileId')
-        sq_ft = int(request.data.get('sqFt'))
+        sq_ft = request.data.get('sqFt')
         return Response(OrdersService.add_tile_order(request, tile_id, sq_ft))
       
     def update(self, request, pk=None):
-        sq_ft = int(request.data.get('sqFt'))
+        sq_ft = request.data.get('sqFt')
         serializer = BaseTileOrdersSerializer(OrdersService.update_tile_order(pk, sq_ft))
         return Response(serializer.data)
       
@@ -53,11 +53,11 @@ class CustomizedTileOrdersViewSet(BaseViewSet):
     
     def create(self, request):
         customized_tile_id = request.data.get('customizedTileId')
-        sq_ft = int(request.data.get('sqFt'))
+        sq_ft = request.data.get('sqFt')
         return Response(OrdersService.add_customized_tile(request, customized_tile_id, sq_ft))
     
     def update(self, request, pk=None):
-        sq_ft = int(request.data.get('sqFt'))
+        sq_ft = request.data.get('sqFt')
         serializer = BaseTileOrdersSerializer(OrdersService.update_customized_tile_order(pk, sq_ft))
         return Response(serializer.data)
         

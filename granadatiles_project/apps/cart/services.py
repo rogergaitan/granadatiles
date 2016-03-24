@@ -73,6 +73,14 @@ class OrdersService:
         }
 
         return data
+    
+    def check_sq_ft(sq_ft, tile):
+        """Return collection minimum square foot if sq_ft is empty"""
+        if sq_ft is None:
+            sq_ft = tile.design.group.collection.minimum_input_square_foot
+        else:
+            sq_ft = int(sq_ft)
+        return sq_ft
       
     def get_tile_orders(cart, language):
         tile_orders_dto = [TileOrdersDto(tile_order, language) for tile_order in cart.tile_orders.all()]
@@ -81,7 +89,8 @@ class OrdersService:
     def add_tile_order(request, tile_id, sq_ft):
         cart = CartService.get_cart(request)
         tile = OrdersService.get_tile(tile_id)
-        
+        sq_ft = OrdersService.check_sq_ft(sq_ft, tile)
+            
         data = OrdersService.calculate_order(tile, sq_ft)
         data['sq_ft'] = sq_ft
         
@@ -93,14 +102,15 @@ class OrdersService:
     def update_tile_order(tile_order_id, sq_ft):
         tile_order = get_object_or_404(TileOrder, pk=tile_order_id)
         tile = tile_order.tile
+        sq_ft = OrdersService.check_sq_ft(sq_ft, tile)
         
         data = OrdersService.calculate_order(tile, sq_ft)
-        data['sq_ft'] = sq_ft
         
         tile_order.sq_ft = sq_ft
         tile_order.quantity = data['quantity']
         tile_order.boxes = data['boxes']
         tile_order.subtotal = data['subtotal']
+        tile_order.save()
             
         return BaseTileOrdersDto(tile_order)
 		      
@@ -119,6 +129,7 @@ class OrdersService:
         cart = CartService.get_cart(request)
         customized_tile = OrdersService.get_customized_tile(customized_tile_id)
         tile = customized_tile.tile
+        sq_ft = OrdersService.check_sq_ft(sq_ft, tile)
         
         data = OrdersService.calculate_order(tile, sq_ft)
         data['sq_ft'] = sq_ft
@@ -132,6 +143,7 @@ class OrdersService:
         customized_tile_order = CustomizedTileOrder.objects.get(pk=customized_tile_order_id)
         customized_tile = customized_tile_order.customized_tile
         tile = customized_tile.tile
+        sq_ft = OrdersService.check_sq_ft(sq_ft, tile)
         
         data = OrdersService.calculate_order(tile, sq_ft)
         
