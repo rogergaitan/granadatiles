@@ -57,10 +57,17 @@ class CustomizedTileOrdersViewSet(BaseViewSet):
         return Response(serializer.data)
     
     def create(self, request):
-        cart = CartService.get_cart(request)
         customized_tile_id = request.data.get('customizedTileId')
         sq_ft = int(request.data.get('sqFt'))
-        return Response(OrdersService.add_customized_tile(cart, customized_tile_id, sq_ft))
+        return Response(OrdersService.add_customized_tile(request, customized_tile_id, sq_ft))
+    
+    def update(self, request, pk=None):
+        sq_ft = int(request.data.get('sqFt'))
+        serializer = BaseTileOrdersSerializer(OrdersService.update_customized_tile_order(request, pk, sq_ft))
+        return Response(serializer.data)
+        
+    def destroy(self, request, pk=None):
+        return Response(OrdersService.remove_customized_tile_order(pk))
       
       
 class SampleOrdersViewSet(BaseViewSet):
