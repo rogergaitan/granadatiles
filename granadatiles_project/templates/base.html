@@ -305,6 +305,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/sectionSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/testimonySvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/content/services/videoSvc.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/core/controllers/confirmModalCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/controllers/shareModalCtrl.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/directives/angular-yamm3.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/directives/fadeIn.js"></script>
@@ -312,6 +313,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/filters/range.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/filters/unsafe.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/interceptors/languageCode.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}app/core/services/gtDialogsSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/services/gtUtilsSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/core/services/sharePageSvc.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}app/galleries/controllers/galleriesListCtrl.js"></script>
@@ -369,7 +371,9 @@
                         shopInstock: '{% trans 'Shop In Stock Tiles - Available NOW' %}',
                         shopInStockSamples: '{% trans 'Shop FREE in Stock Samples' %}',
                         shopCustoms: '{% trans 'Shop Custom Tiles' %}',
-                        shopSpecials: '{% trans 'Shop Specials'%}'
+                        shopSpecials: '{% trans 'Shop Specials'%}',
+                        confirmation: '{% trans 'Confirmation needed' %}',
+                        shareThisContent: '{% trans 'Share this content' %}'
                     },
                    navigation:{
                         catalogs: '{% url 'sr-news:sr-catalogs' %}',
