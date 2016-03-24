@@ -56,7 +56,7 @@ class CustomizedTileOrdersViewSet(BaseViewSet):
         serializer = CustomizedTileOrdersSerializer(customized_tile_orders, many=True)
         return Response(serializer.data)
     
-    def create(self, request, pk=None):
+    def create(self, request):
         cart = CartService.get_cart(request)
         customized_tile_id = request.data.get('customizedTileId')
         sq_ft = int(request.data.get('sqFt'))
