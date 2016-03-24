@@ -31,7 +31,7 @@ class TileDesignForm(forms.ModelForm):
 class TileDesignAdmin(admin.ModelAdmin):
     fields = ('name', 'name_es', 'group', 'styles', 'show_in_web', 'custom_groups')
     list_display = ('name', 'get_collection', 'group', 'tiles_count', 'show_in_web')
-    search_fields = ['name', 'name_es', 'group']
+    search_fields = ['name', 'name_es', ]
     list_filter = ['show_in_web']
     readonly_fields = ('name', 'group')
     inlines = [TileInline]

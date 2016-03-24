@@ -18,6 +18,7 @@ from .serializers import (
 )
 from .services import CollectionService, GroupService, TileService, PortfolioService, PalleteColorService
 from .models import Collection, Group
+from apps.tiles.models import CustomGroup
 
 
 def collection_detail(request, slug):
@@ -29,7 +30,7 @@ def collection_detail(request, slug):
 
 def group_detail(request, collection_slug, group_slug):
     collection_id = Collection.objects.get_id(collection_slug, request.LANGUAGE_CODE)
-    group_id = Group.objects.get_id(group_slug, request.LANGUAGE_CODE)
+    group_id = CustomGroup.objects.get_id(group_slug, request.LANGUAGE_CODE)
     return render(request, "tiles/group_detail.html", {
         'collection_id': collection_id,
         'group_id': group_id
