@@ -101,7 +101,6 @@ class Group(BaseGroup):
 
 
 class CustomGroup(BaseGroup):
-    designs = models.ManyToManyField('TileDesign', related_name='custom_groups', verbose_name=_('Designs'))
     
     class Meta:
         verbose_name = _('Custom Group')
@@ -110,6 +109,7 @@ class CustomGroup(BaseGroup):
 
 class TileDesign(BaseCatalogModel):
     group = models.ForeignKey(Group, related_name='designs', verbose_name=_('Tiles Group'))
+    custom_groups = models.ManyToManyField(CustomGroup, related_name='designs', verbose_name=_('Custom Groups'))
     styles = models.ManyToManyField('Style', related_name='designs', verbose_name=_('Styles'))
     show_in_web = models.BooleanField(default=True, verbose_name=_('Show in web'))
 
