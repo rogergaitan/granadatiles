@@ -30,22 +30,17 @@ class TileOrdersViewSet(BaseViewSet):
         return Response(serializer.data)
       
     def create(self, request):
-        cart = CartService.get_cart(request)
-        tile = OrdersService.get_tile(request.data.get('id'))
+        tile_id = request.data.get('tileId')
         sq_ft = int(request.data.get('sqFt'))
-        return Response(OrdersService.add_tile(cart, tile, sq_ft))
+        return Response(OrdersService.add_tile_order(request, tile_id, sq_ft))
       
     def update(self, request, pk=None):
-        cart = CartService.get_cart(request)
-        tile = OrdersService.get_tile(pk)
         sq_ft = int(request.data.get('sqFt'))
-        serializer = BaseTileOrdersSerializer(OrdersService.update_tile(cart, tile, sq_ft))
+        serializer = BaseTileOrdersSerializer(OrdersService.update_tile_order(pk, sq_ft))
         return Response(serializer.data)
       
     def destroy(self, request, pk=None):
-        cart = CartService.get_cart(request)
-        tile = OrdersService.get_tile(pk)
-        return Response(OrdersService.remove_tile(cart, tile))
+        return Response(OrdersService.remove_tile_order(pk))
     
     
 class CustomizedTileOrdersViewSet(BaseViewSet):
@@ -63,7 +58,7 @@ class CustomizedTileOrdersViewSet(BaseViewSet):
     
     def update(self, request, pk=None):
         sq_ft = int(request.data.get('sqFt'))
-        serializer = BaseTileOrdersSerializer(OrdersService.update_customized_tile_order(request, pk, sq_ft))
+        serializer = BaseTileOrdersSerializer(OrdersService.update_customized_tile_order(pk, sq_ft))
         return Response(serializer.data)
         
     def destroy(self, request, pk=None):
