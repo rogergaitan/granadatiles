@@ -106,12 +106,18 @@ class OrdersService:
                                       for customized_tile_order in cart.customized_tile_orders.all()]
         return customized_tile_orders_dto
 
-    def add_customized_tile(cart, customized_tile, tile, sq_ft):
-        data = CartService.calculate_order(tile, sq_ft)
+    def add_customized_tile(cart, customized_tile_id, sq_ft):
+        customized_tile = OrdersService.get_customized_tile(customized_tile_id)
+        tile = customized_tile.tile
+        
+        data = OrdersService.calculate_order(tile, sq_ft)
         data['customized_tile'] = customized_tile
-        cart.customized_tile_orders.update_or_create(cart=cart,
-                                                    customized_tile=customized_tile,
-                                                    defaults=data)
+        
+        cart.customized_tile_orders.update_or_create(
+            cart=cart,
+            customized_tile=customized_tile,
+            defaults=data
+        )
 
     def remove_customized_tile(cart, customized_tile):
         cart.customizedtiles_orders.get(customized_tile=customized_tile).delete()

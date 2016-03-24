@@ -52,7 +52,7 @@ class CustomizedTileOrdersDto(BaseTileOrdersDto):
         super().__init__(customized_tile_order)
         self.tile = TileDto(customized_tile_order.customized_tile.tile, language)
         self.group_colors = [GroupColorDto(group_color, language)
-                            for group_color in customized_tile_order.customized_tile.group_colors.all()]
+                            for group_color in customized_tile_order.customized_tile.color_groups.all()]
 
 class BaseSampleOrdersDto(BaseDto):
 

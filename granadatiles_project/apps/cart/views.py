@@ -46,6 +46,21 @@ class TileOrdersViewSet(BaseViewSet):
         cart = CartService.get_cart(request)
         tile = OrdersService.get_tile(pk)
         return Response(OrdersService.remove_tile(cart, tile))
+    
+    
+class CustomizedTileOrdersViewSet(BaseViewSet):
+    
+    def list(self, request):
+        cart = CartService.get_cart(request)
+        customized_tile_orders = OrdersService.get_customized_tile_orders(cart, self.get_language(request))
+        serializer = CustomizedTileOrdersSerializer(customized_tile_orders, many=True)
+        return Response(serializer.data)
+    
+    def create(self, request, pk=None):
+        cart = CartService.get_cart(request)
+        customized_tile_id = request.data.get('customizedTileId')
+        sq_ft = int(request.data.get('sqFt'))
+        return Response(OrdersService.add_customized_tile(cart, customized_tile_id, sq_ft))
       
       
 class SampleOrdersViewSet(BaseViewSet):
