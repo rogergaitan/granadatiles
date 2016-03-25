@@ -32,7 +32,7 @@ class LatestUsersDto():
 class GroupsByCollectionDto():
 
     def __init__(self, collection, color, language):
-        self.label = collection.get_title(language) if language else collection.title
+        self.label = collection.get_menu(language) if language else collection.menu_title
         self.value = collection.customgroups.count()
         self.color = color['color']
         self.cssclass = color['cssclass']

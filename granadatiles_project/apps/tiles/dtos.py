@@ -8,9 +8,11 @@ class CollectionDto(BaseGalleryImageDto):
         super().__init__(collection, language)
         self.menu_image = collection.menu_image.url if collection.menu_image else ''
         if language:
+            self.menuTitle = collection.get_menu(language)
             self.url = collection.get_absolute_url(language)
         else:
             self.url = collection.get_absolute_url()
+            self.menuTitle = collection.menu_title
 
 class CollectionDetailDto(CollectionDto):
 

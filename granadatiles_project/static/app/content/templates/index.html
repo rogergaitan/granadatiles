@@ -24,7 +24,7 @@
     <div class="row explore-collections" ng-repeat="collection in ::vm.collections">
         <div ng-if="($index % 2 == 0)">
             <div class="col-md-6 explore-collection-content wow fadeInLeft animated" data-wow-offset="30" data-wow-duration="1.5s" data-wow-delay="0.15s">
-                <h3>{{::collection.title}}</h3>
+                <h3>{{::collection.menuTitle}}</h3>
                 <div class="description" ng-bind-html="::collection.description | unsafe"></div>
                 <a class="btn btn-green text-uppercase" ng-href="{{::collection.url}}">{{ vm.labels.view_collection }}</a>
             </div>
@@ -34,7 +34,7 @@
         </div>
         <div ng-if="($index % 2 != 0)">
             <div class="col-md-6 col-md-push-6 explore-collection-content wow fadeInRight animated" data-wow-offset="30" data-wow-duration="1.5s" data-wow-delay="0.15s">
-                <h3>{{::collection.title}}</h3>
+                <h3>{{::collection.menuTitle}}</h3>
                 <div class="description" ng-bind-html="::collection.description | unsafe"></div>
                 <a class="btn btn-green text-uppercase" ng-href="{{::collection.url}}">{{ vm.labels.view_collection }}</a>
             </div>

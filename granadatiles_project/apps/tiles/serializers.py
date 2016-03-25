@@ -5,6 +5,7 @@ from core.serializers import BaseSerializer, BaseGalleryImageSerializer, BaseCon
 class CollectionSerializer(BaseGalleryImageSerializer):
     url = serializers.URLField()
     menu_image = serializers.CharField()
+    menuTitle = serializers.CharField()
 
 
 class CollectionRetrieveSerializer(CollectionSerializer):

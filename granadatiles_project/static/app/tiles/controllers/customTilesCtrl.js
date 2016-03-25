@@ -96,6 +96,9 @@
                     vm.hasChanges = false;
                 });
             }
+        }
+
+        vm.addToCart = function () {
 
         }
 
