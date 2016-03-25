@@ -18,8 +18,10 @@ class CollectionDetailDto(CollectionDto):
         super().__init__(collection, language)
         if language:
            self.introduction = collection.get_introduction(language)
+           self.menuTitle = collection.get_menu(language)
         else:
            self.introduction = collection.introduction
+           self.menuTitle = collection.menu_title
 
 
 class TileSizeDto:
@@ -281,10 +283,10 @@ class GroupDto(BaseGalleryImageDto):
 class MenuCollectionDto(object):
     def __init__(self, collection, language = None):
         if language:
-            self.title = collection.get_title(language)
+            self.title = collection.get_menu(language)
             self.url = collection.get_absolute_url(language)
         else:
-            self.title = collection.title
+            self.title = collection.menu_title
             self.url = collection.get_absolute_url()
         self.image = collection.menu_image.url if collection.image else ''
 

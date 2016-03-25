@@ -9,6 +9,7 @@ class CollectionSerializer(BaseGalleryImageSerializer):
 
 class CollectionRetrieveSerializer(CollectionSerializer):
     introduction = serializers.CharField()
+    menuTitle = serializers.CharField()
 
 
 class CollectionsFilterSerializer(BaseSerializer):

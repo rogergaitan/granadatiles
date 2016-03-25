@@ -159,14 +159,14 @@ class GroupInline(admin.StackedInline):
 
 @admin.register(Collection)
 class CollectionAdmin(SummernoteModelAdmin):
-    fields = ('title', 'title_es', 'list_id', 'description', 'description_es', 'introduction',
+    fields = ('title', 'title_es', 'menu_title', 'menu_title_es', 'list_id', 'description', 'description_es', 'introduction',
               'introduction_es', 'slug', 'slug_es', 'image', 'menu_image', 'box', 'uses',
               'maximum_input_square_foot', 'minimum_input_square_foot', 'featured', 'show_in_menu')
 
-    list_display = ('title', 'groups_count', 'featured', 'show_in_menu')
+    list_display = ('title','menu_title', 'groups_count', 'featured', 'show_in_menu')
     search_fields = ['title', 'title_es', 'list_id']
     list_editable = ['featured', 'show_in_menu']
-    readonly_fields = ('list_id', 'title')
+    readonly_fields = ('list_id', )
     inlines = [GroupInline]
     prepopulated_fields = {"slug_es": ("title_es",)}
 

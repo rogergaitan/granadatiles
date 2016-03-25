@@ -7,7 +7,7 @@
             <div ng-show="!shared.tileDetailTemplateUrl" class="animate-show">
                 <h1 class="heading-sec">{{ ::vm.group.title }}</h1>
                 <a  class="breadcrumds"><u>{{::vm.labels.collection}}</u> <i class="fa fa-angle-double-right"></i></a>
-                <a ng-href="{{vm.collection.url}}" class="breadcrumds"><u>{{ ::vm.collection.title }}</u> <i class="fa fa-angle-double-right"></i></a>
+                <a ng-href="{{vm.collection.url}}" class="breadcrumds"><u>{{ ::vm.collection.menuTitle }}</u> <i class="fa fa-angle-double-right"></i></a>
                 <a  class="breadcrumds"><u>{{ ::vm.group.title }}</u></a>
                 <div class="text-section" ng-bind-html="::vm.group.description | unsafe"></div>
                 <div class="row filter-container">
