@@ -138,8 +138,8 @@ class ExtendedFlatPage(FlatPage):
         )
     title_es = models.CharField(max_length=200, blank=True, null = True)
     content_es = models.TextField(blank=True, null = True)
-    menu_title = models.TextField(max_length=200, default='')
-    menu_title_es = models.TextField(max_length=200, default='', blank=True)
+    menu_title = models.CharField(max_length=200, default='')
+    menu_title_es = models.CharField(max_length=200, default='', blank=True)
     order = models.PositiveIntegerField(verbose_name=_('Order'),
                                         help_text='El orden en el que aparecera en el menu selecciondado despues de los elementos predefinidos')
     menu = models.IntegerField(choices=MENU_CHOICES, default=1)
@@ -171,8 +171,8 @@ class ExtendedFlatPage(FlatPage):
 class CollectionContent(FlatPage):
     title_es = models.CharField(max_length=200, blank=True, null = True)
     content_es = models.TextField(blank=True, null = True)
-    menu_title = models.TextField(max_length=200, default='')
-    menu_title_es = models.TextField(max_length=200, default='', blank=True)
+    menu_title = models.CharField(max_length=200, default='')
+    menu_title_es = models.CharField(max_length=200, default='', blank=True)
     order = models.PositiveIntegerField(verbose_name=_('Order'),
                                         help_text='El orden en el que aparecera en el menu selecciondado despues de los elementos predefinidos')
     cover = ImageField(null=True, blank=True, verbose_name=_('Cover'))

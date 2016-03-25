@@ -27,6 +27,8 @@ def create_portfolio(sender, instance=None, created=False, **kwargs):
 
 
 class Collection(BaseGalleryImageModel, BaseSlugModel):
+    menu_title = models.CharField(max_length=200, default='')
+    menu_title_es = models.CharField(max_length=200, default='', blank=True)
     menu_image = ImageField(upload_to='Galleries/menu', null = True, blank=True)
     featured = models.BooleanField(default=False, verbose_name=_('Featured'))
     show_in_menu = models.BooleanField(default=False, verbose_name= _('Show in menu'))
@@ -43,6 +45,11 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
         if self.menu_image:
             return get_thumbnail(self.menu_image, '99x99').url
         return ''
+
+    def get_menu(self, language):
+        if language == 'es' and self.menu_title_es is not None and self.menu_title_es:
+            return self.menu_title_es
+        return self.menu_title
 
     def get_absolute_url(self, language=None):
         slug = self.get_slug(language)
@@ -186,7 +193,7 @@ class Tile(BaseCatalogModel):
         return reverse("admin:%s_%s_change" % (self._meta.app_label, self._meta.model_name), args=(self.id,))
     
     def get_absolute_url(self, language):
-        return self.design.group.get_absolute_url(language) + '?tile='+ str(self.id)
+        return self.design.custom_groups.all()[0].get_absolute_url(language) + '?tile='+ str(self.id) if self.design.custom_groups.count() > 0 else ''
 
     def get_available_sizes(self):
         tiles_of_myself = Tile.objects.filter(name=self.name, is_sample=False)

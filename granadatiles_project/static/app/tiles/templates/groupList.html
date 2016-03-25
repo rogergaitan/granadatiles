@@ -6,7 +6,7 @@
         <div class="col-sm-9 col-xs-8">
             <h1 class="heading-sec">{{ ::vm.collection.title }} {{ ::vm.labels.title }}</h1>
             <a  class="breadcrumds"><u>{{::vm.labels.collection}}</u> <i class="fa fa-angle-double-right"></i> </a>
-            <a ng-href="{{vm.collection.url}}" class="breadcrumds"><u>{{::vm.collection.title}}</u> <i class="fa fa-angle-double-right"></i> </a>
+            <a ng-href="{{vm.collection.url}}" class="breadcrumds"><u>{{::vm.collection.menuTitle}}</u> <i class="fa fa-angle-double-right"></i> </a>
             <div class="text-section" ng-bind-html="::vm.collection.introduction | unsafe"></div>
             <div ng-repeat="group in vm.collectionGroups" ng-if="$index % 2 == 0" class="row">
                 <div class="col-md-6 col-sm-6 blue-box" ng-if="$index <= vm.collectionGroups.length - 1">

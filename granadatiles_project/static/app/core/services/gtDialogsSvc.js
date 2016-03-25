@@ -17,7 +17,7 @@
         function confirmModal(message) {
             return $modal.open({
                 templateUrl: baseSettings.staticUrl + 'app/core/templates/confirmModal.html',
-                controller: 'shareModalCtrl',
+                controller: 'confirmModalCtrl',
                 controllerAs: 'vm',
                 resolve: {
                     initData: function () {

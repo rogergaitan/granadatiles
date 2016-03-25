@@ -1,10 +1,10 @@
 ﻿<div class="row submenu-selected">
     <a ng-href="{{ vm.collection.url }}">
         <div class="col-md-6 col-sm-6 submenu-selected-image">
-            <img ng-src="{{ vm.collection.menu_image }}" alt="{{ vm.collection.title }}" class="img-responsive">
+            <img ng-src="{{ vm.collection.menu_image }}" alt="{{ vm.collection.menu_title }}" class="img-responsive">
         </div>
         <div class="col-md-3 col-sm-3 submenu-selected-title">
-            <h3 class="text-uppercase">{{ vm.collection.title | uppercase }}<i class="fa fa-caret-down hidden-sm hidden-xs"></i></h3>
+            <h3 class="text-uppercase">{{ vm.collection.menuTitle | uppercase }}<i class="fa fa-caret-down hidden-sm hidden-xs"></i></h3>
         </div>
     </a>
 </div>
@@ -17,7 +17,7 @@
             </li>
         </ul>
     </li>
-    <li><a  ng-click="vm.showCollectionGallery()">{{ ::vm.collection.title }}{{ ::vm.labels.galleryMenu }}</a></li>
+    <li><a  ng-click="vm.showCollectionGallery()">{{ ::vm.collection.menuTitle }}{{ ::vm.labels.galleryMenu }}</a></li>
     <li ng-repeat="content in vm.collectionContent">
         <a ng-href="{{content.url}}">{{content.title}}</a>
     </li>
