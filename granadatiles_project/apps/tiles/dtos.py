@@ -268,7 +268,7 @@ class CollectionsFiltersDto(BaseDto):
 
     def __init__(self, collection, language):
         super().__init__(collection)
-        self.title = collection.get_title(language)
+        self.title = collection.get_menu(language)
 
 
 class GroupDto(BaseGalleryImageDto):
