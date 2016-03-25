@@ -5,9 +5,9 @@
         .module('app.portfolio')
         .controller('portfolioHomeCtrl', portfolioHomeCtrl);
 
-    portfolioHomeCtrl.$inject = ['pageSettings', 'sectionSvc', 'baseSettings', 'portfolioSvc', 'sharePageSvc', 'authenticationSvc', 'customTilesSvc', 'tilesSvc'];
+    portfolioHomeCtrl.$inject = ['pageSettings', 'sectionSvc', 'baseSettings', 'portfolioSvc', 'sharePageSvc', 'authenticationSvc', 'customTilesSvc', 'tilesSvc', 'gtDialogsSvc'];
 
-    function portfolioHomeCtrl(pageSettings, sectionSvc, baseSettings, portfolioSvc, sharePageSvc, authenticationSvc, customTilesSvc, tilesSvc) {
+    function portfolioHomeCtrl(pageSettings, sectionSvc, baseSettings, portfolioSvc, sharePageSvc, authenticationSvc, customTilesSvc, tilesSvc, gtDialogsSvc) {
         /* jshint validthis:true */
         var vm = this;
         vm.labels = pageSettings.labels;
@@ -26,9 +26,12 @@
         });
 
         vm.removeTile = function (tile) {
-            portfolioSvc.removeTile(tile.portfoliotile_id, tile.isCustomTile).then(function (response) {
-                tile.removed = true;
-            });
+            var instance = gtDialogsSvc.confirmModal(vm.labels.removeTile);
+            instance.result.then(function () {
+                portfolioSvc.removeTile(tile.portfoliotile_id, tile.isCustomTile).then(function (response) {
+                    tile.removed = true;
+                });
+            })
         }
         vm.shareTile = function (tile) {
             sharePageSvc.shareModal(tile.url);

@@ -1,16 +1,15 @@
 ﻿<div class="modal-header">
-    <img class="gt-header-logo-sm " src="/static/img/Granada-Tile-logo.png" alt="Granada Tile logo">
     <button type="button" ng-click="vm.cancel()" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title heading-sec" id="myModal-label">{{vm.confirmation}}</h4>
+    <h4 class="modal-title heading-sec" style="font-size:22px;" id="myModal-label">{{vm.labels.confirmation}}</h4>
 </div>
 <div class="modal-body">
     <div class="row">
         <div class="col-xs-12">
-            {{vm.message}}
+            <p class="text-section" style="font-size:19px;">{{vm.message}}</p>
         </div>
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-danger" type="button" ng-click="vm.ok()">OK</button>
-    <button class="btn btn-primary" type="button" ng-click="vm.cancel()">Cancel</button>
+    <button class="btn btn-danger" type="button" ng-click="vm.ok()">{{::vm.labels.yes}}</button>
+    <button class="btn btn-primary" type="button" ng-click="vm.cancel()">{{::vm.labels.cancel}}</button>
 </div>

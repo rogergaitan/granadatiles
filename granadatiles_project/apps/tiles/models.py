@@ -184,7 +184,7 @@ class Tile(BaseCatalogModel):
         return reverse("admin:%s_%s_change" % (self._meta.app_label, self._meta.model_name), args=(self.id,))
     
     def get_absolute_url(self, language):
-        return self.design.group.get_absolute_url(language) + '?tile='+ str(self.id)
+        return self.design.custom_groups.all()[0].get_absolute_url(language) + '?tile='+ str(self.id) if self.design.custom_groups.count() > 0 else ''
 
     def get_available_sizes(self):
         tiles_of_myself = Tile.objects.filter(name=self.name, is_sample=False)
