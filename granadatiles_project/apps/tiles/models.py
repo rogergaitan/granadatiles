@@ -101,11 +101,13 @@ class Group(BaseGroup):
 
 
 class CustomGroup(BaseGroup):
+    order = models.PositiveIntegerField(verbose_name=_('Order'))
     
     class Meta:
         verbose_name = _('Custom Group')
         verbose_name_plural = _('Custom Groups')
-
+        ordering = ['order']
+        
 
 class TileDesign(BaseCatalogModel):
     group = models.ForeignKey(Group, related_name='designs', verbose_name=_('Tiles Group'))
