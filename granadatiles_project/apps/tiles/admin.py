@@ -257,7 +257,8 @@ class BoxAdmin(admin.ModelAdmin):
 @admin.register(CustomGroup)
 class CustomGroupAdmin(SummernoteModelAdmin):
     fields = ('title', 'title_es', 'collection', 'description', 'description_es',
-              'slug', 'slug_es', 'image', 'show_in_web')
+              'slug', 'slug_es', 'order', 'image', 'show_in_web')
 
-    list_display = ('title','collection', 'designs_count', 'tiles_count')
+    list_display = ('title','collection', 'designs_count', 'order', 'tiles_count')
+    list_editable = ('order',)
     search_fields = ['title', 'title_es', 'id']
