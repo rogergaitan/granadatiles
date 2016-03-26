@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from core.serializers import BaseSerializer, BaseCatalogSerializer
+from apps.tiles.serializers import GroupColorSerializer
 
 
 class TileColorSerializer(BaseCatalogSerializer):
@@ -11,6 +12,7 @@ class TileSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
     colors = TileColorSerializer(many=True)
     inStock = serializers.BooleanField()
+    plane = serializers.CharField()
 
 
 class BaseTileOrdersSerializer(BaseSerializer):
@@ -24,15 +26,10 @@ class TileOrdersSerializer(BaseTileOrdersSerializer):
     tile = TileSerializer()
 
 
-class GroupColorSerializer(serializers.Serializer):
-    group = serializers.CharField()
-    color_name = serializers.CharField()
-    color_code = serializers.CharField()
-
 
 class CustomizedTileOrdersSerializer(BaseTileOrdersSerializer):
     tile = TileSerializer()
-    group_colors = GroupColorSerializer(many=True)
+    groupColors = GroupColorSerializer(many=True)
 
 
 class BaseSampleOrdersSerializer(BaseSerializer):

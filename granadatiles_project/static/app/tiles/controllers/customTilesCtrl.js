@@ -5,9 +5,9 @@
         .module('app')
         .controller('customTilesCtrl', customTileCtrl);
 
-    customTileCtrl.$inject = ['pageSettings', 'customTilesSvc', 'initData', '$modalInstance', '$timeout'];
+    customTileCtrl.$inject = ['pageSettings', 'customTilesSvc', 'initData', '$modalInstance', '$timeout', 'cartSvc'];
 
-    function customTileCtrl(pageSettings, customTilesSvc, initData, $modalInstance, $timeout) {
+    function customTileCtrl(pageSettings, customTilesSvc, initData, $modalInstance, $timeout, cartSvc) {
         /* jshint validthis:true */
         var vm = this;
         vm.hasChanges = false;
@@ -99,6 +99,16 @@
         }
 
         vm.addToCart = function () {
+            var sendObject = {
+                customizedTileId: vm.tile.customizedTileId,
+            }
+            cartSvc.addCustomizedTile(sendObject).then(function (response) {
+                var cart = cartSvc.getCart();
+                cartSvc.setCartCount(cart.count + 1);
+            });
+        }
+
+        vm.orderSample = function () {
 
         }
 

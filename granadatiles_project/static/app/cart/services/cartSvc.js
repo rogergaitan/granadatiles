@@ -9,6 +9,8 @@
 
     function cartSvc($http, appSettings) {
         var service = {
+            setCartCount: setCartCount,
+            getCart: getCart,
             getCartTilesCount: getCartTilesCount,
             getCartTiles: getCartTiles,
             addTile: addTile,
@@ -21,11 +23,24 @@
             removeSample: removeSample,
             getCustomizedTiles: getCustomizedTiles,
             addCustomizedTile: addCustomizedTile,
-            updateSample: updateSample,
+            updateCustomizedTile: updateCustomizedTile,
             removeCusomizedTile: removeCusomizedTile
         };
 
+        var cart = {
+            count: 0
+        };
+
+
         return service;
+
+        function setCartCount(count) {
+            cart.count = count;
+        }
+
+        function getCart(count) {
+            return cart
+        }
 
         function getCartTilesCount() {
             return $http.get(appSettings.serverPath + 'cart/tiles/count')
@@ -36,7 +51,7 @@
         }
 
         function addTile(tile) {
-            return $http.post(appSettings.serverPath + 'cart/tiles/', tile );
+            return $http.post(appSettings.serverPath + 'cart/tiles/', tile);
         }
 
         function updateTile(tile) {
@@ -71,12 +86,12 @@
             return $http.post(appSettings.serverPath + 'cart/customizedtiles/', customizedTile);
         }
 
-        function updateSample(customizedTile) {
+        function updateCustomizedTile(customizedTile) {
             return $http.put(appSettings.serverPath + 'cart/customizedtiles/' + customizedTile.id, customizedTile);
         }
 
         function removeCusomizedTile(customizedTileId) {
-            return $http.delete(appSettings.serverPath + 'customizedtiles/' + customizedTileId);
+            return $http.delete(appSettings.serverPath + 'cart/customizedtiles/' + customizedTileId);
         }
 
     }

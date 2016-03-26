@@ -5,9 +5,9 @@
         .module('app.portfolio')
         .controller('portfolioHomeCtrl', portfolioHomeCtrl);
 
-    portfolioHomeCtrl.$inject = ['pageSettings', 'sectionSvc', 'baseSettings', 'portfolioSvc', 'sharePageSvc', 'authenticationSvc', 'customTilesSvc', 'tilesSvc', 'gtDialogsSvc'];
+    portfolioHomeCtrl.$inject = ['pageSettings', 'sectionSvc', 'baseSettings', 'portfolioSvc', 'sharePageSvc', 'authenticationSvc', 'customTilesSvc', 'tilesSvc', 'gtDialogsSvc', 'cartSvc'];
 
-    function portfolioHomeCtrl(pageSettings, sectionSvc, baseSettings, portfolioSvc, sharePageSvc, authenticationSvc, customTilesSvc, tilesSvc, gtDialogsSvc) {
+    function portfolioHomeCtrl(pageSettings, sectionSvc, baseSettings, portfolioSvc, sharePageSvc, authenticationSvc, customTilesSvc, tilesSvc, gtDialogsSvc, cartSvc) {
         /* jshint validthis:true */
         var vm = this;
         vm.labels = pageSettings.labels;
@@ -24,6 +24,27 @@
         portfolioSvc.getPortfolioTiles().then(function (response) {
             vm.tiles = response.data;
         });
+
+        vm.buyTile = function (tile) {
+            if (tile.isCustomTile) {
+                var sendObject = {
+                    customizedTileId: tile.portfoliotile_id,
+                }
+                cartSvc.addCustomizedTile(sendObject).then(function (response) {
+                    var cart = cartSvc.getCart();
+                    cartSvc.setCartCount(cart.count + 1);
+                });
+            }
+            else {
+                var cartItem = {
+                    id: tile.id
+                };
+                cartSvc.addTile(cartItem).then(function (resp) {
+                    var cart = cartSvc.getCart();
+                    cartSvc.setCartCount(cart.count + 1);
+                });
+            }
+        };
 
         vm.removeTile = function (tile) {
             var instance = gtDialogsSvc.confirmModal(vm.labels.removeTile);

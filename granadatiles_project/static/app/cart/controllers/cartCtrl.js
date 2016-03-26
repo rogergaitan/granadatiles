@@ -5,9 +5,9 @@
         .module('app.cart')
         .controller('cartCtrl', cartCtrl);
 
-    cartCtrl.$inject = ['pageSettings', 'cartSvc'];
+    cartCtrl.$inject = ['pageSettings', 'cartSvc', '$q', 'customTilesSvc'];
 
-    function cartCtrl(pageSettings, cartSvc) {
+    function cartCtrl(pageSettings, cartSvc, $q, customTilesSvc) {
         /* jshint validthis:true */
         var vm = this;
         vm.labels = pageSettings.labels;
@@ -18,13 +18,23 @@
         vm.sampleTotal = 0;
         vm.quantityForSamples = [];
 
-        cartSvc.getCartTiles().then(function (response) {
-            vm.orders = response.data;
+        var cartTiles = cartSvc.getCartTiles();
+        var cartCustomizedTiles = cartSvc.getCustomizedTiles();
+
+        $q.all([cartTiles, cartCustomizedTiles]).then(function (response) {
+            vm.orders = response[0].data;
+            vm.customizedOrders = response[1].data;
+
             for (var i = 0; i < vm.orders.length; i++) {
                 vm.subTotal += vm.orders[i].subtotal;
             }
+            for (var i = 0; i < vm.customizedOrders.length; i++) {
+                vm.customizedOrders[i].tile.colors = customTilesSvc.getColorsUsed(vm.customizedOrders[i].groupColors);
+                vm.customizedOrders[i].tile.inStock = false;
+                vm.subTotal += vm.customizedOrders[i].subtotal;
+            }
             vm.total = vm.subTotal;
-        });
+        })
 
         cartSvc.getCartSamples().then(function (response) {
             vm.sampleOrders = response.data;
@@ -37,7 +47,7 @@
         vm.updateSqFt = function (order) {
             cartSvc.updateTile({
                 sqFt: order.sqFt,
-                id: order.tile.id
+                id: order.id
             }).then(function (response) {
                 var data = response.data;
                 order.boxes = data.boxes;
@@ -47,8 +57,30 @@
         };
 
         vm.removeTile = function (order) {
-            cartSvc.removeTile(order.tile.id).then(function (response) {
+            cartSvc.removeTile(order.id).then(function (response) {
                 order.removed = true;
+                var cart = cartSvc.getCart();
+                cartSvc.setCartCount(cart.count - 1);
+            });
+        };
+
+        vm.updateCustomizedTileSqFt = function (order) {
+            cartSvc.updateCustomizedTile({
+                sqFt: order.sqFt,
+                id: order.id
+            }).then(function (response) {
+                var data = response.data;
+                order.boxes = data.boxes;
+                order.quantity = data.quantity;
+                order.subtotal = data.subtotal;
+            });
+        }
+
+        vm.removeCustomizedTile = function (order) {
+            cartSvc.removeCusomizedTile(order.id).then(function (response) {
+                order.removed = true;
+                var cart = cartSvc.getCart();
+                cartSvc.setCartCount(cart.count - 1);
             });
         };
 

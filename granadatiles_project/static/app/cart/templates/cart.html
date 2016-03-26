@@ -62,6 +62,40 @@
                                     <td class="text-center">{{order.boxes}}</td>
                                     <td class="text-center">{{order.subtotal}}</td>
                                 </tr>
+                                <tr ng-repeat="order in vm.customizedOrders" class="animate-show" ng-show="!order.removed">
+                                    <td class="item">
+                                        <div class="media">
+                                            <span class="media-left">
+                                                <custom-tile-plane plane="order.tile.plane" color-groups="order.groupColors" fixed-width="'140px'"></custom-tile-plane>
+                                            </span>
+                                            <div class="media-body">
+                                                <h2>
+                                                    {{::order.tile.name}} -
+                                                    <span ng-if="order.tile.inStock">In Stock</span>
+                                                    <span ng-if="!order.tile.inStock">Custom</span>
+                                                    Tile
+                                                </h2>
+                                                <span>
+                                                    Color:
+                                                    <span ng-repeat="color in order.tile.colors">
+                                                        <span ng-bind="color.name"></span>
+                                                        <span ng-if="($index < (order.tile.colors.length -1))">,&nbsp;</span>
+                                                    </span>
+                                                </span><br>
+                                                <a href="" ng-click="vm.removeCustomizedTile(order)" class="btn btn-delete btn-sm">X</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="square-footage">
+                                        <form action="" class="form-inline">
+                                            <input type="number" name="sqFt" ng-model="order.sqFt" id="sqFt" class="form-control input-sm">
+                                            <button class="btn btn-default btn-sm" type="button" ng-click="vm.updateCustomizedTileSqFt(order)">UPDATE</button>
+                                        </form>
+                                    </td>
+                                    <td class="text-center">{{order.quantity}}</td>
+                                    <td class="text-center">{{order.boxes}}</td>
+                                    <td class="text-center">{{order.subtotal}}</td>
+                                </tr>
                             </tbody>
                             </table>
                         </div>

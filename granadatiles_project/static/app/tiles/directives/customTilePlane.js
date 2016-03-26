@@ -17,7 +17,8 @@
             restrict: 'E',
             scope: {
                 plane: '=',
-                colorGroups: '='
+                colorGroups: '=',
+                fixedWidth: '='
             },
             templateUrl: baseSettings.staticUrl + 'app/tiles/directives/customTilePlane.html',
             controller: ['customTilesSvc', '$scope', customTilePlaneCtrl]

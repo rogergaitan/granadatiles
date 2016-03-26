@@ -1,4 +1,4 @@
 ﻿<a ng-href="{{vm.navigation.cart}}" ng-controller="cartMenuCtrl as vm">
     <i class="fa fa-shopping-cart"></i>&nbsp;
-    <span>{{vm.labels.cart}}</span>&nbsp;<span ng-if="vm.cartCount != 0" ng-bind="'(' + vm.cartCount + ')'"></span>
+    <span>{{vm.labels.cart}}</span>&nbsp;<span ng-if="vm.cartCount != 0" ng-bind="'(' + vm.cart.count + ')'"></span>
 </a>

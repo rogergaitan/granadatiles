@@ -30,7 +30,7 @@ class TileOrdersViewSet(BaseViewSet):
         return Response(serializer.data)
       
     def create(self, request):
-        tile_id = request.data.get('tileId')
+        tile_id = request.data.get('id')
         sq_ft = request.data.get('sqFt')
         return Response(OrdersService.add_tile_order(request, tile_id, sq_ft))
       
@@ -96,5 +96,5 @@ class TilesCountViewSet(BaseViewSet):
   
     def list(self, request):
         cart = CartService.get_cart(request)
-        tiles_count = cart.tile_orders.count() + cart.sample_orders.count()
+        tiles_count = cart.tile_orders.count() + cart.sample_orders.count() + cart.customized_tile_orders.count() + cart.customized_sample_orders.count()
         return Response({'count': tiles_count})

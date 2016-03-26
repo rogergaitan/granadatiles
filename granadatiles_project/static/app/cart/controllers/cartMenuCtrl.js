@@ -15,7 +15,8 @@
         vm.navigation = baseSettings.navigation;
 
         cartSvc.getCartTilesCount().then(function (response) {
-            vm.cartCount = response.data.count;
+            cartSvc.setCartCount(response.data.count);
+            vm.cart = cartSvc.getCart();
         });
     }
 })();
