@@ -174,9 +174,27 @@
                                 <td>{{::order.sqFt}}</td>
                                 <td>{{::order.subtotal}}</td>
                             </tr>
+                             <tr ng-repeat="order in vm.customizedOrders">
+                                <td>
+                                    <h2>
+                                        {{::order.tile.name}} -
+                                        <span ng-if="order.tile.inStock">{{::vm.labels.inStockTile}}</span>
+                                        <span ng-if="!order.tile.inStock" class="order-custom-label">{{::vm.labels.custom}}</span>
+                                    </h2>
+                                    <span>
+                                        Color:
+                                        <span ng-repeat="color in order.tile.colors">
+                                            <span ng-bind="color.name"></span>
+                                            <span ng-if="($index < (order.tile.colors.length -1))">,&nbsp;</span>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td>{{::order.sqFt}}</td>
+                                <td>{{::order.subtotal}}</td>
+                            </tr>
                         </tbody>
                         <thead>
-                            <tr>
+                            <tr ng-if="vm.sampleOrders.length > 0">
                                 <th>SAMPLE</th>
                                 <th>QUANTITY</th>
                                 <th>SUBTOTAL</th>
