@@ -175,7 +175,7 @@ class Tile(BaseCatalogModel):
     rotate_deg2 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 90)
     rotate_deg3 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 270)
     rotate_deg4 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 180)
-    import_colors = models.CharField(max_length=50 , blank=True, null=True,
+    import_colors = models.CharField(max_length=800 , blank=True, null=True,
                                      help_text=_('Warning any input here will override the group colors!'),
                                      verbose_name=_('Import Colors'))
 
