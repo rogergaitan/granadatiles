@@ -160,7 +160,7 @@ class Tile(BaseCatalogModel):
     new = models.BooleanField(max_length=10, default=False, verbose_name=_('New'))
     size = models.CharField(max_length=10, default='', null=True, verbose_name=_('Size'))
     height = models.IntegerField(null=True, blank=True, verbose_name=_('Height'))
-    width = models.IntegerField(null=True, blank=True, verbose_name=_('Weight'))
+    width = models.IntegerField(null=True, blank=True, verbose_name=_('Width'))
     weight = models.CharField(max_length=10, default='', null=True, verbose_name=_('Weight'))
     thickness = models.CharField(max_length=10, default='', null=True, verbose_name=('Thickness'))
     on_sale = models.BooleanField(default=False, verbose_name=_('On Sale'))
