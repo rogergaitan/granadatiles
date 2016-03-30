@@ -68,6 +68,7 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
     class Meta:
         verbose_name = _('Collection')
         verbose_name_plural = _('Collections')
+        ordering = ['title']
         
         
 class BaseGroup(BaseGalleryImageModel, BaseSlugModel):
@@ -105,6 +106,7 @@ class Group(BaseGroup):
     class Meta:
         verbose_name = _('Group')
         verbose_name_plural = _('Groups')
+        ordering = ['title']
 
 
 class CustomGroup(BaseGroup):
@@ -135,6 +137,7 @@ class TileDesign(BaseCatalogModel):
         verbose_name = _('Tile Design')
         verbose_name_plural = _('Tile Designs')
         unique_together = ('name', 'group')
+        ordering = ['name']
 
 
 class Tile(BaseCatalogModel):
@@ -226,6 +229,7 @@ class Tile(BaseCatalogModel):
     class Meta:
         verbose_name = _('Tile')
         verbose_name_plural = _('Tiles')
+        ordering = ['name']
 
 
 class PalleteColor(BaseCatalogModel):
@@ -249,6 +253,7 @@ class Style(BaseCatalogModel):
     class Meta:
        verbose_name = _('Style')
        verbose_name_plural = _('Styles')
+       ordering = ['name']
 
 
 class Use(BaseCatalogModel):
@@ -256,6 +261,8 @@ class Use(BaseCatalogModel):
     class Meta:
        verbose_name = _('Use')
        verbose_name_plural = _('Uses')
+       ordering = ['name']
+       
 
 class Warehouse(BaseCatalogModel):
     zipcode = models.CharField(max_length=5)
@@ -265,6 +272,7 @@ class Warehouse(BaseCatalogModel):
     class Meta:
        verbose_name = _('Warehouse')
        verbose_name_plural = _('Warehouses')
+       ordering = ['name']
 
 
 class LeadTime(BaseContentModel):
@@ -272,6 +280,7 @@ class LeadTime(BaseContentModel):
     class Meta:
        verbose_name = _('Lead Time')
        verbose_name_plural = _('Lead Times')
+       ordering = ['title']
 
 
 class Portfolio(models.Model):
@@ -321,6 +330,7 @@ class Layout(models.Model):
 class CustomizedTile(models.Model):
     tile = models.ForeignKey(Tile, related_name='customizations')
     portfolio = models.ForeignKey(Portfolio, related_name='customized_tiles')
+    
 
 class GroupColor(models.Model):
     color = models.ForeignKey(PalleteColor)
