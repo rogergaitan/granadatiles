@@ -259,6 +259,7 @@ class CustomGroupAdmin(SummernoteModelAdmin):
     fields = ('title', 'title_es', 'collection', 'description', 'description_es',
               'slug', 'slug_es', 'order', 'image', 'show_in_web')
 
-    list_display = ('title','collection', 'designs_count', 'order', 'tiles_count')
-    list_editable = ('order',)
+    list_display = ('title','collection', 'order', 'show_in_web', 'slug', 'slug_es')
+    list_editable = ('order', 'show_in_web')
     search_fields = ['title', 'title_es', 'id']
+    prepopulated_fields = {'slug': ('title',), 'slug_es': ('title_es',)}
