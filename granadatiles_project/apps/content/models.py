@@ -87,6 +87,7 @@ class FeaturedVideo(BaseCatalogOrderModel):
     class Meta:
         verbose_name = _('Video')
         verbose_name_plural = _('Videos')
+        ordering = ['order']
 
 
 class Area(BaseContentModel):
@@ -94,6 +95,7 @@ class Area(BaseContentModel):
     class Meta:
         verbose_name = _('Manageable Area')
         verbose_name_plural = _('Manageable Areas')
+        ordering = ['title']
 
 
 class Testimony(BaseContentModel):
@@ -109,6 +111,7 @@ class Testimony(BaseContentModel):
     class Meta:
         verbose_name = _('Testimony')
         verbose_name_plural = _('Testimonials')
+        ordering = ['title']
 
 
 class IndexNavigation(BaseGalleryNavImageModel):
@@ -129,6 +132,8 @@ class IndexNavigation(BaseGalleryNavImageModel):
     class Meta:
         verbose_name = _('Index Link')
         verbose_name_plural = _('Index Links')
+        ordering = ['title']
+        
 
 class ExtendedFlatPage(FlatPage):
     MENU_CHOICES = (
