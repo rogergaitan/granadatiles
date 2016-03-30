@@ -12,6 +12,7 @@ class Catalog(BaseCatalogModel):
     class Meta:
         verbose_name = _('Catalog')
         verbose_name_plural = _('Catalogs')
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -43,6 +44,7 @@ class Magazine(models.Model):
     class Meta:
         verbose_name = _('Magazine')
         verbose_name_plural = _('Magazines')
+        ordering = ['name']
 
     def __str__(self):
         return self.name

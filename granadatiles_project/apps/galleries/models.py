@@ -14,6 +14,7 @@ class Designer(models.Model):
     class Meta:
         verbose_name = _('Designer')
         verbose_name_plural = _('Designers')
+        ordering = ['name']
 
 
 class Photographer(models.Model):
@@ -25,6 +26,7 @@ class Photographer(models.Model):
     class Meta:
         verbose_name = _('Photographer')
         verbose_name_plural = _('Photographers')
+        ordering = ['name']
 
 
 class Gallery(BaseCatalogModel):
@@ -38,6 +40,7 @@ class Gallery(BaseCatalogModel):
     class Meta:
         verbose_name = _('Gallery')
         verbose_name_plural = _('Galleries')
+        ordering = ['name']
 
 
 class GalleryCategory(BaseCatalogModel):
@@ -52,6 +55,7 @@ class GalleryCategory(BaseCatalogModel):
     class Meta:
         verbose_name = _('Category')
         verbose_name_plural = _('Categories')
+        ordering = ['name']
 
 
 class GalleryImage(BaseGalleryImageModel):
@@ -70,3 +74,4 @@ class GalleryImage(BaseGalleryImageModel):
     class Meta:
         verbose_name = _('Image')
         verbose_name_plural = _('Images')
+        ordering = ['title']
