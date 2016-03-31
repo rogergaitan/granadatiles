@@ -111,7 +111,7 @@ class GroupViewSet(BaseViewSet):
     def tiles(self, request, pk=None):
         limit = int(request.query_params.get('limit', 6))
         offset = int(request.query_params.get('offset', 0))
-        style = request.query_params.get('style')
+        style = request.query_params.get('style', '0')
         size = request.query_params.get('size')
         new = convert_to_boolean(request.query_params.get('recent'))
         in_stock = convert_to_boolean(request.query_params.get('in_stock'))
@@ -216,7 +216,6 @@ class LayoutsViewSet(BaseViewSet):
         return Response(PortfolioService.get_layout(pk).delete())
 
     def create(self, request):
-        portfolio = PortfolioService.get_portfolio(request.user)
         id = request.data.get('id')
         name = request.data.get('name')
         lenght_ft = request.data.get('lenght_ft')
@@ -224,9 +223,12 @@ class LayoutsViewSet(BaseViewSet):
         width_ft = request.data.get('width_ft')
         width_in = request.data.get('width_in')
         image = request.data.get('image')
-        return Response(PortfolioService.create_layout(portfolio, id, name, lenght_ft,
+        return Response(PortfolioService.create_layout(request, id, name, lenght_ft,
                                                      lenght_in, width_ft, width_in, image))
-
+    
+    def update(self, request, pk=None):
+        pass    
+        
     @detail_route(methods=['post'])
     def duplicates(self, request, pk=None):
         portfolio = PortfolioService.get_portfolio(request.user)

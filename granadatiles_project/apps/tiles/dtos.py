@@ -94,17 +94,16 @@ class MinorTileDto(TileDto):
         self.onSale = True if tile.on_sale else False
 
 
-class TileDesignDto(BaseCatalogDto):
+class TileDesignDto:
 
-    def __init__(self, tile_design, size, new, in_stock, specials, language=None):
-
+    def __init__(self, tile_design, size, new, in_stock, specials, language):
+        
         tiles_filter = tile_design.tiles.exclude(image='')
         if size: tiles_filter = tiles_filter.filter(size=size)
         if new: tiles_filter = tiles_filter.filter(new=True)
         if in_stock: tiles_filter = tiles_filter.filter(custom=False)
         if specials: tiles_filter = tiles_filter.filter(on_sale=True)
-
-        super().__init__(tile_design, language)
+         
         if tiles_filter:
             if tiles_filter.filter(main=True).exists():
                 self.main = MainTileDto(tiles_filter.filter(main=True).first(), language)

@@ -75,7 +75,7 @@ class CollectionInstallationPhotosSerializer(TileInstallationPhotosSerializer):
     designer = serializers.CharField()
 
 
-class TileDesignSerializer(BaseCatalogSerializer):
+class TileDesignSerializer(serializers.Serializer):
     main = MainTileSerialzer(required=False)
     tiles = TileSerializer(many=True, required=False)
 
