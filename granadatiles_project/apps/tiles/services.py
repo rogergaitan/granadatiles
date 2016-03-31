@@ -138,7 +138,7 @@ class TileService:
 
         instock_dto = [InStockDto(tile, is_sample, language)
                         for tile in tiles[offset:(limit+offset)]
-                        if tile.design]
+                        if tile.design and tile.image]
         return instock_dto
 
     def get_tiles_collections_filters(language):
@@ -189,7 +189,8 @@ class PortfolioService:
         layouts_dto = [LayoutDto(layout) for layout in portfolio.layouts.all()]
         return layouts_dto
 
-    def create_layout(portfolio, id, name, length_ft, length_in, width_ft, width_in, image):
+    def create_layout(request, id, name, length_ft, length_in, width_ft, width_in, image):
+        portfolio = PortfolioService.get_portfolio(request.user)
         data = {
             'name': name,
             'length_ft': length_ft,
@@ -198,8 +199,9 @@ class PortfolioService:
             'width_in': width_in,
             'image': image
         }
+        
         portfolio.layouts.update_or_create(pk=id, defaults=data)
-
+        
     def layout_tiles(portfolio, language):
         layout_tiles_dto = [LayoutTilesDto(portfolio_tile.tile, language)
                              for portfolio_tile in portfolio.tiles.all()]
