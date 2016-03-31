@@ -67,23 +67,32 @@ class GroupService:
         group_dto = GroupDto(group, language)
         return group_dto
 
-    def get_group_designs(id, limit, offset, style, size, new, in_stock, specials, language=None):
+    def get_group_designs(id, limit, offset, style, size, new, in_stock, specials, language):
         group = GroupService.group_show_in_web(id)
         designs = group.designs.filter(show_in_web=True).prefetch_related('tiles')
          
         if style != '0': designs = designs.filter(styles__id=style)
-
-        #if new: designs = designs.filter(tiles__new=True).distinct()
-
-        #if in_stock: designs = designs.filter(tiles__custom=False).distinct()
-
-        #if specials: designs = designs.filter(tiles__on_sale=True).distinct()
         
+        tile_designs_dto = []
         
+        for tile_design in designs[offset:(limit+offset)]:
+            tiles_filter = tile_design.tiles.exclude(image='')
+            if size: tiles_filter = tiles_filter.filter(size=size)
+            if new: tiles_filter = tiles_filter.filter(new=True)
+            if in_stock: tiles_filter = tiles_filter.filter(custom=False)
+            if specials: tiles_filter = tiles_filter.filter(on_sale=True)
+            
+            if tiles_filter:
+                if tiles_filter.filter(main=True).exists():
+                    main_tile = tiles_filter.filter(main=True).first()
+                    minor_tiles = tiles_filter.filter(main=False)
+                else:
+                    main_tile = tiles_filter.first()
+                    minor_tiles = tiles_filter.exclude(pk=main_tile.id)
+                
+                tile_designs_dto.append(TileDesignDto(main_tile, minor_tiles, language))
         
-        tile_design_dto = [TileDesignDto(tile_design, size, new, in_stock, specials, language)
-                           for tile_design in designs.exclude(tiles__image='')[offset:(limit+offset)]]
-        return tile_design_dto
+        return tile_designs_dto
 
     def get_styles(id, language=None):
         group = GroupService.group_show_in_web(id)
