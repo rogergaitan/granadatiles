@@ -76,7 +76,7 @@ class GroupService:
         tile_designs_dto = []
         
         for tile_design in designs.distinct()[offset:(limit+offset)]:
-            tiles_filter = tile_design.tiles
+            tiles_filter = tile_design.tiles.exclude(image='')
             if size: tiles_filter = tiles_filter.filter(size=size)
             if new: tiles_filter = tiles_filter.filter(new=True)
             if in_stock: tiles_filter = tiles_filter.filter(custom=False)
