@@ -84,11 +84,30 @@ class CustomTileFilter(admin.SimpleListFilter):
 
         if self.value() == 'n':
             return queryset.filter(custom=False)
-
+        
+class TileImageFilter(admin.SimpleListFilter):
+    
+    title = _('Image')
+    
+    parameter_name = 'image'
+    
+    def lookups(self, request, model_admin):
+        return(
+            ('y', _('Yes')),
+            ('n', 'No')
+        )
+    
+    def queryset(self, request, queryset):
+        if self.value() == 'y':
+            return queryset.exclude(image='')
+        
+        if self.value() == 'n':
+            return queryset.filter(image='')
+    
+    
 class TileColorGroupInline(admin.TabularInline):
     model = TileGroupColor
     fields = ('color', 'group')
-
 
 
 @admin.register(Tile)
@@ -105,7 +124,7 @@ class TileAdmin(admin.ModelAdmin):
 
     list_editable = ['is_active', 'new', 'on_sale', 'size', 'weight', 'thickness', 'qty_is_sq_ft']
     search_fields = ['name', 'name_es', 'list_id', 'size']
-    list_filter = ('new', CustomTileFilter, TileSizeFilter, 'override_collection_box')
+    list_filter = ('new', CustomTileFilter, TileSizeFilter, TileImageFilter, 'override_collection_box')
     actions = ['tile_new']
     readonly_fields = ('list_id', 'design', 'name', 'quantity_on_hand',
                        'sales_price', 'size', 'average_cost', 'is_sample', 'in_stock')
