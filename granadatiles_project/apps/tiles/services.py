@@ -76,7 +76,7 @@ class GroupService:
         tile_designs_dto = []
         
         for tile_design in designs.distinct()[offset:(limit+offset)]:
-            tiles_filter = tile_design.tiles.exclude(image='')
+            tiles_filter = tile_design.tiles
             if size: tiles_filter = tiles_filter.filter(size=size)
             if new: tiles_filter = tiles_filter.filter(new=True)
             if in_stock: tiles_filter = tiles_filter.filter(custom=False)
@@ -136,20 +136,22 @@ class TileService:
         return tileorderDto
 
     def get_in_stock_tiles(ids, is_sample, limit, offset, language):
-
+        
         if ids:
             tiles = Tile.objects.filter(design__group__collection__id__in=ids)
         else:
             tiles = Tile.objects.all()
-
+            
         if is_sample == 'true':
             tiles = tiles.filter(is_sample=True).order_by('name')
         elif is_sample == 'false' or is_sample is None:
             tiles = tiles.filter(is_sample=False).order_by('name')
+            
+        tiles = tiles.exclude(image='')
+        tiles = tiles.filter(design__isnull=False)
 
         instock_dto = [InStockDto(tile, is_sample, language)
-                        for tile in tiles[offset:(limit+offset)]
-                        if tile.design and tile.image]
+                        for tile in tiles[offset:(limit+offset)]]
         return instock_dto
 
     def get_tiles_collections_filters(language):
