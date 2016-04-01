@@ -98,8 +98,9 @@ class GroupService:
         group = GroupService.group_show_in_web(id)
         designs = group.designs.all()
         
-        style_dto = [TileStyleDto(style, language) for design in designs for style in design.styles.all()]
-        return style_dto
+        styles = {style for design in designs for style in design.styles.all()}
+        styles_dto =[TileStyleDto(style, language) for style in styles]
+        return styles_dto
 
     def get_sizes(id):
         group = GroupService.group_show_in_web(id)
