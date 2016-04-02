@@ -73,7 +73,7 @@ class GroupService:
          
         if style != '0': designs = designs.filter(styles__id=style)
         
-        tile_designs_dto = []
+        tile_designs_dto = set() 
         
         for tile_design in designs.distinct()[offset:(limit+offset)]:
             tiles_filter = tile_design.tiles.exclude(image='')
@@ -90,7 +90,7 @@ class GroupService:
                     main_tile = tiles_filter.first()
                     minor_tiles = tiles_filter.exclude(pk=main_tile.id)
                 
-                tile_designs_dto.append(TileDesignDto(main_tile, minor_tiles, language))
+                tile_designs_dto.add(TileDesignDto(main_tile, minor_tiles, language))
         
         return tile_designs_dto
 
