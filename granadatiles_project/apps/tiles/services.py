@@ -69,14 +69,22 @@ class GroupService:
 
     def get_group_designs(id, limit, offset, style, size, new, in_stock, specials, language):
         group = GroupService.group_show_in_web(id)
-        designs = group.designs.filter(show_in_web=True).prefetch_related('tiles')
+        designs = group.designs.filter(show_in_web=True).prefetch_related('tiles').exclude(tiles__image='')
          
         if style != '0': designs = designs.filter(styles__id=style)
+
+        if new: designs = designs.filter(tiles__new=True)
+
+        if in_stock: designs = designs.filter(tiles__custom=False)
+
+        if specials: designs = designs.filter(tiles__on_sale=True)
+      
+        tile_designs_dto = []
         
-        tile_designs_dto = set() 
-        
-        for tile_design in designs.distinct()[offset:(limit+offset)]:
+        for tile_design in designs[offset:(limit+offset)]:
             tiles_filter = tile_design.tiles.exclude(image='')
+            tiles_filter = tiles_filter.filter(is_active=True)
+           
             if size: tiles_filter = tiles_filter.filter(size=size)
             if new: tiles_filter = tiles_filter.filter(new=True)
             if in_stock: tiles_filter = tiles_filter.filter(custom=False)
@@ -90,7 +98,7 @@ class GroupService:
                     main_tile = tiles_filter.first()
                     minor_tiles = tiles_filter.exclude(pk=main_tile.id)
                 
-                tile_designs_dto.add(TileDesignDto(main_tile, minor_tiles, language))
+                tile_designs_dto.append(TileDesignDto(main_tile, minor_tiles, language))
         
         return tile_designs_dto
 
