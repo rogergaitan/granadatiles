@@ -1,4 +1,5 @@
 import math
+from decimal import Decimal
 
 from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404
@@ -204,62 +205,82 @@ class OrdersService:
     def remove_customized_sample(cart, customized_tile):
         cart.customized_sample_orders.get(customized_tile=customized_tile).delete()
 
-    def get_quote_request():
+    def get_shipping_costs(tiles, pickup_zip, delivery_zip):
         import xml.etree.ElementTree as ET
+        
+        from suds.client import Client
+        import zipcode
+        
+        try:
+            client = Client('https://servicesqa.myblueship.com/BlueGraceService.svc?wsdl')
+        except:
+            raise APIException(_('An error ocurred please try again'))
+        
+        shipping_costs = 0
+        
+        pickup_zip = zipcode.isequal(pickup_zip)
+        delivery_zip = zipcode.isequal(delivery_zip)
+        
+        if pickup_zip is None or delivery_zip is None:
+            return None
+        
+        for tile in tiles:
 
-        root = ET.Element('QuoteRequests',
-                          {'xmlns:xsi':'http://www.w3.org/2001/XMLSchema-instance',
-                           'xmlns:xsd':'http://www.w3.org/2001/XMLSchema',
-                           'xmlns':'http://websvcs.myblueship.com/BlueGraceQuoteRequestXML'}
-                         )
+            root = ET.Element('QuoteRequests',
+                            {'xmlns:xsi':'http://www.w3.org/2001/XMLSchema-instance',
+                            'xmlns:xsd':'http://www.w3.org/2001/XMLSchema',
+                            'xmlns':'http://websvcs.myblueship.com/BlueGraceQuoteRequestXML'}
+                            )
 
-        quote_request = ET.SubElement(root, 'QuoteRequest')
+            quote_request = ET.SubElement(root, 'QuoteRequest')
 
-        ET.SubElement(quote_request,
-                      'CustomerName',
-                      {'userId':'GranadaWebSvcQA', 'password':'Password1$'}
-                     ).text = 'GranadaTiles'
+            ET.SubElement(quote_request,
+                        'CustomerName',
+                        {'userId':'GranadaWebSvcQA', 'password':'Password1$'}
+                        ).text = 'GranadaTiles'
 
-        pickup = ET.SubElement(quote_request, 'PickUp')
+            pickup = ET.SubElement(quote_request, 'PickUp')
 
-        ET.SubElement(pickup,
-                      'Date',
-                      {'type':'planned', 'startTime':'10:00', 'endTime': '17:00'}
-                     ).text = '01/30/16'
+            ET.SubElement(pickup,
+                        'Date',
+                        {'type':'planned', 'startTime':'10:00', 'endTime': '17:00'}
+                        ).text = ''
 
-        address_pickup = ET.SubElement(pickup, 'Address', {'addressId': ''})
-        ET.SubElement(address_pickup, 'City').text = 'Bow'
-        ET.SubElement(address_pickup, 'StateProvince').text = 'NH'
-        ET.SubElement(address_pickup, 'PostalCode').text = '03304'
-        ET.SubElement(address_pickup, 'CountryCode').text = 'USA'
+            address_pickup = ET.SubElement(pickup, 'Address', {'addressId': ''})
+            ET.SubElement(address_pickup, 'City').text = pickup_zip.city.capitalize()
+            ET.SubElement(address_pickup, 'StateProvince').text = pickup_zip.state
+            ET.SubElement(address_pickup, 'PostalCode').text = pickup_zip.zip
+            ET.SubElement(address_pickup, 'CountryCode').text = 'USA'
 
-        delivery = ET.SubElement(quote_request, 'Delivery')
+            delivery = ET.SubElement(quote_request, 'Delivery')
 
-        ET.SubElement(delivery,
-                      'Date',
-                      {'type':'planned', 'startTime':'10:00', 'endTime': '17:00'},
-                     ).text = '01/31/06'
+            ET.SubElement(delivery,
+                        'Date',
+                        {'type':'planned', 'startTime':'10:00', 'endTime': '17:00'},
+                        ).text = ''
 
-        address_delivery = ET.SubElement(delivery, 'Address', {'addressId': ''})
-        ET.SubElement(address_delivery, 'City').text = 'RockFord'
-        ET.SubElement(address_delivery, 'StateProvince').text = 'IL'
-        ET.SubElement(address_delivery, 'PostalCode').text = '61107'
-        ET.SubElement(address_delivery, 'CountryCode').text = 'USA'
+            address_delivery = ET.SubElement(delivery, 'Address', {'addressId': ''})
+            ET.SubElement(address_delivery, 'City').text = delivery_zip.city.capitalize()
+            ET.SubElement(address_delivery, 'StateProvince').text = delivery_zip.state
+            ET.SubElement(address_delivery, 'PostalCode').text = delivery_zip.zip
+            ET.SubElement(address_delivery, 'CountryCode').text = 'USA'
 
-        items = ET.SubElement(quote_request, 'Items')
+            items = ET.SubElement(quote_request, 'Items')
 
-        item = ET.SubElement(items, 'Item')
-        ET.SubElement(item, 'Class').text = '250'
-        ET.SubElement(item, 'Weight').text = '256'
-        ET.SubElement(item, 'WeightUom').text = 'lb'
-        ET.SubElement(item, 'Quantity').text = '1.0'
-        ET.SubElement(item, 'QuantityUom').text = 'PIECES'
+            item = ET.SubElement(items, 'Item')
+            ET.SubElement(item, 'Class').text = '50'
+            ET.SubElement(item, 'Weight').text = tile.box.weight * tile.boxes
+            ET.SubElement(item, 'WeightUom').text = 'lb'
+            ET.SubElement(item, 'Quantity').text = tile.boxes
+            ET.SubElement(item, 'QuantityUom').text = 'BOXES'
 
-        dimensions = ET.SubElement(item, 'Dimensions')
-        ET.SubElement(dimensions, 'Length').text = '48.0'
-        ET.SubElement(dimensions, 'Width').text = '48.0'
-        ET.SubElement(dimensions, 'Height').text = '48.0'
-        ET.SubElement(dimensions, 'Uom').text = 'in'
+            dimensions = ET.SubElement(item, 'Dimensions')
+            ET.SubElement(dimensions, 'Length').text = '48.0'
+            ET.SubElement(dimensions, 'Width').text = '48.0'
+            ET.SubElement(dimensions, 'Height').text = '48.0'
+            ET.SubElement(dimensions, 'Uom').text = 'in'
 
-        return ET.tostring(root, encoding='unicode')
-      
+            request_string = ET.tostring(root, encoding='unicode')
+             
+            shipping_costs += Decimal(client.service.GetQuoteRequestString(request_string).find('total').text)
+        return shipping_costs

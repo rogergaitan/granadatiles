@@ -98,3 +98,14 @@ class TilesCountViewSet(BaseViewSet):
         cart = CartService.get_cart(request)
         tiles_count = cart.tile_orders.count() + cart.sample_orders.count() + cart.customized_tile_orders.count() + cart.customized_sample_orders.count()
         return Response({'count': tiles_count})
+
+
+class ShippingCostsViewSet(BaseViewSet):
+    
+    def list(self, request):
+        tiles = request.query_params.getlist('tiles')
+        pickup_zip = request.query_params.get('pickup_zip')
+        destination_zip = request.query_params.get('destination_zip')
+        shipping_costs = OrdersService.get_shipping_costs(tiles, pickup_zip, destination_zip)
+        return {'shippingCosts': shipping_costs}
+       
