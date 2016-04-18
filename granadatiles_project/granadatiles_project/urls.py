@@ -17,7 +17,7 @@ urlpatterns = [
     url(r'^api/', include('apps.news.urls', namespace='news')),
     url(r'^api/', include('apps.customadmin.urls', namespace='dashboard')),
     url(r'^api/', include('apps.cart.urls', namespace='cart')),
-    url(r'^api/', include('apps.orders.urls', namespace='orders'))
+    url(r'^api/', include('apps.orders.urls', namespace='orders')),
     url(r'^api/token/', views.obtain_auth_token),
     url('', include('social.apps.django_app.urls', namespace='social')),
 ]
