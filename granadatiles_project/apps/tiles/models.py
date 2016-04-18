@@ -307,7 +307,10 @@ class Box(models.Model):
     measurement_unit = models.PositiveIntegerField(choices=MEASUREMENT_UNITS, verbose_name=_('Measurement Unit'))
     quantity = models.FloatField(verbose_name=_('Quantity'))
     weight = models.PositiveIntegerField(default=0, verbose_name=_('Weight'))
-
+    height = models.FloatField(verbose_name=_('Height'))
+    length = models.FloatField(verbose_name=_('Lenght'))
+    width = models.FloatField(verbose_name=_('Width'))
+   
     def __str__(self):
         return self.description
 
