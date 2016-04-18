@@ -70,9 +70,9 @@ class OrdersService:
                 order=order,
                 tile=None
                 customized_tile=customized_tile,
-                input_sq_ft=tile_detail['inputSqFt'],
-                price_per_sq_feet=tile_detail['pricePerSqFeet'],
-                price_per_tile=tile_detail['pricePerTile'],
-                base_cost=tile_detail['baseCost'],
+                input_sq_ft=customized_tile_detail['inputSqFt'],
+                price_per_sq_feet=customized_tile_detail['pricePerSqFeet'],
+                price_per_tile=customized_tile_detail['pricePerTile'],
+                base_cost=customized_tile_detail['baseCost'],
                 box=customized_tile.box
             )
