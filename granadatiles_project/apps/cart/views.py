@@ -107,5 +107,5 @@ class ShippingCostsViewSet(BaseViewSet):
         pickup_zip = request.query_params.get('pickup_zip')
         destination_zip = request.query_params.get('destination_zip')
         shipping_costs = OrdersService.get_shipping_costs(tiles, pickup_zip, destination_zip)
-        return {'shippingCosts': shipping_costs}
+        return Response({'shippingCosts': shipping_costs})
        

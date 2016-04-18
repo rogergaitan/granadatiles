@@ -222,7 +222,7 @@ class OrdersService:
         delivery_zip = zipcode.isequal(delivery_zip)
         
         if pickup_zip is None or delivery_zip is None:
-            return None
+            raise APIException(_('Please enter a valid zip code'))
         
         for tile in tiles:
 
@@ -269,18 +269,19 @@ class OrdersService:
 
             item = ET.SubElement(items, 'Item')
             ET.SubElement(item, 'Class').text = '50'
-            ET.SubElement(item, 'Weight').text = tile.box.weight * tile.boxes
+            ET.SubElement(item, 'Weight').text = tile.box.weight
             ET.SubElement(item, 'WeightUom').text = 'lb'
             ET.SubElement(item, 'Quantity').text = tile.boxes
             ET.SubElement(item, 'QuantityUom').text = 'BOXES'
 
             dimensions = ET.SubElement(item, 'Dimensions')
-            ET.SubElement(dimensions, 'Length').text = '48.0'
-            ET.SubElement(dimensions, 'Width').text = '48.0'
-            ET.SubElement(dimensions, 'Height').text = '48.0'
+            ET.SubElement(dimensions, 'Length').text = tile.box.lenght
+            ET.SubElement(dimensions, 'Width').text = tile.box.width
+            ET.SubElement(dimensions, 'Height').text = tile.box.height
             ET.SubElement(dimensions, 'Uom').text = 'in'
 
             request_string = ET.tostring(root, encoding='unicode')
-             
-            shipping_costs += Decimal(client.service.GetQuoteRequestString(request_string).find('total').text)
+            
+            response = client.service.GetQuoteRequestString(request_string)
+            shipping_costs += Decimal(response.find('./Quotes/Quote/Total').text)
         return shipping_costs
