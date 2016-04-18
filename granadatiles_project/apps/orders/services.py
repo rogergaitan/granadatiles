@@ -32,7 +32,7 @@ class OrdersService:
             type=2            
         )
         
-        if customer_data['sameAsShipping'] is not False:
+        if customer_data['sameAsShipping'] is False:
             Address.objects.create(
                 order=order,
                 street_building_house_line1=billing_address['streetBuildingHouseLine1'],
@@ -43,36 +43,37 @@ class OrdersService:
                 type=1
             )
         
-        for tile_detail in tiles:
-            try:
-                tile = Tile.objects.get(pk=tile_detail.id)
-            except Tile.DoesNotExist:
-                tile = None
-            
-            OrderDetail.objects.create(
-                order=order,
-                tile=tile
-                customized_tile=None,
-                input_sq_ft=tile_detail['inputSqFt'],
-                price_per_sq_feet=tile_detail['pricePerSqFeet'],
-                price_per_tile=tile_detail['pricePerTile'],
-                base_cost=tile_detail['baseCost'],
-                box=tile.box
-            )
-            
-        for customized_tile_detail in customized_tiles:
-            try:
-                customized_tile = CustomizedTile.objects.get(pk=customized_tile_detail.id)
-            except CustomizedTile.DoesNotExist:
-                customized_tile = None
+        if tiles:
+            for tile_detail in tiles:
+                try:
+                    tile = Tile.objects.get(pk=tile_detail.id)
+                except Tile.DoesNotExist:
+                    tile = None
                 
-            OrderDetail.objects.create(
-                order=order,
-                tile=None
-                customized_tile=customized_tile,
-                input_sq_ft=customized_tile_detail['inputSqFt'],
-                price_per_sq_feet=customized_tile_detail['pricePerSqFeet'],
-                price_per_tile=customized_tile_detail['pricePerTile'],
-                base_cost=customized_tile_detail['baseCost'],
-                box=customized_tile.box
-            )
+                OrderDetail.objects.create(
+                    order=order,
+                    tile=tile,
+                    customized_tile=None,
+                    input_sq_ft=tile_detail['inputSqFt'],
+                    price_per_sq_feet=tile_detail['pricePerSqFeet'],
+                    price_per_tile=tile_detail['pricePerTile'],
+                    base_cost=tile_detail['baseCost'],
+                    box=tile.box
+                )
+        if customized_tiles:    
+            for customized_tile_detail in customized_tiles:
+                try:
+                    customized_tile = CustomizedTile.objects.get(pk=customized_tile_detail.id)
+                except CustomizedTile.DoesNotExist:
+                    customized_tile = None
+                    
+                OrderDetail.objects.create(
+                    order=order,
+                    tile=None,
+                    customized_tile=customized_tile,
+                    input_sq_ft=customized_tile_detail['inputSqFt'],
+                    price_per_sq_feet=customized_tile_detail['pricePerSqFeet'],
+                    price_per_tile=customized_tile_detail['pricePerTile'],
+                    base_cost=customized_tile_detail['baseCost'],
+                    box=customized_tile.box
+                )
