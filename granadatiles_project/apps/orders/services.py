@@ -42,11 +42,12 @@ class OrdersService:
                 city=billing_address['city'],
                 type=1
             )
+            
         
         if tiles:
             for tile_detail in tiles:
                 try:
-                    tile = Tile.objects.get(pk=tile_detail.id)
+                    tile = Tile.objects.get(pk=tile_detail['id'])
                 except Tile.DoesNotExist:
                     tile = None
                 
@@ -55,15 +56,16 @@ class OrdersService:
                     tile=tile,
                     customized_tile=None,
                     input_sq_ft=tile_detail['inputSqFt'],
-                    price_per_sq_feet=tile_detail['pricePerSqFeet'],
+                    price_per_sq_ft=tile_detail['pricePerSqFt'],
                     price_per_tile=tile_detail['pricePerTile'],
                     base_cost=tile_detail['baseCost'],
                     box=tile.box
                 )
+         
         if customized_tiles:    
             for customized_tile_detail in customized_tiles:
                 try:
-                    customized_tile = CustomizedTile.objects.get(pk=customized_tile_detail.id)
+                    customized_tile = CustomizedTile.objects.get(pk=customized_tile_detail['id'])
                 except CustomizedTile.DoesNotExist:
                     customized_tile = None
                     
@@ -72,8 +74,8 @@ class OrdersService:
                     tile=None,
                     customized_tile=customized_tile,
                     input_sq_ft=customized_tile_detail['inputSqFt'],
-                    price_per_sq_feet=customized_tile_detail['pricePerSqFeet'],
+                    price_per_sq_ft=customized_tile_detail['pricePerSqFt'],
                     price_per_tile=customized_tile_detail['pricePerTile'],
                     base_cost=customized_tile_detail['baseCost'],
-                    box=customized_tile.box
+                    box=customized_tile.tile.box
                 )
