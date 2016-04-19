@@ -225,6 +225,8 @@ class OrdersService:
             raise APIException(_('Please enter a valid zip code'))
         
         for tile in tiles:
+           
+            box = Tile.objects.get(pk=tile['id']).box
 
             root = ET.Element('QuoteRequests',
                             {'xmlns:xsi':'http://www.w3.org/2001/XMLSchema-instance',
@@ -269,19 +271,20 @@ class OrdersService:
 
             item = ET.SubElement(items, 'Item')
             ET.SubElement(item, 'Class').text = '50'
-            ET.SubElement(item, 'Weight').text = tile.box.weight
+            ET.SubElement(item, 'Weight').text = str(box.weight)
             ET.SubElement(item, 'WeightUom').text = 'lb'
-            ET.SubElement(item, 'Quantity').text = tile.boxes
+            ET.SubElement(item, 'Quantity').text = str(tile['boxes'])
             ET.SubElement(item, 'QuantityUom').text = 'BOXES'
 
             dimensions = ET.SubElement(item, 'Dimensions')
-            ET.SubElement(dimensions, 'Length').text = tile.box.lenght
-            ET.SubElement(dimensions, 'Width').text = tile.box.width
-            ET.SubElement(dimensions, 'Height').text = tile.box.height
+            ET.SubElement(dimensions, 'Length').text = str(box.length)
+            ET.SubElement(dimensions, 'Width').text = str(box.width)
+            ET.SubElement(dimensions, 'Height').text = str(box.height)
             ET.SubElement(dimensions, 'Uom').text = 'in'
 
             request_string = ET.tostring(root, encoding='unicode')
             
             response = client.service.GetQuoteRequestString(request_string)
-            shipping_costs += Decimal(response.find('./Quotes/Quote/Total').text)
+            root = ET.fromstring(response)
+            shipping_costs += Decimal(root[0][3][0][5].text)
         return shipping_costs

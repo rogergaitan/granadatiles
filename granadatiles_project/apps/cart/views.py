@@ -102,10 +102,11 @@ class TilesCountViewSet(BaseViewSet):
 
 class ShippingCostsViewSet(BaseViewSet):
     
-    def list(self, request):
-        tiles = request.query_params.getlist('tiles')
-        pickup_zip = request.query_params.get('pickup_zip')
-        destination_zip = request.query_params.get('destination_zip')
-        shipping_costs = OrdersService.get_shipping_costs(tiles, pickup_zip, destination_zip)
+    @list_route(methods=['POST'])
+    def shipping_costs(self, request):
+        tiles = request.data.get('tiles')
+        pickup = request.data.get('pickup')
+        delivery = request.data.get('delivery')
+        shipping_costs = OrdersService.get_shipping_costs(tiles, pickup, delivery)
         return Response({'shippingCosts': shipping_costs})
        
