@@ -104,9 +104,9 @@ class ShippingCostsViewSet(BaseViewSet):
     
     @list_route(methods=['POST'])
     def shipping_costs(self, request):
-        tiles = request.data.get('tiles')
+        orders = request.data.get('tiles')
         pickup = request.data.get('pickup')
         delivery = request.data.get('delivery')
-        shipping_costs = OrdersService.get_shipping_costs(tiles, pickup, delivery)
+        shipping_costs = OrdersService.get_shipping_costs(orders, pickup, delivery)
         return Response({'shippingCosts': shipping_costs})
        

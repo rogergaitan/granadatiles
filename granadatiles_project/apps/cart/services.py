@@ -205,7 +205,7 @@ class OrdersService:
     def remove_customized_sample(cart, customized_tile):
         cart.customized_sample_orders.get(customized_tile=customized_tile).delete()
 
-    def get_shipping_costs(tiles, pickup_zip, delivery_zip):
+    def get_shipping_costs(orders, pickup_zip, delivery_zip):
         import xml.etree.ElementTree as ET
         
         from suds.client import Client
@@ -224,9 +224,10 @@ class OrdersService:
         if pickup_zip is None or delivery_zip is None:
             raise APIException(_('Please enter a valid zip code'))
         
-        for tile in tiles:
+        for order in orders:
            
-            box = Tile.objects.get(pk=tile['id']).box
+            tile = Tile.objects.select_related('design__group__collection__shipping_data', 'box').get(pk=order['id'])
+            box = tile.box if tile.box else tile.design.group.collection.box
 
             root = ET.Element('QuoteRequests',
                             {'xmlns:xsi':'http://www.w3.org/2001/XMLSchema-instance',
@@ -270,11 +271,11 @@ class OrdersService:
             items = ET.SubElement(quote_request, 'Items')
 
             item = ET.SubElement(items, 'Item')
-            ET.SubElement(item, 'Class').text = '50'
+            ET.SubElement(item, 'Class').text = tile.design.group.collection.shipping_data.freigth_class
             ET.SubElement(item, 'Weight').text = str(box.weight)
             ET.SubElement(item, 'WeightUom').text = 'lb'
-            ET.SubElement(item, 'Quantity').text = str(tile['boxes'])
-            ET.SubElement(item, 'QuantityUom').text = 'BOXES'
+            ET.SubElement(item, 'Quantity').text = str(order['boxes'])
+            ET.SubElement(item, 'QuantityUom').text = tile.design.group.collection.shipping_data.quantity_uom
 
             dimensions = ET.SubElement(item, 'Dimensions')
             ET.SubElement(dimensions, 'Length').text = str(box.length)
