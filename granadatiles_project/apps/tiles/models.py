@@ -39,6 +39,7 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
     maximum_input_square_foot = models.PositiveIntegerField(default=5000, verbose_name=_('Maximum Input Square Foot'))
     minimum_input_square_foot = models.PositiveIntegerField(default=1, verbose_name=_('Minimum Input Square Foot'))
     box = models.ForeignKey('Box', null=True, blank=True, verbose_name=_('Box'))
+    shipping_data = models.ForeignKey('ShippingData', null=True, blank=True, verbose_name=_('Shipping Data'))
 
     @property
     def menu_thumbnail(self):
@@ -339,3 +340,15 @@ class GroupColor(models.Model):
     color = models.ForeignKey(PalleteColor)
     group = models.CharField(max_length=5)
     customized_tile = models.ForeignKey(CustomizedTile, related_name='color_groups')
+    
+    
+class ShippingData(models.Model):
+    quantity_uom = models.CharField(max_length=30, verbose_name=_('Quantity Unit Of Measure'))
+    freigth_class = models.CharField(max_length=10, verbose_name=_('Freight Class'))
+    
+    def __str__(self):
+        return "{} {}".format(self.quantity_uom, self.freigth_class)
+    
+    class Meta:
+        verbose_name = _('Shipping Data')
+        verbose_name_plural = _('Shipping Data')

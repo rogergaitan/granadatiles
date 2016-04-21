@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 from django.utils.translation import ugettext as _
-from .models import (Tile, Collection, Group, TileDesign, Use, Style,
+from .models import (Tile, Collection, Group, TileDesign, Use, Style, ShippingData,
                      PalleteColor, Warehouse, LeadTime, Box, CustomGroup, TileGroupColor)
 from django import forms
 
@@ -179,7 +179,7 @@ class GroupInline(admin.StackedInline):
 @admin.register(Collection)
 class CollectionAdmin(SummernoteModelAdmin):
     fields = ('title', 'title_es', 'menu_title', 'menu_title_es', 'list_id', 'description', 'description_es', 'introduction',
-              'introduction_es', 'slug', 'slug_es', 'image', 'menu_image', 'box', 'uses',
+              'introduction_es', 'slug', 'slug_es', 'image', 'menu_image', 'box', 'shipping_data', 'uses',
               'maximum_input_square_foot', 'minimum_input_square_foot', 'featured', 'show_in_menu')
 
     list_display = ('title','menu_title', 'groups_count', 'featured', 'show_in_menu')
@@ -282,3 +282,8 @@ class CustomGroupAdmin(SummernoteModelAdmin):
     list_editable = ('order', 'show_in_web')
     search_fields = ['title', 'title_es', 'id']
     prepopulated_fields = {'slug': ('title',), 'slug_es': ('title_es',)}
+    
+    
+@admin.register(ShippingData)
+class ShippingDataAdmin(admin.ModelAdmin):
+    list_display = ['quantity_uom', 'freigth_class']
