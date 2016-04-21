@@ -343,11 +343,47 @@ class GroupColor(models.Model):
     
     
 class ShippingData(models.Model):
-    quantity_uom = models.CharField(max_length=30, verbose_name=_('Quantity Unit Of Measure'))
-    freigth_class = models.CharField(max_length=10, verbose_name=_('Freight Class'))
+    QUANTITIES_UOM = (
+        ('BAG', 'BAG'),
+        ('BOXES', 'BOXES'),
+        ('BUNDLES', 'BUNDLES'),
+        ('CARTONS', 'CARTONS'),
+        ('CASES', 'CASES'),
+        ('CRATES', 'CRATES'),
+        ('DRUMS', 'DRUMS'),
+        ('LOOSE', 'LOOSE'),
+        ('PAILS', 'PAILS'),
+        ('PALLETS', 'PALLETS'),
+        ('PIECES', 'PIECES'),
+        ('POLES', 'POLES'),
+        ('TOTES', 'TOTES'),
+        ('ROLLS', 'ROLLS')
+    )
+    
+    FREIGHT_CLASSES = (
+        ('50', '50'),
+        ('60', '60'),
+        ('65', '65'),
+        ('70', '70'),
+        ('77.5', '77.5'),
+        ('85', '85'),
+        ('92.5', '92.5'),
+        ('100', '100'),
+        ('125', '125'),
+        ('150', '150'),
+        ('175', '175'),
+        ('200', '200'),
+        ('250', '250'),
+        ('300', '300'),
+        ('400', '400'),
+        ('500', '500'),
+    )
+    
+    quantity_uom = models.CharField(max_length=30, choices=QUANTITIES_UOM, verbose_name=_('Quantity Unit Of Measure'))
+    freigth_class = models.CharField(max_length=10, choices=FREIGHT_CLASSES, verbose_name=_('Freight Class'))
     
     def __str__(self):
-        return "{} {}".format(self.quantity_uom, self.freigth_class)
+        return "Quantity Of Measure:{}, Freight Class:{}".format(self.quantity_uom, self.freigth_class)
     
     class Meta:
         verbose_name = _('Shipping Data')
