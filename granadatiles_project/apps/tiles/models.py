@@ -155,7 +155,9 @@ class Tile(BaseCatalogModel):
     quantity_on_hand = models.IntegerField(verbose_name=_('Quantity'), default=0)
     sales_description = models.CharField(max_length=450 ,verbose_name=_('Sales description'), default='')
     sales_description_es = models.CharField(max_length=450 ,verbose_name=_('Sales description_es'), default='')
-    image = ImageField(upload_to='tiles', verbose_name=_('Image'), null = True, blank=True)
+    image = ImageField(upload_to='tiles', verbose_name=_('Image'), null=True, blank=True)
+    mosaic = ImageField(upload_to='mosaic', verbose_name=_('Mosaic'), null=True, blank=True)
+    is_not_square = models.BooleanField(default=False, verbose_name=_('Is Not Square'))
     main = models.BooleanField(default=False, verbose_name=_('Main'),
                                help_text='Is the main tile of the design')
     similar_tiles = models.ManyToManyField('Tile', verbose_name=_('Similar Tiles'), blank=True)
