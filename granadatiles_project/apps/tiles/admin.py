@@ -29,7 +29,8 @@ class TileDesignForm(forms.ModelForm):
 
 @admin.register(TileDesign)
 class TileDesignAdmin(admin.ModelAdmin):
-    fields = ('name', 'name_es', 'group', 'styles', 'show_in_web', 'custom_groups')
+    fields = ('name', 'name_es', 'group', 'weight', 'thickness', 'rotate_deg1', 'rotate_deg2', 
+              'rotate_deg3', 'rotate_deg4', 'plane', 'styles', 'custom_groups', 'show_in_web')
     list_display = ('name', 'get_collection', 'group', 'tiles_count', 'show_in_web')
     search_fields = ['name', 'name_es', ]
     list_filter = ['show_in_web']
@@ -113,16 +114,15 @@ class TileColorGroupInline(admin.TabularInline):
 @admin.register(Tile)
 class TileAdmin(admin.ModelAdmin):
     fields = ('name', 'name_es', 'list_id', 'design', 'sales_description',
-              'sales_description_es', 'size', 'height', 'width' ,'thickness','weight',
-              'sales_price','average_cost', 'quantity_on_hand','image','rotate_deg1', 
-              'rotate_deg2', 'rotate_deg3', 'rotate_deg4', 'plane',
-              'tearsheet', 'box',  'similar_tiles', 'main', 'new', 'in_stock', 'is_not_square',
-              'is_sample', 'sample', 'override_collection_box', 'is_active', 'on_sale', 'import_colors')
+              'sales_description_es', 'size', 'height', 'width' ,'sales_price','average_cost', 
+              'quantity_on_hand','image',  'tearsheet', 'box',  'similar_tiles', 'main', 'new', 
+              'in_stock', 'is_not_square','is_sample', 'sample', 'override_collection_box', 'is_active', 
+              'on_sale', 'import_colors')
 
-    list_display = ('name', 'sales_description', 'size', 'weight', 'thickness',
-                    'quantity_on_hand', 'in_stock', 'qty_is_sq_ft', 'is_active', 'new', 'on_sale')
+    list_display = ('name', 'sales_description', 'size', 'quantity_on_hand', 'in_stock', 
+                    'qty_is_sq_ft', 'is_active', 'new', 'on_sale')
 
-    list_editable = ['is_active', 'new', 'on_sale', 'size', 'weight', 'thickness', 'qty_is_sq_ft']
+    list_editable = ['is_active', 'new', 'on_sale', 'size', 'qty_is_sq_ft']
     search_fields = ['name', 'name_es', 'list_id', 'size']
     list_filter = ('new', CustomTileFilter, TileSizeFilter, TileImageFilter, 'override_collection_box')
     actions = ['tile_new']

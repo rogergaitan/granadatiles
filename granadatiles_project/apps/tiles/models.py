@@ -120,10 +120,24 @@ class CustomGroup(BaseGroup):
         
 
 class TileDesign(BaseCatalogModel):
+    ROTATE_DEGREES = (
+        (0, '0 deg'),
+        (90, '90 deg'),
+        (270, '270 deg'),
+        (180, '180 deg'),
+    )
+    
     group = models.ForeignKey(Group, related_name='designs', verbose_name=_('Tiles Group'))
     custom_groups = models.ManyToManyField(CustomGroup, related_name='designs', verbose_name=_('Custom Groups'))
     styles = models.ManyToManyField('Style', related_name='designs', verbose_name=_('Styles'))
     show_in_web = models.BooleanField(default=True, verbose_name=_('Show in web'))
+    rotate_deg1 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 0)
+    rotate_deg2 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 90)
+    rotate_deg3 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 270)
+    rotate_deg4 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 180)
+    plane = models.FileField(upload_to='designs', null= True, blank=True, verbose_name=_('Plane'))
+    weight = models.CharField(max_length=10, default='', null=True, verbose_name=_('Weight'))
+    thickness = models.CharField(max_length=10, default='', null=True, verbose_name=('Thickness'))
 
     def tiles_count(self):
         return self.tiles.count()
@@ -142,12 +156,6 @@ class TileDesign(BaseCatalogModel):
 
 
 class Tile(BaseCatalogModel):
-    ROTATE_DEGREES = (
-         (0, '0 deg'),
-         (90, '90 deg'),
-         (270, '270 deg'),
-         (180, '180 deg'),
-        )
     list_id = models.CharField(max_length=30, blank=True, null = True, unique = True)
     is_active = models.BooleanField(verbose_name=_('Is Active'), default=True)
     sales_price = models.FloatField(verbose_name=_('Sales Price'), blank=True, null=True)
@@ -167,20 +175,14 @@ class Tile(BaseCatalogModel):
     size = models.CharField(max_length=10, default='', null=True, verbose_name=_('Size'))
     height = models.IntegerField(null=True, blank=True, verbose_name=_('Height'))
     width = models.IntegerField(null=True, blank=True, verbose_name=_('Width'))
-    weight = models.CharField(max_length=10, default='', null=True, verbose_name=_('Weight'))
-    thickness = models.CharField(max_length=10, default='', null=True, verbose_name=('Thickness'))
     on_sale = models.BooleanField(default=False, verbose_name=_('On Sale'))
     tearsheet = models.FileField(upload_to='tearsheets', null=True, blank=True, verbose_name=_('Tearsheet'))
-    plane = models.FileField(upload_to='designs', null= True, blank=True, verbose_name=_('Plane'))
+    
     custom = models.BooleanField(default=False, blank=True, verbose_name=_('In Stock'))
     sample = models.ForeignKey('self', blank=True, null=True, related_name='samples', verbose_name=_('Sample'))
     override_collection_box = models.BooleanField(default=False, verbose_name=_('Override Collection Box'))
     box = models.ForeignKey('Box', null=True, blank=True, verbose_name=_('Box'))
     qty_is_sq_ft = models.BooleanField(default=False, verbose_name=_('Quantity Square Foot'))
-    rotate_deg1 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 0)
-    rotate_deg2 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 90)
-    rotate_deg3 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 270)
-    rotate_deg4 = models.PositiveIntegerField(choices = ROTATE_DEGREES, default = 180)
     import_colors = models.CharField(max_length=800 , blank=True, null=True,
                                      help_text=_('Warning any input here will override the group colors!'),
                                      verbose_name=_('Import Colors'))
