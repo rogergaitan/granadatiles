@@ -40,10 +40,10 @@ class TileDetailDto(BaseCatalogDto):
         self.image = tile.image.url if tile.image else ''
         self.mosaic = tile.mosaic.url if tile.mosaic else ''
         self.isNotSquare = tile.is_not_square
-        self.rotateDeg1 = tile.rotate_deg1
-        self.rotateDeg2 = tile.rotate_deg2
-        self.rotateDeg3 = tile.rotate_deg3
-        self.rotateDeg4 = tile.rotate_deg4
+        self.rotateDeg1 = tile.design.rotate_deg1
+        self.rotateDeg2 = tile.design.rotate_deg2
+        self.rotateDeg3 = tile.design.rotate_deg3
+        self.rotateDeg4 = tile.design.rotate_deg4
         self.new = tile.new
         self.uses = [TileUseDto(use, language) for use in tile.design.group.collection.uses.all()]
         self.styles = [TileStyleDto(style, language) for style in tile.design.styles.all()]
@@ -73,10 +73,10 @@ class MainTileDto(BaseDto):
         self.image = tile.image.url if tile.image else ''
         self.mosaic = tile.mosaic.url if tile.mosaic else ''
         self.isNotSquare = tile.is_not_square
-        self.rotateDeg1 = tile.rotate_deg1
-        self.rotateDeg2 = tile.rotate_deg2
-        self.rotateDeg3 = tile.rotate_deg3
-        self.rotateDeg4 = tile.rotate_deg4
+        self.rotateDeg1 = tile.design.rotate_deg1
+        self.rotateDeg2 = tile.design.rotate_deg2
+        self.rotateDeg3 = tile.design.rotate_deg3
+        self.rotateDeg4 = tile.design.rotate_deg4
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
         self.hasInstallationPhotos = tile.has_installation_photos()
         self.isSample = tile.is_sample
@@ -188,14 +188,14 @@ class TileOrderDto(BaseCatalogDto):
         self.image = tile.image.url if tile.image else ''
         self.mosaic = tile.mosaic.url if tile.mosaic else ''
         self.isNotSquare = tile.is_not_square
-        self.rotateDeg1 = tile.rotate_deg1
-        self.rotateDeg2 = tile.rotate_deg2
-        self.rotateDeg3 = tile.rotate_deg3
-        self.rotateDeg4 = tile.rotate_deg4
-        self.plane = tile.plane.url if tile.plane else ''
+        self.rotateDeg1 = tile.design.rotate_deg1
+        self.rotateDeg2 = tile.design.rotate_deg2
+        self.rotateDeg3 = tile.design.rotate_deg3
+        self.rotateDeg4 = tile.design.rotate_deg4
+        self.plane = tile.design.plane.url if tile.design.plane else ''
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
-        self.thickness = tile.thickness
-        self.weight = tile.weight
+        self.thickness = tile.design.thickness
+        self.weight = tile.design.weight
         self.colors = [TileColorDto(color, language, colorIsDict=True) for color in tile.colors.values('color__id', 'color__name', 'color__hexadecimalCode').distinct()]
         self.colorGroups = [GroupColorDto(colorGroup, language) for colorGroup in tile.colors.all()]
         self.uses = [TileUseDto(use, language) for use in tile.design.group.collection.uses.all()]
@@ -241,10 +241,10 @@ class InStockDto(BaseCatalogDto):
         super().__init__(tile, language)
         self.image = tile.image.url if tile.image else ''
         self.isNotSquare = tile.is_not_square
-        self.rotateDeg1 = tile.rotate_deg1
-        self.rotateDeg2 = tile.rotate_deg2
-        self.rotateDeg3 = tile.rotate_deg3
-        self.rotateDeg4 = tile.rotate_deg4
+        self.rotateDeg1 = tile.design.rotate_deg1
+        self.rotateDeg2 = tile.design.rotate_deg2
+        self.rotateDeg3 = tile.design.rotate_deg3
+        self.rotateDeg4 = tile.design.rotate_deg4
         self.collection = tile.design.group.collection.get_title(language) \
                           if tile.design.group.collection else ''
         self.size = tile.size
@@ -303,7 +303,7 @@ class PortfolioTilesDto(BasePortfolioTilesDto):
         super().__init__(tile, language)
         self.portfoliotile_id = portfoliotile_id
         self.isCustomTile = isCustomTile
-        self.plane = tile.plane.url if tile.plane else ''
+        self.plane = tile.design.plane.url if tile.design.plane else ''
         if isCustomTile:
             self.colorGroups = [GroupColorDto(colorGroup, language) for colorGroup in colorGroups]
         else:
