@@ -18,6 +18,7 @@ class TileDto(BaseCatalogDto):
         super().__init__(tile, language)
         self.size = tile.size
         self.image = tile.image.url if tile.image else ''
+        self.isNotSquare = tile.is_not_square
         self.colors = [TileColorDto(color, language, colorIsDict=True) for color in tile.colors.values('color__id', 'color__name').distinct()]
         self.inStock = tile.in_stock()
         self.plane = tile.plane.url if tile.plane else ''

@@ -10,6 +10,7 @@ class TileColorSerializer(BaseCatalogSerializer):
 class TileSerializer(BaseCatalogSerializer):
     size = serializers.CharField()
     image = serializers.CharField()
+    isNotSquare = serializers.BooleanField()
     colors = TileColorSerializer(many=True)
     inStock = serializers.BooleanField()
     plane = serializers.CharField()
