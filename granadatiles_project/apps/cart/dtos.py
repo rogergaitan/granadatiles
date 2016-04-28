@@ -21,7 +21,7 @@ class TileDto(BaseCatalogDto):
         self.isNotSquare = tile.is_not_square
         self.colors = [TileColorDto(color, language, colorIsDict=True) for color in tile.colors.values('color__id', 'color__name').distinct()]
         self.inStock = tile.in_stock()
-        self.plane = tile.plane.url if tile.plane else ''
+        self.plane = tile.design.plane.url if tile.design.plane else ''
 
 
 class BaseTileOrdersDto(BaseDto):
