@@ -38,6 +38,8 @@ class TileDetailDto(BaseCatalogDto):
         super().__init__(tile, language)
         self.sizes = [TileSizeDto(size) for size in tile.get_available_sizes()]
         self.image = tile.image.url if tile.image else ''
+        self.mosaic = tile.mosaic.url if tile.mosaic else ''
+        self.isNotSquare = tile.is_not_square
         self.rotateDeg1 = tile.rotate_deg1
         self.rotateDeg2 = tile.rotate_deg2
         self.rotateDeg3 = tile.rotate_deg3
@@ -69,6 +71,8 @@ class MainTileDto(BaseDto):
             self.name = tile.name[:m.start() - 1] if m else tile.name
         self.sizes = tile.size
         self.image = tile.image.url if tile.image else ''
+        self.mosaic = tile.mosaic.url if tile.mosaic else ''
+        self.isNotSquare = tile.is_not_square
         self.rotateDeg1 = tile.rotate_deg1
         self.rotateDeg2 = tile.rotate_deg2
         self.rotateDeg3 = tile.rotate_deg3
@@ -91,6 +95,8 @@ class MinorTileDto(TileDto):
     def __init__(self, tile, language):
         super().__init__(tile, language)
         self.image = tile.image.url if tile.image else ''
+        self.mosaic = tile.mosaic.url if tile.mosaic else ''
+        self.isNotSquare = tile.is_not_square
         self.onSale = True if tile.on_sale else False
 
 
@@ -123,7 +129,8 @@ class SimilarTileDto(BaseCatalogDto):
 
     def __init__(self, tile, language):
         super().__init__(tile, language)
-        self.image = tile.image.url if tile.image else ''
+        self.image = tile.mosaic.url if tile.mosaic else ''
+        self.isNotSquare = tile.is_not_square
         self.url = tile.get_absolute_url(language)
 
 
@@ -179,6 +186,8 @@ class TileOrderDto(BaseCatalogDto):
     def __init__(self, tile, portfolio, language):
         super().__init__(tile, language)
         self.image = tile.image.url if tile.image else ''
+        self.mosaic = tile.mosaic.url if tile.mosaic else ''
+        self.isNotSquare = tile.is_not_square
         self.rotateDeg1 = tile.rotate_deg1
         self.rotateDeg2 = tile.rotate_deg2
         self.rotateDeg3 = tile.rotate_deg3
@@ -231,6 +240,7 @@ class InStockDto(BaseCatalogDto):
     def __init__(self, tile, is_sample, language):
         super().__init__(tile, language)
         self.image = tile.image.url if tile.image else ''
+        self.isNotSquare = tile.is_not_square
         self.rotateDeg1 = tile.rotate_deg1
         self.rotateDeg2 = tile.rotate_deg2
         self.rotateDeg3 = tile.rotate_deg3
@@ -335,4 +345,5 @@ class LayoutTilesDto(BaseCatalogDto):
         super().__init__(tile, language)
         self.collection = tile.design.group.collection.get_title(language)
         self.image = tile.image.url if tile.image else ''
+        self.isNotSquare = tile.is_not_square
         self.size = tile.size

@@ -35,11 +35,15 @@ class TileSizeSerializer(serializers.Serializer):
 
 class TileSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
+    mosaic = serializers.CharField()
+    isNotSquare = serializers.BooleanField()
     sizes = serializers.CharField()
     onSale = serializers.BooleanField()
 
 class MainTileSerialzer(BaseCatalogSerializer):
     image = serializers.CharField()
+    mosaic = serializers.CharField()
+    isNotSquare = serializers.BooleanField()
     rotateDeg1 = serializers.IntegerField()
     rotateDeg2 = serializers.IntegerField()
     rotateDeg3 = serializers.IntegerField()
@@ -56,6 +60,8 @@ class MainTileSerialzer(BaseCatalogSerializer):
 
 class TileDetailSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
+    mosaic = serializers.CharField()
+    isNotSquare = serializers.BooleanField()
     rotateDeg1 = serializers.IntegerField()
     rotateDeg2 = serializers.IntegerField()
     rotateDeg3 = serializers.IntegerField()
@@ -86,6 +92,7 @@ class TileDesignerSerializer(BaseSerializer):
 
 class SimilarTilesSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
+    isNotSquare = serializers.BooleanField()
     url = serializers.CharField()
 
 
@@ -111,6 +118,8 @@ class GroupColorSerializer(serializers.Serializer):
 
 class TileOrderSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
+    mosaic = serializers.CharField()
+    isNotSquare = serializers.BooleanField()
     rotateDeg1 = serializers.IntegerField()
     rotateDeg2 = serializers.IntegerField()
     rotateDeg3 = serializers.IntegerField()
@@ -147,6 +156,7 @@ class TileOrderSerializer(BaseCatalogSerializer):
 class InStockSerializer(BaseCatalogSerializer):
     name = serializers.CharField()
     image = serializers.CharField()
+    isNotSquare = serializers.BooleanField()
     rotateDeg1 = serializers.IntegerField()
     rotateDeg2 = serializers.IntegerField()
     rotateDeg3 = serializers.IntegerField()
@@ -207,5 +217,6 @@ class LayoutSerializer(BaseSerializer):
 
 class LayoutTilesSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
+    isNotSquare = serializers.BooleanField()
     collection = serializers.CharField()
     size = serializers.CharField()
