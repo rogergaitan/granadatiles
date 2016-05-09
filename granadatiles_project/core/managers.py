@@ -45,3 +45,17 @@ class BaseDateManager(models.Manager):
         DD = timedelta(days=1)
         max_date = max_date - DD
         return self.filter(date__gte=min_date, date__lte=max_date).order_by('-date')
+
+
+class SeoManager(models.Manager):
+
+    def get_seo_data(self, id, language):
+        item = self.get(pk=id)
+        data = {
+            'title': item.get_page_title(language),
+            'meta_description': item.meta_description,
+            'meta_description_es': item.meta_description_es,
+            'meta_keywords': item.meta_keywords,
+            'meta_keywords_es': item.meta_keywords_es
+        }
+        return data

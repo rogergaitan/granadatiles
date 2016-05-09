@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext as _
 from sorl.thumbnail import ImageField
-from core.managers import BaseSlugManager
+from core.managers import BaseSlugManager, SeoManager
 
 
 def model_directory_path(instance, filename):
@@ -114,6 +114,8 @@ class BaseSeoModel(models.Model):
     meta_keywords = models.CharField(default='', blank=True, null=True, max_length=500, verbose_name=_('Metakeywords'))
     meta_keywords_es = models.CharField(default='', blank=True, null=True, max_length=500,
                                         verbose_name=_('Metakeywords_es'))
+    objects = models.Manager()
+    seo = SeoManager()
     
     def get_page_title(self, language):
         if language == 'es' and self.page_title_es is not None and self.page_title_es:

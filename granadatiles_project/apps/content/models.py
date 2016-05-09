@@ -2,7 +2,6 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from django.contrib.flatpages.models import FlatPage
 from core.models import BaseContentModel, BaseCatalogModel, BaseGalleryNavImageModel, BaseCatalogOrderModel, BaseSeoModel
-from .managers import SectionManager
 from apps.news.models import Article
 from apps.tiles.models import Tile, Collection
 from apps.galleries.models import Designer, Photographer
@@ -10,9 +9,7 @@ from sorl.thumbnail.fields import ImageField
 
 
 class Section(BaseCatalogModel, BaseContentModel, BaseSeoModel):
-    objects = models.Manager()
-    seo = SectionManager()
-
+    
     class Meta:
         verbose_name = _('Section')
         verbose_name_plural = _('Sections')
