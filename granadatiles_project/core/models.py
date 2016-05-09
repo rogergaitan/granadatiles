@@ -102,3 +102,26 @@ class BaseGalleryNavImageModel(BaseGalleryImageModel):
 
     class Meta:
         abstract = True
+        
+
+class BaseSeoModel(models.Model):
+    meta_description = models.CharField(default='', blank=True, null=True, max_length=500,
+                                        verbose_name=_('Metadescription'))
+    meta_description_es = models.CharField(default='', blank=True, null=True, max_length=500,
+                                           verbose_name=_('Metadescription_es'))
+    meta_keywords = models.CharField(default='', blank=True, null=True, max_length=500, verbose_name=_('Metakeywords'))
+    meta_keywords_es = models.CharField(default='', blank=True, null=True, max_length=500,
+                                        verbose_name=_('Metakeywords_es'))
+    
+    def get_meta_description(self, language):
+        if language == 'es' and self.meta_description_es is not None and self.meta_description_es:
+            return self.meta_description_es
+        return self.meta_description
+
+    def get_meta_keywords(self, language):
+        if language == 'es' and self.meta_keywords_es is not None and self.meta_keywords_es:
+            return self.meta_keywords_es
+        return self.meta_keywords
+    
+    class Meta:
+        abstract = True

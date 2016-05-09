@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext as _
 from django.contrib.flatpages.models import FlatPage
-from core.models import BaseContentModel, BaseCatalogModel, BaseGalleryNavImageModel, BaseCatalogOrderModel
+from core.models import BaseContentModel, BaseCatalogModel, BaseGalleryNavImageModel, BaseCatalogOrderModel, BaseSeoModel
 from .managers import SectionManager
 from apps.news.models import Article
 from apps.tiles.models import Tile, Collection
@@ -9,16 +9,9 @@ from apps.galleries.models import Designer, Photographer
 from sorl.thumbnail.fields import ImageField
 
 
-class Section(BaseCatalogModel, BaseContentModel):
+class Section(BaseCatalogModel, BaseContentModel, BaseSeoModel):
     page_title = models.CharField(default='', blank=True, null=True, max_length=500, verbose_name=_('Pagetitle'))
     page_title_es = models.CharField(default='', blank=True, null=True, max_length=500, verbose_name=_('Pagetitle_es'))
-    meta_description = models.CharField(default='', blank=True, null=True, max_length=500,
-                                        verbose_name=_('Metadescription'))
-    meta_description_es = models.CharField(default='', blank=True, null=True, max_length=500,
-                                           verbose_name=_('Metadescription_es'))
-    meta_keywords = models.CharField(default='', blank=True, null=True, max_length=500, verbose_name=_('Metakeywords'))
-    meta_keywords_es = models.CharField(default='', blank=True, null=True, max_length=500,
-                                        verbose_name=_('Metakeywords_es'))
     objects = models.Manager()
     seo = SectionManager()
 
@@ -26,16 +19,6 @@ class Section(BaseCatalogModel, BaseContentModel):
         if language == 'es' and self.page_title_es is not None and self.page_title_es:
             return self.page_title_es
         return self.page_title
-
-    def get_meta_description(self, language):
-        if language == 'es' and self.meta_description_es is not None and self.meta_description_es:
-            return self.meta_description_es
-        return self.meta_description
-
-    def get_meta_keywords(self, language):
-        if language == 'es' and self.meta_keywords_es is not None and self.meta_keywords_es:
-            return self.meta_keywords_es
-        return self.meta_keywords
 
     class Meta:
         verbose_name = _('Section')
@@ -135,7 +118,7 @@ class IndexNavigation(BaseGalleryNavImageModel):
         ordering = ['title']
         
 
-class ExtendedFlatPage(FlatPage):
+class ExtendedFlatPage(FlatPage, BaseSeoModel):
     MENU_CHOICES = (
             (1, 'Product Information'),
             (2, 'News/Press'),
@@ -173,7 +156,7 @@ class ExtendedFlatPage(FlatPage):
     def __str__(self):
         return self.title
 
-class CollectionContent(FlatPage):
+class CollectionContent(FlatPage, BaseSeoModel):
     title_es = models.CharField(max_length=200, blank=True, null = True)
     content_es = models.TextField(blank=True, null = True)
     menu_title = models.CharField(max_length=200, default='')
