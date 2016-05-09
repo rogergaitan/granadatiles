@@ -10,15 +10,8 @@ from sorl.thumbnail.fields import ImageField
 
 
 class Section(BaseCatalogModel, BaseContentModel, BaseSeoModel):
-    page_title = models.CharField(default='', blank=True, null=True, max_length=500, verbose_name=_('Pagetitle'))
-    page_title_es = models.CharField(default='', blank=True, null=True, max_length=500, verbose_name=_('Pagetitle_es'))
     objects = models.Manager()
     seo = SectionManager()
-
-    def get_page_title(self, language):
-        if language == 'es' and self.page_title_es is not None and self.page_title_es:
-            return self.page_title_es
-        return self.page_title
 
     class Meta:
         verbose_name = _('Section')
