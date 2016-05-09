@@ -17,6 +17,8 @@ class ImagesInline(admin.StackedInline, SummernoteInlineModelAdmin):
 
 @admin.register(Section)
 class SectionAdmin(SummernoteModelAdmin):
+    fields = ('page_title', 'page_title_es', 'meta_description', 'meta_description_es', 'meta_keywords', 
+              'meta_keywords_es', 'title', 'title_es', 'description', 'description_es')
     list_display = ('name', 'title', )
     inlines = [ImagesInline]
     search_fields = ['name', 'name_es']
