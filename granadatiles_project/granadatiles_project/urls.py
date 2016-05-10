@@ -38,7 +38,7 @@ urlpatterns += i18n_patterns(
         include('apps.news.serve_urls', namespace='sr-news')),
     url(_(r'^gallery/'),
         include('apps.galleries.serve_urls', namespace='sr-galleries')),
-     url(r'^pages/', include('django.contrib.flatpages.urls')),
+     url(r'^', include('django.contrib.flatpages.urls')),
      url(_(r'^cart/'),
         include('apps.cart.serve_urls', namespace='sr-cart')),
 )

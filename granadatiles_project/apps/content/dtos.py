@@ -55,7 +55,7 @@ class FlatPageMenuDto(object):
         if(language is None):
             language='en'
         self.title = flatPage.get_menu(language = language)
-        self.url = '/' + language +  '/pages' + flatPage.get_absolute_url()
+        self.url = '/' + language + flatPage.get_absolute_url()
 
 class CollectionContentDto(object):
 
