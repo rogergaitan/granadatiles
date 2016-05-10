@@ -17,8 +17,8 @@ class ImagesInline(admin.StackedInline, SummernoteInlineModelAdmin):
 
 @admin.register(Section)
 class SectionAdmin(SummernoteModelAdmin):
-    fields = ('page_title', 'page_title_es', 'meta_description', 'meta_description_es', 'meta_keywords', 
-              'meta_keywords_es', 'title', 'title_es', 'description', 'description_es')
+    fields = ('title', 'title_es', 'page_title', 'page_title_es', 'meta_description', 'meta_description_es', 
+              'meta_keywords', 'meta_keywords_es', 'description', 'description_es')
     list_display = ('name', 'title', )
     inlines = [ImagesInline]
     search_fields = ['name', 'name_es']
@@ -80,8 +80,8 @@ class ExtendedFlatPageForm(FlatpageForm):
 class ExtendedFlatPageAdmin(FlatPageAdmin):
     form = ExtendedFlatPageForm
     fieldsets = (
-            (None, {'fields': ('page_title', 'page_title_es','meta_description', 'meta_description_es', 'meta_keywords',    
-                               'meta_keywords_es', 'url', 'url_es', 'title', 'title_es', 'menu_title', 'menu_title_es', 'order', 
+            (None, {'fields': ('title', 'title_es', 'page_title', 'page_title_es','meta_description', 'meta_description_es', 
+                               'meta_keywords', 'meta_keywords_es', 'url', 'url_es', 'menu_title', 'menu_title_es', 'order', 
                                'content', 'content_es', 'sites', 'cover', 'template_name', 'menu')}),
             (_('Advanced options'), {'classes': ('collapse',), 'fields': ('enable_comments', 'registration_required', )}),
         )
@@ -104,8 +104,8 @@ class CollectionContentForm(FlatpageForm):
 class CollectionContentAdmin(FlatPageAdmin):
     form = CollectionContentForm
     fieldsets = (
-            (None, {'fields': ('page_title', 'page_title_es','meta_description', 'meta_description_es', 'meta_keywords',         
-                               'meta_keywords_es', 'collection', 'url', 'url_es', 'title', 'title_es', 'menu_title', 'menu_title_es', 
+            (None, {'fields': ('title', 'title_es', 'page_title', 'page_title_es','meta_description', 'meta_description_es',                
+                               'meta_keywords', 'meta_keywords_es', 'collection', 'url', 'url_es', 'menu_title', 'menu_title_es', 
                                'order', 'content', 'content_es', 'sites', 'cover', 'template_name')}),
             (_('Advanced options'), {'classes': ('collapse',), 'fields': ('enable_comments', 'registration_required', )}),
         )

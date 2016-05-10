@@ -178,7 +178,7 @@ class GroupInline(admin.StackedInline):
 
 @admin.register(Collection)
 class CollectionAdmin(SummernoteModelAdmin):
-    fields = ('slug', 'slug_es', 'title', 'title_es', 'menu_title', 'menu_title_es', 'list_id', 'description', 
+    fields = ('title', 'title_es', 'slug', 'slug_es', 'menu_title', 'menu_title_es', 'list_id', 'description',
               'description_es', 'introduction','introduction_es', 'image', 'menu_image', 'box', 'shipping_data', 
               'uses', 'maximum_input_square_foot', 'minimum_input_square_foot', 'featured', 'show_in_menu')
 
@@ -220,8 +220,8 @@ class TileDesignInline(admin.StackedInline):
 
 @admin.register(Group)
 class GroupAdmin(SummernoteModelAdmin):
-    fields = ('slug', 'slug_es','title', 'title_es', 'list_id', 'collection', 'description', 
-              'description_es', 'image', 'show_in_web')
+    fields = ('title', 'title_es', 'slug', 'slug_es', 'list_id', 'collection', 
+              'description', 'description_es', 'image', 'show_in_web')
 
     list_display = ('title','collection', 'designs_count', 'tiles_count')
     search_fields = ['title', 'title_es', 'list_id']
@@ -275,7 +275,7 @@ class BoxAdmin(admin.ModelAdmin):
 
 @admin.register(CustomGroup)
 class CustomGroupAdmin(SummernoteModelAdmin):
-    fields = ('slug', 'slug_es','title', 'title_es', 'collection', 'description', 
+    fields = ('title', 'title_es', 'slug', 'slug_es', 'collection', 'description', 
               'description_es', 'order', 'image', 'show_in_web')
 
     list_display = ('title','collection', 'order', 'show_in_web', 'slug', 'slug_es')
