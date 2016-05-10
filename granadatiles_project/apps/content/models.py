@@ -114,6 +114,7 @@ class ExtendedFlatPage(FlatPage, BaseSeoModel):
             (2, 'News/Press'),
             (3, 'About Us'),
         )
+    url_es = models.CharField(_('URL_ES'), max_length=100, db_index=True, null=True, blank=True)
     title_es = models.CharField(max_length=200, blank=True, null = True)
     content_es = models.TextField(blank=True, null = True)
     menu_title = models.CharField(max_length=200, default='')

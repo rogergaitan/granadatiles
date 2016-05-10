@@ -3,6 +3,7 @@ from sorl.thumbnail.base import ThumbnailBackend
 from django.template.defaultfilters import slugify
 from django.conf import settings
 from django.apps.config import AppConfig
+from django.contrib.flatpages.middleware import FlatpageFallbackMiddleware
 
 class SEOThumbnailBackend(ThumbnailBackend):
     """

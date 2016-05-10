@@ -2,7 +2,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from apps.content.views import index, about_us, videos, compare_products, cement_vs_ceramic, color_palletes, search
+from apps.content.views import index, about_us, videos, compare_products, cement_vs_ceramic, color_palletes, search, flatpage
 from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import ugettext_lazy as _
 from rest_framework.authtoken import views
@@ -38,9 +38,10 @@ urlpatterns += i18n_patterns(
         include('apps.news.serve_urls', namespace='sr-news')),
     url(_(r'^gallery/'),
         include('apps.galleries.serve_urls', namespace='sr-galleries')),
-     url(r'^', include('django.contrib.flatpages.urls')),
      url(_(r'^cart/'),
         include('apps.cart.serve_urls', namespace='sr-cart')),
+     #url(r'^', include('django.contrib.flatpages.urls')),
+     url(r'^', include('apps.content.serve_urls')),
 )
 
 if settings.DEBUG:

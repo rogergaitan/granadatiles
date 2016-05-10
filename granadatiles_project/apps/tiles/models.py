@@ -2,7 +2,7 @@ import re
 from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _, activate
 from django.dispatch.dispatcher import receiver
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -54,6 +54,7 @@ class Collection(BaseGalleryImageModel, BaseSlugModel):
 
     def get_absolute_url(self, language=None):
         slug = self.get_slug(language)
+        activate(language)
         return reverse('sr-collections:sr-detail', kwargs={'slug': slug})
 
     def get_introduction(self, language):
@@ -91,6 +92,7 @@ class BaseGroup(BaseGalleryImageModel, BaseSlugModel):
     
     def get_absolute_url(self, language=None):
         slug = self.get_slug(language)
+        activate(language)
         return reverse('sr-collections:sr-group-detail',
                        kwargs={
                            'group_slug': slug,
