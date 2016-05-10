@@ -144,6 +144,11 @@ class ExtendedFlatPage(FlatPage, BaseSeoModel):
         if language == 'es' and self.content_es is not None and self.content_es:
             return self.content_es
         return self.content
+    
+    def get_url(self, language):
+        if language == 'es' and self.url_es is not None and self.url_es:
+            return self.url_es
+        return self.url
 
     def __str__(self):
         return self.title
@@ -179,6 +184,11 @@ class CollectionContent(FlatPage, BaseSeoModel):
         if language == 'es' and self.content_es is not None and self.content_es:
             return self.content_es
         return self.content
+    
+    def get_url(self, language):
+        if language == 'es' and self.url_es is not None and self.url_es:
+            return self.url_es
+        return self.url
 
     def __str__(self):
         return self.title
