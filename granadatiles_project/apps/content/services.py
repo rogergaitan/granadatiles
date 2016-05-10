@@ -52,12 +52,12 @@ class SectionService(object):
 
 class FlatPageService(object):
 
-    def get_flatpages_for_menu(menuId , language = None):
+    def get_flatpages_for_menu(menuId , language=None):
         flatpages = ExtendedFlatPage.objects.filter(menu=int(menuId))
         flatpagesDto = [FlatPageMenuDto(flatpage, language) for flatpage in flatpages]
         return flatpagesDto
 
-    def get_flatpage(title, language = None):
+    def get_flatpage(title, language=None):
         flatpage = get_object_or_404(ExtendedFlatPage, title=title)
         flatPageDto = FlatPageDto(flatpage, language = language)
         return flatPageDto
@@ -69,14 +69,14 @@ class FlatPageService(object):
 
 class CollectionContentService(object):
 
-    def get_menu_content(collectionId, language = None):
+    def get_menu_content(collectionId, language=None):
         content = CollectionContent.objects.filter(collection__id = collectionId)
         contentDto = [FlatPageMenuDto(item, language) for item in content]
         return contentDto
 
-    def get_content(id, language = None):
-        content = get_object_or_404(CollectionContent, pk=id)
-        collectionContentDto = CollectionContentDto(content, language = language)
+    def get_content(title, language=None):
+        content = get_object_or_404(CollectionContent, title=title)
+        collectionContentDto = CollectionContentDto(content, language=language)
         return collectionContentDto
 
 class FeaturedVideoService(object):
