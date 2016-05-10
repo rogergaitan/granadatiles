@@ -99,18 +99,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'granadatiles_project.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -205,3 +193,8 @@ from core.utils import uploaded_filepath
 SUMMERNOTE_CONFIG = {
     'attachment_upload_to':   uploaded_filepath
     }
+
+try:
+    from granadatiles_project.local_settings import *
+except ImportError:
+    pass

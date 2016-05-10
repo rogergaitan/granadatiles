@@ -122,6 +122,7 @@ class ExtendedFlatPage(FlatPage, BaseSeoModel):
                                         help_text='El orden en el que aparecera en el menu selecciondado despues de los elementos predefinidos')
     menu = models.IntegerField(choices=MENU_CHOICES, default=1)
     cover = ImageField(null=True, blank=True, verbose_name=_('Cover'))
+    objects = models.Manager()
 
     class Meta:
         verbose_name = _('flat page')
@@ -155,6 +156,7 @@ class CollectionContent(FlatPage, BaseSeoModel):
                                         help_text='El orden en el que aparecera en el menu selecciondado despues de los elementos predefinidos')
     cover = ImageField(null=True, blank=True, verbose_name=_('Cover'))
     collection = models.ForeignKey(Collection, related_name='content', verbose_name='collection')
+    objects = models.Manager()
 
     class Meta:
         verbose_name = _('Collection content')
