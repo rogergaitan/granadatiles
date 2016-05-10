@@ -15,7 +15,7 @@ from django.utils.safestring import mark_safe
 from django.template import loader
 from django.views.decorators.csrf import csrf_protect
 from django.conf import settings
-from apps.content.models import ExtendedFlatPage
+from apps.content.models import ExtendedFlatPage, CollectionContent
 
 DEFAULT_TEMPLATE = 'flatpages/default.html'
 
@@ -23,13 +23,15 @@ def flatpage(request, url):
     if not url.startswith('/'):
         url = '/' + url
     site_id = get_current_site(request).id
+    url_en = url
     try:
         if request.LANGUAGE_CODE == 'es':
-            f = get_object_or_404(ExtendedFlatPage,
-            url_es=url, sites=site_id)
-        else:
-            f = get_object_or_404(FlatPage,
-                url=url, sites=site_id)
+            url_en = CollectionContent.objects.filter(url_es = url)[0].url if CollectionContent.objects.filter(url_es = url).count() > 0 else None
+            if url_en is None:
+                url_en = ExtendedFlatPage.objects.filter(url_es = url)[0].url if ExtendedFlatPage.objects.filter(url_es = url).count() > 0 else None 
+        url_en = url if url_en is None else url_en
+        f = get_object_or_404(FlatPage,
+            url=url_en, sites=site_id)
     except Http404:
         if not url.endswith('/') and settings.APPEND_SLASH:
             url += '/'

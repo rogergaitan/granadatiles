@@ -105,7 +105,7 @@ class CollectionContentAdmin(FlatPageAdmin):
     form = CollectionContentForm
     fieldsets = (
             (None, {'fields': ('page_title', 'page_title_es','meta_description', 'meta_description_es', 'meta_keywords',         
-                               'meta_keywords_es', 'collection', 'url', 'title', 'title_es', 'menu_title', 'menu_title_es', 
+                               'meta_keywords_es', 'collection', 'url', 'url_es', 'title', 'title_es', 'menu_title', 'menu_title_es', 
                                'order', 'content', 'content_es', 'sites', 'cover', 'template_name')}),
             (_('Advanced options'), {'classes': ('collapse',), 'fields': ('enable_comments', 'registration_required', )}),
         )
