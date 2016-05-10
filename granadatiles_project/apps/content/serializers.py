@@ -36,6 +36,7 @@ class CollectionContentSerializer(serializers.Serializer):
     title = serializers.CharField()
     description = serializers.CharField()
     collectionId = serializers.IntegerField()
+    url = serializers.URLField()
     
 
 class SocialSerializer(serializers.ModelSerializer):

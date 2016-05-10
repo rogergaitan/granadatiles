@@ -40,7 +40,7 @@ class IndexNavigationDto(BaseGalleryNavImageDto):
 class FlatPageDto(object):
 
     def __init__(self, flatpage, language):
-        self.title = flatpage.get_title(language = language)
+        self.title = flatpage.get_title(language=language)
         self.description = flatpage.get_content(language=language)
         self.menu = flatpage.menu
 
@@ -54,12 +54,13 @@ class FlatPageMenuDto(object):
     def __init__(self, flatPage, language):
         if(language is None):
             language='en'
-        self.title = flatPage.get_menu(language = language)
-        self.url = '/' + language + flatPage.get_absolute_url()
+        self.title = flatPage.get_menu(language=language)
+        self.url = flatPage.get_url(language)
 
 class CollectionContentDto(object):
 
     def __init__(self, content, language):
-        self.title = content.get_title(language = language)
+        self.title = content.get_title(language=language)
         self.description = content.get_content(language=language)
         self.collectionId = content.collection.id
+        self.url = content.get_url(language)

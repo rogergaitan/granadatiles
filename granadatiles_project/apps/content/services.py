@@ -74,8 +74,8 @@ class CollectionContentService(object):
         contentDto = [FlatPageMenuDto(item, language) for item in content]
         return contentDto
 
-    def get_content(title, language = None):
-        content = get_object_or_404(CollectionContent, title=title)
+    def get_content(id, language = None):
+        content = get_object_or_404(CollectionContent, pk=id)
         collectionContentDto = CollectionContentDto(content, language = language)
         return collectionContentDto
 
