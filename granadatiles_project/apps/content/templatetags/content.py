@@ -1,5 +1,5 @@
 from django import template
-from apps.content.models import Section, Area, Social, FeaturedVideo
+from apps.content.models import Section, Area, Social, FeaturedVideo, ExtendedFlatPage, CollectionContent
 from django.conf import settings
 
 register = template.Library()
@@ -28,10 +28,31 @@ def video(video_id, language):
             'video':video.video,
         }
 
-
 @register.assignment_tag()
 def section(section_id, language):
     section_query_set = Section.objects.get(id=section_id)
+    seo_data = format_seo_data(language, section_query_set)
+    return seo_data
+
+@register.assignment_tag()
+def extendedflatpage(extendedFlatPageId, language):
+    flatpage_query_set = ExtendedFlatPage.objects.get(id=extendedFlatPageId)
+    seo_data = format_seo_data(language, flatpage_query_set)
+    return seo_data
+
+@register.assignment_tag()
+def collectioncontent(collectionContentId, language):
+    collectioncontent_query_set = CollectionContent.objects.get(id=collectionContentId)
+    seo_data = format_seo_data(language, collectioncontent_query_set)
+    return seo_data
+
+@register.inclusion_tag('content/meta.html')
+def content_meta_tags(section):
+    return {
+            'section': section
+        }
+
+def format_seo_data(language, section_query_set):
     section = {
         'page_title': section_query_set.get_page_title(language),
         'meta_description_es': section_query_set.meta_description_es,
@@ -40,9 +61,3 @@ def section(section_id, language):
         'meta_keywords': section_query_set.meta_keywords,
         }
     return section
-
-@register.inclusion_tag('content/meta.html')
-def content_meta_tags(section):
-    return {
-            'section': section
-        }
