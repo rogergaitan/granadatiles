@@ -115,7 +115,7 @@ class TileColorGroupInline(admin.TabularInline):
 class TileAdmin(admin.ModelAdmin):
     fields = ('name', 'name_es', 'list_id', 'design', 'sales_description',
               'sales_description_es', 'size', 'height', 'width' ,'sales_price','average_cost', 
-              'quantity_on_hand','image',  'tearsheet', 'box',  'similar_tiles', 'main', 'new', 
+              'quantity_on_hand','image', 'mosaic', 'tearsheet', 'box',  'similar_tiles', 'main', 'new', 
               'in_stock', 'is_not_square','is_sample', 'sample', 'override_collection_box', 'is_active', 
               'on_sale', 'import_colors')
 
