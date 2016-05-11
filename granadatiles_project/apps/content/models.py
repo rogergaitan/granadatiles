@@ -147,8 +147,8 @@ class ExtendedFlatPage(FlatPage, BaseSeoModel):
     
     def get_url(self, language):
         if language == 'es' and self.url_es is not None and self.url_es:
-            return self.url_es
-        return self.url
+            return '/es' + self.url_es
+        return '/en' + self.url
 
     def __str__(self):
         return self.title
