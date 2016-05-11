@@ -21,3 +21,4 @@ class GalleryImageDto(BaseGalleryImageDto):
        super().__init__(image, language)
        self.designer = image.designer
        self.photographer = image.photographer
+       self.imageAlt = image.image_alt

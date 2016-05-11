@@ -18,7 +18,8 @@ class GalleryCategoryAdmin(admin.ModelAdmin):
     
 @admin.register(GalleryImage)
 class GalleryImageAdmin(admin.ModelAdmin):
-     pass
+     fields = ('title', 'title_es', 'description', 'description_es', 'image', 'image_alt',
+               'gallery_categories', 'designer', 'photographer', 'tiles')
     
 
 @admin.register(Designer)

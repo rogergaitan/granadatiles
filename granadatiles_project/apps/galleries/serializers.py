@@ -14,3 +14,4 @@ class GallerySerializer(BaseCatalogSerializer):
 class GalleryImageSerializer(BaseGalleryImageSerializer):
     designer = serializers.StringRelatedField()
     photographer = serializers.StringRelatedField()
+    imageAlt = serializers.CharField()

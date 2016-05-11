@@ -69,7 +69,7 @@ class GalleryImage(BaseGalleryImageModel):
         Photographer, blank=True, null=True, related_name='gallery_images',
         verbose_name=_('Photographer'))
     tiles = models.ManyToManyField(Tile, blank=True, related_name='installation_photos', verbose_name=_('Tiles'))
-
+    image_alt = models.CharField(max_length=150, blank=True, null=True, verbose_name=_('Image Alt'))
 
     class Meta:
         verbose_name = _('Image')
