@@ -117,7 +117,7 @@ class TileAdmin(admin.ModelAdmin):
               'sales_description_es', 'size', 'height', 'width' ,'sales_price','average_cost', 
               'quantity_on_hand','image', 'mosaic', 'tearsheet', 'box',  'similar_tiles', 'main', 'new', 
               'in_stock', 'is_not_square','is_sample', 'sample', 'override_collection_box', 'is_active', 
-              'on_sale', 'import_colors')
+              'on_sale')
 
     list_display = ('name', 'sales_description', 'size', 'quantity_on_hand', 'in_stock', 
                     'qty_is_sq_ft', 'is_active', 'new', 'on_sale')
