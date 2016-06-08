@@ -9,10 +9,18 @@
                 <slide ng-repeat="slide in vm.gallery" active="slide.active">
                     <img class="gt-gallery-img" ng-src="{{::slide.image}}" alt="{{::slide.title}}" />
                     <div>
-                        <h1>{{::slide.title}}</h1>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h1>{{::slide.title}}</h1>
+                            </div>
+                            <div class="col-md-4 text-right">
+                                <h2 class="pull-right" ng-if="slide.designer">{{::vm.labels.designedBy}} {{::slide.designer}}</h2>
+                            </div>
+                        </div>
+                        
                         <p ng-bind-html="slide.description | unsafe"></p>
                         <p>{{::slide.designer}}</p>
-                        <p>{{::slide.photographer}}</p>
+                        <p>{{::vm.labels.photographer}}: {{::slide.photographer}}</p>
                     </div>
                 </slide>
             </carousel>

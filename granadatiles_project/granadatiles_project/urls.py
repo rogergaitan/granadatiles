@@ -6,6 +6,7 @@ from apps.content.views import index, about_us, videos, compare_products, cement
 from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import ugettext_lazy as _
 from rest_framework.authtoken import views
+from django.views.generic.base import TemplateView
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -20,6 +21,9 @@ urlpatterns = [
     url(r'^api/', include('apps.orders.urls', namespace='orders')),
     url(r'^api/token/', views.obtain_auth_token),
     url('', include('social.apps.django_app.urls', namespace='social')),
+    url(r'^robots\.txt$', TemplateView.as_view(template_name= 'robots.txt', content_type= 'text/plain')),
+    url(r'^humans\.txt$', TemplateView.as_view(template_name= 'humans.txt', content_type= 'text/plain')),
+    url(r'^google8b1eebced5a00fe1\.html$', TemplateView.as_view(template_name= 'google8b1eebced5a00fe1.html')),
 ]
 
 urlpatterns += i18n_patterns(

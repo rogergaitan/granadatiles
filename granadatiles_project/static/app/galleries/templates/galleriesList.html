@@ -6,25 +6,14 @@
             <div class="text-section" ng-bind-html="::vm.section.description | unsafe"></div>
         </div>
     </div>
-    <div ng-repeat="gallery in vm.galleries" ng-if="$index % 2 == 0" class="row">
-        <div class="col-md-6 blue-box" ng-if="$index <= vm.galleries.length - 1 && vm.galleries[$index].categories.length > 0">
+    <div class="row">
+        <div class="col-md-6 blue-box" ng-if="$index <= vm.galleries.length - 1 && gallery.categories.length > 0" ng-repeat="gallery in vm.galleries">
             <div class="blue-box-content">
-                <img ng-src="{{ ::vm.galleries[$index].image }}" alt="{{ ::vm.galleries[$index].name }}" class="img-responsive">
-                <h2>{{ ::vm.galleries[$index].name }}</h2>
+                <img ng-src="{{ ::gallery.image }}" alt="{{ ::gallery.name }}" class="img-responsive">
+                <h2>{{ ::gallery.name }}</h2>
                 <ul class="list-inline blue-box-options">
-                    <li ng-repeat="category in vm.galleries[$index].categories">
-                        <a  ng-click="vm.showGallery(category.id)">{{ ::category.name }}</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-6 blue-box" ng-if="$index + 1 <= vm.galleries.length - 1 && vm.galleries[$index + 1].categories.length > 0">
-            <div class="blue-box-content">
-                <img ng-src="{{ ::vm.galleries[$index + 1].image }}" alt="{{ ::vm.galleries[$index + 1].name }}" class="img-responsive">
-                <h2>{{ ::vm.galleries[$index + 1].name }}</h2>
-                <ul class="list-inline blue-box-options">
-                    <li ng-repeat="category in vm.galleries[$index + 1].categories">
-                        <a  ng-click="vm.showGallery(category.id)">{{ ::category.name }}</a>
+                    <li ng-repeat="category in gallery.categories">
+                        <a ng-click="vm.showGallery(category.id)">{{ ::category.name }}</a>
                     </li>
                 </ul>
             </div>

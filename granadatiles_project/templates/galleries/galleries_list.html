@@ -4,6 +4,11 @@
 {% block seo %}
     {% section 5 LANGUAGE_CODE  as section %}
     <title>{{ section.page_title }}</title>
+    <style>
+        .carousel-indicators{
+            display:none;
+        }
+    </style>
     {% content_meta_tags section %}
 {% endblock seo %}
 
@@ -26,7 +31,9 @@
                 sectionId: 5,
                 language: '{{LANGUAGE_CODE}}',
                 labels: {
-                    gallery: '{% trans 'Gallery'%}'
+                    gallery: '{% trans 'Gallery'%}',
+                    designedBy: 'Designed by',
+                    photographer: 'Photographer'
                 }
             }
         };

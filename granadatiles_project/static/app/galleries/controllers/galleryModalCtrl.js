@@ -5,12 +5,13 @@
         .module('app.galleries')
         .controller('galleryModalCtrl',
                     ['gallery',
+                     'pageSettings',
                      '$modalInstance',
                      galleryModalCtrl]);
 
-    function galleryModalCtrl(gallery, $modalInstance) {
+    function galleryModalCtrl(gallery, pageSettings, $modalInstance) {
         var vm = this;
-
+        vm.labels = pageSettings.labels;
         vm.gallery = gallery
 
         vm.close = function () {
