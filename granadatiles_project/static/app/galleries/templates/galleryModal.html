@@ -20,7 +20,7 @@
                         
                         <p ng-bind-html="slide.description | unsafe"></p>
                         <p>{{::slide.designer}}</p>
-                        <p>{{::vm.labels.photographer}}: {{::slide.photographer}}</p>
+                        <p ng-if="slide.photographer">{{::vm.labels.photographer}}: {{::slide.photographer}}</p>
                     </div>
                 </slide>
             </carousel>
