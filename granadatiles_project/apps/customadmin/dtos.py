@@ -59,6 +59,8 @@ class SearchDto:
         elif self.type == 'Tile':
             self.additional = search_item.design.group.collection.get_title(language) if search_item.design else '' 
             self.url = search_item.get_absolute_url(language)
+            self.additional2 = search_item.design.custom_groups.first()
+            self.additional3 = search_item.custom
         elif self.type == 'CustomGroup':
             self.additional = search_item.collection.get_title(language)
             self.url = search_item.get_absolute_url(language)
