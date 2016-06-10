@@ -35,7 +35,7 @@ class CollectionService:
 
     def get_groups(collection_id, language=None):
         collection = get_object_or_404(Collection, pk=collection_id)
-        groups = collection.customgroups.filter(show_in_web=True)
+        groups = collection.customgroups.filter(show_in_web=True, designs__gt=0).distinct()
         groupsDto = [GroupDto(group, language)
                      for group in groups]
         return groupsDto
@@ -78,7 +78,7 @@ class GroupService:
         if in_stock: designs = designs.filter(tiles__custom=False)
 
         if specials: designs = designs.filter(tiles__on_sale=True)
-      
+       
         tile_designs_dto = []
         
         for tile_design in designs[offset:(limit+offset)]:
@@ -141,8 +141,8 @@ class TileService:
 
     def get_tile_order(id, portfolio, language):
         tile = get_object_or_404(Tile.objects.select_related('box','sample', 'design'), pk=id)
-        tileorderDto = TileOrderDto(tile, portfolio, language)
-        return tileorderDto
+        tile_order_dto = TileOrderDto(tile, portfolio, language)
+        return tile_order_dto
 
     def get_in_stock_tiles(ids, is_sample, limit, offset, language):
         
