@@ -5,7 +5,7 @@ from .models import Gallery, GalleryCategory
 
 class GalleryService(object):
     def get_galleries(language=None):
-        galleries = Gallery.objects.all()
+        galleries = Gallery.objects.order_by('-id')
         galleriesDto = [GalleryDto(gallery, language=language) for gallery in galleries]
         return galleriesDto
 
