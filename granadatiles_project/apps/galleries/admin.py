@@ -7,6 +7,7 @@ from django_summernote.admin import SummernoteInlineModelAdmin
 class GalleryAdmin(admin.ModelAdmin):
     list_display = ('name', 'name_es', 'categories_count')
     search_fields = ['name', 'name_es']
+    ordering = ['-id']
 
 
 @admin.register(GalleryCategory)
