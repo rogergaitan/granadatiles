@@ -133,7 +133,7 @@ class TileOrderSerializer(BaseCatalogSerializer):
     uses = TileUseSerializer(many=True)
     similarTiles = SimilarTilesSerializer(many=True)
     designer = TileDesignerSerializer()
-    quantity = serializers.IntegerField()
+    quantity = serializers.FloatField()
     sqFt = serializers.FloatField()
     sqFtPrice = serializers.FloatField()
     qtyIsSqFt = serializers.BooleanField()

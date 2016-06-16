@@ -162,7 +162,7 @@ class Tile(BaseCatalogModel):
     is_active = models.BooleanField(verbose_name=_('Is Active'), default=True)
     sales_price = models.FloatField(verbose_name=_('Sales Price'), blank=True, null=True)
     average_cost = models.FloatField(verbose_name=_('Average Cost'), blank=True, null=True)
-    quantity_on_hand = models.IntegerField(verbose_name=_('Quantity'), default=0)
+    quantity_on_hand = models.FloatField(verbose_name=_('Quantity'), default=0)
     sales_description = models.CharField(max_length=450 ,verbose_name=_('Sales description'), default='')
     sales_description_es = models.CharField(max_length=450 ,verbose_name=_('Sales description_es'), default='')
     image = ImageField(upload_to='tiles', verbose_name=_('Image'), null=True, blank=True)
@@ -229,7 +229,12 @@ class Tile(BaseCatalogModel):
 
     def in_stock(self):
         return self.custom is False
-
+    
+    def get_cart_data(self):
+        return {
+            'tile_id': self.id
+        }       
+    
     def __str__(self):
         return self.name + ' - ' + self.sales_description
 
@@ -341,7 +346,18 @@ class CustomizedTile(models.Model):
     tile = models.ForeignKey(Tile, related_name='customizations')
     portfolio = models.ForeignKey(Portfolio, related_name='customized_tiles')
     
-
+    def get_cart_data(self):
+        return {
+            'customized_tile_id': self.id,
+            'tile_id': self.tile.id,
+            'group_colors': self.color_groups.all()
+        }       
+    
+    class Meta:
+        verbose_name = _('Box')
+        verbose_name_plural = _('Boxes')
+        
+    
 class GroupColor(models.Model):
     color = models.ForeignKey(PalleteColor)
     group = models.CharField(max_length=5)
