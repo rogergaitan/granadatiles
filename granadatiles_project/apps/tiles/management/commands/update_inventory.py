@@ -5,7 +5,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.text import slugify
 
-from ...models import Collection, Group, Tile, TileDesign
+from apps.tiles.models import Collection, Group, Tile, TileDesign
 
 class Command(BaseCommand):
 
@@ -118,7 +118,6 @@ class Command(BaseCommand):
         response = requests.post('https://granadatilesqbintegration.azurewebsites.net/token', data=data)
         auth = {'Authorization': response.json()['token_type'] + " " + response.json()['access_token']}
         items = requests.get('https://granadatilesqbintegration.azurewebsites.net/api/items', headers=auth)
-
         collections = [collection for collection in items.json() if collection['SubLevel'] == 0]
         groups = [group for group in items.json() if group['SubLevel'] == 1]
         tiles = [item for item in items.json() if item['SubLevel'] == 2]
@@ -128,6 +127,5 @@ class Command(BaseCommand):
 
         for group in groups:
             Command.create_update_groups(group)
-
         for tile in tiles:
             Command.create_update_tiles(tile)
