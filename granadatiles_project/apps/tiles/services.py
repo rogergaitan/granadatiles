@@ -10,7 +10,7 @@ from .dtos import (
     MenuCollectionDto, TileStyleDto, TileDetailDto, TileInstallationPhotosDto,
     TileSizeDto, TileOrderDto, InStockDto, CollectionsFiltersDto, PortfolioTilesDto,
     LayoutDto, LayoutTilesDto, PortfolioCustomizedTilesDto, CollectionInstallationPhotosDto,
-    TileColorDto, GroupColorDto
+    TileColorDto, GroupColorDto, RecentTilesDto
 )
 
 
@@ -167,6 +167,12 @@ class TileService:
         collections = Collection.objects.filter(featured=True)
         collectiondto = [CollectionsFiltersDto(collection, language) for collection in collections]
         return collectiondto
+    
+    
+    def get_recent_tiles(language):
+        recent_tiles = Tile.objects.order_by('-id')[:8]
+        recent_tiles_dto = [RecentTilesDto(tile, language) for tile in recent_tiles]
+        return recent_tiles_dto
 
 
 class PortfolioService:

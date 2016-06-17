@@ -3,7 +3,8 @@ from . import views
 from rest_framework.routers import DefaultRouter
 from apps.tiles.views import (
     CollectionViewSet, GroupViewSet, TileViewSet, PortfolioTilesViewSet,
-    TaskViewSet, LayoutsViewSet, PalleteColorsViewSet, CustomizedTilesViewSet
+    TaskViewSet, LayoutsViewSet, PalleteColorsViewSet, CustomizedTilesViewSet,
+    RecentTilesViewSet
 )
 
 router = DefaultRouter()
@@ -15,5 +16,6 @@ router.register('portfolio/layouts', LayoutsViewSet, base_name='portfolio_layout
 router.register('palleteColors', PalleteColorsViewSet, base_name='pallete_colors')
 router.register('customizedtiles', CustomizedTilesViewSet, base_name='group_colors')
 router.register('task', TaskViewSet, base_name='tasks')
+router.register('recenttiles', RecentTilesViewSet, base_name='recent_tiles')
 
 urlpatterns = router.urls

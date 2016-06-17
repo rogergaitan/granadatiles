@@ -220,3 +220,9 @@ class LayoutTilesSerializer(BaseCatalogSerializer):
     isNotSquare = serializers.BooleanField()
     collection = serializers.CharField()
     size = serializers.CharField()
+    
+    
+class RecentTilesSerializer(BaseCatalogSerializer):
+    image = serializers.CharField()    
+    collectionName = serializers.CharField()
+    adminUrl = serializers.URLField()

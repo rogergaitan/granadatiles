@@ -347,3 +347,12 @@ class LayoutTilesDto(BaseCatalogDto):
         self.image = tile.image.url if tile.image else ''
         self.isNotSquare = tile.is_not_square
         self.size = tile.size
+
+
+class RecentTilesDto(BaseCatalogDto):
+    
+    def __init__(self, tile, language):
+        super().__init__(tile, language)
+        self.image = tile.image.url if tile.image else ''
+        self.collectionName = tile.design.group.collection.get_title(language)
+        self.adminUrl = tile.get_admin_url
