@@ -12,7 +12,7 @@
                 <img ng-src="{{ ::gallery.image }}" alt="{{ ::gallery.name }}" class="img-responsive">
                 <h2>{{ ::gallery.name }}</h2>
                 <ul class="list-inline blue-box-options">
-                    <li ng-repeat="category in gallery.categories">
+                    <li ng-repeat="category in gallery.categories" class="padded-item">
                         <a ng-click="vm.showGallery(category.id)">{{ ::category.name }}</a>
                     </li>
                 </ul>
