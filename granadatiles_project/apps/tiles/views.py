@@ -14,7 +14,8 @@ from .serializers import (
     StyleSerializer, GroupTileSizeSerializer, TileDetailSerializer,
     TileInstallationPhotosSerializer, TileOrderSerializer, CollectionsFilterSerializer,
     InStockSerializer, PortfolioTilesSerializer, PortfolioCustomizedTilesSerializer, LayoutSerializer,
-    LayoutTilesSerializer, CollectionInstallationPhotosSerializer, TileColorSerializer
+    LayoutTilesSerializer, CollectionInstallationPhotosSerializer, TileColorSerializer,
+    RecentTilesSerializer
 )
 from .services import CollectionService, GroupService, TileService, PortfolioService, PalleteColorService
 from .models import Collection, Group
@@ -181,7 +182,15 @@ class TileViewSet(BaseViewSet):
         collections = TileService.get_tiles_collections_filters(language=self.get_language(request))
         serializer = CollectionsFilterSerializer(collections, many=True)
         return Response(serializer.data)
-
+    
+    
+class RecentTilesViewSet(BaseViewSet):
+    
+    def list(self, request):
+        recent_tiles = TileService.get_recent_tiles(self.get_language(request))
+        serializer = RecentTilesSerializer(recent_tiles, many=True)
+        return Response(serializer.data)
+    
 
 class PortfolioTilesViewSet(BaseViewSet):
 
