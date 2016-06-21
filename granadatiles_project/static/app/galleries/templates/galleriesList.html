@@ -7,16 +7,19 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6 blue-box" ng-if="$index <= vm.galleries.length - 1 && gallery.categories.length > 0" ng-repeat="gallery in vm.galleries">
-            <div class="blue-box-content">
-                <img ng-src="{{ ::gallery.image }}" alt="{{ ::gallery.name }}" class="img-responsive">
-                <h2>{{ ::gallery.name }}</h2>
-                <ul class="list-inline blue-box-options">
-                    <li ng-repeat="category in gallery.categories" class="padded-item">
-                        <a ng-click="vm.showGallery(category.id)">{{ ::category.name }}</a>
-                    </li>
-                </ul>
+        <div ng-if="gallery.categories.length > 0" ng-repeat="gallery in vm.galleries">
+            <div class="col-md-6 blue-box">
+                <div class="blue-box-content">
+                    <img ng-src="{{ ::gallery.image }}" alt="{{ ::gallery.name }}" class="img-responsive">
+                    <h2>{{ ::gallery.name }}</h2>
+                    <ul class="list-inline blue-box-options">
+                        <li ng-repeat="category in gallery.categories" class="padded-item">
+                            <a ng-click="vm.showGallery(category.id)">{{ ::category.name }}</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
+             <div class="clearfix" ng-if="$index % 2 == 0 && $index != 0"></div>
         </div>
     </div>
 </div>
