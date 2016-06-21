@@ -16,12 +16,14 @@
                         <a href="{{ result.url }}">
                             <img ng-src="{{ result.image }}" alt="{{ result.name }}" class="img-responsive thumbnail animate-show-fade" fade-in>
                         </a>
+                        <a class="result-url" href="{{ result.url }}">{{::vm.labels.viewProduct}}</a><br />
                         <small>{{ result.name }}</small><br>
+                        <small>{{ result.additional2 }}</small><br ng-if="result.additional2 != ''">
                         <small ng-if="result.type == 'Tile'">
                             <span ng-if="result.additional3 == 'True'">{{::vm.labels.custom}}</span>
                             <span ng-if="result.additional3 == 'False'">{{::vm.labels.inStock}}</span>
                         </small><br>
-                        <a class="result-url" href="{{ result.url }}">{{::vm.labels.viewProduct}}</a>
+                       
                     </div>
                 </div>
             </div>
