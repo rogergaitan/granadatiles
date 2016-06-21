@@ -73,13 +73,13 @@ class SearchService:
 
     def get_results(search_term, language):
         if language == 'es':
-            tiles = Tile.objects.select_related('design__custom_groups'). \
+            tiles = Tile.objects.select_related('design'). \
                     filter(name__icontains=search_term, design__show_in_web=True)
             groups = CustomGroup.objects.filter(title_es__icontains=search_term, show_in_web=True)
             article = Article.objects.filter(title_es__icontains=search_term)
             catalogs = Catalog.objects.filter(name_es__icontains=search_term)
         else:
-            tiles = Tile.objects.select_related('design__custom_groups'). \
+            tiles = Tile.objects.select_related('design'). \
                     filter(name__icontains=search_term, design__show_in_web=True)
             groups = CustomGroup.objects.filter(title__icontains=search_term, show_in_web=True)
             article = Article.objects.filter(title__icontains=search_term)
