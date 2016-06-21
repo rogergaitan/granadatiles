@@ -49,7 +49,7 @@
                             <div class="content-tile">
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <tile-mosaic tile="tile.main" repeat-vertical="2" repeat-horinzotal="1" fade-in class="animate-show-fade"></tile-mosaic>
+                                        <tile-mosaic tile="tile.main" repeat-vertical="2" repeat-horinzotal="1" fade-in class="animate-show-fade" ng-click="vm.showTileDetail(tile.main.id)"></tile-mosaic>
                                         <div class="tag-new arrowTop" ng-if="tile.main.new">
                                             <span class="label-new">{{::vm.labels.new_tile}}</span>
                                         </div>
@@ -68,7 +68,7 @@
                                 <div class="row">
                                     <div class="col-md-12 tile-body">
                                         <div>
-                                            <h2>{{ tile.main.name }}</h2>
+                                            <h2><span ng-click="vm.showTileDetail(tile.main.id)">{{ tile.main.name }}</span></h2>
                                             <label class="title-tile" ng-if="!tile.main.inStock">CUSTOM:</label>
                                             <label class="title-tile" ng-if="tile.main.inStock">In Stock:</label>
                                             <ul class="list-inline title-tile">
@@ -78,7 +78,7 @@
 
                                         <ul class="list-inline tile-options">
                                             <li ng-show="!tile.main.isSample">
-                                                <a  ng-click="vm.showTileDetail(tile.main.id)"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
+                                                <a ng-click="vm.showTileDetail(tile.main.id)"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
                                             </li>
                                             <li ng-if="tile.main.hasInstallationPhotos">
                                                 <a  ng-click="vm.showInstallationPhoto(tile.main.id)"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
