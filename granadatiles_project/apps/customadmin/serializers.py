@@ -31,6 +31,6 @@ class SearchSerializer(BaseCatalogSerializer):
     image = serializers.CharField()
     type = serializers.CharField()
     additional = serializers.CharField()
-    additional2 = serializers.CharField()
+    additional2 = serializers.CharField(required=False)
     additional3 = serializers.CharField(required=False)
     url = serializers.CharField(required=False)
