@@ -109,6 +109,7 @@ class TileImageFilter(admin.SimpleListFilter):
 class TileColorGroupInline(admin.TabularInline):
     model = TileGroupColor
     fields = ('color', 'group')
+    extra = 12
 
 
 @admin.register(Tile)

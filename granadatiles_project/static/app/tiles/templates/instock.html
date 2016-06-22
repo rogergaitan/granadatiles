@@ -41,13 +41,13 @@
                             <div class="content-tile">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <tile-mosaic tile="tile" repeat-vertical="2" repeat-horinzotal="1" fade-in class="animate-show-fade"></tile-mosaic>
+                                        <tile-mosaic tile="tile" repeat-vertical="2" repeat-horinzotal="1" fade-in class="animate-show-fade" ng-click="vm.showTileDetail(tile.id)"></tile-mosaic>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 tile-body">
                                         <div>
-                                            <h2>{{ tile.name }}</h2>
+                                            <h2><span ng-click="vm.showTileDetail(tile.id)">{{ tile.name }}</span></h2>
                                             <label class="title-tile">{{vm.labels.inStock}}:</label>
                                             <ul class="list-inline title-tile">
                                                 <li>{{ tile.size }}</li>
