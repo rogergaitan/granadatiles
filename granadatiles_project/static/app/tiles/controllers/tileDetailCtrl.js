@@ -34,6 +34,7 @@
         vm.isAuthenticated = baseSettings.userIsAuthenticated;
         vm.navigation = baseSettings.navigation;
         vm.nortonImage = baseSettings.staticUrl + 'img/Norton-seal.png';
+        vm.imageIndex = 1;
         vm.order = {
             inputSqFt: 0,
             shipFromWarehouseId: 0,
@@ -143,6 +144,10 @@
                 tile.customizedTileId = undefined;
             });
         };
+
+        vm.switchImage = function (imageIndex) {
+            vm.imageIndex = imageIndex;
+        }
 
     }
 })();

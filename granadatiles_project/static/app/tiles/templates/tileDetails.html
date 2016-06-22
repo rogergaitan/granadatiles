@@ -32,7 +32,9 @@
     </div>
     <div class="row">
         <div class="col-md-7 col-sm-8">
-            <tile-mosaic tile="vm.tile" repeat-vertical="2" repeat-horinzotal="2"></tile-mosaic>
+            <tile-mosaic tile="vm.tile" repeat-vertical="2" repeat-horinzotal="2" ng-if="vm.imageIndex == 1"></tile-mosaic>
+            <img ng-src="{{ ::vm.tile.image }}" alt="{{::vm.tile.name}}" class="img-responsive thumbnail" ng-if="vm.imageIndex == 2">
+            <tile-mosaic tile="vm.tile" repeat-vertical="1" repeat-horinzotal="1" class="pointer-cursor" ng-if="vm.imageIndex == 3"></tile-mosaic>
         </div>
         <div class="col-md-5 col-sm-4">
             <ul class="tile-detail-container">
@@ -115,8 +117,6 @@
                     </div>
                 </li>
             </ul>
-
-
         </div>
     </div>
     <div class="row">
@@ -124,10 +124,12 @@
     </div>
     <div class="row">
         <div class="col-md-3 col-sm-3">
-            <img ng-src="{{ ::vm.tile.image }}" alt="{{::vm.tile.name}}" class="img-responsive thumbnail">
+            <img ng-src="{{ ::vm.tile.image }}" alt="{{::vm.tile.name}}" class="img-responsive thumbnail pointer-cursor" ng-if="vm.imageIndex != 2" ng-click="vm.switchImage(2)">
+            <tile-mosaic tile="vm.tile" repeat-vertical="2" repeat-horinzotal="2" ng-if="vm.imageIndex == 2" ng-click="vm.switchImage(1)" class="pointer-cursor" ></tile-mosaic>
         </div>
         <div class="col-md-3 col-sm-3">
-            <tile-mosaic tile="vm.tile" repeat-vertical="1" repeat-horinzotal="1"></tile-mosaic>
+            <tile-mosaic tile="vm.tile" repeat-vertical="1" repeat-horinzotal="1" class="pointer-cursor" ng-click="vm.switchImage(3)" ng-if="vm.imageIndex != 3"></tile-mosaic>
+            <tile-mosaic tile="vm.tile" repeat-vertical="2" repeat-horinzotal="2" class="pointer-cursor" ng-if="vm.imageIndex == 3" ng-click="vm.switchImage(1)"></tile-mosaic>
         </div>
         <div class="col-md-6 col-sm-6">
             <table class="table-tile-detail">
