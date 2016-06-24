@@ -69,7 +69,7 @@ class GroupService:
 
     def get_group_designs(id, limit, offset, style, size, new, in_stock, specials, language):
         group = GroupService.group_show_in_web(id)
-        designs = group.designs.filter(show_in_web=True).prefetch_related('tiles').exclude(tiles__image='')
+        designs = group.designs.filter(show_in_web=True).prefetch_related('tiles').filter(tiles__image__regex='[\w-]')
          
         if style != '0': designs = designs.filter(styles__id=style)
 
@@ -80,6 +80,8 @@ class GroupService:
         if specials: designs = designs.filter(tiles__on_sale=True)
        
         tile_designs_dto = []
+        
+        designs = designs.distinct()
         
         for tile_design in designs[offset:(limit+offset)]:
             tiles_filter = tile_design.tiles.exclude(image='')
