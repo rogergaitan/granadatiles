@@ -184,7 +184,7 @@ class Tile(BaseCatalogModel):
     sample = models.ForeignKey('self', blank=True, null=True, related_name='samples', verbose_name=_('Sample'))
     override_collection_box = models.BooleanField(default=False, verbose_name=_('Override Collection Box'))
     box = models.ForeignKey('Box', null=True, blank=True, verbose_name=_('Box'))
-    qty_is_sq_ft = models.BooleanField(default=False, verbose_name=_('Quantity Square Foot'))
+    qty_is_sq_ft = models.BooleanField(default=False, verbose_name=_('Quantity is in Square Foot'))
     import_colors = models.CharField(max_length=800 , blank=True, null=True,
                                      help_text=_('Warning any input here will override the group colors!'),
                                      verbose_name=_('Import Colors'))
@@ -193,10 +193,13 @@ class Tile(BaseCatalogModel):
         if self.qty_is_sq_ft:
            return self.quantity_on_hand
         else:
-           return round(self.width * self.height * 0.00694444, 2)
+           width = self.width if self.width else 0
+           height = self.height if self.height else 0
+           return round(width * height * 0.00694444, 2)
 
     def get_price_by_sq_ft(self):
-        return (1 / self.get_sq_ft()) * self.sales_price
+        qty_sq = self.get_sq_ft() if self.get_sq_ft() > 0 else 1
+        return (1 / qty_sq) * self.sales_price
 
     @property
     def get_admin_url(self):
