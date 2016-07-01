@@ -3,21 +3,6 @@
         <div class="col-md-6">
             <h4 class="modal-title title-custom-tile">{{::vm.tile.name}}</h4>
         </div>
-        <div class="col-md-6 rotate-tile">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.close()">&times;</button>
-            <div class="custom-checkbox">
-                <p class="checkbox-inline">
-                    <input type="checkbox">
-                    <label>&nbsp;</label>
-                </p>
-            </div>
-            <div><p>RESET TO <br> ORIGINAL</p></div>
-            <div>
-                <a href="" class="btn btn-rotate-left"><i class="fa fa-rotate-left"></i></a>
-                <a href="" class="btn btn-rotate-right"><i class="fa fa-rotate-right"></i></a>
-            </div>
-            <div><p class="text-right">CLICK ON TILE <br> BELOW TO ROTATE</p></div>
-        </div>
     </div>
 </div>
 <div class="modal-body">
@@ -85,10 +70,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="tile-container-rotate">
-                        <!--<tile-mosaic tile="vm.tile" repeat-vertical="4" repeat-horinzotal="4" no-borders="true"></tile-mosaic>-->
-                        <div class="tile-detail-mosaic animate-show initial-hide" ng-show="vm.planeLoaded" ng-class="(noBorders)? '':'similar-tile-container'">
+                        <div class="tile-detail-mosaic animate-show initial-hide" ng-show="vm.planeLoaded" ng-class="(noBorders)? '':'similar-tile-container'" ng-if="!vm.tile.isNotSquare">
                             <div ng-repeat="n in  [] | range:4">
-                                <div ng-style="{ 'width':  100/4 + '%'}" class="tile-mosaic-conatiner" ng-repeat="n in  [] | range:4">
+                                <div ng-style="{ 'width':  100/4 + '%'}" class="tile-mosaic-conatiner" ng-repeat="n in  [] | range:3">
                                     <div  class="tile-mosaic-image" ng-style="{'transform': 'rotate3d(0, 0 , 1, ' + vm.tile.rotateDeg1 +'deg)'}">
                                         <div ng-bind-html="vm.mosaic | unsafe" class="svg-container"></div>
                                     </div>
@@ -105,6 +89,9 @@
                                 </div>
                             </div>
                             <br style="clear:both;" />
+                        </div>
+                        <div class="tile-detail-mosaic animate-show initial-hide" ng-show="vm.planeLoaded" ng-class="(noBorders)? '':'similar-tile-container'" ng-if="vm.tile.isNotSquare">
+                            <div ng-bind-html="vm.mosaic | unsafe" class="tile-not-square-plane" ng-repeat="n in  [] | range:40"></div>
                         </div>
                         <div class="row">
                             <div class="col-md-3">

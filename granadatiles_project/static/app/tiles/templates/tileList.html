@@ -48,8 +48,9 @@
                         <div class="col-md-4 col-sm-4 blue-box">
                             <div class="content-tile">
                                 <div class="row">
-                                    <div class="col-md-8">
-                                        <tile-mosaic tile="tile.main" repeat-vertical="2" repeat-horinzotal="1" fade-in class="animate-show-fade" ng-click="vm.showTileDetail(tile.main.id)"></tile-mosaic>
+                                    <div ng-class="(tile.main.isNotSquare) ? 'col-md-12': 'col-md-8'">
+                                        <tile-mosaic tile="tile.main" repeat-vertical="2" repeat-horinzotal="1" fade-in class="animate-show-fade" ng-click="vm.showTileDetail(tile.main.id)" ng-if="!tile.main.isNotSquare"></tile-mosaic>
+                                        <img ng-src="{{tile.main.image}}" fade-in class="animate-show-fade not-square-image" ng-click="vm.showTileDetail(tile.main.id)" ng-if="tile.main.isNotSquare" />
                                         <div class="tag-new arrowTop" ng-if="tile.main.new">
                                             <span class="label-new">{{::vm.labels.new_tile}}</span>
                                         </div>

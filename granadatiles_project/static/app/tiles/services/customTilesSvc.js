@@ -14,7 +14,8 @@
             addCustomizedTile: addCustomizedTile,
             addColorGroup: addColorGroup,
             formatColorGroupsForPost: formatColorGroupsForPost,
-            getColorsUsed: getColorsUsed
+            getColorsUsed: getColorsUsed,
+            formatGroupName: formatGroupName
         };
 
         return service;
@@ -37,7 +38,9 @@
             for (var i = 0; i < colorGroups.length; i++) {
                 formatedColorGroups.push({
                     colorId: colorGroups[i].color.id,
-                    group: colorGroups[i].group
+                    group: colorGroups[i].group,
+                    colorHexadecimalCode: colorGroups[i].color.hexadecimalCode,
+                    colorName: colorGroups[i].color.name
                 });
             }
             return formatedColorGroups;
@@ -83,6 +86,14 @@
                 }, 500);
             })
             return instance;
+        }
+
+        function formatGroupName(groupName) {
+            if (!groupName.startsWith("G")) {
+                groupName = "G" + groupName;
+            }
+            
+            return groupName;
         }
     }
 })();
