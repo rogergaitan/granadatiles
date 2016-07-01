@@ -27,11 +27,12 @@
             $timeout(function () {
                 for (var i = 0; i < vm.tile.colorGroups.length; i++) {
                     var $parentContainer = $('#painting-container');
-                    $parentContainer.find('#' + vm.tile.colorGroups[i].group).css('fill', vm.tile.colorGroups[i].color.hexadecimalCode);
+                    var groupName = customTilesSvc.formatGroupName(vm.tile.colorGroups[i].group);
+                    $parentContainer.find('#' + groupName).css('fill', vm.tile.colorGroups[i].color.hexadecimalCode);
                     vm.mosaic = $parentContainer.html();
                     vm.planeLoaded = true;
                 }
-            }, 100);
+            }, 400);
         });
 
 

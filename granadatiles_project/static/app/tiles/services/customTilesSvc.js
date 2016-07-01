@@ -14,7 +14,8 @@
             addCustomizedTile: addCustomizedTile,
             addColorGroup: addColorGroup,
             formatColorGroupsForPost: formatColorGroupsForPost,
-            getColorsUsed: getColorsUsed
+            getColorsUsed: getColorsUsed,
+            formatGroupName: formatGroupName
         };
 
         return service;
@@ -85,6 +86,14 @@
                 }, 500);
             })
             return instance;
+        }
+
+        function formatGroupName(groupName) {
+            if (!groupName.startsWith("G")) {
+                groupName = "G" + groupName;
+            }
+            
+            return groupName;
         }
     }
 })();
