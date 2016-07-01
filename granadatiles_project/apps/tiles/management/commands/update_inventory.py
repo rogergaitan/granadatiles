@@ -111,8 +111,8 @@ class Command(BaseCommand):
                       }
                   )
          return design
-
-
+     
+    
     def handle(self, **options):
         data = {'username': 'qbgtAdmin', 'grant_type': 'password', 'password': 'bkTdHyN6beF8C5cf'}
         response = requests.post('https://granadatilesqbintegration.azurewebsites.net/token', data=data)
@@ -127,5 +127,8 @@ class Command(BaseCommand):
 
         for group in groups:
             Command.create_update_groups(group)
+        
         for tile in tiles:
             Command.create_update_tiles(tile)
+
+        TileDesign.objects.filter(tiles__isnull=True).delete()
