@@ -42,10 +42,7 @@
         vm.addColor = function (event, data) {
             var targetElement = event.originalEvent.target;
             vm.dropedColor = data;
-            var index = vm.colorsUsed.map(function (color) { return color.id; }).indexOf(vm.dropedColor.id);
             var group;
-            if (index === -1)
-                vm.colorsUsed.push(vm.dropedColor);
 
             var isGroup = false;
             if (!targetElement.id) {
@@ -68,16 +65,36 @@
             }
 
             vm.mosaic = $(event.currentTarget).html();
-            var count = vm.colorGroups.filter(function (colorGroup) {
-                return (colorGroup.colorId == vm.dropedColor.id && colorGroup.group == group)
-            }).length;
-            if (count == 0) {
+
+            var colorGroup = vm.colorGroups.find(function (colorGroup) {
+                return (colorGroup.group == group)
+            });
+
+            if (colorGroup) {
+                colorGroup.colorId = vm.dropedColor.id;
+                colorGroup.colorName = vm.dropedColor.name,
+                colorGroup.colorHexadecimalCode = vm.dropedColor.hexadecimalCode;
+            }
+            else {
                 vm.colorGroups.push({
                     colorId: vm.dropedColor.id,
-                    group: group
+                    group: group,
+                    colorName: vm.dropedColor.name,
+                    colorHexadecimalCode: vm.dropedColor.hexadecimalCode
                 });
                 vm.hasChanges = true;
             }
+            vm.colorsUsed = [];
+            vm.colorGroups.forEach(function (colorGroup) {
+                var color = vm.colorsUsed.find(function (color) { return color.id == colorGroup.colorId });
+                if (!color) {
+                    vm.colorsUsed.push({
+                        hexadecimalCode: colorGroup.colorHexadecimalCode,
+                        id: colorGroup.colorId,
+                        name: colorGroup.colorName
+                    });
+                }
+            });
         }
 
         vm.saveToPortfolio = function () {
