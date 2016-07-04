@@ -15,7 +15,8 @@
             addColorGroup: addColorGroup,
             formatColorGroupsForPost: formatColorGroupsForPost,
             getColorsUsed: getColorsUsed,
-            formatGroupName: formatGroupName
+            formatGroupName: formatGroupName,
+            paintColor: paintColor
         };
 
         return service;
@@ -92,8 +93,21 @@
             if (!groupName.startsWith("G")) {
                 groupName = "G" + groupName;
             }
-            
+
             return groupName;
+        }
+
+        function paintColor($group, hexadecimalCode) {
+            if ($group.prop('tagName') === "g") {
+                $.each($group.children(), function (index, path) {
+                    $(path).attr('fill', hexadecimalCode);
+                    $(path).css('fill', hexadecimalCode);
+                })
+            }
+            else {
+                $group.attr('fill', hexadecimalCode);
+                $group.css('fill', hexadecimalCode);
+            }
         }
     }
 })();

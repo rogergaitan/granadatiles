@@ -28,10 +28,13 @@
                 for (var i = 0; i < vm.tile.colorGroups.length; i++) {
                     var $parentContainer = $('#painting-container');
                     var groupName = customTilesSvc.formatGroupName(vm.tile.colorGroups[i].group);
-                    $parentContainer.find('#' + groupName).css('fill', vm.tile.colorGroups[i].color.hexadecimalCode);
+                    var $group = $parentContainer.find('#' + groupName);
+                    customTilesSvc.paintColor($group, vm.tile.colorGroups[i].color.hexadecimalCode);
                     vm.mosaic = $parentContainer.html();
                     vm.planeLoaded = true;
                 }
+                if(vm.tile.isNotSquare)
+                    $('.not-square-row').css('height', parseFloat($('.tile-not-square-plane svg').css('height')) - 0.025);
             }, 400);
         });
 
