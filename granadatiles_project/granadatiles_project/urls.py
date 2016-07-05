@@ -7,6 +7,16 @@ from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import ugettext_lazy as _
 from rest_framework.authtoken import views
 from django.views.generic.base import TemplateView
+from django.contrib.sitemaps.views import sitemap
+from granadatiles_project.sitemaps import StaticViewSitemap, CollectionSiteMap, GroupSiteMap
+from django.contrib.flatpages.sitemaps import FlatPageSitemap
+
+sitemaps = {
+    'static': StaticViewSitemap,
+    'flat':  FlatPageSitemap,
+    'collections': CollectionSiteMap,
+    'groups': GroupSiteMap
+    }
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -24,6 +34,7 @@ urlpatterns = [
     url(r'^robots\.txt$', TemplateView.as_view(template_name= 'robots.txt', content_type= 'text/plain')),
     url(r'^humans\.txt$', TemplateView.as_view(template_name= 'humans.txt', content_type= 'text/plain')),
     url(r'^google8b1eebced5a00fe1\.html$', TemplateView.as_view(template_name= 'google8b1eebced5a00fe1.html')),
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap')
 ]
 
 urlpatterns += i18n_patterns(
