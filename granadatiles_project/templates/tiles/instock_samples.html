@@ -31,6 +31,10 @@
                 loggedUser: '{{ request.user |safe}}',
                 labels: {
                    notAuthenticatedCustom: '{% trans 'You are not authenticated, you will not be able to store your custom tile, please log in first' %}',
+                   tileAdded: '{% trans 'The tile was added to your portfolio' %}',
+                   tileAddedCart: '{% trans 'The tile was added to your cart' %}',
+                   success: '{% trans 'Success' %}',
+                   changesSave: '{% trans 'The changes have been save' %}',
                    collections: '{% trans 'Collections'%}',
                    inStock: '{% trans 'In Stock'%}',
                    inStockSamples: '{% trans 'In Stock Samples'%}',

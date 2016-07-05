@@ -9,9 +9,10 @@
                                   'appSettings',
                                   '$sce',
                                   'authenticationSvc',
-                                  'gtUtilsSvc'];
+                                  'gtUtilsSvc',
+                                  'toastr'];
 
-    function portfolioLoginCtrl(pageSettings, appSettings, $sce, authenticationSvc, gtUtilsSvc) {
+    function portfolioLoginCtrl(pageSettings, appSettings, $sce, authenticationSvc, gtUtilsSvc, toastr) {
         /* jshint validthis:true */
         var vm = this;
         vm.labels = pageSettings.labels;
@@ -62,6 +63,8 @@
             authenticationSvc.registerUser(vm.signUp)
                 .then(function (response) {
                     window.location = response.redirect_url;
+                }, function (error) {
+                    toastr.error("Something went wrong with your signup, please try again later", "Error")
                 });
         }
 

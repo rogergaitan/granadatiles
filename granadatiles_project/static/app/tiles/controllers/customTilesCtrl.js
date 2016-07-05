@@ -118,23 +118,20 @@
             if (vm.tile.customizedTileId) {
                 customTilesSvc.addColorGroup(vm.tile.customizedTileId, sendObject).then(function (response) {
                     vm.hasChanges = false;
+                    toastr.success(vm.labels.changesSave, vm.labels.success);
+                }, function (error) {
+                    var messages = error.data
+                    displayErrors(messages);
                 });
             }
             else {
                 customTilesSvc.addCustomizedTile(sendObject).then(function (response) {
                     vm.tile.customizedTileId = response.data.customizedTileId;
                     vm.hasChanges = false;
+                    toastr.success(vm.labels.tileAdded, vm.labels.success);
                 }, function (error) {
                     var messages = error.data
-                    if (messages.constructor == Array) {
-                        messages.forEach(function (message) {
-                            toastr.warning(message, 'Warning');
-                        });
-                    } else {
-                        for (var key in messages) {
-                            toastr.warning(messages[key], 'Warning');
-                        }
-                    }
+                    displayErrors(messages);
                 });
             }
         }
@@ -146,11 +143,27 @@
             cartSvc.addCustomizedTile(sendObject).then(function (response) {
                 var cart = cartSvc.getCart();
                 cartSvc.setCartCount(cart.count + 1);
+                toastr.success(vm.labels.tileAddedCart, vm.labels.success);
+            }, function (error) {
+                var messages = error.data
+                displayErrors(messages);
             });
         }
 
         vm.orderSample = function () {
 
+        }
+
+        function displayErrors(messages) {
+            if (messages.constructor == Array) {
+                messages.forEach(function (message) {
+                    toastr.warning(message, 'Warning');
+                });
+            } else {
+                for (var key in messages) {
+                    toastr.warning(messages[key], 'Warning');
+                }
+            }
         }
 
     }
