@@ -5,9 +5,17 @@
         .module('app.tiles')
         .controller('instockCtrl', instockCtrl);
 
-    instockCtrl.$inject = ['baseSettings', 'pageSettings', 'instockSvc', 'sectionSvc', '$scope', 'gtUtilsSvc', 'cartSvc'];
+    instockCtrl.$inject = ['baseSettings', 'pageSettings',
+                           'instockSvc', 'sectionSvc',
+                           '$scope', 'gtUtilsSvc',
+                           'cartSvc', '$modal',
+                           'collectionsSvc'];
 
-    function instockCtrl(baseSettings, pageSettings, instockSvc, sectionSvc, $scope, gtUtilsSvc, cartSvc) {
+    function instockCtrl(baseSettings, pageSettings,
+                         instockSvc, sectionSvc,
+                         $scope, gtUtilsSvc,
+                         cartSvc, $modal,
+                         collectionsSvc) {
         /* jshint validthis:true */
         var vm = this;
         vm.labels = pageSettings.labels;
@@ -73,6 +81,22 @@
                     vm.inProgress = false;
                 });
         }
+
+        vm.showInstallationPhoto = function (tileId) {
+            $modal.open({
+                templateUrl: baseSettings.staticUrl + 'app/tiles/templates/tileModal.html',
+                controller: 'tileModalCtrl',
+                controllerAs: 'vm',
+                size: 'lg',
+                resolve: {
+                    installationPhotos: function () {
+                        return collectionsSvc.getInstallationPhoto(tileId).then(function (response) {
+                            return response.data;
+                        });
+                    }
+                }
+            })
+        };
 
     }
 })();
