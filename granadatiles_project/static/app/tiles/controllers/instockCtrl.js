@@ -9,13 +9,13 @@
                            'instockSvc', 'sectionSvc',
                            '$scope', 'gtUtilsSvc',
                            'cartSvc', '$modal',
-                           'collectionsSvc'];
+                           'collectionsSvc', 'toastr'];
 
     function instockCtrl(baseSettings, pageSettings,
                          instockSvc, sectionSvc,
                          $scope, gtUtilsSvc,
                          cartSvc, $modal,
-                         collectionsSvc) {
+                         collectionsSvc, toastr) {
         /* jshint validthis:true */
         var vm = this;
         vm.labels = pageSettings.labels;
@@ -24,7 +24,7 @@
         $scope.shared = {};
         $scope.shared.inStockType = (pageSettings.samples) ? vm.labels.samples : vm.labels.tiles;
         UpdateTiles();
-
+        
         instockSvc.getCollectionFilter().then(function (response) {
             vm.collectionFilters = response.data;
         });
@@ -58,6 +58,7 @@
                 id: tile.sampleId
             };
             cartSvc.addSample(cartSample).then(function (resp) {
+                toastr.success(vm.labels.sampleAdded, vm.labels.success);
                 //window.location = pageSettings.navigation.cart;
             });
         };

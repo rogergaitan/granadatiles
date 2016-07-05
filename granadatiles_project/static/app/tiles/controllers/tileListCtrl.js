@@ -13,9 +13,9 @@
                             '$scope',
                             'gtUtilsSvc',
                             'cartSvc',
-                            '$q'];
+                            '$q', 'toastr'];
 
-    function tileListCtrl(baseSettings, pageSettings, collectionsSvc, flatPagesSvc, $modal, $scope, gtUtilsSvc, cartSvc, $q) {
+    function tileListCtrl(baseSettings, pageSettings, collectionsSvc, flatPagesSvc, $modal, $scope, gtUtilsSvc, cartSvc, $q, toastr) {
         /* jshint validthis:true */
         var vm = this;
 
@@ -195,7 +195,7 @@
                 id: tile.sampleId
             };
             cartSvc.addSample(cartSample).then(function (resp) {
-                //window.location = pageSettings.navigation.cart;
+                toastr.success(vm.labels.sampleAdded, vm.labels.success);
             });
         }
 
