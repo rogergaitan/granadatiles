@@ -26,7 +26,9 @@
                 navigation:{
                     cart: '{% url 'sr-cart:sr-home'%}'
                 },
+                loggedUser: '{{ request.user |safe}}',
                 labels: {
+                    notAuthenticatedCustom: '{% trans 'You are not authenticated, you will not be able to store your custom tile, please log in first' %}',
                     interactiveCatalog: '{% trans 'Interactive Catalog' %}',
                     customCement: '{% trans 'Custom Cement Tiles' %}',
                     about: '{% trans 'About the ' %}',
@@ -92,7 +94,7 @@
                     lbsPerBox: '{% trans 'lbs Per Box'%}',
                     numbersRounded: '{% trans 'Numbers are rounded to nearest tile or box'%}',
                     minimunSqFt:'{% trans 'Minimum' %}',
-                    forCustomTiles: '{% trans 'square feet for custom tiles'%}',
+                    forCustomTiles: '{% trans 'square feet'%}',
                     quantityInStock: '{% trans 'Quantity in Stock'%}',
                     retailPrice: '{% trans 'Retail Price'%}',
                     quantity: '{% trans 'Quantity' %}'

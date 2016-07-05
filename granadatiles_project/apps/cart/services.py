@@ -5,7 +5,7 @@ from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
 
-from rest_framework.exceptions import APIException
+from rest_framework.exceptions import APIException, ValidationError
 
 from apps.tiles.models import Tile, CustomizedTile
 from .models import Cart, CustomizedTileOrder, TileOrder
@@ -48,20 +48,20 @@ class OrdersService:
             return math.ceil(quantity/tile.box.quantity)
 
         if tile.qty_is_sq_ft and tile.box.measurement_unit == 1:
-            raise APIException("Cannot use boxes of unit for tiles measure in square foot")
+            raise ValidationError(_("Cannot use boxes of unit for tiles measure in square foot"))
 
         if not tile.qty_is_sq_ft and tile.box.measurement_unit == 2:
-            raise APIException("Cannot use boxes of square foot for tiles measure in units")
+            raise ValidationError(_("Cannot use boxes of square foot for tiles measure in units"))
 
     def get_subtotal(tile, quantity):
         return quantity * tile.sales_price
 
     def calculate_order(tile, sq_ft):
         if sq_ft < tile.design.group.collection.minimum_input_square_foot:
-            raise APIException(_('minimum_input_square_foot_message'))
+            raise ValidationError(_('The input square footage is less than the minimum input square foot required'))
 
         if sq_ft > tile.design.group.collection.maximum_input_square_foot:
-            raise APIException(_('maximum_input_square_foot_message'))
+            raise ValidationError(_('The input square footage is greater than the maximum input square foot required'))
 
         quantity = OrdersService.tile_quantity(tile, sq_ft + (sq_ft * 0.1))
         subtotal = OrdersService.get_subtotal(tile, quantity)

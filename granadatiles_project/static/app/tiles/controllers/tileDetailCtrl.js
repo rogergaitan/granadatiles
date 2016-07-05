@@ -15,14 +15,15 @@
                               'baseSettings',
                               'collectionsSvc',
                               'gtUtilsSvc',
-                              'customTilesSvc'];
+                              'customTilesSvc',
+                              'toastr'];
 
     function tileDetailCtrl($scope, tilesSvc,
                             tilesLogicSvc, pageSettings,
                             portfolioSvc, cartSvc,
                             $modal, baseSettings,
                             collectionsSvc, gtUtilsSvc,
-                            customTilesSvc) {
+                            customTilesSvc, toastr) {
         var selectedTileId = $scope.shared.tileId;
         gtUtilsSvc.addQueryStringParameter('tile', selectedTileId);
 
@@ -113,6 +114,8 @@
                 };
                 cartSvc.addSample(cartSample).then(function (resp) {
                     window.location = pageSettings.navigation.cart;
+                }, function (error) {
+
                 });
             }
             else {
@@ -122,6 +125,11 @@
                 };
                 cartSvc.addTile(cartItem).then(function (resp) {
                     window.location = pageSettings.navigation.cart;
+                }, function (error) {
+                    var a = [];
+                    error.data.forEach(function (message) {
+                        toastr.warning(message, 'Warning');
+                    });
                 });
             }
         };

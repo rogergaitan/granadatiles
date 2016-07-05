@@ -20,7 +20,8 @@ class SectionCoverDto(object):
         self.image = section_image.image.url
         self.designer = section_image.designer
         self.photographer = section_image.photographer
-        self.shopCustomTilesUrl = section_image.tile.design.group.get_absolute_url(language) if section_image.tile else ''
+        self.shopCustomTilesUrl = section_image.tile.design.custom_groups.all()[0].get_absolute_url(language) if section_image.tile else ''
+        self.shopTileUrl = section_image.tile.get_absolute_url(language) if section_image.tile else ''
 
 
 class FeaturedVideoDto(BaseCatalogOrderDto):

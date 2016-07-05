@@ -4,6 +4,7 @@
     angular
         .module('app', ['ngSanitize',
             'ngAnimate',
+            'toastr',
             'ui.bootstrap',
             'mega-menu',
             'angular-loading-bar',

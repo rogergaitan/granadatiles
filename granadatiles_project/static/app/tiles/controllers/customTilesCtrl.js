@@ -5,9 +5,9 @@
         .module('app')
         .controller('customTilesCtrl', customTileCtrl);
 
-    customTileCtrl.$inject = ['pageSettings', 'customTilesSvc', 'initData', '$modalInstance', '$timeout', 'cartSvc'];
+    customTileCtrl.$inject = ['pageSettings', 'customTilesSvc', 'initData', '$modalInstance', '$timeout', 'cartSvc', 'toastr'];
 
-    function customTileCtrl(pageSettings, customTilesSvc, initData, $modalInstance, $timeout, cartSvc) {
+    function customTileCtrl(pageSettings, customTilesSvc, initData, $modalInstance, $timeout, cartSvc, toastr) {
         /* jshint validthis:true */
         var vm = this;
         vm.hasChanges = false;
@@ -20,6 +20,10 @@
         vm.tile = initData.tileData;
         vm.colorGroups = customTilesSvc.formatColorGroupsForPost(vm.tile.colorGroups);
         vm.colorsUsed = customTilesSvc.getColorsUsed(vm.tile.colorGroups);
+        vm.notAuthenticated = false;
+
+        if (pageSettings.loggedUser == "AnonymousUser")
+            vm.notAuthenticated = true;
 
         customTilesSvc.getTilePlane(vm.tile.plane).then(function (response) {
             vm.plane = response.data;
@@ -35,6 +39,9 @@
                 }
                 if(vm.tile.isNotSquare)
                     $('.not-square-row').css('height', parseFloat($('.tile-not-square-plane svg').css('height')) - 0.025);
+                if (vm.notAuthenticated) {
+                    toastr.warning(vm.labels.notAuthenticatedCustom, 'Warning')
+                }
             }, 400);
         });
 
@@ -76,7 +83,9 @@
 
             if (colorGroup) {
                 colorGroup.colorId = vm.dropedColor.id;
-                colorGroup.colorName = vm.dropedColor.name,
+                colorGroup.colorName = vm.dropedColor.name;
+                if(colorGroup.colorHexadecimalCode != vm.dropedColor.hexadecimalCode)
+                    vm.hasChanges = true;
                 colorGroup.colorHexadecimalCode = vm.dropedColor.hexadecimalCode;
             }
             else {
@@ -115,6 +124,17 @@
                 customTilesSvc.addCustomizedTile(sendObject).then(function (response) {
                     vm.tile.customizedTileId = response.data.customizedTileId;
                     vm.hasChanges = false;
+                }, function (error) {
+                    var messages = error.data
+                    if (messages.constructor == Array) {
+                        messages.forEach(function (message) {
+                            toastr.warning(message, 'Warning');
+                        });
+                    } else {
+                        for (var key in messages) {
+                            toastr.warning(messages[key], 'Warning');
+                        }
+                    }
                 });
             }
         }
