@@ -9,30 +9,89 @@
                 collectionsSvc]);
 
     function collectionsSvc(appSettings, $http) {
-        
+
         return {
             getCollections: getCollections,
             getMenuCollections: getMenuCollections,
             getFeaturedCollections: getFeaturedCollections,
-            getCollectionGroups: getCollectionGroups
-        }
+            getCollection: getCollection,
+            getCollectionGroups: getCollectionGroups,
+            getCollectionGallery: getCollectionGallery,
+            getFilteredMenuCollection: getFilteredMenuCollection,
+            getGroup: getGroup,
+            getSizes: getSizes,
+            getStyles: getStyles,
+            getTiles: getTiles,
+            getTileFilteredByStyle: getTileFilteredByStyle,
+            getMainTile: getMainTile,
+            getInstallationPhoto: getInstallationPhoto
+        };
 
         function getCollections() {
             return $http.get(appSettings.serverPath + 'collections');
         }
 
-        function getMenuCollections(){
+        function getMenuCollections() {
             return $http.get(appSettings.serverPath + 'collections/menu');
+        }
+
+        function getFilteredMenuCollection(collectionId) {
+            return $http.get(appSettings.serverPath + 'collections/menu/?exclude=' + collectionId);
         }
 
         function getFeaturedCollections() {
             return $http.get(appSettings.serverPath + 'collections/featured');
         }
 
-        function getCollectionGroups(collectionId) {
-            return $http.get(appSettings.serverPath + 'collections/'+ collectionId + '/groups');
+        function getCollection(collectionId) {
+            return $http.get(appSettings.serverPath + 'collections/' + collectionId);
         }
 
-        
+        function getCollectionGroups(collectionId) {
+            return $http.get(appSettings.serverPath + 'collections/' + collectionId + '/groups');
+        }
+
+        function getCollectionGallery(collectionId) {
+            return $http.get(appSettings.serverPath + 'collections/' + collectionId + '/installationphotos');
+        }
+
+        function getGroup(groupId) {
+            return $http.get(appSettings.serverPath + 'groups/' + groupId);
+        }
+
+        function getStyles(groupId) {
+            return $http.get(appSettings.serverPath + 'groups/' + groupId + '/styles');
+        }
+
+        function getSizes(groupId) {
+            return $http.get(appSettings.serverPath + 'groups/' + groupId + '/sizes');
+        }
+
+        function getTiles(groupId, offset, onlyNews, onlyInStock, onlySpecials, styleId) {
+            return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles',
+                {
+                    params:
+                        {
+                            limit: 6,
+                            offset: offset,
+                            recent: onlyNews,
+                            in_stock: (onlyInStock) ? onlyInStock:undefined,
+                            specials:(onlySpecials) ? onlySpecials:undefined,
+                            style: styleId
+                        }
+                })
+        }
+
+        function getTileFilteredByStyle(groupId, styleName) {
+            return $http.get(appSettings.serverPath + 'groups/' + groupId + '/tiles/?style=' + styleName)
+        }
+
+        function getMainTile(tileId) {
+            return $http.get(appSettings.serverPath + 'tiles/' + tileId);
+        }
+
+        function getInstallationPhoto(tileId) {
+            return $http.get(appSettings.serverPath + 'tiles/' + tileId + '/installationphotos/')
+        }
     }
 }());

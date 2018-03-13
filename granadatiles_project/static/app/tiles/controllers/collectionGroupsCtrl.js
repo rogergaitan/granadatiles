@@ -3,24 +3,59 @@
 
     angular
         .module('app.tiles')
-        .controller('collectionsGroupCtrl', ['pageSettings',
-            'collectionsSvc',
-            collectionsGroupCtrl
-        ]);
+        .controller('collectionsGroupsCtrl',
+                    ['baseSettings',
+                     'pageSettings',
+                     'collectionsSvc',
+                     'flatPagesSvc',
+                     '$modal',
+                     collectionsGroupsCtrl
+                    ]);
 
-    function collectionsGroupCtrl(pageSettings, collectionsSvc) {
+    function collectionsGroupsCtrl(baseSettings,
+                                  pageSettings,
+                                  collectionsSvc,
+                                  flatPagesSvc,
+                                  $modal) {
         var vm = this;
+
+        vm.labels = pageSettings.labels;
+
+        vm.subMenuCollapsed = true;
+
+        vm.collectionAsideNavigationTemplateUrl = baseSettings.staticUrl + 'app/tiles/templates/collectionAsideNavigation.html';
+
+        collectionsSvc.getCollection(pageSettings.collectionId).then(function (response) {
+            vm.collection = response.data;
+        });
 
         collectionsSvc.getCollectionGroups(pageSettings.collectionId).then(function (response) {
             vm.collectionGroups = response.data;
         });
 
-        vm.title = 'Echo Tile Collection Interactive Catalog ';
+        collectionsSvc.getFilteredMenuCollection(pageSettings.collectionId).then(function (response) {
+            vm.filteredMenuCollection = response.data;
+        });
 
-        vm.description = '<p>The Echo Tile Collection revitalizes an art form that developed in France in the mid-1800s\ ' +
-                        'and quickly spread around the world. Unlike ceramic tiles, which are usually glazed and ?red,\ ' +
-                        'decorative cement tiles are made by ?rst pouring a mixture of cement and color pigment into\ ' +
-                        'separate compartments in a metal mold.</p>';
+        flatPagesSvc.getCollectionContentMenu(pageSettings.collectionId).then(function (response) {
+            vm.collectionContent = response.data;
+        });
+
+        vm.showCollectionGallery = function () {
+            $modal.open({
+                templateUrl: baseSettings.staticUrl + 'app/tiles/templates/tileModal.html',
+                controller: 'tileModalCtrl',
+                controllerAs: 'vm',
+                size: 'lg',
+                resolve: {
+                    installationPhotos: function () {
+                        return collectionsSvc.getCollectionGallery(pageSettings.collectionId).then(function (response) {
+                            return response.data;
+                        });
+                    }
+                }
+            })
+        };
 
     }
 }());

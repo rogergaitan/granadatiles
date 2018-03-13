@@ -1,10 +1,12 @@
-import random
+﻿import random
 from django.shortcuts import get_object_or_404
-from .models import Testimony, Section, FeaturedVideo
+from .models import Testimony, Section, FeaturedVideo, Area
 from .dtos import TestimonyDto, SectionCoverDto, FeaturedVideoDto
 from apps.news.models import Article
 from apps.news.dtos import  SectionFeaturedArticleDto, ArticleMagazineDto
 from core.dtos import BaseContentDto
+from apps.content.models import IndexNavigation, ExtendedFlatPage, CollectionContent
+from apps.content.dtos import IndexNavigationDto, FlatPageDto, FlatPageCoverDto, FlatPageMenuDto, CollectionContentDto
 
 
 class TestimonyService(object):
@@ -39,7 +41,7 @@ class SectionService(object):
         section = get_object_or_404(Section, pk=section_id)
         cover = SectionService.get_random_cover(section)
         if cover:
-            sectioncoverDto = SectionCoverDto(cover)
+            sectioncoverDto = SectionCoverDto(cover, language)
             if cover.featured_article:
                 sectioncoverDto.featuredArticle = SectionFeaturedArticleDto(cover.featured_article, language)
             if cover.articles.count() > 0:
@@ -48,9 +50,53 @@ class SectionService(object):
         else:
             return None
 
+class FlatPageService(object):
+
+    def get_flatpages_for_menu(menuId , language=None):
+        flatpages = ExtendedFlatPage.objects.filter(menu=int(menuId))
+        flatpagesDto = [FlatPageMenuDto(flatpage, language) for flatpage in flatpages]
+        return flatpagesDto
+
+    def get_flatpage(title, language=None):
+        flatpage = get_object_or_404(ExtendedFlatPage, title=title)
+        flatPageDto = FlatPageDto(flatpage, language = language)
+        return flatPageDto
+
+    def get_cover(title):
+       flatPage = get_object_or_404(ExtendedFlatPage, title=title)
+       flatPageCoverDto = FlatPageCoverDto(flatPage)
+       return flatPageCoverDto
+
+class CollectionContentService(object):
+
+    def get_menu_content(collectionId, language=None):
+        content = CollectionContent.objects.filter(collection__id = collectionId)
+        contentDto = [FlatPageMenuDto(item, language) for item in content]
+        return contentDto
+
+    def get_content(title, language=None):
+        content = get_object_or_404(CollectionContent, title=title)
+        collectionContentDto = CollectionContentDto(content, language=language)
+        return collectionContentDto
 
 class FeaturedVideoService(object):
+
     def get_videos(language=None):
         videos = FeaturedVideo.objects.all()
         videosDto = [FeaturedVideoDto(video, language=language) for video in videos]
         return videosDto
+
+
+class AreaService(object):
+
+    def get_area(id, language=None):
+        area = get_object_or_404(Area,pk=id)
+        areaDto = BaseContentDto(area, language)
+        return areaDto
+
+class IndexNavigationService(object):
+
+    def get_index_navigation(language=None):
+        index_navigation_objects = IndexNavigation.objects.all()
+        index_navigation_dto = [IndexNavigationDto(index_object, language=language) for index_object in index_navigation_objects]
+        return index_navigation_dto

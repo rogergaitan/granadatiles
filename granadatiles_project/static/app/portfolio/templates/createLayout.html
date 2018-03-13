@@ -1,0 +1,139 @@
+﻿<div class="col-xs-12" ng-controller="createLayoutCtrl as vm">
+    <div class="row">
+        <aside class="col-sm-3 col-xs-4">
+            <ng-include src="vm.portfolioAsideMenuTemplateURl"></ng-include>
+        </aside>
+        <div class="col-sm-9 col-xs-8">
+            <h1 class="heading-sec">{{ ::vm.section.title }} </h1>
+            <a  class="breadcrumds"><u>{{::vm.labels.myPortfolio}}</u> <i class="fa fa-angle-double-right"></i></a>
+            <a ng-href="{{::vm.navigation.layouts}}"  class="breadcrumds"><u>{{::vm.labels.layouts}}</u> <i class="fa fa-angle-double-right"></i></a>
+            <a  class="breadcrumds"><u>{{::vm.labels.createLayout}}</u></a>
+            <div class="text-section" ng-bind-html="::vm.section.description | unsafe"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form action="" class="form-inline form-layout">
+                <div class="form-group">
+                    <label for="">NEW LAYOUT</label>
+                    <input type="text" class="form-control" placeholder="Selected Name or text holder here">
+                </div>
+                <div class="form-group">
+                    <div class="btn-group btn-group-sky" dropdown>
+                        <button id="split-button" type="button" class="btn btn-sky">Length Ft.</button>
+                        <button type="button" class="btn btn-sky" dropdown-toggle>
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="split-button">
+                            <li role="menuitem"><a href="#">Action</a></li>
+                            <li role="menuitem"><a href="#">Another action</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="btn-group btn-group-sky" dropdown>
+                        <button id="split-button" type="button" class="btn btn-sky">Length In</button>
+                        <button type="button" class="btn btn-sky" dropdown-toggle>
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="split-button">
+                            <li role="menuitem"><a href="#">Action</a></li>
+                            <li role="menuitem"><a href="#">Another action</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span>X</span>
+                </div>
+                <div class="form-group">
+                    <div class="btn-group btn-group-sky" dropdown>
+                        <button id="split-button" type="button" class="btn btn-sky">Width Ft.</button>
+                        <button type="button" class="btn btn-sky" dropdown-toggle>
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="split-button">
+                            <li role="menuitem"><a href="#">Action</a></li>
+                            <li role="menuitem"><a href="#">Another action</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="btn-group btn-group-sky" dropdown>
+                        <button id="split-button" type="button" class="btn btn-sky">Width In</button>
+                        <button type="button" class="btn btn-sky" dropdown-toggle>
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="split-button">
+                            <li role="menuitem"><a href="#">Action</a></li>
+                            <li role="menuitem"><a href="#">Another action</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-green">SAVE LAYOUT</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class="row layout-tile">
+        <div class="col-md-2 ctile">
+            <img src="/static/img/initial/tiles/tiles/kotka-mosaic-2.jpg" alt="">
+            <h2>Bordeaux</h2>
+            <span>Echo Collection</span><br>
+            <span>8'x8"</span>
+        </div>
+        <div class="col-md-2 ctile">
+            <img src="/static/img/initial/tiles/tiles/kotka-mosaic-2.jpg" alt="">
+            <h2>Bordeaux</h2>
+            <span>Echo Collection</span><br>
+            <span>8'x8"</span>
+        </div>
+        <div class="col-md-2 ctile">
+            <img src="/static/img/initial/tiles/tiles/kotka-mosaic-2.jpg" alt="">
+            <h2>Bordeaux</h2>
+            <span>Echo Collection</span><br>
+            <span>8'x8"</span>
+        </div>
+        <div class="col-md-2 ctile">
+            <img src="/static/img/initial/tiles/tiles/kotka-mosaic-2.jpg" alt="">
+            <h2>Bordeaux</h2>
+            <span>Echo Collection</span><br>
+            <span>8'x8"</span>
+        </div>
+        <div class="col-md-2 ctile">
+            <img src="/static/img/initial/tiles/tiles/kotka-mosaic-2.jpg" alt="">
+            <h2>Bordeaux</h2>
+            <span>Echo Collection</span><br>
+            <span>8'x8"</span>
+        </div>
+        <div class="col-md-2 ctile">
+            <img src="/static/img/initial/tiles/tiles/kotka-mosaic-2.jpg" alt="">
+            <h2>Bordeaux</h2>
+            <span>Echo Collection</span><br>
+            <span>8'x8"</span>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-md-7">
+            <span class="text-generic">Instructions: Click tiles to add to the layout. Then, click and hold to move tiles around the layout</span>
+        </div>
+        <div class="col-md-5">
+            <ul class="list-inline list-options-layout">
+                <li><a href=""><i class="fa fa-envelope"></i><br>SEND TO GRANADA TILE</a></li>
+                <li><a href=""><i class="fa fa-files-o"></i><br>DUPLICATE</a></li>
+                <li><a href=""><i class="fa fa-share-alt"></i><br>SHARE</a></li>
+                <li><a href=""><i class="fa fa-times-circle-o"></i><br>DELETE</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 rejilla">
+            <img src="/static/img/grid.png" alt="">
+        </div>
+    </div>
+</div>

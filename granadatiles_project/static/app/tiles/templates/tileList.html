@@ -1,0 +1,105 @@
+<div class="col-md-12" ng-controller="tileListCtrl as vm">
+    <div class="row">
+        <aside class="col-md-3 col-sm-3">
+            <ng-include src="vm.collectionAsideNavigationTemplateUrl"></ng-include>
+        </aside>
+        <div class="col-md-9 col-sm-9">
+            <div ng-show="!shared.tileDetailTemplateUrl" class="animate-show">
+                <h1 class="heading-sec">{{ ::vm.group.title }}</h1>
+                <a  class="breadcrumds"><u>{{::vm.labels.collection}}</u> <i class="fa fa-angle-double-right"></i></a>
+                <a ng-href="{{vm.collection.url}}" class="breadcrumds"><u>{{ ::vm.collection.menuTitle }}</u> <i class="fa fa-angle-double-right"></i></a>
+                <a  class="breadcrumds"><u>{{ ::vm.group.title }}</u></a>
+                <div class="text-section" ng-bind-html="::vm.group.description | unsafe"></div>
+                <div class="row filter-container">
+                    <div class="col-md-8">
+                        <label class="inline-block"><strong>{{ vm.labels.show_only }}</strong></label>
+                        <div class="checkbox-content">
+                            <p class="checkbox-inline">
+                                <input type="checkbox" id="chk-news" ng-click="vm.refreshTiles()" ng-model="vm.onlyNews">
+                                <label for="chk-news">{{ ::vm.labels.new_tile }}</label>
+                            </p>
+                            <p class="checkbox-inline">
+                                <input type="checkbox" id="chk-instock" ng-click="vm.refreshTiles()" ng-model="vm.onlyInStock">
+                                <label for="chk-instock">{{ ::vm.labels.stock }}</label>
+                            </p>
+                            <p class="checkbox-inline">
+                                <input type="checkbox" id="chk-specials" ng-click="vm.refreshTiles()" ng-model="vm.onlySpecials">
+                                <label for="chk-specials">{{ ::vm.labels.special }}</label>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 pull-right text-right">
+                        <div class="btn-group dropdown" dropdown>
+                            <button type="button" id="btn-selected-style" class="btn btn-sky">{{ vm.selectedStyle.name }}</button>
+                            <button type="button" class="btn btn-sky dropdown-toggle" dropdown-toggle aria-haspopup="true" aria-expanded="true">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu filter-list" role="menu" dropdown-menu aria-labelledby="btn-selected-style">
+                                <li role="menuitem" ng-repeat="style in vm.updatedStyles">
+                                    <a  ng-click="vm.setStyle(style)" >{{ style.name }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" infinite-scroll='vm.nextPage()' infinite-scroll-distance='0'>
+                    <div ng-repeat="tile in vm.tiles">
+                        <div class="clearfix" ng-if="$index % 3 == 0"></div>
+                        <div class="col-md-4 col-sm-4 blue-box">
+                            <div class="content-tile">
+                                <div class="row">
+                                    <div ng-class="(tile.main.isNotSquare) ? 'col-md-12': 'col-md-8'">
+                                        <tile-mosaic tile="tile.main" repeat-vertical="2" repeat-horinzotal="1" fade-in class="animate-show-fade" ng-click="vm.showTileDetail(tile.main.id)" ng-if="!tile.main.isNotSquare"></tile-mosaic>
+                                        <img ng-src="{{tile.main.image}}" fade-in class="animate-show-fade not-square-image" ng-click="vm.showTileDetail(tile.main.id)" ng-if="tile.main.isNotSquare" />
+                                        <div class="tag-new arrowTop" ng-if="tile.main.new">
+                                            <span class="label-new">{{::vm.labels.new_tile}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div ng-repeat="item in tile.tiles" class="row">
+                                            <div class="col-md-12">
+                                                <a  ng-click="vm.setTile($parent.$index, item.id)">
+                                                    <img ng-src="{{ item.image }}" alt="{{ item.name }}" class="img-responsive thumbnail">
+                                                    <label class="label-tile">{{ item.name }}</label>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 tile-body">
+                                        <div>
+                                            <h2><span ng-click="vm.showTileDetail(tile.main.id)">{{ tile.main.name }}</span></h2>
+                                            <label class="title-tile" ng-if="!tile.main.inStock">CUSTOM:</label>
+                                            <label class="title-tile" ng-if="tile.main.inStock">In Stock:</label>
+                                            <ul class="list-inline title-tile">
+                                                <li ng-repeat="size in tile.main.sizes">{{ size.size }}</li>
+                                            </ul>
+                                        </div>
+
+                                        <ul class="list-inline tile-options">
+                                            <li ng-show="!tile.main.isSample">
+                                                <a ng-click="vm.showTileDetail(tile.main.id)"><i class="fa fa-plus-circle"></i><p>{{ vm.labels.moreInfo | uppercase }}</p></a>
+                                            </li>
+                                            <li ng-if="tile.main.hasInstallationPhotos">
+                                                <a  ng-click="vm.showInstallationPhoto(tile.main.id)"><i class="fa fa-eye"></i><p>{{ vm.labels.photos | uppercase }}</p></a>
+                                            </li>
+                                            <li ng-if="tile.main.hasSample">
+                                                <a ng-click="vm.orderFreeSample(tile.main)">
+                                                    <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="{{::vm.main.name}}">
+                                                    <p>{{ vm.labels.orderFree | uppercase }}</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style='clear: both;'></div>
+                </div>
+            </div>
+            <div ng-include="shared.tileDetailTemplateUrl" class="animate-show" ng-show="shared.tileDetailTemplateUrl"></div>
+        </div>
+    </div>
+</div>

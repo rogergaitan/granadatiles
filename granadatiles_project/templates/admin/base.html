@@ -9,7 +9,7 @@
     <link rel="icon" type="image/x-icon" href="{{ STATIC_URL }}img/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% block extrastyle %}{% endblock %}
-    
+
     <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet" />
     <link rel="stylesheet" href="{{STATIC_URL}}lib/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}admin/css/AdminLTE.min.css" />
@@ -35,6 +35,9 @@
         .navbar-nav > .user-menu > .dropdown-menu {
             width: 316px;
         }
+        a{
+            cursor:pointer;
+        }
     </style>
 </head>
 {% load i18n %}
@@ -47,7 +50,7 @@
         <header class="main-header">
             <a class="logo" href="{% url 'admin:index' %}"><b>Granada</b> Tiles</a>
             <nav class="navbar navbar-static-top" role="navigation">
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <a  class="sidebar-toggle" data-toggle="offcanvas" role="button">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -60,7 +63,7 @@
                         {% load log %}
                         {% get_admin_log 13 as admin_log for_user user %}
                         <li class="dropdown notifications-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a  class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-bell-o"></i>
                                 <span class="label label-warning">{{admin_log.count}}</span>
                             </a>
@@ -91,7 +94,7 @@
                         {% endblock %}
                         {% if user.is_active and user.is_staff %}
                         <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a  class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="hidden-xs">
                                     {% trans 'Welcome,' %}
                                     <strong>
@@ -155,8 +158,8 @@
                 <ul class="sidebar-menu">
                     <li class="header">{% trans 'MAIN NAVIGATION' %}</li>
                     {% for app in apps.app_list %}
-                    <li class="treeview">
-                        <a href="#">
+                    <li class="treeview" id="{{ app.name|lower }}" data-menu-option="{{app.name}}">
+                        <a >
                             <i class="{{app.icon}}"></i>
                             <span>{{app.name}}</span> <i class="fa fa-angle-left pull-right"></i>
                         </a>
@@ -241,7 +244,7 @@
         </strong>
     </footer>
     {% endblock %}
-    
+
     <script src="{% static "admin/js/jquery-migrate-1.2.1.min.js" %}"></script>
     <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
     <script src="{{STATIC_URL}}admin/js/jquery.slimscroll.min.js"></script>
@@ -254,9 +257,14 @@
                 $('input[type="submit"]').addClass('btn');
                 $('[title]').tooltip();
                 $( "ul span:contains('Django Summernote')" ).parent().parent().remove();
+                $($( "ul span:contains('Aut')" )[1]).parent().parent().remove()
                 $( "ul span:contains('Aut')" ).siblings()[0].setAttribute('class', 'fa fa-user');
                 $( "ul span:contains('Aut')" ).text('{% trans 'Authentication'%}')
             });
+            var selectedApp = $('.breadcrumb').find("li:eq(1)").find("a").text();
+            var $selectedMenuOption = $('[data-menu-option="'+selectedApp+'"]');
+            $selectedMenuOption.addClass('active');
+            $selectedMenuOption.find('ul').slideDown();
         }(jQuery));
         //]]>
     </script>

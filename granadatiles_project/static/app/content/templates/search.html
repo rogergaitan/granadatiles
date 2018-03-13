@@ -1,0 +1,32 @@
+﻿<div class="col-md-12" ng-controller="searchCtrl as vm">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="heading-sec">{{ ::vm.labels.searchResults }}</h1>
+            <a  class="breadcrumds"><u>{{ ::vm.labels.searchResults }} <i class="fa fa-angle-double-right"></i></u></a>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row search-list">
+                <div ng-repeat="result in vm.searchResults">
+                    <div class="clearfix" ng-if="$index % 4 == 0"></div>
+                    <div class="col-xs-3 result-item">
+                        <h2>{{ result.additional }}</h2>
+                        <a href="{{ result.url }}">
+                            <img ng-src="{{ result.image }}" alt="{{ result.name }}" class="img-responsive thumbnail animate-show-fade" fade-in>
+                        </a>
+                        <a class="result-url" href="{{ result.url }}">{{::vm.labels.viewProduct}}</a><br />
+                        <small>{{ result.name }}</small><br>
+                        <small>{{ result.additional2 }}</small><br ng-if="result.additional2 != ''">
+                        <small ng-if="result.type == 'Tile'">
+                            <span ng-if="result.additional3 == 'True'">{{::vm.labels.custom}}</span>
+                            <span ng-if="result.additional3 == 'False'">{{::vm.labels.inStock}}</span>
+                        </small><br>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

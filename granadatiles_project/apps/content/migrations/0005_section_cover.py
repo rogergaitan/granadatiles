@@ -102,7 +102,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('content', '0004_initial_testimony_data'),
-        ('tiles', '0002_initial_data')
+        
     ]
 
     operations = [

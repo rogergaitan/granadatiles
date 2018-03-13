@@ -1,6 +1,15 @@
-﻿from django.http.response import JsonResponse
+from django.http.response import JsonResponse
 from django.shortcuts import render
 
+from rest_framework.response import Response
+
+from core.views import BaseViewSet
+
+from .services import ItemCountService, LatestTilesService, LatestUsersService, GroupsByCollectionService, SearchService
+from .serializers import (
+    ItemCountSerializer, LatestTilesSerializer, LatestUsersSerializer,
+    GroupsByCollectionSerializer, SearchSerializer
+)
 
 def search(request):
     #search_term = request.GET.get('search_term')
@@ -13,5 +22,44 @@ def search(request):
     #format_events(events, search_results)
     return render(request, 'admin/search_general.html', {
         #'search_term':search_term,
-        #'search_results':search_results  
+        #'search_results':search_results
         })
+
+
+class ItemCountViewSet(BaseViewSet):
+
+    def list(self, request):
+        items = ItemCountService.get_item_count()
+        serializer = ItemCountSerializer(items)
+        return Response(serializer.data)
+
+
+class LatestTilesViewset(BaseViewSet):
+
+    def list(self, request):
+        tiles = LatestTilesService.get_latest_tiles(language=self.get_language(request))
+        serializer = LatestTilesSerializer(tiles, many=True)
+        return Response(serializer.data)
+
+class LatestUsersViewSet(BaseViewSet):
+
+    def list(self, request):
+        users = LatestUsersService.get_latest_users()
+        serializer = LatestUsersSerializer(users, many=True)
+        return Response(serializer.data)
+
+class GroupsByCollectionViewSet(BaseViewSet):
+
+    def list(self, request):
+        collections = GroupsByCollectionService.get_groups_collection(language=self.get_language(request))
+        serializer = GroupsByCollectionSerializer(collections, many=True)
+        return Response(serializer.data)
+
+
+class SearchViewSet(BaseViewSet):
+
+    def list(self, request):
+        search_term = request.query_params.get('searchTerm')
+        results = SearchService.get_results(search_term, self.get_language(request))
+        serializer = SearchSerializer(results, many=True)
+        return Response(serializer.data)

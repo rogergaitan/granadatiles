@@ -18,9 +18,9 @@ def addInitialData(apps, schema_editor):
                 ),
             #2
             Section(
-                    name='Collections/Compare our products',
+                    name='Collections/Product Comparison',
                     name_es='Colecciones/Compare nuestros productos',
-                    title='Compare our Products ',
+                    title='Product Comparison',
                     title_es='Compare our Products ',
                     description='''This Tile Comparison Chart is designed to give you an overview of Granada Tile's 
                                     6 cement and concrete tile collections, with their varied characteristics and uses.''',
@@ -128,10 +128,56 @@ def addInitialData(apps, schema_editor):
     Area.objects.bulk_create([
             #1
             Area(
-                    title='Footer',
-                    title_es='Pie de pagina',
-                    description='GrandaTile',
-                    description_es=''
+                    title='Slogan',
+                    title_es='Eslogan',
+                    description='''Cement tile is not just a tile made with cement. 
+                                    Cement tile has the strength of concrete & the feel of silk''',
+                    description_es='''El azulejo de cemento no solamente esta hecho con cemento. 
+                                        El azulejo de cemento tiene la fuerza del concrete y la sensacion de la seda'''
+                ),
+             #2
+            Area(
+                    title='Compare our products',
+                    title_es='Compare nuestros productos',
+                    description='''<table class="table table-bordered"><tbody><tr><td>Tile Product Comparison</td>
+                                    <td>Echo</td><td>Minis</td><td>Mauresque</td></tr><tr><td>Sizes</td><td>4"x4", 
+                                    4"x8", 8"x8", 10"x10", 2"x2" 6"x6"</td><td>2"x2"<br></td><td>12"x12", 8"x12", 
+                                    6"x6"</td></tr><tr><td>Shapes</td><td>square, rectangle, hexagon</td><td>star &amp; 
+                                    cross, escama</td><td>arabesque, escama</td></tr><tr><td>Thickness<br></td><td>5/8"<br>
+                                    </td><td>1/2"<br></td><td>1/2"<br></td></tr><tr><td>Standard Solid Colors<br></td><td>32<br>
+                                    </td><td>6</td><td>4</td></tr><tr><td>Designs<br></td><td>150<br></td><td>2</td><td>2</td></tr>
+                                    <tr><td>Customizable<br></td><td>yes<br></td><td>no<br></td><td>no<br></td></tr></tbody></table><p><br></p>''',
+                    description_es='''<table class="table table-bordered"><tbody><tr><td>Tile Product Comparison</td>
+                                    <td>Echo</td><td>Minis</td><td>Mauresque</td></tr><tr><td>Sizes</td><td>4"x4", 
+                                    4"x8", 8"x8", 10"x10", 2"x2" 6"x6"</td><td>2"x2"<br></td><td>12"x12", 8"x12", 
+                                    6"x6"</td></tr><tr><td>Shapes</td><td>square, rectangle, hexagon</td><td>star &amp; 
+                                    cross, escama</td><td>arabesque, escama</td></tr><tr><td>Thickness<br></td><td>5/8"<br>
+                                    </td><td>1/2"<br></td><td>1/2"<br></td></tr><tr><td>Standard Solid Colors<br></td><td>32<br>
+                                    </td><td>6</td><td>4</td></tr><tr><td>Designs<br></td><td>150<br></td><td>2</td><td>2</td></tr>
+                                    <tr><td>Customizable<br></td><td>yes<br></td><td>no<br></td><td>no<br></td></tr></tbody></table><p><br></p>'''
+                ),
+              #3
+            Area(
+                    title='Cement vs Ceramic',
+                    title_es='Cemento vs Ceramica',
+                    description='''<h2>Echo Collection vs. Encaustic Ceramic Tile</h2><h2><br></h2><table class="table">
+                                    <tbody><tr><td><h3>Cement "encaustic"</h3></td><td>
+                                    <h3>Ceramic encaustic</span></h3></td></tr><tr><td>
+                                    Antique French cement floor tile from early 1900s</td><td><p>(theantiquefloorcompany.com)</p>
+                                    </td><td><br></td></tr></tbody></table><p>The Echo Collection utilizes a production process that
+                                    dates back to the 1870s in which a mix of cement, sand, color</p><p>pigment and marble powder 
+                                    is poured into metal molds, backed with a dry concrete mixture, and compressed under 2,000</p>
+                                    <p>pounds of pressure. The tiles are then left to air cure, which permits the cement mixtures 
+                                    to harden and strengthen.</p>''',
+                    description_es='''<h2>Echo Collection vs. Encaustic Ceramic Tile</h2><h2><br></h2><table class="table">
+                                    <tbody><tr><td><h3>Cement "encaustic"</h3></td><td>
+                                    <h3>Ceramic encaustic</span></h3></td></tr><tr><td>
+                                    Antique French cement floor tile from early 1900s</td><td><p>(theantiquefloorcompany.com)</p>
+                                    </td><td><br></td></tr></tbody></table><p>The Echo Collection utilizes a production process that
+                                    dates back to the 1870s in which a mix of cement, sand, color</p><p>pigment and marble powder 
+                                    is poured into metal molds, backed with a dry concrete mixture, and compressed under 2,000</p>
+                                    <p>pounds of pressure. The tiles are then left to air cure, which permits the cement mixtures 
+                                    to harden and strengthen.</p>'''
                 ),
         ])
 

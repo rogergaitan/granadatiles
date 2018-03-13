@@ -1,65 +1,62 @@
 ﻿<div class="col-md-12" ng-controller="articlesListCtrl as vm">
     <div class="row">
-        <aside class="col-md-3 ">
-            <ul class="menu-section">
-                <li><a href="">Magazines</a></li>
-                <li><a href="">Catalogs / Inspiration Books</a></li>
-                <li><a href="">Cement Tile Blog</a></li>
-                <li><a href="">Videos</a></li>
-            </ul>
+        <aside class="col-sm-3 sub-menu-container">
+            <ng-include src="::vm.menuNewsTemplateUrl"></ng-include>
         </aside>
-        <div class="col-md-9">
-            <h1 class="heading-sec">{{ ::vm.title }}</h1>
-            <a href="#" class="breadcrumds"><u>{{ ::vm.breadcrumds }}</u> <i class="fa fa-angle-double-right"></i></a>
-            <div class="text-section" ng-bind-html="::vm.description"></div>
+        <div class="col-sm-9">
+            <h1 class="heading-sec">{{ ::vm.section.title }}</h1>
+            <a  class="breadcrumds"><u>{{ ::vm.labels.newsPress }}</u> <i class="fa fa-angle-double-right"></i></a>
+            <a  class="breadcrumds"><u>{{ ::vm.labels.magazine }}</u> <i class="fa fa-angle-double-right"></i></a>
+            <div class="text-section" ng-bind-html="::vm.section.description | unsafe"></div>
         </div>
     </div>
-    <div class="row filter">
-        <div class="col-md-2 pull-right  text-right">
-            <div class="btn-group">
-                <button type="button" class="btn btn-info">2015</button>
-                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div class="row filter-container">
+        <div class="col-sm-2 pull-right text-right">
+            <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-sky">{{ vm.selectedYear.year }}</button>
+                <button type="button" class="btn btn-sky dropdown-toggle" dropdown-toggle>
                     <span class="caret"></span>
-                    <span class="sr-only">Toggle Dropdown</span>
                 </button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">2015</a></li>
-                    <li><a href="#">2014</a></li>
-                    <li><a href="#">2013</a></li>
+                <ul class="dropdown-menu filter-list" role="menu">
+                    <li ng-repeat="year in vm.years">
+                        <a  ng-click="vm.setYear(year)">{{ year.year }}</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div ng-repeat="article in ::vm.articles" ng-if="$index % 2 == 0" class="row component-space-row" >
-        <div class="col-md-6" ng-if="$index <= vm.articles.length - 1">
-            <a href="#">
-                <div class="component-container">
-                    <div class="row component-container_padding15">
+    <div ng-repeat="article in vm.articles" ng-if="$index % 2 == 0" class="row animate-repeat">
+        <div class="col-xs-6 blue-box" ng-if="$index <= vm.articles.length - 1">
+            <a ng-href="{{vm.articles[$index].url}}" target="_blank">
+                <div class="article-content">
+                    <div class="row">
                         <div class="col-md-4">
-                            <img ng-src="{{ ::vm.articles[$index].image }}" alt="" class="thumbnail img-responsive component-container_multimedia component-container_multimedia--shadow">
+                            <img ng-src="{{ vm.articles[$index].image }}" alt="{{ vm.articles[$index].title }}" class="thumbnail img-responsive shadow-image">
                         </div>
-                        <div class="col-md-8">
-                            <h2 class="component-container_title">{{ ::vm.articles[$index].title }}</h2>
-                            <h3 class="component-container_subtitle">{{ ::vm.articles[$index].magazine }}</h3>
-                            <p class="component-container_text" ng-bind-html="::vm.articles[$index].description"></p>
-                            <label class="component-container_text">{{vm.labels.date}}:</label><label class="component-container_text">{{ ::vm.articles[$index].date }}</label>
+                        <div class="col-md-8 article-body">
+                            <h2>{{ vm.articles[$index].title }}</h2>
+                            <h3>{{ vm.articles[$index].magazine }}</h3>
+                            <p ng-bind-html="vm.articles[$index].description | unsafe"></p>
+                            <label>{{ vm.labels.date}}:</label>
+                            <label>{{ vm.articles[$index].date }}</label>
                         </div>
                     </div>
                 </div>
             </a>
         </div>
-        <div class="col-md-6 article" ng-if="$index + 1 <= vm.articles.length - 1">
-            <a href="#">
-                <div class="component-container">
-                    <div class="row component-container_padding15">
+        <div class="col-xs-6 blue-box" ng-if="$index + 1 <= vm.articles.length - 1">
+            <a ng-href="{{vm.articles[$index + 1].url}}" target="_blank">
+                <div class="article-content">
+                    <div class="row">
                         <div class="col-md-4">
-                            <img ng-src="{{ ::vm.articles[$index + 1].image }}" alt="" class="thumbnail img-responsive component-container_multimedia component-container_multimedia--shadow">
+                            <img ng-src="{{ vm.articles[$index + 1].image }}" alt="{{ vm.articles[$index + 1].title }}" class="thumbnail img-responsive shadow-image">
                         </div>
-                        <div class="col-md-8">
-                            <h2 class="component-container_title">{{ ::vm.articles[$index + 1].title }}</h2>
-                            <h3 class="component-container_subtitle">{{ ::vm.articles[$index + 1].magazine }}</h3>
-                            <p class="component-container_text" ng-bind-html="::vm.articles[$index + 1].description"></p>
-                            <label class="component-container_text">{{vm.labels.date}}:</label><label class="component-container_text">{{ ::vm.articles[$index + 1].date }}</label>
+                        <div class="col-md-8 article-body">
+                            <h2>{{ vm.articles[$index + 1].title }}</h2>
+                            <h3>{{ vm.articles[$index + 1].magazine }}</h3>
+                            <p ng-bind-html="vm.articles[$index + 1].description | unsafe"></p>
+                            <label>{{ vm.labels.date}}:</label>
+                            <label>{{ vm.articles[$index + 1].date }}</label>
                         </div>
                     </div>
                 </div>

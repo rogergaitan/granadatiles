@@ -64,7 +64,7 @@ env
 *.db
 *.sqlite
 *.sqlite3
-local_settins.py
+local_settings.py
 
 #collected static 
 /static

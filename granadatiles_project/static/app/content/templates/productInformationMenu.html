@@ -1,0 +1,11 @@
+﻿<ul class="menu-section" ng-controller="menuCollectionCtrl as vm">
+    <li><a ng-href="{{ ::vm.navigation.inStockSamples }}">{{ ::vm.labels.inStockSamples }}</a></li>
+    <li><a ng-href="{{ ::vm.navigation.inStock }}">{{ ::vm.labels.inStockTiles }}</a></li>
+    <li><a ng-href="{{ ::vm.navigation.compareProducts }}">{{ ::vm.labels.compareProducts }}</a></li>
+    <li><a ng-href="{{ ::vm.navigation.cementVsCeramic }}">{{ ::vm.labels.cementVsCeramic }}</a></li>
+    <li><a ng-href="{{ ::vm.navigation.colorPalletes }}">{{ ::vm.labels.colorPalletes }}</a></li>
+    <li><a ng-href="{{ ::vm.navigation.catalogs }}">{{ ::vm.labels.catalogs }}</a></li>
+    <li ng-repeat="flatpage in vm.flatPages">
+        <a ng-href="{{ ::flatpage.url }}">{{::flatpage.title}}</a>
+    </li>
+</ul>

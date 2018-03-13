@@ -1,0 +1,26 @@
+﻿<div class="row submenu-selected submenu-selected-smtopmargin">
+    <div class="col-xs-12 submenu-selected-title">
+        <h3 class="text-uppercase">
+            {{::vm.labels.welcome}} {{vm.loggedUser}}
+        </h3>
+    </div>
+</div>
+<ul class="active-submenu active-submenu-smtopmargin">
+    <li>
+        <a ng-class="(vm.section.id == 10)? 'active':''" ng-href="{{::vm.navigation.portfolio}}">{{::vm.labels.tilesInMyPortfolio}}</a>
+    </li>
+    <li>
+        <a ng-class="(vm.section.id == 13)? 'active':''" ng-href="{{::vm.navigation.layouts}}">{{::vm.labels.layouts}}</a>
+        <ul class="collapsed-submenu" ng-if="vm.labels.createLayout">
+            <li>
+                <a ng-class="(vm.createLayout)? 'active':''" ng-href="{{::vm.navigation.createLayout}}">{{::vm.labels.createLayout}}</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a ng-click="vm.myAccount()">{{::vm.labels.myAccount}}</a>
+    </li>
+    <li>
+        <a ng-href="{{vm.logoutUrl}}">{{::vm.labels.logout}}</a>
+    </li>
+</ul>

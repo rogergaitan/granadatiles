@@ -1,0 +1,48 @@
+﻿{% extends "base.html" %}
+{% load i18n content %}
+
+{% block seo %}
+     {% collectioncontent flatpage.collectioncontent.id LANGUAGE_CODE  as section %}
+     <title>{{ section.page_title }}</title>
+    {% content_meta_tags section %}
+{% endblock seo %}
+
+{% block content%}
+    <div class="row">
+        <ng-include src="'{{STATIC_URL}}app/content/templates/collectionContent.html'"></ng-include>
+    </div>
+{% endblock content%}
+
+{% block js%}
+<script>
+    (function () {
+        "use strict";
+        angular
+        .module("app.core")
+        .factory("pageSettings", ['appSettings',pageSettings]);
+
+        function pageSettings(appSettings) {
+            return{
+                sectionId: 0,
+                language: '{{LANGUAGE_CODE}}',
+                labels: {
+                    gallery: '{% trans 'Gallery'%}',
+                    title: '{% trans 'Interactive Catalog' %}',
+                    interactiveCatalog: '{% trans 'Interactive Catalog' %}',
+                    customCement: '{% trans 'Custom Cement Tiles' %}',
+                    about: '{% trans 'About the ' %}',
+                    applications: '{% trans 'Applications of Cement Tile' %}',
+                    galleryMenu: '{% trans ' Gallery' %}',
+                    technical: '{% trans 'Technical Specifications' %}',
+                    ordering: '{% trans 'Ordering Cement Tile' %}',
+                    installing: '{% trans 'Installing Cement Tile' %}',
+                    moreInfo: '{% trans 'more info' %}',
+                    collection: '{% trans 'Collections' %}'
+                },
+                areaId: 0,
+                flatPageTitle: '{{ flatpage.title | safe }}'
+            }
+        };
+    })();
+</script>
+{% endblock js%}

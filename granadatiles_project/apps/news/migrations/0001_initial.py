@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import sorl.thumbnail.fields
 import core.models
+import sorl.thumbnail.fields
 
 
 class Migration(migrations.Migration):
@@ -15,13 +15,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Article',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
-                ('title', models.CharField(max_length=150, verbose_name='Title')),
-                ('title_es', models.CharField(max_length=160, null=True, blank=True, verbose_name='Title_es')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(verbose_name='Title', max_length=150)),
+                ('title_es', models.CharField(blank=True, verbose_name='Title_es', null=True, max_length=160)),
                 ('description', models.TextField(verbose_name='Description')),
-                ('description_es', models.TextField(null=True, blank=True, verbose_name='Description_es')),
-                ('image', sorl.thumbnail.fields.ImageField(upload_to=core.models.model_directory_path, verbose_name='Image')),
-                ('url', models.URLField(null=True, blank=True, verbose_name='Link')),
+                ('description_es', models.TextField(blank=True, verbose_name='Description_es', null=True)),
+                ('image', sorl.thumbnail.fields.ImageField(verbose_name='Image', upload_to=core.models.model_directory_path)),
+                ('url', models.URLField(blank=True, verbose_name='Link', null=True)),
                 ('date', models.DateField(verbose_name='Date')),
             ],
             options={
@@ -32,11 +32,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Catalog',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
-                ('name', models.CharField(max_length=150, verbose_name='Name')),
-                ('name_es', models.CharField(max_length=150, null=True, blank=True, verbose_name='Name_es')),
-                ('file', models.FileField(upload_to='Catalogs', verbose_name='File')),
-                ('image', models.ImageField(upload_to='Catalog', verbose_name='Image')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(verbose_name='Name', max_length=150)),
+                ('name_es', models.CharField(blank=True, verbose_name='Name_es', null=True, max_length=150)),
+                ('file', models.FileField(verbose_name='File', upload_to='Catalogs')),
+                ('image', models.ImageField(verbose_name='Image', upload_to='Catalog')),
             ],
             options={
                 'verbose_name_plural': 'Catalogs',
@@ -46,8 +46,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Magazine',
             fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
-                ('name', models.CharField(max_length=130, verbose_name='Name')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(verbose_name='Name', max_length=130)),
                 ('logo', models.ImageField(upload_to='Magazines')),
             ],
             options={
@@ -58,6 +58,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='article',
             name='magazine',
-            field=models.ForeignKey(related_name='articles', to='news.Magazine'),
+            field=models.ForeignKey(to='news.Magazine', related_name='articles'),
         ),
     ]

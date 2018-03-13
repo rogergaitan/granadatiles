@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-26 14:35-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\apps.py:6
+msgid "Content"
+msgstr "Contenido"
+
+#: .\models.py:12
+msgid "Section"
+msgstr "Sección"
+
+#: .\models.py:13
+msgid "Sections"
+msgstr "Secciones"
+
+#: .\models.py:21
+msgid "Designer"
+msgstr "Diseñador"
+
+#: .\models.py:24
+msgid "Photographer"
+msgstr "Fotógrafo"
+
+#: .\models.py:31
+msgid "Tile"
+msgstr "Azulejo"
+
+#: .\models.py:35
+msgid "Image"
+msgstr "Imagen"
+
+#: .\models.py:36
+msgid "Images"
+msgstr "Imagenes"
+
+#: .\models.py:40
+msgid "Name"
+msgstr "Nombre"
+
+#: .\models.py:41
+msgid "Link"
+msgstr "Enlace"
+
+#: .\models.py:42
+msgid "Order"
+msgstr "Orden"
+
+#: .\models.py:43
+msgid "Active"
+msgstr "Activo"
+
+#: .\models.py:56
+msgid "Video Url"
+msgstr "Url del video"
+
+#: .\models.py:59
+msgid "Video"
+msgstr "Video"
+
+#: .\models.py:60
+msgid "Videos"
+msgstr "Video"
+
+#: .\models.py:66
+msgid "Manageable Area"
+msgstr "Area administrable"
+
+#: .\models.py:67
+msgid "Manageable Areas"
+msgstr "Areas administrables"
+
+#: .\models.py:71
+msgid "Subtitle"
+msgstr "Subtitulo"
+
+#: .\models.py:73
+msgid "Subtitle_es"
+msgstr "Subtitulo_es"
+
+#: .\models.py:81
+msgid "Testimony"
+msgstr "Testimonio"
+
+#: .\models.py:82
+msgid "Testimonials"
+msgstr "Testimonios"
+
+#: .\models.py:86
+msgid "Link_es"
+msgstr "Enlace_es"
+
+#: .\models.py:87
+msgid "Action Name"
+msgstr "Accion"
+
+#: .\models.py:88
+msgid "Action Name_es"
+msgstr "Accion_es"
+
+#: .\models.py:101
+msgid "Index Link"
+msgstr "Enlace en inicio"
+
+#: .\models.py:102
+msgid "Index Links"
+msgstr "Enlaces de inicio"

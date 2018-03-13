@@ -3,9 +3,21 @@
     background-color: @backgroundHomepage;
     padding-top: 116px;
 
-    @media screen and (max-width:768px) {
-        padding-top: 67px;
+    @media screen and (max-width:1024px) {
+        padding-top: 116px;
     }
+
+    @media screen and (max-width:768px) {
+        padding-top: 116px;
+    }
+
+    @media screen and (max-width:767px) {
+        padding-top: 89px;
+    }
+}
+
+a {
+    cursor: pointer;
 }
 
 /***************Styles for header***************/
@@ -16,11 +28,25 @@ header.navbar-fixed-top {
     background-color: @white;
     transition: padding 0.6s ease;
 
+    img.gt-header-logo-sm {
+        width: 93px;
+        position: absolute;
+        transition: width 0.6 ease;
+        transition: height 0.6s ease;
+    }
+
     #gt-header-brand {
 
         img {
             width: 131px;
             transition: width 0.6s ease;
+
+            @media screen and (max-width:767px) {
+                position: relative;
+                float: left;
+                left: 2%;
+                width: 100px;
+            }
         }
     }
 
@@ -33,14 +59,14 @@ header.navbar-fixed-top {
             font-size: @font-xs;
         }
 
-        li {
+        & > li {
             margin: 0 2px;
 
             &:last-child {
                 margin-right: 0;
             }
 
-            a {
+            & > a, .contact-item, & > ng-include > a {
                 color: @gray;
 
                 &:hover, &:focus {
@@ -48,7 +74,9 @@ header.navbar-fixed-top {
                 }
             }
 
-            button {
+
+
+            .drop-button {
                 color: @gray;
                 border-color: transparent;
                 padding: 0;
@@ -117,6 +145,15 @@ header.navbar-fixed-top {
     position: relative;
     bottom: 58px;
 
+    @media screen and (max-width:1024px) {
+        bottom: 68px;
+    }
+
+    @media screen and (max-width:760px) {
+        padding-left: 26px;
+        bottom: 58px;
+    }
+
     .row {
         padding-top: 10px;
     }
@@ -138,10 +175,18 @@ header.shrink {
     padding-top: 8px !important;
     padding-bottom: 5px !important;
 
+    img.gt-header-logo-sm {
+        width: 81px;
+    }
+
     #gt-header-brand {
 
         img {
             width: 110px !important;
+
+            @media screen and (max-width:760px) {
+                width: 95px !important;
+            }
         }
     }
 
@@ -166,6 +211,7 @@ header.shrink {
 
 /***************Styles for footer***************/
 footer {
+    margin-top: 30px;
     background-color: @darkBlue;
 
     h4 {
@@ -228,6 +274,27 @@ footer {
 
 /****Angular boostrap*****/
 .nav, .pagination, .carousel, .panel-title a {
-     cursor: pointer; 
+    cursor: pointer;
 }
 /***********/
+
+
+.dropdown-menu > ng-include > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+.btn-cover-container {
+    position: absolute;
+    top: 30%;
+    left: 70%;
+
+    .btn-cover {
+        width: 100%;
+    }
+}

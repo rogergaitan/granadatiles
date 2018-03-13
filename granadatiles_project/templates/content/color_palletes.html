@@ -1,0 +1,38 @@
+﻿{% extends "base.html" %}
+{% load i18n content %}
+
+{% block seo %}
+    {% section 4 LANGUAGE_CODE  as section %}
+    <title>{{ section.page_title }}</title>
+    {% content_meta_tags section %}
+{% endblock seo %}
+
+{% block content%}
+    <div class="row">
+        <ng-include src="'{{STATIC_URL}}app/content/templates/colorPalletes.html'"></ng-include>
+    </div>
+{% endblock content%}
+
+{% block js%}
+<script>
+    (function () {
+        "use strict";
+        angular
+        .module("app.core")
+        .factory("pageSettings", ['appSettings',pageSettings]);
+
+        function pageSettings(appSettings) {
+            return{
+                sectionId: 4,
+                language: '{{LANGUAGE_CODE}}',
+                labels: {
+                   productInformation: '{% trans 'Product Information'%}'
+                },
+                navigation:{
+                   
+                }
+            }
+        };
+    })();
+</script>
+{% endblock js%}

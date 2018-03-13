@@ -9,8 +9,10 @@ class GalleryDto(BaseCatalogDto):
 
     def __init__(self, gallery, language=None):
         super().__init__(gallery, language)
-        self.image = gallery.image.url
-        self.categories = [GalleryCategoryDto(category, language) for category in gallery.categories.all()]
+        self.image = gallery.image.url if gallery.image else ''
+        if gallery.categories.filter(images__isnull=False):
+            self.categories = [GalleryCategoryDto(category, language)
+                                  for category in gallery.categories.filter(images__isnull=False).distinct()]
 
 
 class GalleryImageDto(BaseGalleryImageDto):
@@ -19,3 +21,4 @@ class GalleryImageDto(BaseGalleryImageDto):
        super().__init__(image, language)
        self.designer = image.designer
        self.photographer = image.photographer
+       self.imageAlt = image.image_alt

@@ -1,7 +1,7 @@
-﻿from django.db import models
+from django.db import models
 from django.utils.translation import ugettext as _
 from sorl.thumbnail import ImageField
-from core.managers import BaseSlugManager
+from core.managers import BaseSlugManager, SeoManager
 
 
 def model_directory_path(instance, filename):
@@ -66,9 +66,9 @@ class BaseContentModel(models.Model):
 
 
 class BaseSlugModel(models.Model):
-    slug = models.SlugField(max_length=20, unique=True)
+    slug = models.SlugField(max_length=35, unique=True)
 
-    slug_es = models.SlugField(max_length=20, unique=True)
+    slug_es = models.SlugField(max_length=35, unique=True, null=True)
 
     objects = BaseSlugManager()
 
@@ -96,9 +96,41 @@ class BaseGalleryImageModel(BaseContentModel):
         abstract = True
 
 
-class BaseGallerieNavImageModel(BaseGalleryImageModel):
+class BaseGalleryNavImageModel(BaseGalleryImageModel):
     target = models.BooleanField(default=False, help_text=_('Open in new tab'))
     link = models.URLField(blank=True, null=True, verbose_name=_('Link'))
 
+    class Meta:
+        abstract = True
+        
+
+class BaseSeoModel(models.Model):
+    page_title = models.CharField(default='', blank=True, null=True, max_length=500, verbose_name=_('Pagetitle'))
+    page_title_es = models.CharField(default='', blank=True, null=True, max_length=500, verbose_name=_('Pagetitle_es'))
+    meta_description = models.CharField(default='', blank=True, null=True, max_length=500,
+                                        verbose_name=_('Metadescription'))
+    meta_description_es = models.CharField(default='', blank=True, null=True, max_length=500,
+                                           verbose_name=_('Metadescription_es'))
+    meta_keywords = models.CharField(default='', blank=True, null=True, max_length=500, verbose_name=_('Metakeywords'))
+    meta_keywords_es = models.CharField(default='', blank=True, null=True, max_length=500,
+                                        verbose_name=_('Metakeywords_es'))
+    objects = models.Manager()
+    seo = SeoManager()
+    
+    def get_page_title(self, language):
+        if language == 'es' and self.page_title_es is not None and self.page_title_es:
+            return self.page_title_es
+        return self.page_title
+    
+    def get_meta_description(self, language):
+        if language == 'es' and self.meta_description_es is not None and self.meta_description_es:
+            return self.meta_description_es
+        return self.meta_description
+
+    def get_meta_keywords(self, language):
+        if language == 'es' and self.meta_keywords_es is not None and self.meta_keywords_es:
+            return self.meta_keywords_es
+        return self.meta_keywords
+    
     class Meta:
         abstract = True

@@ -1,0 +1,114 @@
+.modal-custom-tile {
+    .modal-dialog {
+        .modal-content {
+            border-radius: 0;
+            background-color: @backgroundHomepage;
+        }
+    }
+}
+
+.title-custom-tile {
+    color: @darkBlue;
+    margin-left: 110px;
+    font-family: @font-secundary;
+    .font-configuration(@font-xlll,@font-light);
+}
+
+.rotate-tile {
+    div {
+        float: right;
+        margin-right: 20px;
+
+        p {
+            color: @darkGray;
+            font-family: @font-secundary;
+            .font-configuration(@font-md,@font-light);
+        }
+
+        .btn-rotate-left {
+            color: @white;
+            background-color: @lightBlue;
+            border-color: @btnDelete;
+        }
+
+        .btn-rotate-right {
+            color: @white;
+            background-color: @darkGray;
+            border-color: #4C4C4C;
+        }
+    }
+}
+
+.section-information {
+    color: @darkGray;
+    .font-configuration(@font-sm,@font-light);
+
+    span {
+        .font-configuration(@font-sm,@font-medium);
+    }
+}
+
+.color-pallete-content {
+    margin-top: 10px;
+
+    .list-color-pallete {
+        text-align: center;
+
+        .color {
+            height: 32px;
+        }
+
+        .color-name {
+            color: @darkGray;
+            font-family: @font-primary;
+            .font-configuration(10px;@font-light);
+        }
+    }
+}
+
+.tile-container-rotate {
+    border: 7px solid @white;
+    background-color: @white;
+    box-shadow: 2px 4px 10px 2px rgba(0, 0, 0, 0.5);
+
+    span {
+        margin-top: 10px;
+        color: @darkBlue;
+        font-family: @font-primary;
+        .font-configuration(@font-sm,@font-light);
+    }
+}
+
+.svg-container {
+    position: relative;
+    height: 0;
+    width: 100%;
+    padding: 0;
+    padding-bottom: 100%;
+
+    svg {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+    }
+}
+
+.dragable {
+    cursor: move;
+}
+
+.modal-custom-tile > div {
+    width: 80%;
+}
+
+.svg-thumbnail {
+    display: block;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px 4px 0 4px;
+    transition: border .2s ease-in-out;
+}

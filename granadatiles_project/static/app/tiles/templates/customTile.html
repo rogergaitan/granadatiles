@@ -1,0 +1,116 @@
+﻿<div class="modal-header">
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="modal-title title-custom-tile">{{::vm.tile.name}}</h4>
+        </div>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <ul class="list-unstyled tile-button-options">
+                        <li ng-show="vm.hasChanges" class="animate-show initial-hide" style="display:none;">
+                            <a ng-click="vm.saveToPortfolio()">
+                                <i class="fa fa-briefcase"></i>
+                                <p ng-if="!vm.tile.customizedTileId" ng-cloak>SAVE TO PORTFOLIO</p>
+                                <p ng-if="vm.tile.customizedTileId">SAVE CHANGES</p>
+                            </a>
+                        </li>
+                        <!--
+                        <li>
+                            <a href="">
+                                <i class="fa fa-file"></i>
+                                <p>TEAR <br> SHEET</p>
+                            </a>
+                        </li>-->
+                        <li ng-show="vm.tile.customizedTileId" class="animate-show initial-hide" style="display:none;">
+                            <a href="" ng-click="vm.addToCart()">
+                                <i class="fa fa-shopping-cart"></i>
+                                <p>ADD TO <br> CART</p>
+                            </a>
+                        </li>
+                        <!--
+                        <li class="animate-show initial-hide" ng-show="vm.tile.customizedTileId" style="display:none;">
+                            <a href="" ng-click="vm.orderSample()">
+                                <i class="fa fa-briefcase"></i>
+                                <p>ORDER FREE SAMPLE</p>
+                            </a>
+                        </li>-->
+                        <!--
+                        <li>
+                            <a href="">
+                                <i class="fa fa-print"></i>
+                                <p>PRINT <br> PAGE</p>
+                            </a>
+                        </li>-->
+                    </ul>
+                </div>
+                <div class="col-md-9">
+                    <div class="similar-tile-container animate-show initial-hide" id="painting-container" ng-bind-html="vm.plane | unsafe" ng-show="vm.planeLoaded"
+                         ui-on-drop="vm.addColor($event,$data)">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="section-information"><span>Color Palette:</span> Drag colors to tile above to customize</p>
+                    <ul class="list-inline color-pallete-content">
+                        <li class="col-md-2 list-color-pallete" ng-repeat="color in vm.colorPallete">
+                            <div class="color dragable" ui-draggable="true" drag="color"
+                                 ng-style="{ 'background-color' : color.hexadecimalCode}">&nbsp;</div>
+                            <p class="color-name">{{color.name}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tile-container-rotate">
+                        <div class="tile-detail-mosaic animate-show initial-hide" ng-show="vm.planeLoaded" ng-class="(noBorders)? '':'similar-tile-container'" ng-if="!vm.tile.isNotSquare">
+                            <div ng-repeat="n in  [] | range:4">
+                                <div ng-style="{ 'width':  100/4 + '%'}" class="tile-mosaic-conatiner" ng-repeat="n in  [] | range:3">
+                                    <div class="tile-mosaic-image" ng-style="{'transform': 'rotate3d(0, 0 , 1, ' + vm.tile.rotateDeg1 +'deg)'}">
+                                        <div ng-bind-html="vm.mosaic | unsafe" class="svg-container"></div>
+                                    </div>
+                                    <div class="tile-mosaic-image" ng-style="{'transform': 'rotate3d(0, 0 , 1, ' + vm.tile.rotateDeg2 +'deg)'}">
+                                        <div ng-bind-html="vm.mosaic | unsafe" class="svg-container"></div>
+                                    </div>
+                                    <div class="tile-mosaic-image" ng-style="{'transform': 'rotate3d(0, 0 , 1, ' + vm.tile.rotateDeg3 +'deg)'}">
+                                        <div ng-bind-html="vm.mosaic | unsafe" class="svg-container"></div>
+                                    </div>
+                                    <div class="tile-mosaic-image" ng-style="{'transform': 'rotate3d(0, 0 , 1, ' + vm.tile.rotateDeg4 +'deg)'}">
+                                        <div ng-bind-html="vm.mosaic | unsafe" class="svg-container"></div>
+                                    </div>
+                                    <br style="clear:both;" />
+                                </div>
+                            </div>
+                            <br style="clear:both;" />
+                        </div>
+                        <div class="tile-detail-mosaic animate-show initial-hide" ng-show="vm.planeLoaded" ng-class="(noBorders)? '':'similar-tile-container'" ng-if="vm.tile.isNotSquare">
+                            <div ng-repeat="n in  [] | range:3" class="not-square-row">
+                                <div ng-bind-html="vm.mosaic | unsafe" class="tile-not-square-plane" ng-repeat="n in  [] | range:10"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span>Colors Used:</span>
+                            </div>
+                            <div class="col-md-9">
+                                <ul class="list-inline color-pallete-content">
+                                    <li class="col-md-2 list-color-pallete" ng-repeat="color in vm.colorsUsed">
+                                        <div class="color" ng-style="{ 'background-color' : color.hexadecimalCode}">&nbsp;</div>
+                                        <p class="color-name">{{color.name}}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

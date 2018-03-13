@@ -3,26 +3,20 @@
 
     angular
         .module('app.content')
-        .factory('areaSvc', ['pageSettings', areaSvc]);
+        .factory('areaSvc', 
+            ['$http',
+             'appSettings',
+             areaSvc]);
 
 
-    function areaSvc(pageSettingsSvc) {
+    function areaSvc($http, appSettings) {
 
         return {
             getArea: getArea
         };
 
-
         function getArea(areaId) {
-            return getMockArea();
-        }
-
-        //TODO API /api/area/:id
-        function getMockArea() {
-            return {
-                description: '<h2 class="heading-sec">Get inspired by Residential and Commercial installation photos</h2><h3 class="slogan">then choose from in stock and custom tiles.</h3>',
-                id: 1
-            };
+            return $http.get(appSettings.serverPath + 'areas/' + areaId);
         }
 
     }

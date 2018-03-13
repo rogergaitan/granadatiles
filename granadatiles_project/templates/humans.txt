@@ -1,0 +1,36 @@
+/* TEAM */
+	Pinolero Media
+	Contact: say hi at www.pinoleromedia.com
+	
+	Lead Developer: Luis Palacios
+	Contact: lpalacios@pinoleromedia.com
+	Twitter: @LRPalacios
+	Github: LRPalacios
+	From: Managua, Nicaragua
+
+	Front-end developer: Vanessa Lacayo
+	Contact: imerlo@pinoleromedia.com
+	Twitter: @VanessaLacayo
+	Github: VMLacayo
+	From: Managua, Nicaragua
+
+	Front-end developer: Erving Bonilla
+	Contact: ebonilla@pinoleromedia.com
+	Twitter: @ebonilla_91
+	Github: ebonilla91
+	From: Managua, Nicaragua
+
+	Back-end developer: Roger Gaitan
+	Contact: rgaitan@pinoleromedia.com
+	From: Managua, Nicaragua
+
+	Web designer: Franklin Ruiz
+	Contact: fruizmorales@gmail.com 
+	From: Managua, Nicaragua	
+		
+
+/* SITE */
+	Last update: 06/02/2016
+	Language: Spanish
+	Doctype: HTML5
+	IDE: Sublime Text, Visual Studio, Brackets, Pycharm

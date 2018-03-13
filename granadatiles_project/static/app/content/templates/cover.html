@@ -1,29 +1,41 @@
 ﻿<div class="row" ng-controller="coverCtrl as vm">
-    <div ng-if="vm.cover.image">
+    <div ng-if="vm.cover.image" class="col-xs-12">
         <div class="row">
-            <div class="col-xs-12">
                 <img ng-src="{{::vm.cover.image}}" alt="Granada Tiles Cover" class="img-responsive" id="gt-cover-image" />
-            </div>
+                <div class="btn-cover-container" ng-if="vm.cover.shopCustomTilesUrl != ''">
+                    <a ng-href="{{::vm.navigation.inStock}}" class="btn btn-sky btn-cover">{{::vm.labels.shopInstock}}</a>
+                    <br />
+                    <br />
+                    <a ng-href="{{::vm.navigation.inStockSamples}}" class="btn btn-sky btn-cover">{{::vm.labels.shopInStockSamples}}</a>
+                    <br />
+                    <br />
+                    <a ng-href="{{::vm.cover.shopCustomTilesUrl}}" class="btn btn-sky btn-cover">{{::vm.labels.shopCustoms}}</a>
+                    <br />
+                    <br />
+                    <a ng-href="{{::vm.cover.shopTileUrl}}" class="btn btn-sky btn-cover">{{::vm.labels.shopTile}}</a>
+                </div>
         </div>
         <div class="row bg-slider-footer">
             <div class="container">
                 <div class="row" ng-if="vm.cover.designer || vm.cover.photographer || vm.cover.featuredArticle || vm.cover.articles">
-                    <div class="col-md-3">
-                        <label>Designer:</label> <span>{{ ::vm.cover.designer }}</span> <br />
-                        <label>Photographer:</label> <span>{{ ::vm.cover.photographer }}</span>
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        <label ng-if="!vm.cover.designer">&nbsp;</label>
+                        <label ng-if="vm.cover.designer">{{ ::vm.labels.designer }}:</label> <span>{{ ::vm.cover.designer }}</span> <br />
+                        <label ng-if="vm.cover.photographer">{{ ::vm.labels.photographer }}:</label> <span>{{ ::vm.cover.photographer }}</span>
+                        <label ng-if="!vm.cover.photographer">&nbsp;</label>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-3 col-xs-6">
                         <span>{{ ::vm.cover.featuredArticle.title }}</span>
                         <a href="">
                             <img ng-src="{{ ::vm.cover.featuredArticle.image }}" alt="{{ ::vm.cover.featuredArticle.title }}">
                         </a>
                     </div>
-                    <div class="col-md-5 press">
-                        <label>Also Featured in:</label>
+                    <div class="col-md-5 press col-sm-6 hidden-xs" ng-if="vm.cover.articles">
+                        <label>{{ ::vm.labels.featured }}:</label>
                         <ul class="list-inline">
                             <li ng-repeat="article in vm.cover.articles">
                                 <a href="{{ ::article.url }}">
-                                    <img ng-src="{{ ::article.magazineLogo }}" alt="{{ ::article.magazineName }}">
+                                    <img ng-src="{{ ::article.magazineLogo }}" alt="{{ ::article.magazineName }}" style="max-width:97px;">
                                 </a>
                             </li>
                         </ul>

@@ -26,6 +26,6 @@ class BaseGalleryImageSerializer(BaseContentSerializer):
     image = serializers.CharField(allow_blank=True)
 
 
-class BaseGallerieNavImageSerializer(BaseGalleryImageSerializer):
+class BaseGalleryNavImageSerializer(BaseGalleryImageSerializer):
     target = serializers.BooleanField()
     link = serializers.URLField(allow_blank=True)

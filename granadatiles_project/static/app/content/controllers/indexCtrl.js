@@ -16,10 +16,11 @@
         collectionsSvc.getFeaturedCollections().then(function (response) {
             vm.collections = response.data;
         });
-        vm.slogan = areaSvc.getArea(appSettings.areas.SLOGAN).description;
 
         vm.labels = pageSettings.labels;
 
-        vm.navigation = mainNavigationSvc.getmainNavigation();
+        mainNavigationSvc.getmainNavigation().then(function (response) {
+            vm.navigation = response.data;
+        });
     }
 }());

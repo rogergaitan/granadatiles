@@ -1,0 +1,38 @@
+﻿<div class="row submenu-selected">
+    <a ng-href="{{ vm.collection.url }}">
+        <div class="col-md-6 col-sm-6 submenu-selected-image">
+            <img ng-src="{{ vm.collection.menu_image }}" alt="{{ vm.collection.menu_title }}" class="img-responsive">
+        </div>
+        <div class="col-md-3 col-sm-3 submenu-selected-title">
+            <h3 class="text-uppercase">{{ vm.collection.menuTitle | uppercase }}<i class="fa fa-caret-down hidden-sm hidden-xs"></i></h3>
+        </div>
+    </a>
+</div>
+<ul class="active-submenu">
+    <li>
+        <a  ng-click="vm.subMenuCollapsed = !vm.subMenuCollapsed">{{ ::vm.labels.interactiveCatalog }}</a>
+        <ul class="collapsed-submenu" collapse="vm.subMenuCollapsed">
+            <li ng-repeat="group in vm.collectionGroups">
+                <a ng-href="{{::group.url}}">{{::group.title}}</a>
+            </li>
+        </ul>
+    </li>
+    <li><a  ng-click="vm.showCollectionGallery()">{{ ::vm.collection.menuTitle }}{{ ::vm.labels.galleryMenu }}</a></li>
+    <li ng-repeat="content in vm.collectionContent">
+        <a ng-href="{{content.url}}">{{content.title}}</a>
+    </li>
+</ul>
+<div ng-repeat="item in vm.filteredMenuCollection" ng-if="$index % 2 == 0" class="row">
+    <div class="col-md-6 col-sm-6" ng-if="$index <= vm.filteredMenuCollection.length - 1">
+        <a ng-href="{{ vm.filteredMenuCollection[$index].url }}" class="navigation-submenu-option">
+            <img ng-src="{{ ::vm.filteredMenuCollection[$index].image }}" alt="{{ ::vm.filteredMenuCollection[$index].title }}" class="img-responsive">
+            <h3>{{ ::vm.filteredMenuCollection[$index].title | uppercase }}</h3>
+        </a>
+    </div>
+    <div class="col-md-6 col-sm-6" ng-if="$index + 1 <= vm.filteredMenuCollection.length - 1">
+        <a ng-href="{{ vm.filteredMenuCollection[$index + 1].url }}" class="navigation-submenu-option">
+            <img ng-src="{{ ::vm.filteredMenuCollection[$index + 1].image }}" alt="{{ ::vm.filteredMenuCollection[$index + 1].title }}" class="img-responsive">
+            <h3>{{ ::vm.filteredMenuCollection[$index + 1].title | uppercase }}</h3>
+        </a>
+    </div>
+</div>

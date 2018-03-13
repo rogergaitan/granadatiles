@@ -1,0 +1,334 @@
+﻿<div class="col-md-12" ng-controller="cartCtrl as vm">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="heading-sec">{{::vm.labels.yourCart}}</h2>
+            <a class="breadcrumds" ><u>{{ ::vm.labels.cart }}</u> <i class="fa fa-angle-double-right"></i></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <tabset class="gt-cart-tabs">
+                <tab>
+                    <tab-heading>
+                        <div class="icon-tile">
+                            <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="">
+                        </div>
+                        <div class="tab-title">TILE <br> ORDERS</div>
+                    </tab-heading>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table gt-shopping-cart-table">
+                            <thead>
+                                <tr>
+                                    <th>PRODUCT</th>
+                                    <th>SQUARE FOOTAGE</th>
+                                    <th>TILE QTY.</th>
+                                    <th>TILE BOXES</th>
+                                    <th>SUBTOTAL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="order in vm.orders" class="animate-show" ng-show="!order.removed">
+                                    <td class="item">
+                                        <div class="media">
+                                            <span class="media-left">
+                                                <img class="product-image" ng-src="{{::order.tile.image}}" alt="{{::order.tile.name}}">
+                                            </span>
+                                            <div class="media-body">
+                                                <h2>
+                                                    {{::order.tile.name}} -
+                                                    <span ng-if="order.tile.inStock">In Stock</span>
+                                                    <span ng-if="!order.tile.inStock">Custom</span>
+                                                    Tile
+                                                </h2>
+                                                <span>
+                                                    Color:
+                                                    <span ng-repeat="color in order.tile.colors">
+                                                        <span ng-bind="color.name"></span>
+                                                        <span ng-if="($index < (order.tile.colors.length -1))">,&nbsp;</span>
+                                                    </span>
+                                                </span><br>
+                                                <a href="" ng-click="vm.removeTile(order)" class="btn btn-delete btn-sm">X</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="square-footage">
+                                        <form action="" class="form-inline">
+                                            <input type="number" name="sqFt" ng-model="order.sqFt" id="sqFt" class="form-control input-sm">
+                                            <button class="btn btn-default btn-sm" type="button" ng-click="vm.updateSqFt(order)">UPDATE</button>
+                                        </form>
+                                    </td>
+                                    <td class="text-center">{{order.quantity}}</td>
+                                    <td class="text-center">{{order.boxes}}</td>
+                                    <td class="text-center">{{order.subtotal}}</td>
+                                </tr>
+                                <tr ng-repeat="order in vm.customizedOrders" class="animate-show" ng-show="!order.removed">
+                                    <td class="item">
+                                        <div class="media">
+                                            <span class="media-left">
+                                                <custom-tile-plane plane="order.tile.plane" color-groups="order.groupColors" fixed-width="'140px'"></custom-tile-plane>
+                                            </span>
+                                            <div class="media-body">
+                                                <h2>
+                                                    {{::order.tile.name}} -
+                                                    <span ng-if="order.tile.inStock">In Stock</span>
+                                                    <span ng-if="!order.tile.inStock">Custom</span>
+                                                    Tile
+                                                </h2>
+                                                <span>
+                                                    Color:
+                                                    <span ng-repeat="color in order.tile.colors">
+                                                        <span ng-bind="color.name"></span>
+                                                        <span ng-if="($index < (order.tile.colors.length -1))">,&nbsp;</span>
+                                                    </span>
+                                                </span><br>
+                                                <a href="" ng-click="vm.removeCustomizedTile(order)" class="btn btn-delete btn-sm">X</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="square-footage">
+                                        <form action="" class="form-inline">
+                                            <input type="number" name="sqFt" ng-model="order.sqFt" id="sqFt" class="form-control input-sm">
+                                            <button class="btn btn-default btn-sm" type="button" ng-click="vm.updateCustomizedTileSqFt(order)">UPDATE</button>
+                                        </form>
+                                    </td>
+                                    <td class="text-center">{{order.quantity}}</td>
+                                    <td class="text-center">{{order.boxes}}</td>
+                                    <td class="text-center">{{order.subtotal}}</td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6 gt-box-shipping">
+                                    <h3>ESTIMATE SHIPPING COST</h3>
+                                    <form action="">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <select name="" id="" class="form-control sky-select">
+                                                        <option value="1">Ship From</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="inputZipCode" placeholder="Destination Zip">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 text-center">
+                                                <button class="btn btn-green">CALCULATE</button>     
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-3">
+                                    <img src="/static/img/Norton-seal.png" alt="">
+                                </div>
+                                <div class="col-md-3">
+                                    <table class="table gt-table-total-price">
+                                        <tbody>
+                                            <tr>
+                                                <td>Subtotal:</td>
+                                                <td class="text-right">${{vm.subTotal}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Shipping:</td>
+                                                <td class="text-right">$0</td>
+                                            </tr>
+                                            <tr class="total">
+                                                <td>TOTAL:</td>
+                                                <td class="text-right">${{vm.total}}</td>
+                                            </tr>
+                                        </tbody>      
+                                    </table>
+                                    <label class="labelAuthorize">
+                                      <input type="checkbox" id="checkboxSuccess" value="option1">
+                                      I authorize Granada Tile to produce this custom tile order for me
+                                      using the colors I have selected
+                                    </label>
+                                    <a ng-href="{{::vm.navigation.checkout}}" class="btn btn-green"><strong>CHECKOUT</strong></a>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>  
+                </tab>
+                <tab>
+                    <tab-heading>
+                        <div class="icon-tile">
+                            <img src="/static/img/Icon-Free-Sample-Granada-Tile-Cement.svg" alt="">
+                        </div>
+                        <div class="tab-title">SAMPLE <br> ORDERS</div>
+                    </tab-heading>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table gt-shopping-cart-table">
+                            <thead>
+                                <tr>
+                                    <th>PRODUCT</th>
+                                    <th>TILE QTY.</th>
+                                    <th class="text-center">SUBTOTAL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="sampleOrder in vm.sampleOrders" class="animate-show" ng-show="!sampleOrder.removed">
+                                    <td class="item">
+                                        <div class="media">
+                                            <span class="media-left">
+                                                <img class="product-image" ng-src="{{sampleOrder.tile.image}}" alt="{{::sampleOrder.tile.name}}">
+                                            </span>
+                                            <div class="media-body">
+                                                <h2>
+                                                    {{::sampleOrder.tile.name}}
+                                                    <span ng-if="(sampleOrder.subtotal == 0)" class="order-custom-label">FREE</span>
+                                                    <span ng-if="sampleOrder.tile.inStock" ng-class="(sampleOrder.subtotal == 0)? 'order-custom-label':''">Sample Tile</span>
+                                                    <span ng-if="!sampleOrder.tile.inStock">Custom Sample Tile</span>
+                                                </h2>
+                                                <span>
+                                                    Color:
+                                                    <span ng-repeat="color in sampleOrder.tile.colors">
+                                                        <span ng-bind="color.name"></span>
+                                                        <span ng-if="($index < (order.tile.colors.length -1))">,&nbsp;</span>
+                                                    </span>
+                                                </span>
+                                                <a ng-click="vm.removeSample(sampleOrder)" class="btn btn-delete btn-sm">X</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <select class="form-control form-control-inline sky-select" ng-model="sampleOrder.selectedQuantity" ng-change="vm.updateSampleQuantity(sampleOrder)">
+                                                <option ng-repeat="item in vm.quantityForSamples" value="{{item}}" ng-selected="(item==sampleOrder.quantity)">{{item}}</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">{{::sampleOrder.subtotal}}</td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6 gt-box-shipping">
+                                    <h3>ESTIMATE SHIPPING COST</h3>
+                                    <form action="">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <select name="" id="" class="form-control sky-select">
+                                                        <option value="1">Ship From</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <select name="" id="" class="form-control sky-select">
+                                                        <option value="1">Freight</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="inputZipCode" placeholder="Destination Zip">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="inputZipCode" placeholder="(Freight) Account Number">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 text-center">
+                                                <button class="btn btn-green">CALCULATE</button>     
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-3">
+                                    <img src="/static/img/Norton-seal.png" alt="">
+                                </div>
+                                <div class="col-md-3">
+                                    <table class="table gt-table-total-price">
+                                        <tbody>
+                                            <tr>
+                                                <td>Subtotal:</td>
+                                                <td class="text-right">${{vm.sampleSubTotal}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Shipping:</td>
+                                                <td class="text-right">$0</td>
+                                            </tr>
+                                            <tr class="total">
+                                                <td>TOTAL:</td>
+                                                <td class="text-right">${{vm.sampleTotal}}</td>
+                                            </tr>
+                                        </tbody>      
+                                    </table>
+                                    <label class="labelAuthorize">
+                                      <input type="checkbox" id="checkboxSuccess" value="option1">
+                                      I authorize Granada Tile to produce this custom tile order for me
+                                      using the colors I have selected
+                                    </label>
+                                    <button class="btn btn-green"><strong>CHECKOUT</strong></button>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>  
+                </tab>
+            </tabset>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Questions?</h2>
+            <ul class="list-inline list-question">
+                <li>
+                    <div class="icon">
+                        <i class="fa fa-comments"></i>
+                    </div>
+                    <div class="question-content">
+                        <a href=""><strong>{{::vm.labels.liveChat}}</strong></a>
+                        <span>&nbsp;</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="icon">
+                        <i class="fa fa-comments"></i>
+                    </div>
+                    <div class="question-content">
+                        {{::vm.labels.callUs}} 
+                        <span>213-482-8070</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="icon">
+                        <i class="fa fa-envelope"></i>
+                    </div>
+                    <div class="question-content">
+                        EMAIL US
+                        <span><a href="">sales@granadatile.com</a></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Terms of Sale</h2>
+            <div class="gt-scroll-terms" data-spy="scroll">
+                <p class="text-section">HAND MADE TILE 
+                Hand made cement tile is as much an art as a science. The natural components of the cement, sand, marble dust and color pigment change over time, leading to slight variations in shade and tone. These variations are inherent to hand made cement tiles and therefore must be expected. To ensure the smallest possible range in color variation, it is best to order enough tile to complete your installation and, depending on the project, 10 - 15% extra. Also, to avoid miscalculations it is recommended that you have a professional tile contractor calculate the measurements and quantities for your tile project. Furthermore, Granada Tile's products are used in a variety of applications such as kitchens, bathroom, ﬂoors, walls, pools, fountains, and stairs. Some products may not be suitable for all applications. If values for characteristics such as absorption or coeﬃcient of friction are required, please contact us in writing before placing order. No claims for any tile order will be accepted after installation. 
+                MINIMUM ORDER POLICY 
+                All non-stock or custom orders must meet the minimum order requirement of 50 square feet for the Echo, Minis and Mauresque Collections and 100 square feet for the Milano, Rustico and Antique Collections. A small order charge of 30% applies to non-stock or custom Echo Collection orders of 50-100</p>
+            </div>
+        </div>
+    </div>
+</div>

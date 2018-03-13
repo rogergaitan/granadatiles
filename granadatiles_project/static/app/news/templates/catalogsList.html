@@ -1,82 +1,57 @@
 <div class="col-md-12" ng-controller="catalogListCtrl as vm">
     <div class="row">
-        <aside class="col-md-3">
-            <ul class="menu-section">
-                <li><a href="">Magazines</a></li>
-                <li><a href="">Catalogs / Inspiration Books</a></li>
-                <li><a href="">Cement Tile Blog</a></li>
-                <li><a href="">Videos</a></li>
-            </ul>
+        <aside class="col-sm-3">
+            <ng-include src="::vm.menuNewsTemplateUrl"></ng-include>
         </aside>
-        <div class="col-md-9">
-            <h1 class="heading-sec">{{ ::vm.title }}</h1>
-            <a href="#" class="breadcrumds"><u>{{ ::vm.breadcrumds }}</u> <i class="fa fa-angle-double-right"></i></a>
-            <div ng-bind-html="vm.description" class="text-section"></div>
+        <div class="col-sm-9">
+            <h1 class="heading-sec">{{ ::vm.section.title }}</h1>
+            <a class="breadcrumds"><u>{{ ::vm.labels.newsPress }}</u> <i class="fa fa-angle-double-right"></i></a>
+            <a class="breadcrumds"><u>{{ ::vm.labels.news }}</u> <i class="fa fa-angle-double-right"></i></a>
+            <div ng-bind-html="vm.section.description | unsafe" class="text-section"></div>
         </div>
     </div>
-    <div ng-repeat="catalog in vm.catalogs" ng-if="$index % 3 == 0" class="row component-space-row" >
-        <div class="col-md-4" ng-if="$index <= vm.catalogs.length - 1">
-            <div class="component-container">
-                <a href="#">
-                    <img ng-src="{{ ::vm.catalogs[$index].image }}" alt="" class="thumbnail img-responsive
-                     component-container_multimedia component-container_multimedia--shadow">
+    <div ng-repeat="catalog in vm.catalogs" ng-if="$index % 3 == 0" class="row">
+        <div class="col-md-4 blue-box" ng-if="$index <= vm.catalogs.length - 1">
+            <div class="content-catalog">
+                <a>
+                    <img ng-src="{{ ::vm.catalogs[$index].image }}" alt="{{ ::vm.catalogs[$index].name }}" class="shadow-image thumbnail img-responsive">
                 </a>
-                <div class="component-container_footer">
-                    <h2 class="component-container_title">{{ ::vm.catalogs[$index].name }}</h2>
-                    <ul class="list-inline component-container_ItemList">
-                        <li>
-                            <a href="#"><i class="fa fa-eye"></i><br />VIEW</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-download"></i><br />DOWNLOAD</a>
-                        </li>
-                        <li>
-                            <a href="#" ng-click="vm.share()"><i class="fa fa-share-alt"></i><br />SHARE</a>
-                        </li>
+                <div class="catalog-body">
+                    <h2>{{ ::vm.catalogs[$index].name }}</h2>
+                    <ul class="list-inline catalog-options">
+                        <li><a><i class="fa fa-eye"></i><br />{{ ::vm.labels.view | uppercase }}</a></li>
+                        <li><a target="_self" href="{{ ::vm.catalogs[$index].file }}"><i class="fa fa-download"></i><br />{{ ::vm.labels.download | uppercase }}</a></li>
+                        <li><a ng-click="vm.share()"><i class="fa fa-share-alt"></i><br />{{ ::vm.labels.shared | uppercase }}</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-md-4" ng-if="$index + 1 <= vm.catalogs.length - 1">
-            <div class="component-container">
-                <a href="#">
-                    <img ng-src="{{ ::vm.catalogs[$index + 1].image }}" alt="" class="thumbnail img-responsive
-                     component-container_multimedia component-container_multimedia--shadow">
+        <div class="col-md-4 blue-box" ng-if="$index + 1 <= vm.catalogs.length - 1">
+            <div class="content-catalog">
+                <a>
+                    <img ng-src="{{ ::vm.catalogs[$index + 1].image }}" alt="{{ ::vm.catalogs[$index + 1].name }}" class="shadow-image thumbnail img-responsive">
                 </a>
-                <div class="component-container_footer">
-                    <h2 class="component-container_title">{{ ::vm.catalogs[$index + 1].name }}</h2>
-                    <ul class="list-inline component-container_ItemList">
-                        <li>
-                            <a href="#"><i class="fa fa-eye"></i><br />VIEW</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-download"></i><br />DOWNLOAD</a>
-                        </li>
-                        <li>
-                            <a href="#" ng-click="vm.share()"><i class="fa fa-share-alt"></i><br />SHARE</a>
-                        </li>
+                <div class="catalog-body">
+                    <h2>{{ ::vm.catalogs[$index + 1].name }}</h2>
+                    <ul class="list-inline catalog-options">
+                        <li><a><i class="fa fa-eye"></i><br />{{ ::vm.labels.view | uppercase }}</a></li>
+                        <li><a target="_self" href="{{ ::vm.catalogs[$index + 1].file }}"><i class="fa fa-download"></i><br />{{ ::vm.labels.download | uppercase }}</a></li>
+                        <li><a ng-click="vm.share()"><i class="fa fa-share-alt"></i><br />{{ ::vm.labels.shared | uppercase }}</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-md-4" ng-if="$index + 2 <= vm.catalogs.length - 1">
-            <div class="component-container">
-                <a href="#">
-                    <img ng-src="{{ ::vm.catalogs[$index + 2].image }}" alt="" class="thumbnail img-responsive
-                     component-container_multimedia component-container_multimedia--shadow">
+        <div class="col-md-4 blue-box" ng-if="$index + 2 <= vm.catalogs.length - 1">
+            <div class="content-catalog">
+                <a>
+                    <img ng-src="{{ ::vm.catalogs[$index + 2].image }}" alt="{{ ::vm.catalogs[$index + 2].name }}" class="shadow-image thumbnail img-responsive">
                 </a>
-                <div class="component-container_footer">
-                    <h2 class="component-container_title">{{ ::vm.catalogs[$index + 2].name }}</h2>
-                    <ul class="list-inline component-container_ItemList">
-                        <li>
-                            <a href="#"><i class="fa fa-eye"></i><br />VIEW</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-download"></i><br />DOWNLOAD</a>
-                        </li>
-                        <li>
-                            <a href="#" ng-click="vm.share()"><i class="fa fa-share-alt"></i><br />SHARE</a>
-                        </li>
+                <div class="catalog-body">
+                    <h2>{{ ::vm.catalogs[$index + 2].name }}</h2>
+                    <ul class="list-inline catalog-options">
+                        <li><a><i class="fa fa-eye"></i><br />{{ ::vm.labels.view | uppercase }}</a></li>
+                        <li><a target="_self" href="{{ ::vm.catalogs[$index + 2].file }}"><i class="fa fa-download"></i><br />{{ ::vm.labels.download | uppercase }}</a></li>
+                        <li><a ng-click="vm.share()"><i class="fa fa-share-alt"></i><br />{{ ::vm.labels.shared | uppercase }}</a></li>
                     </ul>
                 </div>
             </div>

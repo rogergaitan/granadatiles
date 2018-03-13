@@ -3,10 +3,40 @@
 
 {% block extrahead %}{{ block.super }}
 <link rel="stylesheet" href="{{STATIC_URL}}lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet"href="{{STATIC_URL}}lib/select2/dist/css/select2.min.css" />
+<link rel="stylesheet" href="{{ STATIC_URL }}lib/select2-bootstrap-css/select2-bootstrap.min.css"/>
 <style>
-    td a{
-     font-size: 13px;
-     margin-left: 50%;
+    td a {
+        font-size: 13px;
+        margin-left: 50%;
+    }
+
+    .select2-container{
+        width: 80% !important;
+    }
+
+    .select2-container--default .select2-selection--single {
+        border-radius: 0;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 34px;
+    }
+
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #444444;
+    }
+     .related-widget-wrapper {
+        float: none !important;
+    }
+
+    .form-control-inline {
+        display: inline-block;
+        width: 80%;
+    }
+    fieldset .field-box {
+        float:none;
+        margin-right:0;
     }
 </style>
 {% url 'admin:jsi18n' as jsi18nurl %}
@@ -107,26 +137,21 @@
 {% block extra_js %}
     <script src="{{ STATIC_URL }}lib/moment/moment.js"></script>
     <script src="{{ STATIC_URL }}lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="{{ STATIC_URL }}lib/select2/dist/js/select2.full.min.js"></script>
 <script>
     $(function () {
         
-        var set = $('.controls select.form-control.form-control-inline');
-        var addButtons = $('.add-another');
-        addButtons.children('img').remove()
-        set.each(function () {
-            $(this).next('a').andSelf().wrapAll('<div class="input-group"> </div>');
-        });
-        $('td .input-group').addClass('col-sm-4');
-        addButtonsToBeWrapped = $('.controls .add-another');
-        addButtonsToBeWrapped.wrap('<span class="input-group-addon"></span>');
-        addButtons.append('Add');
-        addButtons.append('<i class="fa fa-plus"></i>');
+        setTimeout(function () {
+            $('.datetimeshortcuts').remove();
+        }, 500);
         $('p.datetime').replaceWith(function () {
             return $("<div />").append($(this).contents());
         });
         $('#id_date_0').datetimepicker({ format: 'DD/MM/YYYY' });
         $('#id_date_1').datetimepicker({ format: 'HH:mm:SS' });
         $('.vDateField').datetimepicker({ format: 'DD/MM/YYYY' });
+        //$('select').not('tr .related-widget-wrapper select.form-control-inline').select2();
+        $('select').select2();
         
     });
 </script>

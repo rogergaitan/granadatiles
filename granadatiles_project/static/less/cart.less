@@ -1,0 +1,338 @@
+﻿.gt-cart-tabs {
+
+    .icon-tile {
+        float: left;
+    }
+
+    .tab-title {
+        margin-left: 35px;
+    }
+
+    .nav-tabs {
+        padding-top: 20px;
+
+        li.active > a,
+        li.active > a:hover {
+            color: @orange;
+            background-color: rgba(0, 0, 0, .0001);
+            border: 1px solid rgba(0, 0, 0, .0001);
+            border-bottom-color: transparent;
+            .font-configuration(@font-size: @font-xl,@font-weight: @font-bold);
+        }
+
+        li > a {
+            color: @darkGray;
+            padding: 10px 15px 10px 0;
+            background-color: rgba(0, 0, 0, .0001);
+            border: 1px solid rgba(0, 0, 0, .0001);
+            border-bottom-color: transparent;
+            .font-configuration(@font-size: @font-xl,@font-weight: @font-light);
+        }
+    }
+}
+
+.gt-shopping-cart-table {
+    thead {
+        background-color: @blue;
+
+        tr {
+            th {
+                color: @white;
+                font-family: @font-secundary;
+                padding: 0 10px 0 10px;
+                .font-configuration(@font-size: @font-sm,@font-weight: @font-normal);
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            .item {
+                padding-left: 0;
+            }
+        }
+
+        td {
+            border-bottom: 1px solid transparent !important;
+        }
+    }
+
+    .product-image {
+        width: 140px;
+        border: 4px solid white;
+    }
+
+    .media-body {
+        width: 70%;
+
+        h2 {
+            color: @darkBlue;
+            font-family: @font-secundary;
+            margin-bottom: 0;
+            .font-configuration(@font-size: @font-xlll,@font-weight:@font-normal);
+
+            span {
+                color: @darkBlue;
+                font-family: @font-secundary;
+                margin-bottom: 0;
+                .font-configuration(@font-size: @font-xlll,@font-weight:@font-normal);
+            }
+        }
+
+        span {
+            color: @darkGray;
+            font-family: @font-primary;
+            .font-configuration(@font-size: @font-sm,@font-weight:@font-light);
+        }
+
+        .btn-delete {
+            color: @darkBlue;
+            margin-top: 5px;
+            border-color: @btnDelete;
+            background-color: @lightBlue;
+            .font-configuration(@font-size: @font-md,@font-weight:@font-light);
+        }
+    }
+}
+
+.gt-table-total-price {
+    color: @darkBlue;
+    font-family: @font-secundary;
+    .font-configuration(@font-size: @font-xl,@font-weight:@font-normal);
+
+    .total {
+        font-size: 20px;
+
+        td {
+            border-bottom: 1px solid transparent !important;
+        }
+    }
+
+    tbody {
+        td {
+            padding: 4px !important;
+            border-bottom: 1px solid @grayBorder !important;
+        }
+    }
+}
+
+.sky-select {
+    color: @darkBlue !important;
+    background-color: @lightBlue;
+}
+
+.labelAuthorize {
+    color: @darkGray;
+    font-style: @italic;
+    font-family: @font-secundary;
+    .font-configuration(@font-size: @font-md,@font-weight:@font-light);
+}
+
+.form-control-inline {
+    min-width: 0;
+    width: auto !important;
+    display: inline !important;
+}
+
+.gt-box-shipping {
+    h3 {
+        margin: 0;
+        padding: 10px;
+        color: @white;
+        font-family: @font-secundary;
+        .font-configuration(@font-size: @font-sm,@font-weight:@font-light);
+        background-color: @blue;
+    }
+
+    form {
+        padding: 10px;
+        background-color: @blueTable;
+    }
+}
+
+.list-question {
+    li {
+        color: @darkBlue;
+        font-family: @font-secundary;
+    }
+
+    .icon {
+        float: left;
+    }
+
+    .question-content {
+        margin-left: 25px;
+        .font-configuration(@font-size: @font-xl,@font-weight:@font-bold);
+
+        span, a {
+            color: @darkBlue;
+            display: block;
+            .font-configuration(@font-size: @font-xl,@font-weight:@font-light);
+        }
+    }
+}
+/************** Checkout *******************/
+.checkout-steps {
+    height: 30px;
+
+    .checkout-step {
+        position: relative;
+        bottom: 48px;
+        display: inline-block;
+        margin: 5px 15px;
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        .number {
+            height: 40px;
+            width: 40px;
+            margin: 0 auto;
+            text-align: center;
+            color: @darkBlue;
+            font-family: @font-secundary;
+            .font-configuration(@font-size: @font-xxll,@font-weight:@font-light);
+            background-color: @lightSteelBlue;
+            border-radius: 50%;
+        }
+
+        .title {
+            color: @darkBlue;
+            text-align: center;
+            font-family: @font-secundary;
+            line-height: 1;
+            margin-top: 10px;
+            .font-configuration(@font-size:@font-xl,@font-weight:@font-light);
+        }
+    }
+
+    .checkout-step.active {
+        display: inline-block;
+
+        .number {
+            height: 40px;
+            width: 40px;
+            margin: 0 auto;
+            text-align: center;
+            color: @darkBlue;
+            font-family: @font-secundary;
+            .font-configuration(@font-size: @font-xxll,@font-weight:@font-light);
+            background-color: @green;
+            border-radius: 50%;
+        }
+
+        .title {
+            color: @darkBlue;
+            text-align: center;
+            font-family: @font-secundary;
+            line-height: 1;
+            margin-top: 10px;
+            .font-configuration(@font-size:@font-xl,@font-weight:@font-bold);
+        }
+    }
+}
+span.asterisk{
+    color:#EC1C23;
+}
+.shipping-information { 
+    label {
+        font-family: @font-secundary;
+        .font-configuration(@font-md,@font-light);
+    }
+    .form-group {
+        margin-bottom: 10px;
+    }
+}
+.order-summary {
+    h3 {
+        margin: 0;
+        padding: 10px;
+        color: @white;
+        background-color: @blue;
+        font-family: @font-secundary;
+        .font-configuration(@font-size:@font-sm,@font-weight:@font-light);
+    }
+
+    .order-detail {
+        margin-bottom: 20px;
+        padding-bottom: 5px;
+        background-color: @blueTable;
+
+        .gt-table-order-summary {
+            thead tr {
+                background-color: transparent;
+
+                th {
+                    color: @darkBlue;
+                    font-family: @font-secundary;
+                    .font-configuration(@font-size:@font-sm,@font-weight:@font-light);
+                    border-bottom: 1px solid transparent;
+                }
+            }
+
+            tbody {
+                color: #58595B;
+                font-family: @font-primary;
+                .font-configuration(@font-size:@font-sm,@font-weight:@font-light);
+
+                tr {
+                    td {
+                        border-bottom: 1px solid @grayBorder !important;
+                    }
+
+                    &:last-child {
+                        td {
+                            border-bottom: 1px solid @blueTable !important;
+                        }
+                    }
+                }
+
+                h2 {
+                    margin: 0;
+                    .font-configuration(@font-size:@font-xlll,@font-weight:@font-light);
+                }
+            }
+        }
+    }
+}
+
+.order-custom-label{
+    color:@rss !important;
+    font-weight: bold !important;
+}
+.custom-checkbox {
+    color: @darkGray;
+    display: inline-block;
+
+    p, label {
+        margin: 0;
+        padding-left: 0;
+    }
+
+    input[type=checkbox] {
+        display: none;
+    }
+
+    input[type=checkbox] + label {
+        cursor: pointer;
+    }
+
+    input[type=checkbox] + label:before {
+        font-family: FontAwesome;
+        vertical-align: middle;
+    }
+
+    input[type=checkbox] + label:before {
+        color: @gray;
+        content: "\f096";
+        font-size: 30px;
+        letter-spacing: 10px;
+    }
+
+    input[type=checkbox]:checked + label:before {
+        content: "\f046";
+        color: @darkBlue;
+        letter-spacing: 5px;
+    }
+}

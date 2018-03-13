@@ -85,8 +85,8 @@ module.exports = function () {
                     }
                 }
             },
-            exclude: [/eonasdan-bootstrap-datetimepicker/,
-                      /Chart.js/],
+            exclude: [/eonasdan-bootstrap-datetimepicker/, /moment/, /moment-timezone/,
+                      /Chart.js/, /select2/],
         },
         /* 
         * These are the settings for you inject css

@@ -1,11 +1,14 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
 {% load i18n %}
 
-{% block title %} Granada Tiles - {% trans 'Collections'%} {% endblock %}
+{% block seo %} 
+<title>Granada Tile - {% trans 'Collections'%} </title>
+{% endblock %}
 
 {% block content%}
-    <ng-include id="gt-main-groups" src="'{{STATIC_URL}}app/tiles/templates/groupList.html'">
-    </ng-include>
+<div class="row">
+    <ng-include id="gt-main-groups" src="'{{STATIC_URL}}app/tiles/templates/groupList.html'"></ng-include>
+</div>
 {% endblock content%}
 
 {% block js%}
@@ -22,10 +25,20 @@
                 language: '{{LANGUAGE_CODE}}',
                 collectionId: {{collection_id}},
                 labels: {
-                    gallery: '{% trans 'Gallery'%}'
+                    gallery: '{% trans 'Gallery'%}',
+                    interactiveCatalog: '{% trans 'Interactive Catalog' %}',
+                    customCement: '{% trans 'Custom Cement Tiles' %}',
+                    about: '{% trans 'About the ' %}',
+                    applications: '{% trans 'Applications of Cement Tile' %}',
+                    galleryMenu: '{% trans ' Gallery' %}',
+                    technical: '{% trans 'Technical Specifications' %}',
+                    ordering: '{% trans 'Ordering Cement Tile' %}',
+                    installing: '{% trans 'Installing Cement Tile' %}',
+                    moreInfo: '{% trans 'more info' %}',
+                    collection: '{% trans 'Collections' %}'
                 }
             }
-        };
+        }
     })();
 </script>
 {% endblock js%}

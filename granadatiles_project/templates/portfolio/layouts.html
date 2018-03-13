@@ -1,0 +1,59 @@
+﻿{% extends "base.html" %}
+{% load i18n content %}
+
+{% block title %} Login to your Granada Tile Portfolio {% endblock %}
+
+{% block css %}
+<script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit"
+        async defer></script>
+{% endblock css %}
+
+{% block content %}
+<ng-include src="'{{ STATIC_URL }}app/portfolio/templates/layouts.html'">
+</ng-include>
+{% endblock content %}
+
+{% block js%}
+{% get_current_language as LANGUAGE_CODE %}
+<script>
+    (function () {
+        "use strict";
+        angular
+        .module("app.core")
+        .factory("pageSettings", ['appSettings',pageSettings]);
+
+        function pageSettings(appSettings) {
+            return{
+                sectionId: 13,
+                labels: {
+                    myPortfolio: '{% trans 'My Portfolio'%}',
+                    tilesInMyPortfolio: '{% trans 'Tiles in my Portfolio' %}',
+                    layouts: '{%trans 'Layouts' %}',
+                    myAccount : '{%trans 'My Account '%}',
+                    logout: '{% trans 'Logout'%}',
+                    buy: '{% trans 'BUY' %}' ,
+                    edit: '{% trans 'EDIT' %}',
+                    share: '{% trans 'SHARE' %}',
+                    delete: '{% trans 'DELETE'%}',
+                    welcome: '{% trans 'WELCOME' %}',
+                    layouts: '{% trans 'Layouts' %}',
+                    createLayout: '{% trans 'Create Layout' %}'
+                },
+                navigation: {
+                    layouts: '{% url 'sr-portfolio:layouts'%}',
+                    portfolio: '{% url 'sr-portfolio:home'%}',
+                    createLayout: '{% url 'sr-portfolio:create-layout' %}'
+                },
+                logoutUrl: '{% url 'sr-portfolio:logout_user'%}',
+                loggedUser: '{{ username |safe}}'
+            }
+        };
+    })();
+</script>
+<script>
+    var app = angular.module('app.portfolio'); // Not including a list of dependent modules (2nd parameter to `module`) "re-opens" the module for additional configuration
+    app.config(['$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.headers.common['X-CSRFToken'] = '{{ csrf_token|escapejs }}';
+    }]);
+</script>
+{% endblock js %}

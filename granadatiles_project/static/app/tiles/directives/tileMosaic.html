@@ -1,0 +1,13 @@
+<div class="tile-detail-mosaic" ng-class="(noBorders)? '':'similar-tile-container'">
+    <!--Calculate width-->
+    <div ng-repeat="n in  [] | range:repeatVertical" ng-if="tile.image">
+        <div ng-style="{ 'width':  100/repeatHorinzotal + '%'}" class="tile-mosaic-conatiner" ng-repeat="n in  [] | range:repeatHorinzotal">
+            <img ng-src="{{tile.image}}" alt="{{tile.name}} mosaic 1" class="tile-mosaic-image" ng-style="{'transform': 'rotate3d(0, 0 , 1, ' + tile.rotateDeg1 +'deg)'}" />
+            <img ng-src="{{tile.image}}" alt="{{tile.name}} mosaic 2" class="tile-mosaic-image" ng-style="{'transform': 'rotate3d(0, 0 , 1, ' + tile.rotateDeg2 +'deg)'}" />
+            <img ng-src="{{tile.image}}" alt="{{tile.name}} mosaic 1" class="tile-mosaic-image" ng-style="{'transform': 'rotate3d(0, 0 , 1, ' + tile.rotateDeg3 +'deg)'}" />
+            <img ng-src="{{tile.image}}" alt="{{tile.name}} mosaic 2" class="tile-mosaic-image" ng-style="{'transform': 'rotate3d(0, 0 , 1, ' + tile.rotateDeg4 +'deg)'}" />
+            <br style="clear:both;" />
+        </div>
+    </div>
+    <br style="clear:both;" />
+</div>

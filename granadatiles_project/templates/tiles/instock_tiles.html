@@ -1,0 +1,121 @@
+﻿{% extends "base.html" %}
+{% load i18n content %}
+
+{% block seo %}
+    {% section 12 LANGUAGE_CODE  as section %}
+    <title>{{ section.page_title }}</title>
+    {% content_meta_tags section %}
+{% endblock seo %}
+
+
+{% block content %}
+<div class="row">
+    <ng-include id="gt-main-content" src="'{{STATIC_URL}}app/tiles/templates/instock.html'">
+    </ng-include>
+</div>
+{% endblock content %}
+
+{% block js%}
+{% get_current_language as LANGUAGE_CODE %}
+<script>
+    (function () {
+        "use strict";
+        angular
+        .module("app.core")
+        .factory("pageSettings", ['appSettings',pageSettings]);
+
+        function pageSettings(appSettings) {
+            return{
+                sectionId: 12,
+                language: '{{LANGUAGE_CODE}}',
+                loggedUser: '{{ request.user |safe}}',
+                labels: {
+                   notAuthenticatedCustom: '{% trans 'You are not authenticated, you will not be able to store your custom tile, please log in first' %}',
+                   tileAdded: '{% trans 'The tile was added to your portfolio' %}',
+                   tileAddedCart: '{% trans 'The tile was added to your cart' %}',
+                   sampleAdded: '{% trans 'The sample was added to your cart'%}',
+                   success: '{% trans 'Success' %}',
+                   changesSave: '{% trans 'The changes have been save' %}',
+                   collections: '{% trans 'Collections'%}',
+                   inStock: '{% trans 'In Stock'%}',
+                   inStockSamples: '{% trans 'In Stock Samples'%}',
+                   inStockTiles: '{% trans 'In Stock Tiles'%}',
+                   moreInfo: '{% trans 'MORE INFO' %}',
+                   photos: '{% trans 'Installation Photos' %}',
+                   orderFree: '{% trans 'ORDER FREE SAMPLE' %}',
+                   showOnly: '{% trans 'Show only'%}',
+                   size: '{% trans 'Sizes' %}',
+                   style: '{% trans 'Styles' %}',
+                   moreInfo: '{% trans 'More Info' %}',
+                   photos: '{% trans 'Installation Photos' %}',
+                   orderFree: '{% trans 'Order Free Sample' %}',
+                   saveToPortfolio: '{% trans 'Save To Portfolio' %}',
+                   addedPortfolio: '{% trans 'Added To Portfolio' %}',
+                   tearSheet: '{% trans 'Tear Sheet' %}',
+                   printPage: '{% trans 'Print Page' %}',
+                   colors: '{% trans 'Colors' %}',
+                   selectSize: '{% trans 'Select Size' %}',
+                   styles: '{% trans 'Styles' %}',
+                   thickness: '{% trans 'Thickness' %}',
+                   weight: '{% trans 'Weight' %}',
+                   uses: '{% trans 'Uses' %}',
+                   leadTime: '{% trans 'Lead Time' %}',
+                   retailPrice: '{% trans 'Retail Price' %}',
+                   order: '{% trans 'Order' %}',
+                   inputSquareFootage: '{% trans 'Input Square Footage' %}',
+                   estimateShippingCost: '{% trans 'Estimate Shipping Cost' %}',
+                   destinationZip: '{% trans 'Destination Zip' %}',
+                   calculate: '{% trans 'Calculate' %}',
+                   subtotal: '{% trans 'Subtotal' %}',
+                   discount: '{% trans 'Discount' %}',
+                   shipping: '{% trans 'Shipping' %}',
+                   yourCost: '{% trans 'Your Cost' %}',
+                   addToCart: '{% trans 'Add To Cart' %}',
+                   estimatedDelivery: '{% trans 'Estimated Delivery Time' %}',
+                   weeks: '{% trans 'Weeks' %}',
+                   customize: '{% trans 'Customize'%}',
+                   tileCalculationDetail: '{% trans 'Tile calculation detail' %}',
+                   all: '{% trans 'All' %}',
+                   collection: '{% trans 'Collections' %}',
+                   perTile: '{% trans 'Per Tile'%}',
+                   perSqFt: '{% trans 'Per Square Foot'%}',
+                   per: '{% trans 'Per' %}',
+                   shipFrom: '{% trans 'Ship From' %}',
+                   similarTiles: '{% trans 'Similar Tiles'%}',
+                   tilesNeeded: '{% trans 'Tiles needed' %}',
+                   tilesNeededOverage: '{% trans 'Tiles needed and 10% Overage' %}',
+                   boxesNeeded: '{% trans 'Boxes needed' %}',
+                   tilesPerBox: '{% trans 'Tiles Per Box' %}',
+                   boxes: '{% trans 'Boxes'%}',
+                   sqFt: '{% trans 'Sq. Ft'%}',
+                   sqFtPerTile: '{% trans 'Sq. Ft Per Tile'%}',
+                   tiles: '{% trans 'Tiles' %}',
+                   samples: '{% trans 'Samples' %}',
+                   baseCost: '{% trans 'Base cost' %}',
+                   perBox: '{% trans 'Per Box'%}',
+                   shippingWeight: '{% trans 'Shipping Weight'%}',
+                   lbsPerBox: '{% trans 'lbs Per Box'%}',
+                   numbersRounded: '{% trans 'Numbers are rounded to nearest tile or box'%}',
+                   minimunSqFt:'{% trans 'Minimum' %}',
+                   forCustomTiles: '{% trans 'square feet for custom tiles'%}',
+                   quantityInStock: '{% trans 'Quantity in Stock'%}',
+                   retailPrice: '{% trans 'Retail Price'%}',
+                   quantity: '{% trans 'Quantity' %}'
+                },
+                navigation: {
+                   inStockSamples: '{% url 'sr-collections:sr-instock-samples'%}',
+                   inStockTiles: '{% url 'sr-collections:sr-instock-tiles'%}',
+                   cart: '{% url 'sr-cart:sr-home'%}'
+                }
+            }
+        };
+    })();
+</script>
+<script>
+// Add the CSRF Token
+var app = angular.module('app.tiles');
+app.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.headers.common['X-CSRFToken'] = '{{ csrf_token|escapejs }}';
+}]);
+</script>
+{% endblock js %}
